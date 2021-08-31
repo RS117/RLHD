@@ -56,7 +56,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
 import rs117.hd.HdPlugin;
-import rs117.hd.GpuPluginConfig;
+import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
 
 @Singleton
@@ -64,7 +64,7 @@ import rs117.hd.HDUtils;
 public class LightManager
 {
 	@Inject
-	private GpuPluginConfig config;
+	private HdPluginConfig config;
 
 	@Inject
 	private Client client;

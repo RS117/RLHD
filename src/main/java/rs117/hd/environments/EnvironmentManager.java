@@ -36,7 +36,7 @@ import net.runelite.api.GameState;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import rs117.hd.HdPlugin;
-import rs117.hd.GpuPluginConfig;
+import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
 import rs117.hd.config.DefaultSkyColor;
 
@@ -48,7 +48,7 @@ public class EnvironmentManager
 	private Client client;
 
 	@Inject
-	private GpuPluginConfig config;
+	private HdPluginConfig config;
 
 	@Inject
 	private HdPlugin gpuPlugin;

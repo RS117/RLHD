@@ -136,10 +136,10 @@ import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
 
 @PluginDescriptor(
-	name = "117 HD",
-	description = "HD mode",
+	name = "High Detail (beta)",
+	description = "GPU renderer with a suite of graphical enhancements",
 	enabledByDefault = false,
-	tags = {"fog", "draw distance"},
+	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},
 	loadInSafeMode = false
 )
 @Slf4j
@@ -169,7 +169,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private ClientThread clientThread;
 
 	@Inject
-	private GpuPluginConfig config;
+	private HdPluginConfig config;
 
 	@Inject
 	private TextureManager textureManager;
@@ -686,9 +686,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	}
 
 	@Provides
-	GpuPluginConfig provideConfig(ConfigManager configManager)
+	HdPluginConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(GpuPluginConfig.class);
+		return configManager.getConfig(HdPluginConfig.class);
 	}
 
 	private void initProgram() throws ShaderException
@@ -2335,7 +2335,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
 	{
-		if (!event.getGroup().equals("gpu"))
+		if (!event.getGroup().equals("hd"))
 		{
 			return;
 		}

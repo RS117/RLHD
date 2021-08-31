@@ -46,8 +46,8 @@ import rs117.hd.config.ShadowResolution;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.config.WaterEffects;
 
-@ConfigGroup("gpu")
-public interface GpuPluginConfig extends Config
+@ConfigGroup("hd")
+public interface HdPluginConfig extends Config
 {
 	/*====== General settings ======*/
 
