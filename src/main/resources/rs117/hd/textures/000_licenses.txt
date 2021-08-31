@@ -1,0 +1,12 @@
+Infernal cape texture by deathlezz
+-- https://www.reddit.com/user/deathlezz
+
+Contains assets from ambientcg.com, licensed under CC0 1.0 Universal.
+-- https://help.ambientcg.com/01-General/Licensing.html
+
+Sand textures derived from a photograph by Romain Dancre on Unsplash.
+-- https://unsplash.com/license
+-- https://unsplash.com/@romaindancre
+
+Some textures copyright (c) 2021 117.
+-- https://twitter.com/117scape

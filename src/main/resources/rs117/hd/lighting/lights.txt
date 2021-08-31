@@ -1,0 +1,380 @@
+// # or Color - Color
+// Strength - Strength (%)
+// Radius - Radius (world units)
+// Range - variance in animation (%)
+// Duration - length of animation (milliseconds)
+// Type - type (flicker, pulse, static)
+// Plane - Plane level of world (int)
+// Height - Height offset (world units)
+
+
+Reset
+
+// lava
+Reset
+Plane 0
+//Type static
+Type pulse
+Range 10
+Duration 7000
+Color 252, 122, 3
+Strength 1200
+Radius 800
+Height 20
+2467, 5174
+2471, 5172
+2448, 5155
+2444, 5155
+2439, 5150
+2444, 5103
+2467, 5088
+2470, 5100
+2472, 5102
+2475, 5104
+2474, 5076
+2477, 5077
+2479, 5075
+2499, 5060
+2539, 5076
+2533, 5077
+2533, 5081
+2536, 5083
+2537, 5085
+2539, 5084
+2540, 5086
+2526, 5106
+2524, 5104
+2523, 5109
+2522, 5104
+2521, 5109
+2519, 5107
+2531, 5160
+2530, 5158
+2528, 5160
+2507, 5157
+2508, 5154
+2511, 5153
+2484, 5149
+2488, 5151
+2470, 5152
+2465, 5137
+2462, 5132
+2451, 5131
+2450, 5127
+2403, 5175
+2406, 5170
+2402, 5169
+2394, 5174
+2392, 5171
+2395, 5168
+2413, 5164
+2420, 5157
+2419, 5151
+2379, 5162
+2389, 5149
+2380, 5145
+2398, 5131
+2418, 5097
+2424, 5102
+2424, 5106
+2424, 5110
+2401, 5107
+2401, 5115
+2396, 5107
+2392, 5112
+2376, 5118
+2371, 5111
+2382, 5088
+2375, 5082
+2369, 5066
+2375, 5060
+2379, 5060
+2388, 5060
+2394, 5062
+2409, 5063
+2410, 5060
+2420, 5060
+2422, 5063
+2415, 5065
+2427, 5079
+2427, 5083
+2427, 5087
+2423, 5091
+// soul wars lobby
+Strength 1400
+Radius 600
+Range 10
+Height -20
+2218, 2839
+2219, 2845
+2220, 2847
+2223, 2848
+2226, 2848
+2225, 2850
+2230, 2844
+2230, 2838
+2229, 2836
+2227, 2836
+2224, 2836
+2221, 2836
+2218, 2837
+// soul wars battlefield
+2277, 2910
+2280, 2911
+2283, 2912
+2283, 2908
+2291, 2910
+2294, 2912
+2292, 2914
+2283, 2925
+2280, 2927
+2279, 2931
+2279, 2935
+2282, 2939
+2286, 2938
+2290, 2938
+2294, 2938
+2294, 2936
+2295, 2933
+2294, 2929
+2293, 2926
+2291, 2925
+
+// slightly different lava in the inferno
+Reset
+Plane 0
+//Type static
+//Range 30
+Type pulse
+Range 10
+Duration 7000
+Color 235, 97, 23
+Strength 300
+Radius 2200
+Height 200
+2495, 5041
+2505, 5041
+2512, 5039
+2513, 5031
+2513, 5022
+2514, 5011
+2512, 5004
+2500, 5003
+2492, 5002
+2485, 5005
+2482, 5002
+2477, 5004
+2477, 5014
+2474, 5021
+2478, 5028
+2474, 5035
+2478, 5039
+2484, 5041
+// jad challenge instance
+2271, 5361
+2281, 5361
+2288, 5359
+2289, 5351
+2289, 5342
+2290, 5331
+2288, 5324
+2276, 5323
+2268, 5322
+2261, 5325
+2258, 5322
+2253, 5324
+2253, 5334
+2250, 5341
+2254, 5348
+2250, 5355
+2254, 5359
+2260, 5361
+
+
+// karamja volcano lava
+Reset
+Plane 0
+//Type flicker
+//Range 30
+Type pulse
+Range 10
+Duration 3000
+Color 252, 122, 3
+Strength 400
+Radius 2000
+Height 50
+2851, 9565
+2856, 9564
+2844, 9564
+2841, 9572
+2842, 9577
+2849, 9574
+2860, 9564
+2832, 9571
+2832, 9576
+2845, 9622
+2845, 9616
+2840, 9619
+2855, 9626
+2864, 9633
+2864, 9637
+2864, 9645
+2849, 9648
+Radius 1500
+2837, 9548
+2843, 9551
+2834, 9552
+2829, 9560
+2835, 9627
+2833, 9622
+2860, 9630
+
+
+
+
+// candles in arceuus
+Reset
+Color 230, 120, 5
+Radius 300
+Strength 300
+Type flicker
+Range 20
+Height 150
+1702, 3767, SW
+1704, 3767, S
+1720, 3758, NW
+1718, 3771
+1715, 3771
+Plane 1
+1706, 3767, W
+1706, 3765, W
+
+
+// stealing creations
+Reset
+Plane 0
+Strength 800
+Radius 1000
+Height 200
+Color 180, 20, 220
+3171, 10003, NW
+
+
+// varrock west bank chandeliers
+Reset
+Plane 1
+Type flicker
+Range 20
+Color 252, 122, 3
+Strength 400
+Radius 700
+Height 150
+3184, 3443
+3184, 3438
+
+
+
+// god wars dungeon
+// light from entrance
+Reset
+Strength 400
+Radius 600
+Height 300
+Plane 2
+Color 255, 255, 255
+2882, 5314, S
+Strength 300
+Radius 2000
+Height 50
+2882, 5314, S
+
+// zammy altar
+Reset
+Strength 400
+Radius 300
+Height 200
+Plane 2
+Color 252, 122, 3
+2937, 5324, NE
+
+// ver sinhaza
+Reset
+Type pulse
+Range 5
+Duration 3200
+Color 220, 60, 0
+Plane 0
+Strength 500
+Radius 300
+Height 580
+3656, 3227
+3661, 3225
+3664, 3225
+3660, 3234, S
+3665, 3234, S
+3664, 3213, S
+3661, 3213, S
+3669, 3211, W
+3665, 3204, N
+3660, 3204, N
+3685, 3207, W
+3678, 3215, W
+3678, 3223, W
+3684, 3231, E
+3668, 3227, E
+3656, 3211, E
+Height 920
+3679, 3219, E
+3687, 3222, S
+3687, 3216, N
+Height 500
+Radius 500
+3662, 3226, E
+Height 540
+Radius 300
+3644, 3213
+3640, 3203
+3644, 3225
+3640, 3235
+
+// Lithkren basement sunlight
+Reset
+Type static
+Color 255, 243, 204
+Plane 0
+Strength 400
+Radius 1500
+Height 800
+3549, 10477, E
+
+// Castle Wars
+// underground ladders
+Reset
+Type static
+Color 130, 180, 255
+Plane 0
+Strength 400
+Radius 700
+Height 260
+2399, 9499
+2400, 9508
+2369, 9525
+2430, 9482
+
+
+
+// development
+// use this for adding new lights
+// copy-paste the finished config and place above
+Reset
+Type static
+Range 5
+Duration 3200
+Color 130, 180, 255
+Plane 0
+Strength 400
+Radius 700
+Height 250
+//3142, 2836
+2399, 9499
+2400, 9508

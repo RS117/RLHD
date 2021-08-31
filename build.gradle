@@ -10,20 +10,26 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.7.5'
+def runeLiteVersion = '1.7.21.1'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
+    compileOnly files('runelite-api-1.7.22-SNAPSHOT.jar')
 
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 	testImplementation 'junit:junit:4.12'
-	testImplementation group: 'net.runelite', name:'client', version: runeLiteVersion
+    testImplementation('net.runelite:client:1.7.21.1')  {
+        exclude group: 'net.runelite', module: 'client-patch'
+        exclude group: 'net.runelite', module: 'runelite-api'
+    }
+    testImplementation files('client-patch-1.7.22-SNAPSHOT.jar')
+    testImplementation files('runelite-api-1.7.22-SNAPSHOT.jar')
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.example'
+group = 'rs117.hd'
 version = '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
