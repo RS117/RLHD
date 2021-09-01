@@ -85,11 +85,7 @@ vec3 hslToRgb(int hsl) {
     }
   }
 
-  vec3 rgb = vec3(
-    pow(var13, brightness),
-    pow(var15, brightness),
-    pow(var17, brightness)
-  );
+  vec3 rgb = vec3(var13, var15, var17);
 
   return rgb;
 }

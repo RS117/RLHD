@@ -70,7 +70,7 @@ public class LightManager
 	private Client client;
 
 	@Inject
-	private HdPlugin gpuPlugin;
+	private HdPlugin hdPlugin;
 
 	ArrayList<Light> allLights = new ArrayList<>();
 	ArrayList<Light> sceneLights = new ArrayList<>();
@@ -198,7 +198,7 @@ public class LightManager
 			return;
 		}
 
-		int[] camTarget = gpuPlugin.getCameraFocalPoint();
+		int[] camTarget = hdPlugin.getCameraFocalPoint();
 		int camX = camTarget[0];
 		int camY = camTarget[1];
 		int camZ = camTarget[2];
@@ -226,7 +226,7 @@ public class LightManager
 				light.y = (int) light.projectile.getY();
 				light.z = (int) light.projectile.getZ();
 
-				light.visible = gpuPlugin.configProjectileLights;
+				light.visible = hdPlugin.configProjectileLights;
 			}
 
 			if (light.npc != null)
@@ -285,7 +285,7 @@ public class LightManager
 
 					light.visible = light.npc.getModel() != null;
 
-					if (!gpuPlugin.configNpcLights)
+					if (!hdPlugin.configNpcLights)
 					{
 						light.visible = false;
 					}

@@ -62,7 +62,7 @@ class SceneUploader
 	private Client client;
 
 	@Inject
-	private HdPlugin gpuPlugin;
+	private HdPlugin hdPlugin;
 
 	@Inject
 	ProceduralGenerator proceduralGenerator;
@@ -91,14 +91,7 @@ class SceneUploader
 					Tile tile = scene.getTiles()[z][x][y];
 					if (tile != null)
 					{
-						if (gpuPlugin.configHdMode)
-						{
-							uploadHD(tile, vertexBuffer, uvBuffer, normalBuffer);
-						}
-						else
-						{
-							upload(tile, vertexBuffer, uvBuffer);
-						}
+						upload(tile, vertexBuffer, uvBuffer, normalBuffer);
 					}
 				}
 			}
@@ -106,275 +99,6 @@ class SceneUploader
 
 		stopwatch.stop();
 		log.debug("Scene upload time: {}", stopwatch);
-	}
-
-	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer)
-	{
-		Tile bridge = tile.getBridge();
-		if (bridge != null)
-		{
-			upload(bridge, vertexBuffer, uvBuffer);
-		}
-
-		SceneTilePaint sceneTilePaint = tile.getSceneTilePaint();
-		if (sceneTilePaint != null)
-		{
-			sceneTilePaint.setBufferOffset(offset);
-			if (sceneTilePaint.getTexture() != -1)
-			{
-				sceneTilePaint.setUvBufferOffset(uvoffset);
-			}
-			else
-			{
-				sceneTilePaint.setUvBufferOffset(-1);
-			}
-			Point tilePoint = tile.getSceneLocation();
-			int len = upload(sceneTilePaint,
-				tile.getRenderLevel(), tilePoint.getX(), tilePoint.getY(),
-				vertexBuffer, uvBuffer,
-				0, 0, false);
-			sceneTilePaint.setBufferLen(len);
-			offset += len;
-			if (sceneTilePaint.getTexture() != -1)
-			{
-				uvoffset += len;
-			}
-		}
-
-		SceneTileModel sceneTileModel = tile.getSceneTileModel();
-		if (sceneTileModel != null)
-		{
-			sceneTileModel.setBufferOffset(offset);
-			if (sceneTileModel.getTriangleTextureId() != null)
-			{
-				sceneTileModel.setUvBufferOffset(uvoffset);
-			}
-			else
-			{
-				sceneTileModel.setUvBufferOffset(-1);
-			}
-			Point tilePoint = tile.getSceneLocation();
-			int len = upload(sceneTileModel,
-				tilePoint.getX(), tilePoint.getY(),
-				vertexBuffer, uvBuffer,
-				0, 0, false);
-			sceneTileModel.setBufferLen(len);
-			offset += len;
-			if (sceneTileModel.getTriangleTextureId() != null)
-			{
-				uvoffset += len;
-			}
-		}
-
-		WallObject wallObject = tile.getWallObject();
-		if (wallObject != null)
-		{
-			Renderable renderable1 = wallObject.getRenderable1();
-			if (renderable1 instanceof Model)
-			{
-				uploadModel((Model) renderable1, vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-
-			Renderable renderable2 = wallObject.getRenderable2();
-			if (renderable2 instanceof Model)
-			{
-				uploadModel((Model) renderable2, vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-		}
-
-		GroundObject groundObject = tile.getGroundObject();
-		if (groundObject != null)
-		{
-			Renderable renderable = groundObject.getRenderable();
-			if (renderable instanceof Model)
-			{
-				uploadModel((Model) renderable, vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-		}
-
-		DecorativeObject decorativeObject = tile.getDecorativeObject();
-		if (decorativeObject != null)
-		{
-			Renderable renderable = decorativeObject.getRenderable();
-			if (renderable instanceof Model)
-			{
-				uploadModel((Model) renderable, vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-
-			Renderable renderable2 = decorativeObject.getRenderable2();
-			if (renderable2 instanceof Model)
-			{
-				uploadModel((Model) renderable2, vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-		}
-
-		GameObject[] gameObjects = tile.getGameObjects();
-		for (GameObject gameObject : gameObjects)
-		{
-			if (gameObject == null)
-			{
-				continue;
-			}
-
-			Renderable renderable = gameObject.getRenderable();
-			if (renderable instanceof Model)
-			{
-				uploadModel((Model) gameObject.getRenderable(), vertexBuffer, uvBuffer, null, 0, 0, 0, null, null);
-			}
-		}
-	}
-
-	int upload(SceneTilePaint tile, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer,
-		int offsetX, int offsetY, boolean padUvs)
-	{
-		final int[][][] tileHeights = client.getTileHeights();
-
-		final int localX = offsetX;
-		final int localY = offsetY;
-
-		final int swHeight = tileHeights[tileZ][tileX][tileY];
-		final int seHeight = tileHeights[tileZ][tileX + 1][tileY];
-		final int neHeight = tileHeights[tileZ][tileX + 1][tileY + 1];
-		final int nwHeight = tileHeights[tileZ][tileX][tileY + 1];
-
-		final int neColor = tile.getNeColor();
-		final int nwColor = tile.getNwColor();
-		final int seColor = tile.getSeColor();
-		final int swColor = tile.getSwColor();
-
-		if (neColor == 12345678)
-		{
-			return 0;
-		}
-
-		vertexBuffer.ensureCapacity(24);
-		uvBuffer.ensureCapacity(24);
-
-		// 0,0
-		int vertexDx = localX;
-		int vertexDy = localY;
-		int vertexDz = swHeight;
-		final int c1 = swColor;
-
-		// 1,0
-		int vertexCx = localX + Perspective.LOCAL_TILE_SIZE;
-		int vertexCy = localY;
-		int vertexCz = seHeight;
-		final int c2 = seColor;
-
-		// 1,1
-		int vertexAx = localX + Perspective.LOCAL_TILE_SIZE;
-		int vertexAy = localY + Perspective.LOCAL_TILE_SIZE;
-		int vertexAz = neHeight;
-		final int c3 = neColor;
-
-		// 0,1
-		int vertexBx = localX;
-		int vertexBy = localY + Perspective.LOCAL_TILE_SIZE;
-		int vertexBz = nwHeight;
-		final int c4 = nwColor;
-
-		vertexBuffer.put(vertexAx, vertexAz, vertexAy, c3);
-		vertexBuffer.put(vertexBx, vertexBz, vertexBy, c4);
-		vertexBuffer.put(vertexCx, vertexCz, vertexCy, c2);
-
-		vertexBuffer.put(vertexDx, vertexDz, vertexDy, c1);
-		vertexBuffer.put(vertexCx, vertexCz, vertexCy, c2);
-		vertexBuffer.put(vertexBx, vertexBz, vertexBy, c4);
-
-		if (padUvs || tile.getTexture() != -1)
-		{
-			int packedTextureData = packTextureData(tile.getTexture(), false);
-
-			uvBuffer.put(packedTextureData, 1.0f, 1.0f, 0f);
-			uvBuffer.put(packedTextureData, 0.0f, 1.0f, 0f);
-			uvBuffer.put(packedTextureData, 1.0f, 0.0f, 0f);
-
-			uvBuffer.put(packedTextureData, 0.0f, 0.0f, 0f);
-			uvBuffer.put(packedTextureData, 1.0f, 0.0f, 0f);
-			uvBuffer.put(packedTextureData, 0.0f, 1.0f, 0f);
-		}
-
-		return 6;
-	}
-
-	int upload(SceneTileModel sceneTileModel, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer,
-		int offsetX, int offsetY, boolean padUvs)
-	{
-		final int[] faceX = sceneTileModel.getFaceX();
-		final int[] faceY = sceneTileModel.getFaceY();
-		final int[] faceZ = sceneTileModel.getFaceZ();
-
-		final int[] vertexX = sceneTileModel.getVertexX();
-		final int[] vertexY = sceneTileModel.getVertexY();
-		final int[] vertexZ = sceneTileModel.getVertexZ();
-
-		final int[] triangleColorA = sceneTileModel.getTriangleColorA();
-		final int[] triangleColorB = sceneTileModel.getTriangleColorB();
-		final int[] triangleColorC = sceneTileModel.getTriangleColorC();
-
-		final int[] triangleTextures = sceneTileModel.getTriangleTextureId();
-
-		final int faceCount = faceX.length;
-
-		vertexBuffer.ensureCapacity(faceCount * 12);
-		uvBuffer.ensureCapacity(faceCount * 12);
-
-		int baseX = Perspective.LOCAL_TILE_SIZE * tileX;
-		int baseY = Perspective.LOCAL_TILE_SIZE * tileY;
-
-		int cnt = 0;
-		for (int i = 0; i < faceCount; ++i)
-		{
-			final int triangleA = faceX[i];
-			final int triangleB = faceY[i];
-			final int triangleC = faceZ[i];
-
-			final int colorA = triangleColorA[i];
-			final int colorB = triangleColorB[i];
-			final int colorC = triangleColorC[i];
-
-			if (colorA == 12345678)
-			{
-				continue;
-			}
-
-			cnt += 3;
-
-			// vertexes are stored in scene local, convert to tile local
-			int vertexXA = vertexX[triangleA] - baseX;
-			int vertexZA = vertexZ[triangleA] - baseY;
-
-			int vertexXB = vertexX[triangleB] - baseX;
-			int vertexZB = vertexZ[triangleB] - baseY;
-
-			int vertexXC = vertexX[triangleC] - baseX;
-			int vertexZC = vertexZ[triangleC] - baseY;
-
-			vertexBuffer.put(vertexXA + offsetX, vertexY[triangleA], vertexZA + offsetY, colorA);
-			vertexBuffer.put(vertexXB + offsetX, vertexY[triangleB], vertexZB + offsetY, colorB);
-			vertexBuffer.put(vertexXC + offsetX, vertexY[triangleC], vertexZC + offsetY, colorC);
-
-			if (padUvs || triangleTextures != null)
-			{
-				if (triangleTextures != null && triangleTextures[i] != -1)
-				{
-					int packedTextureData = packTextureData(triangleTextures[i], false);
-
-					uvBuffer.put(packedTextureData, vertexXA / 128f, vertexZA / 128f, 0f);
-					uvBuffer.put(packedTextureData, vertexXB / 128f, vertexZB / 128f, 0f);
-					uvBuffer.put(packedTextureData, vertexXC / 128f, vertexZC / 128f, 0f);
-				}
-				else
-				{
-					uvBuffer.put(0, 0, 0, 0f);
-					uvBuffer.put(0, 0, 0, 0f);
-					uvBuffer.put(0, 0, 0, 0f);
-				}
-			}
-		}
-
-		return cnt;
 	}
 
 	private void uploadModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
@@ -404,25 +128,26 @@ class SceneUploader
 		model.setSceneId(sceneId);
 
 		final int faceCount = model.getTrianglesCount();
-		int len = 0;
+		int vertexLength = 0;
+		int uvLength = 0;
+
 		for (int face = 0; face < faceCount; ++face)
 		{
-			len += pushFace(model, face, false, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, 0, tileZ, tileX, tileY, objectProperties, objectType);
+			int[] bufferLengths = pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, objectType);
+			vertexLength += bufferLengths[0];
+			uvLength += bufferLengths[1];
 		}
 
-		offset += len;
-		if (model.getFaceTextures() != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
-		{
-			uvoffset += len;
-		}
+		offset += vertexLength;
+		uvoffset += uvLength;
 	}
 
-	private void uploadHD(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
+	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
 	{
 		Tile bridge = tile.getBridge();
 		if (bridge != null)
 		{
-			uploadHD(bridge, vertexBuffer, uvBuffer, normalBuffer);
+			upload(bridge, vertexBuffer, uvBuffer, normalBuffer);
 		}
 
 		final Point tilePoint = tile.getSceneLocation();
@@ -433,7 +158,7 @@ class SceneUploader
 		SceneTilePaint sceneTilePaint = tile.getSceneTilePaint();
 		if (sceneTilePaint != null)
 		{
-			int[] uploadedTilePaintData = uploadHD(
+			int[] uploadedTilePaintData = upload(
 				tile, sceneTilePaint,
 				tileZ, tileX, tileY,
 				vertexBuffer, uvBuffer, normalBuffer,
@@ -445,12 +170,7 @@ class SceneUploader
 			// pack a boolean into the buffer length of tiles so we can tell
 			// which tiles have procedurally generated underwater terrain.
 			// shift the bufferLength to make space for the boolean:
-			int packedBufferLength = bufferLength << 1;
-			if (underwaterTerrain == 1)
-			{
-				// set the boolean bit to 1 if we generated underwater terrain
-				packedBufferLength = packedBufferLength | 1;
-			}
+			int packedBufferLength = bufferLength << 1 | underwaterTerrain;
 			sceneTilePaint.setBufferOffset(offset);
 			sceneTilePaint.setUvBufferOffset(uvBufferLength > 0 ? uvoffset : -1);
 			sceneTilePaint.setBufferLen(packedBufferLength);
@@ -461,7 +181,7 @@ class SceneUploader
 		SceneTileModel sceneTileModel = tile.getSceneTileModel();
 		if (sceneTileModel != null)
 		{
-			int[] uploadedTileModelData = uploadHD(
+			int[] uploadedTileModelData = upload(
 				tile, sceneTileModel,
 				tileZ, tileX, tileY,
 				vertexBuffer, uvBuffer, normalBuffer,
@@ -472,11 +192,7 @@ class SceneUploader
 			final int underwaterTerrain = uploadedTileModelData[2];
 			// pack a boolean into the buffer length of tiles so we can tell
 			// which tiles have procedurally-generated underwater terrain
-			int packedBufferLength = bufferLength << 1;
-			if (underwaterTerrain == 1)
-			{
-				packedBufferLength = packedBufferLength | 1;
-			}
+			int packedBufferLength = bufferLength << 1 | underwaterTerrain;
 			sceneTileModel.setBufferOffset(offset);
 			sceneTileModel.setUvBufferOffset(uvBufferLength > 0 ? uvoffset : -1);
 			sceneTileModel.setBufferLen(packedBufferLength);
@@ -558,45 +274,23 @@ class SceneUploader
 		}
 	}
 
-	int[] uploadHD(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] upload(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
 		int underwaterTerrain = 0;
 
-		if (gpuPlugin.configHdMode)
-		{
-			// Underwater terrain needs to be uploaded first when compute mode is disabled
-			// else it will be drawn in the wrong order
-			if (gpuPlugin.computeMode == HdPlugin.ComputeMode.NONE)
-			{
-				int[] uploadResult;
+		int[] bufferLengths;
 
-				uploadResult = uploadHDTilePaintUnderwater(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
+		bufferLengths = uploadHDTilePaintSurface(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
+		bufferLength += bufferLengths[0];
+		uvBufferLength += bufferLengths[1];
+		underwaterTerrain += bufferLengths[2];
 
-				uploadResult = uploadHDTilePaintSurface(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-			}
-			else
-			{
-				int[] uploadResult;
-
-				uploadResult = uploadHDTilePaintSurface(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-
-				uploadResult = uploadHDTilePaintUnderwater(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-			}
-		}
+		bufferLengths = uploadHDTilePaintUnderwater(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
+		bufferLength += bufferLengths[0];
+		uvBufferLength += bufferLengths[1];
+		underwaterTerrain += bufferLengths[2];
 
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
@@ -698,7 +392,7 @@ class SceneUploader
 				neColor = proceduralGenerator.vertexTerrainColor.getOrDefault(neVertexKey, neColor);
 				nwColor = proceduralGenerator.vertexTerrainColor.getOrDefault(nwVertexKey, nwColor);
 
-				if (gpuPlugin.configGroundTextures)
+				if (hdPlugin.configGroundTextures)
 				{
 					swMaterial = proceduralGenerator.vertexTerrainTexture.getOrDefault(swVertexKey, swMaterial);
 					seMaterial = proceduralGenerator.vertexTerrainTexture.getOrDefault(seVertexKey, seMaterial);
@@ -731,7 +425,7 @@ class SceneUploader
 					neColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(neColor)));
 				}
 
-				if (gpuPlugin.configGroundTextures)
+				if (hdPlugin.configGroundTextures)
 				{
 					swMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX, baseY + tileY);
 					seMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY);
@@ -849,7 +543,7 @@ class SceneUploader
 		int nwVertexKey = vertexKeys[2];
 		int neVertexKey = vertexKeys[3];
 
-		if (gpuPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
+		if (hdPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
 		{
 			// underwater terrain
 
@@ -875,7 +569,7 @@ class SceneUploader
 			Material nwMaterial = Material.NONE;
 			Material neMaterial = Material.NONE;
 
-			if (gpuPlugin.configGroundTextures)
+			if (hdPlugin.configGroundTextures)
 			{
 				GroundMaterial groundMaterial = GroundMaterial.UNDERWATER_GENERIC;
 
@@ -932,45 +626,23 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] uploadHD(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] upload(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
 		int underwaterTerrain = 0;
 
-		if (gpuPlugin.configHdMode)
-		{
-			// Underwater terrain needs to be uploaded first when compute mode is disabled
-			// else it will be drawn in the wrong order
-			if (gpuPlugin.computeMode == HdPlugin.ComputeMode.NONE)
-			{
-				int[] uploadResult;
+		int[] bufferLengths;
 
-				uploadResult = uploadHDTileModelUnderwater(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
+		bufferLengths = uploadHDTileModelSurface(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
+		bufferLength += bufferLengths[0];
+		uvBufferLength += bufferLengths[1];
+		underwaterTerrain += bufferLengths[2];
 
-				uploadResult = uploadHDTileModelSurface(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-			}
-			else
-			{
-				int[] uploadResult;
-
-				uploadResult = uploadHDTileModelSurface(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-
-				uploadResult = uploadHDTileModelUnderwater(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
-				bufferLength += uploadResult[0];
-				uvBufferLength += uploadResult[1];
-				underwaterTerrain += uploadResult[2];
-			}
-		}
+		bufferLengths = uploadHDTileModelUnderwater(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
+		bufferLength += bufferLengths[0];
+		uvBufferLength += bufferLengths[1];
+		underwaterTerrain += bufferLengths[2];
 
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
@@ -1063,7 +735,7 @@ class SceneUploader
 				colorB = proceduralGenerator.vertexTerrainColor.getOrDefault(vertexKeyB, colorB);
 				colorC = proceduralGenerator.vertexTerrainColor.getOrDefault(vertexKeyC, colorC);
 
-				if (gpuPlugin.configGroundTextures)
+				if (hdPlugin.configGroundTextures)
 				{
 					materialA = proceduralGenerator.vertexTerrainTexture.getOrDefault(vertexKeyA, materialA);
 					materialB = proceduralGenerator.vertexTerrainTexture.getOrDefault(vertexKeyB, materialB);
@@ -1095,7 +767,7 @@ class SceneUploader
 					colorC = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorC)));
 				}
 
-				if (gpuPlugin.configGroundTextures)
+				if (hdPlugin.configGroundTextures)
 				{
 					materialA = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[0][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[0][1] / Perspective.LOCAL_TILE_SIZE));
 					materialB = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[1][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[1][1] / Perspective.LOCAL_TILE_SIZE));
@@ -1121,7 +793,6 @@ class SceneUploader
 			float[] normalsC = new float[]{0,-1,0};
 
 			// retrieve normals from hashmap
-
 			if (waterType == WaterType.NONE)
 			{
 				normalsA = proceduralGenerator.vertexTerrainNormals.getOrDefault(vertexKeyA, normalsA);
@@ -1182,7 +853,7 @@ class SceneUploader
 			return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 		}
 
-		if (gpuPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
+		if (hdPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
 		{
 			underwaterTerrain = 1;
 
@@ -1213,7 +884,7 @@ class SceneUploader
 				int depthB = proceduralGenerator.vertexUnderwaterDepth.getOrDefault(vertexKeyB, 0);
 				int depthC = proceduralGenerator.vertexUnderwaterDepth.getOrDefault(vertexKeyC, 0);
 
-				if (gpuPlugin.configGroundTextures)
+				if (hdPlugin.configGroundTextures)
 				{
 					GroundMaterial groundMaterial = GroundMaterial.UNDERWATER_GENERIC;
 
@@ -1281,7 +952,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int pushFace(Model model, int face, boolean padUvs, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int xOffset, int yOffset, int zOffset, int orientation, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
+	int[] pushFace(Model model, int face, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
 	{
 		final int[] vertexX = model.getVerticesX();
 		final int[] vertexY = model.getVerticesY();
@@ -1307,14 +978,9 @@ class SceneUploader
 		int color2 = color2s[face];
 		int color3 = color3s[face];
 
-		int packedAlphaPriority = packAlphaPriority(faceTextures, transparencies, facePriorities, face);
+		int uvLength = 0;
 
-		int sin = 0, cos = 0;
-		if (orientation != 0)
-		{
-			sin = Perspective.SINE[orientation];
-			cos = Perspective.COSINE[orientation];
-		}
+		int packedAlphaPriority = packAlphaPriority(faceTextures, transparencies, facePriorities, face);
 
 		if (color3 == -1)
 		{
@@ -1327,214 +993,180 @@ class SceneUploader
 			vertexBuffer.put(0, 0, 0, 0);
 			vertexBuffer.put(0, 0, 0, 0);
 
-			if (gpuPlugin.configHdMode && normalBuffer != null)
-			{
-				normalBuffer.ensureCapacity(12);
-				normalBuffer.put(0, 0, 0, 0);
-				normalBuffer.put(0, 0, 0, 0);
-				normalBuffer.put(0, 0, 0, 0);
-			}
+			normalBuffer.ensureCapacity(12);
+			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(0, 0, 0, 0);
 
-			if (padUvs || faceTextures != null || (gpuPlugin.configHdMode && objectProperties != null && objectProperties.getMaterial() != Material.NONE))
+			if (faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
 			{
 				uvBuffer.ensureCapacity(12);
 				uvBuffer.put(0, 0, 0, 0f);
 				uvBuffer.put(0, 0, 0, 0f);
 				uvBuffer.put(0, 0, 0, 0f);
-			}
-			return 3;
-		}
-
-		int vnAX = 0, vnAY = 0, vnAZ = 0;
-		int vnBX = 0, vnBY = 0, vnBZ = 0;
-		int vnCX = 0, vnCY = 0, vnCZ = 0;
-
-		if (gpuPlugin.configHdMode)
-		{
-			int[] vertexNormalsX = model.getVertexNormalsX();
-			int[] vertexNormalsY = model.getVertexNormalsY();
-			int[] vertexNormalsZ = model.getVertexNormalsZ();
-
-			vnAX = vertexNormalsX[triangleA];
-			vnAY = vertexNormalsY[triangleA];
-			vnAZ = vertexNormalsZ[triangleA];
-
-			vnBX = vertexNormalsX[triangleB];
-			vnBY = vertexNormalsY[triangleB];
-			vnBZ = vertexNormalsZ[triangleB];
-
-			vnCX = vertexNormalsX[triangleC];
-			vnCY = vertexNormalsY[triangleC];
-			vnCZ = vertexNormalsZ[triangleC];
-		}
-
-		if (gpuPlugin.configHdMode)
-		{
-			int[] color1HSL = HDUtils.colorIntToHSL(color1);
-			int[] color2HSL = HDUtils.colorIntToHSL(color2);
-			int[] color3HSL = HDUtils.colorIntToHSL(color3);
-
-			// reduce the effect of the baked shading by approximately inverting the process by which
-			// the shading is added initially.
-			// first, take a directional vector approximately opposite of the directional light
-			// used by the client..
-			float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{0.5f, 0.5f, 0.5f});
-
-			// multiplier applied to vertex' lightness value.
-			// results in greater lightening of lighter colors
-			float lightnessMultiplier = 3f;
-			// the minimum amount by which each color will be lightened
-			int baseLighten = 10;
-			// subtracts the X lowest lightness levels from the formula.
-			// helps keep darker colors appropriately dark
-			int ignoreLowLightness = 3;
-
-			int lightenA = (int) (Math.max((color1HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-			// use the dot product of the inverse light vector and each vertex' normal vector to
-			// interpolate between the lightened color value and the original color value
-			float dotA = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnAX, vnAY, vnAZ}), inverseLightDirection);
-			dotA = Math.max(dotA, 0);
-			color1HSL[2] = (int) HDUtils.lerp(color1HSL[2], lightenA, dotA);
-
-			int lightenB = (int) (Math.max((color2HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-			float dotB = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnBX, vnBY, vnBZ}), inverseLightDirection);
-			dotB = Math.max(dotB, 0);
-			color2HSL[2] = (int) HDUtils.lerp(color2HSL[2], lightenB, dotB);
-
-			int lightenC = (int) (Math.max((color3HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-			float dotC = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnCX, vnCY, vnCZ}), inverseLightDirection);
-			dotC = Math.max(dotC, 0);
-			color3HSL[2] = (int) HDUtils.lerp(color3HSL[2], lightenC, dotC);
-
-			if (faceTextures != null && faceTextures[face] != -1)
-			{
-				// set textured faces to pure white as they are harder to remove shadows from for some reason
-				color1HSL = color2HSL = color3HSL = new int[]{0, 0, 127};
+				uvLength = 3;
 			}
 
-			if (objectProperties != null && objectProperties.isInheritTileColor())
-			{
-				Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
+			return new int[]{3, uvLength};
+		}
 
-				if (tile != null && (tile.getSceneTilePaint() != null || tile.getSceneTileModel() != null))
+		int vnAX, vnAY, vnAZ;
+		int vnBX, vnBY, vnBZ;
+		int vnCX, vnCY, vnCZ;
+
+		int[] vertexNormalsX = model.getVertexNormalsX();
+		int[] vertexNormalsY = model.getVertexNormalsY();
+		int[] vertexNormalsZ = model.getVertexNormalsZ();
+
+		vnAX = vertexNormalsX[triangleA];
+		vnAY = vertexNormalsY[triangleA];
+		vnAZ = vertexNormalsZ[triangleA];
+
+		vnBX = vertexNormalsX[triangleB];
+		vnBY = vertexNormalsY[triangleB];
+		vnBZ = vertexNormalsZ[triangleB];
+
+		vnCX = vertexNormalsX[triangleC];
+		vnCY = vertexNormalsY[triangleC];
+		vnCZ = vertexNormalsZ[triangleC];
+
+
+
+		int[] color1HSL = HDUtils.colorIntToHSL(color1);
+		int[] color2HSL = HDUtils.colorIntToHSL(color2);
+		int[] color3HSL = HDUtils.colorIntToHSL(color3);
+
+		// reduce the effect of the baked shading by approximately inverting the process by which
+		// the shading is added initially.
+		// first, take a directional vector approximately opposite of the directional light
+		// used by the client..
+		float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{0.5f, 0.5f, 0.5f});
+
+		// multiplier applied to vertex' lightness value.
+		// results in greater lightening of lighter colors
+		float lightnessMultiplier = 3f;
+		// the minimum amount by which each color will be lightened
+		int baseLighten = 10;
+		// subtracts the X lowest lightness levels from the formula.
+		// helps keep darker colors appropriately dark
+		int ignoreLowLightness = 3;
+
+		int lightenA = (int) (Math.max((color1HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		// use the dot product of the inverse light vector and each vertex' normal vector to
+		// interpolate between the lightened color value and the original color value
+		float dotA = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnAX, vnAY, vnAZ}), inverseLightDirection);
+		dotA = Math.max(dotA, 0);
+		color1HSL[2] = (int) HDUtils.lerp(color1HSL[2], lightenA, dotA);
+
+		int lightenB = (int) (Math.max((color2HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		float dotB = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnBX, vnBY, vnBZ}), inverseLightDirection);
+		dotB = Math.max(dotB, 0);
+		color2HSL[2] = (int) HDUtils.lerp(color2HSL[2], lightenB, dotB);
+
+		int lightenC = (int) (Math.max((color3HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		float dotC = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnCX, vnCY, vnCZ}), inverseLightDirection);
+		dotC = Math.max(dotC, 0);
+		color3HSL[2] = (int) HDUtils.lerp(color3HSL[2], lightenC, dotC);
+
+		if (faceTextures != null && faceTextures[face] != -1)
+		{
+			// set textured faces to pure white as they are harder to remove shadows from for some reason
+			color1HSL = color2HSL = color3HSL = new int[]{0, 0, 127};
+		}
+
+		if (objectProperties != null && objectProperties.isInheritTileColor())
+		{
+			Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
+
+			if (tile != null && (tile.getSceneTilePaint() != null || tile.getSceneTileModel() != null))
+			{
+				int[] tileColorHSL;
+
+				if (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() == -1)
 				{
-					int[] tileColorHSL;
+					// pull any corner color as either one should be OK
+					tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSwColor());
 
-					if (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() == -1)
+					// average saturation and lightness
+					tileColorHSL[1] =
+						(
+							tileColorHSL[1] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[1] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[1] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[1]
+						) / 4;
+
+					tileColorHSL[2] =
+						(
+							tileColorHSL[2] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[2] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[2] +
+								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[2]
+						) / 4;
+
+					color1HSL = color2HSL = color3HSL = tileColorHSL;
+				}
+				else if (tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() == null)
+				{
+					int faceColorIndex = -1;
+					for (int i = 0; i < tile.getSceneTileModel().getTriangleColorA().length; i++)
 					{
-						// pull any corner color as either one should be OK
-						tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSwColor());
-
-						// average saturation and lightness
-						tileColorHSL[1] =
-							(
-								tileColorHSL[1] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[1] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[1] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[1]
-							) / 4;
-
-						tileColorHSL[2] =
-							(
-								tileColorHSL[2] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[2] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[2] +
-									HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[2]
-							) / 4;
-
-						color1HSL = color2HSL = color3HSL = tileColorHSL;
+						if (!proceduralGenerator.isOverlayFace(tile, i))
+						{
+							// get a color from an underlay face as it's generally more desirable
+							// than pulling colors from paths and other overlays
+							faceColorIndex = i;
+							break;
+						}
 					}
-					else if (tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() == null)
-					{
-						int faceColorIndex = -1;
-						for (int i = 0; i < tile.getSceneTileModel().getTriangleColorA().length; i++)
-						{
-							if (!proceduralGenerator.isOverlayFace(tile, i))
-							{
-								// get a color from an underlay face as it's generally more desirable
-								// than pulling colors from paths and other overlays
-								faceColorIndex = i;
-								break;
-							}
-						}
 
-						if (faceColorIndex != -1)
-						{
-							tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
-							color1HSL = color2HSL = color3HSL = tileColorHSL;
-						}
+					if (faceColorIndex != -1)
+					{
+						tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
+						color1HSL = color2HSL = color3HSL = tileColorHSL;
 					}
 				}
 			}
-
-			if (gpuPlugin.configTzhaarHD && objectProperties != null && objectProperties.getTzHaarRecolorType() != TzHaarRecolorType.NONE)
-			{
-				int[][] reskinnedData = proceduralGenerator.recolorTzHaar(objectProperties, vertexY[triangleA], vertexY[triangleB], vertexY[triangleC], color1HSL, color2HSL, color3HSL, packedAlphaPriority, objectType);
-				color1HSL = reskinnedData[0].clone();
-				color2HSL = reskinnedData[1].clone();
-				color3HSL = reskinnedData[2].clone();
-				packedAlphaPriority = reskinnedData[3][0];
-			}
-
-			// adjust overly-bright vertex colors to reduce ugly washed-out areas of
-			// brightly-colored models
-			int maxBrightness = 55;
-			if (faceTextures != null && faceTextures[face] != -1)
-			{
-				maxBrightness = 90;
-			}
-			color1HSL[2] = Ints.constrainToRange(color1HSL[2], 0, maxBrightness);
-			color2HSL[2] = Ints.constrainToRange(color2HSL[2], 0, maxBrightness);
-			color3HSL[2] = Ints.constrainToRange(color3HSL[2], 0, maxBrightness);
-
-			color1 = HDUtils.colorHSLToInt(color1HSL);
-			color2 = HDUtils.colorHSLToInt(color2HSL);
-			color3 = HDUtils.colorHSLToInt(color3HSL);
 		}
 
-		if (gpuPlugin.configHdMode)
+		if (hdPlugin.configTzhaarHD && objectProperties != null && objectProperties.getTzHaarRecolorType() != TzHaarRecolorType.NONE)
 		{
-			if (orientation != 0)
-			{
-				int x = vnAZ * sin + vnAX * cos >> 16;
-				int z = vnAZ * cos - vnAX * sin >> 16;
+			int[][] reskinnedData = proceduralGenerator.recolorTzHaar(objectProperties, vertexY[triangleA], vertexY[triangleB], vertexY[triangleC], color1HSL, color2HSL, color3HSL, packedAlphaPriority, objectType);
+			color1HSL = reskinnedData[0].clone();
+			color2HSL = reskinnedData[1].clone();
+			color3HSL = reskinnedData[2].clone();
+			packedAlphaPriority = reskinnedData[3][0];
+		}
 
-				vnAX = x;
-				vnAZ = z;
-			}
+		// adjust overly-bright vertex colors to reduce ugly washed-out areas of
+		// brightly-colored models
+		int maxBrightness = 55;
+		if (faceTextures != null && faceTextures[face] != -1)
+		{
+			maxBrightness = 90;
+		}
+		color1HSL[2] = Ints.constrainToRange(color1HSL[2], 0, maxBrightness);
+		color2HSL[2] = Ints.constrainToRange(color2HSL[2], 0, maxBrightness);
+		color3HSL[2] = Ints.constrainToRange(color3HSL[2], 0, maxBrightness);
 
-			if (orientation != 0)
-			{
-				int x = vnBZ * sin + vnBX * cos >> 16;
-				int z = vnBZ * cos - vnBX * sin >> 16;
+		color1 = HDUtils.colorHSLToInt(color1HSL);
+		color2 = HDUtils.colorHSLToInt(color2HSL);
+		color3 = HDUtils.colorHSLToInt(color3HSL);
 
-				vnBX = x;
-				vnBZ = z;
-			}
+		normalBuffer.ensureCapacity(12);
 
-			if (orientation != 0)
-			{
-				int x = vnCZ * sin + vnCX * cos >> 16;
-				int z = vnCZ * cos - vnCX * sin >> 16;
-
-				vnCX = x;
-				vnCZ = z;
-			}
-
-			normalBuffer.ensureCapacity(12);
-
-			if (objectProperties != null && objectProperties.isFlatNormals())
-			{
-				normalBuffer.put(0, 0, 0, 0);
-				normalBuffer.put(0, 0, 0, 0);
-				normalBuffer.put(0, 0, 0, 0);
-			}
-			else
-			{
-				normalBuffer.put(vnAX, vnAY, vnAZ, 0);
-				normalBuffer.put(vnBX, vnBY, vnBZ, 0);
-				normalBuffer.put(vnCX, vnCY, vnCZ, 0);
-			}
+		// if color3 is -1, the object is flat-shaded
+		if (color3s[face] == -1 || (objectProperties != null && objectProperties.isFlatNormals()))
+		{
+			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(0, 0, 0, 0);
+		}
+		else
+		{
+			normalBuffer.put(vnAX, vnAY, vnAZ, 0);
+			normalBuffer.put(vnBX, vnBY, vnBZ, 0);
+			normalBuffer.put(vnCX, vnCY, vnCZ, 0);
 		}
 
 		vertexBuffer.ensureCapacity(12);
@@ -1543,56 +1175,17 @@ class SceneUploader
 		int aY = vertexY[triangleA];
 		int aZ = vertexZ[triangleA];
 
-		if (orientation != 0)
-		{
-			int x = aZ * sin + aX * cos >> 16;
-			int z = aZ * cos - aX * sin >> 16;
-
-			aX = x;
-			aZ = z;
-		}
-
-		aX += xOffset;
-		aY += yOffset;
-		aZ += zOffset;
-
 		vertexBuffer.put(aX, aY, aZ, packedAlphaPriority | color1);
 
 		int bX = vertexX[triangleB];
 		int bY = vertexY[triangleB];
 		int bZ = vertexZ[triangleB];
 
-		if (orientation != 0)
-		{
-			int x = bZ * sin + bX * cos >> 16;
-			int z = bZ * cos - bX * sin >> 16;
-
-			bX = x;
-			bZ = z;
-		}
-
-		bX += xOffset;
-		bY += yOffset;
-		bZ += zOffset;
-
 		vertexBuffer.put(bX, bY, bZ, packedAlphaPriority | color2);
 
 		int cX = vertexX[triangleC];
 		int cY = vertexY[triangleC];
 		int cZ = vertexZ[triangleC];
-
-		if (orientation != 0)
-		{
-			int x = cZ * sin + cX * cos >> 16;
-			int z = cZ * cos - cX * sin >> 16;
-
-			cX = x;
-			cZ = z;
-		}
-
-		cX += xOffset;
-		cY += yOffset;
-		cZ += zOffset;
 
 		vertexBuffer.put(cX, cY, cZ, packedAlphaPriority | color3);
 
@@ -1603,21 +1196,18 @@ class SceneUploader
 
 		if (faceTextures != null && u != null && v != null && (uf = u[face]) != null && (vf = v[face]) != null)
 		{
-			int packedTextureData = faceTextures[face] + 1;
-			if (gpuPlugin.configHdMode)
-			{
-				material = Material.getTexture(faceTextures[face]);
-				packedTextureData = packTextureData(Material.getIndex(material), false);
-			}
+			material = Material.getTexture(faceTextures[face]);
+			int packedTextureData = packTextureData(Material.getIndex(material), false);
 
 			uvBuffer.ensureCapacity(12);
 			uvBuffer.put(packedTextureData, uf[0], vf[0], 0f);
 			uvBuffer.put(packedTextureData, uf[1], vf[1], 0f);
 			uvBuffer.put(packedTextureData, uf[2], vf[2], 0f);
+			uvLength = 3;
 		}
-		else if (gpuPlugin.configHdMode && objectProperties != null && objectProperties.getMaterial() != Material.NONE)
+		else if (objectProperties != null && objectProperties.getMaterial() != Material.NONE)
 		{
-			material = gpuPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE;
+			material = hdPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE;
 			int packedTextureData = packTextureData(Material.getIndex(material), false);
 
 			uvBuffer.ensureCapacity(12);
@@ -1634,6 +1224,7 @@ class SceneUploader
 				uvBuffer.put(packedTextureData, aU, aV, 0f);
 				uvBuffer.put(packedTextureData, bU, bV, 0f);
 				uvBuffer.put(packedTextureData, cU, cV, 0f);
+				uvLength = 3;
 			}
 			else
 			{
@@ -1641,17 +1232,19 @@ class SceneUploader
 				uvBuffer.put(packedTextureData, 0f, 0f, 0f);
 				uvBuffer.put(packedTextureData, 1f, 0f, 0f);
 				uvBuffer.put(packedTextureData, 0f, 1f, 0f);
+				uvLength = 3;
 			}
 		}
-		else if (padUvs || faceTextures != null)
+		else if (faceTextures != null)
 		{
 			uvBuffer.ensureCapacity(12);
 			uvBuffer.put(0, 0f, 0f, 0f);
 			uvBuffer.put(0, 0f, 0f, 0f);
 			uvBuffer.put(0, 0f, 0f, 0f);
+			uvLength = 3;
 		}
 
-		return 3;
+		return new int[]{3, uvLength};
 	}
 
 	private static int packAlphaPriority(short[] faceTextures, byte[] faceTransparencies, byte[] facePriorities, int face)
@@ -1671,13 +1264,6 @@ class SceneUploader
 
 	private int packTextureData(int texture, boolean isOverlay)
 	{
-		if (gpuPlugin.configHdMode)
-		{
-			return texture << 1 | (isOverlay ? 1 : 0);
-		}
-		else
-		{
-			return texture + 1;
-		}
+		return texture << 1 | (isOverlay ? 1 : 0);
 	}
 }

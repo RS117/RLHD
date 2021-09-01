@@ -56,7 +56,7 @@ class ProceduralGenerator
 	private Client client;
 	
 	@Inject
-	private HdPlugin gpuPlugin;
+	private HdPlugin hdPlugin;
 
 	private final int VERTICES_PER_FACE = 3;
 
@@ -363,7 +363,7 @@ class ProceduralGenerator
 		// these offsets are interpolated to calculate offsets for vertices not on the grid (tilemodels)
 		final int[][][] underwaterDepths = new int[Constants.MAX_Z][Constants.SCENE_SIZE + 1][Constants.SCENE_SIZE + 1];
 
-		if (gpuPlugin.configWaterEffects == WaterEffects.SIMPLE)
+		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
 			return;
 		}
@@ -849,7 +849,7 @@ class ProceduralGenerator
 			}
 		}
 
-		if (gpuPlugin.configWaterEffects == WaterEffects.SIMPLE)
+		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
 			switch(waterType)
 			{
@@ -902,7 +902,7 @@ class ProceduralGenerator
 			}
 		}
 
-		if (gpuPlugin.configWaterEffects == WaterEffects.SIMPLE)
+		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
 			switch(waterType)
 			{

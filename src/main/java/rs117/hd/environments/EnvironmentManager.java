@@ -51,7 +51,7 @@ public class EnvironmentManager
 	private HdPluginConfig config;
 
 	@Inject
-	private HdPlugin gpuPlugin;
+	private HdPlugin hdPlugin;
 
 	private ArrayList<Environment> sceneEnvironments;
 	private Environment currentEnvironment;
@@ -130,7 +130,7 @@ public class EnvironmentManager
 
 	public void update()
 	{
-		int[] camFocalPoint = gpuPlugin.getCameraFocalPoint();
+		int[] camFocalPoint = hdPlugin.getCameraFocalPoint();
 		WorldPoint camPosition = localPointToWorldTile(camFocalPoint[0], camFocalPoint[1]);
 		int camTargetX = camPosition.getX();
 		int camTargetY = camPosition.getY();

@@ -51,6 +51,14 @@ public interface HdPluginConfig extends Config
 {
 	/*====== General settings ======*/
 
+	@ConfigSection(
+		name = "General",
+		description = "General settings",
+		position = 0,
+		closedByDefault = false
+	)
+	String generalSettings = "generalSettings";
+
 	@Range(
 		max = MAX_DISTANCE
 	)
@@ -58,29 +66,20 @@ public interface HdPluginConfig extends Config
 		keyName = "drawDistance",
 		name = "Draw Distance",
 		description = "Draw distance",
-		position = 1
+		position = 1,
+		section = generalSettings
 	)
 	default int drawDistance()
 	{
-		return 25;
-	}
-
-	@ConfigItem(
-		keyName = "smoothBanding",
-		name = "Remove Color Banding",
-		description = "Smooths out the color banding that is present in the CPU renderer",
-		position = 2
-	)
-	default boolean smoothBanding()
-	{
-		return false;
+		return 50;
 	}
 
 	@ConfigItem(
 		keyName = "antiAliasingMode",
 		name = "Anti Aliasing",
 		description = "Configures the anti-aliasing mode",
-		position = 3
+		position = 2,
+		section = generalSettings
 	)
 	default AntiAliasingMode antiAliasingMode()
 	{
@@ -91,37 +90,12 @@ public interface HdPluginConfig extends Config
 		keyName = "uiScalingMode",
 		name = "UI scaling mode",
 		description = "Sampling function to use for the UI in stretched mode",
-		position = 4
+		position = 3,
+		section = generalSettings
 	)
 	default UIScalingMode uiScalingMode()
 	{
 		return UIScalingMode.LINEAR;
-	}
-
-	@Range(
-		max = MAX_FOG_DEPTH
-	)
-	@ConfigItem(
-		keyName = "fogDepth",
-		name = "Fog depth",
-		description = "Distance from the scene edge the fog starts",
-		position = 5
-	)
-	default int fogDepth()
-	{
-		return 0;
-	}
-
-	@ConfigItem(
-		keyName = "useComputeShaders",
-		name = "Compute Shaders",
-		description = "Offloads face sorting to GPU, enabling extended draw distance.",
-		warning = "This feature requires OpenGL 4.3 to use. Please check that your GPU supports this.",
-		position = 6
-	)
-	default boolean useComputeShaders()
-	{
-		return true;
 	}
 
 	@Range(
@@ -132,18 +106,20 @@ public interface HdPluginConfig extends Config
 		keyName = "anisotropicFilteringLevel",
 		name = "Anisotropic Filtering",
 		description = "Configures the anisotropic filtering level.",
-		position = 7
+		position = 4,
+		section = generalSettings
 	)
 	default int anisotropicFilteringLevel()
 	{
-		return 0;
+		return 16;
 	}
 
 	@ConfigItem(
 		keyName = "colorBlindMode",
 		name = "Colorblindness Correction",
 		description = "Adjusts colors to account for colorblindness",
-		position = 8
+		position = 5,
+		section = generalSettings
 	)
 	default ColorBlindMode colorBlindMode()
 	{
@@ -151,46 +127,11 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "brightTextures",
-		name = "Bright Textures",
-		description = "Use old texture lighting method which results in brighter game textures",
-		position = 9
-	)
-	default boolean brightTextures()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		keyName = "hdMode",
-		name = "High Detail Mode (Beta)",
-		description = "Enables a set of graphical improvements.",
-		warning = "This feature is in beta and may cause game crashes. Use with caution!",
-		position = 10
-	)
-	default boolean hdMode()
-	{
-		return false;
-	}
-
-
-
-	/*====== General HD settings ======*/
-
-	@ConfigSection(
-		name = "[HD] General",
-		description = "General settings for High Detail mode.",
-		position = 100,
-		closedByDefault = false
-	)
-	String generalHDSettings = "generalHDSettings";
-
-	@ConfigItem(
 		keyName = "flashingEffects",
 		name = "Flashing Effects",
-		description = "Displays fast flashing effects such as lightning in certain areas.",
-		position = 101,
-		section = generalHDSettings
+		description = "Displays fast flashing effects, such as lightning, in certain areas.",
+		position = 6,
+		section = generalSettings
 	)
 	default boolean flashingEffects()
 	{
@@ -201,8 +142,8 @@ public interface HdPluginConfig extends Config
 		keyName = "saturation",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
-		position = 102,
-		section = generalHDSettings
+		position = 7,
+		section = generalSettings
 	)
 	default Saturation saturation()
 	{
@@ -213,8 +154,8 @@ public interface HdPluginConfig extends Config
 		keyName = "contrast",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
-		position = 103,
-		section = generalHDSettings
+		position = 8,
+		section = generalSettings
 	)
 	default Contrast contrast()
 	{
@@ -225,8 +166,8 @@ public interface HdPluginConfig extends Config
 		keyName = "brightness",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
-		position = 104,
-		section = generalHDSettings
+		position = 9,
+		section = generalSettings
 	)
 	default Brightness brightness()
 	{
@@ -237,12 +178,12 @@ public interface HdPluginConfig extends Config
 		keyName = "levelOfDetail",
 		name = "Level of Detail",
 		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 105,
-		section = generalHDSettings
+		position = 10,
+		section = generalSettings
 	)
 	default LevelOfDetail levelOfDetail()
 	{
-		return LevelOfDetail.MEDIUM;
+		return LevelOfDetail.FULL;
 	}
 
 
@@ -250,10 +191,10 @@ public interface HdPluginConfig extends Config
 	/*====== Lighting settings ======*/
 
 	@ConfigSection(
-		name = "[HD] Lighting",
-		description = "Lighting settings for High Detail mode.",
-		position = 200,
-		closedByDefault = true
+		name = "Lighting",
+		description = "Lighting settings",
+		position = 100,
+		closedByDefault = false
 	)
 	String lightingSettings = "lightingSettings";
 
@@ -261,7 +202,7 @@ public interface HdPluginConfig extends Config
 		keyName = "maxDynamicLights",
 		name = "Dynamic Lights",
 		description = "The maximum number of dynamic lights visible at one time. Reducing this will improve performance.",
-		position = 201,
+		position = 101,
 		section = lightingSettings
 	)
 	default MaxDynamicLights maxDynamicLights()
@@ -273,7 +214,7 @@ public interface HdPluginConfig extends Config
 		keyName = "projectileLights",
 		name = "Projectile Lights",
 		description = "Adds dynamic lights to some projectiles.",
-		position = 202,
+		position = 102,
 		section = lightingSettings
 	)
 	default boolean projectileLights()
@@ -285,7 +226,7 @@ public interface HdPluginConfig extends Config
 		keyName = "npcLights",
 		name = "NPC Lights",
 		description = "Adds dynamic lights to some NPCs.",
-		position = 203,
+		position = 103,
 		section = lightingSettings
 	)
 	default boolean npcLights()
@@ -297,7 +238,7 @@ public interface HdPluginConfig extends Config
 		keyName = "atmosphericLighting",
 		name = "Atmospheric Lighting",
 		description = "Changes the color and brightness of full-scene lighting in certain areas.",
-		position = 204,
+		position = 104,
 		section = lightingSettings
 	)
 	default boolean atmosphericLighting()
@@ -308,8 +249,8 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "shadowsEnabled",
 		name = "Shadows",
-		description = "Enables fully-dynamic shadows. Requires compute shaders.",
-		position = 210,
+		description = "Enables fully-dynamic shadows.",
+		position = 105,
 		section = lightingSettings
 	)
 	default boolean shadowsEnabled()
@@ -320,8 +261,8 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "shadowResolution",
 		name = "Shadow Resolution",
-		description = "The resolution at which shadow maps are drawn. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
-		position = 211,
+		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
+		position = 106,
 		section = lightingSettings
 	)
 	default ShadowResolution shadowResolution()
@@ -333,7 +274,7 @@ public interface HdPluginConfig extends Config
 		keyName = "shadowDistance",
 		name = "Shadow Distance",
 		description = "The maximum draw distance of shadow maps. Shorter distances result in sharper, higher quality shadows.",
-		position = 212,
+		position = 107,
 		section = lightingSettings
 	)
 	default ShadowDistance shadowDistance()
@@ -345,7 +286,7 @@ public interface HdPluginConfig extends Config
 		keyName = "expandShadowDraw",
 		name = "Expand Shadow Draw",
 		description = "Reduces 'flickering' of shadows disappearing at screen edge by increasing geometry drawn at a cost of performance.",
-		position = 213,
+		position = 108,
 		section = lightingSettings
 	)
 	default boolean expandShadowDraw()
@@ -358,10 +299,10 @@ public interface HdPluginConfig extends Config
 	/*====== Environment settings ======*/
 
 	@ConfigSection(
-		name = "[HD] Environment",
-		description = "Environment settings for High Detail mode.",
-		position = 300,
-		closedByDefault = true
+		name = "Environment",
+		description = "Environment settings",
+		position = 200,
+		closedByDefault = false
 	)
 	String environmentSettings = "environmentSettings";
 
@@ -369,7 +310,7 @@ public interface HdPluginConfig extends Config
 		keyName = "fogDepthMode",
 		name = "Fog Depth Mode",
 		description = "Determines the method of controlling the depth of the fog. 'Dynamic' changes fog depth based on the area.",
-		position = 301,
+		position = 201,
 		section = environmentSettings
 	)
 	default FogDepthMode fogDepthMode()
@@ -377,11 +318,26 @@ public interface HdPluginConfig extends Config
 		return FogDepthMode.DYNAMIC;
 	}
 
+	@Range(
+		max = MAX_FOG_DEPTH
+	)
+	@ConfigItem(
+		keyName = "fogDepth",
+		name = "Static Fog Depth",
+		description = "Distance from the scene edge the fog starts. Applies when 'Fog Depth Mode' is set to 'static'.",
+		position = 202,
+		section = environmentSettings
+	)
+	default int fogDepth()
+	{
+		return 0;
+	}
+
 	@ConfigItem(
 		keyName = "groundFog",
 		name = "Ground Fog",
 		description = "Enables a height-based fog effect that covers the ground in certain areas.",
-		position = 302,
+		position = 203,
 		section = environmentSettings
 	)
 	default boolean groundFog() {
@@ -392,7 +348,7 @@ public interface HdPluginConfig extends Config
 		keyName = "defaultSkyColor",
 		name = "Default Sky Color",
 		description = "Determines the color of the sky when in a location without a custom sky color assigned.",
-		position = 303,
+		position = 204,
 		section = environmentSettings
 	)
 	default DefaultSkyColor defaultSkyColor()
@@ -403,8 +359,8 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "objectTextures",
 		name = "Object Textures",
-		description = "Adds detail textures to certain world objects. Requires compute shaders.",
-		position = 304,
+		description = "Adds detail textures to certain world objects.",
+		position = 205,
 		section = environmentSettings
 	)
 	default boolean objectTextures()
@@ -416,7 +372,7 @@ public interface HdPluginConfig extends Config
 		keyName = "groundTextures",
 		name = "Ground Textures",
 		description = "Adds detail textures to the ground.",
-		position = 305,
+		position = 206,
 		section = environmentSettings
 	)
 	default boolean groundTextures()
@@ -428,7 +384,7 @@ public interface HdPluginConfig extends Config
 		keyName = "waterEffects",
 		name = "Water Effects",
 		description = "Changes the appearance of the water. ",
-		position = 306,
+		position = 207,
 		section = environmentSettings
 	)
 	default WaterEffects waterEffects()
@@ -439,8 +395,8 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
-		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant. Requires compute shaders.",
-		position = 307,
+		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
+		position = 208,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()

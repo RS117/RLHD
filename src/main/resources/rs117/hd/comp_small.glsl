@@ -37,51 +37,49 @@ shared int dfs[512]; // packed face id and distance
 
 layout(local_size_x = 512) in;
 
-uniform int hdMode;
-
 #include common.glsl
 #include priority_render.glsl
 
 void main() {
-  uint groupId = gl_WorkGroupID.x;
-  uint localId = gl_LocalInvocationID.x;
-  modelinfo minfo = ol[groupId];
-  ivec4 pos = ivec4(minfo.x, minfo.y, minfo.z, 0);
+    uint groupId = gl_WorkGroupID.x;
+    uint localId = gl_LocalInvocationID.x;
+    modelinfo minfo = ol[groupId];
+    ivec4 pos = ivec4(minfo.x, minfo.y, minfo.z, 0);
 
-  if (localId == 0) {
-    min10 = 1600;
-    for (int i = 0; i < 12; ++i) {
-      totalNum[i] = 0;
-      totalDistance[i] = 0;
+    if (localId == 0) {
+        min10 = 1600;
+        for (int i = 0; i < 12; ++i) {
+            totalNum[i] = 0;
+            totalDistance[i] = 0;
+        }
+        for (int i = 0; i < 18; ++i) {
+            totalMappedNum[i] = 0;
+        }
     }
-    for (int i = 0; i < 18; ++i) {
-      totalMappedNum[i] = 0;
-    }
-  }
 
-  int prio1, dis1;
-  ivec4 vA1, vA2, vA3;
+    int prio1, dis1;
+    ivec4 vA1, vA2, vA3;
 
-  get_face(localId, minfo, cameraYaw, cameraPitch, prio1, dis1, vA1, vA2, vA3);
+    get_face(localId, minfo, cameraYaw, cameraPitch, prio1, dis1, vA1, vA2, vA3);
 
-  memoryBarrierShared();
-  barrier();
+    memoryBarrierShared();
+    barrier();
 
-  add_face_prio_distance(localId, minfo, vA1, vA2, vA3, prio1, dis1, pos);
+    add_face_prio_distance(localId, minfo, vA1, vA2, vA3, prio1, dis1, pos);
 
-  memoryBarrierShared();
-  barrier();
+    memoryBarrierShared();
+    barrier();
 
-  int prio1Adj;
-  int idx1 = map_face_priority(localId, minfo, prio1, dis1, prio1Adj);
+    int prio1Adj;
+    int idx1 = map_face_priority(localId, minfo, prio1, dis1, prio1Adj);
 
-  memoryBarrierShared();
-  barrier();
+    memoryBarrierShared();
+    barrier();
 
-  insert_dfs(localId, minfo, prio1Adj, dis1, idx1);
+    insert_dfs(localId, minfo, prio1Adj, dis1, idx1);
 
-  memoryBarrierShared();
-  barrier();
+    memoryBarrierShared();
+    barrier();
 
-  sort_and_insert(localId, minfo, prio1Adj, dis1, vA1, vA2, vA3);
+    sort_and_insert(localId, minfo, prio1Adj, dis1, vA1, vA2, vA3);
 }
