@@ -998,14 +998,14 @@ class SceneUploader
 			normalBuffer.put(0, 0, 0, 0);
 			normalBuffer.put(0, 0, 0, 0);
 
-//			if (faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
-//			{
+			if (faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
+			{
 				uvBuffer.ensureCapacity(12);
 				uvBuffer.put(0, 0, 0, 0f);
 				uvBuffer.put(0, 0, 0, 0f);
 				uvBuffer.put(0, 0, 0, 0f);
 				uvLength = 3;
-//			}
+			}
 
 			return new int[]{3, uvLength};
 		}
@@ -1224,6 +1224,7 @@ class SceneUploader
 				uvBuffer.put(packedTextureData, aU, aV, 0f);
 				uvBuffer.put(packedTextureData, bU, bV, 0f);
 				uvBuffer.put(packedTextureData, cU, cV, 0f);
+				uvLength = 3;
 			}
 			else
 			{
@@ -1231,18 +1232,10 @@ class SceneUploader
 				uvBuffer.put(packedTextureData, 0f, 0f, 0f);
 				uvBuffer.put(packedTextureData, 1f, 0f, 0f);
 				uvBuffer.put(packedTextureData, 0f, 1f, 0f);
+				uvLength = 3;
 			}
-			uvLength = 3;
 		}
 		else if (faceTextures != null)
-		{
-			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(0, 0f, 0f, 0f);
-			uvBuffer.put(0, 0f, 0f, 0f);
-			uvBuffer.put(0, 0f, 0f, 0f);
-			uvLength = 3;
-		}
-		else
 		{
 			uvBuffer.ensureCapacity(12);
 			uvBuffer.put(0, 0f, 0f, 0f);

@@ -179,41 +179,41 @@ void main() {
     int waterNormalMap2 = 236;
 
     if (
-    mod(diffuseMapId1, 7000) == 1 || mod(diffuseMapId1, 7000) == 24 ||
-    mod(diffuseMapId2, 7000) == 1 || mod(diffuseMapId2, 7000) == 24 ||
-    mod(diffuseMapId3, 7000) == 1 || mod(diffuseMapId3, 7000) == 24)
+   diffuseMapId1 == 1 || diffuseMapId1 == 24 || diffuseMapId1 == 7001 || diffuseMapId1 == 7024 ||
+   diffuseMapId2 == 1 || diffuseMapId2 == 24 || diffuseMapId2 == 7001 || diffuseMapId2 == 7024 ||
+   diffuseMapId3 == 1 || diffuseMapId3 == 24 || diffuseMapId3 == 7001 || diffuseMapId3 == 7024)
     {
         isWater = true;
         waterType = WATER;
     }
     else if (
-    mod(diffuseMapId1, 7000) == 25 ||
-    mod(diffuseMapId2, 7000) == 25 ||
-    mod(diffuseMapId3, 7000) == 25)
+    diffuseMapId1 == 25 || diffuseMapId1 == 7025 ||
+    diffuseMapId2 == 25 || diffuseMapId2 == 7025 ||
+    diffuseMapId3 == 25 || diffuseMapId3 == 7025)
     {
         isWater = true;
         waterType = SWAMP_WATER;
     }
     else if (
-    mod(diffuseMapId1, 7000) == 998 ||
-    mod(diffuseMapId2, 7000) == 998 ||
-    mod(diffuseMapId3, 7000) == 998)
+    diffuseMapId1 == 998 || diffuseMapId1 == 7998 ||
+    diffuseMapId2 == 998 || diffuseMapId2 == 7998 ||
+    diffuseMapId3 == 998 || diffuseMapId3 == 7998)
     {
         isWater = true;
         waterType = POISON_WASTE;
     }
     else if (
-    mod(diffuseMapId1, 7000) == 999 ||
-    mod(diffuseMapId2, 7000) == 999 ||
-    mod(diffuseMapId3, 7000) == 999)
+    diffuseMapId1 == 999 || diffuseMapId1 == 7999 ||
+    diffuseMapId2 == 999 || diffuseMapId2 == 7999 ||
+    diffuseMapId3 == 999 || diffuseMapId3 == 7999)
     {
         isWater = true;
         waterType = BLOOD;
     }
     else if (
-    mod(diffuseMapId1, 7000) == 997 ||
-    mod(diffuseMapId2, 7000) == 997 ||
-    mod(diffuseMapId3, 7000) == 997)
+    diffuseMapId1 == 997 || diffuseMapId1 == 7997 ||
+    diffuseMapId2 == 997 || diffuseMapId2 == 7997 ||
+    diffuseMapId3 == 997 || diffuseMapId3 == 7997)
     {
         isWater = true;
         waterType = ICE;
@@ -673,17 +673,17 @@ void main() {
     vec3 vSpecularStrength = vec3(material1.specularStrength, material2.specularStrength, material3.specularStrength);
     // apply specular highlights to anything semi-transparent
     // this isn't always desirable but adds subtle light reflections to windows, etc.
-    if (color1.a < 1)
+    if (color1.a < 0.99)
     {
         vSpecularGloss.x = 30.0;
         vSpecularStrength.x = clamp((1.0 - color1.a) * 2, 0.0, 1.0);
     }
-    if (color2.a < 1)
+    if (color2.a < 0.99)
     {
         vSpecularGloss.y = 30.0;
         vSpecularStrength.y = clamp((1.0 - color2.a) * 2, 0.0, 1.0);
     }
-    if (color3.a < 1)
+    if (color3.a < 0.99)
     {
         vSpecularGloss.z = 30.0;
         vSpecularStrength.z = clamp((1.0 - color3.a) * 2, 0.0, 1.0);
