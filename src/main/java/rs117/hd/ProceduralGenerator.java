@@ -1168,69 +1168,80 @@ class ProceduralGenerator
 		return false;
 	}
 
-	int[][] recolorTzHaar(ObjectProperties objectProperties, int aY, int bY, int cY, int[] color1HSL, int[] color2HSL, int[] color3HSL, int packedAlphaPriority, ObjectType objectType)
-	{
-		int[][] out = new int[4][3];
+	int[][] tzHaarRecolored = new int[4][3];
+	// used when calculating the gradient to apply to the walls of TzHaar
+	// to emulate the style from 2008 HD rework
+	final int[] gradientBaseColor = new int[]{3, 4, 26};
+	final int[] gradientDarkColor = new int[]{3, 4, 10};
+	final int gradientBottom = 200;
+	final int gradientTop = -200;
 
+	int[][] recolorTzHaar(ObjectProperties objectProperties, int aY, int bY, int cY, int packedAlphaPriority, ObjectType objectType, int color1H, int color1S, int color1L, int color2H, int color2S, int color2L, int color3H, int color3S, int color3L)
+	{
 		// recolor tzhaar to look like the 2008+ HD version
 		if (objectType == ObjectType.GROUND_OBJECT)
 		{
 			// remove the black parts of floor objects to allow the ground to show
 			// so we can apply textures, ground blending, etc. to it
-			if (color1HSL[1] <= 1)
+			if (color1S <= 1)
 			{
 				packedAlphaPriority = 0xFF << 24;
 			}
 		}
 
-		// used when calculating the gradient to apply to the walls of TzHaar
-		// to emulate the style from 2008 HD rework
-		final int[] gradientBaseColor = new int[]{3, 4, 26};
-		final int[] gradientDarkColor = new int[]{3, 4, 10};
-		final int gradientBottom = 200;
-		final int gradientTop = -200;
-
 		// shift model hues from red->yellow
 		int hue = 7;
-		color1HSL[0] = hue;
-		color2HSL[0] = hue;
-		color3HSL[0] = hue;
+		color1H = hue;
+		color2H = hue;
+		color3H = hue;
 
 		if (objectProperties.getTzHaarRecolorType() == TzHaarRecolorType.GRADIENT)
 		{
 			// apply coloring to the rocky walls
-			if (color1HSL[2] < 20)
+			if (color1L < 20)
 			{
 				float pos = Floats.constrainToRange((float) (aY - gradientTop) / (float) gradientBottom, 0.0f, 1.0f);
-				color1HSL = HDUtils.lerpVectors(gradientDarkColor, gradientBaseColor, pos);
+				color1H = (int)HDUtils.lerp(gradientDarkColor[0], gradientBaseColor[0], pos);
+				color1S = (int)HDUtils.lerp(gradientDarkColor[1], gradientBaseColor[1], pos);
+				color1L = (int)HDUtils.lerp(gradientDarkColor[2], gradientBaseColor[2], pos);
 			}
 
-			if (color2HSL[2] < 20)
+			if (color2L < 20)
 			{
 				float pos = Floats.constrainToRange((float) (bY - gradientTop) / (float) gradientBottom, 0.0f, 1.0f);
-				color2HSL = HDUtils.lerpVectors(gradientDarkColor, gradientBaseColor, pos);
+				color2H = (int)HDUtils.lerp(gradientDarkColor[0], gradientBaseColor[0], pos);
+				color2S = (int)HDUtils.lerp(gradientDarkColor[1], gradientBaseColor[1], pos);
+				color2L = (int)HDUtils.lerp(gradientDarkColor[2], gradientBaseColor[2], pos);
 			}
 
-			if (color3HSL[2] < 20)
+			if (color3L < 20)
 			{
 				float pos = Floats.constrainToRange((float) (cY - gradientTop) / (float) gradientBottom, 0.0f, 1.0f);
-				color3HSL = HDUtils.lerpVectors(gradientDarkColor, gradientBaseColor, pos);
+				color3H = (int)HDUtils.lerp(gradientDarkColor[0], gradientBaseColor[0], pos);
+				color3S = (int)HDUtils.lerp(gradientDarkColor[1], gradientBaseColor[1], pos);
+				color3L = (int)HDUtils.lerp(gradientDarkColor[2], gradientBaseColor[2], pos);
 			}
 		}
 		else if (objectProperties.getTzHaarRecolorType() == TzHaarRecolorType.HUE_SHIFT)
 		{
 			// objects around the entrance to The Inferno only need a hue-shift
 			// and very slight lightening to match the lightened terrain
-			color1HSL[2] += 1;
-			color2HSL[2] += 1;
-			color3HSL[2] += 1;
+			color1L += 1;
+			color2L += 1;
+			color3L += 1;
 		}
 
-		out[0] = color1HSL.clone();
-		out[1] = color2HSL.clone();
-		out[2] = color3HSL.clone();
-		out[3][0] = packedAlphaPriority;
+		tzHaarRecolored[0][0] = color1H;
+		tzHaarRecolored[0][1] = color1S;
+		tzHaarRecolored[0][2] = color1L;
+		tzHaarRecolored[1][0] = color2H;
+		tzHaarRecolored[1][1] = color2S;
+		tzHaarRecolored[1][2] = color2L;
+		tzHaarRecolored[2][0] = color3H;
+		tzHaarRecolored[2][1] = color3S;
+		tzHaarRecolored[2][2] = color3L;
+		tzHaarRecolored[3][0] = packedAlphaPriority;
 
-		return out;
+		return tzHaarRecolored;
 	}
 }

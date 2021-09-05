@@ -198,10 +198,9 @@ public class LightManager
 			return;
 		}
 
-		int[] camTarget = hdPlugin.getCameraFocalPoint();
-		int camX = camTarget[0];
-		int camY = camTarget[1];
-		int camZ = camTarget[2];
+		int camX = hdPlugin.camTarget[0];
+		int camY = hdPlugin.camTarget[1];
+		int camZ = hdPlugin.camTarget[2];
 
 		Iterator<Light> lightIterator = sceneLights.iterator();
 

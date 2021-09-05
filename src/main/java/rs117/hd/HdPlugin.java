@@ -391,6 +391,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
 
+	public int[] camTarget = new int[3];
+
 	@Override
 	protected void startUp()
 	{
@@ -1382,6 +1384,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			return;
 		}
 
+		camTarget = getCameraFocalPoint();
+
 		// shader variables for water, lava animations
 		animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
 		lastFrameTime = System.currentTimeMillis();
@@ -1532,7 +1536,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				gl.glUseProgram(glShadowProgram);
 
-				final int[] camTarget = getCameraFocalPoint();
 				final int camX = camTarget[0];
 				final int camY = camTarget[1];
 				final int camZ = camTarget[2];
@@ -2160,7 +2163,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void draw(Renderable renderable, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash)
 	{
-		final int[] camTarget = getCameraFocalPoint();
 		final int camX = camTarget[0];
 		final int camY = camTarget[1];
 		final int camZ = camTarget[2];
@@ -2238,8 +2240,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				model.calculateExtreme(orientation);
 				client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-				boolean hasUv = model.getFaceTextures() != null;
-
 				int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
 				vertexBuffer.ensureCapacity(12 * faceCount);
 				uvBuffer.ensureCapacity(12 * faceCount);
@@ -2247,10 +2247,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				int vertexLength = 0;
 				int uvLength = 0;
+				int[] bufferLengths;
 
 				for (int face = 0; face < faceCount; ++face)
 				{
-					int[] bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
+					bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
 					vertexLength += bufferLengths[0];
 					uvLength += bufferLengths[1];
 				}
@@ -2260,7 +2261,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				b.ensureCapacity(8);
 				IntBuffer buffer = b.getBuffer();
 				buffer.put(tempOffset);
-				buffer.put(hasUv ? tempUvOffset : -1);
+				buffer.put(uvLength > 0 ? tempUvOffset : -1);
 				buffer.put(vertexLength / 3);
 				buffer.put(targetBufferOffset);
 				buffer.put((model.getRadius() << 12) | orientation);

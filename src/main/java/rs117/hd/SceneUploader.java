@@ -952,6 +952,37 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
+	static int color1H;
+	static int color1S;
+	static int color1L;
+	static int color2H;
+	static int color2S;
+	static int color2L;
+	static int color3H;
+	static int color3S;
+	static int color3L;
+	static int[] HSL = new int[3];
+	static float[] vertex = new float[3];
+	static int[] bufferLengths = new int[2];
+
+	// a directional vector approximately opposite of the directional light
+	// used by the client
+	static float[] inverseLightDirection = new float[]{0.57735026f, 0.57735026f, 0.57735026f};
+	// multiplier applied to vertex' lightness value.
+	// results in greater lightening of lighter colors
+	static float lightnessMultiplier = 3f;
+	// the minimum amount by which each color will be lightened
+	static int baseLighten = 10;
+	// subtracts the X lowest lightness levels from the formula.
+	// helps keep darker colors appropriately dark
+	static int ignoreLowLightness = 3;
+	static int lightenA;
+	static float dotA;
+	static int lightenB;
+	static float dotB;
+	static int lightenC;
+	static float dotC;
+
 	int[] pushFace(Model model, int face, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
 	{
 		final int[] vertexX = model.getVerticesX();
@@ -1007,7 +1038,9 @@ class SceneUploader
 				uvLength = 3;
 			}
 
-			return new int[]{3, uvLength};
+			bufferLengths[0] = 3;
+			bufferLengths[1] = uvLength;
+			return bufferLengths;
 		}
 
 		int vnAX, vnAY, vnAZ;
@@ -1031,47 +1064,51 @@ class SceneUploader
 		vnCZ = vertexNormalsZ[triangleC];
 
 
-
-		int[] color1HSL = HDUtils.colorIntToHSL(color1);
-		int[] color2HSL = HDUtils.colorIntToHSL(color2);
-		int[] color3HSL = HDUtils.colorIntToHSL(color3);
+		color1H = color1 >> 10 & 0x3F;
+		color1S = color1 >> 7 & 0x7;
+		color1L = color1 & 0x7F;
+		color2H = color2 >> 10 & 0x3F;
+		color2S = color2 >> 7 & 0x7;
+		color2L = color2 & 0x7F;
+		color3H = color3 >> 10 & 0x3F;
+		color3S = color3 >> 7 & 0x7;
+		color3L = color3 & 0x7F;
 
 		// reduce the effect of the baked shading by approximately inverting the process by which
 		// the shading is added initially.
-		// first, take a directional vector approximately opposite of the directional light
-		// used by the client..
-		float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{0.5f, 0.5f, 0.5f});
 
-		// multiplier applied to vertex' lightness value.
-		// results in greater lightening of lighter colors
-		float lightnessMultiplier = 3f;
-		// the minimum amount by which each color will be lightened
-		int baseLighten = 10;
-		// subtracts the X lowest lightness levels from the formula.
-		// helps keep darker colors appropriately dark
-		int ignoreLowLightness = 3;
-
-		int lightenA = (int) (Math.max((color1HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		lightenA = (int) (Math.max((color1L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
 		// use the dot product of the inverse light vector and each vertex' normal vector to
 		// interpolate between the lightened color value and the original color value
-		float dotA = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnAX, vnAY, vnAZ}), inverseLightDirection);
+		vertex[0] = vnAX;
+		vertex[1] = vnAY;
+		vertex[2] = vnAZ;
+		dotA = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
 		dotA = Math.max(dotA, 0);
-		color1HSL[2] = (int) HDUtils.lerp(color1HSL[2], lightenA, dotA);
+		color1L = (int) HDUtils.lerp(color1L, lightenA, dotA);
 
-		int lightenB = (int) (Math.max((color2HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-		float dotB = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnBX, vnBY, vnBZ}), inverseLightDirection);
+		lightenB = (int) (Math.max((color2L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		vertex[0] = vnBX;
+		vertex[1] = vnBY;
+		vertex[2] = vnBZ;
+		dotB = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
 		dotB = Math.max(dotB, 0);
-		color2HSL[2] = (int) HDUtils.lerp(color2HSL[2], lightenB, dotB);
+		color2L = (int) HDUtils.lerp(color2L, lightenB, dotB);
 
-		int lightenC = (int) (Math.max((color3HSL[2] - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-		float dotC = VectorUtil.dotVec3(VectorUtil.normalizeVec3(new float[]{vnCX, vnCY, vnCZ}), inverseLightDirection);
+		lightenC = (int) (Math.max((color3L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
+		vertex[0] = vnCX;
+		vertex[1] = vnCY;
+		vertex[2] = vnCZ;
+		dotC = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
 		dotC = Math.max(dotC, 0);
-		color3HSL[2] = (int) HDUtils.lerp(color3HSL[2], lightenC, dotC);
+		color3L = (int) HDUtils.lerp(color3L, lightenC, dotC);
 
 		if (faceTextures != null && faceTextures[face] != -1)
 		{
 			// set textured faces to pure white as they are harder to remove shadows from for some reason
-			color1HSL = color2HSL = color3HSL = new int[]{0, 0, 127};
+			color1H = color2H = color3H = 0;
+			color1S = color2S = color3S = 0;
+			color1L = color2L = color3L = 127;
 		}
 
 		if (objectProperties != null && objectProperties.isInheritTileColor())
@@ -1104,7 +1141,9 @@ class SceneUploader
 								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[2]
 						) / 4;
 
-					color1HSL = color2HSL = color3HSL = tileColorHSL;
+					color1H = color2H = color3H = tileColorHSL[0];
+					color1S = color2S = color3S = tileColorHSL[1];
+					color1L = color2L = color3L = tileColorHSL[2];
 				}
 				else if (tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() == null)
 				{
@@ -1123,7 +1162,9 @@ class SceneUploader
 					if (faceColorIndex != -1)
 					{
 						tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
-						color1HSL = color2HSL = color3HSL = tileColorHSL;
+						color1H = color2H = color3H = tileColorHSL[0];
+						color1S = color2S = color3S = tileColorHSL[1];
+						color1L = color2L = color3L = tileColorHSL[2];
 					}
 				}
 			}
@@ -1131,11 +1172,17 @@ class SceneUploader
 
 		if (hdPlugin.configTzhaarHD && objectProperties != null && objectProperties.getTzHaarRecolorType() != TzHaarRecolorType.NONE)
 		{
-			int[][] reskinnedData = proceduralGenerator.recolorTzHaar(objectProperties, vertexY[triangleA], vertexY[triangleB], vertexY[triangleC], color1HSL, color2HSL, color3HSL, packedAlphaPriority, objectType);
-			color1HSL = reskinnedData[0].clone();
-			color2HSL = reskinnedData[1].clone();
-			color3HSL = reskinnedData[2].clone();
-			packedAlphaPriority = reskinnedData[3][0];
+			int[][] tzHaarRecolored = proceduralGenerator.recolorTzHaar(objectProperties, vertexY[triangleA], vertexY[triangleB], vertexY[triangleC], packedAlphaPriority, objectType, color1H, color1S, color1L, color2H, color2S, color2L, color3H, color3S, color3L);
+			color1H = tzHaarRecolored[0][0];
+			color1S = tzHaarRecolored[0][1];
+			color1L = tzHaarRecolored[0][2];
+			color2H = tzHaarRecolored[1][0];
+			color2S = tzHaarRecolored[1][1];
+			color2L = tzHaarRecolored[1][2];
+			color3H = tzHaarRecolored[2][0];
+			color3S = tzHaarRecolored[2][1];
+			color3L = tzHaarRecolored[2][2];
+			packedAlphaPriority = tzHaarRecolored[3][0];
 		}
 
 		// adjust overly-bright vertex colors to reduce ugly washed-out areas of
@@ -1145,13 +1192,13 @@ class SceneUploader
 		{
 			maxBrightness = 90;
 		}
-		color1HSL[2] = Ints.constrainToRange(color1HSL[2], 0, maxBrightness);
-		color2HSL[2] = Ints.constrainToRange(color2HSL[2], 0, maxBrightness);
-		color3HSL[2] = Ints.constrainToRange(color3HSL[2], 0, maxBrightness);
+		color1L = Ints.constrainToRange(color1L, 0, maxBrightness);
+		color2L = Ints.constrainToRange(color2L, 0, maxBrightness);
+		color3L = Ints.constrainToRange(color3L, 0, maxBrightness);
 
-		color1 = HDUtils.colorHSLToInt(color1HSL);
-		color2 = HDUtils.colorHSLToInt(color2HSL);
-		color3 = HDUtils.colorHSLToInt(color3HSL);
+		color1 = (color1H << 3 | color1S) << 7 | color1L;
+		color2 = (color2H << 3 | color2S) << 7 | color2L;
+		color3 = (color3H << 3 | color3S) << 7 | color3L;
 
 		normalBuffer.ensureCapacity(12);
 
@@ -1244,7 +1291,9 @@ class SceneUploader
 			uvLength = 3;
 		}
 
-		return new int[]{3, uvLength};
+		bufferLengths[0] = 3;
+		bufferLengths[1] = uvLength;
+		return bufferLengths;
 	}
 
 	private static int packAlphaPriority(short[] faceTextures, byte[] faceTransparencies, byte[] facePriorities, int face)

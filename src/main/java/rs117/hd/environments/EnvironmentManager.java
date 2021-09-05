@@ -130,8 +130,7 @@ public class EnvironmentManager
 
 	public void update()
 	{
-		int[] camFocalPoint = hdPlugin.getCameraFocalPoint();
-		WorldPoint camPosition = localPointToWorldTile(camFocalPoint[0], camFocalPoint[1]);
+		WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
 		int camTargetX = camPosition.getX();
 		int camTargetY = camPosition.getY();
 		int camTargetZ = camPosition.getPlane();
