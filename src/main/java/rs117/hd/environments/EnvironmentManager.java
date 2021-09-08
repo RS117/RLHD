@@ -430,7 +430,7 @@ public class EnvironmentManager
 		int chunkX = localPoint.getSceneX() / CHUNK_SIZE;
 		int chunkY = localPoint.getSceneY() / CHUNK_SIZE;
 
-		if (client.isInInstancedRegion() && chunkX < instanceTemplateChunks[client.getPlane()].length && chunkY < instanceTemplateChunks[client.getPlane()][chunkX].length)
+		if (client.isInInstancedRegion() && chunkX >= 0 && chunkX < instanceTemplateChunks[client.getPlane()].length && chunkY >= 0 && chunkY < instanceTemplateChunks[client.getPlane()][chunkX].length)
 		{
 			// In some scenarios, taking the detached camera outside of instances
 			// will result in a crash if we don't check the chunk array indices first
