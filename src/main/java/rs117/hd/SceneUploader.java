@@ -1236,20 +1236,19 @@ class SceneUploader
 
 		vertexBuffer.put(cX, cY, cZ, packedAlphaPriority | color3);
 
-		float[][] u = model.getFaceTextureUCoordinates();
-		float[][] v = model.getFaceTextureVCoordinates();
-		float[] uf, vf;
+		float[] uv = model.getFaceTextureUVCoordinates();
 		Material material;
 
-		if (faceTextures != null && u != null && v != null && (uf = u[face]) != null && (vf = v[face]) != null)
+		if (faceTextures != null && faceTextures[face] != -1 && uv != null)
 		{
 			material = Material.getTexture(faceTextures[face]);
 			int packedTextureData = packTextureData(Material.getIndex(material), false);
+			int idx = face * 6;
 
 			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(packedTextureData, uf[0], vf[0], 0f);
-			uvBuffer.put(packedTextureData, uf[1], vf[1], 0f);
-			uvBuffer.put(packedTextureData, uf[2], vf[2], 0f);
+			uvBuffer.put(packedTextureData, uv[idx], uv[idx + 1], 0f);
+			uvBuffer.put(packedTextureData, uv[idx + 2], uv[idx + 3], 0f);
+			uvBuffer.put(packedTextureData, uv[idx + 4], uv[idx + 5], 0f);
 			uvLength = 3;
 		}
 		else if (objectProperties != null && objectProperties.getMaterial() != Material.NONE)
