@@ -136,7 +136,7 @@ import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
 
 @PluginDescriptor(
-	name = "High Detail (beta)",
+	name = "117 HD (beta)",
 	description = "GPU renderer with a suite of graphical enhancements",
 	enabledByDefault = false,
 	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},

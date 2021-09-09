@@ -1,2 +1,2 @@
-# Example
-An example greeter plugin
+# 117 HD
+GPU renderer with a suite of graphical enhancements
