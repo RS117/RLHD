@@ -773,7 +773,6 @@ public class LightManager
 		allLights = new ArrayList<>();
 
 		String filename = "lights.txt";
-		BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
 		boolean commentBlock = false;
 
 		int[] defaultColor = new int[]{255, 255, 255};
@@ -795,7 +794,7 @@ public class LightManager
 		LightType type = defaultType;
 
 		int lineNo = 1;
-		try
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename))))
 		{
 			Matcher m = PATTERN.matcher("");
 			String line;
@@ -939,7 +938,6 @@ public class LightManager
 			throw new IllegalArgumentException("Expected number (" + filename + ":" + lineNo + ")", ex);
 		}
 
-		br.close();
 		log.debug("loaded {} lights from file", allLights.size());
 	}
 }
