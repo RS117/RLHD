@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 repositories {
@@ -10,7 +11,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.7.22'
+def runeLiteVersion = '1.7.23'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -20,7 +21,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 	testImplementation 'junit:junit:4.12'
-    testImplementation('net.runelite:client:1.7.21.1')  {
+    testImplementation('net.runelite:client:1.7.23')  {
         exclude group: 'net.runelite', module: 'client-patch'
         exclude group: 'net.runelite', module: 'runelite-api'
     }
@@ -35,4 +36,12 @@ sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    from sourceSets.test.output
+    configurations = [project.configurations.testRuntimeClasspath]
+    manifest {
+        attributes "Main-Class": "rs117.hd.HdPluginTest"
+    }
 }
