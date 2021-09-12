@@ -138,9 +138,8 @@ import static org.jocl.CL.clCreateFromGLBuffer;
 @PluginDescriptor(
 	name = "117 HD (beta)",
 	description = "GPU renderer with a suite of graphical enhancements",
-	enabledByDefault = false,
 	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},
-	loadInSafeMode = false
+	conflicts = "GPU"
 )
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
