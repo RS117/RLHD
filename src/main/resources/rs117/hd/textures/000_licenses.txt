@@ -1,4 +1,4 @@
-Infernal cape texture by deathlezz
+Infernal cape texture by deathlezz, used with permission
 -- https://www.reddit.com/user/deathlezz
 
 Contains assets from ambientcg.com, licensed under CC0 1.0 Universal.

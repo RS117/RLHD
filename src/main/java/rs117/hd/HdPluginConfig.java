@@ -111,7 +111,7 @@ public interface HdPluginConfig extends Config
 	)
 	default int anisotropicFilteringLevel()
 	{
-		return 16;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -183,7 +183,7 @@ public interface HdPluginConfig extends Config
 	)
 	default LevelOfDetail levelOfDetail()
 	{
-		return LevelOfDetail.FULL;
+		return LevelOfDetail.MEDIUM;
 	}
 
 
@@ -279,7 +279,7 @@ public interface HdPluginConfig extends Config
 	)
 	default ShadowDistance shadowDistance()
 	{
-		return ShadowDistance.DISTANCE_50;
+		return ShadowDistance.DISTANCE_30;
 	}
 
 	@ConfigItem(
@@ -330,7 +330,7 @@ public interface HdPluginConfig extends Config
 	)
 	default int fogDepth()
 	{
-		return 0;
+		return 5;
 	}
 
 	@ConfigItem(
