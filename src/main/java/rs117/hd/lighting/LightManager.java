@@ -55,6 +55,7 @@ import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.NpcChanged;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;

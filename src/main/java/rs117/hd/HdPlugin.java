@@ -82,22 +82,7 @@ import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
 import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
-import net.runelite.api.events.DecorativeObjectChanged;
-import net.runelite.api.events.DecorativeObjectDespawned;
-import net.runelite.api.events.DecorativeObjectSpawned;
-import net.runelite.api.events.GameObjectChanged;
-import net.runelite.api.events.GameObjectDespawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GroundObjectChanged;
-import net.runelite.api.events.GroundObjectDespawned;
-import net.runelite.api.events.GroundObjectSpawned;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.NpcSpawned;
-import net.runelite.api.events.ProjectileMoved;
-import net.runelite.api.events.WallObjectChanged;
-import net.runelite.api.events.WallObjectDespawned;
-import net.runelite.api.events.WallObjectSpawned;
+import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -2464,6 +2449,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public void onNpcDespawned(NpcDespawned npcDespawned)
 	{
 		lightManager.removeNpcLight(npcDespawned);
+	}
+
+	@Subscribe
+	public void onNpcChanged(NpcChanged npcChanged)
+	{
+		lightManager.addNpcLight(npcChanged.getNpc());
 	}
 
 	@Subscribe
