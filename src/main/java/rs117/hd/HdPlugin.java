@@ -2454,8 +2454,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Subscribe
 	public void onNpcChanged(NpcChanged npcChanged)
 	{
-		System.out.println(npcChanged.getNpc().getId());
-		lightManager.updateNpcChanged(npcChanged); // Call a method that will replace the old npc with new npc enum
+		lightManager.updateNpcChanged(npcChanged);
 	}
 
 	@Subscribe
