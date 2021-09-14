@@ -514,6 +514,10 @@ public class LightManager
 		}
 	}
 
+	public void updateNpcChanged(NpcChanged npcChanged)
+	{
+		npc.
+	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
 	{

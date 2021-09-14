@@ -8,7 +8,7 @@ public class HdPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(HdPlugin.class);
+		//ExternalPluginManager.loadBuiltin(HdPlugin.class);
 		RuneLite.main(args);
 	}
 }
