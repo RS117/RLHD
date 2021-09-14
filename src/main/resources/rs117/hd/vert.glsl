@@ -126,4 +126,9 @@ void main() {
         // Combine distance fog with edge fog
         vFogAmount = max(distanceFogAmount, edgeFogAmount);
     }
+    else
+    {
+        // Set out parameter as it is initialized to garbage data otherwise
+        vFogAmount = 0.0f;
+    }
 }
