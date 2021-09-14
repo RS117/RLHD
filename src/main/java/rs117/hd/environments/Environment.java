@@ -402,8 +402,11 @@ public enum Environment
 
 	// Castle Wars
 	CASTLE_WARS_UNDERGROUND(Area.CASTLE_WARS_UNDERGROUND, new Properties()
-		.setAmbientStrength(1.3f)
+		.setFogColor("#31271A")
+		.setFogDepth(40)
 		.setAmbientColor("#FFD79C")
+		.setAmbientStrength(1.3f)
+		.setDirectionalColor("#4C78B6")
 		.setDirectionalStrength(0.0f)
 	),
 
