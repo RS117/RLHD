@@ -125,6 +125,7 @@ import rs117.hd.config.UIScalingMode;
 import rs117.hd.config.WaterEffects;
 import rs117.hd.environments.EnvironmentManager;
 import rs117.hd.lighting.LightManager;
+import rs117.hd.lighting.data.Light;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
 import rs117.hd.template.Template;
@@ -539,9 +540,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				cachedModels2.setCapacity(256);
 				cachedModels2.setRemainingCapacity(256);
 				cachedModels2.reset();
-
-				// load all dynamic scene lights from text file
-				lightManager.loadLightsFromFile();
 
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
@@ -1107,8 +1105,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			{
 				// Update lights UBO
 				lightsUniformBuf.clear();
-				ArrayList<LightManager.Light> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
-				for (LightManager.Light light : visibleLights)
+				ArrayList<Light> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
+				for (Light light : visibleLights)
 				{
 					lightsUniformBuf.putInt(light.x);
 					lightsUniformBuf.putInt(light.y);

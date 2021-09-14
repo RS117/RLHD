@@ -32,9 +32,10 @@ import lombok.Getter;
 import static net.runelite.api.NullObjectID.NULL_5208;
 import static net.runelite.api.NullObjectID.NULL_5247;
 import net.runelite.api.ObjectID;
+import rs117.hd.lighting.data.Alignment;
+import rs117.hd.lighting.data.LightType;
+
 import static net.runelite.api.ObjectID.*;
-import static rs117.hd.lighting.LightManager.Alignment;
-import static rs117.hd.lighting.LightManager.LightType;
 
 @AllArgsConstructor
 @Getter
@@ -198,7 +199,7 @@ enum ObjectLight
 	GRAND_LIBRARY_LIGHT_1(140, Alignment.CENTER, 200, 5f, rgb(0, 200, 225), LightType.STATIC, 0, 0, 35000),
 	GRAND_LIBRARY_LIGHT_2(310, Alignment.CENTER, 200, 5f, rgb(0, 200, 225), LightType.STATIC, 0, 0, 35065, 35066, 35386),
 	GRAND_LIBRARY_SEAL(150, Alignment.FRONT, 300, 5f, rgb(0, 200, 225), LightType.PULSE, 3200, 5, SEAL_OF_THE_FORGOTTEN, SEAL_OF_AMLODD, SEAL_OF_AMLODD_35456, SEAL_OF_CADARN, SEAL_OF_CADARN_35452, SEAL_OF_CRWYS, SEAL_OF_CRWYS_35454, SEAL_OF_HEFIN, SEAL_OF_HEFIN_35458, SEAL_OF_IORWERTH, SEAL_OF_IORWERTH_35460, SEAL_OF_ITHELL, SEAL_OF_ITHELL_35462, SEAL_OF_MEILYR, SEAL_OF_MEILYR_35464, SEAL_OF_TRAHAEARN, SEAL_OF_TRAHAEARN_35466, 36725, 36726, 36727, 36728, 36729, 36730, 36731, 36732),
-	FRAGMENT_OF_SEREN(280, LightManager.Alignment.CENTER, 500, 5f, rgb(0, 200, 225), LightManager.LightType.PULSE, 3200, 10, 37319),
+	FRAGMENT_OF_SEREN(280, Alignment.CENTER, 500, 5f, rgb(0, 200, 225), LightType.PULSE, 3200, 10, 37319),
 	TELEPORT_PLATFORM(50, Alignment.CENTER, 400, 5f, rgb(0, 255, 255), LightType.FLICKER, 0, 20, TELEPORT_PLATFORM_35984, TELEPORT_PLATFORM_35985, TELEPORT_PLATFORM_36062, TELEPORT_PLATFORM_36082, TELEPORT_PLATFORM_36197, TELEPORT_PLATFORM_36198, TELEPORT_PLATFORM_36490, TELEPORT_PLATFORM_36614, TELEPORT_PLATFORM_36615),
 
 	// The Gauntlet

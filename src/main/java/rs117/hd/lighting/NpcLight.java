@@ -30,8 +30,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.runelite.api.NpcID;
 import static net.runelite.api.NpcID.*;
-import rs117.hd.lighting.LightManager.LightType;
-import rs117.hd.lighting.LightManager.Alignment;
+import rs117.hd.lighting.data.Alignment;
+import rs117.hd.lighting.data.LightType;
 
 @AllArgsConstructor
 @Getter

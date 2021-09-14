@@ -27,37 +27,24 @@ package rs117.hd.lighting;
 
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.*;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.events.NpcDespawned;
+import rs117.hd.HDUtils;
+import rs117.hd.HdPlugin;
+import rs117.hd.HdPluginConfig;
+import rs117.hd.lighting.data.Alignment;
+import rs117.hd.lighting.data.Light;
+import rs117.hd.lighting.data.LightType;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.Constants;
-import net.runelite.api.DecorativeObject;
-import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
-import net.runelite.api.GroundObject;
-import net.runelite.api.NPC;
-import net.runelite.api.Perspective;
-import net.runelite.api.Projectile;
-import net.runelite.api.Tile;
-import net.runelite.api.TileObject;
-import net.runelite.api.WallObject;
-import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.events.NpcDespawned;
-import rs117.hd.HdPlugin;
-import rs117.hd.HdPluginConfig;
-import rs117.hd.HDUtils;
 
 @Singleton
 @Slf4j
@@ -72,7 +59,6 @@ public class LightManager
 	@Inject
 	private HdPlugin hdPlugin;
 
-	ArrayList<Light> allLights = new ArrayList<>();
 	ArrayList<Light> sceneLights = new ArrayList<>();
 	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
 
@@ -84,112 +70,6 @@ public class LightManager
 	int sceneMaxY = 0;
 
 	public int visibleLightsCount = 0;
-
-	enum LightType
-	{
-		STATIC, FLICKER, PULSE
-	}
-
-	enum Alignment
-	{
-		CENTER(0, false, false),
-
-		NORTH(0, true, false),
-		NORTHEAST(256, true, false),
-		NORTHEAST_CORNER(256, false, false),
-		EAST(512, true, false),
-		SOUTHEAST(768, true, false),
-		SOUTHEAST_CORNER(768, false, false),
-		SOUTH(1024, true, false),
-		SOUTHWEST(1280, true, false),
-		SOUTHWEST_CORNER(1280, false, false),
-		WEST(1536, true, false),
-		NORTHWEST(1792, true, false),
-		NORTHWEST_CORNER(1792, false, false),
-
-		BACK(0, true, true),
-		BACKLEFT(256, true, true),
-		BACKLEFT_CORNER(256, false, true),
-		LEFT(512, true, true),
-		FRONTLEFT(768, true, true),
-		FRONTLEFT_CORNER(768, false, true),
-		FRONT(1024, true, true),
-		FRONTRIGHT(1280, true, true),
-		FRONTRIGHT_CORNER(1280, false, true),
-		RIGHT(1536, true, true),
-		BACKRIGHT(1792, true, true),
-		BACKRIGHT_CORNER(1792, false, true);
-
-		public final int orientation;
-		public final boolean radial;
-		public final boolean relative;
-
-		Alignment(int orientation, boolean radial, boolean relative)
-		{
-			this.orientation = orientation;
-			this.radial = radial;
-			this.relative = relative;
-		}
-	}
-
-	public static class Light
-	{
-		public int worldX;
-		public int worldY;
-		public int plane;
-		public int height;
-		public Alignment alignment;
-		public int size;
-		public float strength;
-		public int[] color;
-		public LightType type;
-		public float duration;
-		public float range;
-		public int fadeInDuration = 0;
-
-		public int currentSize;
-		public float currentStrength;
-		public int[] currentColor;
-		public float currentAnimation = 0.5f;
-		public int currentFadeIn = 0;
-		public boolean visible = true;
-
-		public int x;
-		public int y;
-		public int z;
-		public int distance = 0;
-		public boolean belowFloor = false;
-		public boolean aboveFloor = false;
-
-		public Projectile projectile = null;
-		public NPC npc = null;
-		public TileObject object = null;
-
-		public Light(int worldX, int worldY, int plane, int height, Alignment alignment, int size, float strength, int[] color, LightType type, float duration, float range, int fadeInDuration)
-		{
-			this.worldX = worldX;
-			this.worldY = worldY;
-			this.plane = plane;
-			this.height = height;
-			this.alignment = alignment;
-			this.size = size;
-			this.strength = strength;
-			this.color = color;
-			this.type = type;
-			this.duration = duration;
-			this.range = range;
-			this.fadeInDuration = fadeInDuration;
-
-			this.currentSize = size;
-			this.currentStrength = strength;
-			this.currentColor = color;
-
-			if (type == LightType.PULSE)
-			{
-				this.currentAnimation = (float)Math.random();
-			}
-		}
-	}
 
 	public void update()
 	{
@@ -408,7 +288,7 @@ public class LightManager
 		sceneMaxX = sceneMinX + Constants.SCENE_SIZE - 2;
 		sceneMaxY = sceneMinY + Constants.SCENE_SIZE - 2;
 
-		for (Light light : allLights)
+		for (Light light : LightData.getLIGHTS())
 		{
 			if (light.worldX >= sceneMinX && light.worldX <= sceneMaxX && light.worldY >= sceneMinY && light.worldY <= sceneMaxY)
 			{
@@ -750,194 +630,4 @@ public class LightManager
 		}
 	}
 
-	private static final Pattern PATTERN = Pattern.compile("^[ \\t]*(?<expr>" +
-		"//.*$|" + // //comment
-		"/\\*.*$|" + // /* start comment block
-		"\\*/.*$|" + //    end comment block */
-		"Reset|" + // sets all variables to defaults
-		"(?<x>[0-9-]+)(,)[ \\t]*(?<y>[0-9-]+)((,)[ \\t]*(?<alignment>[A-Za-z]+))?|" + // 3124, 2843
-		"#([ \\t]*(?<color>[0-9a-fA-F]{6}|[0-9a-fA-F]{3}))|" + // #<RRGGBB> or #<RGB> (hex color)
-		"Color[ \\t]*(?<r>[0-9-]+)(,)[ \\t]*(?<g>[0-9-]+)(,)[ \\t]*(?<b>[0-9-]+)|" + // C 255, 128, 0 (RGB color)
-		"Strength[ \\t]*(?<strength>[0-9-]+)|" + // S 100 (strength)
-		"Radius[ \\t]*(?<radius>[0-9-]+)|" + // R 500 (radius)
-		"Range[ \\t]*(?<range>[0-9-]+)|" + // R 500 (radius)
-		"Duration[ \\t]*(?<duration>[0-9-]+)|" + // R 500 (radius)
-		"Plane[ \\t]*(?<plane>[0-9-]+)|" + // P 0 (plane)
-		"Height[ \\t]*(?<h>[0-9-]+)|" + // H 128 (height)
-		"Type[ \\t]*(?<type>[a-z]+)|" + // T flicker (type)
-		")[ \\t]*");
-
-	public void loadLightsFromFile() throws IOException
-	{
-		// create arraylist of lights from text file
-		allLights = new ArrayList<>();
-
-		String filename = "lights.txt";
-		boolean commentBlock = false;
-
-		int[] defaultColor = new int[]{255, 255, 255};
-		int defaultRadius = 500;
-		float defaultStrength = 1.0f;
-		float defaultRange =  0.2f;
-		int defaultDuration = 1000;
-		int defaultHeight = 0;
-		int defaultPlane = 0;
-		LightType defaultType = LightType.STATIC;
-
-		int[] color = defaultColor;
-		int radius = defaultRadius;
-		float strength = defaultStrength;
-		float range =  defaultRange;
-		int duration = defaultDuration;
-		int height = defaultHeight;
-		int plane = defaultPlane;
-		LightType type = defaultType;
-
-		int lineNo = 1;
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename))))
-		{
-			Matcher m = PATTERN.matcher("");
-			String line;
-			while ((line = br.readLine()) != null)
-			{
-				m.reset(line);
-				int end = 0;
-				while (end < line.length())
-				{
-					m.region(end, line.length());
-					if (!m.find())
-					{
-						throw new IllegalArgumentException("Unexpected: \"" + line.substring(end) + "\" (" + filename + ":" + lineNo + ")");
-					}
-					end = m.end();
-
-					String expr = m.group("expr");
-					if (expr == null || expr.length() <= 0 || expr.startsWith("//"))
-					{
-						continue;
-					}
-
-					if (expr.startsWith("/*")) {
-						commentBlock = true;
-						continue;
-					} else if (expr.startsWith("*/")) {
-						commentBlock = false;
-						continue;
-					}
-
-					if (commentBlock) {
-						continue;
-					}
-
-					if (expr.toLowerCase().startsWith("reset"))
-					{
-						color = defaultColor;
-						radius = defaultRadius;
-						range = defaultRange;
-						duration = defaultDuration;
-						strength = defaultStrength;
-						height = defaultHeight;
-						plane = defaultPlane;
-						type = defaultType;
-						continue;
-					}
-
-					char cha = expr.toLowerCase().charAt(0);
-					switch (cha)
-					{
-						case '#':
-							String sColor = m.group("color");
-							Color RGB = Color.decode("#" + sColor);
-							float[] RGBTmp = new float[3];
-							RGB.getRGBColorComponents(RGBTmp);
-							color = new int[]{(int)(RGBTmp[0] * 255f), (int)(RGBTmp[1] * 255f), (int)(RGBTmp[2] * 255f)};
-							break;
-						case 'c':
-							int r = Integer.parseInt(m.group("r"));
-							int g = Integer.parseInt(m.group("g"));
-							int b = Integer.parseInt(m.group("b"));
-							color = new int[]{r, g, b};
-							break;
-						case 's':
-							strength = Integer.parseInt(m.group("strength")) / 100f;
-							break;
-						case 'r':
-							if (expr.toLowerCase().startsWith("radius")) {
-								radius = Integer.parseInt(m.group("radius"));
-								break;
-							} else if (expr.toLowerCase().startsWith("range")) {
-								range = Integer.parseInt(m.group("range"));
-								break;
-							}
-						case 'd':
-							duration = Integer.parseInt(m.group("duration"));
-							break;
-						case 'p':
-							plane = Integer.parseInt(m.group("plane"));
-							break;
-						case 'h':
-							height = Integer.parseInt(m.group("h"));
-							break;
-						case 't':
-							String typeStr = m.group("type").toLowerCase().trim();
-							switch (typeStr) {
-								case "flicker":
-									type = LightType.FLICKER;
-									break;
-								case "pulse":
-									type = LightType.PULSE;
-									break;
-								default:
-									type = LightType.STATIC;
-									break;
-							}
-							break;
-						default:
-							int x = Integer.parseInt(m.group("x"));
-							int y = Integer.parseInt(m.group("y"));
-							Alignment alignment = Alignment.CENTER;
-							if (m.group("alignment") != null) {
-								switch (m.group("alignment").toLowerCase().trim()) {
-									case "n":
-										alignment = Alignment.NORTH;
-										break;
-									case "ne":
-										alignment = Alignment.NORTHEAST;
-										break;
-									case "e":
-										alignment = Alignment.EAST;
-										break;
-									case "se":
-										alignment = Alignment.SOUTHEAST;
-										break;
-									case "s":
-										alignment = Alignment.SOUTH;
-										break;
-									case "sw":
-										alignment = Alignment.SOUTHWEST;
-										break;
-									case "w":
-										alignment = Alignment.WEST;
-										break;
-									case "nw":
-										alignment = Alignment.NORTHWEST;
-										break;
-									default:
-										alignment = Alignment.CENTER;
-										break;
-								}
-							}
-							allLights.add(new Light(x, y, plane, height, alignment, radius, strength, color, type, duration, range, 0));
-							break;
-					}
-				}
-			}
-		}
-		catch (NumberFormatException ex)
-		{
-			throw new IllegalArgumentException("Expected number (" + filename + ":" + lineNo + ")", ex);
-		}
-
-		log.debug("loaded {} lights from file", allLights.size());
-	}
 }
