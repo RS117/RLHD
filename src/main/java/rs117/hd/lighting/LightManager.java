@@ -31,6 +31,7 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -52,9 +53,13 @@ import net.runelite.api.Projectile;
 import net.runelite.api.Tile;
 import net.runelite.api.TileObject;
 import net.runelite.api.WallObject;
+import net.runelite.api.Player;
+import net.runelite.api.PlayerComposition;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.PlayerChanged;
+import net.runelite.api.events.PlayerDespawned;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
@@ -164,6 +169,8 @@ public class LightManager
 		public Projectile projectile = null;
 		public NPC npc = null;
 		public TileObject object = null;
+		public Player player = null;
+		public int equipmentId = -1;
 
 		public Light(int worldX, int worldY, int plane, int height, Alignment alignment, int size, float strength, int[] color, LightType type, float duration, float range, int fadeInDuration)
 		{
@@ -290,6 +297,56 @@ public class LightManager
 					}
 				}
 				else
+				{
+					light.visible = false;
+				}
+			}
+
+			if (light.player != null)
+			{
+				if (!Arrays.stream(light.player.getPlayerComposition().getEquipmentIds()).anyMatch(id -> id == light.equipmentId))
+				{
+					lightIterator.remove();
+					continue;
+				}
+
+				light.x = light.player.getLocalLocation().getX();
+				light.y = light.player.getLocalLocation().getY();
+
+				int orientation = light.player.getOrientation();
+
+				if (orientation != -1 && light.alignment != Alignment.CENTER)
+				{
+					orientation += light.alignment.orientation;
+					orientation %= 2048;
+
+					float sine = Perspective.SINE[orientation] / 65536f;
+					float cosine = Perspective.COSINE[orientation] / 65536f;
+					//cosine /= (float)light.localSizeX / (float)localSizeY;
+
+					int offsetX = (int)(sine   *  Perspective.LOCAL_HALF_TILE_SIZE);
+					int offsetY = (int)(cosine  *  Perspective.LOCAL_HALF_TILE_SIZE);
+
+					light.x += offsetX;
+					light.y += offsetY;
+				}
+
+				int plane = light.player.getWorldLocation().getPlane();
+				light.plane = plane;
+
+				// Interpolate between tile heights based on specific scene coordinates.
+				float lerpX = (light.x % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+				float lerpY = (light.y % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+				int baseTileX = (int) Math.floor(light.x / (float) Perspective.LOCAL_TILE_SIZE);
+				int baseTileY = (int) Math.floor(light.y / (float) Perspective.LOCAL_TILE_SIZE);
+				float heightNorth = HDUtils.lerp(client.getTileHeights()[plane][baseTileX][baseTileY + 1], client.getTileHeights()[plane][baseTileX + 1][baseTileY + 1], lerpX);
+				float heightSouth = HDUtils.lerp(client.getTileHeights()[plane][baseTileX][baseTileY], client.getTileHeights()[plane][baseTileX + 1][baseTileY], lerpX);
+				float tileHeight = HDUtils.lerp(heightSouth, heightNorth, lerpY);
+				light.z = (int) tileHeight - 1 - light.height;
+
+				light.visible = light.player.getModel() != null;
+
+				if (!hdPlugin.configEquipmentLights)
 				{
 					light.visible = false;
 				}
@@ -490,6 +547,7 @@ public class LightManager
 		}
 
 		updateSceneNpcs();
+		updateSceneEquipment();
 	}
 
 
@@ -513,6 +571,15 @@ public class LightManager
 		}
 	}
 
+	void updateSceneEquipment()
+	{
+
+		for (Player player : client.getPlayers())
+		{
+			addEquipmentLight(player);
+
+		}
+	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
 	{
@@ -612,6 +679,64 @@ public class LightManager
 	public void removeNpcLight(NpcDespawned npcDespawned)
 	{
 		sceneLights.removeIf(light -> light.npc == npcDespawned.getNpc());
+	}
+
+	public void addEquipmentLight(Player player)
+	{
+		PlayerComposition composition = player.getPlayerComposition();
+
+		for (int id : composition.getEquipmentIds())
+		{
+			EquipmentLight equipmentLight = EquipmentLight.find(id);
+			if (equipmentLight == null)
+			{
+				continue;
+			}
+
+			addEquipmentLight(id, player);
+		}
+	}
+
+	public void addEquipmentLight(int id, Player player)
+	{
+		EquipmentLight equipmentLight = EquipmentLight.find(id);
+		if (equipmentLight == null)
+		{
+			return;
+		}
+
+		// prevent duplicate lights being spawned for the same NPC
+		for (Light light : sceneLights)
+		{
+			if (light.player == player && light.equipmentId == id)
+			{
+				return;
+			}
+		}
+
+		int rgb = equipmentLight.getRgb();
+		int r = rgb >>> 16;
+		int g = (rgb >> 8) & 0xff;
+		int b = rgb & 0xff;
+		Light light = new Light(0, 0, -1,
+				equipmentLight.getHeight(), equipmentLight.getAlignment(), equipmentLight.getSize(), equipmentLight.getStrength(), new int[]{r, g, b}, equipmentLight.getLightType(), equipmentLight.getDuration(), equipmentLight.getRange(), 0);
+		light.player = player;
+		light.equipmentId = id;
+		light.visible = false;
+
+		sceneLights.add(light);
+	}
+
+	public void removeEquipmentLight(PlayerDespawned playerDespawned)
+	{
+		sceneLights.removeIf(light -> light.player == playerDespawned.getPlayer());
+	}
+
+	public void equipmentLightChanged(PlayerChanged playerChanged)
+	{
+		Player player = playerChanged.getPlayer();
+		sceneLights.removeIf(light -> light.player == player && Arrays.stream(player.getPlayerComposition().getEquipmentIds()).anyMatch(id -> id == light.equipmentId));
+		addEquipmentLight(player);
 	}
 
 	public void addObjectLight(TileObject tileObject, int plane)
