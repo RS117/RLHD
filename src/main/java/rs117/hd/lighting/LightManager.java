@@ -516,7 +516,15 @@ public class LightManager
 
 	public void updateNpcChanged(NpcChanged npcChanged)
 	{
-		npc.
+		List<NPC> npcs = client.getNpcs();
+
+		for (NPC npc : npcs){
+			if (npc.equals(npcChanged.getOld()))
+			{ // find the old npc enum we need to replace, and somehow replace it with new NPC enum
+				
+			}
+		}
+
 	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
