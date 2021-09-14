@@ -516,15 +516,8 @@ public class LightManager
 
 	public void updateNpcChanged(NpcChanged npcChanged)
 	{
-		List<NPC> npcs = client.getNpcs();
-
-		for (NPC npc : npcs){
-			if (npc.equals(npcChanged.getOld()))
-			{ // find the old npc enum we need to replace, and somehow replace it with new NPC enum
-				
-			}
-		}
-
+		removeNpcLight(npcChanged);
+		addNpcLight(npcChanged.getNpc());
 	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
@@ -625,6 +618,11 @@ public class LightManager
 	public void removeNpcLight(NpcDespawned npcDespawned)
 	{
 		sceneLights.removeIf(light -> light.npc == npcDespawned.getNpc());
+	}
+
+	public void removeNpcLight(NpcChanged npcChanged)
+	{
+		sceneLights.removeIf(light -> light.npc == npcChanged.getNpc());
 	}
 
 	public void addObjectLight(TileObject tileObject, int plane)
