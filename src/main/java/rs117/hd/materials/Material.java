@@ -57,7 +57,7 @@ public enum Material
 	BOOKCASE(20),
 	TEXTURE_21(21),
 	WOOD_PLANKS_2(22, new Properties().setSpecular(0.35f, 30f)),
-	TEXTURE_23(23),
+	BRICK_BROWN(23),
 	WATER_FLAT_2(24),
 	SWAMP_WATER_FLAT(25),
 	SPIDER_WEB(26),

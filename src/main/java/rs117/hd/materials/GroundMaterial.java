@@ -45,6 +45,7 @@ public enum GroundMaterial
 	TILE_SMALL(Material.TILE_SMALL_1),
 	CARPET(Material.CARPET),
 	BRICK(Material.BRICK),
+	BRICK_BROWN(Material.BRICK_BROWN),
 
 	TILES_2x2_1(Material.TILES_1_2x2),
 	TILES_2x2_2(Material.TILES_2_2x2),
