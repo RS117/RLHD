@@ -160,6 +160,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private Client client;
+	
+	@Inject
+	private OpenCLManager openCLManager;
 
 	@Inject
 	private ClientThread clientThread;
@@ -187,6 +190,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private ProceduralGenerator proceduralGenerator;
+	
+	enum ComputeMode
+	{
+		OPENGL,
+		OPENCL,
+	}
+	
+	private ComputeMode computeMode = ComputeMode.OPENGL;
 
 	private Canvas canvas;
 	private JAWTWindow jawtWindow;
@@ -419,6 +430,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					return false;
 				}
+				
+				computeMode = OSType.getOSType() == OSType.MacOS ? ComputeMode.OPENCL : ComputeMode.OPENGL;
 
 				canvas.setIgnoreRepaint(true);
 
@@ -574,6 +587,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			invokeOnMainThread(() ->
 			{
+				openCLManager.cleanup();
+				
 				if (gl != null)
 				{
 					if (textureArrayId != -1)
@@ -666,9 +681,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		glProgram = PROGRAM.compile(gl, template);
 		glUiProgram = UI_PROGRAM.compile(gl, template);
 		glShadowProgram = SHADOW_PROGRAM.compile(gl, template);
-		glComputeProgram = COMPUTE_PROGRAM.compile(gl, template);
-		glSmallComputeProgram = SMALL_COMPUTE_PROGRAM.compile(gl, template);
-		glUnorderedComputeProgram = UNORDERED_COMPUTE_PROGRAM.compile(gl, template);
+		
+		if (computeMode == ComputeMode.OPENCL)
+		{
+			openCLManager.init(gl);
+		}
+		else
+		{
+			glComputeProgram = COMPUTE_PROGRAM.compile(gl, template);
+			glSmallComputeProgram = SMALL_COMPUTE_PROGRAM.compile(gl, template);
+			glUnorderedComputeProgram = UNORDERED_COMPUTE_PROGRAM.compile(gl, template);
+		}
 
 		initUniforms();
 
@@ -1162,6 +1185,24 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			null,
 			GL_STREAM_DRAW,
 			CL_MEM_WRITE_ONLY);
+		
+		if (computeMode == ComputeMode.OPENCL)
+		{
+			// The docs for clEnqueueAcquireGLObjects say all pending GL operations must be completed before calling
+			// clEnqueueAcquireGLObjects, and recommends calling glFinish() as the only portable way to do that.
+			// However no issues have been observed from not calling it, and so will leave disabled for now.
+			// gl.glFinish();
+
+			openCLManager.compute(
+				unorderedModels, smallModels, largeModels,
+				sceneVertexBuffer, sceneUvBuffer,
+				tmpVertexBuffer, tmpUvBuffer,
+				tmpModelBufferUnordered, tmpModelBufferSmall, tmpModelBufferLarge,
+				tmpOutBuffer, tmpOutUvBuffer,
+				uniformBuffer,
+				tmpOutNormalBuffer, sceneNormalBuffer, tmpNormalBuffer);
+			return;
+		}
 
 		/*
 		 * Compute is split into three separate programs: 'unordered', 'small', and 'large'
@@ -1501,7 +1542,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			int vertexBuffer, uvBuffer, normalBuffer;
 
 			// Before reading the SSBOs written to from postDrawScene() we must insert a barrier
-			gl.glMemoryBarrier(gl.GL_SHADER_STORAGE_BARRIER_BIT);
+			if (computeMode == ComputeMode.OPENCL)
+			{
+				openCLManager.finish();
+			}
+			else
+			{
+				gl.glMemoryBarrier(gl.GL_SHADER_STORAGE_BARRIER_BIT);
+			}
 
 			// Draw using the output buffer of the compute
 			vertexBuffer = tmpOutBuffer.glBufferId;
@@ -2373,6 +2421,26 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			glBuffer.size = size;
 			gl.glBufferData(target, size, data, usage);
+			
+			if (computeMode == ComputeMode.OPENCL)
+			{
+				// cleanup previous buffer
+				if (glBuffer.cl_mem != null)
+				{
+					CL.clReleaseMemObject(glBuffer.cl_mem);
+				}
+				
+				// allocate new
+				if (size == 0)
+				{
+					// opencl does not allow 0-size gl buffers, it will segfault on macos
+					glBuffer.cl_mem = null;
+				}
+				else
+				{
+					glBuffer.cl_mem = clCreateFromGLBuffer(openCLManager.context, clFlags, glBuffer.glBufferId, null);
+				}
+			}
 		}
 		else if (data != null)
 		{
