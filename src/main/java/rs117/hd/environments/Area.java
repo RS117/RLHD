@@ -569,6 +569,7 @@ public enum Area
 		new Rect(1292, 3588, 1355, 3526),
 		new Rect(1275, 3692, 1329, 3631)
 	),
+	MESS_HALL_KITCHEN(1643, 3631, 1649, 3622),
 	ZEAH(1152, 4078, 1938, 3270),
 
 	// Kebos Lowlands

@@ -58,6 +58,7 @@ import net.runelite.api.PlayerComposition;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.NpcChanged;
 import net.runelite.api.events.PlayerChanged;
 import net.runelite.api.events.PlayerDespawned;
 import rs117.hd.HdPlugin;
@@ -647,13 +648,17 @@ public class LightManager
 	}
 
 	void updateSceneEquipment()
-	{
-
+  {
 		for (Player player : client.getPlayers())
 		{
 			addEquipmentLight(player);
-
 		}
+  }
+  
+	public void updateNpcChanged(NpcChanged npcChanged)
+	{
+		removeNpcLight(npcChanged);
+		addNpcLight(npcChanged.getNpc());
 	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
@@ -756,6 +761,11 @@ public class LightManager
 		sceneLights.removeIf(light -> light.npc == npcDespawned.getNpc());
 	}
 
+	public void removeNpcLight(NpcChanged npcChanged)
+	{
+		sceneLights.removeIf(light -> light.npc == npcChanged.getNpc());
+  }
+  
 	public void addEquipmentLight(Player player)
 	{
 		PlayerComposition composition = player.getPlayerComposition();

@@ -92,6 +92,7 @@ import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GroundObjectChanged;
 import net.runelite.api.events.GroundObjectDespawned;
 import net.runelite.api.events.GroundObjectSpawned;
+import net.runelite.api.events.NpcChanged;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.PlayerDespawned;
@@ -2473,7 +2474,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		lightManager.removeNpcLight(npcDespawned);
 	}
-
+  
+  @Subscribe
+	public void onNpcChanged(NpcChanged npcChanged)
+	{
+		lightManager.updateNpcChanged(npcChanged);
+  }
+  
 	@Subscribe
 	public void onPlayerSpawned(PlayerSpawned playerSpawned)
 	{

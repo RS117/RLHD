@@ -180,6 +180,8 @@ public enum Overlay
 	SHAYZIEN_COMBAT_RING_FLOOR_2(37, Area.SHAYZIEN_COMBAT_RING, GroundMaterial.CARPET, new Properties().setBlended(false)),
 	SHAYZIEN_COMBAT_RING_FLOOR_3(72, Area.SHAYZIEN_COMBAT_RING, GroundMaterial.CARPET, new Properties().setBlended(false)),
 	SHAYZIEN_COMBAT_RING_FLOOR_4(73, Area.SHAYZIEN_COMBAT_RING, GroundMaterial.CARPET, new Properties().setBlended(false)),
+	MESS_HALL_KITCHEN_TILE_1(30, Area.MESS_HALL_KITCHEN, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),
+	MESS_HALL_KITCHEN_TILE_2(99, Area.MESS_HALL_KITCHEN, GroundMaterial.MARBLE_2_SEMIGLOSS, new Properties().setBlended(false)),
 	// Chambers of Xeric
 	MOUNT_QUIDAMORTEM_SYMBOL(-93, Area.MOUNT_QUIDAMORTEM, GroundMaterial.DIRT, new Properties().setBlended(false)),
 	// Kebos Lowlands
