@@ -58,6 +58,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
@@ -66,7 +67,6 @@ import jogamp.newt.awt.NewtFactoryAWT;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.BufferProvider;
 import net.runelite.api.Client;
-import net.runelite.api.Constants;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
@@ -80,7 +80,6 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
-import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.DecorativeObjectChanged;
 import net.runelite.api.events.DecorativeObjectDespawned;
@@ -119,6 +118,10 @@ import static rs117.hd.GLUtil.glGenRenderbuffer;
 import static rs117.hd.GLUtil.glGenTexture;
 import static rs117.hd.GLUtil.glGenVertexArrays;
 import static rs117.hd.GLUtil.glGetInteger;
+
+import net.runelite.client.ui.ClientToolbar;
+import net.runelite.client.ui.NavigationButton;
+import net.runelite.client.util.ImageUtil;
 import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.FogDepthMode;
@@ -132,6 +135,8 @@ import rs117.hd.template.Template;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
+import rs117.hd.ui.HdPluginPanel;
+
 import static org.jocl.CL.CL_MEM_READ_ONLY;
 import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
@@ -145,6 +150,8 @@ import static org.jocl.CL.clCreateFromGLBuffer;
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
+    public static final String CONFIG_GROUP = "hd";
+
 	// This is the maximum number of triangles the compute shaders support
 	static final int MAX_TRIANGLE = 4096;
 	static final int SMALL_TRIANGLE_COUNT = 512;
@@ -161,7 +168,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private Client client;
-	
+
+    @Inject
+	private ClientToolbar clientToolbar;
+
 	@Inject
 	private OpenCLManager openCLManager;
 
@@ -194,6 +204,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private ConfigManager configManager;
+
+    @Inject
+    @Named("developerMode")
+    boolean developerMode;
 
 	enum ComputeMode
 	{
@@ -408,6 +422,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	public int[] camTarget = new int[3];
 
+    // Side Panel button
+    private NavigationButton navButton;
+
 	@Override
 	protected void startUp()
 	{
@@ -423,6 +440,25 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configNpcLights = config.npcLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
+
+        // Add the Side Plugin Panel
+        // For now only when in developer mode
+        if (developerMode) {
+            final HdPluginPanel panel = injector.getInstance(HdPluginPanel.class);
+            panel.populatePanel();
+
+            // TODO: Change to our own icon
+            final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "RSHD_icon.png");
+
+            navButton = NavigationButton.builder()
+                    .tooltip("RSHD")
+                    .icon(icon)
+                    .priority(1)
+                    .panel(panel)
+                    .build();
+
+            clientToolbar.addNavigation(navButton);
+        }
 
 		clientThread.invoke(() ->
 		{
@@ -600,6 +636,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		startUpCompleted = false;
 
 		lightManager.reset();
+
+        clientToolbar.removeNavigation(navButton);
 
 		clientThread.invoke(() ->
 		{
@@ -2101,6 +2139,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			return;
 		}
+
+        log.debug("CONFIG CHANGED : {}, {}", event.getKey(), developerMode);
 
 		String key = event.getKey();
 

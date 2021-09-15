@@ -30,8 +30,6 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 import net.runelite.client.config.Range;
-import static rs117.hd.HdPlugin.MAX_DISTANCE;
-import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
@@ -45,7 +43,9 @@ import rs117.hd.config.ShadowResolution;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.config.WaterEffects;
 
-@ConfigGroup("hd")
+import static rs117.hd.HdPlugin.*;
+
+@ConfigGroup(CONFIG_GROUP)
 public interface HdPluginConfig extends Config
 {
 	/*====== General settings ======*/

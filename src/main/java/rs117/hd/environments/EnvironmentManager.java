@@ -28,6 +28,8 @@ import com.google.common.primitives.Floats;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import com.sun.tools.doclint.Env;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -315,7 +317,11 @@ public class EnvironmentManager
 					continue;
 				}
 				log.debug("added environment {} to sceneArea list", environment.name());
-				sceneEnvironments.add(environment);
+                // Add the environment or the override if exists
+                if (Environment.overridesMap.containsKey(environment.getArea().name())) {
+                    log.debug("overrided environment {} and added to sceneArea list", environment.name());
+                }
+	 			sceneEnvironments.add(Environment.overridesMap.getOrDefault(environment.getArea().name(), environment));
 				break;
 			}
 		}
@@ -325,8 +331,6 @@ public class EnvironmentManager
 			log.debug("sceneArea: " + environment.name());
 		}
 	}
-
-
 
 	/* lightning */
 	public float lightningBrightness = 0f;
@@ -441,4 +445,8 @@ public class EnvironmentManager
 			return WorldPoint.fromLocal(client, localPoint);
 		}
 	}
+
+    public Environment getCurrentEnvironment() {
+        return currentEnvironment;
+    }
 }
