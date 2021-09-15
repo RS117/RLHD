@@ -381,10 +381,22 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "groundBlending",
+			name = "Ground Blending",
+			description = "Affects the quality of blending between different ground/terrain textures.",
+			position = 207,
+			section = environmentSettings
+	)
+	default boolean groundBlending()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "waterEffects",
 		name = "Water Effects",
 		description = "Changes the appearance of the water. ",
-		position = 207,
+		position = 208,
 		section = environmentSettings
 	)
 	default WaterEffects waterEffects()
@@ -396,7 +408,7 @@ public interface HdPluginConfig extends Config
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
 		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
-		position = 208,
+		position = 209,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()

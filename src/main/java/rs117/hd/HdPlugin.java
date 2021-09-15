@@ -389,6 +389,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	// Config settings used very frequently - thousands/frame
 	public boolean configGroundTextures = false;
+	public boolean configGroundBlending = false;
 	public WaterEffects configWaterEffects = WaterEffects.ALL;
 	public LevelOfDetail configLevelOfDetail = LevelOfDetail.FULL;
 	public boolean configObjectTextures = true;
@@ -407,6 +408,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	protected void startUp()
 	{
 		configGroundTextures = config.groundTextures();
+		configGroundBlending = config.groundBlending();
 		configWaterEffects = config.waterEffects();
 		configLevelOfDetail = config.levelOfDetail();
 		configObjectTextures = config.objectTextures();
@@ -2087,6 +2089,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			case "groundTextures":
 				configGroundTextures = config.groundTextures();
+				reloadScene();
+				break;
+			case "groundBlending":
+				configGroundBlending = config.groundBlending();
 				reloadScene();
 				break;
 			case "waterEffects":
