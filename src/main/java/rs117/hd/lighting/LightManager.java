@@ -55,6 +55,7 @@ import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.NpcChanged;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
@@ -513,6 +514,11 @@ public class LightManager
 		}
 	}
 
+	public void updateNpcChanged(NpcChanged npcChanged)
+	{
+		removeNpcLight(npcChanged);
+		addNpcLight(npcChanged.getNpc());
+	}
 
 	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
 	{
@@ -612,6 +618,11 @@ public class LightManager
 	public void removeNpcLight(NpcDespawned npcDespawned)
 	{
 		sceneLights.removeIf(light -> light.npc == npcDespawned.getNpc());
+	}
+
+	public void removeNpcLight(NpcChanged npcChanged)
+	{
+		sceneLights.removeIf(light -> light.npc == npcChanged.getNpc());
 	}
 
 	public void addObjectLight(TileObject tileObject, int plane)
