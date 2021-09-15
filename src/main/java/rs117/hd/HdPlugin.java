@@ -453,6 +453,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				invokeOnMainThread(() ->
 				{
+					GLDrawable dummyDrawable = GLDrawableFactory.getFactory(GLProfile.getDefault())
+							.createDummyDrawable(GLProfile.getDefaultDevice(), true, new GLCapabilities(GLProfile.getDefault()), null);
+					dummyDrawable.setRealized(true);
+					GLContext versionContext = dummyDrawable.createContext(null);
+					versionContext.makeCurrent();
+					GL versionGL = versionContext.getGL().getGL(); 
+
+					log.info("GPU manufacturer: {}", versionGL.glGetString(GL.GL_VENDOR));
+					log.info("GPU device: {}", versionGL.glGetString(GL.GL_RENDERER));
+					log.info("GPU driver: {}", versionGL.glGetString(GL.GL_VERSION));
+					versionContext.destroy();
+
 					GLProfile glProfile = GLProfile.get(GLProfile.GL4);
 
 					GLCapabilities glCaps = new GLCapabilities(glProfile);
