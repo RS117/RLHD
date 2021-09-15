@@ -345,6 +345,9 @@ enum ObjectLight
 	MAGIC_GUILD_ORBS_BLUE(250, Alignment.CENTER, 250, 4f, rgb(0, 0, 255), LightType.PULSE, 500, 20, MYSTERIOUS_GLOW_34791),
 	MAGIC_GUILD_PORTALS(100, Alignment.CENTER, 500, 3f, rgb(0, 0, 255), LightType.PULSE, 1550, 20, MAGIC_PORTAL, MAGIC_PORTAL_2157, MAGIC_PORTAL_2158),
 
+	// Blast Furnace
+	BLAST_FURNACE_MELTING_POT(50, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
+	
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
