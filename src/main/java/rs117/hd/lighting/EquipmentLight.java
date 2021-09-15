@@ -13,10 +13,11 @@ import rs117.hd.lighting.LightManager.Alignment;
 @Getter
 enum EquipmentLight
 {
-        FIRE_CAPE(75, Alignment.BACK, 135, 8f, rgb(198, 156, 74), LightType.PULSE, 2100, 10, ItemID.FIRE_CAPE, FIRE_CAPE_10566),
-        FIRE_MAX_CAPE(75, Alignment.BACK, 135, 8f, rgb(198, 156, 74), LightType.PULSE, 2100, 10, ItemID.FIRE_MAX_CAPE, FIRE_MAX_CAPE_21186),
-        INFERNAL_CAPE(75, Alignment.BACK, 135, 8f, rgb(133, 64, 0), LightType.PULSE, 2100, 10, ItemID.INFERNAL_CAPE, INFERNAL_CAPE_21297, INFERNAL_CAPE_23622),
-        INFERNAL_MAX_CAPE(75, Alignment.BACK, 135, 8f, rgb(133, 64, 0), LightType.PULSE, 2100, 10, ItemID.INFERNAL_MAX_CAPE, INFERNAL_MAX_CAPE_21285),
+	FIRE_CAPE(90, Alignment.BACK, 150, 6f, rgb(220, 156, 74), LightType.PULSE, 4000, 8, ItemID.FIRE_CAPE, FIRE_CAPE_10566),
+	FIRE_MAX_CAPE(90, Alignment.BACK, 150, 6f, rgb(220, 156, 74), LightType.PULSE, 4000, 8, ItemID.FIRE_MAX_CAPE, FIRE_MAX_CAPE_21186),
+	INFERNAL_CAPE(90, Alignment.BACK, 150, 6f, rgb(133, 64, 0), LightType.PULSE, 4000, 8, ItemID.INFERNAL_CAPE, INFERNAL_CAPE_21297, INFERNAL_CAPE_23622),
+	INFERNAL_MAX_CAPE(90, Alignment.BACK, 150, 6f, rgb(133, 64, 0), LightType.PULSE, 4000, 8, ItemID.INFERNAL_MAX_CAPE, INFERNAL_MAX_CAPE_21285),
+	LIT_BUG_LANTERN(50, Alignment.LEFT, 250, 6f, rgb(255, 233, 138), LightType.FLICKER, 0, 10, ItemID.LIT_BUG_LANTERN),
     ;
 
     private final int[] id;
