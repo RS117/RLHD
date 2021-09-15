@@ -685,15 +685,18 @@ public class LightManager
 	{
 		PlayerComposition composition = player.getPlayerComposition();
 
-		for (int id : composition.getEquipmentIds())
+		if (composition != null)
 		{
-			EquipmentLight equipmentLight = EquipmentLight.find(id);
-			if (equipmentLight == null)
+			for (int id : composition.getEquipmentIds())
 			{
-				continue;
-			}
+				EquipmentLight equipmentLight = EquipmentLight.find(id);
+				if (equipmentLight == null)
+				{
+					continue;
+				}
 
-			addEquipmentLight(id, player);
+				addEquipmentLight(id, player);
+			}
 		}
 	}
 
