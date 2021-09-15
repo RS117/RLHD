@@ -191,7 +191,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private ProceduralGenerator proceduralGenerator;
-	
+
+	@Inject
+	private ConfigManager configManager;
+
 	enum ComputeMode
 	{
 		OPENGL,
@@ -407,6 +410,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
+		convertOldBrightnessConfig();
+
 		configGroundTextures = config.groundTextures();
 		configWaterEffects = config.waterEffects();
 		configLevelOfDetail = config.levelOfDetail();
@@ -1726,7 +1731,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			// get ambient light strength from either the config or the current area
 			float ambientStrength = environmentManager.currentAmbientStrength;
-			ambientStrength *= config.brightness().getAmount();
+			ambientStrength *= (double)config.brightness() / 20;
 			gl.glUniform1f(uniAmbientStrength, ambientStrength);
 
 			// and ambient color
@@ -1735,7 +1740,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			// get light light strength from either the config or the current area
 			float lightStrength = environmentManager.currentDirectionalStrength;
-			lightStrength *= config.brightness().getAmount();
+			lightStrength *= (double)config.brightness() / 20;
 			gl.glUniform1f(uniLightStrength, lightStrength);
 
 			// and light color
@@ -2446,6 +2451,35 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		else if (data != null)
 		{
 			gl.glBufferSubData(target, 0, size, data);
+		}
+	}
+
+	//Sets the new brightness setting from the old brightness setting.
+	//This can be removed later on when most people have updated the plugin
+	private void convertOldBrightnessConfig()
+	{
+		try
+		{
+			String oldBrightnessValue = configManager.getConfiguration("hd", "brightness");
+
+			if (!oldBrightnessValue.equals("set"))
+			{
+				String[][] newBrightnessValues = {{"LOWEST", "10"}, {"LOWER", "15"}, {"DEFAULT", "20"}, {"HIGHER", "25"}, {"HIGHEST", "30"}};
+				for (String[] newValue : newBrightnessValues)
+				{
+					if (newValue[0].equals(oldBrightnessValue))
+					{
+						configManager.setConfiguration("hd", "brightness2", newValue[1]);
+						break;
+					}
+				}
+
+				configManager.setConfiguration("hd", "brightness", "set");
+			}
+		}
+		catch (Exception e)
+		{
+			//Happens if people don't have the old brightness setting, then it doesn't need converting anyway.
 		}
 	}
 
