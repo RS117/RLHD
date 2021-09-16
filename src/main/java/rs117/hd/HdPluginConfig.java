@@ -35,7 +35,6 @@ import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
-import rs117.hd.config.Brightness;
 import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
 import rs117.hd.config.Saturation;
@@ -162,17 +161,18 @@ public interface HdPluginConfig extends Config
 		return Contrast.DEFAULT;
 	}
 
+	@Range(
+		min = 1,
+		max = 50
+	)
 	@ConfigItem(
-		keyName = "brightness",
+		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
 		position = 9,
 		section = generalSettings
 	)
-	default Brightness brightness()
-	{
-		return Brightness.DEFAULT;
-	}
+	default int brightness() { return 20; }
 
 	@ConfigItem(
 		keyName = "levelOfDetail",
