@@ -294,6 +294,32 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
+	@Range(
+			min = 190,
+			max = 350
+	)
+	@ConfigItem(
+			keyName = "sunPitch",
+			name = "Sun Pitch",
+			description = "Changes the pitch of the sun",
+			position = 109,
+			section = lightingSettings
+
+	)
+	default int sunPitch() { return 232;}
+
+	@Range(
+			max = 360
+	)
+	@ConfigItem(
+			keyName = "sunYaw",
+			name = "Sun Yaw",
+			description = "Changes the yaw of the sun",
+			position = 109,
+			section = lightingSettings
+
+	)
+	default int sunYaw() { return 55;}
 
 
 	/*====== Environment settings ======*/
