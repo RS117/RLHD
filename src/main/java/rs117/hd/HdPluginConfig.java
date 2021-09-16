@@ -315,7 +315,7 @@ public interface HdPluginConfig extends Config
 			keyName = "sunYaw",
 			name = "Sun Yaw",
 			description = "Changes the yaw of the sun",
-			position = 109,
+			position = 110,
 			section = lightingSettings
 
 	)
