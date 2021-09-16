@@ -354,7 +354,7 @@ enum ObjectLight
 	DORGESHKAAN_THINGYMAJIG(150, Alignment.CENTER, 500, 6f, rgb(50, 10, 255), LightType.FLICKER, 0, 20, THINGYMAJIG),
 
 	// Blast Furnace
-	BLAST_FURNACE_MELTING_POT(50, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
+	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
 
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
