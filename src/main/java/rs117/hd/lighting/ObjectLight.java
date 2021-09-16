@@ -353,6 +353,9 @@ enum ObjectLight
 	DORGESHKAAN_MAGIC_BALL(150, Alignment.CENTER, 300, 5f, rgb(50, 10, 255), LightType.FLICKER, 0, 20, MAGIC_BALL),
 	DORGESHKAAN_THINGYMAJIG(150, Alignment.CENTER, 500, 6f, rgb(50, 10, 255), LightType.FLICKER, 0, 20, THINGYMAJIG),
 
+	// Blast Furnace
+	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
+
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
