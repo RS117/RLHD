@@ -98,6 +98,8 @@ enum ProjectileLight
 	// Dragons
 	DRAGONFIRE(700, 5f, rgb(255, 123, 0), LightType.STATIC, 0, 0, 500, 54),
 
+	// Undead Druids
+	UNDEAD_DRUID( 300, 4f, rgb(150,   0,   0), LightType.STATIC, 0, 0, 1000, 1679),
 
 	;
 
