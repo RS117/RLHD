@@ -48,7 +48,7 @@ public enum DayLight {
     }
 
     private float percentageOfDaylight(LocalTime currentTime) {
-        return Math.abs(Duration.between(currentTime, startTime).toHours()) / CYCLE_LENGTH;
+        return Math.abs(Duration.between(currentTime, startTime).toMillis()) / (CYCLE_LENGTH * 60 * 60 * 1000);
     }
 
     private float percentageOfSeason(LocalDate currentDate) {
