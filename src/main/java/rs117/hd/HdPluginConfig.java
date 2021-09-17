@@ -295,7 +295,6 @@ public interface HdPluginConfig extends Config
 	}
 
 
-
 	/*====== Environment settings ======*/
 
 	@ConfigSection(
@@ -402,5 +401,29 @@ public interface HdPluginConfig extends Config
 	default boolean tzhaarHD()
 	{
 		return true;
+	}
+
+	@ConfigItem(
+			keyName = "dayNight",
+			name = "Day/Night Cycle",
+			description = "Environmental lighting will be based on your local PC's time of day.",
+			position = 209,
+			section = environmentSettings
+	)
+	default boolean dayNight()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "dayOnly",
+			name = "Day Only",
+			description = "Only show day lighting for you local PC time of day.",
+			position = 210,
+			section = environmentSettings
+	)
+	default boolean dayOnly()
+	{
+		return false;
 	}
 }

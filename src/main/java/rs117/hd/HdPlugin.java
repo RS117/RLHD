@@ -56,6 +56,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
@@ -124,6 +126,7 @@ import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.config.WaterEffects;
+import rs117.hd.environments.DayLight;
 import rs117.hd.environments.EnvironmentManager;
 import rs117.hd.lighting.LightManager;
 import rs117.hd.materials.Material;
@@ -158,6 +161,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private static final int MATERIAL_PROPERTIES_COUNT = 12;
 	private static final int LIGHT_PROPERTIES_COUNT = 8;
 	private static final int SCALAR_BYTES = 4;
+	private static final LocalDate CURRENT_DATE = LocalDate.now();
 
 	@Inject
 	private Client client;
@@ -398,6 +402,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configNpcLights = true;
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
+	public boolean configDayNightEnabled = false;
+	public boolean configDayOnly = false;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -416,6 +422,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configNpcLights = config.npcLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
+		configDayNightEnabled = config.dayNight();
+		configDayOnly = config.dayOnly();
 
 		clientThread.invoke(() ->
 		{
@@ -1574,8 +1582,15 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			Matrix4 lightProjectionMatrix = new Matrix4();
 			float lightPitch = -128;
 			float lightYaw = 55;
+			boolean shadowsAvailable = true;
+			if(configDayNightEnabled) {
+				DayLight timeOfDay = environmentManager.currentTimeOfDay;
+				lightPitch = timeOfDay.getCurrentPitch(LocalTime.now());
+				lightYaw = timeOfDay.getCurrentYaw(CURRENT_DATE);
+				shadowsAvailable = timeOfDay.isShadowsEnabled();
+			}
 
-			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
+			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && shadowsAvailable && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
 				// render shadow depth map
 				gl.glViewport(0, 0, config.shadowResolution().getValue(), config.shadowResolution().getValue());
@@ -1771,9 +1786,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			double lightX = Math.cos(lightPitchRadians) * Math.sin(lightYawRadians);
 			double lightY = Math.sin(lightPitchRadians);
 			double lightZ = Math.cos(lightPitchRadians) * Math.cos(lightYawRadians);
-			gl.glUniform1f(uniLightX, (float)lightX);
-			gl.glUniform1f(uniLightY, (float)lightY);
-			gl.glUniform1f(uniLightZ, (float)lightZ);
+			gl.glUniform1f(uniLightX, (float) lightX);
+			gl.glUniform1f(uniLightY, (float) lightY);
+			gl.glUniform1f(uniLightZ, (float) lightZ);
 
 			// use a curve to calculate max bias value based on the density of the shadow map
 			float shadowPixelsPerTile = (float)config.shadowResolution().getValue() / (float)config.shadowDistance().getValue();
@@ -2132,6 +2147,16 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "expandShadowDraw":
 				configExpandShadowDraw = config.expandShadowDraw();
+				break;
+			case "dayNight":
+				configDayNightEnabled = config.dayNight();
+				reloadScene();
+				environmentManager.update();
+				break;
+			case "dayOnly":
+				configDayOnly = config.dayOnly();
+				reloadScene();
+				environmentManager.update();
 				break;
 		}
 	}

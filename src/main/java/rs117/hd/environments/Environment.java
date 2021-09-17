@@ -757,7 +757,14 @@ public enum Environment
 	UNKNOWN_OVERWORLD(Area.UNKNOWN_OVERWORLD, new Properties()),
 
 	// overrides 'ALL' to provide default daylight conditions for the overworld area
-	OVERWORLD(Area.OVERWORLD, new Properties()),
+	OVERWORLD(Area.OVERWORLD, new Properties(), DayLight.DAY),
+	OVERWORLD_NIGHT(Area.OVERWORLD, new Properties()
+			.setFogColor(15, 14, 13)
+			.setFogDepth(40)
+			.setAmbientColor("#292828")
+			.setAmbientStrength(0.4f)
+			.setDirectionalStrength(0.7f)
+			.setDirectionalColor("#FFFFFF"), DayLight.NIGHT),
 	// used for underground, instances, etc.
 	ALL(Area.ALL, new Properties()
 		.setFogColor("#31271A")
@@ -788,6 +795,7 @@ public enum Environment
 	private final int groundFogStart;
 	private final int groundFogEnd;
 	private final float groundFogOpacity;
+	private final DayLight timeOfDay;
 
 	private static class Properties
 	{
@@ -936,6 +944,11 @@ public enum Environment
 
 	Environment(Area area, Properties properties)
 	{
+		this(area, properties, DayLight.DAY);
+	}
+
+	Environment(Area area, Properties properties, DayLight timeOfDay)
+	{
 		this.area = area;
 		this.fogDepth = properties.fogDepth;
 		this.customFogDepth = properties.customFogDepth;
@@ -955,5 +968,7 @@ public enum Environment
 		this.groundFogStart = properties.groundFogStart;
 		this.groundFogEnd = properties.groundFogEnd;
 		this.groundFogOpacity = properties.groundFogOpacity;
+		this.timeOfDay = timeOfDay;
 	}
+
 }

@@ -25,9 +25,13 @@
 package rs117.hd.environments;
 
 import com.google.common.primitives.Floats;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import jdk.vm.ci.meta.Local;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -56,6 +60,10 @@ public class EnvironmentManager
 	private ArrayList<Environment> sceneEnvironments;
 	private Environment currentEnvironment;
 	private final Environment defaultEnvironment = Environment.OVERWORLD;
+
+	// Assume 7:00 am & pm sunrise/sunset.
+	private static final LocalTime SUNRISE = LocalTime.of(7, 0);
+	private static final LocalTime SUNSET = LocalTime.of(23, 0);
 
 	// transition time
 	private final int transitionDuration = 3000;
@@ -128,6 +136,8 @@ public class EnvironmentManager
 
 	public boolean lightningEnabled = false;
 
+	public DayLight currentTimeOfDay = DayLight.getTimeOfDay(LocalTime.now());
+
 	public void update()
 	{
 		WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
@@ -135,9 +145,11 @@ public class EnvironmentManager
 		int camTargetY = camPosition.getY();
 		int camTargetZ = camPosition.getPlane();
 
+		currentTimeOfDay = hdPlugin.configDayOnly ? DayLight.DAY : DayLight.getTimeOfDay(LocalTime.now());
+
 		for (Environment environment : sceneEnvironments)
 		{
-			if (environment.getArea().containsPoint(camTargetX, camTargetY, camTargetZ))
+			if (environment.getArea().containsPoint(camTargetX, camTargetY, camTargetZ) && environment.getTimeOfDay() == currentTimeOfDay)
 			{
 				if (environment != currentEnvironment)
 				{
@@ -210,7 +222,7 @@ public class EnvironmentManager
 	private void changeEnvironment(Environment newEnvironment, int camTargetX, int camTargetY)
 	{
 		currentEnvironment = newEnvironment;
-		log.debug("currentEnvironment changed to " + newEnvironment);
+		log.debug("currentEnvironment changed to " + currentEnvironment);
 
 		startTime = System.currentTimeMillis();
 		transitionCompleteTime = startTime + transitionDuration;
