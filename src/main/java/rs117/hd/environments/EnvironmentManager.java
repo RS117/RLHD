@@ -61,10 +61,6 @@ public class EnvironmentManager
 	private Environment currentEnvironment;
 	private final Environment defaultEnvironment = Environment.OVERWORLD;
 
-	// Assume 7:00 am & pm sunrise/sunset.
-	private static final LocalTime SUNRISE = LocalTime.of(7, 0);
-	private static final LocalTime SUNSET = LocalTime.of(23, 0);
-
 	// transition time
 	private final int transitionDuration = 3000;
 	// distance in tiles to skip transition (e.g. entering cave, teleporting)
@@ -222,7 +218,7 @@ public class EnvironmentManager
 	private void changeEnvironment(Environment newEnvironment, int camTargetX, int camTargetY)
 	{
 		currentEnvironment = newEnvironment;
-		log.debug("currentEnvironment changed to " + currentEnvironment);
+		log.debug("currentEnvironment changed to " + newEnvironment);
 
 		startTime = System.currentTimeMillis();
 		transitionCompleteTime = startTime + transitionDuration;
