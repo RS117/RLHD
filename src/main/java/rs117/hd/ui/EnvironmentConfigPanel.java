@@ -331,7 +331,7 @@ public class EnvironmentConfigPanel extends JPanel {
                 "<br>Also creates an override so the override persists for this session.</html>");
         applySettingsSelected.setPreferredSize(new Dimension(PANEL_WIDTH, 25));
         applySettingsSelected.addActionListener(e -> {
-            applyPropertiesOverride(selectedEnvironment, modifiedProperties);
+            applyPropertiesOverride(environmentManager.getCurrentEnvironment(), modifiedProperties);
         });
         buttonPanel.add(applySettingsSelected);
 
@@ -341,7 +341,7 @@ public class EnvironmentConfigPanel extends JPanel {
                 "<br>Also creates an override so the override persists for this session.</html>");
         applySettingsCurrent.setPreferredSize(new Dimension(PANEL_WIDTH, 25));
         applySettingsCurrent.addActionListener(e -> {
-            applyPropertiesOverride(environmentManager.getCurrentEnvironment(), modifiedProperties);
+            applyPropertiesOverride(selectedEnvironment, modifiedProperties);
         });
         buttonPanel.add(applySettingsCurrent);
 
