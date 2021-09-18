@@ -753,9 +753,15 @@ public class LightManager
                     try {
                         // Check if it's the Impostor we want
                         if (entry.getKey().getImposterId() == client.getObjectDefinition(entry.getKey().getId()[0]).getImpostor().getId()) {
+                            Light toAdd = entry.getValue();
+                            if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(toAdd.object)))
+                            {
+                                // prevent duplicate lights being spawned for the same Impostor
+                                return;
+                            }
                             sceneLights.add(entry.getValue());
                         } else {
-                            // If it isn't, try to remove the Light from the scene if it has been there before
+                            // If it isn't the Impostor we want, try to remove the Light from the scene if it has been there before
                             Light toRemove = entry.getValue();
                             sceneLights.removeIf(light -> light.x == toRemove.x && light.y == toRemove.y && light.plane == toRemove.plane);
                         }
