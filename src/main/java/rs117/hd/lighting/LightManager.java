@@ -747,25 +747,23 @@ public class LightManager
             return;
         }
 
-        for(Iterator<Map.Entry<ObjectLight, Light>> it = impostorObjectLights.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<ObjectLight, Light> entry = it.next();
-
-            // Don't bother checking the impostor, if the varbit controlling this object didn't update
-            if (varbit.getIndex() != entry.getKey().getVarp()) {
-                continue;
-            }
-
-            try {
-                if (entry.getKey().getImposterId() == client.getObjectDefinition(entry.getKey().getId()[0]).getImpostor().getId()) {
-                    sceneLights.add(entry.getValue());
-                    it.remove();
-                }
-            } catch (NullPointerException ex) {
-                // object wasn't an imposter
-                log.debug("ObjectLight was not imposter : {}", entry.getKey().name());
-                it.remove();
-            }
-        }
+        impostorObjectLights.entrySet().stream()
+                .filter(entry -> entry.getKey().getVarp() == varbit.getIndex())
+                .forEach(entry -> {
+                    try {
+                        // Check if it's the Impostor we want
+                        if (entry.getKey().getImposterId() == client.getObjectDefinition(entry.getKey().getId()[0]).getImpostor().getId()) {
+                            sceneLights.add(entry.getValue());
+                        } else {
+                            // If it isn't, try to remove the Light from the scene if it has been there before
+                            Light toRemove = entry.getValue();
+                            sceneLights.removeIf(light -> light.x == toRemove.x && light.y == toRemove.y && light.plane == toRemove.plane);
+                        }
+                    } catch (NullPointerException ex) {
+                        // ObjectLight wasn't an imposter, shouldn't be marked as such in "ObjectLight.java"
+                        log.debug("ObjectLight was not imposter, remove impostor flag from 'ObjectLight.java' : {}", entry.getKey().name());
+                    }
+                });
     }
 
 	int tileObjectHash(TileObject tileObject)
