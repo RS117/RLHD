@@ -357,6 +357,10 @@ enum ObjectLight
 	// Blast Furnace
 	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
 
+	//Camelot
+	Camelot_COOKING_RANGE(120, Alignment.CENTER, 800, 2f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, RANGE_26181),
+	WALL_STATIC_LAMPS(190, Alignment.CENTER, 450, 3f, rgb(255, 180, 103), LightType.STATIC, 0, 20, 205),
+
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
