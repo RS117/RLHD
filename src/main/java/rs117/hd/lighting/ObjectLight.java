@@ -335,6 +335,7 @@ enum ObjectLight
 	CEILING_LIGHT(0, Alignment.CENTER, 800, 3f, rgb(255, 255, 255), LightType.FLICKER, 0, 10, 20868),
 	// Hallowed Sepulchre
 	HALLOWED_SEPULCHRE_MAGICAL_OBELISK(300, Alignment.CENTER, 500, 4f, rgb(255, 204, 0), LightType.PULSE, 2100, 20, MAGICAL_OBELISK),
+    HALLOWED_PORTAL_FRAME(200, Alignment.CENTER, 1000, 4f, rgb(0, 0, 255), LightType.PULSE, 1000, 10, PORTAL_38829, true, 2730, NULL_39533),
 	SARADOMIN_BRAZIER(200, Alignment.CENTER, 500, 4f, rgb(0, 0, 255), LightType.FLICKER, 0, 20, 39525, 39526),
 	// Darkmeyer
 	RED_STREET_LAMP(250, Alignment.CENTER, 300, 3f, rgb(255, 0, 0), LightType.FLICKER, 0, 20, LAMP_39152),
