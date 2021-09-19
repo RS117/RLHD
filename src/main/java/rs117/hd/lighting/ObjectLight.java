@@ -104,6 +104,10 @@ enum ObjectLight
 
 	TABLE(100, Alignment.CENTER, 250, 3f, rgb(252, 200, 3), LightType.FLICKER, 0, 20, TABLE_6197, TABLE_6199, TABLE_6201),
 
+	CHAOS_RIFT(80, Alignment.CENTER, 600, 4f, rgb(196, 79, 177), LightType.STATIC, 0, 0, CHAOS_RIFT_26765),
+
+	BRANCH_TORCH(215, Alignment.CENTER, 350, 5f, rgb(252, 148, 3), LightType.FLICKER, 0, 20, 11909),
+
 	// Castle Wars
 	ZAMORAK_BARRIER(50, Alignment.CENTER, 300, 4f, rgb(255, 50, 0), LightType.PULSE, 1550, 20, ENERGY_BARRIER_4470),
 	SARADOMIN_BARRIER(50, Alignment.CENTER, 300, 4f, rgb(0, 80, 255), LightType.PULSE, 1550, 20, ENERGY_BARRIER),
@@ -360,13 +364,21 @@ enum ObjectLight
 	// Blast Furnace
 	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
 
+	// Canifis
+	CANIFIS_TUBE(130, Alignment.CENTER, 320, 7f, rgb(123, 204, 174), LightType.STATIC, 0, 30, EMBALMING_TUBE),
+  
+	//Camelot
+	CAMELOT_COOKING_RANGE(120, Alignment.CENTER, 800, 2f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, RANGE_26181),
+	WALL_STATIC_LAMPS(190, Alignment.CENTER, 450, 3f, rgb(255, 180, 103), LightType.STATIC, 0, 20, 205),
+  
+	//Cerberus
+	WALL_TORCH_CERBERUS_DUNGEON(250, Alignment.CENTER, 650, 7f, rgb(252, 148, 3), LightType.FLICKER, 0, 20, 26570),
+
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
 
-	STRANGE_SHRINE(70, Alignment.CENTER, 300, 3f, rgb(255, 216, 87), LightType.PULSE, 2800, 30, 14985),
-
-	;
+	STRANGE_SHRINE(70, Alignment.CENTER, 300, 3f, rgb(255, 216, 87), LightType.PULSE, 2800, 30, 14985);
 
 	private final int[] id;
 	private final int height;
