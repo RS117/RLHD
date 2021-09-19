@@ -361,6 +361,10 @@ enum ObjectLight
 	// Blast Furnace
 	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
 
+	//Camelot
+	CAMELOT_COOKING_RANGE(120, Alignment.CENTER, 800, 2f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, RANGE_26181),
+	WALL_STATIC_LAMPS(190, Alignment.CENTER, 450, 3f, rgb(255, 180, 103), LightType.STATIC, 0, 20, 205),
+  
 	//Cerberus
 	WALL_TORCH_CERBERUS_DUNGEON(250, Alignment.CENTER, 650, 7f, rgb(252, 148, 3), LightType.FLICKER, 0, 20, 26570),
 
