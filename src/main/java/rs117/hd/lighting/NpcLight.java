@@ -137,6 +137,8 @@ enum NpcLight
 	// Morytania
 	// Hallowed Sepulchre
 	CROSSBOWMAN_STATUE_BOLT(220, Alignment.CENTER, 400, 4f, rgb(0, 190, 252), LightType.STATIC, 0, 0, 9672),
+    CROSSBOWMAN_STATUE_BOLT2(220, Alignment.CENTER, 400, 4f, rgb(130, 224, 255), LightType.STATIC, 0, 0, 9673),
+    CROSSBOWMAN_STATUE_BOLT3(220, Alignment.CENTER, 400, 4f, rgb(252, 214, 0), LightType.STATIC, 0, 0, 9674),
 	// Theatre of Blood
 	NYCOLAS_HAGIOS_SMALL(5, Alignment.CENTER, 300, 4f, rgb(0, 200, 255), LightType.FLICKER, 0, 40, 8344),
 	NYCOLAS_HAGIOS_MEDIUM(30, Alignment.CENTER, 500, 4f, rgb(0, 200, 255), LightType.FLICKER, 0, 40, 8347, 8383),
