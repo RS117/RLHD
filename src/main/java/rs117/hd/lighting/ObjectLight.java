@@ -357,6 +357,9 @@ enum ObjectLight
 	// Blast Furnace
 	BLAST_FURNACE_MELTING_POT(300, Alignment.CENTER, 1200, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, MELTING_POT),
 
+	// Canifis
+	CANIFIS_TUBE(130, Alignment.CENTER, 320, 7f, rgb(123, 204, 174), LightType.STATIC, 0, 30, EMBALMING_TUBE),
+
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
