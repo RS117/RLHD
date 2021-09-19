@@ -3,5 +3,6 @@
 # 117 HD
 GPU renderer with a suite of graphical enhancements.
 
-# Discord
- https://discord.gg/U4p6ChjgSE
+# Links
+- Discord https://discord.gg/U4p6ChjgSE
+- Twitter https://twitter.com/117scape
