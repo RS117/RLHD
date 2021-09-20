@@ -374,6 +374,12 @@ enum ObjectLight
 	//Cerberus
 	WALL_TORCH_CERBERUS_DUNGEON(250, Alignment.CENTER, 650, 7f, rgb(252, 148, 3), LightType.FLICKER, 0, 20, 26570),
 
+	// Ancient Cavern
+	ANCIENT_CAVERN_LAVA_POOL(200, Alignment.CENTER, 300, 3f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32215, 32216, 32217, 32218, 32219, 32220),
+	ANCIENT_CAVERN_DRAGON_HEADS(200, Alignment.FRONT, 500, 5f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32213),
+	ANCIENT_CAVERN_LAVA_FLOOR(100, Alignment.CENTER, 300, 3f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32222, 32223, 32224),
+	ANCIENT_CAVERN_ORB(250, Alignment.CENTER, 1000, 10f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, 29899),
+
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 3f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
