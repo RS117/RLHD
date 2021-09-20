@@ -44,6 +44,9 @@ public enum ObjectProperties
 	GRASS_MAINTAIN_ORIGINAL_COLOR(Material.NONE, new Properties().setFlatNormals(true), 16823, 16824, 16825, 16826),
 	FERN(Material.NONE, new Properties().setInheritTileColor(true), 19827, 19833, 19839),
 
+	// Wooden Fences
+	WOODEN_FENCES(Material.WOOD_GRAIN,new Properties().setFlatNormals(true), 980, 981, 991, 992,993, 1007, 1008, 1558, 1559, 1560, 1565, 1566, 1567,  9623),
+
 	// Lumbridge
 	LUMBRIDGE_CASTLE_WALLS(Material.NONE, new Properties().setFlatNormals(true), 1651, 1911, 1912, 1913),
 
