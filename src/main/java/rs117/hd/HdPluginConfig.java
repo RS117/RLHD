@@ -136,41 +136,41 @@ public interface HdPluginConfig extends Config
 	}
 
 	@Range(
-			min = 1,
-			max = 25
+		min = 1,
+		max = 25
 	)
 	@ConfigItem(
-			keyName = "saturation2",
-			name = "Saturation",
-			description = "Controls the saturation of the final rendered image.",
-			position = 7,
-			section = generalSettings
+		keyName = "saturation2",
+		name = "Saturation",
+		description = "Controls the saturation of the final rendered image.",
+		position = 7,
+		section = generalSettings
 	)
 	default int saturation() { return 20; }
 
 	@Range(
-			min = 1,
-			max = 25
+		min = 1,
+		max = 25
 	)
 	@ConfigItem(
-			keyName = "contrast2",
-			name = "Contrast",
-			description = "Controls the contrast of the final rendered image.",
-			position = 8,
-			section = generalSettings
+		keyName = "contrast2",
+		name = "Contrast",
+		description = "Controls the contrast of the final rendered image.",
+		position = 8,
+		section = generalSettings
 	)
 	default int contrast() { return 15; }
 
 	@Range(
-			min = 1,
-			max = 50
+		min = 1,
+		max = 50
 	)
 	@ConfigItem(
-			keyName = "brightness2",
-			name = "Brightness",
-			description = "Controls the brightness of scene lighting.",
-			position = 9,
-			section = generalSettings
+		keyName = "brightness2",
+		name = "Brightness",
+		description = "Controls the brightness of scene lighting.",
+		position = 9,
+		section = generalSettings
 	)
 	default int brightness() { return 20; }
 
@@ -381,11 +381,11 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "groundBlending",
-			name = "Ground Blending",
-			description = "Affects the quality of blending between different ground/terrain textures.",
-			position = 207,
-			section = environmentSettings
+		keyName = "groundBlending",
+		name = "Ground Blending",
+		description = "Affects the quality of blending between different ground/terrain textures.",
+		position = 207,
+		section = environmentSettings
 	)
 	default boolean groundBlending()
 	{
