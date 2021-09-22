@@ -34,10 +34,8 @@ import static rs117.hd.HdPlugin.MAX_DISTANCE;
 import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
-import rs117.hd.config.Contrast;
 import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
-import rs117.hd.config.Saturation;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.ShadowDistance;
@@ -137,40 +135,42 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-	@ConfigItem(
-		keyName = "saturation",
-		name = "Saturation",
-		description = "Controls the saturation of the final rendered image.",
-		position = 7,
-		section = generalSettings
+	@Range(
+			min = 1,
+			max = 25
 	)
-	default Saturation saturation()
-	{
-		return Saturation.DEFAULT;
-	}
-
 	@ConfigItem(
-		keyName = "contrast",
-		name = "Contrast",
-		description = "Controls the contrast of the final rendered image.",
-		position = 8,
-		section = generalSettings
+			keyName = "saturation2",
+			name = "Saturation",
+			description = "Controls the saturation of the final rendered image.",
+			position = 7,
+			section = generalSettings
 	)
-	default Contrast contrast()
-	{
-		return Contrast.DEFAULT;
-	}
+	default int saturation() { return 20; }
 
 	@Range(
-		min = 1,
-		max = 50
+			min = 1,
+			max = 25
 	)
 	@ConfigItem(
-		keyName = "brightness2",
-		name = "Brightness",
-		description = "Controls the brightness of scene lighting.",
-		position = 9,
-		section = generalSettings
+			keyName = "contrast2",
+			name = "Contrast",
+			description = "Controls the contrast of the final rendered image.",
+			position = 8,
+			section = generalSettings
+	)
+	default int contrast() { return 15; }
+
+	@Range(
+			min = 1,
+			max = 50
+	)
+	@ConfigItem(
+			keyName = "brightness2",
+			name = "Brightness",
+			description = "Controls the brightness of scene lighting.",
+			position = 9,
+			section = generalSettings
 	)
 	default int brightness() { return 20; }
 
