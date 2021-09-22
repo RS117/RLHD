@@ -35,7 +35,6 @@ import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
-import rs117.hd.config.Brightness;
 import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
 import rs117.hd.config.Saturation;
@@ -162,17 +161,18 @@ public interface HdPluginConfig extends Config
 		return Contrast.DEFAULT;
 	}
 
+	@Range(
+		min = 1,
+		max = 50
+	)
 	@ConfigItem(
-		keyName = "brightness",
+		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
 		position = 9,
 		section = generalSettings
 	)
-	default Brightness brightness()
-	{
-		return Brightness.DEFAULT;
-	}
+	default int brightness() { return 20; }
 
 	@ConfigItem(
 		keyName = "levelOfDetail",
@@ -380,10 +380,22 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "groundBlending",
+			name = "Ground Blending",
+			description = "Affects the quality of blending between different ground/terrain textures.",
+			position = 207,
+			section = environmentSettings
+	)
+	default boolean groundBlending()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "waterEffects",
 		name = "Water Effects",
 		description = "Changes the appearance of the water. ",
-		position = 207,
+		position = 208,
 		section = environmentSettings
 	)
 	default WaterEffects waterEffects()
@@ -395,7 +407,7 @@ public interface HdPluginConfig extends Config
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
 		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
-		position = 208,
+		position = 209,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()
