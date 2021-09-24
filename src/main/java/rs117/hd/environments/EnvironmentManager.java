@@ -25,9 +25,13 @@
 package rs117.hd.environments;
 
 import com.google.common.primitives.Floats;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import jdk.vm.ci.meta.Local;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -128,6 +132,8 @@ public class EnvironmentManager
 
 	public boolean lightningEnabled = false;
 
+	public DayLight currentTimeOfDay = DayLight.getTimeOfDay(LocalTime.now());
+
 	public void update()
 	{
 		WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
@@ -135,9 +141,11 @@ public class EnvironmentManager
 		int camTargetY = camPosition.getY();
 		int camTargetZ = camPosition.getPlane();
 
+		currentTimeOfDay = hdPlugin.configDayOnly ? DayLight.DAY : DayLight.getTimeOfDay(LocalTime.now());
+
 		for (Environment environment : sceneEnvironments)
 		{
-			if (environment.getArea().containsPoint(camTargetX, camTargetY, camTargetZ))
+			if (environment.getArea().containsPoint(camTargetX, camTargetY, camTargetZ) && environment.getTimeOfDay() == currentTimeOfDay)
 			{
 				if (environment != currentEnvironment)
 				{
