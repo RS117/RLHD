@@ -29,9 +29,10 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import static net.runelite.api.NullObjectID.NULL_5208;
-import static net.runelite.api.NullObjectID.NULL_5247;
 import net.runelite.api.ObjectID;
+import net.runelite.api.Varbits;
+
+import static net.runelite.api.NullObjectID.*;
 import static net.runelite.api.ObjectID.*;
 import static rs117.hd.lighting.LightManager.Alignment;
 import static rs117.hd.lighting.LightManager.LightType;
@@ -199,6 +200,20 @@ enum ObjectLight
 	// Trollheim
 	EADGAR_CAVE_EXIT(70, Alignment.CENTER, 250, 6f, rgb(255, 255, 255), LightType.STATIC, 0, 0, CAVE_EXIT_3760),
 
+    // My Arm Fire Pits
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6528#object33334Title */
+    FIRE_OF_NOURISHMENT(50, Alignment.CENTER, 500, 3f, rgb(11, 252, 3), LightType.FLICKER, 0, 4, ObjectID.FIRE_OF_NOURISHMENT, true, 1785, NULL_33334),
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6531 */
+    FIRE_OF_UNSEASONAL_WARMTH(50, Alignment.CENTER, 750, 2.5f, rgb(255, 85, 0), LightType.FLICKER, 0, 4, ObjectID.FIRE_OF_UNSEASONAL_WARMTH, true, 1785, NULL_33335),
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6532 */
+    FIRE_PIT_GIANT_MOLE(50, Alignment.CENTER, 1500, 1.5f, rgb(214, 203, 199), LightType.PULSE, 750, 4, ObjectID.FIRE_OF_ETERNAL_LIGHT, true, 1785, NULL_33336),
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6533 */
+    FIRE_PIT_LUMBRIDGE_SWAMP(50, Alignment.CENTER, 1500, 1.5f, rgb(214, 203, 199), LightType.PULSE, 750, 4, ObjectID.FIRE_OF_ETERNAL_LIGHT, true, 1785, NULL_33337),
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6534 */
+    FIRE_PIT_MOS_LE_HARMLESS(50, Alignment.CENTER, 1500, 1.5f, rgb(214, 203, 199), LightType.PULSE, 750, 4, ObjectID.FIRE_OF_ETERNAL_LIGHT, true, 1785, NULL_33338),
+    /* https://chisel.weirdgloop.org/varbs/display?varbit=6535 */
+    FIRE_OF_DEHUMIDIFICATION(50, Alignment.CENTER, 750, 4f, rgb(219, 252, 3), LightType.FLICKER, 0, 6, ObjectID.FIRE_OF_DEHUMIDIFICATION, true, 1785, NULL_33339),
+
 	// Underground Pass
 	WELL_OF_VOYAGE(200, Alignment.CENTER, 250, 6f, rgb(255, 255, 255), LightType.PULSE, 1200, 30, WELL_4004, WELL_4005),
 
@@ -327,6 +342,7 @@ enum ObjectLight
 	CEILING_LIGHT(0, Alignment.CENTER, 800, 3f, rgb(255, 255, 255), LightType.FLICKER, 0, 10, 20868),
 	// Hallowed Sepulchre
 	HALLOWED_SEPULCHRE_MAGICAL_OBELISK(300, Alignment.CENTER, 500, 4f, rgb(255, 204, 0), LightType.PULSE, 2100, 20, MAGICAL_OBELISK),
+    HALLOWED_PORTAL_FRAME(200, Alignment.CENTER, 1000, 4f, rgb(0, 0, 255), LightType.PULSE, 1000, 10, PORTAL_38829, true, 2730, NULL_39533),
 	SARADOMIN_BRAZIER(200, Alignment.CENTER, 500, 4f, rgb(0, 0, 255), LightType.FLICKER, 0, 20, 39525, 39526),
 	// Darkmeyer
 	RED_STREET_LAMP(250, Alignment.CENTER, 300, 3f, rgb(255, 0, 0), LightType.FLICKER, 0, 20, LAMP_39152),
@@ -390,6 +406,15 @@ enum ObjectLight
 	private final float duration;
 	private final float range;
 
+    // Is this object an imposter
+    private boolean imposter = false;
+    private int imposterId = -1;
+    // If so, what varp is it's status dependant on
+    // (You can get varp from the varbit : either search dump.varbit for "varbit_#" and "basevar" is the varp
+    // or run client#getVarbit#getIndex to get the varp
+    // https://gitlab.com/waliedyassen/cache-dumps/-/raw/master/dump.varbit
+    private int varp = -1;
+
 	ObjectLight(int height, Alignment alignment, int size, float strength, int rgb, LightType lightType, float duration, float range, int... ids)
 	{
 		this.height = height;
@@ -402,6 +427,15 @@ enum ObjectLight
 		this.range = range;
 		this.id = ids;
 	}
+
+    // Constructor for imposters
+    ObjectLight(int height, Alignment alignment, int size, float strength, int rgb, LightType lightType, float duration, float range, int id, boolean imposter, int varp, int parentId)
+    {
+        this(height, alignment, size, strength, rgb, lightType, duration, range, parentId);
+        this.imposter = imposter;
+        this.imposterId = id;
+        this.varp = varp;
+    }
 
 	private static final Map<Integer, ObjectLight> LIGHTS;
 

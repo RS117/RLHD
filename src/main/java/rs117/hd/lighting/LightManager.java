@@ -31,34 +31,25 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.Constants;
-import net.runelite.api.DecorativeObject;
-import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
-import net.runelite.api.GroundObject;
-import net.runelite.api.NPC;
-import net.runelite.api.Perspective;
-import net.runelite.api.Projectile;
-import net.runelite.api.Tile;
-import net.runelite.api.TileObject;
-import net.runelite.api.WallObject;
+import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcChanged;
+import net.runelite.api.events.VarbitChanged;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
+
+import static net.runelite.api.NullObjectID.NULL_33336;
+import static net.runelite.api.ObjectID.FIRE_OF_ETERNAL_LIGHT;
 
 @Singleton
 @Slf4j
@@ -76,6 +67,7 @@ public class LightManager
 	ArrayList<Light> allLights = new ArrayList<>();
 	ArrayList<Light> sceneLights = new ArrayList<>();
 	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
+    Map<ObjectLight, Light> impostorObjectLights = new HashMap<>();
 
 	long lastFrameTime = -1;
 
@@ -634,7 +626,7 @@ public class LightManager
 	{
 		int id = tileObject.getId();
 		ObjectLight objectLight = ObjectLight.find(id);
-		if (objectLight == null)
+		if (objectLight == null || impostorObjectLights.containsKey(objectLight))
 		{
 			return;
 		}
@@ -715,6 +707,19 @@ public class LightManager
 		light.z = (int) tileHeight - light.height - 1;
 		light.object = tileObject;
 
+        try {
+            // If this objectLight is an impostor, check that the current object definition impostor has the same ID
+            if (objectLight.isImposter() &&
+                    objectLight.getImposterId() != client.getObjectDefinition(tileObject.getId()).getImpostor().getId()) {
+                impostorObjectLights.put(objectLight, light);
+                return;
+            }
+        } catch (NullPointerException ex) {
+            // Null pointer is thrown on ObjectDefinition#getImpostor if it isn't a multiloc / doesn't have impostors
+            // This should only occur if the ObjectLight was defined as an impostor when it isn't
+            return;
+        }
+
 		sceneLights.add(light);
 	}
 
@@ -727,11 +732,45 @@ public class LightManager
 			return;
 		}
 
+        if (impostorObjectLights.remove(objectLight) != null) {
+            return;
+        }
+
 		LocalPoint localLocation = tileObject.getLocalLocation();
 		int plane = tileObject.getWorldLocation().getPlane();
 
 		sceneLights.removeIf(light -> light.x == localLocation.getX() && light.y == localLocation.getY() && light.plane == plane);
 	}
+
+    public void updateImpostorObjectLights(VarbitChanged varbit) {
+        if (impostorObjectLights.isEmpty()) {
+            return;
+        }
+
+        impostorObjectLights.entrySet().stream()
+                .filter(entry -> entry.getKey().getVarp() == varbit.getIndex())
+                .forEach(entry -> {
+                    try {
+                        // Check if it's the Impostor we want
+                        if (entry.getKey().getImposterId() == client.getObjectDefinition(entry.getKey().getId()[0]).getImpostor().getId()) {
+                            Light toAdd = entry.getValue();
+                            if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(toAdd.object)))
+                            {
+                                // prevent duplicate lights being spawned for the same Impostor
+                                return;
+                            }
+                            sceneLights.add(entry.getValue());
+                        } else {
+                            // If it isn't the Impostor we want, try to remove the Light from the scene if it has been there before
+                            Light toRemove = entry.getValue();
+                            sceneLights.removeIf(light -> light.x == toRemove.x && light.y == toRemove.y && light.plane == toRemove.plane);
+                        }
+                    } catch (NullPointerException ex) {
+                        // ObjectLight wasn't an imposter, shouldn't be marked as such in "ObjectLight.java"
+                        log.debug("ObjectLight was not imposter, remove impostor flag from 'ObjectLight.java' : {}", entry.getKey().name());
+                    }
+                });
+    }
 
 	int tileObjectHash(TileObject tileObject)
 	{
