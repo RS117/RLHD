@@ -23,12 +23,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-vec4 specular(vec3 viewDir, vec3 reflectDir, vec3 gloss, vec3 strength, vec3 lightColor, float lightStrength)
+vec4 specular(vec3 viewDir, vec3 reflectDir, vec3 specularGloss, vec3 specularStrength, vec3 lightColor, float lightStrength)
 {
     float vDotR = max(dot(viewDir, reflectDir), 0.0);
-    vec3 specX = vec3(pow(vDotR, gloss.x) * lightColor * lightStrength * strength.x);
-    vec3 specY = vec3(pow(vDotR, gloss.y) * lightColor * lightStrength * strength.y);
-    vec3 specZ = vec3(pow(vDotR, gloss.z) * lightColor * lightStrength * strength.z);
+    vec3 specX = vec3(pow(vDotR, specularGloss.x) * lightColor * specularStrength.x);
+    vec3 specY = vec3(pow(vDotR, specularGloss.y) * lightColor * specularStrength.y);
+    vec3 specZ = vec3(pow(vDotR, specularGloss.z) * lightColor * specularStrength.z);
     float specAmount = clamp(vDotR * lightStrength, 0.0, 1.0);
     vec4 combined = vec4(specX * texBlend.x + specY * texBlend.y + specZ * texBlend.z, specAmount);
     return vDotR > 0.0 ? combined : vec4(0.0);

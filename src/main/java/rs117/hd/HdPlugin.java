@@ -1708,7 +1708,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			// Clear scene
 			int sky = environmentManager.getFogColor();
-			gl.glClearColor((sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f, 1f);
+			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
+			gl.glClearColor(fogColor[0], fogColor[1], fogColor[2], 1f);
 			gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
 			final int drawDistance = getDrawDistance();
@@ -1726,8 +1727,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glUniform1i(uniUseFog, fogDepth > 0 ? 1 : 0);
 			gl.glUniform1i(uniFogDepth, fogDepth);
 
-			int[] fogColor = new int[]{sky >> 16 & 0xFF, sky >> 8 & 0xFF, sky & 0xFF};
-			gl.glUniform4f(uniFogColor, fogColor[0] / 255f, fogColor[1] / 255f, fogColor[2] / 255f, 1f);
+			gl.glUniform4f(uniFogColor, fogColor[0], fogColor[1], fogColor[2], 1f);
 
 			gl.glUniform1i(uniDrawDistance, drawDistance * Perspective.LOCAL_TILE_SIZE);
 			gl.glUniform1i(uniColorBlindMode, config.colorBlindMode().ordinal());
@@ -1753,7 +1753,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] ambientColor = environmentManager.currentAmbientColor;
 			gl.glUniform3f(uniAmbientColor, ambientColor[0], ambientColor[1], ambientColor[2]);
 
-			// get light light strength from either the config or the current area
+			// get light strength from either the config or the current area
 			float lightStrength = environmentManager.currentDirectionalStrength;
 			lightStrength *= (double)config.brightness() / 20;
 			gl.glUniform1f(uniLightStrength, lightStrength);

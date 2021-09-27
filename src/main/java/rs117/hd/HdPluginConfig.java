@@ -260,7 +260,7 @@ public interface HdPluginConfig extends Config
 
 	@ConfigItem(
 		keyName = "shadowResolution",
-		name = "Shadow Resolution",
+		name = "Shadow Quality",
 		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
 		position = 106,
 		section = lightingSettings
