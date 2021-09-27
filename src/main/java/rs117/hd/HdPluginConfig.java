@@ -395,7 +395,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "waterEffects",
 		name = "Water Effects",
-		description = "Changes the appearance of the water. ",
+		description = "Changes the appearance of the water.",
 		position = 208,
 		section = environmentSettings
 	)
@@ -414,5 +414,29 @@ public interface HdPluginConfig extends Config
 	default boolean tzhaarHD()
 	{
 		return true;
+	}
+
+
+
+	/*====== Workaround settings ======*/
+
+	@ConfigSection(
+			name = "Workarounds",
+			description = "Workaround settings",
+			position = 300,
+			closedByDefault = true
+	)
+	String workaroundSettings = "workaroundSettings";
+
+	@ConfigItem(
+			keyName = "macosIntelWorkaround",
+			name = "Fix shading on MacOS with Intel",
+			description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
+			position = 301,
+			section = workaroundSettings
+	)
+	default boolean macosIntelWorkaround()
+	{
+		return false;
 	}
 }
