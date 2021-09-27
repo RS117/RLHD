@@ -26,9 +26,6 @@
 // Workaround wrapper for drivers that do not support dynamic indexing,
 // particularly Intel drivers on MacOS, where OpenGL 4.1 is the latest version
 Material fetchMaterial(int index) {
-#if __VERSION__ > 410 // Assume that more recent versions support dynamic indexing
-    return material[index];
-#else
     switch (index) {
         case 0: return material[0];
         case 1: return material[1];
@@ -232,5 +229,4 @@ Material fetchMaterial(int index) {
         case 199: return material[199];
         default: return material[0];
     }
-#endif
 }

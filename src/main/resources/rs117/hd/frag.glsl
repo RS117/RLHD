@@ -124,7 +124,10 @@ out vec4 FragColor;
 #include lighting.glsl
 #include utils.glsl
 #include colorblind.glsl
+
+#if __VERSION__ <= 410
 #include utils/fetch_material.glsl
+#endif
 
 #define WATER 1
 #define SWAMP_WATER 3
@@ -139,9 +142,15 @@ void main() {
     vec3 lightDir = normalize(vec3(lightX, lightY, lightZ));
 
     // material data
+#if __VERSION__ > 410 // Assume that more recent versions support dynamic indexing
+    Material material1 = material[materialId.x];
+    Material material2 = material[materialId.y];
+    Material material3 = material[materialId.z];
+#else
     Material material1 = fetchMaterial(materialId.x);
     Material material2 = fetchMaterial(materialId.y);
     Material material3 = fetchMaterial(materialId.z);
+#endif
 
     // water data
     int waterDepth1 = waterData.x >> 5;
