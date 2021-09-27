@@ -124,6 +124,7 @@ out vec4 FragColor;
 #include lighting.glsl
 #include utils.glsl
 #include colorblind.glsl
+#include utils/fetch_material.glsl
 
 #define WATER 1
 #define SWAMP_WATER 3
@@ -137,14 +138,10 @@ void main() {
     vec3 viewDir = normalize(camPos - position);
     vec3 lightDir = normalize(vec3(lightX, lightY, lightZ));
 
-    Material material1 = material[materialId.x];
-    Material material2 = material[materialId.y];
-    Material material3 = material[materialId.z];
-
     // material data
-    int bmaterial1 = materialId.x;
-    int bmaterial2 = materialId.y;
-    int bmaterial3 = materialId.z;
+    Material material1 = fetchMaterial(materialId.x);
+    Material material2 = fetchMaterial(materialId.y);
+    Material material3 = fetchMaterial(materialId.z);
 
     // water data
     int waterDepth1 = waterData.x >> 5;

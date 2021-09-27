@@ -574,21 +574,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			catch (Throwable e)
 			{
 				log.error("Error starting HD plugin", e);
-
-				SwingUtilities.invokeLater(() ->
-				{
-					try
-					{
-						pluginManager.setPluginEnabled(this, false);
-						pluginManager.stopPlugin(this);
-					}
-					catch (PluginInstantiationException ex)
-					{
-						log.error("error stopping plugin", ex);
-					}
-				});
-
-				shutDown();
+				stopPlugin();
 			}
 			return true;
 		});
@@ -679,6 +665,24 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		});
 	}
 
+	private void stopPlugin()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			try
+			{
+				pluginManager.setPluginEnabled(this, false);
+				pluginManager.stopPlugin(this);
+			}
+			catch (PluginInstantiationException ex)
+			{
+				log.error("error stopping plugin", ex);
+			}
+		});
+
+		shutDown();
+	}
+
 	@Provides
 	HdPluginConfig provideConfig(ConfigManager configManager)
 	{
@@ -691,9 +695,22 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		Template template = new Template();
 		template.add(key ->
 		{
-			if ("version_header".equals(key))
+			switch (key)
 			{
-				return versionHeader;
+				case "version_header":
+					return versionHeader;
+				case "CONST_MACOS_INTEL_WORKAROUND":
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
+				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES": {
+					StringBuilder sb = new StringBuilder(MAX_MATERIALS * (
+						"case : return material[];".length() +
+						((int) Math.log10(MAX_MATERIALS) + 1) * 2));
+					for (int i = 0; i < MAX_MATERIALS; i++)
+					{
+						sb.append("case ").append(i).append(": return material[").append(i).append("];\n");
+					}
+					return sb.toString();
+				}
 			}
 			return null;
 		});
@@ -811,6 +828,27 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		gl.glDeleteProgram(glShadowProgram);
 		glShadowProgram = -1;
+	}
+
+	private void recompileProgram()
+	{
+		clientThread.invoke(() ->
+			invokeOnMainThread(() ->
+			{
+				try
+				{
+					shutdownProgram();
+					shutdownVao();
+					initVao();
+					initProgram();
+				}
+				catch (ShaderException ex)
+				{
+					log.error("Failed to recompile shader program", ex);
+					stopPlugin();
+				}
+			})
+		);
 	}
 
 	private void initVao()
@@ -2156,6 +2194,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "expandShadowDraw":
 				configExpandShadowDraw = config.expandShadowDraw();
+				break;
+			case "macosIntelWorkaround":
+				recompileProgram();
 				break;
 		}
 	}
