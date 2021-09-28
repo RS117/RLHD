@@ -158,9 +158,9 @@ public enum Environment
 	MORYTANIA(Area.MORYTANIA, new Properties()
 		.setFogColor("#1E314B")
 		.setFogDepth(40)
-		.setAmbientColor("#5B83B3")
-		.setAmbientStrength(0.7f)
-		.setDirectionalColor("#526E8B")
+		.setAmbientColor("#5A8CC0")
+		.setAmbientStrength(1.0f)
+		.setDirectionalColor("#67A8F8")
 		.setDirectionalStrength(3.0f)
 		.setGroundFog(-150, -350, 0.5f)
 	),
@@ -661,6 +661,15 @@ public enum Environment
 		.setDirectionalColor(113, 160, 226)
 	),
 	// Theatre of Blood
+	VER_SINHAZA(Area.VER_SINHAZA, new Properties()
+		.setFogColor("#1E314B")
+		.setFogDepth(40)
+		.setAmbientColor("#5A8CC0")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#67A8F8")
+		.setDirectionalStrength(5.0f)
+		.setGroundFog(-150, -350, 0.5f)
+	),
 	TOB_ROOM_VAULT(Area.TOB_ROOM_VAULT, new Properties()
 		.setFogColor("#0E081A")
 		.setFogDepth(40)
@@ -692,7 +701,7 @@ public enum Environment
 	NIGHTMARE_OF_ASHIHAMA_ARENA(Area.NIGHTMARE_OF_ASHIHAMA_ARENA, new Properties()
 		.setFogColor("#000000")
 		.setFogDepth(30)
-		.setAmbientStrength(1.4f)
+		.setAmbientStrength(3.5f)
 		.setAmbientColor("#9A5DFD")
 		.setDirectionalStrength(2.0f)
 		.setDirectionalColor("#00FF60")
