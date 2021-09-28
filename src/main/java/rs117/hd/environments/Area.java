@@ -61,7 +61,11 @@ public enum Area
 	),
 
 	// Dorgesh-Kaan
-	DORGESHKAAN(2688, 5248, 2879, 5503),
+	DORGESHKAAN(
+		new Rect(2687, 5376, 2752, 5247), // lower level
+		new Rect(2751, 5440, 2816, 5311), // middle level
+		new Rect(2815, 5504, 2880, 5375) // upper level
+	),
 
 	// Varrock
 	VARROCK_MUSEUM_BASEMENT(
@@ -731,6 +735,7 @@ public enum Area
 	RANDOM_EVENT_GRAVEDIGGER(1920, 5007, 1935, 4992),
 	RANDOM_EVENT_DRILL_DEMON(3136, 4799, 3200, 4863),
 	RANDOM_EVENT_FROG_CAVE(2450, 4764, 2480, 4794),
+	RANDOM_EVENT_PRISON_PETE(2059, 4479, 2111, 4447),
 
 	// Clan halls
 	CLAN_HALL(1730, 5442, 1789, 5501),
