@@ -1171,9 +1171,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					lightsUniformBuf.putInt(light.y);
 					lightsUniformBuf.putInt(light.z);
 					lightsUniformBuf.putFloat(light.currentSize);
-					lightsUniformBuf.putInt(light.currentColor[0]);
-					lightsUniformBuf.putInt(light.currentColor[1]);
-					lightsUniformBuf.putInt(light.currentColor[2]);
+					lightsUniformBuf.putFloat(HDUtils.gammaToLinear(light.currentColor[0] / 255f));
+					lightsUniformBuf.putFloat(HDUtils.gammaToLinear(light.currentColor[1] / 255f));
+					lightsUniformBuf.putFloat(HDUtils.gammaToLinear(light.currentColor[2] / 255f));
 					lightsUniformBuf.putFloat(light.currentStrength);
 
 					// UBO elements must be divisible by groups of 4 scalars. Pad any remaining space

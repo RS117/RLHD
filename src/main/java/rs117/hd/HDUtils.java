@@ -244,4 +244,16 @@ class HDUtils
 
 		return p;
 	}
+
+	public static float linearToGamma(float c)
+	{
+		float gamma = 2.2f;
+		return (float)Math.pow(c, 1.0f / gamma);
+	}
+
+	public static float gammaToLinear(float c)
+	{
+		float gamma = 2.2f;
+		return (float)Math.pow(c, gamma);
+	}
 }
