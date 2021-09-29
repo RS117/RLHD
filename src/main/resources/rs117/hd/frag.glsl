@@ -124,6 +124,7 @@ out vec4 FragColor;
 #include lighting.glsl
 #include utils.glsl
 #include colorblind.glsl
+#include utils/fetch_material.glsl
 
 #define WATER 1
 #define SWAMP_WATER 3
@@ -137,14 +138,10 @@ void main() {
     vec3 viewDir = normalize(camPos - position);
     vec3 lightDir = normalize(vec3(lightX, lightY, lightZ));
 
-    Material material1 = material[materialId.x];
-    Material material2 = material[materialId.y];
-    Material material3 = material[materialId.z];
-
     // material data
-    int bmaterial1 = materialId.x;
-    int bmaterial2 = materialId.y;
-    int bmaterial3 = materialId.z;
+    Material material1 = fetchMaterial(materialId.x);
+    Material material2 = fetchMaterial(materialId.y);
+    Material material3 = fetchMaterial(materialId.z);
 
     // water data
     int waterDepth1 = waterData.x >> 5;
@@ -700,13 +697,12 @@ void main() {
     // calculate lighting
 
     // ambient light
-    vec3 ambientLightOut = ambientStrength * ambientColor;
+    vec3 ambientLightOut = gammaToLinear(ambientColor) * ambientStrength;
 
     // directional light
-    vec3 lightColor = lightColor;
     float lightStrength = lightStrength * inverseShadow;
-    vec3 light = lightColor * lightStrength;
-    vec3 lightOut = max(lightDotNormals, 0.0) * light;
+    vec3 lightColor = gammaToLinear(lightColor) * lightStrength;
+    vec3 lightOut = max(lightDotNormals, 0.0) * lightColor;
 
     // directional light specular
     vec3 lightReflectDir = reflect(-lightDir, normals);
@@ -719,8 +715,8 @@ void main() {
     for (int i = 0; i < pointLightsCount; i++)
     {
         vec3 pointLightPos = vec3(pointLight[i].position.x, pointLight[i].position.z, pointLight[i].position.y);
-        vec3 pointLightColor = vec3(pointLight[i].color.r / 255.0, pointLight[i].color.g / 255.0, pointLight[i].color.b / 255.0);
         float pointLightStrength = pointLight[i].strength;
+        vec3 pointLightColor = gammaToLinear(vec3(pointLight[i].color.r / 255.0, pointLight[i].color.g / 255.0, pointLight[i].color.b / 255.0)) * pointLightStrength;
         float pointLightSize = pointLight[i].size;
         float distanceToLightSource = length(pointLightPos - position);
         vec3 pointLightDir = normalize(pointLightPos - position);
@@ -728,7 +724,7 @@ void main() {
         if (distanceToLightSource <= pointLightSize)
         {
             float pointLightDotNormals = dot(normals, pointLightDir);
-            vec3 pointLightOut = pointLightColor * pointLightStrength * max(pointLightDotNormals, 0.0);
+            vec3 pointLightOut = pointLightColor * max(pointLightDotNormals, 0.0);
 
             float attenuation = pow(clamp(1 - (distanceToLightSource / pointLightSize), 0.0, 1.0), 2.0);
             pointLightOut *= attenuation;
@@ -785,13 +781,16 @@ void main() {
 
     if (isWater)
     {
-        vec3 baseColor = mix(waterSurfaceColor * compositeLight, surfaceColor, waterFresnelAmount);
+        vec3 baseColor = gammaToLinear(waterSurfaceColor) * compositeLight;
+        baseColor = mix(baseColor, gammaToLinear(surfaceColor), waterFresnelAmount);
+        baseColor = linearToGamma(baseColor);
         float shadowDarken = 0.15;
         baseColor *= (1.0 - shadowDarken) + inverseShadow * shadowDarken;
         float foamAmount = 1.0 - fragColor.r;
         float foamDistance = 0.7;
         vec3 foamColor = waterFoamColor / 255.0;
-        foamColor = foamColor * diffuse3.rgb * compositeLight;
+        foamColor = gammaToLinear(foamColor * diffuse3.rgb) * compositeLight;
+        foamColor = linearToGamma(foamColor);
         foamAmount = clamp(pow(1.0 - ((1.0 - foamAmount) / foamDistance), 3), 0.0, 1.0) * waterHasFoam;
         foamAmount *= foamColor.r;
         baseColor = mix(baseColor, foamColor, foamAmount);
@@ -805,7 +804,8 @@ void main() {
     }
     else
     {
-        vec3 litColor = compositeColor * compositeLight;
+        vec3 litColor = gammaToLinear(compositeColor) * compositeLight;
+        litColor = linearToGamma(litColor);
         compositeColor = mix(litColor, compositeColor, emissive);
     }
 
@@ -842,7 +842,7 @@ void main() {
 
         if (causticsDepth > 0 && lightDotNormals > 0 && underwaterType == 1)
         {
-            float causticsMultiplier = 1;
+            float causticsMultiplier = 0.7;
             vec2 causticsUv = vec2(worldUvs(1).x + displacement.x * displacementStrength * 2, worldUvs(1).y + displacement.y * displacementStrength * 2);
             causticsUv += animationFrame(16);
             float caustics = texture(texturesHD, vec3(causticsUv, causticsMapId)).r;

@@ -141,7 +141,7 @@ public class EnvironmentManager
 			{
 				if (environment != currentEnvironment)
 				{
-					changeEnvironment(environment, camTargetX, camTargetY);
+					changeEnvironment(environment, camTargetX, camTargetY, false);
 				}
 				break;
 			}
@@ -149,7 +149,7 @@ public class EnvironmentManager
 
 		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting())
 		{
-			changeEnvironment(currentEnvironment, camTargetX, camTargetY);
+			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
 		}
 
 		// modify all environment values during transition
@@ -207,13 +207,13 @@ public class EnvironmentManager
 	 * @param camTargetX
 	 * @param camTargetY
 	 */
-	private void changeEnvironment(Environment newEnvironment, int camTargetX, int camTargetY)
+	private void changeEnvironment(Environment newEnvironment, int camTargetX, int camTargetY, boolean instantChange)
 	{
 		currentEnvironment = newEnvironment;
 		log.debug("currentEnvironment changed to " + newEnvironment);
 
 		startTime = System.currentTimeMillis();
-		transitionCompleteTime = startTime + transitionDuration;
+		transitionCompleteTime = instantChange ? 0 : startTime + transitionDuration;
 
 		// set previous variables to current ones
 		startFogColor = currentFogColor;

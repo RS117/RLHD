@@ -574,21 +574,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			catch (Throwable e)
 			{
 				log.error("Error starting HD plugin", e);
-
-				SwingUtilities.invokeLater(() ->
-				{
-					try
-					{
-						pluginManager.setPluginEnabled(this, false);
-						pluginManager.stopPlugin(this);
-					}
-					catch (PluginInstantiationException ex)
-					{
-						log.error("error stopping plugin", ex);
-					}
-				});
-
-				shutDown();
+				stopPlugin();
 			}
 			return true;
 		});
@@ -679,6 +665,24 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		});
 	}
 
+	private void stopPlugin()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			try
+			{
+				pluginManager.setPluginEnabled(this, false);
+				pluginManager.stopPlugin(this);
+			}
+			catch (PluginInstantiationException ex)
+			{
+				log.error("error stopping plugin", ex);
+			}
+		});
+
+		shutDown();
+	}
+
 	@Provides
 	HdPluginConfig provideConfig(ConfigManager configManager)
 	{
@@ -691,9 +695,22 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		Template template = new Template();
 		template.add(key ->
 		{
-			if ("version_header".equals(key))
+			switch (key)
 			{
-				return versionHeader;
+				case "version_header":
+					return versionHeader;
+				case "CONST_MACOS_INTEL_WORKAROUND":
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
+				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES": {
+					StringBuilder sb = new StringBuilder(MAX_MATERIALS * (
+						"case : return material[];".length() +
+						((int) Math.log10(MAX_MATERIALS) + 1) * 2));
+					for (int i = 0; i < MAX_MATERIALS; i++)
+					{
+						sb.append("case ").append(i).append(": return material[").append(i).append("];\n");
+					}
+					return sb.toString();
+				}
 			}
 			return null;
 		});
@@ -811,6 +828,27 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		gl.glDeleteProgram(glShadowProgram);
 		glShadowProgram = -1;
+	}
+
+	private void recompileProgram()
+	{
+		clientThread.invoke(() ->
+			invokeOnMainThread(() ->
+			{
+				try
+				{
+					shutdownProgram();
+					shutdownVao();
+					initVao();
+					initProgram();
+				}
+				catch (ShaderException ex)
+				{
+					log.error("Failed to recompile shader program", ex);
+					stopPlugin();
+				}
+			})
+		);
 	}
 
 	private void initVao()
@@ -1708,7 +1746,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			// Clear scene
 			int sky = environmentManager.getFogColor();
-			gl.glClearColor((sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f, 1f);
+			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
+			gl.glClearColor(fogColor[0], fogColor[1], fogColor[2], 1f);
 			gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
 			final int drawDistance = getDrawDistance();
@@ -1726,8 +1765,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glUniform1i(uniUseFog, fogDepth > 0 ? 1 : 0);
 			gl.glUniform1i(uniFogDepth, fogDepth);
 
-			int[] fogColor = new int[]{sky >> 16 & 0xFF, sky >> 8 & 0xFF, sky & 0xFF};
-			gl.glUniform4f(uniFogColor, fogColor[0] / 255f, fogColor[1] / 255f, fogColor[2] / 255f, 1f);
+			gl.glUniform4f(uniFogColor, fogColor[0], fogColor[1], fogColor[2], 1f);
 
 			gl.glUniform1i(uniDrawDistance, drawDistance * Perspective.LOCAL_TILE_SIZE);
 			gl.glUniform1i(uniColorBlindMode, config.colorBlindMode().ordinal());
@@ -1753,7 +1791,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] ambientColor = environmentManager.currentAmbientColor;
 			gl.glUniform3f(uniAmbientColor, ambientColor[0], ambientColor[1], ambientColor[2]);
 
-			// get light light strength from either the config or the current area
+			// get light strength from either the config or the current area
 			float lightStrength = environmentManager.currentDirectionalStrength;
 			lightStrength *= (double)config.brightness() / 20;
 			gl.glUniform1f(uniLightStrength, lightStrength);
@@ -2156,6 +2194,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "expandShadowDraw":
 				configExpandShadowDraw = config.expandShadowDraw();
+				break;
+			case "macosIntelWorkaround":
+				recompileProgram();
 				break;
 		}
 	}

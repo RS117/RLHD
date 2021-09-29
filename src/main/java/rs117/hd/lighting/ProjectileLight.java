@@ -36,70 +36,71 @@ enum ProjectileLight
 {
 	// Standard spellbook
 	// Combat spells
-	WIND_STRIKE( 175, 1f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 91),
-	WATER_STRIKE(175, 1.5f, rgb(  0, 140, 255), LightType.STATIC, 0, 0, 1000, 94),
-	EARTH_STRIKE(175, 1.25f, rgb(  0, 255,   0), LightType.STATIC, 0, 0, 1000, 97),
-	FIRE_STRIKE( 175, 1.5f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 100),
+	WIND_STRIKE(175, 2.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 91),
+	WATER_STRIKE(175, 3.8f, rgb( 0, 140, 255), LightType.STATIC, 0, 0, 1000, 94),
+	EARTH_STRIKE(175, 3.1f, rgb( 0, 255,   0), LightType.STATIC, 0, 0, 1000, 97),
+	FIRE_STRIKE(175, 3.8f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 100),
 
-	WIND_BOLT( 210, 1.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 118),
-	WATER_BOLT(210, 2.5f, rgb(  0, 140, 255), LightType.STATIC, 0, 0, 1000, 121),
-	EARTH_BOLT(210, 2.25f, rgb(  0, 255,   0), LightType.STATIC, 0, 0, 1000, 124),
-	FIRE_BOLT( 210, 2.5f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 127),
+	WIND_BOLT(210, 3.8f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 118),
+	WATER_BOLT(210, 6.3f, rgb( 0, 140, 255), LightType.STATIC, 0, 0, 1000, 121),
+	EARTH_BOLT(210, 5.6f, rgb( 0, 255,   0), LightType.STATIC, 0, 0, 1000, 124),
+	FIRE_BOLT(210, 6.3f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 127),
 
-	WIND_BLAST( 250, 2.25f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 133),
-	WATER_BLAST(250, 3.5f, rgb(  0, 140, 255), LightType.STATIC, 0, 0, 1000, 136),
-	EARTH_BLAST(250, 2.75f, rgb(  0, 255,   0), LightType.STATIC, 0, 0, 1000, 139),
-	FIRE_BLAST( 250, 3.5f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 130),
+	WIND_BLAST(250, 5.6f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 133),
+	WATER_BLAST(250, 8.8f, rgb( 0, 140, 255), LightType.STATIC, 0, 0, 1000, 136),
+	EARTH_BLAST(250, 6.9f, rgb( 0, 255,   0), LightType.STATIC, 0, 0, 1000, 139),
+	FIRE_BLAST(250, 8.8f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 130),
 
-	WIND_WAVE( 300, 3f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 159),
-	WATER_WAVE(300, 4f, rgb(  0, 140, 255), LightType.STATIC, 0, 0, 1000, 162),
-	EARTH_WAVE(300, 3.5f, rgb(  0, 255,   0), LightType.STATIC, 0, 0, 1000, 165),
-	FIRE_WAVE( 300, 4f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 156),
+	WIND_WAVE(300, 7.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 159),
+	WATER_WAVE(300, 10.0f, rgb( 0, 140, 255), LightType.STATIC, 0, 0, 1000, 162),
+	EARTH_WAVE(300, 8.8f, rgb( 0, 255,   0), LightType.STATIC, 0, 0, 1000, 165),
+	FIRE_WAVE(300, 10.0f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 156),
 
-	WIND_SURGE( 400, 4.25f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 1456),
-	WATER_SURGE(400, 5.5f, rgb(  0, 140, 255), LightType.STATIC, 0, 0, 1000, 1459),
-	EARTH_SURGE(400, 5f, rgb(  0, 255,   0), LightType.STATIC, 0, 0, 1000, 1462),
-	FIRE_SURGE( 400, 5.5f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 1465),
+	WIND_SURGE(400, 10.6f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 1456),
+	WATER_SURGE(400, 13.8f, rgb( 0, 140, 255), LightType.STATIC, 0, 0, 1000, 1459),
+	EARTH_SURGE(400, 12.5f, rgb( 0, 255,   0), LightType.STATIC, 0, 0, 1000, 1462),
+	FIRE_SURGE(400, 13.8f, rgb(255,   0,   0), LightType.STATIC, 0, 0, 1000, 1465),
 
-	// Non-combat spells
-	CONFUSE(200, 2f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 103),
-	WEAKEN(200, 1.5f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 106),
-	CURSE(200, 2f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 109),
-	VULNERABILITY(250, 2.5f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 168),
-	ENFEEBLE(250, 2.5f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 171),
-	STUN(250, 2f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 174),
-	BIND_SNARE_ENTANGLE(200, 2.5f, rgb(0, 255, 0), LightType.PULSE, 500, 20, 1000, 178),
-	CRUMBLE_UNDEAD(200, 2f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 146),
-	MAGIC_DART(200, 3f, rgb(168, 255, 206), LightType.STATIC, 0, 0, 1000, 328),
-	IBAN_BLAST(200, 3f, rgb(255, 175, 84), LightType.STATIC, 0, 0, 1000, 88),
-	TELE_BLOCK(200, 2f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 344),
+	// Utility combat spells
+	CONFUSE(200, 5.0f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 103),
+	WEAKEN(200, 3.8f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 106),
+	CURSE(200, 5.0f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 109),
+	VULNERABILITY(250, 6.3f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 168),
+	ENFEEBLE(250, 6.3f, rgb(255, 0, 255), LightType.PULSE, 500, 20, 1000, 171),
+	STUN(250, 5.0f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 174),
+	BIND_SNARE_ENTANGLE(200, 6.3f, rgb(0, 255, 0), LightType.PULSE, 500, 20, 1000, 178),
+	CRUMBLE_UNDEAD(200, 5.0f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 146),
+	MAGIC_DART(200, 7.5f, rgb(168, 255, 206), LightType.STATIC, 0, 0, 1000, 328),
+	IBAN_BLAST(200, 7.5f, rgb(255, 175, 84), LightType.STATIC, 0, 0, 1000, 88),
+	TELE_BLOCK(200, 5.0f, rgb(255, 255, 255), LightType.PULSE, 500, 20, 1000, 344),
 
 	// Charged magic weapons
-	TRIDENT_SWAMP_SPELL( 400, 5f, rgb(0, 167, 204), LightType.STATIC, 0, 0, 1000, 1040),
-	TRIDENT_SEA_SPELL( 400, 3f, rgb(0, 0, 255), LightType.STATIC, 0, 0, 1000, 1252),
+	TRIDENT_SWAMP_SPELL(400, 12.5f, rgb(0, 167, 204), LightType.STATIC, 0, 0, 1000, 1040),
+	TRIDENT_SEA_SPELL(400, 7.5f, rgb(0, 0, 255), LightType.STATIC, 0, 0, 1000, 1252),
 
 	// Ancient magicks spellbook
-	SMOKE_RUSH( 250, 0.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 384),
-	SHADOW_RUSH( 250, 1f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 378),
-	ICE_RUSH( 250, 2f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 360),
-	SMOKE_BLITZ( 250, 0.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 386),
-	SHADOW_BLITZ( 250, 1f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 380),
-	BLOOD_BLITZ( 250, 4f, rgb(255, 0, 0), LightType.STATIC, 0, 0, 1000, 374),
+	SMOKE_RUSH(250, 1.3f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 384),
+	SHADOW_RUSH(250, 2.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 378),
+	ICE_RUSH(250, 5.0f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 360),
+	SMOKE_BLITZ(250, 1.3f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 386),
+	SHADOW_BLITZ(250, 2.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 1000, 380),
+	BLOOD_BLITZ(250, 10.0f, rgb(255, 0, 0), LightType.STATIC, 0, 0, 1000, 374),
 
 	// Arrows/bolts
-	MAGIC_BOW_SPEC_AND_CRYSTAL_BOW( 250, 3f, rgb(52, 235, 113), LightType.STATIC, 0, 0, 300, 249),
-	CRAWS_BOW( 250, 3f, rgb(255, 199, 102), LightType.STATIC, 0, 0, 300, 1574),
-	FIRE_ARROWS(200, 2.5f, rgb(252,122,3), LightType.FLICKER, 0, 30, 300, 17),
-	ARMADYL_CROSSBOW_SPEC(250, 3f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 300, 301),
+	MAGIC_BOW_SPEC_AND_CRYSTAL_BOW(250, 7.5f, rgb(52, 235, 113), LightType.STATIC, 0, 0, 300, 249),
+	CRAWS_BOW(250, 7.5f, rgb(255, 199, 102), LightType.STATIC, 0, 0, 300, 1574),
+	FIRE_ARROWS(200, 6.3f, rgb(252,122,3), LightType.FLICKER, 0, 30, 300, 17),
+	ARMADYL_CROSSBOW_SPEC(250, 7.5f, rgb(255, 255, 255), LightType.STATIC, 0, 0, 300, 301),
 
 	// TzHaar
-	JALTOK_JAD_MAGIC(700, 5f, rgb(255, 123, 0), LightType.STATIC, 0, 0, 500, 450),
+	JALTOK_JAD_MAGIC(700, 12.5f, rgb(255, 123, 0), LightType.STATIC, 0, 0, 500, 450),
 
 	// Dragons
-	DRAGONFIRE(700, 5f, rgb(255, 123, 0), LightType.STATIC, 0, 0, 500, 54),
+	DRAGONFIRE(700, 12.5f, rgb(255, 123, 0), LightType.STATIC, 0, 0, 500, 54),
 
 	// Undead Druids
-	UNDEAD_DRUID( 300, 4f, rgb(150,   0,   0), LightType.STATIC, 0, 0, 1000, 1679),
+	UNDEAD_DRUID(300, 10.0f, rgb(150,   0,   0), LightType.STATIC, 0, 0, 1000, 1679),
+
 
 	;
 

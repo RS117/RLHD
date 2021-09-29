@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 117 <https://twitter.com/117scape>
+ * Copyright (c) 2021, Hooder <ahooder@protonmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,13 +23,17 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-vec4 specular(vec3 viewDir, vec3 reflectDir, vec3 specularGloss, vec3 specularStrength, vec3 lightColor, float lightStrength)
-{
-    float vDotR = max(dot(viewDir, reflectDir), 0.0);
-    vec3 specX = vec3(pow(vDotR, specularGloss.x) * lightColor * specularStrength.x);
-    vec3 specY = vec3(pow(vDotR, specularGloss.y) * lightColor * specularStrength.y);
-    vec3 specZ = vec3(pow(vDotR, specularGloss.z) * lightColor * specularStrength.z);
-    float specAmount = clamp(vDotR * lightStrength, 0.0, 1.0);
-    vec4 combined = vec4(specX * texBlend.x + specY * texBlend.y + specZ * texBlend.z, specAmount);
-    return vDotR > 0.0 ? combined : vec4(0.0);
-}
+#include CONST_MACOS_INTEL_WORKAROUND
+
+#if CONST_MACOS_INTEL_WORKAROUND
+    // Workaround wrapper for drivers that do not support dynamic indexing,
+    // particularly Intel drivers on MacOS
+    Material fetchMaterial(int index) {
+        switch (index) {
+            #include MACOS_INTEL_WORKAROUND_MATERIAL_CASES
+            default: return material[0];
+        }
+    }
+#else
+    #define fetchMaterial(index) material[index]
+#endif
