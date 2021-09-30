@@ -18,7 +18,7 @@ Type pulse
 Range 10
 Duration 7000
 Color 252, 122, 3
-Strength 1200
+Strength 3000
 Radius 800
 Height 20
 2467, 5174
@@ -101,7 +101,7 @@ Height 20
 2427, 5087
 2423, 5091
 // soul wars lobby
-Strength 1400
+Strength 3500
 Radius 600
 Range 10
 Height -20
@@ -149,7 +149,7 @@ Type pulse
 Range 10
 Duration 7000
 Color 235, 97, 23
-Strength 300
+Strength 750
 Radius 2200
 Height 200
 2495, 5041
@@ -200,7 +200,7 @@ Type pulse
 Range 10
 Duration 3000
 Color 252, 122, 3
-Strength 400
+Strength 1000
 Radius 2000
 Height 50
 2851, 9565
@@ -236,7 +236,7 @@ Radius 1500
 Reset
 Color 230, 120, 5
 Radius 300
-Strength 300
+Strength 750
 Type flicker
 Range 20
 Height 150
@@ -253,7 +253,7 @@ Plane 1
 // stealing creations
 Reset
 Plane 0
-Strength 800
+Strength 2000
 Radius 1000
 Height 200
 Color 180, 20, 220
@@ -266,7 +266,7 @@ Plane 1
 Type flicker
 Range 20
 Color 252, 122, 3
-Strength 400
+Strength 1000
 Radius 700
 Height 150
 3184, 3443
@@ -277,20 +277,20 @@ Height 150
 // god wars dungeon
 // light from entrance
 Reset
-Strength 400
+Strength 1000
 Radius 600
 Height 300
 Plane 2
 Color 255, 255, 255
 2882, 5314, S
-Strength 300
+Strength 750
 Radius 2000
 Height 50
 2882, 5314, S
 
 // zammy altar
 Reset
-Strength 400
+Strength 1000
 Radius 300
 Height 200
 Plane 2
@@ -304,7 +304,7 @@ Range 5
 Duration 3200
 Color 220, 60, 0
 Plane 0
-Strength 500
+Strength 1250
 Radius 300
 Height 580
 3656, 3227
@@ -342,7 +342,7 @@ Reset
 Type static
 Color 255, 243, 204
 Plane 0
-Strength 400
+Strength 1000
 Radius 1500
 Height 800
 3549, 10477, E
@@ -353,7 +353,7 @@ Reset
 Type static
 Color 130, 180, 255
 Plane 0
-Strength 400
+Strength 1000
 Radius 700
 Height 260
 2399, 9499
@@ -372,7 +372,7 @@ Range 5
 Duration 3200
 Color 130, 180, 255
 Plane 0
-Strength 400
+Strength 1000
 Radius 700
 Height 250
 //3142, 2836

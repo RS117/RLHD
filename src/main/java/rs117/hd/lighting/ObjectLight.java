@@ -29,10 +29,9 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import static net.runelite.api.NullObjectID.NULL_5208;
-import static net.runelite.api.NullObjectID.NULL_5247;
 import net.runelite.api.ObjectID;
 import static net.runelite.api.ObjectID.*;
+import rs117.hd.HDUtils;
 import static rs117.hd.lighting.LightManager.Alignment;
 import static rs117.hd.lighting.LightManager.LightType;
 
@@ -389,18 +388,18 @@ enum ObjectLight
 	private final Alignment alignment;
 	private final int size;
 	private final float strength;
-	private final int rgb;
+	private final float[] color;
 	private final LightType lightType;
 	private final float duration;
 	private final float range;
 
-	ObjectLight(int height, Alignment alignment, int size, float strength, int rgb, LightType lightType, float duration, float range, int... ids)
+	ObjectLight(int height, Alignment alignment, int size, float strength, float[] color, LightType lightType, float duration, float range, int... ids)
 	{
 		this.height = height;
 		this.alignment = alignment;
 		this.size = size;
 		this.strength = strength;
-		this.rgb = rgb;
+		this.color = color;
 		this.lightType = lightType;
 		this.duration = duration;
 		this.range = range;
@@ -427,8 +426,12 @@ enum ObjectLight
 		return LIGHTS.get(id);
 	}
 
-	private static int rgb(int r, int g, int b)
+	private static float[] rgb(int r, int g, int b)
 	{
-		return (r << 16) | (g << 8) | b;
+		return new float[]{
+			HDUtils.gammaToLinear(r / 255f),
+			HDUtils.gammaToLinear(g / 255f),
+			HDUtils.gammaToLinear(b / 255f)
+		};
 	}
 }

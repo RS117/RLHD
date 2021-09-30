@@ -697,11 +697,11 @@ void main() {
     // calculate lighting
 
     // ambient light
-    vec3 ambientLightOut = gammaToLinear(ambientColor) * ambientStrength;
+    vec3 ambientLightOut = ambientColor * ambientStrength;
 
     // directional light
     float lightStrength = lightStrength * inverseShadow;
-    vec3 lightColor = gammaToLinear(lightColor) * lightStrength;
+    vec3 lightColor = lightColor * lightStrength;
     vec3 lightOut = max(lightDotNormals, 0.0) * lightColor;
 
     // directional light specular

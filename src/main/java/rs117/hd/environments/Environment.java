@@ -26,6 +26,7 @@ package rs117.hd.environments;
 
 import java.awt.Color;
 import lombok.Getter;
+import rs117.hd.HDUtils;
 
 @Getter
 public enum Environment
@@ -812,18 +813,18 @@ public enum Environment
 	{
 		private int fogDepth = 65;
 		private boolean customFogDepth = false;
-		private float[] fogColor = new float[]{185 / 255f, 214 / 255f, 255 / 255f};
+		private float[] fogColor = rgb(185, 214, 255);
 		private boolean customFogColor = false;
 		private float ambientStrength = 1.0f;
 		private boolean customAmbientStrength = false;
-		private float[] ambientColor = new float[]{151 / 255f, 186 / 255f, 255 / 255f};
+		private float[] ambientColor = rgb(151, 186, 255);
 		private boolean customAmbientColor = false;
 		private float directionalStrength = 4.7f;
 		private boolean customDirectionalStrength = false;
-		private float[] directionalColor = new float[]{255 / 255f, 255 / 255f, 255 / 255f};
+		private float[] directionalColor = rgb(255, 255, 255);
 		private boolean customDirectionalColor = false;
 		private float underglowStrength = 0.0f;
-		private float[] underglowColor = new float[]{0, 0, 0};
+		private float[] underglowColor = rgb(0, 0, 0);
 		private boolean lightningEnabled = false;
 		private int groundFogStart = -200;
 		private int groundFogEnd = -500;
@@ -838,10 +839,7 @@ public enum Environment
 
 		public Properties setFogColor(int r, int g, int b)
 		{
-			this.fogColor = new float[3];
-			this.fogColor[0] = r / 255f;
-			this.fogColor[1] = g / 255f;
-			this.fogColor[2] = b / 255f;
+			this.fogColor = rgb(r, g, b);
 			this.customFogColor = true;
 			return this;
 		}
@@ -849,10 +847,7 @@ public enum Environment
 		public Properties setFogColor(String hex)
 		{
 			Color color = Color.decode(hex);
-			this.fogColor = new float[3];
-			this.fogColor[0] = color.getRed() / 255f;
-			this.fogColor[1] = color.getGreen() / 255f;
-			this.fogColor[2] = color.getBlue() / 255f;
+			this.fogColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			this.customFogColor = true;
 			return this;
 		}
@@ -866,10 +861,7 @@ public enum Environment
 
 		public Properties setAmbientColor(int r, int g, int b)
 		{
-			this.ambientColor = new float[3];
-			this.ambientColor[0] = r / 255f;
-			this.ambientColor[1] = g / 255f;
-			this.ambientColor[2] = b / 255f;
+			this.ambientColor = rgb(r, g, b);
 			this.customAmbientColor = true;
 			return this;
 		}
@@ -877,10 +869,7 @@ public enum Environment
 		public Properties setAmbientColor(String hex)
 		{
 			Color color = Color.decode(hex);
-			this.ambientColor = new float[3];
-			this.ambientColor[0] = color.getRed() / 255f;
-			this.ambientColor[1] = color.getGreen() / 255f;
-			this.ambientColor[2] = color.getBlue() / 255f;
+			this.ambientColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			this.customAmbientColor = true;
 			return this;
 		}
@@ -894,10 +883,7 @@ public enum Environment
 
 		public Properties setDirectionalColor(int r, int g, int b)
 		{
-			this.directionalColor = new float[3];
-			this.directionalColor[0] = r / 255f;
-			this.directionalColor[1] = g / 255f;
-			this.directionalColor[2] = b / 255f;
+			this.directionalColor = rgb(r, g, b);
 			this.customDirectionalColor = true;
 			return this;
 		}
@@ -905,10 +891,7 @@ public enum Environment
 		public Properties setDirectionalColor(String hex)
 		{
 			Color color = Color.decode(hex);
-			this.directionalColor = new float[3];
-			this.directionalColor[0] = color.getRed() / 255f;
-			this.directionalColor[1] = color.getGreen() / 255f;
-			this.directionalColor[2] = color.getBlue() / 255f;
+			this.directionalColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			this.customDirectionalColor = true;
 			return this;
 		}
@@ -921,20 +904,14 @@ public enum Environment
 
 		public Properties setUnderglowColor(int r, int g, int b)
 		{
-			this.underglowColor = new float[3];
-			this.underglowColor[0] = r / 255f;
-			this.underglowColor[1] = g / 255f;
-			this.underglowColor[2] = b / 255f;
+			this.underglowColor = rgb(r, g, b);
 			return this;
 		}
 
 		public Properties setUnderglowColor(String hex)
 		{
 			Color color = Color.decode(hex);
-			this.underglowColor = new float[3];
-			this.underglowColor[0] = color.getRed() / 255f;
-			this.underglowColor[1] = color.getGreen() / 255f;
-			this.underglowColor[2] = color.getBlue() / 255f;
+			this.underglowColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			return this;
 		}
 
@@ -974,5 +951,14 @@ public enum Environment
 		this.groundFogStart = properties.groundFogStart;
 		this.groundFogEnd = properties.groundFogEnd;
 		this.groundFogOpacity = properties.groundFogOpacity;
+	}
+
+	private static float[] rgb(int r, int g, int b)
+	{
+		return new float[]{
+			HDUtils.gammaToLinear(r / 255f),
+			HDUtils.gammaToLinear(g / 255f),
+			HDUtils.gammaToLinear(b / 255f)
+		};
 	}
 }
