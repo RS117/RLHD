@@ -61,7 +61,7 @@ struct PointLight
 {
     ivec3 position;
     float size;
-    ivec3 color;
+    vec3 color;
     float strength;
 };
 
@@ -697,11 +697,11 @@ void main() {
     // calculate lighting
 
     // ambient light
-    vec3 ambientLightOut = gammaToLinear(ambientColor) * ambientStrength;
+    vec3 ambientLightOut = ambientColor * ambientStrength;
 
     // directional light
     float lightStrength = lightStrength * inverseShadow;
-    vec3 lightColor = gammaToLinear(lightColor) * lightStrength;
+    vec3 lightColor = lightColor * lightStrength;
     vec3 lightOut = max(lightDotNormals, 0.0) * lightColor;
 
     // directional light specular
@@ -716,7 +716,7 @@ void main() {
     {
         vec3 pointLightPos = vec3(pointLight[i].position.x, pointLight[i].position.z, pointLight[i].position.y);
         float pointLightStrength = pointLight[i].strength;
-        vec3 pointLightColor = gammaToLinear(vec3(pointLight[i].color.r / 255.0, pointLight[i].color.g / 255.0, pointLight[i].color.b / 255.0)) * pointLightStrength;
+        vec3 pointLightColor = pointLight[i].color * pointLightStrength;
         float pointLightSize = pointLight[i].size;
         float distanceToLightSource = length(pointLightPos - position);
         vec3 pointLightDir = normalize(pointLightPos - position);

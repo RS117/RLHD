@@ -217,11 +217,15 @@ public enum Overlay
 	PEST_CONTROL_LANDER_WATER_FIX_2(42, Area.PEST_CONTROL_LANDER_WATER_FIX, WaterType.WATER),
 
 	// Barbarian Assault
-	BA_WAITING_ROOM_NUMBERS(89, GroundMaterial.DIRT, new Properties().setBlended(false)),
+	BA_WAITING_ROOM_NUMBERS(89, Area.BARBARIAN_ASSAULT_WAITING_ROOMS, GroundMaterial.DIRT, new Properties().setBlended(false)),
 
 	// POHs
 	POH_DESERT_INDOORS(26, Area.PLAYER_OWNED_HOUSE, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
 	POH_TWISTED_INDOORS(99, Area.PLAYER_OWNED_HOUSE, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
+
+	// Random events
+	PRISON_PETE_TILE_1(2, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_1, new Properties().setBlended(false)),
+	PRISON_PETE_TILE_2(-125, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_2, new Properties().setBlended(false)),
 
 
 

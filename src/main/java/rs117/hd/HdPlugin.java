@@ -66,7 +66,6 @@ import jogamp.newt.awt.NewtFactoryAWT;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.BufferProvider;
 import net.runelite.api.Client;
-import net.runelite.api.Constants;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
@@ -80,7 +79,6 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
-import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.DecorativeObjectChanged;
 import net.runelite.api.events.DecorativeObjectDespawned;
@@ -1173,9 +1171,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					lightsUniformBuf.putInt(light.y);
 					lightsUniformBuf.putInt(light.z);
 					lightsUniformBuf.putFloat(light.currentSize);
-					lightsUniformBuf.putInt(light.currentColor[0]);
-					lightsUniformBuf.putInt(light.currentColor[1]);
-					lightsUniformBuf.putInt(light.currentColor[2]);
+					lightsUniformBuf.putFloat(light.currentColor[0]);
+					lightsUniformBuf.putFloat(light.currentColor[1]);
+					lightsUniformBuf.putFloat(light.currentColor[2]);
 					lightsUniformBuf.putFloat(light.currentStrength);
 
 					// UBO elements must be divisible by groups of 4 scalars. Pad any remaining space
@@ -1747,6 +1745,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			// Clear scene
 			int sky = environmentManager.getFogColor();
 			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
+			for (int i = 0; i < fogColor.length; i++)
+			{
+				fogColor[i] = HDUtils.linearToGamma(fogColor[i]);
+			}
 			gl.glClearColor(fogColor[0], fogColor[1], fogColor[2], 1f);
 			gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
@@ -1778,6 +1780,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] waterColorLight = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * lightBrightnessMultiplier)).getRGBColorComponents(null);
 			float[] waterColorMid = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * midBrightnessMultiplier)).getRGBColorComponents(null);
 			float[] waterColorDark = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * darkBrightnessMultiplier)).getRGBColorComponents(null);
+			for (int i = 0; i < waterColorLight.length; i++)
+			{
+				waterColorLight[i] = HDUtils.linearToGamma(waterColorLight[i]);
+			}
+			for (int i = 0; i < waterColorMid.length; i++)
+			{
+				waterColorMid[i] = HDUtils.linearToGamma(waterColorMid[i]);
+			}
+			for (int i = 0; i < waterColorDark.length; i++)
+			{
+				waterColorDark[i] = HDUtils.linearToGamma(waterColorDark[i]);
+			}
 			gl.glUniform3f(uniWaterColorLight, waterColorLight[0], waterColorLight[1], waterColorLight[2]);
 			gl.glUniform3f(uniWaterColorMid, waterColorMid[0], waterColorMid[1], waterColorMid[2]);
 			gl.glUniform3f(uniWaterColorDark, waterColorDark[0], waterColorDark[1], waterColorDark[2]);
