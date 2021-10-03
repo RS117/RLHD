@@ -76,7 +76,6 @@ class ProceduralGenerator
 	boolean[][][] skipTile;
 	Map<Integer, Integer> vertexUnderwaterDepth;
 	int[][][] underwaterDepthLevels;
-	int totalDepthLevels = 12; // max is length of depthLevelSlope
 	int[] depthLevelSlope = new int[]{150, 300, 470, 610, 700, 750, 820, 920, 1080, 1300, 1350, 1380};
 
 	/**
@@ -550,7 +549,7 @@ class ProceduralGenerator
 		}
 
 		// Sink terrain further from shore by desired levels.
-		for (int level = 0; level < totalDepthLevels - 1; level++)
+		for (int level = 0; level < depthLevelSlope.length - 1; level++)
 		{
 			for (int z = 0; z < Constants.MAX_Z; ++z)
 			{

@@ -61,7 +61,7 @@ struct PointLight
 {
     ivec3 position;
     float size;
-    ivec3 color;
+    vec3 color;
     float strength;
 };
 
@@ -124,6 +124,7 @@ out vec4 FragColor;
 #include lighting.glsl
 #include utils.glsl
 #include colorblind.glsl
+#include utils/fetch_material.glsl
 
 #define WATER 1
 #define SWAMP_WATER 3
@@ -137,21 +138,17 @@ void main() {
     vec3 viewDir = normalize(camPos - position);
     vec3 lightDir = normalize(vec3(lightX, lightY, lightZ));
 
-    Material material1 = material[materialId.x];
-    Material material2 = material[materialId.y];
-    Material material3 = material[materialId.z];
-
     // material data
-    int bmaterial1 = materialId.x;
-    int bmaterial2 = materialId.y;
-    int bmaterial3 = materialId.z;
+    Material material1 = fetchMaterial(materialId.x);
+    Material material2 = fetchMaterial(materialId.y);
+    Material material3 = fetchMaterial(materialId.z);
 
     // water data
     int waterDepth1 = waterData.x >> 5;
     int waterDepth2 = waterData.y >> 5;
     int waterDepth3 = waterData.z >> 5;
     float waterDepth = waterDepth1 * texBlend.x + waterDepth2 * texBlend.y + waterDepth3 * texBlend.z;
-    int underwaterType = waterData.x & 5;
+    int underwaterType = waterData.x & 31; // 31 = 0b11111
 
     // set initial texture map ids
     int diffuseMapId1 = material1.diffuseMapId;
@@ -247,7 +244,7 @@ void main() {
             waterNormalStrength = 0.05;
             waterBaseOpacity = 0.8;
             waterFresnelAmount = 0.3;
-            waterSurfaceColor = vec3(38, 58, 31) / 255.0;
+            waterSurfaceColor = vec3(23, 33, 20) / 255.0;
             waterFoamColor = vec3(115, 120, 101);
             waterHasFoam = 1;
             waterDuration = 1.2;
@@ -306,6 +303,7 @@ void main() {
 
     bool isUnderwater = false;
     vec3 waterDepthColor = vec3(0, 0, 0);
+    float waterCausticsStrength = 0.0;
     if (underwaterType != 0)
     {
         isUnderwater = true;
@@ -313,18 +311,27 @@ void main() {
         if (underwaterType == WATER)
         {
             waterDepthColor = vec3(0, 117, 142) / 255.0;
+            waterCausticsStrength = 1.0;
         }
         else if (underwaterType == SWAMP_WATER)
         {
             waterDepthColor = vec3(41, 82, 26) / 255.0;
+            waterCausticsStrength = 0.0;
         }
         else if (underwaterType == POISON_WASTE)
         {
             waterDepthColor = vec3(50, 52, 46) / 255.0;
+            waterCausticsStrength = 0.0;
         }
         else if (underwaterType == BLOOD)
         {
             waterDepthColor = vec3(50, 26, 22) / 255.0;
+            waterCausticsStrength = 0.0;
+        }
+        else if (underwaterType == ICE)
+        {
+            waterDepthColor = vec3(0, 117, 142) / 255.0;
+            waterCausticsStrength = 0.4;
         }
     }
     if (isUnderwater)
@@ -700,13 +707,12 @@ void main() {
     // calculate lighting
 
     // ambient light
-    vec3 ambientLightOut = ambientStrength * ambientColor;
+    vec3 ambientLightOut = ambientColor * ambientStrength;
 
     // directional light
-    vec3 lightColor = lightColor;
     float lightStrength = lightStrength * inverseShadow;
-    vec3 light = lightColor * lightStrength;
-    vec3 lightOut = max(lightDotNormals, 0.0) * light;
+    vec3 lightColor = lightColor * lightStrength;
+    vec3 lightOut = max(lightDotNormals, 0.0) * lightColor;
 
     // directional light specular
     vec3 lightReflectDir = reflect(-lightDir, normals);
@@ -719,8 +725,8 @@ void main() {
     for (int i = 0; i < pointLightsCount; i++)
     {
         vec3 pointLightPos = vec3(pointLight[i].position.x, pointLight[i].position.z, pointLight[i].position.y);
-        vec3 pointLightColor = vec3(pointLight[i].color.r / 255.0, pointLight[i].color.g / 255.0, pointLight[i].color.b / 255.0);
         float pointLightStrength = pointLight[i].strength;
+        vec3 pointLightColor = pointLight[i].color * pointLightStrength;
         float pointLightSize = pointLight[i].size;
         float distanceToLightSource = length(pointLightPos - position);
         vec3 pointLightDir = normalize(pointLightPos - position);
@@ -728,7 +734,7 @@ void main() {
         if (distanceToLightSource <= pointLightSize)
         {
             float pointLightDotNormals = dot(normals, pointLightDir);
-            vec3 pointLightOut = pointLightColor * pointLightStrength * max(pointLightDotNormals, 0.0);
+            vec3 pointLightOut = pointLightColor * max(pointLightDotNormals, 0.0);
 
             float attenuation = pow(clamp(1 - (distanceToLightSource / pointLightSize), 0.0, 1.0), 2.0);
             pointLightOut *= attenuation;
@@ -785,10 +791,12 @@ void main() {
 
     if (isWater)
     {
-        vec3 baseColor = mix(waterSurfaceColor * compositeLight, surfaceColor, waterFresnelAmount);
+        vec3 baseColor = waterSurfaceColor * compositeLight;
+        baseColor = mix(baseColor, surfaceColor, waterFresnelAmount);
         float shadowDarken = 0.15;
         baseColor *= (1.0 - shadowDarken) + inverseShadow * shadowDarken;
-        float foamAmount = 1.0 - fragColor.r;
+        float maxFoamAmount = 0.8;
+        float foamAmount = min(1.0 - fragColor.r, maxFoamAmount);
         float foamDistance = 0.7;
         vec3 foamColor = waterFoamColor / 255.0;
         foamColor = foamColor * diffuse3.rgb * compositeLight;
@@ -799,14 +807,15 @@ void main() {
         float flatFresnel = (1.0 - dot(viewDir, downDir)) * 1.0;
         finalFresnel = max(finalFresnel, flatFresnel);
         finalFresnel -= finalFresnel * shadow * 0.2;
-        baseColor += pointLightsSpecularOut + lightSpecularOut;
-        alpha = max(waterBaseOpacity, max(foamAmount, max(finalFresnel, length(specularComposite))));
+        baseColor += pointLightsSpecularOut + lightSpecularOut / 3;
+        alpha = max(waterBaseOpacity, max(foamAmount, max(finalFresnel, length(specularComposite / 3))));
         compositeColor = baseColor;
     }
     else
     {
         vec3 litColor = compositeColor * compositeLight;
         compositeColor = mix(litColor, compositeColor, emissive);
+        compositeColor = linearToGamma(compositeColor);
     }
 
 
@@ -842,12 +851,13 @@ void main() {
 
         if (causticsDepth > 0 && lightDotNormals > 0 && underwaterType == 1)
         {
-            float causticsMultiplier = 1;
+            float causticsMultiplier = 0.7;
             vec2 causticsUv = vec2(worldUvs(1).x + displacement.x * displacementStrength * 2, worldUvs(1).y + displacement.y * displacementStrength * 2);
             causticsUv += animationFrame(16);
             float caustics = texture(texturesHD, vec3(causticsUv, causticsMapId)).r;
             caustics *= causticsDepth * causticsMultiplier * lightStrength / 2 * lightDotNormals;
             caustics = 1.0 - clamp(caustics, 0.0, 1.0);
+            caustics *= waterCausticsStrength;
             compositeColor /= max(caustics, 0.001);
         }
     }

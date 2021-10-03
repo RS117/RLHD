@@ -76,7 +76,7 @@ void main() {
 
     vPosition = vertex;
     vNormal = normal;
-    vColor = vec4(rgb, 1.f - a);
+    vColor = vec4(gammaToLinear(rgb), 1.f - a);
     vUv = uv;
 
     if (fogDepth > 0)

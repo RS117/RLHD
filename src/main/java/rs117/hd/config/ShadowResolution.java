@@ -31,10 +31,10 @@ package rs117.hd.config;
 @RequiredArgsConstructor
 public enum ShadowResolution
 {
-	RES_1024("1024", 1024),
-	RES_2048("2048", 2048),
-	RES_4096("4096", 4096),
-	RES_8192("8192", 8192);
+	RES_1024("Low (1024)", 1024),
+	RES_2048("Medium (2048)", 2048),
+	RES_4096("High (4096)", 4096),
+	RES_8192("Ultra (8192)", 8192);
 
 	private final String name;
 	private final int value;

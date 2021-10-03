@@ -66,7 +66,6 @@ import jogamp.newt.awt.NewtFactoryAWT;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.BufferProvider;
 import net.runelite.api.Client;
-import net.runelite.api.Constants;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
@@ -80,7 +79,6 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
-import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
 import net.runelite.api.events.DecorativeObjectChanged;
 import net.runelite.api.events.DecorativeObjectDespawned;
@@ -574,21 +572,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			catch (Throwable e)
 			{
 				log.error("Error starting HD plugin", e);
-
-				SwingUtilities.invokeLater(() ->
-				{
-					try
-					{
-						pluginManager.setPluginEnabled(this, false);
-						pluginManager.stopPlugin(this);
-					}
-					catch (PluginInstantiationException ex)
-					{
-						log.error("error stopping plugin", ex);
-					}
-				});
-
-				shutDown();
+				stopPlugin();
 			}
 			return true;
 		});
@@ -679,6 +663,24 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		});
 	}
 
+	private void stopPlugin()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			try
+			{
+				pluginManager.setPluginEnabled(this, false);
+				pluginManager.stopPlugin(this);
+			}
+			catch (PluginInstantiationException ex)
+			{
+				log.error("error stopping plugin", ex);
+			}
+		});
+
+		shutDown();
+	}
+
 	@Provides
 	HdPluginConfig provideConfig(ConfigManager configManager)
 	{
@@ -691,9 +693,22 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		Template template = new Template();
 		template.add(key ->
 		{
-			if ("version_header".equals(key))
+			switch (key)
 			{
-				return versionHeader;
+				case "version_header":
+					return versionHeader;
+				case "CONST_MACOS_INTEL_WORKAROUND":
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
+				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES": {
+					StringBuilder sb = new StringBuilder(MAX_MATERIALS * (
+						"case : return material[];".length() +
+						((int) Math.log10(MAX_MATERIALS) + 1) * 2));
+					for (int i = 0; i < MAX_MATERIALS; i++)
+					{
+						sb.append("case ").append(i).append(": return material[").append(i).append("];\n");
+					}
+					return sb.toString();
+				}
 			}
 			return null;
 		});
@@ -811,6 +826,27 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		gl.glDeleteProgram(glShadowProgram);
 		glShadowProgram = -1;
+	}
+
+	private void recompileProgram()
+	{
+		clientThread.invoke(() ->
+			invokeOnMainThread(() ->
+			{
+				try
+				{
+					shutdownProgram();
+					shutdownVao();
+					initVao();
+					initProgram();
+				}
+				catch (ShaderException ex)
+				{
+					log.error("Failed to recompile shader program", ex);
+					stopPlugin();
+				}
+			})
+		);
 	}
 
 	private void initVao()
@@ -1135,9 +1171,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					lightsUniformBuf.putInt(light.y);
 					lightsUniformBuf.putInt(light.z);
 					lightsUniformBuf.putFloat(light.currentSize);
-					lightsUniformBuf.putInt(light.currentColor[0]);
-					lightsUniformBuf.putInt(light.currentColor[1]);
-					lightsUniformBuf.putInt(light.currentColor[2]);
+					lightsUniformBuf.putFloat(light.currentColor[0]);
+					lightsUniformBuf.putFloat(light.currentColor[1]);
+					lightsUniformBuf.putFloat(light.currentColor[2]);
 					lightsUniformBuf.putFloat(light.currentStrength);
 
 					// UBO elements must be divisible by groups of 4 scalars. Pad any remaining space
@@ -1708,7 +1744,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			// Clear scene
 			int sky = environmentManager.getFogColor();
-			gl.glClearColor((sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f, 1f);
+			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
+			for (int i = 0; i < fogColor.length; i++)
+			{
+				fogColor[i] = HDUtils.linearToGamma(fogColor[i]);
+			}
+			gl.glClearColor(fogColor[0], fogColor[1], fogColor[2], 1f);
 			gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
 			final int drawDistance = getDrawDistance();
@@ -1726,8 +1767,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glUniform1i(uniUseFog, fogDepth > 0 ? 1 : 0);
 			gl.glUniform1i(uniFogDepth, fogDepth);
 
-			int[] fogColor = new int[]{sky >> 16 & 0xFF, sky >> 8 & 0xFF, sky & 0xFF};
-			gl.glUniform4f(uniFogColor, fogColor[0] / 255f, fogColor[1] / 255f, fogColor[2] / 255f, 1f);
+			gl.glUniform4f(uniFogColor, fogColor[0], fogColor[1], fogColor[2], 1f);
 
 			gl.glUniform1i(uniDrawDistance, drawDistance * Perspective.LOCAL_TILE_SIZE);
 			gl.glUniform1i(uniColorBlindMode, config.colorBlindMode().ordinal());
@@ -1740,6 +1780,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] waterColorLight = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * lightBrightnessMultiplier)).getRGBColorComponents(null);
 			float[] waterColorMid = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * midBrightnessMultiplier)).getRGBColorComponents(null);
 			float[] waterColorDark = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * darkBrightnessMultiplier)).getRGBColorComponents(null);
+			for (int i = 0; i < waterColorLight.length; i++)
+			{
+				waterColorLight[i] = HDUtils.linearToGamma(waterColorLight[i]);
+			}
+			for (int i = 0; i < waterColorMid.length; i++)
+			{
+				waterColorMid[i] = HDUtils.linearToGamma(waterColorMid[i]);
+			}
+			for (int i = 0; i < waterColorDark.length; i++)
+			{
+				waterColorDark[i] = HDUtils.linearToGamma(waterColorDark[i]);
+			}
 			gl.glUniform3f(uniWaterColorLight, waterColorLight[0], waterColorLight[1], waterColorLight[2]);
 			gl.glUniform3f(uniWaterColorMid, waterColorMid[0], waterColorMid[1], waterColorMid[2]);
 			gl.glUniform3f(uniWaterColorDark, waterColorDark[0], waterColorDark[1], waterColorDark[2]);
@@ -1753,7 +1805,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] ambientColor = environmentManager.currentAmbientColor;
 			gl.glUniform3f(uniAmbientColor, ambientColor[0], ambientColor[1], ambientColor[2]);
 
-			// get light light strength from either the config or the current area
+			// get light strength from either the config or the current area
 			float lightStrength = environmentManager.currentDirectionalStrength;
 			lightStrength *= (double)config.brightness() / 20;
 			gl.glUniform1f(uniLightStrength, lightStrength);
@@ -2156,6 +2208,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "expandShadowDraw":
 				configExpandShadowDraw = config.expandShadowDraw();
+				break;
+			case "macosIntelWorkaround":
+				recompileProgram();
 				break;
 		}
 	}

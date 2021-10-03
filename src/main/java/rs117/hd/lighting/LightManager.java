@@ -142,15 +142,15 @@ public class LightManager
 		public Alignment alignment;
 		public int size;
 		public float strength;
-		public int[] color;
+		public float[] color;
 		public LightType type;
 		public float duration;
 		public float range;
-		public int fadeInDuration = 0;
+		public int fadeInDuration;
 
 		public int currentSize;
 		public float currentStrength;
-		public int[] currentColor;
+		public float[] currentColor;
 		public float currentAnimation = 0.5f;
 		public int currentFadeIn = 0;
 		public boolean visible = true;
@@ -166,7 +166,7 @@ public class LightManager
 		public NPC npc = null;
 		public TileObject object = null;
 
-		public Light(int worldX, int worldY, int plane, int height, Alignment alignment, int size, float strength, int[] color, LightType type, float duration, float range, int fadeInDuration)
+		public Light(int worldX, int worldY, int plane, int height, Alignment alignment, int size, float strength, float[] color, LightType type, float duration, float range, int fadeInDuration)
 		{
 			this.worldX = worldX;
 			this.worldY = worldY;
@@ -570,12 +570,8 @@ public class LightManager
 			return;
 		}
 
-		int rgb = projectileLight.getRgb();
-		int r = rgb >>> 16;
-		int g = (rgb >> 8) & 0xff;
-		int b = rgb & 0xff;
 		Light light = new Light(0, 0, projectile.getFloor(),
-			0, Alignment.CENTER, projectileLight.getSize(), projectileLight.getStrength(), new int[]{r, g, b}, projectileLight.getLightType(), projectileLight.getDuration(), projectileLight.getRange(), 300);
+			0, Alignment.CENTER, projectileLight.getSize(), projectileLight.getStrength(), projectileLight.getColor(), projectileLight.getLightType(), projectileLight.getDuration(), projectileLight.getRange(), 300);
 		light.projectile = projectile;
 		light.x = (int) projectile.getX();
 		light.y = (int) projectile.getY();
@@ -603,12 +599,8 @@ public class LightManager
 			}
 		}
 
-		int rgb = npcLight.getRgb();
-		int r = rgb >>> 16;
-		int g = (rgb >> 8) & 0xff;
-		int b = rgb & 0xff;
 		Light light = new Light(0, 0, -1,
-			npcLight.getHeight(), npcLight.getAlignment(), npcLight.getSize(), npcLight.getStrength(), new int[]{r, g, b}, npcLight.getLightType(), npcLight.getDuration(), npcLight.getRange(), 0);
+			npcLight.getHeight(), npcLight.getAlignment(), npcLight.getSize(), npcLight.getStrength(), npcLight.getColor(), npcLight.getLightType(), npcLight.getDuration(), npcLight.getRange(), 0);
 		light.npc = npc;
 		light.visible = false;
 
@@ -645,13 +637,9 @@ public class LightManager
 			return;
 		}
 
-		int rgb = objectLight.getRgb();
-		int r = rgb >>> 16;
-		int g = (rgb >> 8) & 0xff;
-		int b = rgb & 0xff;
 		WorldPoint worldLocation = tileObject.getWorldLocation();
 		Light light = new Light(worldLocation.getX(), worldLocation.getY(), worldLocation.getPlane(),
-			objectLight.getHeight(), objectLight.getAlignment(), objectLight.getSize(), objectLight.getStrength(), new int[]{r, g, b}, objectLight.getLightType(), objectLight.getDuration(), objectLight.getRange(), 0);
+			objectLight.getHeight(), objectLight.getAlignment(), objectLight.getSize(), objectLight.getStrength(), objectLight.getColor(), objectLight.getLightType(), objectLight.getDuration(), objectLight.getRange(), 0);
 		LocalPoint localLocation = tileObject.getLocalLocation();
 		light.x = localLocation.getX();
 		light.y = localLocation.getY();
@@ -786,7 +774,7 @@ public class LightManager
 		String filename = "lights.txt";
 		boolean commentBlock = false;
 
-		int[] defaultColor = new int[]{255, 255, 255};
+		float[] defaultColor = new float[]{1.0f, 1.0f, 1.0f};
 		int defaultRadius = 500;
 		float defaultStrength = 1.0f;
 		float defaultRange =  0.2f;
@@ -795,7 +783,7 @@ public class LightManager
 		int defaultPlane = 0;
 		LightType defaultType = LightType.STATIC;
 
-		int[] color = defaultColor;
+		float[] color = defaultColor;
 		int radius = defaultRadius;
 		float strength = defaultStrength;
 		float range =  defaultRange;
@@ -861,13 +849,13 @@ public class LightManager
 							Color RGB = Color.decode("#" + sColor);
 							float[] RGBTmp = new float[3];
 							RGB.getRGBColorComponents(RGBTmp);
-							color = new int[]{(int)(RGBTmp[0] * 255f), (int)(RGBTmp[1] * 255f), (int)(RGBTmp[2] * 255f)};
+							color = RGBTmp.clone();
 							break;
 						case 'c':
 							int r = Integer.parseInt(m.group("r"));
 							int g = Integer.parseInt(m.group("g"));
 							int b = Integer.parseInt(m.group("b"));
-							color = new int[]{r, g, b};
+							color = new float[]{r / 255f, g / 255f, b / 255f};
 							break;
 						case 's':
 							strength = Integer.parseInt(m.group("strength")) / 100f;
