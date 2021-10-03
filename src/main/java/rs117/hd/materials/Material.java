@@ -227,6 +227,7 @@ public enum Material
 	HD_MAGMA_2(244, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
 
 	BARK(245),
+	WOOD_GRAIN(247),
 
 	// water/fluid variants
 	WATER(7001),
