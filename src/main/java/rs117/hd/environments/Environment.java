@@ -181,7 +181,6 @@ public enum Environment
 		.setDirectionalStrength(1.5f)
 		.setDirectionalColor(113, 160, 226)
 	),
-	// Theatre of Blood
 	VER_SINHAZA(Area.VER_SINHAZA, new Properties()
 		.setFogColor("#1E314B")
 		.setFogDepth(40)
@@ -203,9 +202,9 @@ public enum Environment
 		.setFogColor("#0E0C2C")
 		.setFogDepth(40)
 		.setAmbientStrength(3.0f)
-		.setAmbientColor("#7575EA")
-		.setDirectionalStrength(4.0f)
-		.setDirectionalColor("#DDA6A6")
+		.setAmbientColor("#8282B0")
+		.setDirectionalStrength(5.0f)
+		.setDirectionalColor("#DFC0C0")
 	),
 	BARROWS_CRYPTS(Area.BARROWS_CRYPTS, new Properties()
 		.setFogColor(0, 0, 0)
@@ -246,9 +245,9 @@ public enum Environment
 		.setFogColor("#1E314B")
 		.setFogDepth(40)
 		.setAmbientColor("#5A8CC0")
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor("#67A8F8")
-		.setDirectionalStrength(3.0f)
+		.setAmbientStrength(2.0f)
+		.setDirectionalColor("#F8BF68")
+		.setDirectionalStrength(2.0f)
 		.setGroundFog(-150, -350, 0.5f)
 	),
 
@@ -272,6 +271,15 @@ public enum Environment
 		.setDirectionalStrength(0.0f)
 	),
 	DRAYNOR(Area.DRAYNOR, new Properties()),
+
+	MOTHERLODE_MINE(Area.MOTHERLODE_MINE, new Properties()
+		.setFogColor("#241809")
+		.setFogDepth(40)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(4.0f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(0.0f)
+	),
 
 	FALADOR(Area.FALADOR, new Properties()),
 
@@ -301,20 +309,28 @@ public enum Environment
 		.setDirectionalStrength(1.0f)
 	),
 	KHARIDIAN_DESERT_DEEP(Area.KHARIDIAN_DESERT_DEEP, new Properties()
-		.setFogColor(213, 179, 117)
-		.setFogDepth(80)
-		.setAmbientColor(205, 185, 150)
+		.setFogColor("#CDAF7A")
+		.setFogDepth(70)
+		.setAmbientColor("#C0AE94")
 		.setAmbientStrength(3.0f)
-		.setDirectionalColor(200, 169, 115)
+		.setDirectionalColor("#F5BC67")
+		.setDirectionalStrength(1.0f)
+	),
+	KHARIDIAN_DESERT_MID(Area.KHARIDIAN_DESERT_MID, new Properties()
+		.setFogColor("#C8B085")
+		.setFogDepth(50)
+		.setAmbientColor("#C0AE94")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#F5BC67")
 		.setDirectionalStrength(1.0f)
 	),
 	KHARIDIAN_DESERT(Area.KHARIDIAN_DESERT, new Properties()
-		.setFogColor(200, 186, 152)
-		.setFogDepth(50)
-		.setAmbientColor(208, 185, 156)
-		.setAmbientStrength(1.5f)
-		.setDirectionalColor(181, 155, 121)
-		.setDirectionalStrength(4.0f)
+		.setFogColor("#C7B79B")
+		.setFogDepth(25)
+		.setAmbientColor("#A6AFC2")
+		.setAmbientStrength(2.5f)
+		.setDirectionalColor("#EDCFA3")
+		.setDirectionalStrength(2.5f)
 	),
 	DESERT_TREASURE_PYRAMID(Area.DESERT_TREASURE_PYRAMID, new Properties()
 		.setFogColor(39, 23, 4)
@@ -334,12 +350,12 @@ public enum Environment
 	),
 
 	GIELINOR_SNOWY_NORTHERN_REGION(Area.GIELINOR_SNOWY_NORTHERN_REGION, new Properties()
-		.setFogColor(174, 189, 224)
-		.setFogDepth(80)
-		.setAmbientColor(59, 135, 228)
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor(255, 201, 104)
-		.setDirectionalStrength(2.5f)
+		.setFogColor("#AEBDE0")
+		.setFogDepth(70)
+		.setAmbientColor("#0073FF")
+		.setAmbientStrength(2.5f)
+		.setDirectionalColor("#E5D3B3")
+		.setDirectionalStrength(1.5f)
 	),
 
 	WHITE_WOLF_MOUNTAIN(Area.WHITE_WOLF_MOUNTAIN, new Properties()),
@@ -369,15 +385,6 @@ public enum Environment
 		.setDirectionalStrength(2.0f)
 		.setDirectionalColor("#ABC2D3")
 		.setGroundFog(-200, -400, 0.3f)
-	),
-
-	HAM_HIDEOUT(Area.HAM_HIDEOUT, new Properties()
-		.setFogColor("#190D02")
-		.setFogDepth(40)
-		.setAmbientColor("#7891B5")
-		.setAmbientStrength(1.3f)
-		.setDirectionalColor(76, 120, 182)
-		.setDirectionalStrength(0.0f)
 	),
 
 	// Karamja
@@ -503,13 +510,21 @@ public enum Environment
 	LMS_ARENA_DESERTED_ISLAND(Area.LMS_ARENA_DESERTED_ISLAND, new Properties()),
 
 	// Zeah
+	KARUULM_SLAYER_DUNGEON(Area.KARUULM_SLAYER_DUNGEON, new Properties()
+		.setFogColor("#051E22")
+		.setFogDepth(40)
+		.setAmbientColor("#A4D2E5")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#9AEAFF")
+		.setDirectionalStrength(1.0f)
+	),
 	KOUREND_CATACOMBS(Area.KOUREND_CATACOMBS, new Properties()
 		.setFogColor("#0E0022")
 		.setFogDepth(40)
 		.setAmbientColor("#8B7DDB")
-		.setAmbientStrength(4.0f)
-		.setDirectionalColor(76, 120, 182)
-		.setDirectionalStrength(0.0f)
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(1.5f)
 	),
 	MOUNT_QUIDAMORTEM(Area.MOUNT_QUIDAMORTEM, new Properties()),
 	KEBOS_LOWLANDS(Area.KEBOS_LOWLANDS, new Properties()
@@ -529,12 +544,12 @@ public enum Environment
 		.setDirectionalStrength(2.5f)
 	),
 	ZEAH_SNOWY_NORTHERN_REGION(Area.ZEAH_SNOWY_NORTHERN_REGION, new Properties()
-		.setFogColor(174, 189, 224)
-		.setFogDepth(80)
-		.setAmbientColor(59, 135, 228)
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor(255, 201, 104)
-		.setDirectionalStrength(2.5f)
+		.setFogColor("#AEBDE0")
+		.setFogDepth(70)
+		.setAmbientColor("#0073FF")
+		.setAmbientStrength(2.5f)
+		.setDirectionalColor("#E5D3B3")
+		.setDirectionalStrength(1.5f)
 	),
 	ARCEUUS(Area.ARCEUUS, new Properties()
 		.setFogColor(19, 24, 79)
@@ -696,10 +711,10 @@ public enum Environment
 	MOGRE_CAMP_CUTSCENE(Area.MOGRE_CAMP_CUTSCENE, new Properties()),
 	MOGRE_CAMP(Area.MOGRE_CAMP, new Properties()
 		.setFogColor("#133156")
-		.setFogDepth(80)
+		.setFogDepth(60)
 		.setAmbientStrength(0.5f)
 		.setAmbientColor("#255590")
-		.setDirectionalStrength(4.0f)
+		.setDirectionalStrength(5.0f)
 		.setDirectionalColor("#71A3D0")
 		.setGroundFog(0, -500, 0.5f)
 	),
@@ -714,10 +729,10 @@ public enum Environment
 	),
 	FOSSIL_ISLAND_UNDERWATER_AREA(Area.FOSSIL_ISLAND_UNDERWATER_AREA, new Properties()
 		.setFogColor("#133156")
-		.setFogDepth(80)
+		.setFogDepth(60)
 		.setAmbientStrength(0.5f)
 		.setAmbientColor("#255590")
-		.setDirectionalStrength(4.0f)
+		.setDirectionalStrength(5.0f)
 		.setDirectionalColor("#71A3D0")
 		.setGroundFog(-400, -750, 0.5f)
 	),
@@ -779,12 +794,12 @@ public enum Environment
 	OVERWORLD(Area.OVERWORLD, new Properties()),
 	// used for underground, instances, etc.
 	ALL(Area.ALL, new Properties()
-		.setFogColor("#190D02")
+		.setFogColor("#241809")
 		.setFogDepth(40)
-		.setAmbientColor("#699BFF")
-		.setAmbientStrength(3.0f)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(2.5f)
 		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(1.0f)
+		.setDirectionalStrength(0.0f)
 	),
 
 	;
@@ -819,7 +834,7 @@ public enum Environment
 		private boolean customAmbientStrength = false;
 		private float[] ambientColor = rgb(151, 186, 255);
 		private boolean customAmbientColor = false;
-		private float directionalStrength = 4.7f;
+		private float directionalStrength = 4.0f;
 		private boolean customDirectionalStrength = false;
 		private float[] directionalColor = rgb(255, 255, 255);
 		private boolean customDirectionalColor = false;

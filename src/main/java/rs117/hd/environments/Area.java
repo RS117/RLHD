@@ -134,6 +134,11 @@ public enum Area
 		new Rect(3456, 4734, 3528, 4783)
 	),
 
+	MOTHERLODE_MINE(
+		new Rect(3713, 5696, 3776, 5633),
+		new Rect(3827, 5692, 3868, 5652)
+	),
+
 	// Edgeville
 	EDGEVILLE_PATH_OVERLAY(
 		new Rect(3087, 3501, 3099, 3502), // path north of bank
@@ -322,6 +327,9 @@ public enum Area
 		new Rect(3198, 2989, 3322, 2817),
 		new Rect(3315, 2928, 3469, 2812)
 	),
+	KHARIDIAN_DESERT_MID(
+		new Rect(3135, 3051, 3524, 2885)
+	),
 	KHARIDIAN_DESERT(
 		new Rect(3196, 3134, 3526, 2997),
 		new Rect(3134, 3069, 3565, 2600),
@@ -397,7 +405,7 @@ public enum Area
 	MORYTANIA(
 		new Rect(3422, 3202, 3782, 3467),
 		new Rect(3775, 3467, 3426, 3603),
-		new Rect(3426, 3603, 3399, 3515),
+		new Rect(3426, 3603, 3399, 3511),
 		new Rect(3410, 3524, 3457, 3500),
 		new Rect(3457, 3500, 3416, 3495),
 		new Rect(3420, 3495, 3451, 3481),
@@ -518,6 +526,8 @@ public enum Area
 	),
 
 	// Zeah
+	KARUULM_SLAYER_DUNGEON(1112, 10295, 1384, 10124),
+	LIZARDMAN_TEMPLE(1280, 10047, 1341, 10109),
 	XERICS_LOOKOUT(1580, 3526, 1596, 3534),
 	SHAYZIEN_COMBAT_RING(1539, 3627, 1548, 3618),
 	SHAYZIEN_ENCAMPMENT(
@@ -579,9 +589,6 @@ public enum Area
 	),
 	MESS_HALL_KITCHEN(1643, 3631, 1649, 3622),
 	ZEAH(1152, 4078, 1938, 3270),
-
-	// Kebos Lowlands
-	LIZARDMAN_TEMPLE(1280, 10047, 1341, 10109),
 
 	// Fossil Island
 	TAR_SWAMP(
