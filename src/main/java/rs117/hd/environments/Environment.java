@@ -352,10 +352,10 @@ public enum Environment
 	GIELINOR_SNOWY_NORTHERN_REGION(Area.GIELINOR_SNOWY_NORTHERN_REGION, new Properties()
 		.setFogColor("#AEBDE0")
 		.setFogDepth(70)
-		.setAmbientColor("#0073FF")
-		.setAmbientStrength(2.5f)
-		.setDirectionalColor("#E5D3B3")
-		.setDirectionalStrength(1.5f)
+		.setAmbientColor("#6FB0FF")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#F4E5C9")
+		.setDirectionalStrength(2.5f)
 	),
 
 	WHITE_WOLF_MOUNTAIN(Area.WHITE_WOLF_MOUNTAIN, new Properties()),
@@ -522,9 +522,9 @@ public enum Environment
 		.setFogColor("#0E0022")
 		.setFogDepth(40)
 		.setAmbientColor("#8B7DDB")
-		.setAmbientStrength(3.0f)
+		.setAmbientStrength(3.5f)
 		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(1.5f)
+		.setDirectionalStrength(1.0f)
 	),
 	MOUNT_QUIDAMORTEM(Area.MOUNT_QUIDAMORTEM, new Properties()),
 	KEBOS_LOWLANDS(Area.KEBOS_LOWLANDS, new Properties()
@@ -546,10 +546,10 @@ public enum Environment
 	ZEAH_SNOWY_NORTHERN_REGION(Area.ZEAH_SNOWY_NORTHERN_REGION, new Properties()
 		.setFogColor("#AEBDE0")
 		.setFogDepth(70)
-		.setAmbientColor("#0073FF")
-		.setAmbientStrength(2.5f)
-		.setDirectionalColor("#E5D3B3")
-		.setDirectionalStrength(1.5f)
+		.setAmbientColor("#6FB0FF")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#F4E5C9")
+		.setDirectionalStrength(2.5f)
 	),
 	ARCEUUS(Area.ARCEUUS, new Properties()
 		.setFogColor(19, 24, 79)
@@ -645,11 +645,11 @@ public enum Environment
 
 	// POHs
 	PLAYER_OWNED_HOUSE_SNOWY(Area.PLAYER_OWNED_HOUSE_SNOWY, new Properties()
-		.setFogColor(174, 189, 224)
+		.setFogColor("#AEBDE0")
 		.setFogDepth(50)
-		.setAmbientColor("#72A2FF")
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor("#FFFFFF")
+		.setAmbientColor("#6FB0FF")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#F4E5C9")
 		.setDirectionalStrength(2.5f)
 	),
 	PLAYER_OWNED_HOUSE(Area.PLAYER_OWNED_HOUSE, new Properties()),
@@ -680,9 +680,9 @@ public enum Environment
 	TEMPOROSS_COVE(Area.TEMPOROSS_COVE, new Properties()
 		.setFogColor("#45474B")
 		.setFogDepth(60)
-		.setAmbientStrength(0.9f)
+		.setAmbientStrength(2.0f)
 		.setAmbientColor("#A5ACBD")
-		.setDirectionalStrength(0.25f)
+		.setDirectionalStrength(1.0f)
 		.setDirectionalColor("#707070")
 		.enableLightning()
 	),
@@ -782,12 +782,13 @@ public enum Environment
 
 
 	UNKNOWN_OVERWORLD_SNOWY(Area.UNKNOWN_OVERWORLD_SNOWY, new Properties()
-		.setFogColor(174, 189, 224)
-		.setFogDepth(80)
-		.setAmbientColor(59, 135, 228)
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor(255, 201, 104)
-		.setDirectionalStrength(2.5f)),
+		.setFogColor("#AEBDE0")
+		.setFogDepth(70)
+		.setAmbientColor("#6FB0FF")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#F4E5C9")
+		.setDirectionalStrength(2.5f)
+	),
 	UNKNOWN_OVERWORLD(Area.UNKNOWN_OVERWORLD, new Properties()),
 
 	// overrides 'ALL' to provide default daylight conditions for the overworld area

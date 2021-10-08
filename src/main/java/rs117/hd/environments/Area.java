@@ -40,8 +40,10 @@ public enum Area
 	TUTORIAL_ISLAND_QUEST_BUILDING(3079, 3118, 3090, 3126),
 	TUTORIAL_ISLAND_KITCHEN(3072, 3092, 3079, 3080),
 	TUTORIAL_ISLAND_START_BUILDING(3086, 3113, 3098, 3099),
+	TUTORIAL_ISLAND_THE_NODE(3084, 3048, 3124, 3006),
 	TUTORIAL_ISLAND(
 		new Rect(3052, 3137, 3155, 3057),
+		new Rect(3084, 3048, 3124, 3006), // the node
 		new Rect(1600, 6015, 1792, 6207) // some kind of instance
 	),
 
@@ -333,6 +335,7 @@ public enum Area
 	KHARIDIAN_DESERT(
 		new Rect(3196, 3134, 3526, 2997),
 		new Rect(3134, 3069, 3565, 2600),
+		new Rect(3114, 2974, 3216, 2786),
 		new Rect(3008, 4671, 3072, 4734) // agility pyramid instance
 	),
 	KHARID_DESERT_REGION(
