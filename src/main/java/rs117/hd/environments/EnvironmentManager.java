@@ -296,7 +296,7 @@ public class EnvironmentManager
 		int sceneMinY = client.getBaseY();
 		if (client.isInInstancedRegion())
 		{
-			LocalPoint localPoint = client.getLocalPlayer().getLocalLocation();
+			LocalPoint localPoint = client.getLocalPlayer() != null ? client.getLocalPlayer().getLocalLocation() : new LocalPoint(0, 0);
 			WorldPoint worldPoint = WorldPoint.fromLocalInstance(client, localPoint);
 			sceneMinX = worldPoint.getX() - localPoint.getSceneX();
 			sceneMinY = worldPoint.getY() - localPoint.getSceneY();
