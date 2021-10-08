@@ -907,7 +907,7 @@ void main() {
     }
 
     // apply distance fog
-    compositeColor = mix(compositeColor, fogColor.rgb, fogAmount);
+    compositeColor = mix(clamp(compositeColor, 0.0, 1.0), fogColor.rgb, fogAmount);
 
     FragColor = vec4(compositeColor, alpha);
 }
