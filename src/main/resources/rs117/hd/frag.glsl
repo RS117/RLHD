@@ -48,8 +48,8 @@ struct Material
     float emissiveStrength;
     int displacementMapId;
     float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
+    vec2 displacementDuration;
+    vec2 scrollDuration;
     vec2 textureScale;
 };
 

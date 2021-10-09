@@ -1000,10 +1000,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			materialUniformBuf.putFloat(material.getEmissiveStrength());
 			materialUniformBuf.putInt(material.getDisplacementMapId());
 			materialUniformBuf.putFloat(material.getDisplacementStrength());
-			materialUniformBuf.putInt(material.getDisplacementDurationX());
-			materialUniformBuf.putInt(material.getDisplacementDurationY());
-			materialUniformBuf.putInt(material.getScrollDurationX());
-			materialUniformBuf.putInt(material.getScrollDurationY());
+			materialUniformBuf.putFloat(material.getDisplacementDurationX());
+			materialUniformBuf.putFloat(material.getDisplacementDurationY());
+			materialUniformBuf.putFloat(material.getScrollDurationX());
+			materialUniformBuf.putFloat(material.getScrollDurationY());
 			materialUniformBuf.putFloat(material.getTextureScaleX());
 			materialUniformBuf.putFloat(material.getTextureScaleY());
 
