@@ -108,15 +108,23 @@ class SceneUploader
 			return; // model has already been uploaded
 		}
 
-		byte skipObject = 0;
+		byte skipObject = 0b00;
 
 		if (objectType == ObjectType.GROUND_OBJECT || objectType == ObjectType.DECORATIVE_OBJECT)
 		{
-			skipObject = 0b1;
+			// mark it as low priority
+			skipObject = 0b01;
+
+			if (client.getBaseX() + tileX == 2558 && client.getBaseY() + tileY >= 3249 && client.getBaseY() + tileY <= 3252)
+			{
+				// fix for water by khazard spirit tree
+				// marks object to never be drawn
+				skipObject = 0b11;
+			}
 		}
 		// pack a bit into bufferoffset that we can use later to hide
 		// some low-importance objects based on Level of Detail setting
-		model.setBufferOffset(offset << 1 | skipObject);
+		model.setBufferOffset(offset << 2 | skipObject);
 		if (model.getFaceTextures() != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
 		{
 			model.setUvBufferOffset(uvoffset);

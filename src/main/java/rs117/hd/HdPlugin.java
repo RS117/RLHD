@@ -2308,7 +2308,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				return;
 			}
 
-			if ((model.getBufferOffset() & 0b1) == 0b1 && distance > drawObjectCutoff)
+			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
 			{
 				return;
 			}
@@ -2324,7 +2324,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			b.ensureCapacity(8);
 			IntBuffer buffer = b.getBuffer();
 			// shift the bufferoffset as the last bit is used for the level of detail setting
-			buffer.put(model.getBufferOffset() >> 1);
+			buffer.put(model.getBufferOffset() >> 2);
 			buffer.put(uvOffset);
 			buffer.put(tc);
 			buffer.put(targetBufferOffset);
@@ -2352,7 +2352,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					return;
 				}
 
-				if ((model.getBufferOffset() & 0b1) == 0b1 && distance > drawObjectCutoff)
+				if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
 				{
 					return;
 				}
