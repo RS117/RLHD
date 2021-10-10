@@ -255,7 +255,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean shadowsEnabled()
 	{
-		return false;
+		return true;
 	}
 
 	@ConfigItem(
@@ -267,7 +267,7 @@ public interface HdPluginConfig extends Config
 	)
 	default ShadowResolution shadowResolution()
 	{
-		return ShadowResolution.RES_2048;
+		return ShadowResolution.RES_1024;
 	}
 
 	@ConfigItem(
