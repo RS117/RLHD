@@ -71,7 +71,6 @@ import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
 import net.runelite.api.GroundObject;
 import net.runelite.api.Model;
-import net.runelite.api.NodeCache;
 import net.runelite.api.Perspective;
 import net.runelite.api.Renderable;
 import net.runelite.api.Scene;
@@ -553,12 +552,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				textureArrayId = -1;
 				textureHDArrayId = -1;
 
-				// increase size of model cache for dynamic objects since we are extending scene size
-				NodeCache cachedModels2 = client.getCachedModels2();
-				cachedModels2.setCapacity(256);
-				cachedModels2.setRemainingCapacity(256);
-				cachedModels2.reset();
-
 				// load all dynamic scene lights from text file
 				lightManager.loadLightsFromFile();
 
@@ -1007,10 +1000,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			materialUniformBuf.putFloat(material.getEmissiveStrength());
 			materialUniformBuf.putInt(material.getDisplacementMapId());
 			materialUniformBuf.putFloat(material.getDisplacementStrength());
-			materialUniformBuf.putInt(material.getDisplacementDurationX());
-			materialUniformBuf.putInt(material.getDisplacementDurationY());
-			materialUniformBuf.putInt(material.getScrollDurationX());
-			materialUniformBuf.putInt(material.getScrollDurationY());
+			materialUniformBuf.putFloat(material.getDisplacementDurationX());
+			materialUniformBuf.putFloat(material.getDisplacementDurationY());
+			materialUniformBuf.putFloat(material.getScrollDurationX());
+			materialUniformBuf.putFloat(material.getScrollDurationY());
 			materialUniformBuf.putFloat(material.getTextureScaleX());
 			materialUniformBuf.putFloat(material.getTextureScaleY());
 
@@ -2315,7 +2308,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				return;
 			}
 
-			if ((model.getBufferOffset() & 0b1) == 0b1 && distance > drawObjectCutoff)
+			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
 			{
 				return;
 			}
@@ -2331,7 +2324,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			b.ensureCapacity(8);
 			IntBuffer buffer = b.getBuffer();
 			// shift the bufferoffset as the last bit is used for the level of detail setting
-			buffer.put(model.getBufferOffset() >> 1);
+			buffer.put(model.getBufferOffset() >> 2);
 			buffer.put(uvOffset);
 			buffer.put(tc);
 			buffer.put(targetBufferOffset);
@@ -2359,7 +2352,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					return;
 				}
 
-				if ((model.getBufferOffset() & 0b1) == 0b1 && distance > drawObjectCutoff)
+				if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
 				{
 					return;
 				}

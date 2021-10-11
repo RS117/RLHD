@@ -84,7 +84,7 @@ public enum Overlay
 	AL_KHARID_FLOOR_MARBLE_2(4, Area.AL_KHARID_BUILDINGS, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),
 	KHARID_PATHS_1(26, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT, new Properties().setSaturation(2).setHue(6).setShiftLightness(5)),
 	KHARID_PATHS_2(76, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT, new Properties().setSaturation(3).setHue(6).setShiftLightness(-10)),
-	KHARID_PATHS_3(25, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT),
+	KHARID_PATHS_3(25, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT, new Properties().setSaturation(3).setHue(6)),
 
 	// Falador
 	FALADOR_PATHS(-119, Area.FALADOR, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(7)),
@@ -199,6 +199,7 @@ public enum Overlay
 	CRANDOR_GROUND_1(11, Area.CRANDOR, GroundMaterial.GRAVEL),
 
 	FISHING_TRAWLER_BOAT_PORT_KHAZARD_FIX(42, Area.FISHING_TRAWLER_BOAT_PORT_KHAZARD, WaterType.WATER),
+	FISHING_TRAWLER_BOAT_FLOODED(6, Area.FISHING_TRAWLER_BOAT_FLOODED, WaterType.WATER_FLAT),
 
 	// Mind Altar
 	MIND_ALTAR_TILE_1(3, Area.MIND_ALTAR, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),

@@ -48,8 +48,8 @@ struct Material
     float emissiveStrength;
     int displacementMapId;
     float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
+    vec2 displacementDuration;
+    vec2 scrollDuration;
     vec2 textureScale;
 };
 
@@ -907,7 +907,7 @@ void main() {
     }
 
     // apply distance fog
-    compositeColor = mix(compositeColor, fogColor.rgb, fogAmount);
+    compositeColor = mix(clamp(compositeColor, 0.0, 1.0), fogColor.rgb, fogAmount);
 
     FragColor = vec4(compositeColor, alpha);
 }

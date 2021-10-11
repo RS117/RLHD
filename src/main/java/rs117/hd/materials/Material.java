@@ -65,7 +65,7 @@ public enum Material
 	MOSS(28),
 	PALM_LEAF(29),
 	WILLOW_LEAVES(30, new Properties().setTextureScale(1.025f, 1.0f)),
-	LAVA(31, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36, 22).setScroll(0, 3)),
+	LAVA(31, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36f, 22f).setScroll(0f, 3f)),
 	TEXTURE_32(32),
 	MAPLE_LEAVES(33, new Properties().setTextureScale(1.3f, 1.0f)),
 	MAGIC_STARS(34, new Properties().setEmissive(1.0f)),
@@ -74,7 +74,7 @@ public enum Material
 	CHAIN(37),
 	TEXTURE_38(38),
 	PAINTING_ELF(39),
-	FIRE_CAPE(40, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 12, 4).setScroll(0, -3)),
+	FIRE_CAPE(40, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 12f, 4f).setScroll(0f, -3f)),
 	LEAVES_2(41, new Properties().setTextureScale(1.1f, 1.1f)),
 	MARBLE(42, new Properties().setSpecular(1.0f, 400f)),
 	TILE_DARK(43),
@@ -93,7 +93,7 @@ public enum Material
 	TEXTURE_56(56),
 	TEXTURE_57(57),
 	TEXTURE_58(58),
-	INFERNAL_CAPE(59, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12, 4).setScroll(0, 0)),
+	INFERNAL_CAPE(59, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 0f)),
 	TEXTURE_60(60),
 	TEXTURE_61(61),
 	TEXTURE_62(62),
@@ -180,6 +180,7 @@ public enum Material
 	GRASS_1(209),
 	GRASS_2(210),
 	GRASS_3(211),
+	GRASS_SCROLLING(209, new Properties().setScroll(0f, 0.7f)),
 
 	DIRT_1(213),
 	DIRT_2(214),
@@ -221,10 +222,10 @@ public enum Material
 	MARBLE_2_SEMIGLOSS(232, new Properties().setSpecular(0.3f, 100f)),
 	MARBLE_3_SEMIGLOSS(234, new Properties().setSpecular(0.4f, 120f)),
 
-	HD_LAVA_1(241, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_LAVA_2(242, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_MAGMA_1(243, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_MAGMA_2(244, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
+	HD_LAVA_1(241, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_LAVA_2(242, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_MAGMA_1(243, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_MAGMA_2(244, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
 
 	BARK(245),
 	WOOD_GRAIN(247),
@@ -246,10 +247,10 @@ public enum Material
 	private final float emissiveStrength;
 	private final int displacementMapId;
 	private final float displacementStrength;
-	private final int displacementDurationX;
-	private final int displacementDurationY;
-	private final int scrollDurationX;
-	private final int scrollDurationY;
+	private final float displacementDurationX;
+	private final float displacementDurationY;
+	private final float scrollDurationX;
+	private final float scrollDurationY;
 	private final float textureScaleX;
 	private final float textureScaleY;
 
@@ -260,10 +261,10 @@ public enum Material
 		private float emissiveStrength = 0f;
 		private int displacementMapId = 304;
 		private float displacementStrength = 0f;
-		private int displacementDurationX = 0;
-		private int displacementDurationY = 0;
-		private int scrollDurationX = 0;
-		private int scrollDurationY = 0;
+		private float displacementDurationX = 0;
+		private float displacementDurationY = 0;
+		private float scrollDurationX = 0;
+		private float scrollDurationY = 0;
 		private float textureScaleX = 1.0f;
 		private float textureScaleY = 1.0f;
 
@@ -280,7 +281,7 @@ public enum Material
 			return this;
 		}
 
-		public Properties setDisplacement(int displacementMapId, float displacementStrength, int displacementDurationX, int displacementDurationY)
+		public Properties setDisplacement(int displacementMapId, float displacementStrength, float displacementDurationX, float displacementDurationY)
 		{
 			this.displacementMapId = displacementMapId;
 			this.displacementStrength = displacementStrength;
@@ -289,7 +290,7 @@ public enum Material
 			return this;
 		}
 
-		public Properties setScroll(int scrollDurationX, int scrollDurationY)
+		public Properties setScroll(float scrollDurationX, float scrollDurationY)
 		{
 			this.scrollDurationX = scrollDurationX;
 			this.scrollDurationY = scrollDurationY;

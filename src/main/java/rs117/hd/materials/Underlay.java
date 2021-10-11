@@ -114,6 +114,11 @@ public enum Underlay
 	// Mind Altar
 	MIND_ALTAR_TILE(55, Area.MIND_ALTAR, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),
 
+	// Cutscenes
+	CANOE_CUTSCENE_GRASS_1(48, Area.CANOE_CUTSCENE, GroundMaterial.GRASS_SCROLLING),
+	CANOE_CUTSCENE_GRASS_2(50, Area.CANOE_CUTSCENE, GroundMaterial.GRASS_SCROLLING),
+	CANOE_CUTSCENE_GRASS_3(63, Area.CANOE_CUTSCENE, GroundMaterial.GRASS_SCROLLING),
+
 	
 	// default underlays
 	UNDERLAY_N127(-127, GroundMaterial.SAND),
