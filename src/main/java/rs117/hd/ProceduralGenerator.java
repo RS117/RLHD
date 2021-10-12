@@ -268,16 +268,21 @@ class ProceduralGenerator
 
 			float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{1.0f, 1.0f, 0.0f});
 
-			float multiplier = 1.5f;
-			int base = 15;
-			int add = 3;
+			float lightenMultiplier = 1.5f;
+			int lightenBase = 15;
+			int lightenAdd = 3;
+			float darkenMultiplier = 0.5f;
+			int darkenBase = 0;
+			int darkenAdd = 0;
 
 			float[] vNormals = vertexTerrainNormals.getOrDefault(vertexHashes[vertex], new float[]{0.0f, 0.0f, 0.0f});
 
 			float dot = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vNormals), inverseLightDirection);
-			dot = Math.max(dot, 0);
-			int lighten = (int) (Math.max((colorHSL[2] - add), 0) * multiplier) + base;
-			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], lighten, dot);
+			int lighten = (int) (Math.max((colorHSL[2] - lightenAdd), 0) * lightenMultiplier) + lightenBase;
+			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], lighten, Math.max(dot, 0));
+			int darken = (int) (Math.max((colorHSL[2] - darkenAdd), 0) * darkenMultiplier) + darkenBase;
+			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], darken, Math.abs(Math.min(dot, 0)));
+			colorHSL[2] *= 1.25f;
 
 			boolean isOverlay = false;
 			Material material = Material.DIRT_1;

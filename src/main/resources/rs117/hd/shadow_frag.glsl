@@ -49,11 +49,17 @@ uniform vec2 textureOffsets[128];
 in float alpha;
 in vec2 fUv;
 flat in int materialId;
+flat in int terrainPlane;
 
 out vec4 FragColor;
 
 void main()
 {
+    if (terrainPlane == 0)
+    {
+        discard;
+    }
+
     // skip water surfaces
     switch (material[materialId].diffuseMapId)
     {
