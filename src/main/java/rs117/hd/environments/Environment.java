@@ -31,6 +31,15 @@ import rs117.hd.HDUtils;
 @Getter
 public enum Environment
 {
+	// Wilderness
+	REVENANT_CAVES (Area.REVENANT_CAVES, new Properties()
+		.setFogColor("#081F1C")
+		.setFogDepth(20)
+		.setAmbientColor("#AECFC9")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#AECFC9")
+		.setDirectionalStrength(1.0f)
+	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
 		.setFogColor("#252C37")
 		.setFogDepth(80)
@@ -257,9 +266,9 @@ public enum Environment
 		.setFogColor(15, 14, 13)
 		.setFogDepth(30)
 		.setAmbientColor("#615C57")
-		.setAmbientStrength(0.5f)
+		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#FFBCB7")
-		.setDirectionalStrength(1.5f)
+		.setDirectionalStrength(2.0f)
 		.enableLightning()
 	),
 	DRAYNOR_MANOR_BASEMENT(Area.DRAYNOR_MANOR_BASEMENT, new Properties()
@@ -271,6 +280,16 @@ public enum Environment
 		.setDirectionalStrength(0.0f)
 	),
 	DRAYNOR(Area.DRAYNOR, new Properties()),
+
+	MISTHALIN_MYSTERY_MANOR(Area.MISTHALIN_MYSTERY_MANOR, new Properties()
+		.setFogColor(15, 14, 13)
+		.setFogDepth(30)
+		.setAmbientColor("#615C57")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#FFBCB7")
+		.setDirectionalStrength(2.0f)
+		.enableLightning()
+	),
 
 	MOTHERLODE_MINE(Area.MOTHERLODE_MINE, new Properties()
 		.setFogColor("#241809")
