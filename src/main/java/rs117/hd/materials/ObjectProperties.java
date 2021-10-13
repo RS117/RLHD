@@ -119,6 +119,12 @@ public enum ObjectProperties
 	COX_OUTSIDE_RUINS(Material.GRUNGE_1, new Properties().setFlatNormals(true), 29921, 29922, 29923, 29924, 29925, 29926, 29927, 29928, 29929, 29930, 29931, 29932, 29933, 29934, 29935, 29936, 29937, 29938, 29939, 29940, 29941, 29942, 29943),
 	COX_PILLAR(Material.GRUNGE_1, new Properties().setFlatNormals(true), 29806, 29807, 29808, 29809, 29810),
 
+	// Ground decoration rocks
+	GROUND_DECORATION_TAN_ROCK(Material.DIRT_1, new Properties().setInheritTileColor(true),  7105, 7106, 7107),
+	GROUND_DECORATION_GRAY_ROCK(Material.ROCK_1, new Properties().setInheritTileColor(true), 7103, 7104, 7057),
+	// environment rock objects
+	GROUND_ROCK_OBJECT(Material.ROCK_1,new Properties().setFlatNormals(true), 3634,3635,3636,3637,3638, 3639),
+
 	// Unknown
 	UNKNOWN_1(Material.GRUNGE_1, new Properties().setFlatNormals(true), 677),
 	UNKNOWN_2(Material.NONE, new Properties().setFlatNormals(true), 1602, 2569, 3089, 3090, 3091, 3096, 3097, 3102, 3103, 3111, 3112, 3113, 3114, 3192, 10748, 10767, 10770),
@@ -130,7 +136,6 @@ public enum ObjectProperties
 	UNKNOWN_8(Material.NONE, new Properties().setFlatNormals(true), 10743, 10744, 10749, 10750, 10769, 17349),
 	UNKNOWN_9(Material.NONE, new Properties().setFlatNormals(true), 3110, 3174),
 	UNKNOWN_10(Material.GRUNGE_1, 3709, 3724, 3803, 3804, 3948, 3950),
-	UNKNOWN_11(Material.GRUNGE_2, 7057, 7103, 7104, 7105, 7106, 7107),
 
 	;
 
