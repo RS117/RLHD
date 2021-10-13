@@ -77,7 +77,7 @@ public enum Underlay
 	GAMES_ROOM_FLOOR(64, Area.GAMES_ROOM, GroundMaterial.WOOD_PLANKS_1, new Properties().setBlended(false)),
 
 	// Crandor
-	CRANDOR_SAND(-110, GroundMaterial.SAND, new Properties().setSaturation(3).setHue(6)),
+	CRANDOR_SAND(-110, Area.CRANDOR, GroundMaterial.SAND, new Properties().setSaturation(3).setHue(6)),
 
 	// God Wars Dungeon (GWD)
 	GOD_WARS_DUNGEON_SNOW_1(58, Area.GOD_WARS_DUNGEON, GroundMaterial.SNOW_1),
@@ -106,6 +106,9 @@ public enum Underlay
 	// Zanaris
 	COSMIC_ENTITYS_PLANE_ABYSS_1(72, Area.COSMIC_ENTITYS_PLANE, GroundMaterial.NONE, new Properties().setLightness(0).setBlended(false)),
 	COSMIC_ENTITYS_PLANE_ABYSS_2(2, Area.COSMIC_ENTITYS_PLANE, GroundMaterial.NONE, new Properties().setLightness(0).setBlended(false)),
+
+	// Death's office
+	DEATHS_OFFICE_TILE(-110, Area.DEATHS_OFFICE, GroundMaterial.TILES_2x2_1_SEMIGLOSS),
 
 	// Chambers of Xeric
 	COX_SNOW_1(16, Area.COX_SNOW, GroundMaterial.SNOW_1),

@@ -468,11 +468,11 @@ public enum Environment
 	),
 	POSION_WASTE(Area.POISON_WASTE, new Properties()
 		.setFogColor(50, 55, 47)
-		.setFogDepth(50)
+		.setFogDepth(30)
 		.setAmbientColor(192, 219, 173)
-		.setAmbientStrength(1.5f)
+		.setAmbientStrength(1.0f)
 		.setDirectionalColor(173, 176, 139)
-		.setDirectionalStrength(1.0f)
+		.setDirectionalStrength(2.0f)
 	),
 	TIRANNWN(Area.TIRANNWN, new Properties()
 		.setFogColor("#99D8C8")
@@ -704,6 +704,16 @@ public enum Environment
 		.setDirectionalStrength(1.0f)
 		.setDirectionalColor("#707070")
 		.enableLightning()
+	),
+
+	// Death's office
+	DEATHS_OFFICE(Area.DEATHS_OFFICE, new Properties()
+		.setFogColor("#000000")
+		.setFogDepth(20)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(4.0f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(0.0f)
 	),
 
 	// Chambers of Xeric

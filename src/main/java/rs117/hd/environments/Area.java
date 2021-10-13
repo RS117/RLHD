@@ -723,6 +723,9 @@ public enum Area
 	// Tempoross
 	TEMPOROSS_COVE(3005, 3011, 3066, 2941),
 
+	// Death's office
+	DEATHS_OFFICE(3166, 5734, 3185, 4288),
+
 	// Theatre of Blood
 	TOB_ROOM_MAIDEN(3231, 4468, 3152, 4416),
 	TOB_ROOM_BLOAT(3260, 4474, 3327, 4427),
