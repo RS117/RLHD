@@ -425,7 +425,8 @@ public enum Area
 		new Rect(2087, 4903, 2064, 4880), // ver sinhaza cutscene
 		new Rect(1987, 4996, 2105, 5054), // temple trekking
 		new Rect(2118, 4994, 2171, 5036), // temple trekking
-		new Rect(2178, 4996, 2478, 5054) // temple trekking
+		new Rect(2178, 4996, 2478, 5054), // temple trekking
+		new Rect(1670, 4546, 1724, 4600) // slayer tower roof (grotesque guardians)
 	),
 
 	// TzHaar
