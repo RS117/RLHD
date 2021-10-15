@@ -122,8 +122,16 @@ public enum ObjectProperties
 	// Ground decoration rocks
 	GROUND_DECORATION_TAN_ROCK(Material.DIRT_1, new Properties().setInheritTileColor(true),  7105, 7106, 7107),
 	GROUND_DECORATION_GRAY_ROCK(Material.ROCK_1, new Properties().setInheritTileColor(true), 7103, 7104, 7057),
-	// environment rock objects
-	GROUND_ROCK_OBJECT(Material.ROCK_1,new Properties().setFlatNormals(true), 3634,3635,3636,3637,3638, 3639),
+	// environment rock objects such as piles of rocks, stalagmites, or rock like structures.
+	ROCK_LIKE_OBJECT(Material.ROCK_1,new Properties().setFlatNormals(true), 84, 3634,3635,3636,3637,3638, 3639, 5950, 5953, 22541, 22542,22543, 25077,25078,25079,25080,25081,25082,25083,25084,25085,25086, 25102, 25103, 25104, 25105, 25106, 25107, 25108, 25109, 25110, 25112,25113,25114,25161),
+
+	// Cave Walls
+	ROCK_CAVE_ENTRANCES(Material.ROCK_2, new Properties().setFlatNormals(true), 6659, 11835, 29627),
+	CAVE_WALLS_BLEND(Material.ROCK_2, new Properties().setFlatNormals(true).setUvType(UvType.GROUND_PLANE), 17211, 17210, 17215, 17216, 17217,25049,25050, 25051, 25052,25053,25054,25055,25056,25052, 25059,25060, 25061,25062, 25063,25064,29634),
+	CAVE_WALL_ABOVE_FLOOR_TILE(Material.ROCK_2, new Properties().setFlatNormals(true).setUvType(UvType.GROUND_PLANE), 17224, 25057, 25058),
+
+	// All Lumbridge wall IDs
+	LUMBRIDGE_CAVE_WALLS(Material.ROCK_2, new Properties().setFlatNormals(true), 5912, 5913, 5914, 5915, 5916, 5917, 5918, 5919, 5920, 5921, 5922, 5923, 5924, 5925, 5926, 5927, 5928, 5929, 5930, 5931, 5932, 5933, 5934, 5935, 5936, 5937, 5938, 5939, 5940, 5941, 5942, 5943, 5944,6903,6925,6927,6929,6930,6931,6932,6933,6939,6940),
 
 	// Unknown
 	UNKNOWN_1(Material.GRUNGE_1, new Properties().setFlatNormals(true), 677),

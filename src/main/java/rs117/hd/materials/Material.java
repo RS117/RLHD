@@ -198,6 +198,7 @@ public enum Material
 	GRUNGE_2(222),
 
 	ROCK_1(223),
+	ROCK_2(224),
 
 	CARPET(225),
 
