@@ -399,6 +399,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configNpcLights = true;
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
+	public boolean configUnlockFps = false;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -421,6 +422,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configNpcLights = config.npcLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
+		configUnlockFps = config.unlockFps();
 
 		clientThread.invoke(() ->
 		{
@@ -512,7 +514,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					}
 
 					this.gl = glContext.getGL().getGL4();
-					gl.setSwapInterval(0);
+
+					final boolean unlockFps = this.config.unlockFps();
+					client.setUnlockedFps(unlockFps);
+					gl.setSwapInterval(unlockFps ? 1 : 0);
 
 					if (log.isDebugEnabled())
 					{
@@ -583,6 +588,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			client.setGpu(false);
 			client.setDrawCallbacks(null);
+			client.setUnlockedFps(false);
 
 			invokeOnMainThread(() ->
 			{
@@ -2213,6 +2219,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "macosIntelWorkaround":
 				recompileProgram();
+				break;
+			case "unlockFps":
+				configUnlockFps = config.unlockFps();
+				clientThread.invokeLater(() ->
+				{
+					client.setUnlockedFps(configUnlockFps);
+					invokeOnMainThread(() -> gl.setSwapInterval(configUnlockFps ? 1 : 0));
+				});
 				break;
 		}
 	}
