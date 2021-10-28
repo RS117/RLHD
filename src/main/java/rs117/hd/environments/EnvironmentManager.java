@@ -406,14 +406,7 @@ public class EnvironmentManager
 	 */
 	public int getFogColor()
 	{
-		if (client.getGameState() != GameState.LOGGED_IN)
-		{
-			return 0;
-		}
-		else
-		{
-			return currentFogColorInt;
-		}
+		return currentFogColorInt;
 	}
 
 	/**
