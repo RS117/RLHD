@@ -403,7 +403,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
-	private boolean loggedIn = true;
 
 	public int[] camTarget = new int[3];
 
@@ -565,7 +564,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					invokeOnMainThread(this::uploadScene);
 				}
-
 				startUpCompleted = true;
 			}
 			catch (Throwable e)
@@ -1127,12 +1125,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		final Scene scene = client.getScene();
 		scene.setDrawDistance(getDrawDistance());
 
-		// Only reset the target buffer offset right before drawing the scene. That way if there are frames
-		// after this that don't involve a scene draw, like during LOADING/HOPPING/CONNECTION_LOST, we can
-		// still redraw the previous frame's scene to emulate the client behavior of not painting over the
-		// viewport buffer.
-		targetBufferOffset = 0;
-
 		environmentManager.update();
 		lightManager.update();
 
@@ -1468,23 +1460,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void drawFrame(int overlayColor)
 	{
-		log.debug("gameState: {}", client.getGameState());
-
-		if (client.getGameState() == GameState.LOGIN_SCREEN)
+		if (jawtWindow.getAWTComponent() != client.getCanvas())
 		{
-			loggedIn = false;
-		}
-		else if (client.getGameState() == GameState.LOGGED_IN)
-		{
-			loggedIn = true;
-		}
-
-		if (!startUpCompleted)
+			// We inject code in the game engine mixin to prevent the client from doing canvas replacement,
+			// so this should not ever be hit
+			log.warn("Canvas invalidated!");
+			shutDown();
+			startUp();
 			return;
+		}
 
-		// We inject code in the game engine mixin to prevent the client from doing canvas replacement,
-		// so this should not ever be tripped
-		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
+		if (client.getGameState() == GameState.LOADING || client.getGameState() == GameState.HOPPING)
+		{
+			// While the client is loading it doesn't draw
+			return;
+		}
 
 		camTarget = getCameraFocalPoint();
 
@@ -1548,8 +1538,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		// Draw 3d scene
 		final TextureProvider textureProvider = client.getTextureProvider();
-		final GameState gameState = client.getGameState();
-		if (textureProvider != null && gameState.getState() >= GameState.LOADING.getState() && loggedIn)
+		if (textureProvider != null)
 		{
 			if (textureArrayId == -1)
 			{
@@ -1640,7 +1629,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float lightPitch = -128;
 			float lightYaw = 55;
 
-			if (client.getGameState().getState() >= GameState.LOADING.getState() && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
+			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
 				// render shadow depth map
 				gl.glViewport(0, 0, config.shadowResolution().getValue(), config.shadowResolution().getValue());
@@ -1933,6 +1922,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		modelBufferSmall.clear();
 		modelBufferUnordered.clear();
 
+		targetBufferOffset = 0;
 		smallModels = largeModels = unorderedModels = 0;
 		tempOffset = 0;
 		tempUvOffset = 0;

@@ -406,7 +406,7 @@ public class EnvironmentManager
 	 */
 	public int getFogColor()
 	{
-		return currentFogColorInt;
+		return client.getGameState().getState() >= GameState.LOADING.getState() ? currentFogColorInt : 0;
 	}
 
 	/**
