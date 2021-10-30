@@ -292,7 +292,10 @@ class ProceduralGenerator
 				GroundMaterial groundMaterial = overlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = !overlay.isBlendedAsUnderlay();
-				colorHSL = recolorOverlay(overlay, colorHSL);
+				if (hdPlugin.configGroundTextures)
+				{
+					colorHSL = recolorOverlay(overlay, colorHSL);
+				}
 			}
 			else if (vertexUnderlays[vertex] != 0)
 			{
@@ -300,7 +303,10 @@ class ProceduralGenerator
 				GroundMaterial groundMaterial = underlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = underlay.isBlendedAsOverlay();
-				colorHSL = recolorUnderlay(underlay, colorHSL);
+				if (hdPlugin.configGroundTextures)
+				{
+					colorHSL = recolorUnderlay(underlay, colorHSL);
+				}
 			}
 
 			final int maxBrightness = 55; // reduces overexposure
@@ -1148,7 +1154,7 @@ class ProceduralGenerator
 		int x = tile.getSceneLocation().getX();
 		int y = tile.getSceneLocation().getY();
 
-		if (!hdPlugin.configGroundBlending || (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
+		if ((tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
 			(tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() != null))
 		{
 			// skip tiles with textures provided by default
