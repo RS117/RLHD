@@ -54,6 +54,8 @@ import rs117.hd.materials.TzHaarRecolorType;
 import rs117.hd.materials.Underlay;
 import rs117.hd.materials.UvType;
 
+import java.util.Arrays;
+
 @Singleton
 @Slf4j
 class SceneUploader
@@ -1000,6 +1002,12 @@ class SceneUploader
 	static int lightenC;
 	static float dotC;
 
+	// 12 zeroes to replace the duplicated zero calls to vertexBuffer and normalBuffer
+	final static int[] zeroInts = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+	// same thing but for the uvBuffer
+	final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 	int[] pushFace(Model model, int face, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
 	{
 		final int[] vertexX = model.getVerticesX();
@@ -1037,21 +1045,15 @@ class SceneUploader
 		else if (color3 == -2)
 		{
 			vertexBuffer.ensureCapacity(12);
-			vertexBuffer.put(0, 0, 0, 0);
-			vertexBuffer.put(0, 0, 0, 0);
-			vertexBuffer.put(0, 0, 0, 0);
+			vertexBuffer.put(zeroInts);
 
 			normalBuffer.ensureCapacity(12);
-			normalBuffer.put(0, 0, 0, 0);
-			normalBuffer.put(0, 0, 0, 0);
-			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(zeroFloats);
 
 			if (faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
 			{
 				uvBuffer.ensureCapacity(12);
-				uvBuffer.put(0, 0, 0, 0f);
-				uvBuffer.put(0, 0, 0, 0f);
-				uvBuffer.put(0, 0, 0, 0f);
+				uvBuffer.put(zeroFloats);
 				uvLength = 3;
 			}
 
@@ -1222,55 +1224,42 @@ class SceneUploader
 		// if color3 is -1, the object is flat-shaded
 		if (color3s[face] == -1 || (objectProperties != null && objectProperties.isFlatNormals()))
 		{
-			normalBuffer.put(0, 0, 0, 0);
-			normalBuffer.put(0, 0, 0, 0);
-			normalBuffer.put(0, 0, 0, 0);
+			normalBuffer.put(zeroFloats);
 		}
 		else
 		{
-			normalBuffer.put(vnAX, vnAY, vnAZ, 0);
-			normalBuffer.put(vnBX, vnBY, vnBZ, 0);
-			normalBuffer.put(vnCX, vnCY, vnCZ, 0);
+			normalBuffer.put(new float[]{ vnAX, vnAY, vnAZ, 0, vnBX, vnBY, vnBZ, 0, vnCX, vnCY, vnCZ, 0 });
 		}
-
-		vertexBuffer.ensureCapacity(12);
 
 		int aX = vertexX[triangleA];
 		int aY = vertexY[triangleA];
 		int aZ = vertexZ[triangleA];
 
-		vertexBuffer.put(aX, aY, aZ, packedAlphaPriority | color1);
-
 		int bX = vertexX[triangleB];
 		int bY = vertexY[triangleB];
 		int bZ = vertexZ[triangleB];
-
-		vertexBuffer.put(bX, bY, bZ, packedAlphaPriority | color2);
 
 		int cX = vertexX[triangleC];
 		int cY = vertexY[triangleC];
 		int cZ = vertexZ[triangleC];
 
-		vertexBuffer.put(cX, cY, cZ, packedAlphaPriority | color3);
+		vertexBuffer.ensureCapacity(12);
+		vertexBuffer.put(new int[]{ aX, aY, aZ, packedAlphaPriority | color1, bX, bY, bZ, packedAlphaPriority | color2, cX, cY, cZ, packedAlphaPriority | color3 });
 
 		float[] uv = model.getFaceTextureUVCoordinates();
-		Material material;
 
 		if (faceTextures != null && faceTextures[face] != -1 && uv != null)
 		{
-			material = Material.getTexture(faceTextures[face]);
-			int packedMaterialData = packMaterialData(Material.getIndex(material), false);
+			int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(faceTextures[face]), false);
 			int idx = face * 6;
 
 			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(packedMaterialData, uv[idx], uv[idx + 1], 0f);
-			uvBuffer.put(packedMaterialData, uv[idx + 2], uv[idx + 3], 0f);
-			uvBuffer.put(packedMaterialData, uv[idx + 4], uv[idx + 5], 0f);
+			uvBuffer.put(new float[]{ packedMaterialData, uv[idx], uv[idx + 1], 0, packedMaterialData, uv[idx + 2], uv[idx + 3], 0, packedMaterialData, uv[idx + 4], uv[idx + 5], 0 });
 			uvLength = 3;
 		}
 		else if (objectProperties != null && objectProperties.getMaterial() != Material.NONE)
 		{
-			material = hdPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE;
+			Material material = hdPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE;
 			int packedMaterialData = packMaterialData(Material.getIndex(material), false);
 
 			uvBuffer.ensureCapacity(12);
@@ -1284,26 +1273,20 @@ class SceneUploader
 				float cU = (cX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
 				float cV = (cZ % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
 
-				uvBuffer.put(packedMaterialData, aU, aV, 0f);
-				uvBuffer.put(packedMaterialData, bU, bV, 0f);
-				uvBuffer.put(packedMaterialData, cU, cV, 0f);
+				uvBuffer.put(new float[]{ packedMaterialData, aU, aV, 0, packedMaterialData, bU, bV, 0, packedMaterialData, cU, cV, 0 });
 				uvLength = 3;
 			}
 			else
 			{
 				// UvType.GEOMETRY
-				uvBuffer.put(packedMaterialData, 0f, 0f, 0f);
-				uvBuffer.put(packedMaterialData, 1f, 0f, 0f);
-				uvBuffer.put(packedMaterialData, 0f, 1f, 0f);
+				uvBuffer.put(new float[]{ packedMaterialData, 0, 0, 0, packedMaterialData, 1, 0, 0, packedMaterialData, 0, 1, 0});
 				uvLength = 3;
 			}
 		}
 		else if (faceTextures != null)
 		{
 			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(0, 0f, 0f, 0f);
-			uvBuffer.put(0, 0f, 0f, 0f);
-			uvBuffer.put(0, 0f, 0f, 0f);
+			uvBuffer.put(zeroFloats);
 			uvLength = 3;
 		}
 

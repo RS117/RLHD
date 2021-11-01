@@ -42,6 +42,10 @@ class GpuIntBuffer
 		buffer.put(x).put(y).put(z).put(c);
 	}
 
+	void put(int[] ints) {
+		buffer.put(ints);
+	}
+
 	void flip()
 	{
 		buffer.flip();
