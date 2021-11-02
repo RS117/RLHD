@@ -996,11 +996,15 @@ class SceneUploader
 	static int lightenC;
 	static float dotC;
 
-	// 12 zeroes to replace the duplicated zero calls to vertexBuffer and normalBuffer
+	// 12 zeroes to replace the duplicated zero calls to vertexBuffer
 	final static int[] zeroInts = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-	// same thing but for the uvBuffer
+	// same thing but for the normalBuffer and uvBuffer
 	final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+	// allocate these arrays up front to reduce the garbage created we're writing to the buffers
+	final static int[] twelveIntArray = new int[12];
+	final static float[] twelveFloatArray = new float[12];
 
 	int[] pushFace(Model model, int face, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
 	{
@@ -1222,7 +1226,19 @@ class SceneUploader
 		}
 		else
 		{
-			normalBuffer.put(new float[]{ vnAX, vnAY, vnAZ, 0, vnBX, vnBY, vnBZ, 0, vnCX, vnCY, vnCZ, 0 });
+			twelveFloatArray[0] = vnAX;
+			twelveFloatArray[1] = vnAY;
+			twelveFloatArray[2] = vnAZ;
+			twelveFloatArray[3] = 0;
+			twelveFloatArray[4] = vnBX;
+			twelveFloatArray[5] = vnBY;
+			twelveFloatArray[6] = vnBZ;
+			twelveFloatArray[7] = 0;
+			twelveFloatArray[8] = vnCX;
+			twelveFloatArray[9] = vnCY;
+			twelveFloatArray[10] = vnCZ;
+			twelveFloatArray[11] = 0;
+			normalBuffer.put(twelveFloatArray);
 		}
 
 		int aX = vertexX[triangleA];
@@ -1238,7 +1254,19 @@ class SceneUploader
 		int cZ = vertexZ[triangleC];
 
 		vertexBuffer.ensureCapacity(12);
-		vertexBuffer.put(new int[]{ aX, aY, aZ, packedAlphaPriority | color1, bX, bY, bZ, packedAlphaPriority | color2, cX, cY, cZ, packedAlphaPriority | color3 });
+		twelveIntArray[0] = aX;
+		twelveIntArray[1] = aY;
+		twelveIntArray[2] = aZ;
+		twelveIntArray[3] = packedAlphaPriority | color1;
+		twelveIntArray[4] = bX;
+		twelveIntArray[5] = bY;
+		twelveIntArray[6] = bZ;
+		twelveIntArray[7] = packedAlphaPriority | color2;
+		twelveIntArray[8] = cX;
+		twelveIntArray[9] = cY;
+		twelveIntArray[10] = cZ;
+		twelveIntArray[11] = packedAlphaPriority | color3;
+		vertexBuffer.put(twelveIntArray);
 
 		float[] uv = model.getFaceTextureUVCoordinates();
 
@@ -1248,7 +1276,19 @@ class SceneUploader
 			int idx = face * 6;
 
 			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(new float[]{ packedMaterialData, uv[idx], uv[idx + 1], 0, packedMaterialData, uv[idx + 2], uv[idx + 3], 0, packedMaterialData, uv[idx + 4], uv[idx + 5], 0 });
+			twelveFloatArray[0] = packedMaterialData;
+			twelveFloatArray[1] = uv[idx];
+			twelveFloatArray[2] = uv[idx + 1];
+			twelveFloatArray[3] = 0;
+			twelveFloatArray[4] = packedMaterialData;
+			twelveFloatArray[5] = uv[idx + 2];
+			twelveFloatArray[6] = uv[idx + 3];
+			twelveFloatArray[7] = 0;
+			twelveFloatArray[8] = packedMaterialData;
+			twelveFloatArray[9] = uv[idx + 4];
+			twelveFloatArray[10] = uv[idx + 5];
+			twelveFloatArray[11] = 0;
+			uvBuffer.put(twelveFloatArray);
 			uvLength = 3;
 		}
 		else if (objectProperties != null && objectProperties.getMaterial() != Material.NONE)
@@ -1267,13 +1307,37 @@ class SceneUploader
 				float cU = (cX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
 				float cV = (cZ % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
 
-				uvBuffer.put(new float[]{ packedMaterialData, aU, aV, 0, packedMaterialData, bU, bV, 0, packedMaterialData, cU, cV, 0 });
+				twelveFloatArray[0] = packedMaterialData;
+				twelveFloatArray[1] = aU;
+				twelveFloatArray[2] = aV;
+				twelveFloatArray[3] = 0;
+				twelveFloatArray[4] = packedMaterialData;
+				twelveFloatArray[5] = bU;
+				twelveFloatArray[6] = bV;
+				twelveFloatArray[7] = 0;
+				twelveFloatArray[8] = packedMaterialData;
+				twelveFloatArray[9] = cU;
+				twelveFloatArray[10] = cV;
+				twelveFloatArray[11] = 0;
+				uvBuffer.put(twelveFloatArray);
 				uvLength = 3;
 			}
 			else
 			{
 				// UvType.GEOMETRY
-				uvBuffer.put(new float[]{ packedMaterialData, 0, 0, 0, packedMaterialData, 1, 0, 0, packedMaterialData, 0, 1, 0});
+				twelveFloatArray[0] = packedMaterialData;
+				twelveFloatArray[1] = 0;
+				twelveFloatArray[2] = 0;
+				twelveFloatArray[3] = 0;
+				twelveFloatArray[4] = packedMaterialData;
+				twelveFloatArray[5] = 1;
+				twelveFloatArray[6] = 0;
+				twelveFloatArray[7] = 0;
+				twelveFloatArray[8] = packedMaterialData;
+				twelveFloatArray[9] = 0;
+				twelveFloatArray[10] = 1;
+				twelveFloatArray[11] = 0;
+				uvBuffer.put(twelveFloatArray);
 				uvLength = 3;
 			}
 		}
