@@ -292,10 +292,7 @@ class ProceduralGenerator
 				GroundMaterial groundMaterial = overlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = !overlay.isBlendedAsUnderlay();
-				if (hdPlugin.configGroundTextures)
-				{
-					colorHSL = recolorOverlay(overlay, colorHSL);
-				}
+				colorHSL = recolorOverlay(overlay, colorHSL);
 			}
 			else if (vertexUnderlays[vertex] != 0)
 			{
@@ -303,10 +300,7 @@ class ProceduralGenerator
 				GroundMaterial groundMaterial = underlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = underlay.isBlendedAsOverlay();
-				if (hdPlugin.configGroundTextures)
-				{
-					colorHSL = recolorUnderlay(underlay, colorHSL);
-				}
+				colorHSL = recolorUnderlay(underlay, colorHSL);
 			}
 
 			final int maxBrightness = 55; // reduces overexposure
