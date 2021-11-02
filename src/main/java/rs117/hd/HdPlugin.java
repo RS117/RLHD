@@ -2244,14 +2244,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	/**
 	 * Check is a model is visible and should be drawn.
 	 */
-	private boolean isVisible(Model model, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int _x, int _y, int _z, long hash)
+	private boolean isVisible(Model model, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z)
 	{
+		model.calculateBoundsCylinder();
+
 		final int XYZMag = model.getXYZMag();
-		int zoom = client.get3dZoom();
-		if (configShadowsEnabled && configExpandShadowDraw)
-		{
-			zoom /= 2;
-		}
+		final int bottomY = model.getBottomY();
+		final int zoom = (configShadowsEnabled && configExpandShadowDraw) ? client.get3dZoom() : client.get3dZoom() / 2;
 		final int modelHeight = model.getModelHeight();
 
 		int Rasterizer3D_clipMidX2 = client.getRasterizer3D_clipMidX2();
@@ -2259,27 +2258,28 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		int Rasterizer3D_clipNegativeMidY = client.getRasterizer3D_clipNegativeMidY();
 		int Rasterizer3D_clipMidY2 = client.getRasterizer3D_clipMidY2();
 
-		int var11 = yawCos * _z - yawSin * _x >> 16;
-		int var12 = pitchSin * _y + pitchCos * var11 >> 16;
+		int var11 = yawCos * z - yawSin * x >> 16;
+		int var12 = pitchSin * y + pitchCos * var11 >> 16;
 		int var13 = pitchCos * XYZMag >> 16;
-		int var14 = var12 + var13;
-		if (var14 > 50)
+		int depth = var12 + var13;
+		if (depth > 50)
 		{
-			int var15 = _z * yawSin + yawCos * _x >> 16;
-			int var16 = (var15 - XYZMag) * zoom;
-			if (var16 / var14 < Rasterizer3D_clipMidX2)
+			int rx = z * yawSin + yawCos * x >> 16;
+			int var16 = (rx - XYZMag) * zoom;
+			if (var16 / depth < Rasterizer3D_clipMidX2)
 			{
-				int var17 = (var15 + XYZMag) * zoom;
-				if (var17 / var14 > Rasterizer3D_clipNegativeMidX)
+				int var17 = (rx + XYZMag) * zoom;
+				if (var17 / depth > Rasterizer3D_clipNegativeMidX)
 				{
-					int var18 = pitchCos * _y - var11 * pitchSin >> 16;
-					int var19 = pitchSin * XYZMag >> 16;
-					int var20 = (var18 + var19) * zoom;
-					if (var20 / var14 > Rasterizer3D_clipNegativeMidY)
+					int ry = pitchCos * y - var11 * pitchSin >> 16;
+					int yheight = pitchSin * XYZMag >> 16;
+					int ybottom = (pitchCos * bottomY >> 16) + yheight;
+					int var20 = (ry + ybottom) * zoom;
+					if (var20 / depth > Rasterizer3D_clipNegativeMidY)
 					{
-						int var21 = (pitchCos * modelHeight >> 16) + var19;
-						int var22 = (var18 - var21) * zoom;
-						return var22 / var14 < Rasterizer3D_clipMidY2;
+						int ytop = (pitchCos * modelHeight >> 16) + yheight;
+						int var22 = (ry - ytop) * zoom;
+						return var22 / depth < Rasterizer3D_clipMidY2;
 					}
 				}
 			}
@@ -2317,14 +2317,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 		int drawObjectCutoff = configLevelOfDetail.getDistance() * Perspective.LOCAL_TILE_SIZE;
 
-		// Model may be in the scene buffer
-		if (renderable instanceof Model && ((Model) renderable).getSceneId() == sceneUploader.sceneId)
-		{
-			Model model = (Model) renderable;
+		Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
+		if (model == null) {
+			return;
+		}
 
+		// Model may be in the scene buffer
+		if (model.getSceneId() == sceneUploader.sceneId)
+		{
 			model.calculateBoundsCylinder();
 
-			if (!isVisible(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash))
+			if (!isVisible(model, pitchSin, pitchCos, yawSin, yawCos, x, y, z))
 			{
 				return;
 			}
@@ -2357,61 +2360,57 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		else
 		{
 			// Temporary model (animated or otherwise not a static Model on the scene)
-			Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
-			if (model != null)
+			// Apply height to renderable from the model
+			if (model != renderable)
 			{
-				// Apply height to renderable from the model
-				if (model != renderable)
-				{
-					renderable.setModelHeight(model.getModelHeight());
-				}
-
-				model.calculateBoundsCylinder();
-
-				if (!isVisible(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash))
-				{
-					return;
-				}
-
-				if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
-				{
-					return;
-				}
-
-				model.calculateExtreme(orientation);
-				client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
-
-				int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
-				vertexBuffer.ensureCapacity(12 * faceCount);
-				uvBuffer.ensureCapacity(12 * faceCount);
-				normalBuffer.ensureCapacity(12 * faceCount);
-
-				int vertexLength = 0;
-				int uvLength = 0;
-				int[] bufferLengths;
-
-				for (int face = 0; face < faceCount; ++face)
-				{
-					bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
-					vertexLength += bufferLengths[0];
-					uvLength += bufferLengths[1];
-				}
-
-				GpuIntBuffer b = bufferForTriangles(faceCount);
-
-				b.ensureCapacity(8);
-				IntBuffer buffer = b.getBuffer();
-				buffer.put(tempOffset);
-				buffer.put(uvLength > 0 ? tempUvOffset : -1);
-				buffer.put(vertexLength / 3);
-				buffer.put(targetBufferOffset);
-				buffer.put((model.getRadius() << 12) | orientation);
-				buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
-
-				tempOffset += vertexLength;
-				tempUvOffset += uvLength;
-				targetBufferOffset += vertexLength;
+				renderable.setModelHeight(model.getModelHeight());
 			}
+
+			model.calculateBoundsCylinder();
+
+			if (!isVisible(model, pitchSin, pitchCos, yawSin, yawCos, x, y, z))
+			{
+				return;
+			}
+
+			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
+			{
+				return;
+			}
+
+			model.calculateExtreme(orientation);
+			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
+
+			int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
+			vertexBuffer.ensureCapacity(12 * faceCount);
+			uvBuffer.ensureCapacity(12 * faceCount);
+			normalBuffer.ensureCapacity(12 * faceCount);
+
+			int vertexLength = 0;
+			int uvLength = 0;
+			int[] bufferLengths;
+
+			for (int face = 0; face < faceCount; ++face)
+			{
+				bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
+				vertexLength += bufferLengths[0];
+				uvLength += bufferLengths[1];
+			}
+
+			GpuIntBuffer b = bufferForTriangles(faceCount);
+
+			b.ensureCapacity(8);
+			IntBuffer buffer = b.getBuffer();
+			buffer.put(tempOffset);
+			buffer.put(uvLength > 0 ? tempUvOffset : -1);
+			buffer.put(vertexLength / 3);
+			buffer.put(targetBufferOffset);
+			buffer.put((model.getRadius() << 12) | orientation);
+			buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
+
+			tempOffset += vertexLength;
+			tempUvOffset += uvLength;
+			targetBufferOffset += vertexLength;
 		}
 	}
 
