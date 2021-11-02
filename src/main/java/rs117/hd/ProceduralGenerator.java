@@ -1148,7 +1148,7 @@ class ProceduralGenerator
 		int x = tile.getSceneLocation().getX();
 		int y = tile.getSceneLocation().getY();
 
-		if (!hdPlugin.configGroundBlending || (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
+		if ((tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
 			(tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() != null))
 		{
 			// skip tiles with textures provided by default
