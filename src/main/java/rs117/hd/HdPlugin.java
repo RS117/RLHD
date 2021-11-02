@@ -711,7 +711,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				case "MAX_MATERIALS":
 					return String.format("#define %s %d\n", key, MAX_MATERIALS);
 				case "CONST_MACOS_INTEL_WORKAROUND":
-					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
+					boolean isAppleM1 = OSType.getOSType() == OSType.MacOS && System.getProperty("os.arch").equals("aarch64");
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() && !isAppleM1 ? 1 : 0);
 				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES":
 					return "return " + generateFetchMaterialCases(0, MAX_MATERIALS) + ";";
 			}
