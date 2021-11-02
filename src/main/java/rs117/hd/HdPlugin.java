@@ -2250,7 +2250,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		final int XYZMag = model.getXYZMag();
 		final int bottomY = model.getBottomY();
-		final int zoom = (configShadowsEnabled && configExpandShadowDraw) ? client.get3dZoom() : client.get3dZoom() / 2;
+		final int zoom = (configShadowsEnabled && configExpandShadowDraw) ? client.get3dZoom() / 2 : client.get3dZoom();
 		final int modelHeight = model.getModelHeight();
 
 		int Rasterizer3D_clipMidX2 = client.getRasterizer3D_clipMidX2();
