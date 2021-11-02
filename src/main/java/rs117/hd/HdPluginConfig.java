@@ -444,6 +444,7 @@ public interface HdPluginConfig extends Config
 			keyName = "macosIntelWorkaround",
 			name = "Fix shading on MacOS with Intel",
 			description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
+			warning = "This setting can cause RuneLite to crash, and can be difficult to revert. Only enable it if you\nare seeing black patches. Are you sure you want to enable the setting?",
 			position = 301,
 			section = workaroundSettings
 	)
