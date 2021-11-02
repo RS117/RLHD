@@ -430,26 +430,38 @@ public interface HdPluginConfig extends Config
 
 
 
-	/*====== Workaround settings ======*/
+	/*====== Miscellaneous settings ======*/
 
 	@ConfigSection(
-			name = "Workarounds",
-			description = "Workaround settings",
-			position = 300,
-			closedByDefault = true
+		name = "Miscellaneous",
+		description = "Miscellaneous settings",
+		position = 300,
+		closedByDefault = true
 	)
-	String workaroundSettings = "workaroundSettings";
+	String miscellaneousSettings = "miscellaneousSettings";
 
 	@ConfigItem(
-			keyName = "macosIntelWorkaround",
-			name = "Fix shading on MacOS with Intel",
-			description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
-			warning = "This setting can cause RuneLite to crash, and can be difficult to revert. Only enable it if you\nare seeing black patches. Are you sure you want to enable the setting?",
-			position = 301,
-			section = workaroundSettings
+		keyName = "macosIntelWorkaround",
+		name = "Fix shading on MacOS with Intel",
+		description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
+		warning = "This setting can cause RuneLite to crash, and can be difficult to revert. Only enable it if you\nare seeing black patches. Are you sure you want to enable the setting?",
+		position = 301,
+		section = miscellaneousSettings
 	)
 	default boolean macosIntelWorkaround()
 	{
 		return false;
+	}
+
+	@ConfigItem(
+		keyName = "hdInfernalTexture",
+		name = "HD Infernal Texture",
+		description = "Replaces the OSRS infernal cape texture with a high detail one.",
+		position = 302,
+		section = miscellaneousSettings
+	)
+	default boolean hdInfernalTexture()
+	{
+		return true;
 	}
 }

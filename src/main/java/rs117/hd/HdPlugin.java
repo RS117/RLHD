@@ -400,6 +400,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
 	public boolean configUnlockFps = false;
+	public boolean configHdInfernalTexture = true;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -422,6 +423,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
 		configUnlockFps = config.unlockFps();
+		configHdInfernalTexture = config.hdInfernalTexture();
 
 		clientThread.invoke(() ->
 		{
@@ -2225,6 +2227,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					client.setUnlockedFps(configUnlockFps);
 					invokeOnMainThread(() -> gl.setSwapInterval(configUnlockFps ? 1 : 0));
 				});
+				break;
+			case "hdInfernalTexture":
+				configHdInfernalTexture = config.hdInfernalTexture();
 				break;
 		}
 	}

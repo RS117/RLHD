@@ -232,6 +232,8 @@ public enum Material
 	BARK(245),
 	WOOD_GRAIN(247),
 
+	HD_INFERNAL_CAPE(248, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 3f)),
+
 	// water/fluid variants
 	WATER(7001),
 	SWAMP_WATER(7025),

@@ -1312,6 +1312,10 @@ class SceneUploader
 
 	private int packMaterialData(int materialId, boolean isOverlay)
 	{
+		if (materialId == Material.getIndex(Material.INFERNAL_CAPE) && hdPlugin.configHdInfernalTexture)
+		{
+			materialId = Material.getIndex(Material.HD_INFERNAL_CAPE);
+		}
 		return materialId << 1 | (isOverlay ? 0b1 : 0b0);
 	}
 
