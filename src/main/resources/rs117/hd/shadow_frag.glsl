@@ -24,7 +24,7 @@
  */
 #version 330
 
-#define MAX_MATERIALS 200
+#include MAX_MATERIALS
 
 struct Material
 {

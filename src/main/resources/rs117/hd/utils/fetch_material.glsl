@@ -28,11 +28,8 @@
 #if CONST_MACOS_INTEL_WORKAROUND
     // Workaround wrapper for drivers that do not support dynamic indexing,
     // particularly Intel drivers on MacOS
-    Material fetchMaterial(int index) {
-        switch (index) {
-            #include MACOS_INTEL_WORKAROUND_MATERIAL_CASES
-            default: return material[0];
-        }
+    Material fetchMaterial(int i) {
+        #include MACOS_INTEL_WORKAROUND_MATERIAL_CASES
     }
 #else
     #define fetchMaterial(index) material[index]
