@@ -25,7 +25,7 @@
  */
 #version 330
 
-#define MAX_MATERIALS 200
+#include MAX_MATERIALS
 #define MAX_LIGHTS 100
 
 layout(std140) uniform uniforms {

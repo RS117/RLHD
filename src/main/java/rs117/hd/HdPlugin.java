@@ -150,7 +150,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	static final int MAX_DISTANCE = 90;
 	static final int MAX_FOG_DEPTH = 100;
 	// MAX_MATERIALS and MAX_LIGHTS must match the #defined values in the HD and shadow fragment shaders
-	private static final int MAX_MATERIALS = 200;
+	private static final int MAX_MATERIALS = Material.values().length;
 	private static final int MAX_LIGHTS = 100;
 	private static final int MATERIAL_PROPERTIES_COUNT = 12;
 	private static final int LIGHT_PROPERTIES_COUNT = 8;
@@ -400,6 +400,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
 	public boolean configUnlockFps = false;
+	public boolean configHdInfernalTexture = true;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -422,6 +423,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
 		configUnlockFps = config.unlockFps();
+		configHdInfernalTexture = config.hdInfernalTexture();
 
 		clientThread.invoke(() ->
 		{
@@ -685,6 +687,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		return configManager.getConfig(HdPluginConfig.class);
 	}
 
+	private String generateFetchMaterialCases(int from, int to)
+	{
+		int length = to - from;
+		if (length == 1)
+		{
+			return "material[" + from + "]";
+		}
+		int middle = from + length / 2;
+		return "i < " + middle +
+			" ? " + generateFetchMaterialCases(from, middle) +
+			" : " + generateFetchMaterialCases(middle, to);
+	}
+
 	private void initProgram() throws ShaderException
 	{
 		String versionHeader = OSType.getOSType() == OSType.Linux ? LINUX_VERSION_HEADER : WINDOWS_VERSION_HEADER;
@@ -695,18 +710,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			{
 				case "version_header":
 					return versionHeader;
+				case "MAX_MATERIALS":
+					return String.format("#define %s %d\n", key, MAX_MATERIALS);
 				case "CONST_MACOS_INTEL_WORKAROUND":
-					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
-				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES": {
-					StringBuilder sb = new StringBuilder(MAX_MATERIALS * (
-						"case : return material[];".length() +
-						((int) Math.log10(MAX_MATERIALS) + 1) * 2));
-					for (int i = 0; i < MAX_MATERIALS; i++)
-					{
-						sb.append("case ").append(i).append(": return material[").append(i).append("];\n");
-					}
-					return sb.toString();
-				}
+					boolean isAppleM1 = OSType.getOSType() == OSType.MacOS && System.getProperty("os.arch").equals("aarch64");
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() && !isAppleM1 ? 1 : 0);
+				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES":
+					return "return " + generateFetchMaterialCases(0, MAX_MATERIALS) + ";";
 			}
 			return null;
 		});
@@ -2217,6 +2227,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					client.setUnlockedFps(configUnlockFps);
 					invokeOnMainThread(() -> gl.setSwapInterval(configUnlockFps ? 1 : 0));
 				});
+				break;
+			case "hdInfernalTexture":
+				configHdInfernalTexture = config.hdInfernalTexture();
 				break;
 		}
 	}
