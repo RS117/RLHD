@@ -25,7 +25,7 @@
  */
 #version 330
 
-#define MAX_MATERIALS 200
+#include MAX_MATERIALS
 #define MAX_LIGHTS 100
 
 layout(std140) uniform uniforms {
@@ -115,7 +115,7 @@ in vec3 normals;
 in vec3 position;
 in vec3 texBlend;
 flat in ivec3 materialId;
-flat in ivec3 waterData;
+flat in ivec3 terrainData;
 flat in ivec3 isOverlay;
 
 out vec4 FragColor;
@@ -144,11 +144,13 @@ void main() {
     Material material3 = fetchMaterial(materialId.z);
 
     // water data
-    int waterDepth1 = waterData.x >> 5;
-    int waterDepth2 = waterData.y >> 5;
-    int waterDepth3 = waterData.z >> 5;
+    int isTerrain = terrainData.x & 1; // 1 = 0b1
+    int terrainPlane = isTerrain == 1 ? (terrainData.x >> 1) & 3 : -1; // 3 = 0b11
+    int waterDepth1 = terrainData.x >> 7;
+    int waterDepth2 = terrainData.y >> 7;
+    int waterDepth3 = terrainData.z >> 7;
     float waterDepth = waterDepth1 * texBlend.x + waterDepth2 * texBlend.y + waterDepth3 * texBlend.z;
-    int underwaterType = waterData.x & 31; // 31 = 0b11111
+    int underwaterType = isTerrain == 1 ? (terrainData.x >> 3) & 15 : 0; // 15 = 0b1111
 
     // set initial texture map ids
     int diffuseMapId1 = material1.diffuseMapId;
@@ -257,7 +259,7 @@ void main() {
             waterNormalStrength = 0.05;
             waterBaseOpacity = 0.9;
             waterFresnelAmount = 0.3;
-            waterSurfaceColor = vec3(37, 38, 35) / 255.0;
+            waterSurfaceColor = vec3(22, 23, 13) / 255.0;
             waterFoamColor = vec3(106, 108, 100);
             waterHasFoam = 1;
             waterDuration = 1.6;

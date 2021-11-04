@@ -31,6 +31,16 @@ import rs117.hd.HDUtils;
 @Getter
 public enum Environment
 {
+	// Wilderness
+	REVENANT_CAVES(Area.REVENANT_CAVES, new Properties()
+		.setFogColor("#081F1C")
+		.setFogDepth(20)
+		.setAmbientColor("#AECFC9")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#AECFC9")
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
+	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
 		.setFogColor("#252C37")
 		.setFogDepth(80)
@@ -71,10 +81,12 @@ public enum Environment
 	VARROCK_MUSEUM_BASEMENT(Area.VARROCK_MUSEUM_BASEMENT, new Properties()
 		.setFogColor("#131B26")
 		.setFogDepth(20)
-		.setAmbientColor("#CBC2B2")
-		.setAmbientStrength(1.0f)
-		.setDirectionalColor("#4C78B6")
-		.setDirectionalStrength(1.0f)),
+		.setAmbientColor("#B59B79")
+		.setAmbientStrength(2.0f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(0.5f)
+		.setLightDirection(270f, 0f)
+	),
 	// A Soul's Bane
 	TOLNA_DUNGEON_ANGER(Area.TOLNA_DUNGEON_ANGER, new Properties()
 		.setFogColor("#290000")
@@ -83,6 +95,7 @@ public enum Environment
 		.setAmbientStrength(1.3f)
 		.setDirectionalColor("#CB4848")
 		.setDirectionalStrength(1.8f)
+		.setLightDirection(270f, 0f)
 	),
 	TOLNA_DUNGEON_FEAR(Area.TOLNA_DUNGEON_FEAR, new Properties()
 		.setFogColor("#000B0F")
@@ -91,6 +104,7 @@ public enum Environment
 		.setAmbientStrength(1.3f)
 		.setDirectionalColor("#4C78B6")
 		.setDirectionalStrength(1.5f)
+		.setLightDirection(270f, 0f)
 	),
 	TOLNA_DUNGEON_CONFUSION(Area.TOLNA_DUNGEON_CONFUSION, new Properties()
 		.setFogColor("#2E0C23")
@@ -99,6 +113,7 @@ public enum Environment
 		.setAmbientStrength(1.3f)
 		.setDirectionalColor("#4E9DD0")
 		.setDirectionalStrength(1.5f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Dorgesh-Kaan
@@ -109,6 +124,7 @@ public enum Environment
 		.setAmbientStrength(1.0f)
 		.setDirectionalColor("#A29B71")
 		.setDirectionalStrength(1.5f)
+		.setLightDirection(270f, 0f)
 	),
 
 	THE_INFERNO(Area.THE_INFERNO, new Properties()
@@ -119,7 +135,8 @@ public enum Environment
 		.setAmbientColor(240, 184, 184)
 		.setAmbientStrength(1.7f)
 		.setDirectionalColor(255, 246, 202)
-		.setDirectionalStrength(0f)
+		.setDirectionalStrength(0.7f)
+		.setLightDirection(270f, 0f)
 	),
 	TZHAAR(Area.TZHAAR, new Properties()
 		.setFogColor("#1A0808")
@@ -128,6 +145,7 @@ public enum Environment
 		.setAmbientStrength(0.8f)
 		.setDirectionalColor("#FFA400")
 		.setDirectionalStrength(1.8f)
+		.setLightDirection(270f, 0f)
 	),
 
 
@@ -140,6 +158,7 @@ public enum Environment
 		.setAmbientColor("#C4D5EA")
 		.setDirectionalStrength(1.0f)
 		.setDirectionalColor("#A0BBE2")
+		.setLightDirection(270f, 0f)
 	),
 	HALLOWED_SEPULCHRE_FLOOR_1(Area.HALLOWED_SEPULCHRE_FLOOR_1, new Properties()
 		.setFogColor(17, 28, 26)
@@ -148,6 +167,7 @@ public enum Environment
 		.setAmbientColor(155, 187, 177)
 		.setDirectionalStrength(1.8f)
 		.setDirectionalColor(117, 231, 255)
+		.setLightDirection(270f, 0f)
 	),
 	HALLOWED_SEPULCHRE_FLOOR_2(Area.HALLOWED_SEPULCHRE_FLOOR_2, new Properties()
 		.setFogColor(17, 28, 27)
@@ -156,6 +176,7 @@ public enum Environment
 		.setAmbientColor(160, 191, 191)
 		.setDirectionalStrength(1.5f)
 		.setDirectionalColor(116, 214, 247)
+		.setLightDirection(270f, 0f)
 	),
 	HALLOWED_SEPULCHRE_FLOOR_3(Area.HALLOWED_SEPULCHRE_FLOOR_3, new Properties()
 		.setFogColor(18, 28, 29)
@@ -164,6 +185,7 @@ public enum Environment
 		.setAmbientColor(165, 195, 205)
 		.setDirectionalStrength(1.5f)
 		.setDirectionalColor(115, 196, 240)
+		.setLightDirection(270f, 0f)
 	),
 	HALLOWED_SEPULCHRE_FLOOR_4(Area.HALLOWED_SEPULCHRE_FLOOR_4, new Properties()
 		.setFogColor(18, 27, 31)
@@ -172,6 +194,7 @@ public enum Environment
 		.setAmbientColor(170, 199, 220)
 		.setDirectionalStrength(1.5f)
 		.setDirectionalColor(114, 178, 233)
+		.setLightDirection(270f, 0f)
 	),
 	HALLOWED_SEPULCHRE_FLOOR_5(Area.HALLOWED_SEPULCHRE_FLOOR_5, new Properties()
 		.setFogColor(19, 27, 33)
@@ -180,6 +203,7 @@ public enum Environment
 		.setAmbientColor(175, 202, 234)
 		.setDirectionalStrength(1.5f)
 		.setDirectionalColor(113, 160, 226)
+		.setLightDirection(270f, 0f)
 	),
 	VER_SINHAZA(Area.VER_SINHAZA, new Properties()
 		.setFogColor("#1E314B")
@@ -197,6 +221,7 @@ public enum Environment
 		.setAmbientColor("#7575EA")
 		.setDirectionalStrength(1.0f)
 		.setDirectionalColor("#DDA6A6")
+		.setLightDirection(270f, 0f)
 	),
 	THEATRE_OF_BLOOD(Area.THEATRE_OF_BLOOD, new Properties()
 		.setFogColor("#0E0C2C")
@@ -210,9 +235,10 @@ public enum Environment
 		.setFogColor(0, 0, 0)
 		.setFogDepth(20)
 		.setAmbientColor(181, 143, 124)
-		.setAmbientStrength(2.0f)
+		.setAmbientStrength(3.5f)
 		.setDirectionalColor(255, 200, 117)
-		.setDirectionalStrength(0.25f)
+		.setDirectionalStrength(0.0f)
+		.setLightDirection(270f, 0f)
 	),
 	BARROWS_TUNNELS(Area.BARROWS_TUNNELS, new Properties()
 		.setFogColor(0, 0, 0)
@@ -221,6 +247,7 @@ public enum Environment
 		.setAmbientStrength(3.0f)
 		.setDirectionalColor(255, 200, 117)
 		.setDirectionalStrength(0.5f)
+		.setLightDirection(270f, 0f)
 	),
 	BARROWS(Area.BARROWS, new Properties()
 		.setFogColor("#242D3A")
@@ -257,9 +284,9 @@ public enum Environment
 		.setFogColor(15, 14, 13)
 		.setFogDepth(30)
 		.setAmbientColor("#615C57")
-		.setAmbientStrength(0.5f)
+		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#FFBCB7")
-		.setDirectionalStrength(1.5f)
+		.setDirectionalStrength(2.0f)
 		.enableLightning()
 	),
 	DRAYNOR_MANOR_BASEMENT(Area.DRAYNOR_MANOR_BASEMENT, new Properties()
@@ -269,8 +296,19 @@ public enum Environment
 		.setAmbientStrength(1.0f)
 		.setDirectionalColor(76, 120, 182)
 		.setDirectionalStrength(0.0f)
+		.setLightDirection(270f, 0f)
 	),
 	DRAYNOR(Area.DRAYNOR, new Properties()),
+
+	MISTHALIN_MYSTERY_MANOR(Area.MISTHALIN_MYSTERY_MANOR, new Properties()
+		.setFogColor(15, 14, 13)
+		.setFogDepth(30)
+		.setAmbientColor("#615C57")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#FFBCB7")
+		.setDirectionalStrength(2.0f)
+		.enableLightning()
+	),
 
 	MOTHERLODE_MINE(Area.MOTHERLODE_MINE, new Properties()
 		.setFogColor("#241809")
@@ -278,7 +316,8 @@ public enum Environment
 		.setAmbientColor("#AAAFB6")
 		.setAmbientStrength(4.0f)
 		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(0.0f)
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	FALADOR(Area.FALADOR, new Properties()),
@@ -286,10 +325,11 @@ public enum Environment
 	GAMES_ROOM(Area.GAMES_ROOM, new Properties()
 		.setFogColor("#190D02")
 		.setFogDepth(20)
-		.setAmbientColor(162, 151, 148)
-		.setAmbientStrength(1.2f)
-		.setDirectionalColor(138, 158, 182)
-		.setDirectionalStrength(0.25f)
+		.setAmbientColor(181, 155, 121)
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor(162, 151, 148)
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	SOUL_WARS_RED_TEAM(Area.SOUL_WARS_RED_BASE, new Properties()
@@ -307,6 +347,7 @@ public enum Environment
 		.setAmbientStrength(1.0f)
 		.setDirectionalColor(86, 86, 86)
 		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 	KHARIDIAN_DESERT_DEEP(Area.KHARIDIAN_DESERT_DEEP, new Properties()
 		.setFogColor("#CDAF7A")
@@ -344,9 +385,10 @@ public enum Environment
 		.setFogColor("#190D02")
 		.setFogDepth(40)
 		.setAmbientColor(181, 155, 121)
-		.setAmbientStrength(0.6f)
+		.setAmbientStrength(1.0f)
 		.setDirectionalColor(138, 158, 182)
-		.setDirectionalStrength(0.25f)
+		.setDirectionalStrength(0.75f)
+		.setLightDirection(270f, 0f)
 	),
 
 	GIELINOR_SNOWY_NORTHERN_REGION(Area.GIELINOR_SNOWY_NORTHERN_REGION, new Properties()
@@ -375,7 +417,6 @@ public enum Environment
 		.setAmbientStrength(0.9f)
 		.setDirectionalStrength(1.0f)
 		.setGroundFog(-1200, -1600, 0.5f)
-		.setGroundFog(-1200, -1600, 0.5f)
 	),
 	FREMENNIK_PROVINCE(Area.FREMENNIK_PROVINCE, new Properties()
 		.setFogColor("#969CA2")
@@ -392,9 +433,10 @@ public enum Environment
 		.setFogColor("#190D02")
 		.setFogDepth(40)
 		.setAmbientColor("#7891B5")
-		.setAmbientStrength(0.9f)
+		.setAmbientStrength(0.5f)
 		.setDirectionalColor(76, 120, 182)
-		.setDirectionalStrength(0.0f)
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 	KARAMJA(Area.KARAMJA, new Properties()),
 
@@ -415,6 +457,7 @@ public enum Environment
 		.setAmbientStrength(0.3f)
 		.setDirectionalColor(146, 209, 250)
 		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 		.enableLightning()
 	),
 	GOD_WARS_DUNGEON(Area.GOD_WARS_DUNGEON, new Properties()
@@ -424,6 +467,7 @@ public enum Environment
 		.setAmbientStrength(0.5f)
 		.setDirectionalColor(146, 209, 250)
 		.setDirectionalStrength(1.8f)
+		.setLightDirection(270f, 0f)
 	),
 
 	TAR_SWAMP(Area.TAR_SWAMP, new Properties()
@@ -449,11 +493,11 @@ public enum Environment
 	),
 	POSION_WASTE(Area.POISON_WASTE, new Properties()
 		.setFogColor(50, 55, 47)
-		.setFogDepth(50)
+		.setFogDepth(30)
 		.setAmbientColor(192, 219, 173)
-		.setAmbientStrength(1.5f)
+		.setAmbientStrength(1.0f)
 		.setDirectionalColor(173, 176, 139)
-		.setDirectionalStrength(1.0f)
+		.setDirectionalStrength(2.0f)
 	),
 	TIRANNWN(Area.TIRANNWN, new Properties()
 		.setFogColor("#99D8C8")
@@ -482,6 +526,7 @@ public enum Environment
 		.setAmbientStrength(0.9f)
 		.setDirectionalColor("#97DDFF")
 		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Tree Gnome Stronghold
@@ -491,10 +536,11 @@ public enum Environment
 	CASTLE_WARS_UNDERGROUND(Area.CASTLE_WARS_UNDERGROUND, new Properties()
 		.setFogColor("#190D02")
 		.setFogDepth(40)
-		.setAmbientColor("#FFD79C")
-		.setAmbientStrength(1.3f)
-		.setDirectionalColor("#4C78B6")
-		.setDirectionalStrength(0.0f)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Last Man Standing
@@ -517,6 +563,7 @@ public enum Environment
 		.setAmbientStrength(3.0f)
 		.setDirectionalColor("#9AEAFF")
 		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 	KOUREND_CATACOMBS(Area.KOUREND_CATACOMBS, new Properties()
 		.setFogColor("#0E0022")
@@ -575,6 +622,7 @@ public enum Environment
 		.setAmbientColor("#DB6FFF")
 		.setDirectionalStrength(3.0f)
 		.setDirectionalColor("#57FF00")
+		.setLightDirection(270f, 0f)
 	),
 	ZANARIS(Area.ZANARIS, new Properties()
 		.setFogColor(22, 63, 71)
@@ -583,6 +631,7 @@ public enum Environment
 		.setAmbientStrength(0.5f)
 		.setDirectionalColor(245, 214, 122)
 		.setDirectionalStrength(1.3f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Dragon Slayer II
@@ -618,6 +667,7 @@ public enum Environment
 		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#78FFE3")
 		.setDirectionalStrength(3.0f)
+		.setLightDirection(270f, 0f)
 	),
 	THE_GAUNTLET_CORRUPTED(Area.THE_GAUNTLET_CORRUPTED, new Properties()
 		.setFogColor("#090606")
@@ -626,6 +676,7 @@ public enum Environment
 		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#FF7878")
 		.setDirectionalStrength(3.0f)
+		.setLightDirection(270f, 0f)
 	),
 	THE_GAUNTLET_LOBBY(Area.THE_GAUNTLET_LOBBY, new Properties()
 		.setFogColor("#090606")
@@ -634,6 +685,7 @@ public enum Environment
 		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#78FFE3")
 		.setDirectionalStrength(3.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Islands
@@ -661,6 +713,7 @@ public enum Environment
 		.setAmbientStrength(1.2f)
 		.setAmbientColor(255, 255, 255)
 		.setDirectionalStrength(0.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Fishing Trawler
@@ -674,6 +727,7 @@ public enum Environment
 		.setAmbientColor("#C9B9F7")
 		.setDirectionalStrength(0.0f)
 		.setDirectionalColor("#6DC5FF")
+		.setLightDirection(270f, 0f)
 	),
 
 	// Tempoross
@@ -687,6 +741,17 @@ public enum Environment
 		.enableLightning()
 	),
 
+	// Death's office
+	DEATHS_OFFICE(Area.DEATHS_OFFICE, new Properties()
+		.setFogColor("#000000")
+		.setFogDepth(20)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(4.0f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(0.0f)
+		.setLightDirection(270f, 0f)
+	),
+
 	// Chambers of Xeric
 	CHAMBERS_OF_XERIC(Area.CHAMBERS_OF_XERIC, new Properties()
 		.setFogColor("#122717")
@@ -695,6 +760,7 @@ public enum Environment
 		.setAmbientColor("#7897C3")
 		.setDirectionalStrength(1.0f)
 		.setDirectionalColor("#ACFF68")
+		.setLightDirection(270f, 0f)
 	),
 
 	// Nightmare of Ashihama
@@ -705,6 +771,7 @@ public enum Environment
 		.setAmbientColor("#9A5DFD")
 		.setDirectionalStrength(2.0f)
 		.setDirectionalColor("#00FF60")
+		.setLightDirection(270f, 0f)
 	),
 
 	// Underwater areas
@@ -725,6 +792,7 @@ public enum Environment
 		.setAmbientColor("#255590")
 		.setDirectionalStrength(2.5f)
 		.setDirectionalColor("#71A3D0")
+		.setLightDirection(270f, 0f)
 		.setGroundFog(-800, -1100, 0.5f)
 	),
 	FOSSIL_ISLAND_UNDERWATER_AREA(Area.FOSSIL_ISLAND_UNDERWATER_AREA, new Properties()
@@ -734,6 +802,7 @@ public enum Environment
 		.setAmbientColor("#255590")
 		.setDirectionalStrength(5.0f)
 		.setDirectionalColor("#71A3D0")
+		.setLightDirection(270f, 0f)
 		.setGroundFog(-400, -750, 0.5f)
 	),
 
@@ -745,6 +814,7 @@ public enum Environment
 		.setAmbientStrength(3.0f)
 		.setDirectionalColor("#CAB6CD")
 		.setDirectionalStrength(0.7f)
+		.setLightDirection(270f, 0f)
 	),
 
 	// Runecrafting altars
@@ -757,7 +827,19 @@ public enum Environment
 		.setAmbientColor("#FFFFFF")
 		.setAmbientStrength(0.2f)
 		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(3.0f)),
+		.setDirectionalStrength(3.0f)
+		.setLightDirection(270f, 0f)
+	),
+
+	TARNS_LAIR(Area.TARNS_LAIR, new Properties()
+		.setFogColor("#241809")
+		.setFogDepth(40)
+		.setAmbientColor("#AAAFB6")
+		.setAmbientStrength(1.5f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
+	),
 
 	// Random events
 	CLASSROOM(Area.RANDOM_EVENT_CLASSROOM, new Properties()),
@@ -798,9 +880,10 @@ public enum Environment
 		.setFogColor("#241809")
 		.setFogDepth(40)
 		.setAmbientColor("#AAAFB6")
-		.setAmbientStrength(3.0f)
+		.setAmbientStrength(1.5f)
 		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(0.0f)
+		.setDirectionalStrength(1.0f)
+		.setLightDirection(270f, 0f)
 	),
 
 	;
@@ -824,6 +907,8 @@ public enum Environment
 	private final int groundFogStart;
 	private final int groundFogEnd;
 	private final float groundFogOpacity;
+	private final float lightPitch;
+	private final float lightYaw;
 
 	private static class Properties
 	{
@@ -845,6 +930,8 @@ public enum Environment
 		private int groundFogStart = -200;
 		private int groundFogEnd = -500;
 		private float groundFogOpacity = 0;
+		private float lightPitch = -128f;
+		private float lightYaw = 55f;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -944,6 +1031,13 @@ public enum Environment
 			this.lightningEnabled = true;
 			return this;
 		}
+
+		public Properties setLightDirection(float pitch, float yaw)
+		{
+			this.lightPitch = pitch;
+			this.lightYaw = yaw;
+			return this;
+		}
 	}
 
 	Environment(Area area, Properties properties)
@@ -967,6 +1061,8 @@ public enum Environment
 		this.groundFogStart = properties.groundFogStart;
 		this.groundFogEnd = properties.groundFogEnd;
 		this.groundFogOpacity = properties.groundFogOpacity;
+		this.lightPitch = properties.lightPitch;
+		this.lightYaw = properties.lightYaw;
 	}
 
 	private static float[] rgb(int r, int g, int b)

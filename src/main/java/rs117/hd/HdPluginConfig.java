@@ -114,10 +114,22 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "unlockFps",
+		name = "Unlock FPS",
+		description = "Removes the 50 FPS cap for camera movement",
+		position = 5,
+		section = generalSettings
+	)
+	default boolean unlockFps()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "colorBlindMode",
 		name = "Colorblindness Correction",
 		description = "Adjusts colors to account for colorblindness",
-		position = 5,
+		position = 6,
 		section = generalSettings
 	)
 	default ColorBlindMode colorBlindMode()
@@ -129,7 +141,7 @@ public interface HdPluginConfig extends Config
 		keyName = "flashingEffects",
 		name = "Flashing Effects",
 		description = "Displays fast flashing effects, such as lightning, in certain areas.",
-		position = 6,
+		position = 7,
 		section = generalSettings
 	)
 	default boolean flashingEffects()
@@ -141,7 +153,7 @@ public interface HdPluginConfig extends Config
 		keyName = "saturation",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
-		position = 7,
+		position = 8,
 		section = generalSettings
 	)
 	default Saturation saturation()
@@ -153,7 +165,7 @@ public interface HdPluginConfig extends Config
 		keyName = "contrast",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
-		position = 8,
+		position = 9,
 		section = generalSettings
 	)
 	default Contrast contrast()
@@ -169,7 +181,7 @@ public interface HdPluginConfig extends Config
 		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
-		position = 9,
+		position = 10,
 		section = generalSettings
 	)
 	default int brightness() { return 20; }
@@ -178,7 +190,7 @@ public interface HdPluginConfig extends Config
 		keyName = "levelOfDetail",
 		name = "Level of Detail",
 		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 10,
+		position = 11,
 		section = generalSettings
 	)
 	default LevelOfDetail levelOfDetail()
@@ -418,25 +430,38 @@ public interface HdPluginConfig extends Config
 
 
 
-	/*====== Workaround settings ======*/
+	/*====== Miscellaneous settings ======*/
 
 	@ConfigSection(
-			name = "Workarounds",
-			description = "Workaround settings",
-			position = 300,
-			closedByDefault = true
+		name = "Miscellaneous",
+		description = "Miscellaneous settings",
+		position = 300,
+		closedByDefault = true
 	)
-	String workaroundSettings = "workaroundSettings";
+	String miscellaneousSettings = "miscellaneousSettings";
 
 	@ConfigItem(
-			keyName = "macosIntelWorkaround",
-			name = "Fix shading on MacOS with Intel",
-			description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
-			position = 301,
-			section = workaroundSettings
+		keyName = "macosIntelWorkaround",
+		name = "Fix shading on MacOS with Intel",
+		description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
+		warning = "This setting can cause RuneLite to crash, and can be difficult to revert. Only enable it if you\nare seeing black patches. Are you sure you want to enable the setting?",
+		position = 301,
+		section = miscellaneousSettings
 	)
 	default boolean macosIntelWorkaround()
 	{
 		return false;
+	}
+
+	@ConfigItem(
+		keyName = "hdInfernalTexture",
+		name = "HD Infernal Texture",
+		description = "Replaces the OSRS infernal cape texture with a high detail one.",
+		position = 302,
+		section = miscellaneousSettings
+	)
+	default boolean hdInfernalTexture()
+	{
+		return true;
 	}
 }

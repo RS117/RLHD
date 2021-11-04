@@ -119,11 +119,16 @@ public enum Area
 		new Rect(3120, 3360, 3126, 3353)
 	),
 	DRAYNOR_MANOR(3083, 3386, 3129, 3329),
-	DRAYNOR_MANOR_BASEMENT(3073, 9780, 3082, 9766),
+	DRAYNOR_MANOR_BASEMENT(
+		new Rect(3073, 9780, 3082, 9766)
+	),
 	DRAYNOR(
 		new Rect(3071, 3226, 3133, 3292),
 		new Rect(2112, 4893, 2166, 4930) // bank robbery cutscene
 	),
+
+	// Misthalin Mystery
+	MISTHALIN_MYSTERY_MANOR(1600, 4863, 1727, 4779),
 
 	// Falador
 	FALADOR_HAIRDRESSER(
@@ -420,7 +425,8 @@ public enum Area
 		new Rect(2087, 4903, 2064, 4880), // ver sinhaza cutscene
 		new Rect(1987, 4996, 2105, 5054), // temple trekking
 		new Rect(2118, 4994, 2171, 5036), // temple trekking
-		new Rect(2178, 4996, 2478, 5054) // temple trekking
+		new Rect(2178, 4996, 2478, 5054), // temple trekking
+		new Rect(1670, 4546, 1724, 4600) // slayer tower roof (grotesque guardians)
 	),
 
 	// TzHaar
@@ -438,6 +444,7 @@ public enum Area
 	),
 
 	// Wilderness
+	REVENANT_CAVES(3265, 10243, 3134, 10050),
 	FROZEN_WASTE_PLATEAU(
 		new Rect(2939, 3970, 2988, 3904),
 		new Rect(2988, 3907, 3002, 3940),
@@ -499,7 +506,10 @@ public enum Area
 	ZANARIS(2315, 4345, 2500, 4485),
 
 	FROZEN_DOOR(2884, 5280, 2883, 5280),
-	GOD_WARS_DUNGEON(2816, 5375, 2971, 5216),
+	GOD_WARS_DUNGEON(
+		new Rect(2816, 5375, 2971, 5216),
+		new Rect(3008, 10178, 3072, 10112) // wilderness dungeon
+	),
 
 	// Soul Wars
 	ISLE_OF_SOULS(2079, 3014, 2348, 2763),
@@ -714,6 +724,9 @@ public enum Area
 	// Tempoross
 	TEMPOROSS_COVE(3005, 3011, 3066, 2941),
 
+	// Death's office
+	DEATHS_OFFICE(3166, 5734, 3185, 4288),
+
 	// Theatre of Blood
 	TOB_ROOM_MAIDEN(3231, 4468, 3152, 4416),
 	TOB_ROOM_BLOAT(3260, 4474, 3327, 4427),
@@ -744,6 +757,11 @@ public enum Area
 
 	// Barbarian Assault
 	BARBARIAN_ASSAULT_WAITING_ROOMS(2571, 5252, 2616, 5305),
+
+	TARNS_LAIR(
+		new Rect(3136, 4544, 3391, 4608),
+		new Rect(3168, 4639, 3196, 4604)
+	),
 
 	// Random events
 	RANDOM_EVENT_CLASSROOM(1894, 5036, 1878, 5014),

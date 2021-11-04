@@ -24,7 +24,9 @@
  */
 package rs117.hd.materials;
 
+import java.util.Arrays;
 import java.util.HashMap;
+
 import lombok.Getter;
 
 @Getter
@@ -198,6 +200,7 @@ public enum Material
 	GRUNGE_2(222),
 
 	ROCK_1(223),
+	ROCK_2(224),
 
 	CARPET(225),
 
@@ -229,6 +232,8 @@ public enum Material
 
 	BARK(245),
 	WOOD_GRAIN(247),
+
+	HD_INFERNAL_CAPE(248, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 3f)),
 
 	// water/fluid variants
 	WATER(7001),
@@ -338,16 +343,27 @@ public enum Material
 	}
 
 	private static final HashMap<Integer, Material> DIFFUSE_ID_MATERIAL_MAP;
+	private static final int[] MATERIAL_DIFUSE_INDEX_MAP;
 
 	static
 	{
 		DIFFUSE_ID_MATERIAL_MAP = new HashMap<>();
+		MATERIAL_DIFUSE_INDEX_MAP = new int[10000];
+		Arrays.fill(MATERIAL_DIFUSE_INDEX_MAP, 0);
+
+		int index = 0;
 		for (Material material : values())
 		{
 			if (!DIFFUSE_ID_MATERIAL_MAP.containsKey(material.diffuseMapId))
 			{
 				DIFFUSE_ID_MATERIAL_MAP.put(material.diffuseMapId, material);
+
+				if (material.diffuseMapId > 0 && material.diffuseMapId < 9999) {
+					MATERIAL_DIFUSE_INDEX_MAP[material.diffuseMapId] = index;
+				}
 			}
+
+			index++;
 		}
 	}
 
@@ -361,6 +377,7 @@ public enum Material
 	static
 	{
 		MATERIAL_INDEX_MAP = new HashMap<>();
+
 		int index = 0;
 		for (Material material : values())
 		{
@@ -372,6 +389,14 @@ public enum Material
 	public static int getIndex(Material material)
 	{
 		return MATERIAL_INDEX_MAP.getOrDefault(material, 0);
+	}
+
+	public static int getIndexFromDiffuseID(int id) {
+		if (id < 0 || id > 9999) {
+			return 0;
+		}
+
+		return MATERIAL_DIFUSE_INDEX_MAP[id];
 	}
 
 	public static Material[] getAllTextures()

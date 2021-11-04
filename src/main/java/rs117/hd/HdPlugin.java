@@ -150,7 +150,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	static final int MAX_DISTANCE = 90;
 	static final int MAX_FOG_DEPTH = 100;
 	// MAX_MATERIALS and MAX_LIGHTS must match the #defined values in the HD and shadow fragment shaders
-	private static final int MAX_MATERIALS = 200;
+	private static final int MAX_MATERIALS = Material.values().length;
 	private static final int MAX_LIGHTS = 100;
 	private static final int MATERIAL_PROPERTIES_COUNT = 12;
 	private static final int LIGHT_PROPERTIES_COUNT = 8;
@@ -399,6 +399,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configNpcLights = true;
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
+	public boolean configUnlockFps = false;
+	public boolean configHdInfernalTexture = true;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -420,6 +422,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configNpcLights = config.npcLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
+		configUnlockFps = config.unlockFps();
+		configHdInfernalTexture = config.hdInfernalTexture();
 
 		clientThread.invoke(() ->
 		{
@@ -511,7 +515,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					}
 
 					this.gl = glContext.getGL().getGL4();
-					gl.setSwapInterval(0);
+
+					final boolean unlockFps = this.config.unlockFps();
+					client.setUnlockedFps(unlockFps);
+					gl.setSwapInterval(unlockFps ? 1 : 0);
 
 					if (log.isDebugEnabled())
 					{
@@ -559,7 +566,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					invokeOnMainThread(this::uploadScene);
 				}
-
 				startUpCompleted = true;
 			}
 			catch (Throwable e)
@@ -582,6 +588,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			client.setGpu(false);
 			client.setDrawCallbacks(null);
+			client.setUnlockedFps(false);
 
 			invokeOnMainThread(() ->
 			{
@@ -680,6 +687,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		return configManager.getConfig(HdPluginConfig.class);
 	}
 
+	private String generateFetchMaterialCases(int from, int to)
+	{
+		int length = to - from;
+		if (length == 1)
+		{
+			return "material[" + from + "]";
+		}
+		int middle = from + length / 2;
+		return "i < " + middle +
+			" ? " + generateFetchMaterialCases(from, middle) +
+			" : " + generateFetchMaterialCases(middle, to);
+	}
+
 	private void initProgram() throws ShaderException
 	{
 		String versionHeader = OSType.getOSType() == OSType.Linux ? LINUX_VERSION_HEADER : WINDOWS_VERSION_HEADER;
@@ -690,18 +710,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			{
 				case "version_header":
 					return versionHeader;
+				case "MAX_MATERIALS":
+					return String.format("#define %s %d\n", key, MAX_MATERIALS);
 				case "CONST_MACOS_INTEL_WORKAROUND":
-					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() ? 1 : 0);
-				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES": {
-					StringBuilder sb = new StringBuilder(MAX_MATERIALS * (
-						"case : return material[];".length() +
-						((int) Math.log10(MAX_MATERIALS) + 1) * 2));
-					for (int i = 0; i < MAX_MATERIALS; i++)
-					{
-						sb.append("case ").append(i).append(": return material[").append(i).append("];\n");
-					}
-					return sb.toString();
-				}
+					boolean isAppleM1 = OSType.getOSType() == OSType.MacOS && System.getProperty("os.arch").equals("aarch64");
+					return String.format("#define %s %d\n", key, config.macosIntelWorkaround() && !isAppleM1 ? 1 : 0);
+				case "MACOS_INTEL_WORKAROUND_MATERIAL_CASES":
+					return "return " + generateFetchMaterialCases(0, MAX_MATERIALS) + ";";
 			}
 			return null;
 		});
@@ -1455,9 +1470,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void drawFrame(int overlayColor)
 	{
-		if (!startUpCompleted)
-			return;
-
 		if (jawtWindow.getAWTComponent() != client.getCanvas())
 		{
 			// We inject code in the game engine mixin to prevent the client from doing canvas replacement,
@@ -1530,6 +1542,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glDisable(gl.GL_MULTISAMPLE);
 			shutdownAAFbo();
 		}
+
+		gl.glClearColor(0, 0, 0, 1f);
+		gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
 		// Draw 3d scene
 		final TextureProvider textureProvider = client.getTextureProvider();
@@ -1621,8 +1636,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 
 			Matrix4 lightProjectionMatrix = new Matrix4();
-			float lightPitch = -128;
-			float lightYaw = 55;
+			float lightPitch = environmentManager.currentLightPitch;
+			float lightYaw = environmentManager.currentLightYaw;
 
 			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
@@ -2205,6 +2220,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case "macosIntelWorkaround":
 				recompileProgram();
 				break;
+			case "unlockFps":
+				configUnlockFps = config.unlockFps();
+				clientThread.invokeLater(() ->
+				{
+					client.setUnlockedFps(configUnlockFps);
+					invokeOnMainThread(() -> gl.setSwapInterval(configUnlockFps ? 1 : 0));
+				});
+				break;
+			case "hdInfernalTexture":
+				configHdInfernalTexture = config.hdInfernalTexture();
+				break;
 		}
 	}
 
@@ -2223,14 +2249,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	/**
 	 * Check is a model is visible and should be drawn.
 	 */
-	private boolean isVisible(Model model, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int _x, int _y, int _z, long hash)
+	private boolean isVisible(Model model, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z)
 	{
+		model.calculateBoundsCylinder();
+
 		final int XYZMag = model.getXYZMag();
-		int zoom = client.get3dZoom();
-		if (configShadowsEnabled && configExpandShadowDraw)
-		{
-			zoom /= 2;
-		}
+		final int bottomY = model.getBottomY();
+		final int zoom = (configShadowsEnabled && configExpandShadowDraw) ? client.get3dZoom() / 2 : client.get3dZoom();
 		final int modelHeight = model.getModelHeight();
 
 		int Rasterizer3D_clipMidX2 = client.getRasterizer3D_clipMidX2();
@@ -2238,27 +2263,28 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		int Rasterizer3D_clipNegativeMidY = client.getRasterizer3D_clipNegativeMidY();
 		int Rasterizer3D_clipMidY2 = client.getRasterizer3D_clipMidY2();
 
-		int var11 = yawCos * _z - yawSin * _x >> 16;
-		int var12 = pitchSin * _y + pitchCos * var11 >> 16;
+		int var11 = yawCos * z - yawSin * x >> 16;
+		int var12 = pitchSin * y + pitchCos * var11 >> 16;
 		int var13 = pitchCos * XYZMag >> 16;
-		int var14 = var12 + var13;
-		if (var14 > 50)
+		int depth = var12 + var13;
+		if (depth > 50)
 		{
-			int var15 = _z * yawSin + yawCos * _x >> 16;
-			int var16 = (var15 - XYZMag) * zoom;
-			if (var16 / var14 < Rasterizer3D_clipMidX2)
+			int rx = z * yawSin + yawCos * x >> 16;
+			int var16 = (rx - XYZMag) * zoom;
+			if (var16 / depth < Rasterizer3D_clipMidX2)
 			{
-				int var17 = (var15 + XYZMag) * zoom;
-				if (var17 / var14 > Rasterizer3D_clipNegativeMidX)
+				int var17 = (rx + XYZMag) * zoom;
+				if (var17 / depth > Rasterizer3D_clipNegativeMidX)
 				{
-					int var18 = pitchCos * _y - var11 * pitchSin >> 16;
-					int var19 = pitchSin * XYZMag >> 16;
-					int var20 = (var18 + var19) * zoom;
-					if (var20 / var14 > Rasterizer3D_clipNegativeMidY)
+					int ry = pitchCos * y - var11 * pitchSin >> 16;
+					int yheight = pitchSin * XYZMag >> 16;
+					int ybottom = (pitchCos * bottomY >> 16) + yheight;
+					int var20 = (ry + ybottom) * zoom;
+					if (var20 / depth > Rasterizer3D_clipNegativeMidY)
 					{
-						int var21 = (pitchCos * modelHeight >> 16) + var19;
-						int var22 = (var18 - var21) * zoom;
-						return var22 / var14 < Rasterizer3D_clipMidY2;
+						int ytop = (pitchCos * modelHeight >> 16) + yheight;
+						int var22 = (ry - ytop) * zoom;
+						return var22 / depth < Rasterizer3D_clipMidY2;
 					}
 				}
 			}
@@ -2296,14 +2322,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 		int drawObjectCutoff = configLevelOfDetail.getDistance() * Perspective.LOCAL_TILE_SIZE;
 
-		// Model may be in the scene buffer
-		if (renderable instanceof Model && ((Model) renderable).getSceneId() == sceneUploader.sceneId)
-		{
-			Model model = (Model) renderable;
+		Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
+		if (model == null) {
+			return;
+		}
 
+		// Model may be in the scene buffer
+		if (model.getSceneId() == sceneUploader.sceneId)
+		{
 			model.calculateBoundsCylinder();
 
-			if (!isVisible(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash))
+			if (!isVisible(model, pitchSin, pitchCos, yawSin, yawCos, x, y, z))
 			{
 				return;
 			}
@@ -2336,61 +2365,57 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		else
 		{
 			// Temporary model (animated or otherwise not a static Model on the scene)
-			Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
-			if (model != null)
+			// Apply height to renderable from the model
+			if (model != renderable)
 			{
-				// Apply height to renderable from the model
-				if (model != renderable)
-				{
-					renderable.setModelHeight(model.getModelHeight());
-				}
-
-				model.calculateBoundsCylinder();
-
-				if (!isVisible(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash))
-				{
-					return;
-				}
-
-				if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
-				{
-					return;
-				}
-
-				model.calculateExtreme(orientation);
-				client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
-
-				int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
-				vertexBuffer.ensureCapacity(12 * faceCount);
-				uvBuffer.ensureCapacity(12 * faceCount);
-				normalBuffer.ensureCapacity(12 * faceCount);
-
-				int vertexLength = 0;
-				int uvLength = 0;
-				int[] bufferLengths;
-
-				for (int face = 0; face < faceCount; ++face)
-				{
-					bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
-					vertexLength += bufferLengths[0];
-					uvLength += bufferLengths[1];
-				}
-
-				GpuIntBuffer b = bufferForTriangles(faceCount);
-
-				b.ensureCapacity(8);
-				IntBuffer buffer = b.getBuffer();
-				buffer.put(tempOffset);
-				buffer.put(uvLength > 0 ? tempUvOffset : -1);
-				buffer.put(vertexLength / 3);
-				buffer.put(targetBufferOffset);
-				buffer.put((model.getRadius() << 12) | orientation);
-				buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
-
-				tempOffset += vertexLength;
-				tempUvOffset += uvLength;
-				targetBufferOffset += vertexLength;
+				renderable.setModelHeight(model.getModelHeight());
 			}
+
+			model.calculateBoundsCylinder();
+
+			if (!isVisible(model, pitchSin, pitchCos, yawSin, yawCos, x, y, z))
+			{
+				return;
+			}
+
+			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
+			{
+				return;
+			}
+
+			model.calculateExtreme(orientation);
+			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
+
+			int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
+			vertexBuffer.ensureCapacity(12 * faceCount);
+			uvBuffer.ensureCapacity(12 * faceCount);
+			normalBuffer.ensureCapacity(12 * faceCount);
+
+			int vertexLength = 0;
+			int uvLength = 0;
+			int[] bufferLengths;
+
+			for (int face = 0; face < faceCount; ++face)
+			{
+				bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
+				vertexLength += bufferLengths[0];
+				uvLength += bufferLengths[1];
+			}
+
+			GpuIntBuffer b = bufferForTriangles(faceCount);
+
+			b.ensureCapacity(8);
+			IntBuffer buffer = b.getBuffer();
+			buffer.put(tempOffset);
+			buffer.put(uvLength > 0 ? tempUvOffset : -1);
+			buffer.put(vertexLength / 3);
+			buffer.put(targetBufferOffset);
+			buffer.put((model.getRadius() << 12) | orientation);
+			buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
+
+			tempOffset += vertexLength;
+			tempUvOffset += uvLength;
+			targetBufferOffset += vertexLength;
 		}
 	}
 

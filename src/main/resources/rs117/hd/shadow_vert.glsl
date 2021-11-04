@@ -27,17 +27,21 @@
 
 layout (location = 0) in ivec4 VertexPosition;
 layout (location = 1) in vec4 uv;
+layout (location = 2) in vec4 normal;
 
 uniform mat4 lightProjectionMatrix;
 
 out float alpha;
 out vec2 fUv;
 flat out int materialId;
+flat out int terrainPlane;
 
 void main()
 {
     alpha = 1.0f - (float(VertexPosition.w >> 24 & 0xff) / 255.f);
     materialId = int(uv.x) >> 1;
+    int isTerrain = int(normal.w) & 1; // 1 = 0b1
+    terrainPlane = isTerrain == 1 ? (int(normal.w) >> 1) & 3 : -1; // 3 = 0b11
     fUv = uv.yz;
     ivec3 vertex = VertexPosition.xyz;
     gl_Position = lightProjectionMatrix * vec4(vertex, 1.f);
