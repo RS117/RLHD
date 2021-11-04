@@ -126,6 +126,14 @@ public class EnvironmentManager
 	public float currentGroundFogOpacity = 0f;
 	private float targetGroundFogOpacity = 0f;
 
+	private float startLightPitch = 0f;
+	public float currentLightPitch = 0f;
+	private float targetLightPitch = 0f;
+
+	private float startLightYaw = 0f;
+	public float currentLightYaw = 0f;
+	private float targetLightYaw = 0f;
+
 	public boolean lightningEnabled = false;
 
 	public void update()
@@ -168,6 +176,8 @@ public class EnvironmentManager
 			currentGroundFogStart = targetGroundFogStart;
 			currentGroundFogEnd = targetGroundFogEnd;
 			currentGroundFogOpacity = targetGroundFogOpacity;
+			currentLightPitch = targetLightPitch;
+			currentLightYaw = targetLightYaw;
 		}
 		else
 		{
@@ -186,6 +196,8 @@ public class EnvironmentManager
 			currentGroundFogStart  = HDUtils.lerp(startGroundFogStart, targetGroundFogStart, t);
 			currentGroundFogEnd  = HDUtils.lerp(startGroundFogEnd, targetGroundFogEnd, t);
 			currentGroundFogOpacity  = HDUtils.lerp(startGroundFogOpacity, targetGroundFogOpacity, t);
+			currentLightPitch = HDUtils.lerp(startLightPitch, targetLightPitch, t);
+			currentLightYaw = HDUtils.lerp(startLightYaw, targetLightYaw, t);
 		}
 
 		updateLightning();
@@ -228,6 +240,8 @@ public class EnvironmentManager
 		startGroundFogStart = currentGroundFogStart;
 		startGroundFogEnd = currentGroundFogEnd;
 		startGroundFogOpacity = currentGroundFogOpacity;
+		startLightPitch = currentLightPitch;
+		startLightYaw = currentLightYaw;
 
 		// set target variables to ones from new environment
 		targetFogColor = newEnvironment.getFogColor();
@@ -249,6 +263,8 @@ public class EnvironmentManager
 			targetDirectionalColor = newEnvironment.getDirectionalColor();
 			targetUnderglowStrength = newEnvironment.getUnderglowStrength();
 			targetUnderglowColor = newEnvironment.getUnderglowColor();
+			targetLightPitch = newEnvironment.getLightPitch();
+			targetLightYaw = newEnvironment.getLightYaw();
 		}
 		else
 		{
@@ -258,6 +274,8 @@ public class EnvironmentManager
 			targetDirectionalColor = defaultEnvironment.getDirectionalColor();
 			targetUnderglowStrength = defaultEnvironment.getUnderglowStrength();
 			targetUnderglowColor = defaultEnvironment.getUnderglowColor();
+			targetLightPitch = defaultEnvironment.getLightPitch();
+			targetLightYaw = defaultEnvironment.getLightYaw();
 		}
 		targetGroundFogStart = newEnvironment.getGroundFogStart();
 		targetGroundFogEnd = newEnvironment.getGroundFogEnd();
