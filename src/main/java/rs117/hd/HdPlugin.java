@@ -1636,8 +1636,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 
 			Matrix4 lightProjectionMatrix = new Matrix4();
-			float lightPitch = -128;
-			float lightYaw = 55;
+			float lightPitch = environmentManager.currentLightPitch;
+			float lightYaw = environmentManager.currentLightYaw;
 
 			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
