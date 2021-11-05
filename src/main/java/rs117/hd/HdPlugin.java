@@ -1504,45 +1504,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		final AntiAliasingMode antiAliasingMode = config.antiAliasingMode();
 		final boolean aaEnabled = antiAliasingMode != AntiAliasingMode.DISABLED;
 
-		if (aaEnabled)
-		{
-			gl.glEnable(gl.GL_MULTISAMPLE);
-
-			final Dimension stretchedDimensions = client.getStretchedDimensions();
-
-			final int stretchedCanvasWidth = client.isStretchedEnabled() ? stretchedDimensions.width : canvasWidth;
-			final int stretchedCanvasHeight = client.isStretchedEnabled() ? stretchedDimensions.height : canvasHeight;
-
-			// Re-create fbo
-			if (lastStretchedCanvasWidth != stretchedCanvasWidth
-				|| lastStretchedCanvasHeight != stretchedCanvasHeight
-				|| lastAntiAliasingMode != antiAliasingMode)
-			{
-				shutdownAAFbo();
-
-				// Bind default FBO to check whether anti-aliasing is forced
-				gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0);
-				final int forcedAASamples = glGetInteger(gl, gl.GL_SAMPLES);
-				final int maxSamples = glGetInteger(gl, gl.GL_MAX_SAMPLES);
-				final int samples = forcedAASamples != 0 ? forcedAASamples :
-					Math.min(antiAliasingMode.getSamples(), maxSamples);
-
-				log.debug("AA samples: {}, max samples: {}, forced samples: {}", samples, maxSamples, forcedAASamples);
-
-				initAAFbo(stretchedCanvasWidth, stretchedCanvasHeight, samples);
-
-				lastStretchedCanvasWidth = stretchedCanvasWidth;
-				lastStretchedCanvasHeight = stretchedCanvasHeight;
-			}
-
-			gl.glBindFramebuffer(gl.GL_DRAW_FRAMEBUFFER, fboSceneHandle);
-		}
-		else
-		{
-			gl.glDisable(gl.GL_MULTISAMPLE);
-			shutdownAAFbo();
-		}
-
 		gl.glClearColor(0, 0, 0, 1f);
 		gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
@@ -1731,8 +1692,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					shutdownAAFbo();
 
+					// Bind default FBO to check whether anti-aliasing is forced
+					gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0);
+					final int forcedAASamples = glGetInteger(gl, gl.GL_SAMPLES);
 					final int maxSamples = glGetInteger(gl, gl.GL_MAX_SAMPLES);
-					final int samples = Math.min(antiAliasingMode.getSamples(), maxSamples);
+					final int samples = forcedAASamples != 0 ? forcedAASamples :
+						Math.min(antiAliasingMode.getSamples(), maxSamples);
+
+					log.debug("AA samples: {}, max samples: {}, forced samples: {}", samples, maxSamples, forcedAASamples);
 
 					initAAFbo(stretchedCanvasWidth, stretchedCanvasHeight, samples);
 
