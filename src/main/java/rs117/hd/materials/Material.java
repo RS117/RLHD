@@ -358,7 +358,7 @@ public enum Material
 			{
 				DIFFUSE_ID_MATERIAL_MAP.put(material.diffuseMapId, material);
 
-				if (material.diffuseMapId > 0 && material.diffuseMapId < 9999) {
+				if (material.diffuseMapId >= 0 && material.diffuseMapId <= 9999) {
 					MATERIAL_DIFUSE_INDEX_MAP[material.diffuseMapId] = index;
 				}
 			}
