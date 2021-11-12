@@ -56,7 +56,7 @@ class GpuIntBuffer
 		buffer.clear();
 	}
 
-	void ensureCapacity(int size)
+	GpuIntBuffer ensureCapacity(int size)
 	{
 		int capacity = buffer.capacity();
 		final int position = buffer.position();
@@ -73,6 +73,8 @@ class GpuIntBuffer
 			newB.put(buffer);
 			buffer = newB;
 		}
+
+		return this;
 	}
 
 	IntBuffer getBuffer()
