@@ -125,11 +125,46 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
+	enum SyncMode
+	{
+		OFF,
+		ON,
+		ADAPTIVE
+	}
+
+	@ConfigItem(
+			keyName = "vsyncMode",
+			name = "VSync Mode",
+			description = "Method to synchronize frame rate with refresh rate",
+			position = 6,
+			section = generalSettings
+	)
+	default SyncMode syncMode()
+	{
+		return SyncMode.ADAPTIVE;
+	}
+
+	@ConfigItem(
+			keyName = "fpsTarget",
+			name = "FPS Target",
+			description = "Target FPS when unlock FPS is enabled and Vsync mode is OFF",
+			position = 7,
+			section = generalSettings
+	)
+	@Range(
+			min = 1,
+			max = 999
+	)
+	default int fpsTarget()
+	{
+		return 60;
+	}
+
 	@ConfigItem(
 		keyName = "colorBlindMode",
 		name = "Colorblindness Correction",
 		description = "Adjusts colors to account for colorblindness",
-		position = 6,
+		position = 8,
 		section = generalSettings
 	)
 	default ColorBlindMode colorBlindMode()
@@ -141,7 +176,7 @@ public interface HdPluginConfig extends Config
 		keyName = "flashingEffects",
 		name = "Flashing Effects",
 		description = "Displays fast flashing effects, such as lightning, in certain areas.",
-		position = 7,
+		position = 9,
 		section = generalSettings
 	)
 	default boolean flashingEffects()
@@ -153,7 +188,7 @@ public interface HdPluginConfig extends Config
 		keyName = "saturation",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
-		position = 8,
+		position = 10,
 		section = generalSettings
 	)
 	default Saturation saturation()
@@ -165,7 +200,7 @@ public interface HdPluginConfig extends Config
 		keyName = "contrast",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
-		position = 9,
+		position = 11,
 		section = generalSettings
 	)
 	default Contrast contrast()
@@ -181,7 +216,7 @@ public interface HdPluginConfig extends Config
 		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
-		position = 10,
+		position = 12,
 		section = generalSettings
 	)
 	default int brightness() { return 20; }
@@ -190,7 +225,7 @@ public interface HdPluginConfig extends Config
 		keyName = "levelOfDetail",
 		name = "Level of Detail",
 		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 11,
+		position = 13,
 		section = generalSettings
 	)
 	default LevelOfDetail levelOfDetail()

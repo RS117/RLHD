@@ -399,7 +399,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configNpcLights = true;
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
-	public boolean configUnlockFps = false;
 	public boolean configHdInfernalTexture = true;
 
 	// Reduces drawing a buggy mess when toggling HD
@@ -422,7 +421,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configNpcLights = config.npcLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
-		configUnlockFps = config.unlockFps();
 		configHdInfernalTexture = config.hdInfernalTexture();
 
 		clientThread.invoke(() ->
@@ -516,9 +514,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					this.gl = glContext.getGL().getGL4();
 
-					final boolean unlockFps = this.config.unlockFps();
-					client.setUnlockedFps(unlockFps);
-					gl.setSwapInterval(unlockFps ? 1 : 0);
+					setupSyncMode();
 
 					if (log.isDebugEnabled())
 					{
@@ -2188,15 +2184,43 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				recompileProgram();
 				break;
 			case "unlockFps":
-				configUnlockFps = config.unlockFps();
+			case "vsyncMode":
+			case "fpsTarget":
 				clientThread.invokeLater(() ->
 				{
-					client.setUnlockedFps(configUnlockFps);
-					invokeOnMainThread(() -> gl.setSwapInterval(configUnlockFps ? 1 : 0));
+					log.debug("Rebuilding sync mode");
+					clientThread.invokeLater(() -> invokeOnMainThread(this::setupSyncMode));
 				});
 				break;
 			case "hdInfernalTexture":
 				configHdInfernalTexture = config.hdInfernalTexture();
+				break;
+		}
+	}
+
+	private void setupSyncMode()
+	{
+		final boolean unlockFps = config.unlockFps();
+		client.setUnlockedFps(unlockFps);
+
+		// Without unlocked fps, the client manages sync on its 20ms timer
+		HdPluginConfig.SyncMode syncMode = unlockFps
+				? this.config.syncMode()
+				: HdPluginConfig.SyncMode.OFF;
+
+		switch (syncMode)
+		{
+			case ON:
+				gl.setSwapInterval(1);
+				client.setUnlockedFpsTarget(0);
+				break;
+			case OFF:
+				gl.setSwapInterval(0);
+				client.setUnlockedFpsTarget(config.fpsTarget()); // has no effect with unlockFps=false
+				break;
+			case ADAPTIVE:
+				gl.setSwapInterval(-1);
+				client.setUnlockedFpsTarget(0);
 				break;
 		}
 	}
