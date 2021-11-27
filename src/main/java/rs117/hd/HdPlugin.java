@@ -2186,11 +2186,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case "unlockFps":
 			case "vsyncMode":
 			case "fpsTarget":
-				clientThread.invokeLater(() ->
-				{
-					log.debug("Rebuilding sync mode");
-					clientThread.invokeLater(() -> invokeOnMainThread(this::setupSyncMode));
-				});
+				log.debug("Rebuilding sync mode");
+				clientThread.invokeLater(() -> invokeOnMainThread(this::setupSyncMode));
 				break;
 			case "hdInfernalTexture":
 				configHdInfernalTexture = config.hdInfernalTexture();
