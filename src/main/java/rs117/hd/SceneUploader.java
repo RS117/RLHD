@@ -1374,6 +1374,35 @@ class SceneUploader
 		{
 			materialId = Material.getIndex(Material.HD_INFERNAL_CAPE);
 		}
+
+		if (hdPlugin.configObjectTextures)
+		{
+			if (materialId == Material.getIndex(Material.BRICK))
+			{
+				materialId = Material.getIndex(Material.HD_BRICK);
+			}
+			else if (materialId == Material.getIndex(Material.ROOF_SHINGLES_1))
+			{
+				materialId = Material.getIndex(Material.HD_ROOF_SHINGLES_1);
+			}
+			else if (materialId == Material.getIndex(Material.MARBLE_DARK))
+			{
+				materialId = Material.getIndex(Material.HD_MARBLE_DARK);
+			}
+			else if (materialId == Material.getIndex(Material.BRICK_BROWN))
+			{
+				materialId = Material.getIndex(Material.HD_BRICK_BROWN);
+			}
+			else if (materialId == Material.getIndex(Material.LAVA))
+			{
+				materialId = Material.getIndex(Material.HD_LAVA_3);
+			}
+			else if (materialId == Material.getIndex(Material.ROOF_SHINGLES_2))
+			{
+				materialId = Material.getIndex(Material.HD_ROOF_SHINGLES_2);
+			}
+		}
+
 		return materialId << 1 | (isOverlay ? 0b1 : 0b0);
 	}
 
