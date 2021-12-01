@@ -149,6 +149,12 @@ public class EnvironmentManager
 			{
 				if (environment != currentEnvironment)
 				{
+					if (environment == Environment.PLAYER_OWNED_HOUSE || environment == Environment.PLAYER_OWNED_HOUSE_SNOWY) {
+						hdPlugin.setInHouse(true);
+						hdPlugin.setNextSceneReload(System.currentTimeMillis() + 2500);
+					} else {
+						hdPlugin.setInHouse(false);
+					}
 					changeEnvironment(environment, camTargetX, camTargetY, false);
 				}
 				break;

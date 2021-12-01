@@ -63,39 +63,10 @@ import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import jogamp.nativewindow.macosx.OSXUtil;
 import jogamp.newt.awt.NewtFactoryAWT;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.BufferProvider;
-import net.runelite.api.Client;
-import net.runelite.api.DecorativeObject;
-import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
-import net.runelite.api.GroundObject;
-import net.runelite.api.Model;
-import net.runelite.api.Perspective;
-import net.runelite.api.Renderable;
-import net.runelite.api.Scene;
-import net.runelite.api.SceneTileModel;
-import net.runelite.api.SceneTilePaint;
-import net.runelite.api.Texture;
-import net.runelite.api.TextureProvider;
-import net.runelite.api.WallObject;
-import net.runelite.api.events.DecorativeObjectChanged;
-import net.runelite.api.events.DecorativeObjectDespawned;
-import net.runelite.api.events.DecorativeObjectSpawned;
-import net.runelite.api.events.GameObjectChanged;
-import net.runelite.api.events.GameObjectDespawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GroundObjectChanged;
-import net.runelite.api.events.GroundObjectDespawned;
-import net.runelite.api.events.GroundObjectSpawned;
-import net.runelite.api.events.NpcChanged;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.NpcSpawned;
-import net.runelite.api.events.ProjectileMoved;
-import net.runelite.api.events.WallObjectChanged;
-import net.runelite.api.events.WallObjectDespawned;
-import net.runelite.api.events.WallObjectSpawned;
+import net.runelite.api.*;
+import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -390,6 +361,16 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private long lastFrameTime = System.currentTimeMillis();
 	// Generic scalable animation timer used in shaders
 	private float animationCurrent = 0;
+
+	// future time to reload the scene
+	// useful for pulling new data into the scene buffer
+	@Setter
+	private long nextSceneReload = 0;
+
+	// some necessary data for reloading the scene while in POH to fix major performance loss
+	@Setter
+	private boolean isInHouse = false;
+	private int previousPlane;
 
 	// Config settings used very frequently - thousands/frame
 	public boolean configGroundTextures = false;
@@ -1266,7 +1247,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			null,
 			GL_STREAM_DRAW,
 			CL_MEM_WRITE_ONLY);
-		
+
+
+
 		if (computeMode == ComputeMode.OPENCL)
 		{
 			// The docs for clEnqueueAcquireGLObjects say all pending GL operations must be completed before calling
@@ -1519,6 +1502,16 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			// While the client is loading it doesn't draw
 			return;
+		}
+
+		// reload the scene if the player is in a house and their plane changed
+		// this greatly improves the performance as it keeps the scene buffer up to date
+		if (isInHouse) {
+			int plane = client.getPlane();
+			if (previousPlane != plane) {
+				reloadScene();
+				previousPlane = plane;
+			}
 		}
 
 		camTarget = getCameraFocalPoint();
@@ -1934,6 +1927,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		modelBufferSmall.clear();
 		modelBufferUnordered.clear();
 
+		// reload the scene if it was requested
+		if (nextSceneReload != 0 && nextSceneReload <= System.currentTimeMillis()) {
+			lightManager.reset();
+			uploadScene();
+			nextSceneReload = 0;
+		}
+
 		targetBufferOffset = 0;
 		smallModels = largeModels = unorderedModels = 0;
 		tempOffset = 0;
@@ -2079,10 +2079,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		if (gameStateChanged.getGameState() != GameState.LOGGED_IN)
 		{
 			lightManager.reset();
-		}
-
-		if (gameStateChanged.getGameState() != GameState.LOGGED_IN)
-		{
 			return;
 		}
 
@@ -2253,14 +2249,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void reloadScene()
 	{
-		clientThread.invoke(() ->
-		{
-			if (client.getGameState() == GameState.LOGGED_IN)
-			{
-				// Reload the scene
-				client.setGameState(GameState.LOADING);
-			}
-		});
+		nextSceneReload = System.currentTimeMillis();
 	}
 
 	/**
