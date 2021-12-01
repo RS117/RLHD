@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = 'rs117.hd'
-version = '1.0.8'
+version = '1.0.9'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
