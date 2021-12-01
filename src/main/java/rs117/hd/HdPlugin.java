@@ -156,6 +156,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private static final int LIGHT_PROPERTIES_COUNT = 8;
 	private static final int SCALAR_BYTES = 4;
 
+	private static final int[] eightIntWrite = new int[8];
+
 	@Inject
 	private Client client;
 	
@@ -2336,17 +2338,16 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			int tc = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
 			int uvOffset = model.getUvBufferOffset();
 
-			GpuIntBuffer b = bufferForTriangles(tc);
+			eightIntWrite[0] = model.getBufferOffset() >> 2;
+			eightIntWrite[1] = uvOffset;
+			eightIntWrite[2] = tc;
+			eightIntWrite[3] = targetBufferOffset;
+			eightIntWrite[4] = FLAG_SCENE_BUFFER | (model.getRadius() << 12) | orientation;
+			eightIntWrite[5] = x + client.getCameraX2();
+			eightIntWrite[6] = y + client.getCameraY2();
+			eightIntWrite[7] = z + client.getCameraZ2();
 
-			b.ensureCapacity(8);
-			IntBuffer buffer = b.getBuffer();
-			// shift the bufferoffset as the last bit is used for the level of detail setting
-			buffer.put(model.getBufferOffset() >> 2);
-			buffer.put(uvOffset);
-			buffer.put(tc);
-			buffer.put(targetBufferOffset);
-			buffer.put(FLAG_SCENE_BUFFER | (model.getRadius() << 12) | orientation);
-			buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
+			bufferForTriangles(tc).ensureCapacity(8).put(eightIntWrite);
 
 			targetBufferOffset += tc * 3;
 		}
@@ -2374,36 +2375,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			model.calculateExtreme(orientation);
 			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-			int faceCount = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
-			vertexBuffer.ensureCapacity(12 * faceCount);
-			uvBuffer.ensureCapacity(12 * faceCount);
-			normalBuffer.ensureCapacity(12 * faceCount);
+			final int[] lengths = sceneUploader.pushModel(model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
 
-			int vertexLength = 0;
-			int uvLength = 0;
-			int[] bufferLengths;
+			eightIntWrite[0] = tempOffset;
+			eightIntWrite[1] = lengths[1] > 0 ? tempUvOffset : -1;
+			eightIntWrite[2] = lengths[0]  / 3;
+			eightIntWrite[3] = targetBufferOffset;
+			eightIntWrite[4] = (model.getRadius() << 12) | orientation;
+			eightIntWrite[5] = x + client.getCameraX2();
+			eightIntWrite[6] = y + client.getCameraY2();
+			eightIntWrite[7] = z + client.getCameraZ2();
+			bufferForTriangles(lengths[0]).ensureCapacity(8).put(eightIntWrite);
 
-			for (int face = 0; face < faceCount; ++face)
-			{
-				bufferLengths = sceneUploader.pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE);
-				vertexLength += bufferLengths[0];
-				uvLength += bufferLengths[1];
-			}
-
-			GpuIntBuffer b = bufferForTriangles(faceCount);
-
-			b.ensureCapacity(8);
-			IntBuffer buffer = b.getBuffer();
-			buffer.put(tempOffset);
-			buffer.put(uvLength > 0 ? tempUvOffset : -1);
-			buffer.put(vertexLength / 3);
-			buffer.put(targetBufferOffset);
-			buffer.put((model.getRadius() << 12) | orientation);
-			buffer.put(x + client.getCameraX2()).put(y + client.getCameraY2()).put(z + client.getCameraZ2());
-
-			tempOffset += vertexLength;
-			tempUvOffset += uvLength;
-			targetBufferOffset += vertexLength;
+			tempOffset += lengths[0];
+			tempUvOffset += lengths[1];
+			targetBufferOffset += lengths[0];
 		}
 	}
 
