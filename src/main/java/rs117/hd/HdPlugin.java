@@ -403,6 +403,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
 	public boolean configHdInfernalTexture = true;
+	public boolean configWinterTheme = true;
 
 	// Reduces drawing a buggy mess when toggling HD
 	private boolean startUpCompleted = false;
@@ -425,6 +426,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
 		configHdInfernalTexture = config.hdInfernalTexture();
+		configWinterTheme = config.winterTheme();
 
 		clientThread.invoke(() ->
 		{
@@ -2192,6 +2194,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "tzhaarHD":
 				configTzhaarHD = config.tzhaarHD();
+				reloadScene();
+				break;
+			case "winterTheme":
+				configWinterTheme = config.winterTheme();
 				reloadScene();
 				break;
 			case "projectileLights":

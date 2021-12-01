@@ -802,6 +802,7 @@ public enum Area
 
 	OVERWORLD(700, 2300, 4200, 4095),
 	ALL(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+	NONE(0, 0, 0, 0),
 	;
 
 	private final Rect[] rects;

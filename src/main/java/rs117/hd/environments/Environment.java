@@ -873,6 +873,15 @@ public enum Environment
 	),
 	UNKNOWN_OVERWORLD(Area.UNKNOWN_OVERWORLD, new Properties()),
 
+	WINTER(Area.NONE, new Properties()
+		.setFogColor("#B8C5DB")
+		.setFogDepth(35)
+		.setAmbientColor("#8FCAFF")
+		.setAmbientStrength(3.5f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(1.5f)
+	),
+
 	// overrides 'ALL' to provide default daylight conditions for the overworld area
 	OVERWORLD(Area.OVERWORLD, new Properties()),
 	// used for underground, instances, etc.

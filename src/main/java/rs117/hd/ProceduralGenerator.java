@@ -289,6 +289,7 @@ class ProceduralGenerator
 			if (vertexOverlays[vertex] != 0)
 			{
 				Overlay overlay = Overlay.getOverlay(vertexOverlays[vertex], tile, client);
+				overlay = getSeasonalOverlay(overlay);
 				GroundMaterial groundMaterial = overlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = !overlay.isBlendedAsUnderlay();
@@ -297,6 +298,7 @@ class ProceduralGenerator
 			else if (vertexUnderlays[vertex] != 0)
 			{
 				Underlay underlay = Underlay.getUnderlay(vertexUnderlays[vertex], tile, client);
+				underlay = getSeasonalUnderlay(underlay);
 				GroundMaterial groundMaterial = underlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = underlay.isBlendedAsOverlay();
@@ -853,6 +855,8 @@ class ProceduralGenerator
 			}
 		}
 
+		waterType = getSeasonalWaterType(waterType);
+
 		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
 			switch(waterType)
@@ -905,6 +909,8 @@ class ProceduralGenerator
 				waterType = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
 			}
 		}
+
+		waterType = getSeasonalWaterType(waterType);
 
 		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
@@ -1170,6 +1176,86 @@ class ProceduralGenerator
 			}
 		}
 		return false;
+	}
+
+	Underlay getSeasonalUnderlay(Underlay underlay)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (underlay.getGroundMaterial())
+			{
+				case OVERWORLD_GRASS_1:
+					underlay = Underlay.WINTER_GRASS;
+					break;
+				case OVERWORLD_DIRT:
+					underlay = Underlay.WINTER_DIRT;
+					break;
+			}
+		}
+		return underlay;
+	}
+
+	Overlay getSeasonalOverlay(Overlay overlay)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (overlay.getGroundMaterial())
+			{
+				case OVERWORLD_GRASS_1:
+					overlay = Overlay.WINTER_GRASS;
+					break;
+			}
+		}
+		return overlay;
+	}
+
+	WaterType getSeasonalWaterType(WaterType waterType)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (waterType)
+			{
+				case WATER:
+					waterType = WaterType.ICE;
+					break;
+			}
+		}
+		return waterType;
+	}
+
+	Material getSeasonalMaterial(Material material)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (material)
+			{
+				case LEAVES_1:
+					material = Material.WINTER_LEAVES_1;
+					break;
+				case WILLOW_LEAVES:
+					material = Material.WINTER_WILLOW_LEAVES;
+					break;
+				case MAPLE_LEAVES:
+					material = Material.WINTER_MAPLE_LEAVES;
+					break;
+				case LEAVES_2:
+					material = Material.WINTER_LEAVES_2;
+					break;
+				case LEAVES_3:
+					material = Material.WINTER_LEAVES_3;
+					break;
+				case PAINTING_LANDSCAPE:
+					material = Material.WINTER_PAINTING_LANDSCAPE;
+					break;
+				case PAINTING_KING:
+					material = Material.WINTER_PAINTING_KING;
+					break;
+				case PAINTING_ELF:
+					material = Material.WINTER_PAINTING_ELF;
+					break;
+			}
+		}
+		return material;
 	}
 
 	int[][] tzHaarRecolored = new int[4][3];

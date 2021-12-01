@@ -292,6 +292,21 @@ class SceneUploader
 												HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[2]
 								) / 4;
 
+						int overlayId = client.getScene().getOverlayIds()[tileZ][tileX][tileY];
+						int underlayId = client.getScene().getUnderlayIds()[tileZ][tileX][tileY];
+						if (overlayId != 0)
+						{
+							Overlay overlay = Overlay.getOverlay(overlayId, tile, client);
+							overlay = proceduralGenerator.getSeasonalOverlay(overlay);
+							tileColorHSL = proceduralGenerator.recolorOverlay(overlay, tileColorHSL);
+						}
+						else
+						{
+							Underlay underlay = Underlay.getUnderlay(underlayId, tile, client);
+							underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+							tileColorHSL = proceduralGenerator.recolorUnderlay(underlay, tileColorHSL);
+						}
+
 						color1H = color2H = color3H = tileColorHSL[0];
 						color1S = color2S = color3S = tileColorHSL[1];
 						color1L = color2L = color3L = tileColorHSL[2];
@@ -308,6 +323,12 @@ class SceneUploader
 
 						if (faceColorIndex != -1) {
 							tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
+
+							int underlayId = client.getScene().getUnderlayIds()[tileZ][tileX][tileY];
+							Underlay underlay = Underlay.getUnderlay(underlayId, tile, client);
+							underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+							tileColorHSL = proceduralGenerator.recolorUnderlay(underlay, tileColorHSL);
+
 							color1H = color2H = color3H = tileColorHSL[0];
 							color1S = color2S = color3S = tileColorHSL[1];
 							color1L = color2L = color3L = tileColorHSL[2];
@@ -392,7 +413,8 @@ class SceneUploader
 			vertexBuffer.put(twelveIntArray);
 
 			if (faceTextures != null && faceTextures[face] != -1 && uv != null) {
-				int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(faceTextures[face]), false);
+				material = proceduralGenerator.getSeasonalMaterial(Material.getTexture(faceTextures[face]));
+				int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(material.getDiffuseMapId()), false);
 				int idx = face * 6;
 
 				twelveFloatArray[0] = packedMaterialData;
@@ -410,6 +432,7 @@ class SceneUploader
 				uvBuffer.put(twelveFloatArray);
 				uvLength += 3;
 			} else if (material != null) {
+				material = proceduralGenerator.getSeasonalMaterial(hdPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE);
 				int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(material.getDiffuseMapId()), false);
 
 				twelveFloatArray[0] = packedMaterialData;
@@ -712,6 +735,7 @@ class SceneUploader
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
 					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
@@ -722,6 +746,7 @@ class SceneUploader
 				else
 				{
 					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(swColor)));
@@ -734,6 +759,29 @@ class SceneUploader
 				seMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY);
 				nwMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX, baseY + tileY + 1);
 				neMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY + 1);
+			}
+			else
+			{
+				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
+				{
+					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
+
+					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
+					seColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(seColor)));
+					nwColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(nwColor)));
+					neColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(neColor)));
+				}
+				else
+				{
+					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+
+					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(swColor)));
+					seColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(seColor)));
+					nwColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(nwColor)));
+					neColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(neColor)));
+				}
 			}
 
 			if (proceduralGenerator.vertexIsOverlay.containsKey(neVertexKey) && proceduralGenerator.vertexIsUnderlay.containsKey(neVertexKey))
@@ -1009,6 +1057,10 @@ class SceneUploader
 				materialC = Material.getTexture(faceTextures[face]);
 			}
 
+			materialA = proceduralGenerator.getSeasonalMaterial(materialA);
+			materialB = proceduralGenerator.getSeasonalMaterial(materialB);
+			materialC = proceduralGenerator.getSeasonalMaterial(materialC);
+
 			WaterType waterType = proceduralGenerator.faceWaterType(tile, face, sceneTileModel);
 
 			if (waterType != WaterType.NONE)
@@ -1058,6 +1110,7 @@ class SceneUploader
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
 					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));
@@ -1067,6 +1120,7 @@ class SceneUploader
 				else
 				{
 					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorA)));
@@ -1077,6 +1131,27 @@ class SceneUploader
 				materialA = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[0][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[0][1] / Perspective.LOCAL_TILE_SIZE));
 				materialB = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[1][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[1][1] / Perspective.LOCAL_TILE_SIZE));
 				materialC = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[2][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[2][1] / Perspective.LOCAL_TILE_SIZE));
+			}
+			else
+			{
+				if (proceduralGenerator.isOverlayFace(tile, face))
+				{
+					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
+
+					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));
+					colorB = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorB)));
+					colorC = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorC)));
+				}
+				else
+				{
+					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+
+					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorA)));
+					colorB = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorB)));
+					colorC = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorC)));
+				}
 			}
 
 			if (proceduralGenerator.vertexIsOverlay.containsKey(vertexKeyA) && proceduralGenerator.vertexIsUnderlay.containsKey(vertexKeyA))

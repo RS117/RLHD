@@ -48,6 +48,29 @@ import rs117.hd.config.WaterEffects;
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
 {
+	/*====== Limited-time settings ======*/
+
+	@ConfigSection(
+		name = "Limited-time",
+		description = "Fun and/or experimental settings that are available for a limited time",
+		position = -10,
+		closedByDefault = false
+	)
+	String limitedTimeSettings = "limitedTimeSettings";
+
+	@ConfigItem(
+		keyName = "winterTheme",
+		name = "Winter theme",
+		description = "Covers the Gielinor overworld with a layer of snow! This feature will be available until the end of December.",
+		position = -9,
+		section = limitedTimeSettings
+	)
+	default boolean winterTheme()
+	{
+		return true;
+	}
+
+
 	/*====== General settings ======*/
 
 	@ConfigSection(

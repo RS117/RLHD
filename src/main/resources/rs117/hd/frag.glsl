@@ -272,7 +272,7 @@ void main() {
             waterNormalStrength = 0.05;
             waterBaseOpacity = 0.8;
             waterFresnelAmount = 0.3;
-            waterSurfaceColor = vec3(69, 2, 2) / 255.0;
+            waterSurfaceColor = vec3(38, 0, 0) / 255.0;
             waterFoamColor = vec3(117, 63, 45);
             waterHasFoam = 1;
             waterDuration = 2;
