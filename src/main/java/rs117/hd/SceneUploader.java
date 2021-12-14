@@ -143,7 +143,7 @@ class SceneUploader
 
 	public int[] pushModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType) {
 		// get the required model data
-		final int faceCount = model.getTrianglesCount();
+		final int faceCount = model.getFaceCount();
 
 		// skip models with zero faces
 		// this does seem to happen sometimes (mostly during loading)
@@ -155,13 +155,13 @@ class SceneUploader
 		final int[] vertexX = model.getVerticesX();
 		final int[] vertexY = model.getVerticesY();
 		final int[] vertexZ = model.getVerticesZ();
-		final int[] trianglesX = model.getTrianglesX();
-		final int[] trianglesY = model.getTrianglesY();
-		final int[] trianglesZ = model.getTrianglesZ();
+		final int[] faceIndices1 = model.getFaceIndices1();
+		final int[] faceIndices2 = model.getFaceIndices2();
+		final int[] faceIndices3 = model.getFaceIndices3();
 		final int[] color1s = model.getFaceColors1();
 		final int[] color2s = model.getFaceColors2();
 		final int[] color3s = model.getFaceColors3();
-		final byte[] transparencies = model.getTriangleTransparencies();
+		final byte[] transparencies = model.getFaceTransparencies();
 		final short[] faceTextures = model.getFaceTextures();
 		final byte[] facePriorities = model.getFaceRenderPriorities();
 		final int[] vertexNormalsX = model.getVertexNormalsX();
@@ -203,9 +203,9 @@ class SceneUploader
 				color2 = color3 = color1;
 			}
 
-			final int triangleA = trianglesX[face];
-			final int triangleB = trianglesY[face];
-			final int triangleC = trianglesZ[face];
+			final int triangleA = faceIndices1[face];
+			final int triangleB = faceIndices2[face];
+			final int triangleC = faceIndices3[face];
 
 
 			final int vnAX = vertexNormalsX[triangleA];

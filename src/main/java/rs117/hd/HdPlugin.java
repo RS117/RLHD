@@ -2362,21 +2362,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			model.calculateExtreme(orientation);
 			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-			int tc = Math.min(MAX_TRIANGLE, model.getTrianglesCount());
+			int faceCount = Math.min(MAX_TRIANGLE, model.getFaceCount());
 			int uvOffset = model.getUvBufferOffset();
 
 			eightIntWrite[0] = model.getBufferOffset() >> 2;
 			eightIntWrite[1] = uvOffset;
-			eightIntWrite[2] = tc;
+			eightIntWrite[2] = faceCount;
 			eightIntWrite[3] = targetBufferOffset;
 			eightIntWrite[4] = FLAG_SCENE_BUFFER | (model.getRadius() << 12) | orientation;
 			eightIntWrite[5] = x + client.getCameraX2();
 			eightIntWrite[6] = y + client.getCameraY2();
 			eightIntWrite[7] = z + client.getCameraZ2();
 
-			bufferForTriangles(tc).ensureCapacity(8).put(eightIntWrite);
+			bufferForTriangles(faceCount).ensureCapacity(8).put(eightIntWrite);
 
-			targetBufferOffset += tc * 3;
+			targetBufferOffset += faceCount * 3;
 		}
 		else
 		{
