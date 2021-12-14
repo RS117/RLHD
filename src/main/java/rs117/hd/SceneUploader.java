@@ -170,6 +170,10 @@ class SceneUploader
 		final float[] uv = model.getFaceTextureUVCoordinates();
 		final boolean modelHasUv = faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE);
 		final Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
+		final byte overrideAmount = model.getOverrideAmount();
+		final byte overrideHue = model.getOverrideHue();
+		final byte overrideSat = model.getOverrideSaturation();
+		final byte overrideLum = model.getOverrideLuminance();
 
 		Material material = null;
 		if (objectProperties != null && objectProperties.getMaterial() != Material.NONE) {
@@ -183,30 +187,44 @@ class SceneUploader
 
 		int vertexLength = 0;
 		int uvLength = 0;
-		for (int face = 0; face < faceCount; face++) {
+		for (int face = 0; face < faceCount; face++)
+		{
 			int color1 = color1s[face];
 			int color2 = color2s[face];
 			int color3 = color3s[face];
 
-			if (color3 == -2) {
+			if (color3 == -2)
+			{
 				vertexBuffer.put(zeroInts);
 				normalBuffer.put(zeroFloats);
 
-				if (modelHasUv) {
+				if (modelHasUv)
+				{
 					uvBuffer.put(zeroFloats);
 					uvLength += 3;
 				}
 
 				vertexLength += 3;
 				continue;
-			} else if (color3 == -1) {
+			}
+			else if (color3 == -1)
+			{
 				color2 = color3 = color1;
+			}
+			// HSL override is not applied to flat shade faces or to textured faces
+			else if (faceTextures == null || faceTextures[face] == -1)
+			{
+				if (overrideAmount > 0)
+				{
+					color1 = interpolateHSL(color1, overrideHue, overrideSat, overrideLum, overrideAmount);
+					color2 = interpolateHSL(color2, overrideHue, overrideSat, overrideLum, overrideAmount);
+					color3 = interpolateHSL(color3, overrideHue, overrideSat, overrideLum, overrideAmount);
+				}
 			}
 
 			final int triangleA = faceIndices1[face];
 			final int triangleB = faceIndices2[face];
 			final int triangleC = faceIndices3[face];
-
 
 			final int vnAX = vertexNormalsX[triangleA];
 			final int vnAY = vertexNormalsY[triangleA];
@@ -1433,5 +1451,29 @@ class SceneUploader
 	{
 		byte isTerrain = 0b1;
 		return ((waterDepth << 4 | underwaterType.getValue()) << 2 | plane) << 1 | isTerrain;
+	}
+
+	private static int interpolateHSL(int hsl, byte hue2, byte sat2, byte lum2, byte lerp)
+	{
+		int hue = hsl >> 10 & 63;
+		int sat = hsl >> 7 & 7;
+		int lum = hsl & 127;
+		int var9 = lerp & 255;
+		if (hue2 != -1)
+		{
+			hue += var9 * (hue2 - hue) >> 7;
+		}
+
+		if (sat2 != -1)
+		{
+			sat += var9 * (sat2 - sat) >> 7;
+		}
+
+		if (lum2 != -1)
+		{
+			lum += var9 * (lum2 - lum) >> 7;
+		}
+
+		return (hue << 10 | sat << 7 | lum) & 65535;
 	}
 }
