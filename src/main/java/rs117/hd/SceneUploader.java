@@ -778,7 +778,7 @@ class SceneUploader
 				nwMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX, baseY + tileY + 1);
 				neMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY + 1);
 			}
-			else
+			else if (hdPlugin.configWinterTheme)
 			{
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
@@ -1150,7 +1150,7 @@ class SceneUploader
 				materialB = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[1][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[1][1] / Perspective.LOCAL_TILE_SIZE));
 				materialC = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[2][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[2][1] / Perspective.LOCAL_TILE_SIZE));
 			}
-			else
+			else if (hdPlugin.configWinterTheme)
 			{
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
