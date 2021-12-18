@@ -305,10 +305,22 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "equipmentLights",
+			name = "Equipment Lights",
+			description = "Adds dynamic lights to some equipment when equipped on a player.",
+			position = 104,
+			section = lightingSettings
+	)
+	default boolean equipmentLights()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "atmosphericLighting",
 		name = "Atmospheric Lighting",
 		description = "Changes the color and brightness of full-scene lighting in certain areas.",
-		position = 104,
+		position = 105,
 		section = lightingSettings
 	)
 	default boolean atmosphericLighting()
@@ -320,7 +332,7 @@ public interface HdPluginConfig extends Config
 		keyName = "shadowsEnabled",
 		name = "Shadows",
 		description = "Enables fully-dynamic shadows.",
-		position = 105,
+		position = 106,
 		section = lightingSettings
 	)
 	default boolean shadowsEnabled()
@@ -332,7 +344,7 @@ public interface HdPluginConfig extends Config
 		keyName = "shadowResolution",
 		name = "Shadow Quality",
 		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
-		position = 106,
+		position = 107,
 		section = lightingSettings
 	)
 	default ShadowResolution shadowResolution()
@@ -344,7 +356,7 @@ public interface HdPluginConfig extends Config
 		keyName = "shadowDistance",
 		name = "Shadow Distance",
 		description = "The maximum draw distance of shadow maps. Shorter distances result in sharper, higher quality shadows.",
-		position = 107,
+		position = 108,
 		section = lightingSettings
 	)
 	default ShadowDistance shadowDistance()
@@ -356,7 +368,7 @@ public interface HdPluginConfig extends Config
 		keyName = "expandShadowDraw",
 		name = "Expand Shadow Draw",
 		description = "Reduces 'flickering' of shadows disappearing at screen edge by increasing geometry drawn at a cost of performance.",
-		position = 108,
+		position = 109,
 		section = lightingSettings
 	)
 	default boolean expandShadowDraw()

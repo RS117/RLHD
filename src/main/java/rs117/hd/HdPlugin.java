@@ -92,6 +92,9 @@ import net.runelite.api.events.GroundObjectSpawned;
 import net.runelite.api.events.NpcChanged;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
+import net.runelite.api.events.PlayerDespawned;
+import net.runelite.api.events.PlayerSpawned;
+import net.runelite.api.events.PlayerChanged;
 import net.runelite.api.events.ProjectileMoved;
 import net.runelite.api.events.WallObjectChanged;
 import net.runelite.api.events.WallObjectDespawned;
@@ -400,6 +403,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configTzhaarHD = true;
 	public boolean configProjectileLights = true;
 	public boolean configNpcLights = true;
+	public boolean configEquipmentLights = true;
 	public boolean configShadowsEnabled = false;
 	public boolean configExpandShadowDraw = false;
 	public boolean configHdInfernalTexture = true;
@@ -423,6 +427,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configTzhaarHD = config.tzhaarHD();
 		configProjectileLights = config.projectileLights();
 		configNpcLights = config.npcLights();
+		configEquipmentLights = config.equipmentLights();
 		configShadowsEnabled = config.shadowsEnabled();
 		configExpandShadowDraw = config.expandShadowDraw();
 		configHdInfernalTexture = config.hdInfernalTexture();
@@ -2206,6 +2211,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case "npcLights":
 				configNpcLights = config.npcLights();
 				break;
+			case "equipmentLights":
+				configEquipmentLights = config.equipmentLights();
+				break;
 			case "expandShadowDraw":
 				configExpandShadowDraw = config.expandShadowDraw();
 				break;
@@ -2593,11 +2601,29 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		lightManager.removeNpcLight(npcDespawned);
 	}
-
-	@Subscribe
+  
+  @Subscribe
 	public void onNpcChanged(NpcChanged npcChanged)
 	{
 		lightManager.updateNpcChanged(npcChanged);
+  }
+  
+	@Subscribe
+	public void onPlayerSpawned(PlayerSpawned playerSpawned)
+	{
+		lightManager.addEquipmentLight(playerSpawned.getPlayer());
+	}
+
+	@Subscribe
+	public void onPlayerDespawned(PlayerDespawned playerDespawned)
+	{
+		lightManager.removeEquipmentLight(playerDespawned);
+	}
+
+	@Subscribe
+	public void onPlayerChanged(PlayerChanged playerChanged)
+	{
+		lightManager.equipmentLightChanged(playerChanged);
 	}
 
 	@Subscribe
