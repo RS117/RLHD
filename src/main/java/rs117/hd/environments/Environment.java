@@ -457,16 +457,6 @@ public enum Environment
 		.setDirectionalStrength(1.5f)
 	),
 
-	FROZEN_DOOR(Area.FROZEN_DOOR, new Properties()
-		.setFogColor(3, 16, 25)
-		.setFogDepth(30)
-		.setAmbientColor(200, 228, 247)
-		.setAmbientStrength(0.3f)
-		.setDirectionalColor(146, 209, 250)
-		.setDirectionalStrength(1.0f)
-		.setLightDirection(260f, 10f)
-		.enableLightning()
-	),
 	GOD_WARS_DUNGEON(Area.GOD_WARS_DUNGEON, new Properties()
 		.setFogColor(14, 59, 89)
 		.setFogDepth(30)

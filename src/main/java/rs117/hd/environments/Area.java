@@ -505,9 +505,9 @@ public enum Area
 
 	ZANARIS(2315, 4345, 2500, 4485),
 
-	FROZEN_DOOR(2884, 5280, 2883, 5280),
 	GOD_WARS_DUNGEON(
 		new Rect(2816, 5375, 2971, 5216),
+		new Rect(2848, 5199, 2944, 5153), // ancient prison
 		new Rect(3008, 10178, 3072, 10112) // wilderness dungeon
 	),
 
