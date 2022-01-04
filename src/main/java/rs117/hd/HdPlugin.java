@@ -1110,6 +1110,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		if (!configShadowsEnabled)
 		{
+			initDummyShadowMap();
 			return;
 		}
 
@@ -1137,6 +1138,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		// Reset
 		gl.glBindTexture(gl.GL_TEXTURE_2D, 0);
 		gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0);
+	}
+
+	private void initDummyShadowMap()
+	{
+		// Create texture
+		texShadowMap = glGenTexture(gl);
+		gl.glBindTexture(gl.GL_TEXTURE_2D, texShadowMap);
+		gl.glTexImage2D(gl.GL_TEXTURE_2D, 0, gl.GL_DEPTH_COMPONENT, 1, 1, 0, gl.GL_DEPTH_COMPONENT, gl.GL_FLOAT, null);
+		gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST);
+		gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST);
+		gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP_TO_BORDER);
+		gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP_TO_BORDER);
+
+		// Reset
+		gl.glBindTexture(gl.GL_TEXTURE_2D, 0);
 	}
 
 	private void shutdownShadowMapFbo()
@@ -1733,13 +1749,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			gl.glUseProgram(glProgram);
 
-			if (texShadowMap != -1)
-			{
-				// bind shadow map
-				gl.glActiveTexture(gl.GL_TEXTURE3);
-				gl.glBindTexture(GL_TEXTURE_2D, texShadowMap);
-				gl.glActiveTexture(gl.GL_TEXTURE0);
-			}
+			// bind shadow map, or dummy 1x1 texture
+			gl.glActiveTexture(gl.GL_TEXTURE3);
+			gl.glBindTexture(GL_TEXTURE_2D, texShadowMap);
+			gl.glActiveTexture(gl.GL_TEXTURE0);
 
 			if (aaEnabled)
 			{
