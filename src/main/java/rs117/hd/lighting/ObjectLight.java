@@ -373,6 +373,11 @@ enum ObjectLight
 	
 	// Cerberus
 	WALL_TORCH_CERBERUS_DUNGEON(250, Alignment.CENTER, 650, 17.5f, rgb(252, 148, 3), LightType.FLICKER, 0, 20, 26570),
+
+	// God Wars Dungeon
+	GWD_NEX_ANCIENT_BARRIER_RED(100, Alignment.CENTER, 700, 10f, rgb(255, 51, 0), LightType.PULSE, 2200, 10, 42968),
+	GWD_NEX_ANCIENT_BARRIER_PURPLE(100, Alignment.CENTER, 700, 10f, rgb(183, 0, 255), LightType.PULSE, 2200, 10, 42967),
+	GWD_NEX_ANCIENT_FORGE(100, Alignment.CENTER, 350, 20f, rgb(0, 200, 255), LightType.FLICKER, 0, 10, ANCIENT_FORGE),
 	
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
