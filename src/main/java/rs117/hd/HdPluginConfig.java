@@ -61,7 +61,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "winterTheme",
 		name = "Winter theme",
-		description = "Covers the Gielinor overworld with a layer of snow! This feature will be available until the end of December.",
+		description = "Covers the Gielinor overworld with a layer of snow! This feature will be available until the end of January.",
 		position = -9,
 		section = limitedTimeSettings
 	)
