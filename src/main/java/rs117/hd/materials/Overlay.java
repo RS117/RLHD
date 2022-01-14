@@ -237,12 +237,6 @@ public enum Overlay
 
 
 
-	// Christmas event 2021
-	CHRISTMAS_2021_SNOW_1(-59, Area.FALADOR, GroundMaterial.FALADOR_PATHS, new Properties().setShiftLightness(5).setSaturation(0)),
-	CHRISTMAS_2021_ICE(-60, Area.FALADOR, WaterType.ICE),
-
-
-
 	// default overlays
 	OVERLAY_N128(-128, WaterType.WATER),
 	OVERLAY_N124(-124, GroundMaterial.DIRT),

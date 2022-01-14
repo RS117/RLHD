@@ -125,12 +125,6 @@ public enum Underlay
 
 
 
-	// Christmas event 2021
-	CHRISTMAS_2021_SNOW_1(59, Area.FALADOR, GroundMaterial.SNOW_1),
-	CHRISTMAS_2021_SNOW_2(60, Area.FALADOR, GroundMaterial.SNOW_1),
-
-
-
 	// default underlays
 	OVERWORLD_UNDERLAY_10(10, Area.OVERWORLD, GroundMaterial.OVERWORLD_GRASS_1),
 	OVERWORLD_UNDERLAY_25(25, Area.OVERWORLD, GroundMaterial.OVERWORLD_GRASS_1),

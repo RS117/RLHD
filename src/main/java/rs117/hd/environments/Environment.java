@@ -320,15 +320,6 @@ public enum Environment
 		.setLightDirection(260f, 10f)
 	),
 
-	FALADOR(Area.FALADOR, new Properties()
-		.setFogColor("#B8C5DB")
-		.setFogDepth(35)
-		.setAmbientColor("#8FCAFF")
-		.setAmbientStrength(3.5f)
-		.setDirectionalColor("#FFFFFF")
-		.setDirectionalStrength(1.5f)
-	),
-
 	GAMES_ROOM(Area.GAMES_ROOM, new Properties()
 		.setFogColor("#190D02")
 		.setFogDepth(20)

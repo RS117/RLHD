@@ -134,10 +134,6 @@ public enum ObjectProperties
 	LUMBRIDGE_CAVE_WALLS(Material.ROCK_2, new Properties().setFlatNormals(true), 5912, 5913, 5914, 5915, 5916, 5917, 5918, 5919, 5920, 5921, 5922, 5923, 5924, 5925, 5926, 5927, 5928, 5929, 5930, 5931, 5932, 5933, 5934, 5935, 5936, 5937, 5938, 5939, 5940, 5941, 5942, 5943, 5944,6903,6925,6927,6929,6930,6931,6932,6933,6939,6940),
 
 
-	// Christmas event 2021
-	CHRISTMAS_2021_GRASS(Material.NONE, new Properties().setFlatNormals(true), 42909, 42910, 42911, 42912),
-
-
 
 	// Unknown
 	UNKNOWN_1(Material.GRUNGE_1, new Properties().setFlatNormals(true), 677),
