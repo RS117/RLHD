@@ -307,7 +307,7 @@ public class LightManager
 				light.currentStrength += (light.strength / ((frameTime / 1000f) * flickerRate)) * change;
 				light.currentStrength = Floats.constrainToRange(light.currentStrength, light.strength * minFlicker, light.strength * maxFlicker);
 
-				light.currentSize += (light.size / sizeAdjustment) * change;
+				light.currentSize += (light.size / sizeAdjustment) * change * (frameTime / 100f);
 				light.currentSize = Ints.constrainToRange(light.currentSize, (int)(light.size * minFlicker), (int)(light.size * maxFlicker));
 			}
 			else if (light.type == LightType.PULSE)
