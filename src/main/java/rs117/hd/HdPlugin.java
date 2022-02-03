@@ -118,7 +118,7 @@ import static org.jocl.CL.clCreateFromGLBuffer;
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
 	// This is the maximum number of triangles the compute shaders support
-	static final int MAX_TRIANGLE = 4096;
+	static final int MAX_TRIANGLE = 6144;
 	static final int SMALL_TRIANGLE_COUNT = 512;
 	private static final int FLAG_SCENE_BUFFER = Integer.MIN_VALUE;
 	private static final int DEFAULT_DISTANCE = 25;
