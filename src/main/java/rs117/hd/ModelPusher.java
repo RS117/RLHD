@@ -2,20 +2,35 @@ package rs117.hd;
 
 import com.google.common.primitives.Ints;
 import com.jogamp.opengl.math.VectorUtil;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import rs117.hd.materials.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+class ModelData {
+    private int[] colors;
+
+    public ModelData setColors(int[] colors) {
+        this.colors = colors;
+        return this;
+    }
+
+    public int getColorForFace(int face, int index) {
+        return this.colors[(face * 4) + index];
+    }
+}
 
 /**
  * Pushes models
  */
 @Singleton
+@Slf4j
 public class ModelPusher {
-    // todo: calculate a single hash for all of the model functions
-    // then create a map<long, ModelData> for the cache and clear it whenever the scene changes
-
     @Inject
     private HdPlugin hdPlugin;
 
@@ -39,12 +54,16 @@ public class ModelPusher {
             0.57735026f, 0.57735026f, 0.57735026f
     };
 
-    // 12 zeroes to replace the duplicated zero calls to vertexBuffer
-    private final static int[] zeroInts = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     // same thing but for the normalBuffer and uvBuffer
     private final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    public int[] pushModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType) {
+    private final HashMap<Integer, ModelData> modelCache = new HashMap<>();
+
+    public void clearModelCache() {
+        modelCache.clear();
+    }
+
+    public int[] pushModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache) {
         final int faceCount = Math.min(model.getFaceCount(), HdPlugin.MAX_TRIANGLE);
 
         // skip models with zero faces
@@ -59,10 +78,12 @@ public class ModelPusher {
         normalBuffer.ensureCapacity(12 * 2 * faceCount);
         uvBuffer.ensureCapacity(12 * 2 * faceCount);
 
+        ModelData modelData = getCachedModelData(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache);
+
         int vertexLength = 0;
         int uvLength = 0;
         for (int face = 0; face < faceCount; face++) {
-            vertexBuffer.put(getVertexDataForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face));
+            vertexBuffer.put(getVertexDataForFace(model, modelData, face));
             vertexLength += 3;
 
             normalBuffer.put(getNormalDataForFace(model, objectProperties, face));
@@ -77,28 +98,27 @@ public class ModelPusher {
         return new int[]{vertexLength, uvLength};
     }
 
-    private int[] getVertexDataForFace(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int face) {
+    private int[] getVertexDataForFace(Model model, ModelData modelData, int face) {
         final int[] xVertices = model.getVerticesX();
         final int[] yVertices = model.getVerticesY();
         final int[] zVertices = model.getVerticesZ();
         final int triA = model.getFaceIndices1()[face];
         final int triB = model.getFaceIndices2()[face];
         final int triC = model.getFaceIndices3()[face];
-        final int[] colors = getColorsForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face);
 
         return new int[]{
                 xVertices[triA],
                 yVertices[triA],
                 zVertices[triA],
-                colors[3] | colors[0],
+                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 0),
                 xVertices[triB],
                 yVertices[triB],
                 zVertices[triB],
-                colors[3] | colors[1],
+                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 1),
                 xVertices[triC],
                 yVertices[triC],
                 zVertices[triC],
-                colors[3] | colors[2],
+                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 2),
         };
     }
 
@@ -228,6 +248,40 @@ public class ModelPusher {
         }
 
         return materialId << 1 | (isOverlay ? 0b1 : 0b0);
+    }
+
+    private ModelData getCachedModelData(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache) {
+        if (noCache) {
+            return new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+        }
+
+        int hash = Arrays.hashCode(new int[] {
+                model.hashCode(),
+                faceCount,
+                tileX,
+                tileY,
+                tileZ,
+                objectProperties.name().hashCode(),
+                objectType.name().hashCode(),
+        });
+
+        ModelData modelData = modelCache.get(hash);
+        if (modelData == null) {
+            modelData = new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+            modelCache.put(hash, modelData);
+        }
+
+        return modelData;
+    }
+
+    private int[] getColorsForModel(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount) {
+        ArrayList<Integer> modelColors = new ArrayList<>();
+
+        for (int face = 0; face < faceCount; face++) {
+            Arrays.stream(getColorsForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face)).forEach(modelColors::add);
+        }
+
+        return modelColors.stream().mapToInt(i -> i).toArray();
     }
 
     private int[] getColorsForFace(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int face) {
