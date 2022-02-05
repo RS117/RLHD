@@ -522,4 +522,13 @@ public interface HdPluginConfig extends Config
 	{
 		return true;
 	}
+
+	@ConfigItem(
+		keyName = "modelCaching",
+		name = "Disable model caching",
+		description = "Model caching improves performance with increased memory usage.",
+		position = 303,
+		section = miscellaneousSettings
+	)
+	default boolean disableModelCaching() { return false; }
 }

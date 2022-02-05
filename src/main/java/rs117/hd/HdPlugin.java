@@ -2445,7 +2445,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			model.calculateExtreme(orientation);
 			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-			final int[] lengths = modelPusher.pushModel(model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, false);
+			final int[] lengths = modelPusher.pushModel(model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, config.disableModelCaching());
 
 			eightIntWrite[0] = tempOffset;
 			eightIntWrite[1] = lengths[1] > 0 ? tempUvOffset : -1;
