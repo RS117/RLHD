@@ -57,6 +57,8 @@ public class ModelPusher {
     // same thing but for the normalBuffer and uvBuffer
     private final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+    private final static FixedLengthHashCode hasher = new FixedLengthHashCode(6144);
+
     private final HashMap<Integer, ModelData> modelCache = new HashMap<>();
 
     public void clearModelCache() {
@@ -255,15 +257,9 @@ public class ModelPusher {
             return new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
         }
 
-        int hash = Arrays.hashCode(new int[] {
-                model.hashCode(),
-                faceCount,
-                tileX,
-                tileY,
-                tileZ,
-                objectProperties.name().hashCode(),
-                objectType.name().hashCode(),
-        });
+        // note for future spelunkers:
+        // this hash code is accurate for caching the model colors but will probably need to be expanded if you're attempting to include other data
+        int hash = hasher.hashCode(new int[]{ hasher.hashCode(model.getFaceColors1()), hasher.hashCode(model.getFaceColors2()), hasher.hashCode(model.getFaceColors3()) });
 
         ModelData modelData = modelCache.get(hash);
         if (modelData == null) {
