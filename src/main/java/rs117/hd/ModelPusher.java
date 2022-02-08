@@ -56,6 +56,12 @@ public class ModelPusher {
 
     // same thing but for the normalBuffer and uvBuffer
     private final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private final static int[] twoInts = new int[2];
+    private final static int[] fourInts = new int[4];
+    private final static int[] twelveInts = new int[12];
+    private final static float[] twelveFloats = new float[12];
+    private final static int[] modelColors = new int[HdPlugin.MAX_TRIANGLE * 4];
+    private final static ModelData tempModelData = new ModelData();
 
     private final static FixedLengthHashCode hasher = new FixedLengthHashCode(HdPlugin.MAX_TRIANGLE);
 
@@ -72,7 +78,9 @@ public class ModelPusher {
         // this does seem to happen sometimes (mostly during loading)
         // should save some CPU cycles here and there
         if (faceCount == 0) {
-            return new int[]{0, 0};
+            twoInts[0] = 0;
+            twoInts[1] = 0;
+            return twoInts;
         }
 
         // ensure capacity upfront
@@ -97,7 +105,10 @@ public class ModelPusher {
             }
         }
 
-        return new int[]{vertexLength, uvLength};
+        twoInts[0] = vertexLength;
+        twoInts[1] = uvLength;
+
+        return twoInts;
     }
 
     private int[] getVertexDataForFace(Model model, ModelData modelData, int face) {
@@ -108,20 +119,20 @@ public class ModelPusher {
         final int triB = model.getFaceIndices2()[face];
         final int triC = model.getFaceIndices3()[face];
 
-        return new int[]{
-                xVertices[triA],
-                yVertices[triA],
-                zVertices[triA],
-                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 0),
-                xVertices[triB],
-                yVertices[triB],
-                zVertices[triB],
-                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 1),
-                xVertices[triC],
-                yVertices[triC],
-                zVertices[triC],
-                modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 2),
-        };
+        twelveInts[0] = xVertices[triA];
+        twelveInts[1] = yVertices[triA];
+        twelveInts[2] = zVertices[triA];
+        twelveInts[3] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 0);
+        twelveInts[4] = xVertices[triB];
+        twelveInts[5] = yVertices[triB];
+        twelveInts[6] = zVertices[triB];
+        twelveInts[7] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 1);
+        twelveInts[8] = xVertices[triC];
+        twelveInts[9] = yVertices[triC];
+        twelveInts[10] = zVertices[triC];
+        twelveInts[11] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 2);
+
+        return twelveInts;
     }
 
     private float[] getNormalDataForFace(Model model, ObjectProperties objectProperties, int face) {
@@ -135,20 +146,21 @@ public class ModelPusher {
         final int[] xVertexNormals = model.getVertexNormalsX();
         final int[] yVertexNormals = model.getVertexNormalsY();
         final int[] zVertexNormals = model.getVertexNormalsZ();
-        return new float[]{
-                xVertexNormals[triA],
-                yVertexNormals[triA],
-                zVertexNormals[triA],
-                0,
-                xVertexNormals[triB],
-                yVertexNormals[triB],
-                zVertexNormals[triB],
-                0,
-                xVertexNormals[triC],
-                yVertexNormals[triC],
-                zVertexNormals[triC],
-                0
-        };
+
+        twelveFloats[0] = xVertexNormals[triA];
+        twelveFloats[1] = yVertexNormals[triA];
+        twelveFloats[2] = zVertexNormals[triA];
+        twelveFloats[3] = 0;
+        twelveFloats[4] = xVertexNormals[triB];
+        twelveFloats[5] = yVertexNormals[triB];
+        twelveFloats[6] = zVertexNormals[triB];
+        twelveFloats[7] = 0;
+        twelveFloats[8] = xVertexNormals[triC];
+        twelveFloats[9] = yVertexNormals[triC];
+        twelveFloats[10] = zVertexNormals[triC];
+        twelveFloats[11] = 0;
+
+        return twelveFloats;
     }
 
     private float[] getUvDataForFace(Model model, ObjectProperties objectProperties, int face) {
@@ -165,20 +177,20 @@ public class ModelPusher {
             int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(material.getDiffuseMapId()), false);
             int idx = face * 6;
 
-            return new float[]{
-                    packedMaterialData,
-                    uv[idx],
-                    uv[idx + 1],
-                    0,
-                    packedMaterialData,
-                    uv[idx + 2],
-                    uv[idx + 3],
-                    0,
-                    packedMaterialData,
-                    uv[idx + 4],
-                    uv[idx + 5],
-                    0
-            };
+            twelveFloats[0] = packedMaterialData;
+            twelveFloats[1] = uv[idx];
+            twelveFloats[2] = uv[idx + 1];
+            twelveFloats[3] = 0;
+            twelveFloats[4] = packedMaterialData;
+            twelveFloats[5] = uv[idx + 2];
+            twelveFloats[6] = uv[idx + 3];
+            twelveFloats[7] = 0;
+            twelveFloats[8] = packedMaterialData;
+            twelveFloats[9] = uv[idx + 4];
+            twelveFloats[10] = uv[idx + 5];
+            twelveFloats[11] = 0;
+
+            return twelveFloats;
         } else if (material != null) {
             final int triA = model.getFaceIndices1()[face];
             final int triB = model.getFaceIndices2()[face];
@@ -191,35 +203,35 @@ public class ModelPusher {
             int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(material.getDiffuseMapId()), false);
 
             if (objectProperties.getUvType() == UvType.GROUND_PLANE) {
-                return new float[]{
-                        packedMaterialData,
-                        (xVertices[triA] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        (zVertices[triA] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        0,
-                        packedMaterialData,
-                        (xVertices[triB] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        (zVertices[triB] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        0,
-                        packedMaterialData,
-                        (xVertices[triC] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        (zVertices[triC] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE,
-                        0
-                };
+                twelveFloats[0] = packedMaterialData;
+                twelveFloats[1] = (xVertices[triA] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[2] = (zVertices[triA] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[3] = 0;
+                twelveFloats[4] = packedMaterialData;
+                twelveFloats[5] = (xVertices[triB] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[6] = (zVertices[triB] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[7] = 0;
+                twelveFloats[8] = packedMaterialData;
+                twelveFloats[9] = (xVertices[triC] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[10] = (zVertices[triC] % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+                twelveFloats[11] = 0;
+
+                return twelveFloats;
             } else {
-                return new float[]{
-                        packedMaterialData,
-                        0,
-                        0,
-                        0,
-                        packedMaterialData,
-                        1,
-                        0,
-                        0,
-                        packedMaterialData,
-                        0,
-                        1,
-                        0
-                };
+                twelveFloats[0] = packedMaterialData;
+                twelveFloats[1] = 0;
+                twelveFloats[2] = 0;
+                twelveFloats[3] = 0;
+                twelveFloats[4] = packedMaterialData;
+                twelveFloats[5] = 1;
+                twelveFloats[6] = 0;
+                twelveFloats[7] = 0;
+                twelveFloats[8] = packedMaterialData;
+                twelveFloats[9] = 0;
+                twelveFloats[10] = 1;
+                twelveFloats[11] = 0;
+
+                return twelveFloats;
             }
         } else if (faceTextures != null) {
             return zeroFloats;
@@ -254,7 +266,8 @@ public class ModelPusher {
 
     private ModelData getCachedModelData(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache) {
         if (noCache) {
-            return new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+            tempModelData.setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+            return tempModelData;
         }
 
         // note for future spelunkers:
@@ -271,13 +284,11 @@ public class ModelPusher {
     }
 
     private int[] getColorsForModel(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount) {
-        ArrayList<Integer> modelColors = new ArrayList<>();
-
         for (int face = 0; face < faceCount; face++) {
-            Arrays.stream(getColorsForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face)).forEach(modelColors::add);
+            System.arraycopy(getColorsForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face), 0, modelColors, face*4, 4);
         }
 
-        return modelColors.stream().mapToInt(i -> i).toArray();
+        return Arrays.copyOfRange(modelColors, 0, faceCount*4);
     }
 
     private int[] getColorsForFace(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int face) {
@@ -299,12 +310,11 @@ public class ModelPusher {
         final Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
 
         if (color3 == -2) {
-            return new int[] {
-                    0,
-                    0,
-                    0,
-                    0xFF << 24
-            };
+            fourInts[0] = 0;
+            fourInts[1] = 0;
+            fourInts[2] = 0;
+            fourInts[3] = 0xFF << 24;
+            return fourInts;
         } else if (color3 == -1) {
             color2 = color3 = color1;
         } else if ((faceTextures == null || faceTextures[face] == -1) && overrideAmount > 0) {
@@ -450,12 +460,12 @@ public class ModelPusher {
         color2 = (color2H << 3 | color2S) << 7 | color2L;
         color3 = (color3H << 3 | color3S) << 7 | color3L;
 
-        return new int[]{
-                color1,
-                color2,
-                color3,
-                packedAlphaPriority
-        };
+        fourInts[0] = color1;
+        fourInts[1] = color2;
+        fourInts[2] = color3;
+        fourInts[3] = packedAlphaPriority;
+
+        return fourInts;
     }
 
     private static int interpolateHSL(int hsl, byte hue2, byte sat2, byte lum2, byte lerp) {
