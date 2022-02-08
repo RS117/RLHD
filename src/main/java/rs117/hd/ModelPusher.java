@@ -8,7 +8,6 @@ import rs117.hd.materials.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -58,6 +57,7 @@ public class ModelPusher {
     private final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final static int[] twoInts = new int[2];
     private final static int[] fourInts = new int[4];
+    private final static int[] eightInts = new int[8];
     private final static int[] twelveInts = new int[12];
     private final static float[] twelveFloats = new float[12];
     private final static int[] modelColors = new int[HdPlugin.MAX_TRIANGLE * 4];
@@ -272,7 +272,15 @@ public class ModelPusher {
 
         // note for future spelunkers:
         // this hash code is accurate for caching the model colors but will probably need to be expanded if you're attempting to include other data
-        int hash = hasher.hashCode(new int[]{ hasher.hashCode(model.getFaceColors1()), hasher.hashCode(model.getFaceColors2()), hasher.hashCode(model.getFaceColors3()), Arrays.hashCode(model.getFaceTransparencies()), model.getOverrideAmount(), model.getOverrideLuminance(), model.getOverrideHue(), model.getOverrideSaturation() });
+        eightInts[0] = hasher.hashCode(model.getFaceColors1());
+        eightInts[1] = hasher.hashCode(model.getFaceColors2());
+        eightInts[2] = hasher.hashCode(model.getFaceColors3());
+        eightInts[3] = Arrays.hashCode(model.getFaceTransparencies());
+        eightInts[4] = model.getOverrideAmount();
+        eightInts[5] = model.getOverrideHue();
+        eightInts[6] = model.getOverrideSaturation();
+        eightInts[7] = model.getOverrideLuminance();
+        int hash = hasher.hashCode(eightInts);
 
         ModelData modelData = modelCache.get(hash);
         if (modelData == null) {
