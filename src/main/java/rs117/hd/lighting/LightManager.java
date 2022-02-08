@@ -31,14 +31,13 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import com.jogamp.opengl.math.FloatUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -60,6 +59,9 @@ import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.HDUtils;
 
+import static com.jogamp.opengl.math.FloatUtil.cos;
+import static com.jogamp.opengl.math.FloatUtil.pow;
+
 @Singleton
 @Slf4j
 public class LightManager
@@ -72,6 +74,8 @@ public class LightManager
 
 	@Inject
 	private HdPlugin hdPlugin;
+
+	private static final Random randomizer = new Random();
 
 	ArrayList<Light> allLights = new ArrayList<>();
 	ArrayList<Light> sceneLights = new ArrayList<>();
@@ -147,6 +151,7 @@ public class LightManager
 		public float duration;
 		public float range;
 		public int fadeInDuration;
+		public final int randomOffset = randomizer.nextInt();
 
 		public int currentSize;
 		public float currentStrength;
@@ -298,17 +303,26 @@ public class LightManager
 
 			if (light.type == LightType.FLICKER)
 			{
-				double change = Math.random() * 2 - 1.0f;
-				int flickerRate = 1000; // 1800
-				int sizeAdjustment = 15;
+				long repeatMs = 60000;
+				int offset = light.randomOffset;
+				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * FloatUtil.TWO_PI;
+
+				float flicker = (
+						pow(cos(11 * t), 2) +
+								pow(cos(17 * t), 4) +
+								pow(cos(23 * t), 6) +
+								pow(cos(31 * t), 2) +
+								pow(cos(179 * t), 2) / 3 +
+								pow(cos(331 * t), 2) / 7
+				) / 4.335f;
+
 				float maxFlicker = 1f + (light.range / 100f);
 				float minFlicker = 1f - (light.range / 100f);
 
-				light.currentStrength += (light.strength / ((frameTime / 1000f) * flickerRate)) * change;
-				light.currentStrength = Floats.constrainToRange(light.currentStrength, light.strength * minFlicker, light.strength * maxFlicker);
+				flicker = minFlicker + (maxFlicker - minFlicker) * flicker;
 
-				light.currentSize += (light.size / sizeAdjustment) * change * (frameTime / 100f);
-				light.currentSize = Ints.constrainToRange(light.currentSize, (int)(light.size * minFlicker), (int)(light.size * maxFlicker));
+				light.currentStrength = light.strength * flicker;
+				light.currentSize = (int) (light.size * flicker * 1.5f);
 			}
 			else if (light.type == LightType.PULSE)
 			{
