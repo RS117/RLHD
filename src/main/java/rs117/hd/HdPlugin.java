@@ -478,6 +478,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					GL versionGL = versionContext.getGL().getGL();
 					log.info("Using device: {}", versionGL.glGetString(GL.GL_RENDERER));
 					log.info("Using driver: {}", versionGL.glGetString(GL.GL_VERSION));
+					log.info("Client is {}-bit", System.getProperty("sun.arch.data.model"));
 					versionContext.destroy();
 
 					GLProfile glProfile = GLProfile.get(GLProfile.GL4);
