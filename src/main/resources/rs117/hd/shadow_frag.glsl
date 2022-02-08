@@ -75,7 +75,7 @@ void main()
     uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
     vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
 
-    if (min(texture.a, alpha) < 0.25)
+    if (min(texture.a, alpha) < 0.3)
     {
         discard;
     }
