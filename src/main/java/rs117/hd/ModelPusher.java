@@ -259,7 +259,7 @@ public class ModelPusher {
 
         // note for future spelunkers:
         // this hash code is accurate for caching the model colors but will probably need to be expanded if you're attempting to include other data
-        int hash = hasher.hashCode(new int[]{ hasher.hashCode(model.getFaceColors1()), hasher.hashCode(model.getFaceColors2()), hasher.hashCode(model.getFaceColors3()), Arrays.hashCode(model.getFaceTransparencies()) });
+        int hash = hasher.hashCode(new int[]{ hasher.hashCode(model.getFaceColors1()), hasher.hashCode(model.getFaceColors2()), hasher.hashCode(model.getFaceColors3()), Arrays.hashCode(model.getFaceTransparencies()), model.getOverrideAmount(), model.getOverrideLuminance(), model.getOverrideHue(), model.getOverrideSaturation() });
 
         ModelData modelData = modelCache.get(hash);
         if (modelData == null) {
