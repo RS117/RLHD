@@ -2139,6 +2139,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		invokeOnMainThread(this::uploadScene);
 	}
 
+	@Subscribe
+	public void onResizeableChanged(ResizeableChanged resizeableChanged)
+	{
+		if (OSType.getOSType() == OSType.MacOS)
+		{
+			// switching resizable mode adjusts the canvas size, without adjusting
+			// the client size. queue the GLFBODrawable resize for later.
+			needsReset = 5;
+		}
+	}
+
 	private void uploadScene()
 	{
 		modelPusher.clearModelCache();
