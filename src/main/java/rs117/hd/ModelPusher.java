@@ -9,7 +9,8 @@ import rs117.hd.materials.*;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 class ModelData {
     private int[] colors;
@@ -65,7 +66,7 @@ public class ModelPusher {
 
     private final static FixedLengthHashCode hasher = new FixedLengthHashCode(HdPlugin.MAX_TRIANGLE);
 
-    private final HashMap<Integer, ModelData> modelCache = new HashMap<>();
+    private final Map<Integer, ModelData> modelCache = new WeakHashMap<>();
 
     public void clearModelCache() {
         modelCache.clear();
