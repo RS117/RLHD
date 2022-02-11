@@ -139,7 +139,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "unlockFps",
 		name = "Unlock FPS",
-		description = "Removes the 50 FPS cap for camera movement, lighting and shadows.",
+		description = "Removes the 50 FPS cap for some game content such as camera movement and dynamic lighting.",
 		position = 5,
 		section = generalSettings
 	)
@@ -271,7 +271,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "maxDynamicLights",
 		name = "Dynamic Lights",
-		description = "The maximum number of dynamic lights visible at one time. GPU-heavy in certain scenes.",
+		description = "The maximum number of dynamic lights visible at one time. Reducing this will improve performance.",
 		position = 101,
 		section = lightingSettings
 	)
