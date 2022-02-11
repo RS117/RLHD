@@ -99,7 +99,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "antiAliasingMode",
 		name = "Anti Aliasing",
-		description = "Configures the anti-aliasing mode",
+		description = "Improves jagged/shimmering edges at a cost of GPU performance. 8x/16x MSAA are highly expensive.",
 		position = 2,
 		section = generalSettings
 	)
@@ -127,19 +127,19 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "anisotropicFilteringLevel",
 		name = "Anisotropic Filtering",
-		description = "Configures the anisotropic filtering level.",
+		description = "Configures the anisotropic filtering level from 0 to 16x.",
 		position = 4,
 		section = generalSettings
 	)
 	default int anisotropicFilteringLevel()
 	{
-		return 1;
+		return 16;
 	}
 
 	@ConfigItem(
 		keyName = "unlockFps",
 		name = "Unlock FPS",
-		description = "Removes the 50 FPS cap for camera movement",
+		description = "Removes the 50 FPS cap for camera movement, lighting and shadows.",
 		position = 5,
 		section = generalSettings
 	)
@@ -175,7 +175,7 @@ public interface HdPluginConfig extends Config
 			section = generalSettings
 	)
 	@Range(
-			min = 1,
+			min = 0,
 			max = 999
 	)
 	default int fpsTarget()
@@ -271,7 +271,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "maxDynamicLights",
 		name = "Dynamic Lights",
-		description = "The maximum number of dynamic lights visible at one time. Reducing this will improve performance.",
+		description = "The maximum number of dynamic lights visible at one time. GPU-heavy in certain scenes.",
 		position = 101,
 		section = lightingSettings
 	)
@@ -331,7 +331,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "shadowResolution",
 		name = "Shadow Quality",
-		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
+		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of GPU performance.",
 		position = 106,
 		section = lightingSettings
 	)
