@@ -400,6 +400,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private int needsReset;
 
+	@Setter
+	private boolean isInGauntlet = false;
+
+	@Subscribe
+	public void onChatMessage(final ChatMessage event) {
+		if (!isInGauntlet) {
+			return;
+		}
+
+		// reload the scene if the player is in the gauntlet and opening a new room to pull the new data into the buffer
+		if (event.getMessage().equals("You light the nodes in the corridor to help guide the way.")) {
+			reloadScene();
+		}
+	}
+
 	private final ComponentListener resizeListener = new ComponentAdapter()
 	{
 		@Override

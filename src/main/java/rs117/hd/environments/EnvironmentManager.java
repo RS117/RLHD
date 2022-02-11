@@ -155,6 +155,9 @@ public class EnvironmentManager
 					} else {
 						hdPlugin.setInHouse(false);
 					}
+
+					hdPlugin.setInGauntlet(environment == Environment.THE_GAUNTLET || environment == Environment.THE_GAUNTLET_CORRUPTED);
+
 					changeEnvironment(environment, camTargetX, camTargetY, false);
 				}
 				break;
