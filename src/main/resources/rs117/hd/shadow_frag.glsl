@@ -60,15 +60,11 @@ void main()
         discard;
     }
 
+    int diffuseMapId = material[materialId].diffuseMapId;
+
     // skip water surfaces
-    switch (material[materialId].diffuseMapId)
-    {
-        case 7001:
-        case 7025:
-        case 7997:
-        case 7998:
-        case 7999:
-            discard;
+    if (diffuseMapId == 7001 || diffuseMapId == 7025 || diffuseMapId == 7997 || diffuseMapId == 7998 || diffuseMapId == 7999) {
+        discard;
     }
 
     vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
