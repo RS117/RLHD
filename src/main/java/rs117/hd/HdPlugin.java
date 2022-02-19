@@ -72,6 +72,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetID;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -1628,6 +1630,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			int renderCanvasHeight = canvasHeight;
 			int renderViewportHeight = viewportHeight;
 			int renderViewportWidth = viewportWidth;
+
+			// Fix viewport offset for cutscenes in resizeable mode
+			if (client.isResized())
+			{
+				Widget viewportWidget = client.getWidget(WidgetID.RESIZABLE_VIEWPORT_BOTTOM_LINE_GROUP_ID, 87);
+				if (viewportWidget != null)
+				{
+					renderWidthOff = viewportWidget.getRelativeX();
+					renderHeightOff = viewportWidget.getRelativeY();
+					renderViewportWidth = viewportWidget.getWidth();
+					renderViewportHeight = viewportWidget.getHeight();
+				}
+			}
 
 			// Setup anisotropic filtering
 			final int anisotropicFilteringLevel = config.anisotropicFilteringLevel();
