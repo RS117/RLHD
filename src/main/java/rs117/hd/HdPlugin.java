@@ -72,8 +72,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
-import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetID;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -404,7 +402,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Setter
 	private boolean isInGauntlet = false;
-	private boolean isInCutscene = false;
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
@@ -1632,19 +1629,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			int renderViewportHeight = viewportHeight;
 			int renderViewportWidth = viewportWidth;
 
-			// Fix viewport offset for cutscenes in resizeable mode
-			if (client.isResized() && isInCutscene)
-			{
-				Widget viewportWidget = client.getWidget(WidgetID.RESIZABLE_VIEWPORT_BOTTOM_LINE_GROUP_ID, 87);
-				if (viewportWidget != null)
-				{
-					renderWidthOff = viewportWidget.getRelativeX();
-					renderHeightOff = viewportWidget.getRelativeY();
-					renderViewportWidth = viewportWidget.getWidth();
-					renderViewportHeight = viewportWidget.getHeight();
-				}
-			}
-
 			// Setup anisotropic filtering
 			final int anisotropicFilteringLevel = config.anisotropicFilteringLevel();
 
@@ -2776,11 +2760,5 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		GroundObject groundObject = groundObjectDespawned.getGroundObject();
 		lightManager.removeObjectLight(groundObject);
-	}
-
-	@Subscribe
-	public void onVarbitChanged(VarbitChanged e)
-	{
-		isInCutscene = (client.getVarbitValue(client.getVarps(), 4606) == 1);
 	}
 }
