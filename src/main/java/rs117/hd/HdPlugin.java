@@ -393,15 +393,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configHdInfernalTexture = true;
 	public boolean configWinterTheme = true;
 
-	// Reduces drawing a buggy mess when toggling HD
-	private boolean startUpCompleted = false;
-
 	public int[] camTarget = new int[3];
 
 	private int needsReset;
 
 	@Setter
 	private boolean isInGauntlet = false;
+
+	private boolean loggedIn = false;
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
@@ -453,6 +452,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			try
 			{
+				targetBufferOffset = 0;
 				fboSceneHandle = rboSceneHandle = -1; // AA FBO
 				fboShadowMap = -1;
 				unorderedModels = smallModels = largeModels = 0;
@@ -608,7 +608,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					needsReset = 5; // plugin startup races with ClientUI positioning, so do a reset in a little bit
 				}
 
-				startUpCompleted = true;
 			}
 			catch (Throwable e)
 			{
@@ -622,7 +621,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void shutDown()
 	{
-		startUpCompleted = false;
 
 		((Component) client).removeComponentListener(resizeListener);
 
@@ -1201,6 +1199,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		environmentManager.update();
 		lightManager.update();
 
+		// Only reset the target buffer offset right before drawing the scene. That way if there are frames
+		// after this that don't involve a scene draw, like during LOADING/HOPPING/CONNECTION_LOST, we can
+		// still redraw the previous frame's scene to emulate the client behavior of not painting over the
+		// viewport buffer.
+		targetBufferOffset = 0;
+
 		invokeOnMainThread(() ->
 		{
 			// UBO. Only the first 32 bytes get modified here, the rest is the constant sin/cos table.
@@ -1560,21 +1564,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void drawFrame(int overlayColor)
 	{
-		if (jawtWindow.getAWTComponent() != client.getCanvas())
-		{
-			// We inject code in the game engine mixin to prevent the client from doing canvas replacement,
-			// so this should not ever be hit
-			log.warn("Canvas invalidated!");
-			shutDown();
-			startUp();
-			return;
-		}
-
-		if (client.getGameState() == GameState.LOADING || client.getGameState() == GameState.HOPPING)
-		{
-			// While the client is loading it doesn't draw
-			return;
-		}
+		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
 
 		// reload the scene if the player is in a house and their plane changed
 		// this greatly improves the performance as it keeps the scene buffer up to date
@@ -1700,7 +1690,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float lightPitch = environmentManager.currentLightPitch;
 			float lightYaw = environmentManager.currentLightYaw;
 
-			if (client.getGameState() == GameState.LOGGED_IN && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
+			GameState gs = client.getGameState();
+
+			if (loggedIn && (gs == GameState.LOGGED_IN || gs == GameState.LOADING) && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
 				// render shadow depth map
 				gl.glViewport(0, 0, config.shadowResolution().getValue(), config.shadowResolution().getValue());
@@ -2003,7 +1995,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			nextSceneReload = 0;
 		}
 
-		targetBufferOffset = 0;
 		smallModels = largeModels = unorderedModels = 0;
 		tempOffset = 0;
 		tempUvOffset = 0;
@@ -2145,13 +2136,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged)
 	{
-		if (gameStateChanged.getGameState() != GameState.LOGGED_IN)
-		{
-			lightManager.reset();
-			return;
+		switch (gameStateChanged.getGameState()) {
+			case LOGGED_IN:
+				loggedIn = true;
+				invokeOnMainThread(this::uploadScene);
+				break;
+			case LOGIN_SCREEN:
+				// Avoid drawing the last frame's buffer during LOADING after LOGIN_SCREEN
+				targetBufferOffset = 0;
+				loggedIn = false;
+			default:
+				lightManager.reset();
 		}
-
-		invokeOnMainThread(this::uploadScene);
 	}
 
 	@Subscribe
