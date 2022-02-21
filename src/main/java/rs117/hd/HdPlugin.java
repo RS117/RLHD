@@ -365,7 +365,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private int uniBlockPointLights;
 
 	// Animation things
-	private long lastFrameTime = System.currentTimeMillis();
+	private long lastFrameTime;
 	// Generic scalable animation timer used in shaders
 	private float animationCurrent = 0;
 
@@ -1566,45 +1566,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
 
-		// reload the scene if the player is in a house and their plane changed
-		// this greatly improves the performance as it keeps the scene buffer up to date
-		if (isInHouse) {
-			int plane = client.getPlane();
-			if (previousPlane != plane) {
-				reloadScene();
-				previousPlane = plane;
-			}
-		}
-
-		GameState gs = client.getGameState();
-		if (gs != GameState.LOADING)
-		{
-			camTarget = getCameraFocalPoint();
-		}
-
-		// shader variables for water, lava animations
-		animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
-		lastFrameTime = System.currentTimeMillis();
-
 		final int canvasHeight = client.getCanvasHeight();
 		final int canvasWidth = client.getCanvasWidth();
 
-		final int viewportHeight = client.getViewportHeight();
-		final int viewportWidth = client.getViewportWidth();
-
 		prepareInterfaceTexture(canvasWidth, canvasHeight);
-
-		// Setup anti-aliasing
-		final AntiAliasingMode antiAliasingMode = config.antiAliasingMode();
-		final boolean aaEnabled = antiAliasingMode != AntiAliasingMode.DISABLED;
 
 		gl.glClearColor(0, 0, 0, 1f);
 		gl.glClear(gl.GL_COLOR_BUFFER_BIT);
 
 		// Draw 3d scene
 		final TextureProvider textureProvider = client.getTextureProvider();
-		if (textureProvider != null)
+		if (loggedIn && textureProvider != null)
 		{
+			final Texture[] textures = textureProvider.getTextures();
 			if (textureArrayId == -1)
 			{
 				// lazy init textures as they may not be loaded at plugin start.
@@ -1616,16 +1590,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				textureHDArrayId = textureManager.initTextureHDArray(textureProvider, gl);
 			}
 
-			final Texture[] textures = textureProvider.getTextures();
-			int renderHeightOff = client.getViewportYOffset();
-			int renderWidthOff = client.getViewportXOffset();
-			int renderCanvasHeight = canvasHeight;
-			int renderViewportHeight = viewportHeight;
-			int renderViewportWidth = viewportWidth;
-
 			// Setup anisotropic filtering
 			final int anisotropicFilteringLevel = config.anisotropicFilteringLevel();
-
 			if (lastAnisotropicFilteringLevel != anisotropicFilteringLevel)
 			{
 				if (textureArrayId != -1)
@@ -1638,6 +1604,25 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				}
 				lastAnisotropicFilteringLevel = anisotropicFilteringLevel;
 			}
+
+			// reload the scene if the player is in a house and their plane changed
+			// this greatly improves the performance as it keeps the scene buffer up to date
+			if (isInHouse) {
+				int plane = client.getPlane();
+				if (previousPlane != plane) {
+					reloadScene();
+					previousPlane = plane;
+				}
+			}
+
+			final int viewportHeight = client.getViewportHeight();
+			final int viewportWidth = client.getViewportWidth();
+
+			int renderHeightOff = client.getViewportYOffset();
+			int renderWidthOff = client.getViewportXOffset();
+			int renderCanvasHeight = canvasHeight;
+			int renderViewportHeight = viewportHeight;
+			int renderViewportWidth = viewportWidth;
 
 			if (client.isStretchedEnabled())
 			{
@@ -1659,8 +1644,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				renderWidthOff       = (int) Math.floor(scaleFactorX * (renderWidthOff )) - padding;
 			}
 
-			int vertexBuffer, uvBuffer, normalBuffer;
-
 			// Before reading the SSBOs written to from postDrawScene() we must insert a barrier
 			if (computeMode == ComputeMode.OPENCL)
 			{
@@ -1672,9 +1655,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 
 			// Draw using the output buffer of the compute
-			vertexBuffer = tmpOutBuffer.glBufferId;
-			uvBuffer = tmpOutUvBuffer.glBufferId;
-			normalBuffer = tmpOutNormalBuffer.glBufferId;
+			int vertexBuffer = tmpOutBuffer.glBufferId;
+			int uvBuffer = tmpOutUvBuffer.glBufferId;
+			int normalBuffer = tmpOutNormalBuffer.glBufferId;
 
 			for (int id = 0; id < textures.length; ++id)
 			{
@@ -1690,11 +1673,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				textureOffsets[id * 2 + 1] = texture.getV();
 			}
 
+			// Update the camera target only when not loading, to keep drawing correct shadows while loading
+			if (client.getGameState() != GameState.LOADING)
+			{
+				camTarget = getCameraFocalPoint();
+			}
+
 			Matrix4 lightProjectionMatrix = new Matrix4();
 			float lightPitch = environmentManager.currentLightPitch;
 			float lightYaw = environmentManager.currentLightYaw;
 
-			if (loggedIn && (gs == GameState.LOGGED_IN || gs == GameState.LOADING) && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
+			if (configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
 				// render shadow depth map
 				gl.glViewport(0, 0, config.shadowResolution().getValue(), config.shadowResolution().getValue());
@@ -1767,6 +1756,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glBindTexture(GL_TEXTURE_2D, texShadowMap);
 			gl.glActiveTexture(gl.GL_TEXTURE0);
 
+			// Setup anti-aliasing
+			final AntiAliasingMode antiAliasingMode = config.antiAliasingMode();
+			final boolean aaEnabled = antiAliasingMode != AntiAliasingMode.DISABLED;
 			if (aaEnabled)
 			{
 				gl.glEnable(gl.GL_MULTISAMPLE);
@@ -1932,6 +1924,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			// Bind directional light projection matrix
 			gl.glUniformMatrix4fv(uniLightProjectionMatrix, 1, false, lightProjectionMatrix.getMatrix(), 0);
 
+			// shader variables for water, lava animations
+			animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
+			lastFrameTime = System.currentTimeMillis();
+
 			// Bind uniforms
 			gl.glUniformBlockBinding(glProgram, uniBlockMain, 0);
 			gl.glUniformBlockBinding(glProgram, uniBlockMaterials, 1);
@@ -1969,37 +1965,37 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glDisable(gl.GL_CULL_FACE);
 
 			gl.glUseProgram(0);
+
+			if (aaEnabled)
+			{
+				gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, fboSceneHandle);
+				gl.glBindFramebuffer(gl.GL_DRAW_FRAMEBUFFER, 0);
+				gl.glBlitFramebuffer(0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
+					0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
+					gl.GL_COLOR_BUFFER_BIT, gl.GL_NEAREST);
+
+				// Reset
+				gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, 0);
+			}
+
+			this.vertexBuffer.clear();
+			this.uvBuffer.clear();
+			this.normalBuffer.clear();
+			modelBuffer.clear();
+			modelBufferSmall.clear();
+			modelBufferUnordered.clear();
+
+			smallModels = largeModels = unorderedModels = 0;
+			tempOffset = 0;
+			tempUvOffset = 0;
+
+			// reload the scene if it was requested
+			if (nextSceneReload != 0 && nextSceneReload <= System.currentTimeMillis()) {
+				lightManager.reset();
+				uploadScene();
+				nextSceneReload = 0;
+			}
 		}
-
-		if (aaEnabled)
-		{
-			gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, fboSceneHandle);
-			gl.glBindFramebuffer(gl.GL_DRAW_FRAMEBUFFER, 0);
-			gl.glBlitFramebuffer(0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
-				0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
-				gl.GL_COLOR_BUFFER_BIT, gl.GL_NEAREST);
-
-			// Reset
-			gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, 0);
-		}
-
-		vertexBuffer.clear();
-		uvBuffer.clear();
-		normalBuffer.clear();
-		modelBuffer.clear();
-		modelBufferSmall.clear();
-		modelBufferUnordered.clear();
-
-		// reload the scene if it was requested
-		if (nextSceneReload != 0 && nextSceneReload <= System.currentTimeMillis()) {
-			lightManager.reset();
-			uploadScene();
-			nextSceneReload = 0;
-		}
-
-		smallModels = largeModels = unorderedModels = 0;
-		tempOffset = 0;
-		tempUvOffset = 0;
 
 		// Texture on UI
 		drawUi(overlayColor, canvasHeight, canvasWidth);
@@ -2141,6 +2137,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		switch (gameStateChanged.getGameState()) {
 			case LOGGED_IN:
 				loggedIn = true;
+				lastFrameTime = System.currentTimeMillis();
 				invokeOnMainThread(this::uploadScene);
 				break;
 			case LOGIN_SCREEN:
