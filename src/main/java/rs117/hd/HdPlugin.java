@@ -402,8 +402,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Setter
 	private boolean isInGauntlet = false;
 
-	private boolean loggedIn = false;
-
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
 		if (!isInGauntlet) {
@@ -1580,7 +1578,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		// Draw 3d scene
 		final TextureProvider textureProvider = client.getTextureProvider();
-		if (loggedIn && textureProvider != null)
+		if (textureProvider != null && client.getGameState().getState() >= GameState.LOADING.getState())
 		{
 			final Texture[] textures = textureProvider.getTextures();
 			if (textureArrayId == -1)
@@ -2140,14 +2138,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		switch (gameStateChanged.getGameState()) {
 			case LOGGED_IN:
-				loggedIn = true;
 				lastFrameTime = System.currentTimeMillis();
 				invokeOnMainThread(this::uploadScene);
 				break;
 			case LOGIN_SCREEN:
 				// Avoid drawing the last frame's buffer during LOADING after LOGIN_SCREEN
 				targetBufferOffset = 0;
-				loggedIn = false;
 			default:
 				lightManager.reset();
 		}
