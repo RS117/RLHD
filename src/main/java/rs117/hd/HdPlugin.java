@@ -1576,7 +1576,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 		}
 
-		camTarget = getCameraFocalPoint();
+		GameState gs = client.getGameState();
+		if (gs != GameState.LOADING)
+		{
+			camTarget = getCameraFocalPoint();
+		}
 
 		// shader variables for water, lava animations
 		animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
@@ -1689,8 +1693,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			Matrix4 lightProjectionMatrix = new Matrix4();
 			float lightPitch = environmentManager.currentLightPitch;
 			float lightYaw = environmentManager.currentLightYaw;
-
-			GameState gs = client.getGameState();
 
 			if (loggedIn && (gs == GameState.LOGGED_IN || gs == GameState.LOADING) && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
