@@ -306,6 +306,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private int yaw;
 	private int pitch;
+	private int viewportOffsetX;
+	private int viewportOffsetY;
 
 	// Uniforms
 	private int uniColorBlindMode;
@@ -1192,6 +1194,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		yaw = client.getCameraYaw();
 		pitch = client.getCameraPitch();
+		viewportOffsetX = client.getViewportXOffset();
+		viewportOffsetY = client.getViewportYOffset();
 
 		final Scene scene = client.getScene();
 		scene.setDrawDistance(getDrawDistance());
@@ -1618,8 +1622,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			final int viewportHeight = client.getViewportHeight();
 			final int viewportWidth = client.getViewportWidth();
 
-			int renderHeightOff = client.getViewportYOffset();
-			int renderWidthOff = client.getViewportXOffset();
+			int renderWidthOff = viewportOffsetX;
+			int renderHeightOff = viewportOffsetY;
 			int renderCanvasHeight = canvasHeight;
 			int renderViewportHeight = viewportHeight;
 			int renderViewportWidth = viewportWidth;
