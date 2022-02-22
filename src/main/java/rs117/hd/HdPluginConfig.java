@@ -364,7 +364,18 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-
+	@Range(
+			min = 1,
+			max = 200
+	)
+	@ConfigItem(
+			keyName = "lightIntensity",
+			name = "Light Intensity",
+			description = "Scales the intensity of dynamic lights as a percentage.",
+			position = 109,
+			section = lightingSettings
+	)
+	default int lightIntensity() { return 100; }
 
 	/*====== Environment settings ======*/
 

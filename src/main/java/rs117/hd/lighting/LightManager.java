@@ -301,6 +301,12 @@ public class LightManager
 				}
 			}
 
+			float scaledStrength = (float) (light.strength * (config.lightIntensity() * 0.01));
+			float scaledSize = (float) (light.size * (config.lightIntensity() * 0.01));
+			if (scaledSize < light.size) {
+				scaledSize = light.size;
+			}
+
 			if (light.type == LightType.FLICKER)
 			{
 				long repeatMs = 60000;
@@ -321,8 +327,8 @@ public class LightManager
 
 				flicker = minFlicker + (maxFlicker - minFlicker) * flicker;
 
-				light.currentStrength = light.strength * flicker;
-				light.currentSize = (int) (light.size * flicker * 1.5f);
+				light.currentStrength = scaledStrength * flicker;
+				light.currentSize = (int) (scaledSize * flicker * 1.5f);
 			}
 			else if (light.type == LightType.PULSE)
 			{
@@ -351,13 +357,13 @@ public class LightManager
 
 				float multiplier = (1.0f - range) + output * fullRange;
 
-				light.currentSize = (int)(light.size * multiplier);
-				light.currentStrength = light.strength * multiplier;
+				light.currentSize = (int)(scaledSize * multiplier);
+				light.currentStrength = scaledStrength * multiplier;
 			}
 			else
 			{
-				light.currentStrength = light.strength;
-				light.currentSize = light.size;
+				light.currentStrength = scaledStrength;
+				light.currentSize = (int) scaledSize;
 				light.currentColor = light.color;
 			}
 			// Apply fade-in
