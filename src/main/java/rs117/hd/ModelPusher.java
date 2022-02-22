@@ -14,6 +14,16 @@ import java.util.WeakHashMap;
 
 class ModelData {
     private int[] colors;
+    private int faceCount;
+
+    public int getFaceCount() {
+        return faceCount;
+    }
+
+    public ModelData setFaceCount(int faceCount) {
+        this.faceCount = faceCount;
+        return this;
+    }
 
     public ModelData setColors(int[] colors) {
         this.colors = colors;
@@ -284,8 +294,9 @@ public class ModelPusher {
         int hash = hasher.hashCode(eightInts);
 
         ModelData modelData = modelCache.get(hash);
-        if (modelData == null) {
-            modelData = new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+        if (modelData == null || modelData.getFaceCount() != model.getFaceCount()) {
+            // get new data if there was no cache or if we detected an exception causing hash collision
+            modelData = new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount)).setFaceCount(model.getFaceCount());
             modelCache.put(hash, modelData);
         }
 
