@@ -367,7 +367,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private int uniBlockPointLights;
 
 	// Animation things
-	private long lastFrameTime;
+	private long lastFrameTime = System.currentTimeMillis();
 	// Generic scalable animation timer used in shaders
 	private float animationCurrent = 0;
 
@@ -1568,6 +1568,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
 
+		// reset the plugin if the last frame took >1min to draw
+		// why? because the user's computer was probably suspended and the buffers are no longer valid
+		if (System.currentTimeMillis() - lastFrameTime > 60000) {
+			log.debug("resetting the plugin after probable OS suspend");
+			shutDown();
+			startUp();
+		}
+
+		// shader variables for water, lava animations
+		animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
+		lastFrameTime = System.currentTimeMillis();
+
 		final int canvasHeight = client.getCanvasHeight();
 		final int canvasWidth = client.getCanvasWidth();
 
@@ -1926,9 +1938,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			// Bind directional light projection matrix
 			gl.glUniformMatrix4fv(uniLightProjectionMatrix, 1, false, lightProjectionMatrix.getMatrix(), 0);
 
-			// shader variables for water, lava animations
-			animationCurrent += (System.currentTimeMillis() - lastFrameTime) / 1000f;
-			lastFrameTime = System.currentTimeMillis();
 
 			// Bind uniforms
 			gl.glUniformBlockBinding(glProgram, uniBlockMain, 0);
@@ -2138,7 +2147,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		switch (gameStateChanged.getGameState()) {
 			case LOGGED_IN:
-				lastFrameTime = System.currentTimeMillis();
 				invokeOnMainThread(this::uploadScene);
 				break;
 			case LOGIN_SCREEN:
