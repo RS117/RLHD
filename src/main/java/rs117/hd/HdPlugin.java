@@ -1568,6 +1568,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
 
+		// reset the plugin if the last frame took >1min to draw
+		// why? because the user's computer was probably suspended and the buffers are no longer valid
+		if (System.currentTimeMillis() - lastFrameTime > 60000) {
+			log.debug("resetting the plugin after probable OS suspend");
+			shutDown();
+			startUp();
+		}
+
 		final int canvasHeight = client.getCanvasHeight();
 		final int canvasWidth = client.getCanvasWidth();
 
