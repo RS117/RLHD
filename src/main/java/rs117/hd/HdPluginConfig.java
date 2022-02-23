@@ -35,7 +35,6 @@ import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
-import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
 import rs117.hd.config.Saturation;
 import rs117.hd.config.DefaultSkyColor;
@@ -243,19 +242,6 @@ public interface HdPluginConfig extends Config
 		section = generalSettings
 	)
 	default int brightness() { return 20; }
-
-	@ConfigItem(
-		keyName = "levelOfDetail",
-		name = "Level of Detail",
-		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 13,
-		section = generalSettings
-	)
-	default LevelOfDetail levelOfDetail()
-	{
-		return LevelOfDetail.MEDIUM;
-	}
-
 
 
 	/*====== Lighting settings ======*/
