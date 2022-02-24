@@ -34,10 +34,8 @@ import static rs117.hd.HdPlugin.MAX_DISTANCE;
 import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
-import rs117.hd.config.Contrast;
 import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
-import rs117.hd.config.Saturation;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.ShadowDistance;
@@ -207,29 +205,31 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
+	@Range(
+		min = 1,
+		max = 25
+	)
 	@ConfigItem(
-		keyName = "saturation",
+		keyName = "saturation2",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
 		position = 10,
 		section = generalSettings
 	)
-	default Saturation saturation()
-	{
-		return Saturation.DEFAULT;
-	}
+	default int saturation() { return 20; }
 
+	@Range(
+		min = 1,
+		max = 25
+	)
 	@ConfigItem(
-		keyName = "contrast",
+		keyName = "contrast2",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
 		position = 11,
 		section = generalSettings
 	)
-	default Contrast contrast()
-	{
-		return Contrast.DEFAULT;
-	}
+	default int contrast() { return 15; }
 
 	@Range(
 		min = 1,
@@ -451,11 +451,11 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "groundBlending",
-			name = "Ground Blending",
-			description = "Affects the quality of blending between different ground/terrain textures.",
-			position = 207,
-			section = environmentSettings
+		keyName = "groundBlending",
+		name = "Ground Blending",
+		description = "Affects the quality of blending between different ground/terrain textures.",
+		position = 207,
+		section = environmentSettings
 	)
 	default boolean groundBlending()
 	{

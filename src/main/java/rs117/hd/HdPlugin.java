@@ -433,7 +433,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
-		convertOldBrightnessConfig();
+		convertOldConfigs();
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
@@ -1909,8 +1909,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glUniform1i(uniPointLightsCount, config.maxDynamicLights().getValue() > 0 ? lightManager.visibleLightsCount : 0);
 
 			gl.glUniform1i(uniWaterEffects, configWaterEffects.getMode());
-			gl.glUniform1f(uniSaturation, config.saturation().getAmount());
-			gl.glUniform1f(uniContrast, config.contrast().getAmount());
+			gl.glUniform1f(uniSaturation, (float)config.saturation() / 20);
+			gl.glUniform1f(uniContrast, 0.8f + (float)config.contrast() / 70);
 
 			double lightPitchRadians = Math.toRadians(lightPitch);
 			double lightYawRadians = Math.toRadians(lightYaw);
@@ -2622,32 +2622,42 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 	}
 
-	//Sets the new brightness setting from the old brightness setting.
+	//Sets the new brightness, saturation and contrast settings from the old ones
 	//This can be removed later on when most people have updated the plugin
-	private void convertOldBrightnessConfig()
+	private void convertOldConfigs()
 	{
-		try
-		{
-			String oldBrightnessValue = configManager.getConfiguration("hd", "brightness");
+		String[] oldSettingNames = {"brightness", "saturation", "contrast"};
 
-			if (!oldBrightnessValue.equals("set"))
+		for (int i = 0; i < oldSettingNames.length; i++)
+		{
+			String setting = oldSettingNames[i];
+
+			try
 			{
-				String[][] newBrightnessValues = {{"LOWEST", "10"}, {"LOWER", "15"}, {"DEFAULT", "20"}, {"HIGHER", "25"}, {"HIGHEST", "30"}};
-				for (String[] newValue : newBrightnessValues)
+				String oldValue = configManager.getConfiguration("hd", setting);
+				if (!oldValue.equals("set"))
 				{
-					if (newValue[0].equals(oldBrightnessValue))
-					{
-						configManager.setConfiguration("hd", "brightness2", newValue[1]);
-						break;
-					}
-				}
+					String[][][] newValues =
+					{{{"LOWEST", "10"}, {"LOWER", "15"}, {"DEFAULT", "20"}, {"HIGHER", "25"}, {"HIGHEST", "30"}}, //brightness
+					{{"NONE", "0"}, {"LOWEST", "16"}, {"LOWER", "18"}, {"DEFAULT", "20"}, {"HIGHER", "22"}, {"HIGHEST", "24"}}, //saturation
+					{{"LOWEST", "7"}, {"LOWER", "10"}, {"DEFAULT", "14"}, {"HIGHER", "21"}, {"HIGHEST", "17"}}}; //contrast
 
-				configManager.setConfiguration("hd", "brightness", "set");
+					for (String[] newValue : newValues[i])
+					{
+						if (newValue[0].equals(oldValue))
+						{
+							configManager.setConfiguration("hd", setting + "2", newValue[1]);
+							break;
+						}
+					}
+
+					configManager.setConfiguration("hd", setting, "set");
+				}
 			}
-		}
-		catch (Exception e)
-		{
-			//Happens if people don't have the old brightness setting, then it doesn't need converting anyway.
+			catch (Exception e)
+			{
+				//Happens if people don't have the old setting saved, then it doesn't need converting anyway.
+			}
 		}
 	}
 
