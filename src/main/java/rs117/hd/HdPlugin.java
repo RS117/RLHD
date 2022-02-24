@@ -91,7 +91,6 @@ import static rs117.hd.GLUtil.glGenRenderbuffer;
 import static rs117.hd.GLUtil.glGenTexture;
 import static rs117.hd.GLUtil.glGenVertexArrays;
 import static rs117.hd.GLUtil.glGetInteger;
-import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
@@ -385,7 +384,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public boolean configGroundTextures = false;
 	public boolean configGroundBlending = false;
 	public WaterEffects configWaterEffects = WaterEffects.ALL;
-	public LevelOfDetail configLevelOfDetail = LevelOfDetail.FULL;
 	public boolean configObjectTextures = true;
 	public boolean configTzhaarHD = true;
 	public boolean configProjectileLights = true;
@@ -438,7 +436,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
 		configWaterEffects = config.waterEffects();
-		configLevelOfDetail = config.levelOfDetail();
 		configObjectTextures = config.objectTextures();
 		configTzhaarHD = config.tzhaarHD();
 		configProjectileLights = config.projectileLights();
@@ -2248,9 +2245,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configWaterEffects = config.waterEffects();
 				reloadScene();
 				break;
-			case "levelOfDetail":
-				configLevelOfDetail = config.levelOfDetail();
-				break;
 			case "shadowsEnabled":
 				configShadowsEnabled = config.shadowsEnabled();
 				clientThread.invoke(() ->
@@ -2401,19 +2395,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void draw(Renderable renderable, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash)
 	{
-		final int camX = camTarget[0];
-		final int camY = camTarget[1];
-		final int camZ = camTarget[2];
-		final int adjustedX = x + client.getCameraX();
-		final int adjustedY = z + client.getCameraY();
-		final int adjustedZ = y + client.getCameraZ();
-		double distance = 0;
-		if (configLevelOfDetail != LevelOfDetail.FULL)
-		{
-			distance = Math.sqrt(Math.pow(camX - adjustedX, 2) + Math.pow(camY - adjustedY, 2) + Math.pow(camZ - adjustedZ, 2));
-		}
-		int drawObjectCutoff = configLevelOfDetail.getDistance() * Perspective.LOCAL_TILE_SIZE;
-
 		Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
 		if (model == null) {
 			return;
@@ -2429,8 +2410,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				return;
 			}
 
-			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
+			if ((model.getBufferOffset() & 0b11) == 0b11)
 			{
+				// this object was marked to be skipped
 				return;
 			}
 
@@ -2469,8 +2451,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				return;
 			}
 
-			if (((model.getBufferOffset() & 0b11) == 0b01 && distance > drawObjectCutoff) || (model.getBufferOffset() & 0b11) == 0b11)
+			if ((model.getBufferOffset() & 0b11) == 0b11)
 			{
+				// this object was marked to be skipped
 				return;
 			}
 

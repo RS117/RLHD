@@ -112,19 +112,13 @@ class SceneUploader
 		}
 
 		byte skipObject = 0b00;
-
-		if (objectType == ObjectType.GROUND_OBJECT || objectType == ObjectType.DECORATIVE_OBJECT)
+		if (client.getBaseX() + tileX == 2558 && client.getBaseY() + tileY >= 3249 && client.getBaseY() + tileY <= 3252)
 		{
-			// mark it as low priority
-			skipObject = 0b01;
-
-			if (client.getBaseX() + tileX == 2558 && client.getBaseY() + tileY >= 3249 && client.getBaseY() + tileY <= 3252)
-			{
-				// fix for water by khazard spirit tree
-				// marks object to never be drawn
-				skipObject = 0b11;
-			}
+			// fix for water by khazard spirit tree
+			// marks object to never be drawn
+			skipObject = 0b11;
 		}
+
 		// pack a bit into bufferoffset that we can use later to hide
 		// some low-importance objects based on Level of Detail setting
 		model.setBufferOffset(offset << 2 | skipObject);
