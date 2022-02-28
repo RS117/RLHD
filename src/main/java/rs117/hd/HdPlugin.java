@@ -1565,6 +1565,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void drawFrame(int overlayColor)
 	{
+	        if (client.getGameState() == GameState.LOADING || client.getGameState() == GameState.HOPPING)
+		{
+			// While the client is loading it doesn't draw
+			return;
+		}
 		assert jawtWindow.getAWTComponent() == client.getCanvas() : "canvas invalidated";
 
 		// reset the plugin if the last frame took >1min to draw
