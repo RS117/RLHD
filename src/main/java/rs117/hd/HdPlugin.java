@@ -1696,7 +1696,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float lightPitch = environmentManager.currentLightPitch;
 			float lightYaw = environmentManager.currentLightYaw;
 
-			if (configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
+			if ((client.getGameState() == GameState.LOGGED_IN || client.getGameState() == GameState.LOADING) && configShadowsEnabled && fboShadowMap != -1 && environmentManager.currentDirectionalStrength > 0.0f)
 			{
 				// render shadow depth map
 				gl.glViewport(0, 0, config.shadowResolution().getValue(), config.shadowResolution().getValue());
