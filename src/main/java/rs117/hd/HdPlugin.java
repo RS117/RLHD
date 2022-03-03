@@ -396,6 +396,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public int[] camTarget = new int[3];
 
 	private int needsReset;
+	private boolean hasLoggedIn;
 
 	@Setter
 	private boolean isInGauntlet = false;
@@ -1814,7 +1815,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			lastAntiAliasingMode = antiAliasingMode;
 
 			// Clear scene
-			int sky = environmentManager.getFogColor();
+			int sky = hasLoggedIn ? environmentManager.getFogColor() : 0;
 			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
 			for (int i = 0; i < fogColor.length; i++)
 			{
@@ -2151,6 +2152,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case LOGIN_SCREEN:
 				// Avoid drawing the last frame's buffer during LOADING after LOGIN_SCREEN
 				targetBufferOffset = 0;
+				hasLoggedIn = false;
 			default:
 				lightManager.reset();
 		}
@@ -2748,5 +2750,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		GroundObject groundObject = groundObjectDespawned.getGroundObject();
 		lightManager.removeObjectLight(groundObject);
+	}
+
+	@Subscribe
+	public void onGameTick(GameTick gameTick)
+	{
+		if (!hasLoggedIn && client.getGameState() == GameState.LOGGED_IN)
+		{
+			hasLoggedIn = true;
+		}
 	}
 }
