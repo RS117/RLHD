@@ -485,23 +485,29 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				invokeOnMainThread(() ->
 				{
-					// Get and display the device and driver used by the GPU plugin
-					GLDrawable dummyDrawable = GLDrawableFactory.getFactory(GLProfile.getDefault())
-						.createDummyDrawable(GLProfile.getDefaultDevice(), true, new GLCapabilities(GLProfile.getDefault()), null);
-					dummyDrawable.setRealized(true);
-					GLContext versionContext = dummyDrawable.createContext(null);
-					versionContext.makeCurrent();
-					// Due to probable JOGL spaghetti, calling .getGL() once results in versionGL being set to null
-					// I have no idea exactly why the second call works, but it results in the correct GL being gotten.
-					GL versionGL = versionContext.getGL().getGL();
-					log.info("Using device: {}", versionGL.glGetString(GL.GL_RENDERER));
-					log.info("Using driver: {}", versionGL.glGetString(GL.GL_VERSION));
-					log.info("Client is {}-bit", System.getProperty("sun.arch.data.model"));
-					versionContext.destroy();
+					GLProfile glProfile;
+					GLCapabilities glCaps;
+					try {
+						glProfile = GLProfile.get(GLProfile.GL4);
+						glCaps = new GLCapabilities(glProfile);
 
-					GLProfile glProfile = GLProfile.get(GLProfile.GL4);
+						// Get and display the device and driver used by the GPU plugin
+						GLDrawable dummyDrawable = GLDrawableFactory.getFactory(glProfile)
+								.createDummyDrawable(GLProfile.getDefaultDevice(), true, glCaps, null);
+						dummyDrawable.setRealized(true);
+						GLContext versionContext = dummyDrawable.createContext(null);
+						versionContext.makeCurrent();
+						GL versionGL = versionContext.getGL();
+						log.info("Using device: {}", versionGL.glGetString(GL.GL_RENDERER));
+						log.info("Using driver: {}", versionGL.glGetString(GL.GL_VERSION));
+						log.info("Client is {}-bit", System.getProperty("sun.arch.data.model"));
+						versionContext.destroy();
+					} catch (Exception ex) {
+						log.error("failed to get device information", ex);
+						stopPlugin();
+						return;
+					}
 
-					GLCapabilities glCaps = new GLCapabilities(glProfile);
 					AWTGraphicsConfiguration config = AWTGraphicsConfiguration.create(canvas.getGraphicsConfiguration(), glCaps, glCaps);
 
 					jawtWindow = NewtFactoryAWT.getNativeWindow(canvas, config);
