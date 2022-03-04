@@ -595,7 +595,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				textureHDArrayId = -1;
 
 				// load all dynamic scene lights from text file
-				lightManager.loadLightsFromFile();
+				lightManager.startUp();
 
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
@@ -624,7 +624,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		((Component) client).removeComponentListener(resizeListener);
 
-		lightManager.reset();
+		lightManager.shutDown();
 
 		clientThread.invoke(() ->
 		{
@@ -1241,8 +1241,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			{
 				// Update lights UBO
 				lightsUniformBuf.clear();
-				ArrayList<LightManager.Light> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
-				for (LightManager.Light light : visibleLights)
+				ArrayList<LightManager.SceneLight> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
+				for (LightManager.SceneLight light : visibleLights)
 				{
 					lightsUniformBuf.putInt(light.x);
 					lightsUniformBuf.putInt(light.y);
@@ -2645,7 +2645,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Subscribe
 	public void onNpcSpawned(NpcSpawned npcSpawned)
 	{
-		lightManager.addNpcLight(npcSpawned.getNpc());
+		lightManager.addNpcLights(npcSpawned.getNpc());
 	}
 
 	@Subscribe
