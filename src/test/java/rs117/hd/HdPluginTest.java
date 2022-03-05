@@ -1,11 +1,12 @@
 package rs117.hd;
 
-import java.nio.file.Paths;
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
+import static rs117.hd.HdPlugin.SHADER_PATH;
 import rs117.hd.lighting.LightManager;
 import static rs117.hd.lighting.LightManager.LIGHTS_CONFIG_ENV;
 import rs117.hd.utils.Env;
+import rs117.hd.utils.FileWatcher;
 
 public class HdPluginTest
 {
@@ -13,11 +14,11 @@ public class HdPluginTest
 	{
 		if (Env.missing(LIGHTS_CONFIG_ENV))
 		{
-			Env.set(LIGHTS_CONFIG_ENV, Paths
-				.get("src/main/resources",
-					LightManager.class.getPackage().getName().replace(".", "/"),
-					"lights.json")
-				.toString());
+			Env.set(LIGHTS_CONFIG_ENV, FileWatcher.getResourcePath(LightManager.class).resolve("lights.json"));
+		}
+		if (Env.missing(SHADER_PATH))
+		{
+			Env.set(SHADER_PATH, FileWatcher.getResourcePath(HdPlugin.class));
 		}
 
 		ExternalPluginManager.loadBuiltin(HdPlugin.class);

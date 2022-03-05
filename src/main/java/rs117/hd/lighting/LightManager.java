@@ -134,15 +134,8 @@ public class LightManager
 		reset();
 		if (fileWatcher != null)
 		{
-			try
-			{
-				fileWatcher.close();
-				fileWatcher = null;
-			}
-			catch (InterruptedException | IOException ex)
-			{
-				log.error("Failed to shut down file watcher", ex);
-			}
+			fileWatcher.close();
+			fileWatcher = null;
 		}
 	}
 
@@ -238,7 +231,7 @@ public class LightManager
 
 	public int visibleLightsCount = 0;
 
-	enum LightType
+	public enum LightType
 	{
 		STATIC, FLICKER, PULSE
 	}
@@ -447,12 +440,12 @@ public class LightManager
 				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * FloatUtil.TWO_PI;
 
 				float flicker = (
-						pow(cos(11 * t), 2) +
-								pow(cos(17 * t), 4) +
-								pow(cos(23 * t), 6) +
-								pow(cos(31 * t), 2) +
-								pow(cos(179 * t), 2) / 3 +
-								pow(cos(331 * t), 2) / 7
+					pow(cos(11 * t), 2) +
+					pow(cos(17 * t), 4) +
+					pow(cos(23 * t), 6) +
+					pow(cos(31 * t), 2) +
+					pow(cos(179 * t), 2) / 3 +
+					pow(cos(331 * t), 2) / 7
 				) / 4.335f;
 
 				float maxFlicker = 1f + (light.range / 100f);

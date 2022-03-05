@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.ClosedWatchServiceException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
@@ -89,6 +90,28 @@ public class FileWatcher implements AutoCloseable
 		});
 		watchThread.setDaemon(true);
 		watchThread.start();
+	}
+
+	public static Path getResourcePath(Class<?> clazz)
+	{
+		return Paths.get(
+			"src/main/resources",
+			clazz.getPackage().getName().replace(".", "/"));
+	}
+
+	public FileWatcher watchPath(Class<?> resourcePath) throws IOException
+	{
+		return watchPath(getResourcePath(resourcePath));
+	}
+
+	public FileWatcher watchPath(Class<?> resourcePath, @NonNull Path path) throws IOException
+	{
+		return watchPath(getResourcePath(resourcePath).resolve(path));
+	}
+
+	public FileWatcher watchFile(Class<?> resourcePath, @NonNull Path path) throws IOException
+	{
+		return watchFile(getResourcePath(resourcePath).resolve(path));
 	}
 
 	/**
@@ -172,11 +195,18 @@ public class FileWatcher implements AutoCloseable
 	}
 
 	@Override
-	public void close() throws IOException, InterruptedException
+	public void close()
 	{
 		watchKeys.clear();
-		watchService.close();
-		watchThread.join();
+		try
+		{
+			watchService.close();
+			watchThread.join();
+		}
+		catch (IOException | InterruptedException ex)
+		{
+			log.warn("Failed to cleanly shut down file watcher", ex);
+		}
 		changeHandlers.clear();
 	}
 }

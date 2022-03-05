@@ -55,11 +55,15 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
@@ -106,6 +110,8 @@ import org.jocl.CL;
 import static org.jocl.CL.CL_MEM_READ_ONLY;
 import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
+import rs117.hd.utils.Env;
+import rs117.hd.utils.FileWatcher;
 
 @PluginDescriptor(
 	name = "117 HD (beta)",
@@ -116,6 +122,8 @@ import static org.jocl.CL.clCreateFromGLBuffer;
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
+	public static String SHADER_PATH = "RLHD_SHADER_PATH";
+
 	// This is the maximum number of triangles the compute shaders support
 	static final int MAX_TRIANGLE = 6144;
 	static final int SMALL_TRIANGLE_COUNT = 512;
@@ -184,6 +192,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private GL4 gl;
 	private GLContext glContext;
 	private GLDrawable glDrawable;
+
+	private Path shaderPath;
+	private FileWatcher fileWatcher;
 
 	static final String LINUX_VERSION_HEADER =
 		"#version 420\n" +
@@ -597,6 +608,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				// load all dynamic scene lights from text file
 				lightManager.startUp();
 
+				shaderPath = Env.getPath(SHADER_PATH);
+				if (shaderPath != null)
+				{
+					fileWatcher	= new FileWatcher()
+						.watchPath(shaderPath)
+						.addChangeHandler(path ->
+						{
+							if (path.getFileName().toString().endsWith(".glsl"))
+							{
+								log.debug("Reloading shaders...");
+								recompileProgram();
+							}
+						});
+				}
+
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
 					invokeOnMainThread(this::uploadScene);
@@ -623,6 +649,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 
 		((Component) client).removeComponentListener(resizeListener);
+
+		if (fileWatcher != null)
+		{
+			fileWatcher.close();
+			fileWatcher = null;
+		}
 
 		lightManager.shutDown();
 
@@ -762,6 +794,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 			return null;
 		});
+		if (shaderPath != null)
+		{
+			template.add(path -> {
+				Path fullPath = shaderPath.resolve(path);
+				try
+				{
+					System.out.println("Loading shader file: " + fullPath);
+					return Template.inputStreamToString(new FileInputStream(fullPath.toFile()));
+				}
+				catch (FileNotFoundException ex)
+				{
+					throw new RuntimeException("Failed to load shader from file: " + fullPath, ex);
+				}
+			});
+		}
 		template.addInclude(HdPlugin.class);
 
 		glProgram = PROGRAM.compile(gl, template);
