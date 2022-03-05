@@ -49,7 +49,7 @@ public class LightConfigParser
 		int defaultDuration = 1000;
 		int defaultHeight = 0;
 		int defaultPlane = 0;
-		LightManager.LightType defaultType = LightManager.LightType.STATIC;
+		LightType defaultType = LightType.STATIC;
 
 		float[] color = defaultColor;
 		int radius = defaultRadius;
@@ -58,7 +58,7 @@ public class LightConfigParser
 		int duration = defaultDuration;
 		int height = defaultHeight;
 		int plane = defaultPlane;
-		LightManager.LightType type = defaultType;
+		LightType type = defaultType;
 
 		int lineNo = 1;
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(LightConfigParser.class.getResourceAsStream(filename))))
@@ -177,48 +177,48 @@ public class LightConfigParser
 							String typeStr = m.group("type").toLowerCase().trim();
 							switch (typeStr) {
 								case "flicker":
-									type = LightManager.LightType.FLICKER;
+									type = LightType.FLICKER;
 									break;
 								case "pulse":
-									type = LightManager.LightType.PULSE;
+									type = LightType.PULSE;
 									break;
 								default:
-									type = LightManager.LightType.STATIC;
+									type = LightType.STATIC;
 									break;
 							}
 							break;
 						default:
 							int x = Integer.parseInt(m.group("x"));
 							int y = Integer.parseInt(m.group("y"));
-							LightManager.Alignment alignment = LightManager.Alignment.CENTER;
+							Alignment alignment = Alignment.CENTER;
 							if (m.group("alignment") != null) {
 								switch (m.group("alignment").toLowerCase().trim()) {
 									case "n":
-										alignment = LightManager.Alignment.NORTH;
+										alignment = Alignment.NORTH;
 										break;
 									case "ne":
-										alignment = LightManager.Alignment.NORTHEAST;
+										alignment = Alignment.NORTHEAST;
 										break;
 									case "e":
-										alignment = LightManager.Alignment.EAST;
+										alignment = Alignment.EAST;
 										break;
 									case "se":
-										alignment = LightManager.Alignment.SOUTHEAST;
+										alignment = Alignment.SOUTHEAST;
 										break;
 									case "s":
-										alignment = LightManager.Alignment.SOUTH;
+										alignment = Alignment.SOUTH;
 										break;
 									case "sw":
-										alignment = LightManager.Alignment.SOUTHWEST;
+										alignment = Alignment.SOUTHWEST;
 										break;
 									case "w":
-										alignment = LightManager.Alignment.WEST;
+										alignment = Alignment.WEST;
 										break;
 									case "nw":
-										alignment = LightManager.Alignment.NORTHWEST;
+										alignment = Alignment.NORTHWEST;
 										break;
 									default:
-										alignment = LightManager.Alignment.CENTER;
+										alignment = Alignment.CENTER;
 										break;
 								}
 							}

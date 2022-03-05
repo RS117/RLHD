@@ -7,11 +7,11 @@ public class Light
 {
 	public String description;
 	public Integer worldX, worldY, plane, height;
-	public LightManager.Alignment alignment;
+	public Alignment alignment;
 	public int radius;
 	public float strength;
 	public float[] color;
-	public LightManager.LightType type;
+	public LightType type;
 	public float duration;
 	public float range;
 	public Integer fadeInDuration;

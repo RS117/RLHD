@@ -38,8 +38,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import java.util.*;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -93,34 +93,35 @@ public class LightManager
 
 	private FileWatcher fileWatcher;
 
+	ArrayList<SceneLight> sceneLights = new ArrayList<>();
+	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
+
+	long lastFrameTime = -1;
+	boolean hotswapScheduled = false;
+
+	int sceneMinX = 0;
+	int sceneMinY = 0;
+	int sceneMaxX = 0;
+	int sceneMaxY = 0;
+
+	public int visibleLightsCount = 0;
+
 	public void startUp()
 	{
-		String lightsConfigPath = Env.get(LIGHTS_CONFIG_ENV);
+		Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
 		if (lightsConfigPath == null)
 		{
-			reloadLights();
+			reloadLightConfiguration();
 		}
 		else
 		{
-			reloadLights(Paths.get(lightsConfigPath).toFile());
+			reloadLightConfiguration(lightsConfigPath.toFile());
 
 			try
 			{
 				fileWatcher = new FileWatcher()
-					.watchFile(Paths.get(lightsConfigPath))
-					.addChangeHandler((path, event) ->
-					{
-						if (event.kind() == ENTRY_DELETE)
-						{
-							reloadLights();
-						}
-						else
-						{
-							reloadLights(path.toFile());
-						}
-						reset();
-						loadSceneLights();
-					});
+					.watchFile(lightsConfigPath)
+					.addChangeHandler(path -> hotswapScheduled = true);
 			}
 			catch (IOException ex)
 			{
@@ -139,7 +140,7 @@ public class LightManager
 		}
 	}
 
-	public void reloadLights()
+	public void reloadLightConfiguration()
 	{
 		String filename = "lights.json";
 		InputStream is = Light.class.getResourceAsStream(filename);
@@ -148,23 +149,23 @@ public class LightManager
 			throw new RuntimeException("Missing resource: " + Paths.get(
 				Light.class.getPackage().getName().replace(".", "/"), filename));
 		}
-		reloadLights(is);
+		reloadLightConfiguration(is);
 	}
 
-	public void reloadLights(File jsonFile)
+	public void reloadLightConfiguration(File jsonFile)
 	{
 		try
 		{
-			reloadLights(new FileInputStream(jsonFile));
+			reloadLightConfiguration(new FileInputStream(jsonFile));
 		}
 		catch (IOException ex)
 		{
 			log.error("Lights config file not found: " + jsonFile.toPath(), ex);
-			reloadLights();
+			reloadLightConfiguration();
 		}
 	}
 
-	public void reloadLights(InputStream jsonInputStream)
+	public void reloadLightConfiguration(InputStream jsonInputStream)
 	{
 		WORLD_LIGHTS.clear();
 		NPC_LIGHTS.clear();
@@ -217,123 +218,27 @@ public class LightManager
 		}
 	}
 
-	private static final Random randomizer = new Random();
-
-	ArrayList<SceneLight> sceneLights = new ArrayList<>();
-	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
-
-	long lastFrameTime = -1;
-
-	int sceneMinX = 0;
-	int sceneMinY = 0;
-	int sceneMaxX = 0;
-	int sceneMaxY = 0;
-
-	public int visibleLightsCount = 0;
-
-	public enum LightType
-	{
-		STATIC, FLICKER, PULSE
-	}
-
-	enum Alignment
-	{
-		CENTER(0, false, false),
-
-		NORTH(0, true, false),
-		NORTHEAST(256, true, false),
-		NORTHEAST_CORNER(256, false, false),
-		EAST(512, true, false),
-		SOUTHEAST(768, true, false),
-		SOUTHEAST_CORNER(768, false, false),
-		SOUTH(1024, true, false),
-		SOUTHWEST(1280, true, false),
-		SOUTHWEST_CORNER(1280, false, false),
-		WEST(1536, true, false),
-		NORTHWEST(1792, true, false),
-		NORTHWEST_CORNER(1792, false, false),
-
-		BACK(0, true, true),
-		BACKLEFT(256, true, true),
-		BACKLEFT_CORNER(256, false, true),
-		LEFT(512, true, true),
-		FRONTLEFT(768, true, true),
-		FRONTLEFT_CORNER(768, false, true),
-		FRONT(1024, true, true),
-		FRONTRIGHT(1280, true, true),
-		FRONTRIGHT_CORNER(1280, false, true),
-		RIGHT(1536, true, true),
-		BACKRIGHT(1792, true, true),
-		BACKRIGHT_CORNER(1792, false, true);
-
-		public final int orientation;
-		public final boolean radial;
-		public final boolean relative;
-
-		Alignment(int orientation, boolean radial, boolean relative)
-		{
-			this.orientation = orientation;
-			this.radial = radial;
-			this.relative = relative;
-		}
-	}
-
-	public static class SceneLight extends Light
-	{
-		public final int randomOffset = randomizer.nextInt();
-
-		public int currentSize;
-		public float currentStrength;
-		public float[] currentColor;
-		public float currentAnimation = 0.5f;
-		public int currentFadeIn = 0;
-		public boolean visible = true;
-
-		public int x;
-		public int y;
-		public int z;
-		public int distance = 0;
-		public boolean belowFloor = false;
-		public boolean aboveFloor = false;
-
-		public Projectile projectile = null;
-		public NPC npc = null;
-		public TileObject object = null;
-
-		public SceneLight(Light l)
-		{
-			this(l.description, l.worldX, l.worldY, l.plane, l.height, l.alignment, l.radius,
-				l.strength, l.color, l.type, l.duration, l.range, l.fadeInDuration);
-		}
-
-		public SceneLight(int worldX, int worldY, int plane, int height, Alignment alignment, int radius, float strength, float[] color, LightType type, float duration, float range, int fadeInDuration)
-		{
-			this(null, worldX, worldY, plane, height, alignment, radius,
-				strength, color, type, duration, range, fadeInDuration);
-		}
-
-		public SceneLight(String description, int worldX, int worldY, int plane, int height, Alignment alignment, int radius, float strength, float[] color, LightType type, float duration, float range, int fadeInDuration)
-		{
-			super(description, worldX, worldY, plane, height, alignment, radius,
-				strength, color, type, duration, range, fadeInDuration,
-				null, null, null);
-
-			this.currentSize = radius;
-			this.currentStrength = strength;
-			this.currentColor = color;
-
-			if (type == LightType.PULSE)
-			{
-				this.currentAnimation = (float) Math.random();
-			}
-		}
-	}
-
 	public void update()
 	{
 		if (client.getGameState() != GameState.LOGGED_IN)
 		{
 			return;
+		}
+
+		if (hotswapScheduled)
+		{
+			hotswapScheduled = false;
+			Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
+			if (lightsConfigPath != null && lightsConfigPath.toFile().exists())
+			{
+				reloadLightConfiguration(lightsConfigPath.toFile());
+			}
+			else
+			{
+				reloadLightConfiguration();
+			}
+			reset();
+			loadSceneLights();
 		}
 
 		int camX = hdPlugin.camTarget[0];

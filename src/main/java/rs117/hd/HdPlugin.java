@@ -63,7 +63,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
@@ -101,6 +100,7 @@ import rs117.hd.config.UIScalingMode;
 import rs117.hd.config.WaterEffects;
 import rs117.hd.environments.EnvironmentManager;
 import rs117.hd.lighting.LightManager;
+import rs117.hd.lighting.SceneLight;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
 import rs117.hd.template.Template;
@@ -800,7 +800,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				Path fullPath = shaderPath.resolve(path);
 				try
 				{
-					System.out.println("Loading shader file: " + fullPath);
+					log.debug("Loading shader from file: {}", fullPath);
 					return Template.inputStreamToString(new FileInputStream(fullPath.toFile()));
 				}
 				catch (FileNotFoundException ex)
@@ -1288,8 +1288,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			{
 				// Update lights UBO
 				lightsUniformBuf.clear();
-				ArrayList<LightManager.SceneLight> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
-				for (LightManager.SceneLight light : visibleLights)
+				ArrayList<SceneLight> visibleLights = lightManager.getVisibleLights(getDrawDistance(), config.maxDynamicLights().getValue());
+				for (SceneLight light : visibleLights)
 				{
 					lightsUniformBuf.putInt(light.x);
 					lightsUniformBuf.putInt(light.y);
