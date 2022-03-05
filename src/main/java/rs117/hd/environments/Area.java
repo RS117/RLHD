@@ -40,8 +40,10 @@ public enum Area
 	TUTORIAL_ISLAND_QUEST_BUILDING(3079, 3118, 3090, 3126),
 	TUTORIAL_ISLAND_KITCHEN(3072, 3092, 3079, 3080),
 	TUTORIAL_ISLAND_START_BUILDING(3086, 3113, 3098, 3099),
+	TUTORIAL_ISLAND_THE_NODE(3084, 3048, 3124, 3006),
 	TUTORIAL_ISLAND(
 		new Rect(3052, 3137, 3155, 3057),
+		new Rect(3084, 3048, 3124, 3006), // the node
 		new Rect(1600, 6015, 1792, 6207) // some kind of instance
 	),
 
@@ -58,6 +60,13 @@ public enum Area
 		new Rect(3266, 3200, 3247, 3327),
 		new Rect(3271, 3330, 3264, 3322),
 		new Rect(3400, 4807, 3448, 4847) // clan wars arena
+	),
+
+	// Dorgesh-Kaan
+	DORGESHKAAN(
+		new Rect(2687, 5376, 2752, 5247), // lower level
+		new Rect(2751, 5440, 2816, 5311), // middle level
+		new Rect(2815, 5504, 2880, 5375) // upper level
 	),
 
 	// Varrock
@@ -110,11 +119,16 @@ public enum Area
 		new Rect(3120, 3360, 3126, 3353)
 	),
 	DRAYNOR_MANOR(3083, 3386, 3129, 3329),
-	DRAYNOR_MANOR_BASEMENT(3073, 9780, 3082, 9766),
+	DRAYNOR_MANOR_BASEMENT(
+		new Rect(3073, 9780, 3082, 9766)
+	),
 	DRAYNOR(
 		new Rect(3071, 3226, 3133, 3292),
 		new Rect(2112, 4893, 2166, 4930) // bank robbery cutscene
 	),
+
+	// Misthalin Mystery
+	MISTHALIN_MYSTERY_MANOR(1600, 4863, 1727, 4779),
 
 	// Falador
 	FALADOR_HAIRDRESSER(
@@ -125,6 +139,11 @@ public enum Area
 	FALADOR(
 		new Rect(2932, 3306, 3068, 3401),
 		new Rect(3456, 4734, 3528, 4783)
+	),
+
+	MOTHERLODE_MINE(
+		new Rect(3713, 5696, 3776, 5633),
+		new Rect(3827, 5692, 3868, 5652)
 	),
 
 	// Edgeville
@@ -315,9 +334,13 @@ public enum Area
 		new Rect(3198, 2989, 3322, 2817),
 		new Rect(3315, 2928, 3469, 2812)
 	),
+	KHARIDIAN_DESERT_MID(
+		new Rect(3135, 3051, 3524, 2885)
+	),
 	KHARIDIAN_DESERT(
 		new Rect(3196, 3134, 3526, 2997),
 		new Rect(3134, 3069, 3565, 2600),
+		new Rect(3114, 2974, 3216, 2786),
 		new Rect(3008, 4671, 3072, 4734) // agility pyramid instance
 	),
 	KHARID_DESERT_REGION(
@@ -382,14 +405,15 @@ public enum Area
 	MORYTANIA_SLAYER_TOWER(3405, 3531, 3452, 3579),
 	CANIFIS(13878),
 	MORTTON(13875),
-	BARROWS_CRYPTS(3586, 9726, 3524, 9669),
+	BARROWS_CRYPTS(3586, 9726, 3524, 9669, 3),
+	BARROWS_TUNNELS(3586, 9726, 3524, 9669, 0),
 	BARROWS(14131),
 	BURGH_DE_ROTT(3468, 3258, 3583, 3164),
 	ABANDONED_MINE(3423, 3261, 3461, 3201),
 	MORYTANIA(
 		new Rect(3422, 3202, 3782, 3467),
 		new Rect(3775, 3467, 3426, 3603),
-		new Rect(3426, 3603, 3399, 3515),
+		new Rect(3426, 3603, 3399, 3511),
 		new Rect(3410, 3524, 3457, 3500),
 		new Rect(3457, 3500, 3416, 3495),
 		new Rect(3420, 3495, 3451, 3481),
@@ -401,7 +425,8 @@ public enum Area
 		new Rect(2087, 4903, 2064, 4880), // ver sinhaza cutscene
 		new Rect(1987, 4996, 2105, 5054), // temple trekking
 		new Rect(2118, 4994, 2171, 5036), // temple trekking
-		new Rect(2178, 4996, 2478, 5054) // temple trekking
+		new Rect(2178, 4996, 2478, 5054), // temple trekking
+		new Rect(1670, 4546, 1724, 4600) // slayer tower roof (grotesque guardians)
 	),
 
 	// TzHaar
@@ -419,6 +444,7 @@ public enum Area
 	),
 
 	// Wilderness
+	REVENANT_CAVES(3265, 10243, 3134, 10050),
 	FROZEN_WASTE_PLATEAU(
 		new Rect(2939, 3970, 2988, 3904),
 		new Rect(2988, 3907, 3002, 3940),
@@ -479,8 +505,12 @@ public enum Area
 
 	ZANARIS(2315, 4345, 2500, 4485),
 
-	FROZEN_DOOR(2884, 5280, 2883, 5280),
-	GOD_WARS_DUNGEON(2816, 5375, 2971, 5216),
+	GOD_WARS_DUNGEON(
+		new Rect(2816, 5375, 2971, 5216),
+		new Rect(2848, 5199, 2948, 5153), // ancient prison
+		new Rect(2848, 5246, 2948, 5185), // ancient prison
+		new Rect(3008, 10178, 3072, 10112) // wilderness dungeon
+	),
 
 	// Soul Wars
 	ISLE_OF_SOULS(2079, 3014, 2348, 2763),
@@ -510,6 +540,8 @@ public enum Area
 	),
 
 	// Zeah
+	KARUULM_SLAYER_DUNGEON(1112, 10295, 1384, 10124),
+	LIZARDMAN_TEMPLE(1280, 10047, 1341, 10109),
 	XERICS_LOOKOUT(1580, 3526, 1596, 3534),
 	SHAYZIEN_COMBAT_RING(1539, 3627, 1548, 3618),
 	SHAYZIEN_ENCAMPMENT(
@@ -571,9 +603,6 @@ public enum Area
 	),
 	MESS_HALL_KITCHEN(1643, 3631, 1649, 3622),
 	ZEAH(1152, 4078, 1938, 3270),
-
-	// Kebos Lowlands
-	LIZARDMAN_TEMPLE(1280, 10047, 1341, 10109),
 
 	// Fossil Island
 	TAR_SWAMP(
@@ -637,7 +666,13 @@ public enum Area
 
 	// Fishing Trawler
 	FISHING_TRAWLER_BOAT_PORT_KHAZARD(2669, 3183, 2673, 3166),
-	FISHING_TRAWLER(1860, 4900, 1700, 4800),
+	FISHING_TRAWLER_BOAT_FLOODED(2012, 4826, 2021, 4824),
+	FISHING_TRAWLER(
+		new Rect(1792, 4863, 1855, 4734),
+		new Rect(1855, 4893, 1920, 4798),
+		new Rect(1920, 4863, 1990, 4798),
+		new Rect(1990, 4917, 2047, 4798)
+	),
 
 	// Underwater areas
 	MOGRE_CAMP_CUTSCENE(1832, 4776, 1934,4878),
@@ -690,6 +725,9 @@ public enum Area
 	// Tempoross
 	TEMPOROSS_COVE(3005, 3011, 3066, 2941),
 
+	// Death's office
+	DEATHS_OFFICE(3166, 5734, 3185, 4288),
+
 	// Theatre of Blood
 	TOB_ROOM_MAIDEN(3231, 4468, 3152, 4416),
 	TOB_ROOM_BLOAT(3260, 4474, 3327, 4427),
@@ -721,12 +759,18 @@ public enum Area
 	// Barbarian Assault
 	BARBARIAN_ASSAULT_WAITING_ROOMS(2571, 5252, 2616, 5305),
 
+	TARNS_LAIR(
+		new Rect(3136, 4544, 3391, 4608),
+		new Rect(3168, 4639, 3196, 4604)
+	),
+
 	// Random events
 	RANDOM_EVENT_CLASSROOM(1894, 5036, 1878, 5014),
 	RANDOM_EVENT_FREAKY_FORESTER(2588, 4786, 2615, 4762),
 	RANDOM_EVENT_GRAVEDIGGER(1920, 5007, 1935, 4992),
 	RANDOM_EVENT_DRILL_DEMON(3136, 4799, 3200, 4863),
 	RANDOM_EVENT_FROG_CAVE(2450, 4764, 2480, 4794),
+	RANDOM_EVENT_PRISON_PETE(2059, 4479, 2111, 4447),
 
 	// Clan halls
 	CLAN_HALL(1730, 5442, 1789, 5501),
@@ -759,6 +803,7 @@ public enum Area
 
 	OVERWORLD(700, 2300, 4200, 4095),
 	ALL(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+	NONE(0, 0, 0, 0),
 	;
 
 	private final Rect[] rects;

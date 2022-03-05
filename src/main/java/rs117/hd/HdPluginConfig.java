@@ -35,7 +35,6 @@ import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
-import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
 import rs117.hd.config.Saturation;
 import rs117.hd.config.DefaultSkyColor;
@@ -48,6 +47,29 @@ import rs117.hd.config.WaterEffects;
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
 {
+	/*====== Limited-time settings ======*/
+
+	@ConfigSection(
+		name = "Limited-time",
+		description = "Fun and/or experimental settings that are available for a limited time",
+		position = -10,
+		closedByDefault = false
+	)
+	String limitedTimeSettings = "limitedTimeSettings";
+
+	@ConfigItem(
+		keyName = "winterTheme",
+		name = "Winter theme",
+		description = "Covers the Gielinor overworld with a layer of snow!",
+		position = -9,
+		section = limitedTimeSettings
+	)
+	default boolean winterTheme()
+	{
+		return true;
+	}
+
+
 	/*====== General settings ======*/
 
 	@ConfigSection(
@@ -76,7 +98,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "antiAliasingMode",
 		name = "Anti Aliasing",
-		description = "Configures the anti-aliasing mode",
+		description = "Improves jagged/shimmering edges at a cost of GPU performance. 8x/16x MSAA are highly expensive.",
 		position = 2,
 		section = generalSettings
 	)
@@ -104,20 +126,67 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "anisotropicFilteringLevel",
 		name = "Anisotropic Filtering",
-		description = "Configures the anisotropic filtering level.",
+		description = "Configures the anisotropic filtering level from 0 to 16x.",
 		position = 4,
 		section = generalSettings
 	)
 	default int anisotropicFilteringLevel()
 	{
-		return 1;
+		return 16;
+	}
+
+	@ConfigItem(
+		keyName = "unlockFps",
+		name = "Unlock FPS",
+		description = "Removes the 50 FPS cap for some game content such as camera movement and dynamic lighting.",
+		position = 5,
+		section = generalSettings
+	)
+	default boolean unlockFps()
+	{
+		return false;
+	}
+
+	enum SyncMode
+	{
+		OFF,
+		ON,
+		ADAPTIVE
+	}
+
+	@ConfigItem(
+			keyName = "vsyncMode",
+			name = "VSync Mode",
+			description = "Method to synchronize frame rate with refresh rate",
+			position = 6,
+			section = generalSettings
+	)
+	default SyncMode syncMode()
+	{
+		return SyncMode.ADAPTIVE;
+	}
+
+	@ConfigItem(
+			keyName = "fpsTarget",
+			name = "FPS Target",
+			description = "Target FPS when unlock FPS is enabled and Vsync mode is OFF",
+			position = 7,
+			section = generalSettings
+	)
+	@Range(
+			min = 0,
+			max = 999
+	)
+	default int fpsTarget()
+	{
+		return 60;
 	}
 
 	@ConfigItem(
 		keyName = "colorBlindMode",
 		name = "Colorblindness Correction",
 		description = "Adjusts colors to account for colorblindness",
-		position = 5,
+		position = 8,
 		section = generalSettings
 	)
 	default ColorBlindMode colorBlindMode()
@@ -129,7 +198,7 @@ public interface HdPluginConfig extends Config
 		keyName = "flashingEffects",
 		name = "Flashing Effects",
 		description = "Displays fast flashing effects, such as lightning, in certain areas.",
-		position = 6,
+		position = 9,
 		section = generalSettings
 	)
 	default boolean flashingEffects()
@@ -141,7 +210,7 @@ public interface HdPluginConfig extends Config
 		keyName = "saturation",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
-		position = 7,
+		position = 10,
 		section = generalSettings
 	)
 	default Saturation saturation()
@@ -153,7 +222,7 @@ public interface HdPluginConfig extends Config
 		keyName = "contrast",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
-		position = 8,
+		position = 11,
 		section = generalSettings
 	)
 	default Contrast contrast()
@@ -169,23 +238,10 @@ public interface HdPluginConfig extends Config
 		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
-		position = 9,
+		position = 12,
 		section = generalSettings
 	)
 	default int brightness() { return 20; }
-
-	@ConfigItem(
-		keyName = "levelOfDetail",
-		name = "Level of Detail",
-		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 10,
-		section = generalSettings
-	)
-	default LevelOfDetail levelOfDetail()
-	{
-		return LevelOfDetail.MEDIUM;
-	}
-
 
 
 	/*====== Lighting settings ======*/
@@ -243,7 +299,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean atmosphericLighting()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -255,19 +311,19 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean shadowsEnabled()
 	{
-		return false;
+		return true;
 	}
 
 	@ConfigItem(
 		keyName = "shadowResolution",
-		name = "Shadow Resolution",
-		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
+		name = "Shadow Quality",
+		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of GPU performance.",
 		position = 106,
 		section = lightingSettings
 	)
 	default ShadowResolution shadowResolution()
 	{
-		return ShadowResolution.RES_2048;
+		return ShadowResolution.RES_1024;
 	}
 
 	@ConfigItem(
@@ -395,7 +451,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "waterEffects",
 		name = "Water Effects",
-		description = "Changes the appearance of the water. ",
+		description = "Changes the appearance of the water.",
 		position = 208,
 		section = environmentSettings
 	)
@@ -415,4 +471,50 @@ public interface HdPluginConfig extends Config
 	{
 		return true;
 	}
+
+
+
+	/*====== Miscellaneous settings ======*/
+
+	@ConfigSection(
+		name = "Miscellaneous",
+		description = "Miscellaneous settings",
+		position = 300,
+		closedByDefault = true
+	)
+	String miscellaneousSettings = "miscellaneousSettings";
+
+	@ConfigItem(
+		keyName = "macosIntelWorkaround",
+		name = "Fix shading on MacOS with Intel",
+		description = "Workaround for visual artifacts on some Intel GPU drivers on MacOS.",
+		warning = "This setting can cause RuneLite to crash, and can be difficult to revert. Only enable it if you\nare seeing black patches. Are you sure you want to enable the setting?",
+		position = 301,
+		section = miscellaneousSettings
+	)
+	default boolean macosIntelWorkaround()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "hdInfernalTexture",
+		name = "HD Infernal Texture",
+		description = "Replaces the OSRS infernal cape texture with a high detail one.",
+		position = 302,
+		section = miscellaneousSettings
+	)
+	default boolean hdInfernalTexture()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "modelCaching",
+		name = "Disable model caching",
+		description = "Model caching improves performance with increased memory usage.",
+		position = 303,
+		section = miscellaneousSettings
+	)
+	default boolean disableModelCaching() { return false; }
 }

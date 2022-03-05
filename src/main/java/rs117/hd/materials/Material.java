@@ -24,7 +24,9 @@
  */
 package rs117.hd.materials;
 
+import java.util.Arrays;
 import java.util.HashMap;
+
 import lombok.Getter;
 
 @Getter
@@ -65,7 +67,7 @@ public enum Material
 	MOSS(28),
 	PALM_LEAF(29),
 	WILLOW_LEAVES(30, new Properties().setTextureScale(1.025f, 1.0f)),
-	LAVA(31, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36, 22).setScroll(0, 3)),
+	LAVA(31, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36f, 22f).setScroll(0f, 3f)),
 	TEXTURE_32(32),
 	MAPLE_LEAVES(33, new Properties().setTextureScale(1.3f, 1.0f)),
 	MAGIC_STARS(34, new Properties().setEmissive(1.0f)),
@@ -74,11 +76,11 @@ public enum Material
 	CHAIN(37),
 	TEXTURE_38(38),
 	PAINTING_ELF(39),
-	FIRE_CAPE(40, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 12, 4).setScroll(0, -3)),
+	FIRE_CAPE(40, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 12f, 4f).setScroll(0f, -3f)),
 	LEAVES_2(41, new Properties().setTextureScale(1.1f, 1.1f)),
 	MARBLE(42, new Properties().setSpecular(1.0f, 400f)),
 	TILE_DARK(43),
-	TEXTURE_44(44),
+	ROOF_SHINGLES_2(44),
 	TEXTURE_45(45),
 	STONE_PATTERN(46),
 	TEXTURE_47(47),
@@ -93,8 +95,8 @@ public enum Material
 	TEXTURE_56(56),
 	TEXTURE_57(57),
 	TEXTURE_58(58),
-	INFERNAL_CAPE(59, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12, 4).setScroll(0, 0)),
-	TEXTURE_60(60),
+	INFERNAL_CAPE(59, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 0f)),
+	LEAVES_3(60),
 	TEXTURE_61(61),
 	TEXTURE_62(62),
 	TEXTURE_63(63),
@@ -180,6 +182,7 @@ public enum Material
 	GRASS_1(209),
 	GRASS_2(210),
 	GRASS_3(211),
+	GRASS_SCROLLING(209, new Properties().setScroll(0f, 0.7f)),
 
 	DIRT_1(213),
 	DIRT_2(214),
@@ -197,6 +200,7 @@ public enum Material
 	GRUNGE_2(222),
 
 	ROCK_1(223),
+	ROCK_2(224),
 
 	CARPET(225),
 
@@ -221,12 +225,33 @@ public enum Material
 	MARBLE_2_SEMIGLOSS(232, new Properties().setSpecular(0.3f, 100f)),
 	MARBLE_3_SEMIGLOSS(234, new Properties().setSpecular(0.4f, 120f)),
 
-	HD_LAVA_1(241, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_LAVA_2(242, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_MAGMA_1(243, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
-	HD_MAGMA_2(244, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36, 12)),
+	HD_LAVA_1(241, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_LAVA_2(242, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_MAGMA_1(243, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
+	HD_MAGMA_2(244, new Properties().setEmissive(1.0f).setDisplacement(235, 0.04f, 36f, 12f)),
 
 	BARK(245),
+	WOOD_GRAIN(247),
+
+	HD_INFERNAL_CAPE(248, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 3f)),
+
+	HD_BRICK(249),
+	HD_ROOF_SHINGLES_1(250, new Properties().setSpecular(0.5f, 30f)),
+	HD_MARBLE_DARK(251, new Properties().setSpecular(1.1f, 380f)),
+	HD_BRICK_BROWN(252),
+	HD_LAVA_3(253, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36f, 22f).setScroll(0f, 3f)),
+	HD_ROOF_SHINGLES_2(254),
+
+	// Seasonal
+	WINTER_WILLOW_LEAVES(255, new Properties().setTextureScale(1.025f, 1.0f)),
+	WINTER_MAPLE_LEAVES(256, new Properties().setTextureScale(1.3f, 1.0f)),
+	WINTER_LEAVES_1(257, new Properties().setTextureScale(1.3f, 1.0f)),
+	WINTER_LEAVES_2(258, new Properties().setTextureScale(1.1f, 1.1f)),
+	WINTER_LEAVES_3(259),
+	WINTER_PAINTING_LANDSCAPE(260),
+	WINTER_PAINTING_KING(261),
+	WINTER_PAINTING_ELF(262),
+
 
 	// water/fluid variants
 	WATER(7001),
@@ -245,10 +270,10 @@ public enum Material
 	private final float emissiveStrength;
 	private final int displacementMapId;
 	private final float displacementStrength;
-	private final int displacementDurationX;
-	private final int displacementDurationY;
-	private final int scrollDurationX;
-	private final int scrollDurationY;
+	private final float displacementDurationX;
+	private final float displacementDurationY;
+	private final float scrollDurationX;
+	private final float scrollDurationY;
 	private final float textureScaleX;
 	private final float textureScaleY;
 
@@ -259,10 +284,10 @@ public enum Material
 		private float emissiveStrength = 0f;
 		private int displacementMapId = 304;
 		private float displacementStrength = 0f;
-		private int displacementDurationX = 0;
-		private int displacementDurationY = 0;
-		private int scrollDurationX = 0;
-		private int scrollDurationY = 0;
+		private float displacementDurationX = 0;
+		private float displacementDurationY = 0;
+		private float scrollDurationX = 0;
+		private float scrollDurationY = 0;
 		private float textureScaleX = 1.0f;
 		private float textureScaleY = 1.0f;
 
@@ -279,7 +304,7 @@ public enum Material
 			return this;
 		}
 
-		public Properties setDisplacement(int displacementMapId, float displacementStrength, int displacementDurationX, int displacementDurationY)
+		public Properties setDisplacement(int displacementMapId, float displacementStrength, float displacementDurationX, float displacementDurationY)
 		{
 			this.displacementMapId = displacementMapId;
 			this.displacementStrength = displacementStrength;
@@ -288,7 +313,7 @@ public enum Material
 			return this;
 		}
 
-		public Properties setScroll(int scrollDurationX, int scrollDurationY)
+		public Properties setScroll(float scrollDurationX, float scrollDurationY)
 		{
 			this.scrollDurationX = scrollDurationX;
 			this.scrollDurationY = scrollDurationY;
@@ -336,16 +361,27 @@ public enum Material
 	}
 
 	private static final HashMap<Integer, Material> DIFFUSE_ID_MATERIAL_MAP;
+	private static final int[] MATERIAL_DIFUSE_INDEX_MAP;
 
 	static
 	{
 		DIFFUSE_ID_MATERIAL_MAP = new HashMap<>();
+		MATERIAL_DIFUSE_INDEX_MAP = new int[10000];
+		Arrays.fill(MATERIAL_DIFUSE_INDEX_MAP, 0);
+
+		int index = 0;
 		for (Material material : values())
 		{
 			if (!DIFFUSE_ID_MATERIAL_MAP.containsKey(material.diffuseMapId))
 			{
 				DIFFUSE_ID_MATERIAL_MAP.put(material.diffuseMapId, material);
+
+				if (material.diffuseMapId >= 0 && material.diffuseMapId <= 9999) {
+					MATERIAL_DIFUSE_INDEX_MAP[material.diffuseMapId] = index;
+				}
 			}
+
+			index++;
 		}
 	}
 
@@ -359,6 +395,7 @@ public enum Material
 	static
 	{
 		MATERIAL_INDEX_MAP = new HashMap<>();
+
 		int index = 0;
 		for (Material material : values())
 		{
@@ -370,6 +407,14 @@ public enum Material
 	public static int getIndex(Material material)
 	{
 		return MATERIAL_INDEX_MAP.getOrDefault(material, 0);
+	}
+
+	public static int getIndexFromDiffuseID(int id) {
+		if (id < 0 || id > 9999) {
+			return 0;
+		}
+
+		return MATERIAL_DIFUSE_INDEX_MAP[id];
 	}
 
 	public static Material[] getAllTextures()

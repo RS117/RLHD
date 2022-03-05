@@ -37,6 +37,10 @@ class GpuFloatBuffer
 		buffer.put(texture).put(u).put(v).put(pad);
 	}
 
+	void put(float[] floats) {
+		buffer.put(floats);
+	}
+
 	void flip()
 	{
 		buffer.flip();

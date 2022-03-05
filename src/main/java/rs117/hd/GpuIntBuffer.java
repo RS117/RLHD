@@ -42,6 +42,10 @@ class GpuIntBuffer
 		buffer.put(x).put(y).put(z).put(c);
 	}
 
+	void put(int[] ints) {
+		buffer.put(ints);
+	}
+
 	void flip()
 	{
 		buffer.flip();
@@ -52,7 +56,7 @@ class GpuIntBuffer
 		buffer.clear();
 	}
 
-	void ensureCapacity(int size)
+	GpuIntBuffer ensureCapacity(int size)
 	{
 		int capacity = buffer.capacity();
 		final int position = buffer.position();
@@ -69,6 +73,8 @@ class GpuIntBuffer
 			newB.put(buffer);
 			buffer = newB;
 		}
+
+		return this;
 	}
 
 	IntBuffer getBuffer()

@@ -44,9 +44,10 @@ public class Template
 		StringBuilder sb = new StringBuilder();
 		for (String line : str.split("\r?\n"))
 		{
-			if (line.startsWith("#include "))
+			String trimmed = line.trim();
+			if (trimmed.startsWith("#include "))
 			{
-				String resource = line.substring(9);
+				String resource = trimmed.substring(9);
 				String resourceStr = load(resource);
 				sb.append(resourceStr);
 			}

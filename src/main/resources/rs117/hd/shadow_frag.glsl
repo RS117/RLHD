@@ -24,7 +24,7 @@
  */
 #version 330
 
-#define MAX_MATERIALS 200
+#include MAX_MATERIALS
 
 struct Material
 {
@@ -49,11 +49,17 @@ uniform vec2 textureOffsets[128];
 in float alpha;
 in vec2 fUv;
 flat in int materialId;
+flat in int terrainPlane;
 
 out vec4 FragColor;
 
 void main()
 {
+    if (terrainPlane == 0)
+    {
+        discard;
+    }
+
     // skip water surfaces
     switch (material[materialId].diffuseMapId)
     {
@@ -69,7 +75,7 @@ void main()
     uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
     vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
 
-    if (min(texture.a, alpha) < 0.25)
+    if (min(texture.a, alpha) < 0.85)
     {
         discard;
     }

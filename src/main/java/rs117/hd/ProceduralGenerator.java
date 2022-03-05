@@ -76,7 +76,6 @@ class ProceduralGenerator
 	boolean[][][] skipTile;
 	Map<Integer, Integer> vertexUnderwaterDepth;
 	int[][][] underwaterDepthLevels;
-	int totalDepthLevels = 12; // max is length of depthLevelSlope
 	int[] depthLevelSlope = new int[]{150, 300, 470, 610, 700, 750, 820, 920, 1080, 1300, 1350, 1380};
 
 	/**
@@ -269,22 +268,28 @@ class ProceduralGenerator
 
 			float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{1.0f, 1.0f, 0.0f});
 
-			float multiplier = 1.5f;
-			int base = 15;
-			int add = 3;
+			float lightenMultiplier = 1.5f;
+			int lightenBase = 15;
+			int lightenAdd = 3;
+			float darkenMultiplier = 0.5f;
+			int darkenBase = 0;
+			int darkenAdd = 0;
 
 			float[] vNormals = vertexTerrainNormals.getOrDefault(vertexHashes[vertex], new float[]{0.0f, 0.0f, 0.0f});
 
 			float dot = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vNormals), inverseLightDirection);
-			dot = Math.max(dot, 0);
-			int lighten = (int) (Math.max((colorHSL[2] - add), 0) * multiplier) + base;
-			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], lighten, dot);
+			int lighten = (int) (Math.max((colorHSL[2] - lightenAdd), 0) * lightenMultiplier) + lightenBase;
+			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], lighten, Math.max(dot, 0));
+			int darken = (int) (Math.max((colorHSL[2] - darkenAdd), 0) * darkenMultiplier) + darkenBase;
+			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], darken, Math.abs(Math.min(dot, 0)));
+			colorHSL[2] *= 1.25f;
 
 			boolean isOverlay = false;
 			Material material = Material.DIRT_1;
 			if (vertexOverlays[vertex] != 0)
 			{
 				Overlay overlay = Overlay.getOverlay(vertexOverlays[vertex], tile, client);
+				overlay = getSeasonalOverlay(overlay);
 				GroundMaterial groundMaterial = overlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = !overlay.isBlendedAsUnderlay();
@@ -293,6 +298,7 @@ class ProceduralGenerator
 			else if (vertexUnderlays[vertex] != 0)
 			{
 				Underlay underlay = Underlay.getUnderlay(vertexUnderlays[vertex], tile, client);
+				underlay = getSeasonalUnderlay(underlay);
 				GroundMaterial groundMaterial = underlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
 				isOverlay = underlay.isBlendedAsOverlay();
@@ -550,7 +556,7 @@ class ProceduralGenerator
 		}
 
 		// Sink terrain further from shore by desired levels.
-		for (int level = 0; level < totalDepthLevels - 1; level++)
+		for (int level = 0; level < depthLevelSlope.length - 1; level++)
 		{
 			for (int z = 0; z < Constants.MAX_Z; ++z)
 			{
@@ -849,6 +855,8 @@ class ProceduralGenerator
 			}
 		}
 
+		waterType = getSeasonalWaterType(waterType);
+
 		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
 			switch(waterType)
@@ -901,6 +909,8 @@ class ProceduralGenerator
 				waterType = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
 			}
 		}
+
+		waterType = getSeasonalWaterType(waterType);
 
 		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
 		{
@@ -1144,7 +1154,7 @@ class ProceduralGenerator
 		int x = tile.getSceneLocation().getX();
 		int y = tile.getSceneLocation().getY();
 
-		if (!hdPlugin.configGroundBlending || (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
+		if ((tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() >= 0) ||
 			(tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() != null))
 		{
 			// skip tiles with textures provided by default
@@ -1166,6 +1176,86 @@ class ProceduralGenerator
 			}
 		}
 		return false;
+	}
+
+	Underlay getSeasonalUnderlay(Underlay underlay)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (underlay.getGroundMaterial())
+			{
+				case OVERWORLD_GRASS_1:
+					underlay = Underlay.WINTER_GRASS;
+					break;
+				case OVERWORLD_DIRT:
+					underlay = Underlay.WINTER_DIRT;
+					break;
+			}
+		}
+		return underlay;
+	}
+
+	Overlay getSeasonalOverlay(Overlay overlay)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (overlay.getGroundMaterial())
+			{
+				case OVERWORLD_GRASS_1:
+					overlay = Overlay.WINTER_GRASS;
+					break;
+			}
+		}
+		return overlay;
+	}
+
+	WaterType getSeasonalWaterType(WaterType waterType)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (waterType)
+			{
+				case WATER:
+					waterType = WaterType.ICE;
+					break;
+			}
+		}
+		return waterType;
+	}
+
+	Material getSeasonalMaterial(Material material)
+	{
+		if (hdPlugin.configWinterTheme)
+		{
+			switch (material)
+			{
+				case LEAVES_1:
+					material = Material.WINTER_LEAVES_1;
+					break;
+				case WILLOW_LEAVES:
+					material = Material.WINTER_WILLOW_LEAVES;
+					break;
+				case MAPLE_LEAVES:
+					material = Material.WINTER_MAPLE_LEAVES;
+					break;
+				case LEAVES_2:
+					material = Material.WINTER_LEAVES_2;
+					break;
+				case LEAVES_3:
+					material = Material.WINTER_LEAVES_3;
+					break;
+				case PAINTING_LANDSCAPE:
+					material = Material.WINTER_PAINTING_LANDSCAPE;
+					break;
+				case PAINTING_KING:
+					material = Material.WINTER_PAINTING_KING;
+					break;
+				case PAINTING_ELF:
+					material = Material.WINTER_PAINTING_ELF;
+					break;
+			}
+		}
+		return material;
 	}
 
 	int[][] tzHaarRecolored = new int[4][3];

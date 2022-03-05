@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 117 <https://twitter.com/117scape>
+ * Copyright (c) 2021, Hooder <ahooder@protonmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,26 +22,15 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.config;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+#include CONST_MACOS_INTEL_WORKAROUND
 
-@Getter
-@RequiredArgsConstructor
-public enum LevelOfDetail
-{
-	FULL("Full", 90),
-	HIGH("High", 50),
-	MEDIUM("Medium", 30),
-	LOW("Low", 20);
-
-	private final String name;
-	private final int distance;
-
-	@Override
-	public String toString()
-	{
-		return name;
-	}
-}
+#if CONST_MACOS_INTEL_WORKAROUND
+    // Workaround wrapper for drivers that do not support dynamic indexing,
+    // particularly Intel drivers on MacOS
+    Material fetchMaterial(int i) {
+        #include MACOS_INTEL_WORKAROUND_MATERIAL_CASES
+    }
+#else
+    #define fetchMaterial(index) material[index]
+#endif

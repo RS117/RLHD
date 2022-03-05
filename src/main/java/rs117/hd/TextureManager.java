@@ -57,7 +57,7 @@ class TextureManager
 
 		int textureArrayId = GLUtil.glGenTexture(gl);
 		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, textures.length);
+		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_SRGB8_ALPHA8, TEXTURE_SIZE, TEXTURE_SIZE, textures.length);
 
 		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST);
 		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST);
@@ -93,7 +93,7 @@ class TextureManager
 
 		int textureArrayId = GLUtil.glGenTexture(gl);
 		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, textureCount);
+		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_SRGB8_ALPHA8, TEXTURE_SIZE, TEXTURE_SIZE, textureCount);
 
 		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_WRAP_S, gl.GL_REPEAT);
 		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_WRAP_T, gl.GL_REPEAT);
