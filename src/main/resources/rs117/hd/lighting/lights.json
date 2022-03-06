@@ -26379,5 +26379,99 @@
     "projectileIds": [
       1679
     ]
+  },
+  {
+    "description": "CERBERUS_LAIR_NORTH",
+    "worldX": 1304,
+    "worldY": 1316,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 4000,
+    "strength": 10,
+    "color": [
+      0.92156863,
+      0.38039216,
+      0.09019608
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "CERBERUS_LAIR_WEST",
+    "worldX": 1240,
+    "worldY": 1252,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 4000,
+    "strength": 10,
+    "color": [
+      0.92156863,
+      0.38039216,
+      0.09019608
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "CERBERUS_LAIR_EAST",
+    "worldX": 1368,
+    "worldY": 1252,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 4000,
+    "strength": 10,
+    "color": [
+      0.92156863,
+      0.38039216,
+      0.09019608
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "CERBERUS_LAIR_FIRE",
+    "height": 80,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 20,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      732,
+      23105
+    ]
+  },
+  {
+    "description": "CERBERUS_LAIR_SOUL_DEVOURER",
+    "height": 80,
+    "alignment": "CENTER",
+    "radius": 5000,
+    "strength": 30,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      21773
+    ]
   }
 ]
