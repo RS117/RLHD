@@ -98,7 +98,7 @@ public class Template
 		});
 	}
 
-	private static String inputStreamToString(InputStream in)
+	public static String inputStreamToString(InputStream in)
 	{
 		try
 		{

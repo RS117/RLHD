@@ -31,11 +31,10 @@ import lombok.Getter;
 import net.runelite.api.NpcID;
 import static net.runelite.api.NpcID.*;
 import rs117.hd.HDUtils;
-import rs117.hd.lighting.LightManager.LightType;
-import rs117.hd.lighting.LightManager.Alignment;
 
 @AllArgsConstructor
 @Getter
+@Deprecated
 enum NpcLight
 {
 	HELLCAT(20, Alignment.CENTER, 220, 7.5f , rgb(255, 0, 0), LightType.STATIC, 0, 0, NpcID.HELLCAT, HELLCAT_6668, LAZY_HELLCAT, OVERGROWN_HELLCAT, WILY_HELLCAT, LAZY_HELLCAT_6689, OVERGROWN_HELLCAT_6682, WILY_HELLCAT_6696, HELLKITTEN),
