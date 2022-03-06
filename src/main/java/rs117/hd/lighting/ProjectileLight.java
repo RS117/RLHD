@@ -29,10 +29,10 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import rs117.hd.HDUtils;
-import rs117.hd.lighting.LightManager.LightType;
 
 @AllArgsConstructor
 @Getter
+@Deprecated
 enum ProjectileLight
 {
 	// Standard spellbook

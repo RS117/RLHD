@@ -25,15 +25,22 @@
  */
 package rs117.hd.lighting;
 
-import com.google.common.primitives.Floats;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.primitives.Ints;
-import java.awt.Color;
-import java.io.BufferedReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -61,11 +68,15 @@ import rs117.hd.HDUtils;
 
 import static com.jogamp.opengl.math.FloatUtil.cos;
 import static com.jogamp.opengl.math.FloatUtil.pow;
+import rs117.hd.utils.Env;
+import rs117.hd.utils.FileWatcher;
 
 @Singleton
 @Slf4j
 public class LightManager
 {
+	public static String LIGHTS_CONFIG_ENV = "RLHD_LIGHTS_PATH";
+
 	@Inject
 	private HdPluginConfig config;
 
@@ -75,13 +86,18 @@ public class LightManager
 	@Inject
 	private HdPlugin hdPlugin;
 
-	private static final Random randomizer = new Random();
+	private static final List<SceneLight> WORLD_LIGHTS = new ArrayList<>();
+	private static final ListMultimap<Integer, Light> NPC_LIGHTS = ArrayListMultimap.create();
+	private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
+	private static final ListMultimap<Integer, Light> PROJECTILE_LIGHTS = ArrayListMultimap.create();
 
-	ArrayList<Light> allLights = new ArrayList<>();
-	ArrayList<Light> sceneLights = new ArrayList<>();
+	private FileWatcher fileWatcher;
+
+	ArrayList<SceneLight> sceneLights = new ArrayList<>();
 	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
 
 	long lastFrameTime = -1;
+	boolean hotswapScheduled = false;
 
 	int sceneMinX = 0;
 	int sceneMinY = 0;
@@ -90,110 +106,115 @@ public class LightManager
 
 	public int visibleLightsCount = 0;
 
-	enum LightType
+	public void startUp()
 	{
-		STATIC, FLICKER, PULSE
-	}
-
-	enum Alignment
-	{
-		CENTER(0, false, false),
-
-		NORTH(0, true, false),
-		NORTHEAST(256, true, false),
-		NORTHEAST_CORNER(256, false, false),
-		EAST(512, true, false),
-		SOUTHEAST(768, true, false),
-		SOUTHEAST_CORNER(768, false, false),
-		SOUTH(1024, true, false),
-		SOUTHWEST(1280, true, false),
-		SOUTHWEST_CORNER(1280, false, false),
-		WEST(1536, true, false),
-		NORTHWEST(1792, true, false),
-		NORTHWEST_CORNER(1792, false, false),
-
-		BACK(0, true, true),
-		BACKLEFT(256, true, true),
-		BACKLEFT_CORNER(256, false, true),
-		LEFT(512, true, true),
-		FRONTLEFT(768, true, true),
-		FRONTLEFT_CORNER(768, false, true),
-		FRONT(1024, true, true),
-		FRONTRIGHT(1280, true, true),
-		FRONTRIGHT_CORNER(1280, false, true),
-		RIGHT(1536, true, true),
-		BACKRIGHT(1792, true, true),
-		BACKRIGHT_CORNER(1792, false, true);
-
-		public final int orientation;
-		public final boolean radial;
-		public final boolean relative;
-
-		Alignment(int orientation, boolean radial, boolean relative)
+		Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
+		if (lightsConfigPath == null)
 		{
-			this.orientation = orientation;
-			this.radial = radial;
-			this.relative = relative;
+			reloadLightConfiguration();
+		}
+		else
+		{
+			reloadLightConfiguration(lightsConfigPath.toFile());
+
+			try
+			{
+				fileWatcher = new FileWatcher()
+					.watchFile(lightsConfigPath)
+					.addChangeHandler(path -> hotswapScheduled = true);
+			}
+			catch (IOException ex)
+			{
+				log.info("Failed to initialize file watcher", ex);
+			}
 		}
 	}
 
-	public static class Light
+	public void shutDown()
 	{
-		public int worldX;
-		public int worldY;
-		public int plane;
-		public int height;
-		public Alignment alignment;
-		public int size;
-		public float strength;
-		public float[] color;
-		public LightType type;
-		public float duration;
-		public float range;
-		public int fadeInDuration;
-		public final int randomOffset = randomizer.nextInt();
-
-		public int currentSize;
-		public float currentStrength;
-		public float[] currentColor;
-		public float currentAnimation = 0.5f;
-		public int currentFadeIn = 0;
-		public boolean visible = true;
-
-		public int x;
-		public int y;
-		public int z;
-		public int distance = 0;
-		public boolean belowFloor = false;
-		public boolean aboveFloor = false;
-
-		public Projectile projectile = null;
-		public NPC npc = null;
-		public TileObject object = null;
-
-		public Light(int worldX, int worldY, int plane, int height, Alignment alignment, int size, float strength, float[] color, LightType type, float duration, float range, int fadeInDuration)
+		reset();
+		if (fileWatcher != null)
 		{
-			this.worldX = worldX;
-			this.worldY = worldY;
-			this.plane = plane;
-			this.height = height;
-			this.alignment = alignment;
-			this.size = size;
-			this.strength = strength;
-			this.color = color;
-			this.type = type;
-			this.duration = duration;
-			this.range = range;
-			this.fadeInDuration = fadeInDuration;
+			fileWatcher.close();
+			fileWatcher = null;
+		}
+	}
 
-			this.currentSize = size;
-			this.currentStrength = strength;
-			this.currentColor = color;
+	public void reloadLightConfiguration()
+	{
+		String filename = "lights.json";
+		InputStream is = Light.class.getResourceAsStream(filename);
+		if (is == null)
+		{
+			throw new RuntimeException("Missing resource: " + Paths.get(
+				Light.class.getPackage().getName().replace(".", "/"), filename));
+		}
+		reloadLightConfiguration(is);
+	}
 
-			if (type == LightType.PULSE)
+	public void reloadLightConfiguration(File jsonFile)
+	{
+		try
+		{
+			reloadLightConfiguration(new FileInputStream(jsonFile));
+		}
+		catch (IOException ex)
+		{
+			log.error("Lights config file not found: " + jsonFile.toPath(), ex);
+			reloadLightConfiguration();
+		}
+	}
+
+	public void reloadLightConfiguration(InputStream jsonInputStream)
+	{
+		WORLD_LIGHTS.clear();
+		NPC_LIGHTS.clear();
+		OBJECT_LIGHTS.clear();
+		PROJECTILE_LIGHTS.clear();
+
+		try
+		{
+			Reader reader = new InputStreamReader(jsonInputStream, StandardCharsets.UTF_8);
+
+			Gson gson = new GsonBuilder()
+				.setLenient()
+				.create();
+			Light[] lights = gson.fromJson(reader, Light[].class);
+
+			for (Light l : lights)
 			{
-				this.currentAnimation = (float)Math.random();
+				if (l.worldX != null && l.worldY != null)
+				{
+					WORLD_LIGHTS.add(new SceneLight(l));
+				}
+				if (l.npcIds != null)
+				{
+					for (int id : l.npcIds)
+					{
+						NPC_LIGHTS.put(id, l);
+					}
+				}
+				if (l.objectIds != null)
+				{
+					for (int id : l.objectIds)
+					{
+						OBJECT_LIGHTS.put(id, l);
+					}
+				}
+				if (l.projectileIds != null)
+				{
+					for (int id : l.projectileIds)
+					{
+						PROJECTILE_LIGHTS.put(id, l);
+					}
+				}
 			}
+
+			log.info("Reloaded {} lights", lights.length);
+		}
+		catch (JsonSyntaxException ex)
+		{
+			log.error("Failed to parse lights", ex);
 		}
 	}
 
@@ -204,15 +225,31 @@ public class LightManager
 			return;
 		}
 
+		if (hotswapScheduled)
+		{
+			hotswapScheduled = false;
+			Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
+			if (lightsConfigPath != null && lightsConfigPath.toFile().exists())
+			{
+				reloadLightConfiguration(lightsConfigPath.toFile());
+			}
+			else
+			{
+				reloadLightConfiguration();
+			}
+			reset();
+			loadSceneLights();
+		}
+
 		int camX = hdPlugin.camTarget[0];
 		int camY = hdPlugin.camTarget[1];
 		int camZ = hdPlugin.camTarget[2];
 
-		Iterator<Light> lightIterator = sceneLights.iterator();
+		Iterator<SceneLight> lightIterator = sceneLights.iterator();
 
 		while (lightIterator.hasNext())
 		{
-			Light light = lightIterator.next();
+			SceneLight light = lightIterator.next();
 
 			long frameTime = System.currentTimeMillis() - lastFrameTime;
 
@@ -308,12 +345,12 @@ public class LightManager
 				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * FloatUtil.TWO_PI;
 
 				float flicker = (
-						pow(cos(11 * t), 2) +
-								pow(cos(17 * t), 4) +
-								pow(cos(23 * t), 6) +
-								pow(cos(31 * t), 2) +
-								pow(cos(179 * t), 2) / 3 +
-								pow(cos(331 * t), 2) / 7
+					pow(cos(11 * t), 2) +
+					pow(cos(17 * t), 4) +
+					pow(cos(23 * t), 6) +
+					pow(cos(31 * t), 2) +
+					pow(cos(179 * t), 2) / 3 +
+					pow(cos(331 * t), 2) / 7
 				) / 4.335f;
 
 				float maxFlicker = 1f + (light.range / 100f);
@@ -322,7 +359,7 @@ public class LightManager
 				flicker = minFlicker + (maxFlicker - minFlicker) * flicker;
 
 				light.currentStrength = light.strength * flicker;
-				light.currentSize = (int) (light.size * flicker * 1.5f);
+				light.currentSize = (int) (light.radius * flicker * 1.5f);
 			}
 			else if (light.type == LightType.PULSE)
 			{
@@ -351,13 +388,13 @@ public class LightManager
 
 				float multiplier = (1.0f - range) + output * fullRange;
 
-				light.currentSize = (int)(light.size * multiplier);
+				light.currentSize = (int)(light.radius * multiplier);
 				light.currentStrength = light.strength * multiplier;
 			}
 			else
 			{
 				light.currentStrength = light.strength;
-				light.currentSize = light.size;
+				light.currentSize = light.radius;
 				light.currentColor = light.color;
 			}
 			// Apply fade-in
@@ -423,7 +460,7 @@ public class LightManager
 		sceneMaxX = sceneMinX + Constants.SCENE_SIZE - 2;
 		sceneMaxY = sceneMinY + Constants.SCENE_SIZE - 2;
 
-		for (Light light : allLights)
+		for (SceneLight light : WORLD_LIGHTS)
 		{
 			if (light.worldX >= sceneMinX && light.worldX <= sceneMaxX && light.worldY >= sceneMinY && light.worldY <= sceneMaxY)
 			{
@@ -507,39 +544,25 @@ public class LightManager
 		updateSceneNpcs();
 	}
 
-
-	void updateSceneNpcs()
+	public void updateSceneNpcs()
 	{
 		// check the NPCs in the scene to make sure they have lights assigned, if applicable,
 		// for scenarios in which HD mode or dynamic lights were disabled during NPC spawn
-
-		List<NPC> npcs = client.getNpcs();
-
-		for (NPC npc : npcs)
-		{
-			int npcId = npc.getId();
-			NpcLight npcLight = NpcLight.find(npcId);
-			if (npcLight == null)
-			{
-				continue;
-			}
-
-			addNpcLight(npc);
-		}
+		client.getNpcs().forEach(this::addNpcLights);
 	}
 
 	public void updateNpcChanged(NpcChanged npcChanged)
 	{
 		removeNpcLight(npcChanged);
-		addNpcLight(npcChanged.getNpc());
+		addNpcLights(npcChanged.getNpc());
 	}
 
-	public ArrayList<Light> getVisibleLights(int maxDistance, int maxLights)
+	public ArrayList<SceneLight> getVisibleLights(int maxDistance, int maxLights)
 	{
-		ArrayList<Light> visibleLights = new ArrayList<>();
+		ArrayList<SceneLight> visibleLights = new ArrayList<>();
 		int lightsCount = 0;
 
-		for (Light light : sceneLights)
+		for (SceneLight light : sceneLights)
 		{
 			if (lightsCount >= maxLights || light.distance > maxDistance * Perspective.LOCAL_TILE_SIZE)
 			{
@@ -571,54 +594,45 @@ public class LightManager
 
 	public void addProjectileLight(Projectile projectile)
 	{
-		int id = projectile.getId();
-		ProjectileLight projectileLight = ProjectileLight.find(id);
-		if (projectileLight == null)
-		{
-			return;
-		}
-
-		if (sceneProjectiles.contains(projectile))
+		for (Light l : PROJECTILE_LIGHTS.get(projectile.getId()))
 		{
 			// prevent duplicate lights being spawned for the same projectile
-			return;
+			if (sceneProjectiles.contains(projectile))
+			{
+				continue;
+			}
+
+			SceneLight light = new SceneLight(
+				0, 0, projectile.getFloor(), 0, Alignment.CENTER, l.radius,
+				l.strength, l.color, l.type, l.duration, l.range, 300);
+			light.projectile = projectile;
+			light.x = (int) projectile.getX();
+			light.y = (int) projectile.getY();
+			light.z = (int) projectile.getZ();
+
+			sceneProjectiles.add(projectile);
+			sceneLights.add(light);
 		}
-
-		Light light = new Light(0, 0, projectile.getFloor(),
-			0, Alignment.CENTER, projectileLight.getSize(), projectileLight.getStrength(), projectileLight.getColor(), projectileLight.getLightType(), projectileLight.getDuration(), projectileLight.getRange(), 300);
-		light.projectile = projectile;
-		light.x = (int) projectile.getX();
-		light.y = (int) projectile.getY();
-		light.z = (int) projectile.getZ();
-
-		sceneProjectiles.add(projectile);
-		sceneLights.add(light);
 	}
 
-	public void addNpcLight(NPC npc)
+	public void addNpcLights(NPC npc)
 	{
-		int id = npc.getId();
-		NpcLight npcLight = NpcLight.find(id);
-		if (npcLight == null)
+		for (Light l : NPC_LIGHTS.get(npc.getId()))
 		{
-			return;
-		}
-
-		// prevent duplicate lights being spawned for the same NPC
-		for (Light light : sceneLights)
-		{
-			if (light.npc == npc)
+			// prevent duplicate lights being spawned for the same NPC
+			if (sceneLights.stream().anyMatch(x -> x.npc == npc))
 			{
-				return;
+				continue;
 			}
+
+			SceneLight light = new SceneLight(
+				0, 0, -1, l.height, l.alignment, l.radius,
+				l.strength, l.color, l.type, l.duration, l.range, 0);
+			light.npc = npc;
+			light.visible = false;
+
+			sceneLights.add(light);
 		}
-
-		Light light = new Light(0, 0, -1,
-			npcLight.getHeight(), npcLight.getAlignment(), npcLight.getSize(), npcLight.getStrength(), npcLight.getColor(), npcLight.getLightType(), npcLight.getDuration(), npcLight.getRange(), 0);
-		light.npc = npc;
-		light.visible = false;
-
-		sceneLights.add(light);
 	}
 
 	public void removeNpcLight(NpcDespawned npcDespawned)
@@ -638,101 +652,95 @@ public class LightManager
 
 	public void addObjectLight(TileObject tileObject, int plane, int sizeX, int sizeY, int orientation)
 	{
-		int id = tileObject.getId();
-		ObjectLight objectLight = ObjectLight.find(id);
-		if (objectLight == null)
-		{
-			return;
-		}
-
-		if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(tileObject)))
+		for (Light l : OBJECT_LIGHTS.get(tileObject.getId()))
 		{
 			// prevent duplicate lights being spawned for the same object
-			return;
-		}
+			if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(tileObject)))
+				continue;
 
-		WorldPoint worldLocation = tileObject.getWorldLocation();
-		Light light = new Light(worldLocation.getX(), worldLocation.getY(), worldLocation.getPlane(),
-			objectLight.getHeight(), objectLight.getAlignment(), objectLight.getSize(), objectLight.getStrength(), objectLight.getColor(), objectLight.getLightType(), objectLight.getDuration(), objectLight.getRange(), 0);
-		LocalPoint localLocation = tileObject.getLocalLocation();
-		light.x = localLocation.getX();
-		light.y = localLocation.getY();
+			WorldPoint worldLocation = tileObject.getWorldLocation();
+			SceneLight light = new SceneLight(
+				worldLocation.getX(), worldLocation.getY(), worldLocation.getPlane(), l.height, l.alignment, l.radius,
+				l.strength, l.color, l.type, l.duration, l.range, 0);
+			LocalPoint localLocation = tileObject.getLocalLocation();
+			light.x = localLocation.getX();
+			light.y = localLocation.getY();
 
-		int lightX = tileObject.getX();
-		int lightY = tileObject.getY();
-		int localSizeX = sizeX * Perspective.LOCAL_TILE_SIZE;
-		int localSizeY = sizeY * Perspective.LOCAL_TILE_SIZE;
+			int lightX = tileObject.getX();
+			int lightY = tileObject.getY();
+			int localSizeX = sizeX * Perspective.LOCAL_TILE_SIZE;
+			int localSizeY = sizeY * Perspective.LOCAL_TILE_SIZE;
 
-		if (orientation != -1 && light.alignment != Alignment.CENTER)
-		{
-			float radius = localSizeX / 2f;
-			if (!light.alignment.radial)
+			if (orientation != -1 && light.alignment != Alignment.CENTER)
 			{
-				radius = (float)Math.sqrt(localSizeX * localSizeX + localSizeX * localSizeX) / 2;
+				float radius = localSizeX / 2f;
+				if (!light.alignment.radial)
+				{
+					radius = (float)Math.sqrt(localSizeX * localSizeX + localSizeX * localSizeX) / 2;
+				}
+
+				if (!light.alignment.relative)
+				{
+					orientation = 0;
+				}
+				orientation += light.alignment.orientation;
+				orientation %= 2048;
+
+				float sine = Perspective.SINE[orientation] / 65536f;
+				float cosine = Perspective.COSINE[orientation] / 65536f;
+				cosine /= (float)localSizeX / (float)localSizeY;
+
+				int offsetX = (int)(radius * sine);
+				int offsetY = (int)(radius * cosine);
+
+				lightX += offsetX;
+				lightY += offsetY;
 			}
 
-			if (!light.alignment.relative)
-			{
-				orientation = 0;
-			}
-			orientation += light.alignment.orientation;
-			orientation %= 2048;
+			float tileX = (float)lightX / Perspective.LOCAL_TILE_SIZE;
+			float tileY = (float)lightY / Perspective.LOCAL_TILE_SIZE;
+			float lerpX = (lightX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
+			float lerpY = (lightY % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
+			int tileMinX = (int)Math.floor(tileX);
+			int tileMinY = (int)Math.floor(tileY);
+			int tileMaxX = tileMinX + 1;
+			int tileMaxY = tileMinY + 1;
+			tileMinX = Ints.constrainToRange(tileMinX, 0, Constants.SCENE_SIZE - 1);
+			tileMinY = Ints.constrainToRange(tileMinY, 0, Constants.SCENE_SIZE - 1);
+			tileMaxX = Ints.constrainToRange(tileMaxX, 0, Constants.SCENE_SIZE - 1);
+			tileMaxY = Ints.constrainToRange(tileMaxY, 0, Constants.SCENE_SIZE - 1);
 
-			float sine = Perspective.SINE[orientation] / 65536f;
-			float cosine = Perspective.COSINE[orientation] / 65536f;
-			cosine /= (float)localSizeX / (float)localSizeY;
+			float heightNorth = HDUtils.lerp(
+				client.getTileHeights()[plane][tileMinX][tileMaxY],
+				client.getTileHeights()[plane][tileMaxX][tileMaxY],
+				lerpX);
+			float heightSouth = HDUtils.lerp(
+				client.getTileHeights()[plane][tileMinX][tileMinY],
+				client.getTileHeights()[plane][tileMaxX][tileMinY],
+				lerpX);
+			float tileHeight = HDUtils.lerp(heightSouth, heightNorth, lerpY);
 
-			int offsetX = (int)(radius * sine);
-			int offsetY = (int)(radius * cosine);
+			light.x = lightX;
+			light.y = lightY;
+			light.z = (int) tileHeight - light.height - 1;
+			light.object = tileObject;
 
-			lightX += offsetX;
-			lightY += offsetY;
+			sceneLights.add(light);
 		}
-
-		float tileX = (float)lightX / Perspective.LOCAL_TILE_SIZE;
-		float tileY = (float)lightY / Perspective.LOCAL_TILE_SIZE;
-		float lerpX = (lightX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-		float lerpY = (lightY % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-		int tileMinX = (int)Math.floor(tileX);
-		int tileMinY = (int)Math.floor(tileY);
-		int tileMaxX = tileMinX + 1;
-		int tileMaxY = tileMinY + 1;
-		tileMinX = Ints.constrainToRange(tileMinX, 0, Constants.SCENE_SIZE - 1);
-		tileMinY = Ints.constrainToRange(tileMinY, 0, Constants.SCENE_SIZE - 1);
-		tileMaxX = Ints.constrainToRange(tileMaxX, 0, Constants.SCENE_SIZE - 1);
-		tileMaxY = Ints.constrainToRange(tileMaxY, 0, Constants.SCENE_SIZE - 1);
-
-		float heightNorth = HDUtils.lerp(
-			client.getTileHeights()[plane][tileMinX][tileMaxY],
-			client.getTileHeights()[plane][tileMaxX][tileMaxY],
-			lerpX);
-		float heightSouth = HDUtils.lerp(
-			client.getTileHeights()[plane][tileMinX][tileMinY],
-			client.getTileHeights()[plane][tileMaxX][tileMinY],
-			lerpX);
-		float tileHeight = HDUtils.lerp(heightSouth, heightNorth, lerpY);
-
-		light.x = lightX;
-		light.y = lightY;
-		light.z = (int) tileHeight - light.height - 1;
-		light.object = tileObject;
-
-		sceneLights.add(light);
 	}
 
 	public void removeObjectLight(TileObject tileObject)
 	{
-		int id = tileObject.getId();
-		ObjectLight objectLight = ObjectLight.find(id);
-		if (objectLight == null)
+		for (Light l : OBJECT_LIGHTS.get(tileObject.getId()))
 		{
-			return;
+			LocalPoint localLocation = tileObject.getLocalLocation();
+			int plane = tileObject.getWorldLocation().getPlane();
+
+			sceneLights.removeIf(light ->
+				light.x == localLocation.getX() &&
+				light.y == localLocation.getY() &&
+				light.plane == plane);
 		}
-
-		LocalPoint localLocation = tileObject.getLocalLocation();
-		int plane = tileObject.getWorldLocation().getPlane();
-
-		sceneLights.removeIf(light -> light.x == localLocation.getX() && light.y == localLocation.getY() && light.plane == plane);
 	}
 
 	int tileObjectHash(TileObject tileObject)
@@ -740,7 +748,7 @@ public class LightManager
 		return tileObject.getWorldLocation().getX() * tileObject.getWorldLocation().getY() * (tileObject.getPlane() + 1) + tileObject.getId();
 	}
 
-	void calculateScenePosition(Light light)
+	void calculateScenePosition(SceneLight light)
 	{
 		light.x = ((light.worldX - sceneMinX) * Perspective.LOCAL_TILE_SIZE) + Perspective.LOCAL_HALF_TILE_SIZE;
 		light.y = ((light.worldY - sceneMinY) * Perspective.LOCAL_TILE_SIZE) + Perspective.LOCAL_HALF_TILE_SIZE;
@@ -761,196 +769,5 @@ public class LightManager
 		{
 			light.x -= Perspective.LOCAL_HALF_TILE_SIZE;
 		}
-	}
-
-	private static final Pattern PATTERN = Pattern.compile("^[ \\t]*(?<expr>" +
-		"//.*$|" + // //comment
-		"/\\*.*$|" + // /* start comment block
-		"\\*/.*$|" + //    end comment block */
-		"Reset|" + // sets all variables to defaults
-		"(?<x>[0-9-]+)(,)[ \\t]*(?<y>[0-9-]+)((,)[ \\t]*(?<alignment>[A-Za-z]+))?|" + // 3124, 2843
-		"#([ \\t]*(?<color>[0-9a-fA-F]{6}|[0-9a-fA-F]{3}))|" + // #<RRGGBB> or #<RGB> (hex color)
-		"Color[ \\t]*(?<r>[0-9-]+)(,)[ \\t]*(?<g>[0-9-]+)(,)[ \\t]*(?<b>[0-9-]+)|" + // C 255, 128, 0 (RGB color)
-		"Strength[ \\t]*(?<strength>[0-9-]+)|" + // S 100 (strength)
-		"Radius[ \\t]*(?<radius>[0-9-]+)|" + // R 500 (radius)
-		"Range[ \\t]*(?<range>[0-9-]+)|" + // R 500 (radius)
-		"Duration[ \\t]*(?<duration>[0-9-]+)|" + // R 500 (radius)
-		"Plane[ \\t]*(?<plane>[0-9-]+)|" + // P 0 (plane)
-		"Height[ \\t]*(?<h>[0-9-]+)|" + // H 128 (height)
-		"Type[ \\t]*(?<type>[a-z]+)|" + // T flicker (type)
-		")[ \\t]*");
-
-	public void loadLightsFromFile() throws IOException
-	{
-		// create arraylist of lights from text file
-		allLights = new ArrayList<>();
-
-		String filename = "lights.txt";
-		boolean commentBlock = false;
-
-		float[] defaultColor = new float[]{1.0f, 1.0f, 1.0f};
-		int defaultRadius = 500;
-		float defaultStrength = 1.0f;
-		float defaultRange =  0.2f;
-		int defaultDuration = 1000;
-		int defaultHeight = 0;
-		int defaultPlane = 0;
-		LightType defaultType = LightType.STATIC;
-
-		float[] color = defaultColor;
-		int radius = defaultRadius;
-		float strength = defaultStrength;
-		float range =  defaultRange;
-		int duration = defaultDuration;
-		int height = defaultHeight;
-		int plane = defaultPlane;
-		LightType type = defaultType;
-
-		int lineNo = 1;
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename))))
-		{
-			Matcher m = PATTERN.matcher("");
-			String line;
-			while ((line = br.readLine()) != null)
-			{
-				m.reset(line);
-				int end = 0;
-				while (end < line.length())
-				{
-					m.region(end, line.length());
-					if (!m.find())
-					{
-						throw new IllegalArgumentException("Unexpected: \"" + line.substring(end) + "\" (" + filename + ":" + lineNo + ")");
-					}
-					end = m.end();
-
-					String expr = m.group("expr");
-					if (expr == null || expr.length() <= 0 || expr.startsWith("//"))
-					{
-						continue;
-					}
-
-					if (expr.startsWith("/*")) {
-						commentBlock = true;
-						continue;
-					} else if (expr.startsWith("*/")) {
-						commentBlock = false;
-						continue;
-					}
-
-					if (commentBlock) {
-						continue;
-					}
-
-					if (expr.toLowerCase().startsWith("reset"))
-					{
-						color = defaultColor;
-						radius = defaultRadius;
-						range = defaultRange;
-						duration = defaultDuration;
-						strength = defaultStrength;
-						height = defaultHeight;
-						plane = defaultPlane;
-						type = defaultType;
-						continue;
-					}
-
-					char cha = expr.toLowerCase().charAt(0);
-					switch (cha)
-					{
-						case '#':
-							String sColor = m.group("color");
-							Color RGB = Color.decode("#" + sColor);
-							float[] RGBTmp = new float[3];
-							RGB.getRGBColorComponents(RGBTmp);
-							color = RGBTmp.clone();
-							break;
-						case 'c':
-							int r = Integer.parseInt(m.group("r"));
-							int g = Integer.parseInt(m.group("g"));
-							int b = Integer.parseInt(m.group("b"));
-							color = new float[]{r / 255f, g / 255f, b / 255f};
-							break;
-						case 's':
-							strength = Integer.parseInt(m.group("strength")) / 100f;
-							break;
-						case 'r':
-							if (expr.toLowerCase().startsWith("radius")) {
-								radius = Integer.parseInt(m.group("radius"));
-								break;
-							} else if (expr.toLowerCase().startsWith("range")) {
-								range = Integer.parseInt(m.group("range"));
-								break;
-							}
-						case 'd':
-							duration = Integer.parseInt(m.group("duration"));
-							break;
-						case 'p':
-							plane = Integer.parseInt(m.group("plane"));
-							break;
-						case 'h':
-							height = Integer.parseInt(m.group("h"));
-							break;
-						case 't':
-							String typeStr = m.group("type").toLowerCase().trim();
-							switch (typeStr) {
-								case "flicker":
-									type = LightType.FLICKER;
-									break;
-								case "pulse":
-									type = LightType.PULSE;
-									break;
-								default:
-									type = LightType.STATIC;
-									break;
-							}
-							break;
-						default:
-							int x = Integer.parseInt(m.group("x"));
-							int y = Integer.parseInt(m.group("y"));
-							Alignment alignment = Alignment.CENTER;
-							if (m.group("alignment") != null) {
-								switch (m.group("alignment").toLowerCase().trim()) {
-									case "n":
-										alignment = Alignment.NORTH;
-										break;
-									case "ne":
-										alignment = Alignment.NORTHEAST;
-										break;
-									case "e":
-										alignment = Alignment.EAST;
-										break;
-									case "se":
-										alignment = Alignment.SOUTHEAST;
-										break;
-									case "s":
-										alignment = Alignment.SOUTH;
-										break;
-									case "sw":
-										alignment = Alignment.SOUTHWEST;
-										break;
-									case "w":
-										alignment = Alignment.WEST;
-										break;
-									case "nw":
-										alignment = Alignment.NORTHWEST;
-										break;
-									default:
-										alignment = Alignment.CENTER;
-										break;
-								}
-							}
-							allLights.add(new Light(x, y, plane, height, alignment, radius, strength, color, type, duration, range, 0));
-							break;
-					}
-				}
-			}
-		}
-		catch (NumberFormatException ex)
-		{
-			throw new IllegalArgumentException("Expected number (" + filename + ":" + lineNo + ")", ex);
-		}
-
-		log.debug("loaded {} lights from file", allLights.size());
 	}
 }
