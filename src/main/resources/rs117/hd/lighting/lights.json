@@ -24780,10 +24780,10 @@
   },
   {
     "description": "CAMDOZAAL_STATUE",
-    "height": 200,
+    "height": 175,
     "alignment": "FRONT",
-    "radius": 600,
-    "strength": 2.0,
+    "radius": 350,
+    "strength": 30.0,
     "color": [
       0.0,
       0.2673581,
@@ -24791,9 +24791,10 @@
     ],
     "type": "FLICKER",
     "duration": 0.0,
-    "range": 30.0,
+    "range": 7.5,
     "objectIds": [
-      41467
+      41467,
+      7261
     ]
   },
   {
@@ -24848,7 +24849,7 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      41412
+      41411
     ]
   },
   {
@@ -24885,6 +24886,24 @@
     "range": 0.0,
     "objectIds": [
       41588
+    ]
+  },
+  {
+    "description": "camdozaal lantern",
+    "height": 175,
+    "alignment": "BACK",
+    "radius": 300,
+    "strength": 25.0,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      41565
     ]
   },
   {
