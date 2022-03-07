@@ -19556,7 +19556,7 @@
       6698
     ]
   },
-  {
+ {
     "description": "ABERRANT_SPECTRES",
     "height": 110,
     "alignment": "CENTER",
@@ -19580,6 +19580,24 @@
     ]
   },
   {
+    "description": "DEVIANT_SPECTRE",
+    "height": 110,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 15,
+    "color": [
+      1.0,
+      0.62,
+      0.42
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "npcIds": [
+      7279
+    ]
+  },
+  {
     "description": "ABHORRENT_SPECTRE",
     "height": 220,
     "alignment": "CENTER",
@@ -19595,6 +19613,24 @@
     "range": 10.0,
     "npcIds": [
       7402
+    ]
+  },
+  {
+    "description": "REPUGNANT_SPECTRE",
+    "height": 110,
+    "alignment": "CENTER",
+    "radius": 900,
+    "strength": 18,
+    "color": [
+      1.0,
+      0.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "npcIds": [
+      7403
     ]
   },
   {
