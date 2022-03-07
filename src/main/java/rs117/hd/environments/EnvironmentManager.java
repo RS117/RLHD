@@ -77,14 +77,14 @@ public class EnvironmentManager
 	// previous camera target world Y
 	private int prevCamTargetY = 0;
 
-	private float[] startFogColor = new float[]{0,0,0};
-	public float[] currentFogColor = new float[]{0,0,0};
+	private float[] startFogColor = new float[]{0, 0, 0};
+	public float[] currentFogColor = new float[]{0, 0, 0};
 	public int currentFogColorInt = 0;
-	private float[] targetFogColor = new float[]{0,0,0};
+	private float[] targetFogColor = new float[]{0, 0, 0};
 
-	private float[] startWaterColor = new float[]{0,0,0};
-	public float[] currentWaterColor = new float[]{0,0,0};
-	private float[] targetWaterColor = new float[]{0,0,0};
+	private float[] startWaterColor = new float[]{0, 0, 0};
+	public float[] currentWaterColor = new float[]{0, 0, 0};
+	private float[] targetWaterColor = new float[]{0, 0, 0};
 
 	private int startFogDepth = 0;
 	public int currentFogDepth = 0;
@@ -94,25 +94,25 @@ public class EnvironmentManager
 	public float currentAmbientStrength = 0f;
 	private float targetAmbientStrength = 0f;
 
-	private float[] startAmbientColor = new float[]{0,0,0};
-	public float[] currentAmbientColor = new float[]{0,0,0};
-	private float[] targetAmbientColor = new float[]{0,0,0};
+	private float[] startAmbientColor = new float[]{0, 0, 0};
+	public float[] currentAmbientColor = new float[]{0, 0, 0};
+	private float[] targetAmbientColor = new float[]{0, 0, 0};
 
 	private float startDirectionalStrength = 0f;
 	public float currentDirectionalStrength = 0f;
 	private float targetDirectionalStrength = 0f;
 
-	private float[] startDirectionalColor = new float[]{0,0,0};
-	public float[] currentDirectionalColor = new float[]{0,0,0};
-	private float[] targetDirectionalColor = new float[]{0,0,0};
+	private float[] startDirectionalColor = new float[]{0, 0, 0};
+	public float[] currentDirectionalColor = new float[]{0, 0, 0};
+	private float[] targetDirectionalColor = new float[]{0, 0, 0};
 
 	private float startUnderglowStrength = 0f;
 	public float currentUnderglowStrength = 0f;
 	private float targetUnderglowStrength = 0f;
 
-	private float[] startUnderglowColor = new float[]{0,0,0};
-	public float[] currentUnderglowColor = new float[]{0,0,0};
-	private float[] targetUnderglowColor = new float[]{0,0,0};
+	private float[] startUnderglowColor = new float[]{0, 0, 0};
+	public float[] currentUnderglowColor = new float[]{0, 0, 0};
+	private float[] targetUnderglowColor = new float[]{0, 0, 0};
 
 	private float startGroundFogStart = 0f;
 	public float currentGroundFogStart = 0f;
@@ -149,10 +149,13 @@ public class EnvironmentManager
 			{
 				if (environment != currentEnvironment)
 				{
-					if (environment == Environment.PLAYER_OWNED_HOUSE || environment == Environment.PLAYER_OWNED_HOUSE_SNOWY) {
+					if (environment == Environment.PLAYER_OWNED_HOUSE || environment == Environment.PLAYER_OWNED_HOUSE_SNOWY)
+					{
 						hdPlugin.setInHouse(true);
 						hdPlugin.setNextSceneReload(System.currentTimeMillis() + 2500);
-					} else {
+					}
+					else
+					{
 						hdPlugin.setInHouse(false);
 					}
 
@@ -191,7 +194,7 @@ public class EnvironmentManager
 		else
 		{
 			// interpolate between start and target values
-			float t = (float)(currentTime - startTime) / (float)transitionDuration;
+			float t = (float) (currentTime - startTime) / (float) transitionDuration;
 
 			currentFogColor = HDUtils.lerpVectors(startFogColor, targetFogColor, t);
 			currentWaterColor = HDUtils.lerpVectors(startWaterColor, targetWaterColor, t);
@@ -202,9 +205,9 @@ public class EnvironmentManager
 			currentDirectionalColor = HDUtils.lerpVectors(startDirectionalColor, targetDirectionalColor, t);
 			currentUnderglowStrength = HDUtils.lerp(startUnderglowStrength, targetUnderglowStrength, t);
 			currentUnderglowColor = HDUtils.lerpVectors(startUnderglowColor, targetUnderglowColor, t);
-			currentGroundFogStart  = HDUtils.lerp(startGroundFogStart, targetGroundFogStart, t);
-			currentGroundFogEnd  = HDUtils.lerp(startGroundFogEnd, targetGroundFogEnd, t);
-			currentGroundFogOpacity  = HDUtils.lerp(startGroundFogOpacity, targetGroundFogOpacity, t);
+			currentGroundFogStart = HDUtils.lerp(startGroundFogStart, targetGroundFogStart, t);
+			currentGroundFogEnd = HDUtils.lerp(startGroundFogEnd, targetGroundFogEnd, t);
+			currentGroundFogOpacity = HDUtils.lerp(startGroundFogOpacity, targetGroundFogOpacity, t);
 			currentLightPitch = HDUtils.lerp(startLightPitch, targetLightPitch, t);
 			currentLightYaw = HDUtils.lerp(startLightYaw, targetLightYaw, t);
 		}
@@ -264,11 +267,24 @@ public class EnvironmentManager
 			}
 			else
 			{
-				DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
-				if (defaultSkyColor != DefaultSkyColor.DEFAULT)
+
+				WorldPoint localWorld = client.getLocalPlayer().getWorldLocation();
+				float[] color = SkyColor.validArea(localWorld);
+
+				if (color != null)
 				{
-					targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+					System.out.println("RHIS");
+					targetFogColor = color;
 				}
+				else
+				{
+					DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
+					if (defaultSkyColor != DefaultSkyColor.DEFAULT)
+					{
+						targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+					}
+				}
+
 			}
 		}
 		targetFogDepth = newEnvironment.getFogDepth();
@@ -389,7 +405,7 @@ public class EnvironmentManager
 
 		log.debug("adding environments for scene {},{} - {},{}..", sceneMinX, sceneMinY, sceneMaxX, sceneMaxY);
 
-		for (Environment environment: Environment.values())
+		for (Environment environment : Environment.values())
 		{
 			for (Rect rect : environment.getArea().getRects())
 			{
@@ -418,7 +434,6 @@ public class EnvironmentManager
 	}
 
 
-
 	/* lightning */
 	public float lightningBrightness = 0f;
 	public float[] lightningColor = new float[]{1.0f, 1.0f, 1.0f};
@@ -439,7 +454,7 @@ public class EnvironmentManager
 	{
 		if (lightningBrightness > 0)
 		{
-			int frameTime = (int)(System.currentTimeMillis() - lastFrameTime);
+			int frameTime = (int) (System.currentTimeMillis() - lastFrameTime);
 			float brightnessChange = (frameTime / 1000f) * lightningFadeSpeed;
 			lightningBrightness = Math.max(lightningBrightness - brightnessChange, 0);
 		}
@@ -475,8 +490,8 @@ public class EnvironmentManager
 	 */
 	void generateNextLightningTime()
 	{
-		int lightningInterval = (int)(minLightningInterval + ((maxLightningInterval - minLightningInterval) * Math.random()));
-		int quickLightningInterval = (int)(minQuickLightningInterval + ((maxQuickLightningInterval - minQuickLightningInterval) * Math.random()));
+		int lightningInterval = (int) (minLightningInterval + ((maxLightningInterval - minLightningInterval) * Math.random()));
+		int quickLightningInterval = (int) (minQuickLightningInterval + ((maxQuickLightningInterval - minQuickLightningInterval) * Math.random()));
 		if (Math.random() <= 1f / quickLightningChance)
 		{
 			// chain together lighting strikes in quick succession

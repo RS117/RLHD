@@ -25,6 +25,7 @@
 package rs117.hd.environments;
 
 import lombok.Getter;
+import net.runelite.api.coords.WorldPoint;
 
 @Getter
 public class Rect
@@ -42,6 +43,15 @@ public class Rect
 		this.maxX = Math.max(pointAX, pointBX);
 		this.maxY = Math.max(pointAY, pointBY);
 		this.plane = -1;
+	}
+
+	public Rect(WorldPoint p1, WorldPoint p2)
+	{
+		minX = Math.min(p1.getX(), p2.getX());
+		maxX = Math.max(p1.getX(), p2.getX());
+		minY = Math.min(p1.getY(), p2.getY());
+		maxY = Math.max(p1.getY(), p2.getY());
+		plane = Math.min(p1.getPlane(), p2.getPlane());
 	}
 
 	Rect(int pointAX, int pointAY, int pointBX, int pointBY, int plane)
