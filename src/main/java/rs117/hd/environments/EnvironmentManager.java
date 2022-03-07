@@ -273,7 +273,6 @@ public class EnvironmentManager
 
 				if (color != null)
 				{
-					System.out.println("RHIS");
 					targetFogColor = color;
 				}
 				else
