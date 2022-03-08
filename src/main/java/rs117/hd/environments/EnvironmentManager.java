@@ -138,14 +138,14 @@ public class EnvironmentManager
 
 	public void update()
 	{
-		WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
-		int camTargetX = camPosition.getX();
-		int camTargetY = camPosition.getY();
-		int camTargetZ = camPosition.getPlane();
+		WorldPoint camPosition = hdPlugin.getClient().getLocalPlayer().getWorldLocation();
+		int posX = camPosition.getX();
+		int posY = camPosition.getY();
+		int plane = camPosition.getPlane();
 
 		for (Environment environment : sceneEnvironments)
 		{
-			if (environment.getArea().containsPoint(camTargetX, camTargetY, camTargetZ))
+			if (environment.getArea().containsPoint(posX, posY, plane))
 			{
 				if (environment != currentEnvironment)
 				{
@@ -158,7 +158,7 @@ public class EnvironmentManager
 
 					hdPlugin.setInGauntlet(environment == Environment.THE_GAUNTLET || environment == Environment.THE_GAUNTLET_CORRUPTED);
 
-					changeEnvironment(environment, camTargetX, camTargetY, false);
+					changeEnvironment(environment, posX, posY, false);
 				}
 				break;
 			}
@@ -166,7 +166,7 @@ public class EnvironmentManager
 
 		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting())
 		{
-			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
+			changeEnvironment(currentEnvironment, posX, posY, true);
 		}
 
 		// modify all environment values during transition
@@ -214,8 +214,8 @@ public class EnvironmentManager
 		currentFogColorInt = HDUtils.colorRGBToInt(currentFogColor);
 
 		// update some things for use next frame
-		prevCamTargetX = camTargetX;
-		prevCamTargetY = camTargetY;
+		prevCamTargetX = posX;
+		prevCamTargetY = posY;
 		lastFrameTime = System.currentTimeMillis();
 		lastSkyColor = config.defaultSkyColor();
 		lastEnvironmentLighting = config.atmosphericLighting();

@@ -70,6 +70,7 @@ import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import jogamp.nativewindow.macosx.OSXUtil;
 import jogamp.newt.awt.NewtFactoryAWT;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -141,6 +142,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private static final int[] eightIntWrite = new int[8];
 
 	@Inject
+	@Getter
 	private Client client;
 	
 	@Inject
