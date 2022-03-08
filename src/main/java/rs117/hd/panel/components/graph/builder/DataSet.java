@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Abex
+ * Copyright (c) 2021 Mark_ <https://github.com/Mark7625/>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,46 +22,42 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components;
+package rs117.hd.panel.components.graph.builder;
 
-import lombok.Setter;
-import net.runelite.client.ui.ClientUI;
+import lombok.Data;
+import org.jfree.data.time.TimeSeries;
 
-import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
 
-public class DebugFrame extends JFrame
+@Data
+public class DataSet
 {
-	@Setter()
-	protected ToggleButton toolsButton;
 
-	public DebugFrame()
+	private TimeSeries value;
+	private String name;
+	private Color color;
+
+	public DataSet(String name, Color color)
 	{
-		setIconImage(ClientUI.ICON);
-
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowAdapter()
-		{
-			@Override
-			public void windowClosing(WindowEvent e)
-			{
-				close();
-				toolsButton.setToggled(false);
-			}
-		});
+		this.name = name;
+		this.color = color;
 	}
 
-	public void open()
+	public DataSet setName(String name)
 	{
-
-		setVisible(true);
-		toFront();
-		repaint();
+		this.name = name;
+		return this;
 	}
 
-	public void close()
+	public DataSet setColor(Color color)
 	{
-		setVisible(false);
+		this.color = color;
+		return this;
 	}
+
+	public DataSet build()
+	{
+		return new DataSet(name, color);
+	}
+
 }
