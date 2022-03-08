@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class ExportLightsToJson
 			rs117.hd.lighting.Light.class.getPackage().getName().replace(".", "/"),
 			"lights.json");
 
-		Set<Light> uniqueLights = new HashSet<>();
+		Set<Light> uniqueLights = new LinkedHashSet<>();
 
 		// Load all lights from current lights.json
 		Light[] currentLights = LightConfig.loadRawLights(new FileInputStream(outputPath.toFile()));

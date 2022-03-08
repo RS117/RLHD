@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.NpcID;
 import net.runelite.api.ObjectID;
@@ -30,6 +31,7 @@ public class Light
 	public HashSet<Integer> npcIds;
 	@JsonAdapter(ObjectIDAdapter.class)
 	public HashSet<Integer> objectIds;
+	@JsonAdapter(ProjectileIDAdapter.class)
 	public HashSet<Integer> projectileIds;
 
 	// Called by GSON when parsing JSON
@@ -60,7 +62,7 @@ public class Light
 		this.projectileIds = projectileIds == null ? new HashSet<>() : projectileIds;
 	}
 
-	private static HashSet<Integer> parseIDArray(JsonReader in, Class<?> idContainer) throws IOException
+	private static HashSet<Integer> parseIDArray(JsonReader in, @Nullable Class<?> idContainer) throws IOException
 	{
 		HashSet<Integer> ids = new HashSet<>();
 		in.beginArray();
@@ -80,6 +82,11 @@ public class Light
 					break;
 				case STRING:
 					String fieldName = in.nextString();
+					if (idContainer == null)
+					{
+						log.error("String '{}' is not supported here", fieldName);
+						continue;
+					}
 
 					try
 					{
@@ -107,8 +114,25 @@ public class Light
 		return ids;
 	}
 
-	private static void writeIDArray(JsonWriter out, HashSet<Integer> listToWrite, Class<?> idContainer) throws IOException
+	private static void writeIDArray(JsonWriter out, HashSet<Integer> listToWrite, @Nullable Class<?> idContainer) throws IOException
 	{
+		if (listToWrite.size() == 0)
+		{
+			out.nullValue();
+			return;
+		}
+
+		if (idContainer == null)
+		{
+			out.beginArray();
+			for (int i : listToWrite)
+			{
+				out.value(i);
+			}
+			out.endArray();
+			return;
+		}
+
 		HashMap<Integer, String> idNames = new HashMap<>();
 		for (Field field : idContainer.getFields())
 		{
@@ -166,6 +190,21 @@ public class Light
 		public HashSet<Integer> read(JsonReader in) throws IOException
 		{
 			return parseIDArray(in, ObjectID.class);
+		}
+	}
+
+	public static class ProjectileIDAdapter extends TypeAdapter<HashSet<Integer>>
+	{
+		@Override
+		public void write(JsonWriter out, HashSet<Integer> value) throws IOException
+		{
+			writeIDArray(out, value, null);
+		}
+
+		@Override
+		public HashSet<Integer> read(JsonReader in) throws IOException
+		{
+			return parseIDArray(in, null);
 		}
 	}
 
