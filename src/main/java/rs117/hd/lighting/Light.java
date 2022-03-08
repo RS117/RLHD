@@ -1,5 +1,6 @@
 package rs117.hd.lighting;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.stream.JsonReader;
@@ -17,6 +18,9 @@ import net.runelite.api.ObjectID;
 @Slf4j
 public class Light
 {
+	@VisibleForTesting
+	static boolean THROW_WHEN_PARSING_FAILS = false;
+
 	public String description;
 	public Integer worldX, worldY, plane, height;
 	public Alignment alignment;
@@ -77,14 +81,24 @@ public class Light
 					}
 					catch (NumberFormatException ex)
 					{
-						log.error("Failed to parse int", ex);
+						String message = "Failed to parse int";
+						if (THROW_WHEN_PARSING_FAILS)
+						{
+							throw new RuntimeException(message, ex);
+						}
+						log.error(message, ex);
 					}
 					break;
 				case STRING:
 					String fieldName = in.nextString();
 					if (idContainer == null)
 					{
-						log.error("String '{}' is not supported here", fieldName);
+						String message = String.format("String '%s' is not supported here", fieldName);
+						if (THROW_WHEN_PARSING_FAILS)
+						{
+							throw new RuntimeException(message);
+						}
+						log.error(message);
 						continue;
 					}
 
@@ -93,18 +107,35 @@ public class Light
 						Field field = idContainer.getField(fieldName);
 						if (!field.getType().equals(int.class))
 						{
-							log.error("{} field '{}' is not an int", idContainer.getName(), fieldName);
+							String message = String.format(
+								"%s field '%s' is not an int", idContainer.getName(), fieldName);
+							if (THROW_WHEN_PARSING_FAILS)
+							{
+								throw new RuntimeException(message);
+							}
+							log.error(message);
 							continue;
 						}
 						ids.add(field.getInt(null));
 					}
 					catch (NoSuchFieldException ex)
 					{
-						log.error("Missing " + idContainer.getName() + ": " + fieldName, ex);
+						String message = String.format("Missing %s: %s", idContainer.getName(), fieldName);
+						if (THROW_WHEN_PARSING_FAILS)
+						{
+							throw new RuntimeException(message, ex);
+						}
+						log.error(message, ex);
 					}
 					catch (IllegalAccessException ex)
 					{
-						log.error("Unable to access " + idContainer.getName() + " field: " + fieldName, ex);
+						String message = String.format(
+							"Unable to access %s field: %s", idContainer.getName(), fieldName);
+						if (THROW_WHEN_PARSING_FAILS)
+						{
+							throw new RuntimeException(message, ex);
+						}
+						log.error(message, ex);
 					}
 
 					break;

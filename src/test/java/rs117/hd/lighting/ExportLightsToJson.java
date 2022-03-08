@@ -29,6 +29,7 @@ public class ExportLightsToJson
 		Set<Light> uniqueLights = new LinkedHashSet<>();
 
 		// Load all lights from current lights.json
+		Light.THROW_WHEN_PARSING_FAILS = true;
 		Light[] currentLights = LightConfig.loadRawLights(new FileInputStream(outputPath.toFile()));
 		Collections.addAll(uniqueLights, currentLights);
 
