@@ -187,6 +187,9 @@ enum NpcLight
 	REVENANT_ORK(100, Alignment.CENTER, 400, 12.5f, rgb(183, 234, 225), LightType.PULSE, 3400, 10, NpcID.REVENANT_ORK),
 	REVENANT_PYREFIEND(30, Alignment.CENTER, 200, 12.5f, rgb(183, 234, 225), LightType.PULSE, 3400, 10, NpcID.REVENANT_PYREFIEND),
 
+  // Ancient Cavern
+	ANCIENT_CAVERN_DRAGON_HEAD(200, Alignment.CENTER, 500, 10.0f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, DRAGON_HEAD_8144),
+  
 	;
 
 

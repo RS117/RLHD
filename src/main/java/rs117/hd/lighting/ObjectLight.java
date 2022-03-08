@@ -377,14 +377,18 @@ enum ObjectLight
 	GWD_NEX_ANCIENT_BARRIER_RED(100, Alignment.CENTER, 700, 10f, rgb(255, 51, 0), LightType.PULSE, 2200, 10, 42968),
 	GWD_NEX_ANCIENT_BARRIER_PURPLE(100, Alignment.CENTER, 700, 10f, rgb(183, 0, 255), LightType.PULSE, 2200, 10, 42967),
 	GWD_NEX_ANCIENT_FORGE(100, Alignment.CENTER, 350, 20f, rgb(0, 200, 255), LightType.FLICKER, 0, 10, ANCIENT_FORGE),
+  
+  // Ancient Cavern
+	ANCIENT_CAVERN_LAVA_POOL(200, Alignment.CENTER, 300, 7.5f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32215, 32216, 32217, 32218, 32219, 32220),
+	ANCIENT_CAVERN_DRAGON_HEADS(200, Alignment.FRONT, 500, 12.5f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32213),
+	ANCIENT_CAVERN_LAVA_FLOOR(100, Alignment.CENTER, 300, 7.5f, rgb(252, 122, 3), LightType.STATIC, 0, 20, 32222, 32223, 32224),
+	ANCIENT_CAVERN_ORB(250, Alignment.CENTER, 1000, 25.0f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, 29899),
 	
 	// Misc
 	// This is a generic portal reused in different locations. It's identical to the private corp portal
 	EXIT_PORTAL(30, Alignment.CENTER, 500, 7.5f, rgb(255, 216, 87), LightType.PULSE, 1550, 20, 20843),
 	
 	STRANGE_SHRINE(70, Alignment.CENTER, 300, 7.5f, rgb(255, 216, 87), LightType.PULSE, 2800, 30, 14985),
-
-
 
 	;
 
