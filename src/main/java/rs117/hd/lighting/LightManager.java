@@ -28,18 +28,9 @@ package rs117.hd.lighting;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.primitives.Ints;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -86,7 +77,7 @@ public class LightManager
 	@Inject
 	private HdPlugin hdPlugin;
 
-	private static final List<SceneLight> WORLD_LIGHTS = new ArrayList<>();
+	private static final ArrayList<SceneLight> WORLD_LIGHTS = new ArrayList<>();
 	private static final ListMultimap<Integer, Light> NPC_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> PROJECTILE_LIGHTS = ArrayListMultimap.create();
@@ -140,82 +131,24 @@ public class LightManager
 		}
 	}
 
-	public void reloadLightConfiguration()
-	{
-		String filename = "lights.json";
-		InputStream is = Light.class.getResourceAsStream(filename);
-		if (is == null)
-		{
-			throw new RuntimeException("Missing resource: " + Paths.get(
-				Light.class.getPackage().getName().replace(".", "/"), filename));
-		}
-		reloadLightConfiguration(is);
-	}
-
-	public void reloadLightConfiguration(File jsonFile)
-	{
-		try
-		{
-			reloadLightConfiguration(new FileInputStream(jsonFile));
-		}
-		catch (IOException ex)
-		{
-			log.error("Lights config file not found: " + jsonFile.toPath(), ex);
-			reloadLightConfiguration();
-		}
-	}
-
-	public void reloadLightConfiguration(InputStream jsonInputStream)
+	public void clearLightConfiguration()
 	{
 		WORLD_LIGHTS.clear();
 		NPC_LIGHTS.clear();
 		OBJECT_LIGHTS.clear();
 		PROJECTILE_LIGHTS.clear();
+	}
 
-		try
-		{
-			Reader reader = new InputStreamReader(jsonInputStream, StandardCharsets.UTF_8);
+	public void reloadLightConfiguration()
+	{
+		clearLightConfiguration();
+		LightConfig.load(WORLD_LIGHTS, NPC_LIGHTS, OBJECT_LIGHTS, PROJECTILE_LIGHTS);
+	}
 
-			Gson gson = new GsonBuilder()
-				.setLenient()
-				.create();
-			Light[] lights = gson.fromJson(reader, Light[].class);
-
-			for (Light l : lights)
-			{
-				if (l.worldX != null && l.worldY != null)
-				{
-					WORLD_LIGHTS.add(new SceneLight(l));
-				}
-				if (l.npcIds != null)
-				{
-					for (int id : l.npcIds)
-					{
-						NPC_LIGHTS.put(id, l);
-					}
-				}
-				if (l.objectIds != null)
-				{
-					for (int id : l.objectIds)
-					{
-						OBJECT_LIGHTS.put(id, l);
-					}
-				}
-				if (l.projectileIds != null)
-				{
-					for (int id : l.projectileIds)
-					{
-						PROJECTILE_LIGHTS.put(id, l);
-					}
-				}
-			}
-
-			log.info("Reloaded {} lights", lights.length);
-		}
-		catch (JsonSyntaxException ex)
-		{
-			log.error("Failed to parse lights", ex);
-		}
+	public void reloadLightConfiguration(File jsonFile)
+	{
+		clearLightConfiguration();
+		LightConfig.load(jsonFile, WORLD_LIGHTS, NPC_LIGHTS, OBJECT_LIGHTS, PROJECTILE_LIGHTS);
 	}
 
 	public void update()
