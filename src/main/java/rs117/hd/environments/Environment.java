@@ -42,7 +42,7 @@ public enum Environment
 		.setLightDirection(260f, 10f)
 	),
 	RFD_QUIZ(Area.RFD_QUIZ, new Properties()
-		.setFogColor("#00000")
+		.setFogColor("#000000")
 		.setFogDepth(0)
 	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
