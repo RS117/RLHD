@@ -80,9 +80,11 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
+import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
 import static rs117.hd.GLUtil.glDeleteBuffer;
 import static rs117.hd.GLUtil.glDeleteFrameBuffer;
 import static rs117.hd.GLUtil.glDeleteRenderbuffers;
@@ -119,6 +121,7 @@ import rs117.hd.utils.FileWatcher;
 	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},
 	conflicts = "GPU"
 )
+@PluginDependency(EntityHiderPlugin.class)
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
