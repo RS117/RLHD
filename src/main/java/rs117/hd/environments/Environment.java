@@ -41,6 +41,10 @@ public enum Environment
 		.setDirectionalStrength(1.0f)
 		.setLightDirection(260f, 10f)
 	),
+	RFD_QUIZ(Area.RFD_QUIZ, new Properties()
+		.setFogColor("#00000")
+		.setFogDepth(0)
+	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
 		.setFogColor("#252C37")
 		.setFogDepth(80)
