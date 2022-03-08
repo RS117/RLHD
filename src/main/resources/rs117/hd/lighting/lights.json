@@ -8418,101 +8418,6 @@
   },
   {
     "description": "Lava Dragons",
-    "worldX": 3175,
-    "worldY": 3817,
-    "plane": 1,
-    "height": 50,
-    "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 7.5,
-    "color": [
-      0.9882353,
-      0.47843137,
-      0.011764706
-    ],
-    "type": "PULSE",
-    "duration": 3000.0,
-    "range": 10.0,
-    "fadeInDuration": 0
-  },
-  {
-    "description": "Lava Dragons",
-    "worldX": 3173,
-    "worldY": 3820,
-    "plane": 1,
-    "height": 50,
-    "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 7.5,
-    "color": [
-      0.9882353,
-      0.47843137,
-      0.011764706
-    ],
-    "type": "PULSE",
-    "duration": 3000.0,
-    "range": 10.0,
-    "fadeInDuration": 0
-  },
-  {
-    "description": "Lava Dragons",
-    "worldX": 3170,
-    "worldY": 3823,
-    "plane": 1,
-    "height": 50,
-    "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 7.5,
-    "color": [
-      0.9882353,
-      0.47843137,
-      0.011764706
-    ],
-    "type": "PULSE",
-    "duration": 3000.0,
-    "range": 10.0,
-    "fadeInDuration": 0
-  },
-  {
-    "description": "Lava Dragons",
-    "worldX": 3173,
-    "worldY": 3824,
-    "plane": 1,
-    "height": 50,
-    "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 7.5,
-    "color": [
-      0.9882353,
-      0.47843137,
-      0.011764706
-    ],
-    "type": "PULSE",
-    "duration": 3000.0,
-    "range": 10.0,
-    "fadeInDuration": 0
-  },
-  {
-    "description": "Lava Dragons",
-    "worldX": 3176,
-    "worldY": 3827,
-    "plane": 1,
-    "height": 50,
-    "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 7.5,
-    "color": [
-      0.9882353,
-      0.47843137,
-      0.011764706
-    ],
-    "type": "PULSE",
-    "duration": 3000.0,
-    "range": 10.0,
-    "fadeInDuration": 0
-  },
-  {
-    "description": "Lava Dragons",
     "worldX": 3186,
     "worldY": 3822,
     "plane": 1,
@@ -18672,15 +18577,15 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      1625,
-      6668,
-      1632,
-      5604,
-      5590,
-      6689,
-      6682,
-      6696,
-      5597
+      "LAZY_HELLCAT",
+      "LAZY_HELLCAT_6689",
+      "OVERGROWN_HELLCAT",
+      "WILY_HELLCAT",
+      "WILY_HELLCAT_6696",
+      "HELLCAT",
+      "OVERGROWN_HELLCAT_6682",
+      "HELLCAT_6668",
+      "HELLKITTEN"
     ]
   },
   {
@@ -18698,8 +18603,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      4809,
-      6793
+      "HELLRAT",
+      "HELLRAT_BEHEMOTH"
     ]
   },
   {
@@ -18717,8 +18622,8 @@
     "duration": 5000.0,
     "range": 20.0,
     "npcIds": [
-      964,
-      3099
+      "HELLPUPPY",
+      "HELLPUPPY_3099"
     ]
   },
   {
@@ -18736,8 +18641,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      8494,
-      8519
+      "IKKLE_HYDRA_8519",
+      "IKKLE_HYDRA_8494"
     ]
   },
   {
@@ -18755,8 +18660,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      8492,
-      8517
+      "IKKLE_HYDRA_8517",
+      "IKKLE_HYDRA"
     ]
   },
   {
@@ -18774,8 +18679,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      8493,
-      8518
+      "IKKLE_HYDRA_8518",
+      "IKKLE_HYDRA_8493"
     ]
   },
   {
@@ -18793,8 +18698,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      8495,
-      8520
+      "IKKLE_HYDRA_8520",
+      "IKKLE_HYDRA_8495"
     ]
   },
   {
@@ -18812,8 +18717,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      7368,
-      7370
+      "PHOENIX_7368",
+      "PHOENIX_7370"
     ]
   },
   {
@@ -18831,8 +18736,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      3079,
-      3083
+      "PHOENIX_3079",
+      "PHOENIX_3083"
     ]
   },
   {
@@ -18850,8 +18755,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      3078,
-      3082
+      "PHOENIX_3078",
+      "PHOENIX_3082"
     ]
   },
   {
@@ -18869,8 +18774,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      3080,
-      3084
+      "PHOENIX_3080",
+      "PHOENIX_3084"
     ]
   },
   {
@@ -18888,8 +18793,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      3077,
-      3081
+      "PHOENIX",
+      "PHOENIX_3081"
     ]
   },
   {
@@ -18907,8 +18812,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      8009,
-      8011
+      "TZREKZUK",
+      "TZREKZUK_8011"
     ]
   },
   {
@@ -18926,8 +18831,8 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      7890,
-      7893
+      "MIDNIGHT",
+      "MIDNIGHT_7893"
     ]
   },
   {
@@ -18945,8 +18850,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7337,
-      7354
+      "RIFT_GUARDIAN",
+      "RIFT_GUARDIAN_7354"
     ]
   },
   {
@@ -18964,8 +18869,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7338,
-      7355
+      "RIFT_GUARDIAN_7338",
+      "RIFT_GUARDIAN_7355"
     ]
   },
   {
@@ -18983,8 +18888,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7339,
-      7356
+      "RIFT_GUARDIAN_7339",
+      "RIFT_GUARDIAN_7356"
     ]
   },
   {
@@ -19002,8 +18907,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7340,
-      7357
+      "RIFT_GUARDIAN_7340",
+      "RIFT_GUARDIAN_7357"
     ]
   },
   {
@@ -19021,8 +18926,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7341,
-      7358
+      "RIFT_GUARDIAN_7341",
+      "RIFT_GUARDIAN_7358"
     ]
   },
   {
@@ -19040,8 +18945,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7342,
-      7359
+      "RIFT_GUARDIAN_7342",
+      "RIFT_GUARDIAN_7359"
     ]
   },
   {
@@ -19059,8 +18964,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7343,
-      7360
+      "RIFT_GUARDIAN_7360",
+      "RIFT_GUARDIAN_7343"
     ]
   },
   {
@@ -19078,8 +18983,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7344,
-      7361
+      "RIFT_GUARDIAN_7344",
+      "RIFT_GUARDIAN_7361"
     ]
   },
   {
@@ -19097,8 +19002,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7345,
-      7362
+      "RIFT_GUARDIAN_7345",
+      "RIFT_GUARDIAN_7362"
     ]
   },
   {
@@ -19116,8 +19021,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7346,
-      7363
+      "RIFT_GUARDIAN_7346",
+      "RIFT_GUARDIAN_7363"
     ]
   },
   {
@@ -19135,8 +19040,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7347,
-      7364
+      "RIFT_GUARDIAN_7347",
+      "RIFT_GUARDIAN_7364"
     ]
   },
   {
@@ -19154,8 +19059,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7348,
-      7365
+      "RIFT_GUARDIAN_7348",
+      "RIFT_GUARDIAN_7365"
     ]
   },
   {
@@ -19173,8 +19078,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7349,
-      7366
+      "RIFT_GUARDIAN_7349",
+      "RIFT_GUARDIAN_7366"
     ]
   },
   {
@@ -19192,8 +19097,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      7350,
-      7367
+      "RIFT_GUARDIAN_7350",
+      "RIFT_GUARDIAN_7367"
     ]
   },
   {
@@ -19211,8 +19116,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      8024,
-      8028
+      "RIFT_GUARDIAN_8024",
+      "RIFT_GUARDIAN_8028"
     ]
   },
   {
@@ -19230,8 +19135,8 @@
     "duration": 0.0,
     "range": 80.0,
     "npcIds": [
-      2055,
-      5907
+      "CHAOS_ELEMENTAL_JR_5907",
+      "CHAOS_ELEMENTAL_JR"
     ]
   },
   {
@@ -19249,8 +19154,8 @@
     "duration": 3000.0,
     "range": 20.0,
     "npcIds": [
-      425,
-      7671
+      "SKOTOS_7671",
+      "SKOTOS"
     ]
   },
   {
@@ -19268,8 +19173,8 @@
     "duration": 2100.0,
     "range": 10.0,
     "npcIds": [
-      8198,
-      8203
+      "VANGUARD_8198",
+      "VANGUARD_8203"
     ]
   },
   {
@@ -19287,8 +19192,8 @@
     "duration": 2400.0,
     "range": 30.0,
     "npcIds": [
-      8199,
-      8204
+      "VASA_MINIRIO",
+      "VASA_MINIRIO_8204"
     ]
   },
   {
@@ -19306,8 +19211,8 @@
     "duration": 2400.0,
     "range": 0.0,
     "npcIds": [
-      8197,
-      8202
+      "TEKTINY",
+      "TEKTINY_8202"
     ]
   },
   {
@@ -19325,8 +19230,8 @@
     "duration": 2400.0,
     "range": 0.0,
     "npcIds": [
-      9511,
-      9513
+      "ENRAGED_TEKTINY",
+      "ENRAGED_TEKTINY_9513"
     ]
   },
   {
@@ -19344,8 +19249,8 @@
     "duration": 3000.0,
     "range": 15.0,
     "npcIds": [
-      6639,
-      6655
+      "SMOKE_DEVIL_6639",
+      "SMOKE_DEVIL_6655"
     ]
   },
   {
@@ -19363,8 +19268,8 @@
     "duration": 3000.0,
     "range": 15.0,
     "npcIds": [
-      8729,
-      8737
+      "YOUNGLLEF_8737",
+      "YOUNGLLEF"
     ]
   },
   {
@@ -19382,8 +19287,8 @@
     "duration": 3000.0,
     "range": 15.0,
     "npcIds": [
-      8730,
-      8738
+      "CORRUPTED_YOUNGLLEF_8738",
+      "CORRUPTED_YOUNGLLEF"
     ]
   },
   {
@@ -19401,8 +19306,8 @@
     "duration": 3200.0,
     "range": 20.0,
     "npcIds": [
-      10562,
-      10637
+      "TINY_TEMPOR",
+      "TINY_TEMPOR_10637"
     ]
   },
   {
@@ -19420,11 +19325,11 @@
     "duration": 0.0,
     "range": 20.0,
     "npcIds": [
-      433,
-      434,
-      435,
-      436,
-      3139
+      "PYREFIEND",
+      "PYREFIEND_434",
+      "PYREFIEND_435",
+      "PYREFIEND_3139",
+      "PYREFIEND_436"
     ]
   },
   {
@@ -19442,57 +19347,57 @@
     "duration": 1.0,
     "range": 10.0,
     "npcIds": [
-      85,
-      3008,
-      86,
-      87,
-      88,
-      89,
-      90,
-      91,
-      92,
-      93,
-      94,
-      95,
-      96,
-      97,
-      98,
-      99,
-      472,
-      473,
-      474,
-      505,
-      506,
-      507,
-      920,
-      1786,
-      2527,
-      2528,
-      2529,
-      2530,
-      2531,
-      2532,
-      2533,
-      2534,
-      3009,
-      3516,
-      3625,
-      3975,
-      3976,
-      3977,
-      3978,
-      3979,
-      5370,
-      7263,
-      7264,
-      9194,
-      10538,
-      10558,
-      3451,
-      3452,
-      3453,
-      3454,
-      3455
+      "GHOST_3975",
+      "GHOST_3976",
+      "GHOST_3977",
+      "GHOST_3978",
+      "GHOST_3979",
+      "GHOST_920",
+      "GHOST_3625",
+      "GHOST_10538",
+      "GHOST_3516",
+      "ANCIENT_GHOST_10558",
+      "GHOST_",
+      "GHOST__3009",
+      "GHOST",
+      "GHOST_86",
+      "GHOST_87",
+      "GHOST_88",
+      "GHOST_472",
+      "GHOST_89",
+      "GHOST_473",
+      "GHOST_90",
+      "GHOST_474",
+      "GHOST_91",
+      "GHOST_92",
+      "GHOST_93",
+      "GHOST_94",
+      "GHOST_95",
+      "GHOST_2527",
+      "GHOST_7263",
+      "GHOST_96",
+      "GHOST_2528",
+      "GHOST_7264",
+      "GHOST_97",
+      "GHOST_2529",
+      "GHOST_98",
+      "GHOST_2530",
+      "GHOST_99",
+      "GHOST_2531",
+      "GHOST_2532",
+      "GHOST_2533",
+      "GHOST_2534",
+      "GHOST_9194",
+      "GHOST_505",
+      "GHOST_506",
+      "GHOST_1786",
+      "GHOST_5370",
+      "GHOST_507",
+      "MYSTERIOUS_GHOST_3451",
+      "MYSTERIOUS_GHOST_3452",
+      "MYSTERIOUS_GHOST_3453",
+      "MYSTERIOUS_GHOST_3454",
+      "MYSTERIOUS_GHOST_3455"
     ]
   },
   {
@@ -19510,15 +19415,15 @@
     "duration": 1.0,
     "range": 10.0,
     "npcIds": [
-      10524,
-      10525,
-      10526,
-      10534,
-      10535,
-      10536,
-      10537,
-      10544,
-      10545
+      "FORGOTTEN_SOUL_10544",
+      "FORGOTTEN_SOUL_10545",
+      "FORGOTTEN_SOUL_10534",
+      "FORGOTTEN_SOUL_10535",
+      "FORGOTTEN_SOUL_10536",
+      "FORGOTTEN_SOUL_10537",
+      "FORGOTTEN_SOUL_10524",
+      "FORGOTTEN_SOUL_10525",
+      "FORGOTTEN_SOUL_10526"
     ]
   },
   {
@@ -19536,24 +19441,24 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      2988,
-      2986,
-      3007,
-      2999,
-      2998,
-      2987,
-      3001,
-      3000,
-      3493,
-      3494,
-      8134,
-      3003,
-      3005,
-      3006,
-      3004,
-      2985,
-      3002,
-      6698
+      "DROALAK",
+      "DROALAK_3494",
+      "SARAH_8134",
+      "VELORINA",
+      "NECROVARUS",
+      "GHOST_GUARD_6698",
+      "GRAVINGAS",
+      "GHOST_DISCIPLE",
+      "GHOST_VILLAGER",
+      "TORTURED_SOUL",
+      "GHOST_SHOPKEEPER",
+      "GHOST_INNKEEPER",
+      "GHOST_FARMER",
+      "GHOST_BANKER",
+      "GHOST_SAILOR",
+      "GHOST_CAPTAIN",
+      "GHOST_CAPTAIN_3006",
+      "GHOST_GUARD"
     ]
   },
   {
@@ -19561,7 +19466,7 @@
     "height": 110,
     "alignment": "CENTER",
     "radius": 600,
-    "strength": 15,
+    "strength": 15.0,
     "color": [
       0.59,
       1.0,
@@ -19571,12 +19476,12 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      2,
-      3,
-      4,
-      5,
-      6,
-      7
+      "ABERRANT_SPECTRE",
+      "ABERRANT_SPECTRE_3",
+      "ABERRANT_SPECTRE_4",
+      "ABERRANT_SPECTRE_5",
+      "ABERRANT_SPECTRE_6",
+      "ABERRANT_SPECTRE_7"
     ]
   },
   {
@@ -19584,7 +19489,7 @@
     "height": 110,
     "alignment": "CENTER",
     "radius": 600,
-    "strength": 15,
+    "strength": 15.0,
     "color": [
       1.0,
       0.62,
@@ -19594,7 +19499,7 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      7279
+      "DEVIANT_SPECTRE"
     ]
   },
   {
@@ -19602,7 +19507,7 @@
     "height": 220,
     "alignment": "CENTER",
     "radius": 900,
-    "strength": 18,
+    "strength": 18.0,
     "color": [
       0.59,
       1.0,
@@ -19612,7 +19517,7 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      7402
+      "ABHORRENT_SPECTRE"
     ]
   },
   {
@@ -19620,7 +19525,7 @@
     "height": 220,
     "alignment": "CENTER",
     "radius": 900,
-    "strength": 18,
+    "strength": 18.0,
     "color": [
       1.0,
       0.0,
@@ -19630,7 +19535,7 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      7403
+      "REPUGNANT_SPECTRE"
     ]
   },
   {
@@ -19648,12 +19553,12 @@
     "duration": 1.0,
     "range": 0.7,
     "npcIds": [
-      1672,
-      1675,
-      1673,
-      1676,
-      1677,
-      1674
+      "AHRIM_THE_BLIGHTED",
+      "DHAROK_THE_WRETCHED",
+      "GUTHAN_THE_INFESTED",
+      "KARIL_THE_TAINTED",
+      "TORAG_THE_CORRUPTED",
+      "VERAC_THE_DEFILED"
     ]
   },
   {
@@ -19671,16 +19576,16 @@
     "duration": 3200.0,
     "range": 10.0,
     "npcIds": [
-      8775,
-      8776,
-      8777,
-      8778,
-      8779,
-      8780,
-      8781,
-      8782,
-      8783,
-      8784
+      "MEMORY_OF_SEREN_8784",
+      "SEREN",
+      "MEMORY_OF_SEREN",
+      "MEMORY_OF_SEREN_8777",
+      "MEMORY_OF_SEREN_8778",
+      "MEMORY_OF_SEREN_8779",
+      "MEMORY_OF_SEREN_8780",
+      "MEMORY_OF_SEREN_8781",
+      "MEMORY_OF_SEREN_8782",
+      "MEMORY_OF_SEREN_8783"
     ]
   },
   {
@@ -19698,9 +19603,9 @@
     "duration": 3200.0,
     "range": 10.0,
     "npcIds": [
-      8917,
-      8919,
-      8920
+      "FRAGMENT_OF_SEREN",
+      "FRAGMENT_OF_SEREN_8919",
+      "FRAGMENT_OF_SEREN_8920"
     ]
   },
   {
@@ -19718,10 +19623,10 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9021,
-      9022,
-      9023,
-      9024
+      "CRYSTALLINE_HUNLLEF_9024",
+      "CRYSTALLINE_HUNLLEF",
+      "CRYSTALLINE_HUNLLEF_9022",
+      "CRYSTALLINE_HUNLLEF_9023"
     ]
   },
   {
@@ -19739,7 +19644,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9028
+      "CRYSTALLINE_BAT"
     ]
   },
   {
@@ -19757,7 +19662,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9026
+      "CRYSTALLINE_RAT"
     ]
   },
   {
@@ -19775,7 +19680,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9027
+      "CRYSTALLINE_SPIDER"
     ]
   },
   {
@@ -19793,7 +19698,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9033
+      "CRYSTALLINE_DRAGON"
     ]
   },
   {
@@ -19811,7 +19716,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9032
+      "CRYSTALLINE_BEAR"
     ]
   },
   {
@@ -19829,7 +19734,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9034
+      "CRYSTALLINE_DARK_BEAST"
     ]
   },
   {
@@ -19847,7 +19752,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9030
+      "CRYSTALLINE_SCORPION"
     ]
   },
   {
@@ -19865,7 +19770,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9029
+      "CRYSTALLINE_UNICORN"
     ]
   },
   {
@@ -19883,7 +19788,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9031
+      "CRYSTALLINE_WOLF"
     ]
   },
   {
@@ -19901,10 +19806,10 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9035,
-      9036,
-      9037,
-      9038
+      "CORRUPTED_HUNLLEF",
+      "CORRUPTED_HUNLLEF_9036",
+      "CORRUPTED_HUNLLEF_9037",
+      "CORRUPTED_HUNLLEF_9038"
     ]
   },
   {
@@ -19922,7 +19827,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9042
+      "CORRUPTED_BAT"
     ]
   },
   {
@@ -19940,7 +19845,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9040
+      "CORRUPTED_RAT"
     ]
   },
   {
@@ -19958,7 +19863,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9041
+      "CORRUPTED_SPIDER"
     ]
   },
   {
@@ -19976,7 +19881,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9047
+      "CORRUPTED_DRAGON"
     ]
   },
   {
@@ -19994,7 +19899,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9046
+      "CORRUPTED_BEAR"
     ]
   },
   {
@@ -20012,7 +19917,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9048
+      "CORRUPTED_DARK_BEAST"
     ]
   },
   {
@@ -20030,7 +19935,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9044
+      "CORRUPTED_SCORPION"
     ]
   },
   {
@@ -20048,7 +19953,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9043
+      "CORRUPTED_UNICORN"
     ]
   },
   {
@@ -20066,7 +19971,7 @@
     "duration": 0.0,
     "range": 0.0,
     "npcIds": [
-      9045
+      "CORRUPTED_WOLF"
     ]
   },
   {
@@ -20084,9 +19989,9 @@
     "duration": 5000.0,
     "range": 20.0,
     "npcIds": [
-      5862,
-      5863,
-      5866
+      "CERBERUS",
+      "CERBERUS_5863",
+      "CERBERUS_5866"
     ]
   },
   {
@@ -20104,7 +20009,7 @@
     "duration": 3200.0,
     "range": 20.0,
     "npcIds": [
-      10572
+      "TEMPOROSS"
     ]
   },
   {
@@ -20122,8 +20027,8 @@
     "duration": 3200.0,
     "range": 20.0,
     "npcIds": [
-      10574,
-      10573
+      10573,
+      "TEMPOROSS_10574"
     ]
   },
   {
@@ -20141,7 +20046,7 @@
     "duration": 3200.0,
     "range": 20.0,
     "npcIds": [
-      10571
+      "SPIRIT_POOL"
     ]
   },
   {
@@ -20213,7 +20118,7 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      8344
+      "NYLOCAS_HAGIOS"
     ]
   },
   {
@@ -20231,8 +20136,8 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      8347,
-      8383
+      "NYLOCAS_HAGIOS_8347",
+      "NYLOCAS_HAGIOS_8383"
     ]
   },
   {
@@ -20250,7 +20155,7 @@
     "duration": 0.0,
     "range": 40.0,
     "npcIds": [
-      8356
+      "NYLOCAS_VASILIAS_8356"
     ]
   },
   {
@@ -20268,30 +20173,30 @@
     "duration": 4500.0,
     "range": 10.0,
     "npcIds": [
-      404,
-      1161,
-      1841,
-      1840,
-      1842,
-      1847,
-      1848,
-      1849,
-      1850,
-      1851,
-      2829,
-      2868,
-      2869,
-      3092,
-      3204,
-      5736,
-      5835,
-      5836,
-      5837,
-      5838,
-      5839,
-      5856,
-      7332,
-      7748
+      "FAIRY_CHEF",
+      "FAIRY_3204",
+      "FAIRY_FIXIT",
+      "FAIRY_7748",
+      "FAIRY_AERYKA",
+      "FAIRY_QUEEN",
+      "COORDINATOR",
+      "FAIRY_NUFF_5836",
+      "FAIRY_2829",
+      "FAIRY_GODFATHER_5837",
+      "SLIM_LOUIE",
+      "FAT_ROCCO",
+      "FAIRY_GODFATHER",
+      "FAIRY_NUFF",
+      "FAIRY_QUEEN_1842",
+      "CHAELDAR",
+      "FAIRY_SHOP_KEEPER",
+      "BANKER_3092",
+      "FAIRY_SHOP_ASSISTANT",
+      "FAIRY_VERY_WISE",
+      "FAIRY",
+      "FAIRY_1849",
+      "FAIRY_1850",
+      "FAIRY_1851"
     ]
   },
   {
@@ -20309,9 +20214,9 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      10878,
-      10880,
-      10879
+      "GREATER_GHOSTLY_THRALL",
+      "LESSER_GHOSTLY_THRALL",
+      "SUPERIOR_GHOSTLY_THRALL"
     ]
   },
   {
@@ -20329,9 +20234,9 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      10881,
-      10883,
-      10882
+      "LESSER_SKELETAL_THRALL",
+      "SUPERIOR_SKELETAL_THRALL",
+      "GREATER_SKELETAL_THRALL"
     ]
   },
   {
@@ -20349,9 +20254,9 @@
     "duration": 0.0,
     "range": 10.0,
     "npcIds": [
-      10884,
-      10886,
-      10885
+      "LESSER_ZOMBIFIED_THRALL",
+      "SUPERIOR_ZOMBIFIED_THRALL",
+      "GREATER_ZOMBIFIED_THRALL"
     ]
   },
   {
@@ -20369,7 +20274,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "npcIds": [
-      7568
+      "GLOWING_CRYSTAL"
     ]
   },
   {
@@ -20387,8 +20292,8 @@
     "duration": 2400.0,
     "range": 30.0,
     "npcIds": [
-      7566,
-      7567
+      "VASA_NISTIRIO",
+      "VASA_NISTIRIO_7567"
     ]
   },
   {
@@ -20406,10 +20311,10 @@
     "duration": 2400.0,
     "range": 0.0,
     "npcIds": [
-      7540,
-      7541,
-      7542,
-      7545
+      "TEKTON",
+      "TEKTON_7541",
+      "TEKTON_7542",
+      "TEKTON_7545"
     ]
   },
   {
@@ -20427,8 +20332,8 @@
     "duration": 2400.0,
     "range": 0.0,
     "npcIds": [
-      7543,
-      7544
+      "TEKTON_ENRAGED",
+      "TEKTON_ENRAGED_7544"
     ]
   },
   {
@@ -20446,11 +20351,11 @@
     "duration": 2400.0,
     "range": 0.0,
     "npcIds": [
-      7525,
-      7526,
-      7527,
-      7528,
-      7529
+      "VANGUARD",
+      "VANGUARD_7526",
+      "VANGUARD_7527",
+      "VANGUARD_7528",
+      "VANGUARD_7529"
     ]
   },
   {
@@ -20468,7 +20373,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "npcIds": [
-      7578
+      "JEWELLED_CRAB_GREEN"
     ]
   },
   {
@@ -20486,7 +20391,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "npcIds": [
-      7577
+      "JEWELLED_CRAB_RED"
     ]
   },
   {
@@ -20504,7 +20409,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "npcIds": [
-      7579
+      "JEWELLED_CRAB_BLUE"
     ]
   },
   {
@@ -20522,10 +20427,10 @@
     "duration": 1950.0,
     "range": 20.0,
     "npcIds": [
-      9461,
-      9462,
-      9463,
-      9464
+      "THE_NIGHTMARE_9461",
+      "THE_NIGHTMARE_9462",
+      "THE_NIGHTMARE_9463",
+      "THE_NIGHTMARE_9464"
     ]
   },
   {
@@ -20543,18 +20448,18 @@
     "duration": 0.0,
     "range": 20.0,
     "npcIds": [
-      2075,
-      2076,
-      2077,
-      2078,
-      2079,
-      2080,
-      2081,
-      2082,
-      2083,
-      2084,
-      7251,
-      7252
+      "FIRE_GIANT_2080",
+      "FIRE_GIANT_2081",
+      "FIRE_GIANT_2082",
+      "FIRE_GIANT_2083",
+      "FIRE_GIANT_7251",
+      "FIRE_GIANT_2084",
+      "FIRE_GIANT_7252",
+      "FIRE_GIANT",
+      "FIRE_GIANT_2076",
+      "FIRE_GIANT_2077",
+      "FIRE_GIANT_2078",
+      "FIRE_GIANT_2079"
     ]
   },
   {
@@ -20572,10 +20477,10 @@
     "duration": 2000.0,
     "range": 25.0,
     "npcIds": [
-      1739,
-      1743,
-      1747,
-      1751
+      "PORTAL_1747",
+      "PORTAL_1751",
+      "PORTAL",
+      "PORTAL_1743"
     ]
   },
   {
@@ -20593,10 +20498,10 @@
     "duration": 2000.0,
     "range": 25.0,
     "npcIds": [
-      1740,
-      1744,
-      1748,
-      1752
+      "PORTAL_1744",
+      "PORTAL_1748",
+      "PORTAL_1752",
+      "PORTAL_1740"
     ]
   },
   {
@@ -20614,10 +20519,10 @@
     "duration": 2000.0,
     "range": 25.0,
     "npcIds": [
-      1741,
-      1745,
-      1749,
-      1753
+      "PORTAL_1745",
+      "PORTAL_1749",
+      "PORTAL_1753",
+      "PORTAL_1741"
     ]
   },
   {
@@ -20635,10 +20540,10 @@
     "duration": 2000.0,
     "range": 25.0,
     "npcIds": [
-      1742,
-      1746,
-      1750,
-      1754
+      "PORTAL_1746",
+      "PORTAL_1750",
+      "PORTAL_1754",
+      "PORTAL_1742"
     ]
   },
   {
@@ -20656,10 +20561,10 @@
     "duration": 1500.0,
     "range": 10.0,
     "npcIds": [
-      2950,
-      2951,
-      2952,
-      2953
+      "VOID_KNIGHT_2950",
+      "VOID_KNIGHT_2951",
+      "VOID_KNIGHT_2952",
+      "VOID_KNIGHT_2953"
     ]
   },
   {
@@ -20677,7 +20582,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7934
+      "REVENANT_CYCLOPS"
     ]
   },
   {
@@ -20695,7 +20600,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7881
+      "REVENANT_IMP"
     ]
   },
   {
@@ -20713,7 +20618,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7936
+      "REVENANT_DEMON"
     ]
   },
   {
@@ -20731,7 +20636,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7940
+      "REVENANT_DRAGON"
     ]
   },
   {
@@ -20749,7 +20654,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7931
+      "REVENANT_GOBLIN"
     ]
   },
   {
@@ -20767,7 +20672,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7938
+      "REVENANT_DARK_BEAST"
     ]
   },
   {
@@ -20785,7 +20690,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7935
+      "REVENANT_HELLHOUND"
     ]
   },
   {
@@ -20803,7 +20708,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7933
+      "REVENANT_HOBGOBLIN"
     ]
   },
   {
@@ -20821,7 +20726,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7939
+      "REVENANT_KNIGHT"
     ]
   },
   {
@@ -20839,7 +20744,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7937
+      "REVENANT_ORK"
     ]
   },
   {
@@ -20857,7 +20762,7 @@
     "duration": 3400.0,
     "range": 10.0,
     "npcIds": [
-      7932
+      "REVENANT_PYREFIEND"
     ]
   },
   {
@@ -20875,27 +20780,27 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      724,
-      5494,
-      6203,
-      6404,
-      6406,
-      6408,
-      6410,
-      6412,
-      6413,
-      6414,
-      6415,
-      6416,
-      6896,
-      10178,
-      10179,
       10720,
-      11606,
-      15158,
-      20716,
-      25122,
-      25123
+      "STANDING_TORCH_10178",
+      "CANDLE_STAND_25122",
+      "STANDING_TORCH_10179",
+      "CANDLE_STAND_25123",
+      "STANDING_TORCH_6404",
+      "STANDING_TORCH_6406",
+      "STANDING_TORCH_6408",
+      "STANDING_TORCH_6410",
+      "STANDING_TORCH_6412",
+      "STANDING_TORCH_20716",
+      "STANDING_TORCH_6413",
+      "STANDING_TORCH_6414",
+      "STANDING_TORCH_6415",
+      "STANDING_TORCH_6416",
+      "STANDING_TORCH_6896",
+      "STANDING_TORCH",
+      "STANDING_TORCH_5494",
+      "STANDING_TORCH_11606",
+      "STANDING_TORCH_15158",
+      "LAMP_6203"
     ]
   },
   {
@@ -20913,16 +20818,16 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
+      "TORCH_38512",
+      "TORCH_38513",
+      "TORCH_38514",
+      "TORCH_38562",
+      "TORCH_17237",
       3478,
-      5881,
-      17237,
-      32118,
-      33454,
-      38512,
-      38513,
-      38514,
-      38555,
-      38562
+      "TORCH_32118",
+      "STANDING_TORCH_5881",
+      "TORCH_38555",
+      "BRAZIER_33454"
     ]
   },
   {
@@ -20940,7 +20845,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      25156
+      "FIRE_25156"
     ]
   },
   {
@@ -20958,7 +20863,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      37826
+      "BRAZIER_37826"
     ]
   },
   {
@@ -20976,7 +20881,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      34856
+      "TORCH_34856"
     ]
   },
   {
@@ -20994,7 +20899,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      6202
+      "LAMP_6202"
     ]
   },
   {
@@ -21013,18 +20918,18 @@
     "range": 20.0,
     "objectIds": [
       198,
+      6537,
+      12300,
+      31628,
+      12238,
+      20942,
       3474,
       4694,
-      5247,
       5208,
-      6537,
       10297,
-      12238,
-      12300,
       15161,
-      20942,
       25659,
-      31628
+      5247
     ]
   },
   {
@@ -21042,17 +20947,17 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
+      11474,
       196,
       197,
-      202,
-      206,
-      203,
-      2175,
-      2501,
+      "OIL_LAMP",
       4501,
       7432,
-      11474,
-      24414
+      "CANDLES",
+      "CANDLES_203",
+      206,
+      24414,
+      2175
     ]
   },
   {
@@ -21107,8 +21012,8 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      11472,
-      12301
+      "CANDLES_11472",
+      "CANDLES_12301"
     ]
   },
   {
@@ -21126,7 +21031,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      12302
+      "CANDLES_12302"
     ]
   },
   {
@@ -21144,11 +21049,11 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      2492,
       4691,
-      10307,
-      11468,
-      16901
+      "LANTERN_10307",
+      "LANTERN_16901",
+      "LANTERN",
+      "LANTERN_11468"
     ]
   },
   {
@@ -21166,10 +21071,10 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      42132,
-      42133,
-      42134,
-      42135
+      "LANTERN_42132",
+      "LANTERN_42133",
+      "LANTERN_42134",
+      "LANTERN_42135"
     ]
   },
   {
@@ -21187,7 +21092,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      4650
+      "FIREPLACE_4650"
     ]
   },
   {
@@ -21205,8 +21110,8 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      4267,
-      5608
+      "SPIT_ROAST_5608",
+      "SPIT_ROAST"
     ]
   },
   {
@@ -21224,7 +21129,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      26180
+      "COOKING_POT_26180"
     ]
   },
   {
@@ -21242,43 +21147,43 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      3769,
-      3775,
-      4265,
-      4266,
-      5249,
-      5499,
-      5981,
-      9735,
-      10660,
+      "FIRE_5249",
+      "FIRE_30021",
+      "FIRE_23046",
+      "FIRE_9735",
+      "CAMPING_FIRE",
+      "FIRE_35912",
+      "FIRE_26185",
+      "FIRE_35913",
+      "FIRE_26577",
+      "FIRE_26578",
+      "FIRE_13337",
+      "FIRE_14169",
+      "FIRE_5981",
+      "CAMPFIRE_29085",
+      "CAMPFIRE_25374",
+      "FIRE_33311",
+      "FIRE_35810",
+      "FIRE_35811",
+      "FIRE_10660",
+      "FIRE_4265",
+      "CAMPFIRE",
+      "FIRE_32297",
+      "FIRE_4266",
+      "CAMPFIRE_19884",
+      "FIRE_15156",
+      "FIRE_21620",
+      "BONFIRE",
+      "FIRE_31798",
+      "FIRE_28791",
+      "FIRE",
+      "FIRE_13881",
+      "FIRE_25465",
+      "FIRE_34682",
+      "FIRE_5499",
       12795,
-      12796,
-      13337,
-      13881,
-      14169,
-      15156,
-      19881,
-      19884,
-      21620,
-      23046,
-      23175,
-      25374,
-      25465,
-      26185,
-      26577,
-      26578,
-      28791,
-      29085,
-      29300,
-      30021,
-      31798,
-      32297,
-      33311,
-      34682,
-      35810,
-      35811,
-      35912,
-      35913
+      "FIRE_12796",
+      "FIRE_3775"
     ]
   },
   {
@@ -21296,9 +21201,9 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      25155,
-      35812,
-      40728
+      "FIRE_25155",
+      "FIRE_35812",
+      "FIRE_40728"
     ]
   },
   {
@@ -21316,7 +21221,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      37996
+      "MAGICAL_FIRE_37996"
     ]
   },
   {
@@ -21334,8 +21239,8 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      37994,
-      37995
+      "MAGICAL_FIRE_37994",
+      "MAGICAL_FIRE_37995"
     ]
   },
   {
@@ -21353,37 +21258,37 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      4618,
-      5165,
-      6093,
-      6094,
-      6095,
-      6096,
-      7185,
-      8712,
-      9439,
-      9440,
-      9441,
-      10058,
-      10824,
-      17640,
-      17641,
-      17642,
-      17643,
-      18039,
-      21795,
-      24969,
-      24970,
-      26179,
-      30136,
-      30137,
-      30138,
-      6781,
-      40775,
-      40777,
-      6783,
-      17325,
-      6785
+      "MARBLE_FIREPLACE_6785",
+      "FIREPLACE_26179",
+      "DECORATED_LIMESTONE_FIREPLACE_40775",
+      "FIREPLACE_8712",
+      "FIREPLACE_10824",
+      "FIREPLACE_24969",
+      "DECORATED_MARBLE_FIREPLACE_40777",
+      "FIREPLACE",
+      "FIREPLACE_10058",
+      "FIREPLACE_24970",
+      "FIREPLACE_6093",
+      "FIREPLACE_6094",
+      "FIREPLACE_6095",
+      "FIREPLACE_6096",
+      "FIREPLACE_7185",
+      "FIREPLACE_9439",
+      "FIREPLACE_9440",
+      "FIREPLACE_9441",
+      "FIREPLACE_21795",
+      "FIREPLACE_17640",
+      "FIREPLACE_17641",
+      "FIREPLACE_17642",
+      "FIREPLACE_17643",
+      "FIREPLACE_5165",
+      "LIMESTONE_FIREPLACE_17325",
+      "FIREPLACE_18039",
+      "FIREPLACE_30136",
+      "FIREPLACE_30137",
+      "FIREPLACE_30138",
+      "CLAY_FIREPLACE_6781",
+      "LIMESTONE_FIREPLACE_6783"
     ]
   },
   {
@@ -21419,7 +21324,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      35806
+      "BARRICADE_35806"
     ]
   },
   {
@@ -21437,7 +21342,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      34345
+      "TORCH_34345"
     ]
   },
   {
@@ -21455,7 +21360,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      34346
+      "STANDING_TORCH_34346"
     ]
   },
   {
@@ -21473,7 +21378,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      20001
+      "FIRE_20001"
     ]
   },
   {
@@ -21491,7 +21396,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      26186
+      "FIRE_26186"
     ]
   },
   {
@@ -21509,7 +21414,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      26576
+      "FIRE_26576"
     ]
   },
   {
@@ -21527,7 +21432,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      20000
+      "FIRE_20000"
     ]
   },
   {
@@ -21545,7 +21450,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      26575
+      "FIRE_26575"
     ]
   },
   {
@@ -21563,10 +21468,10 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      18967,
-      18968,
-      18969,
-      25213
+      "CLIMBING_ROPE_18967",
+      "CLIMBING_ROPE_18968",
+      "CLIMBING_ROPE_18969",
+      "CLIMBING_ROPE_25213"
     ]
   },
   {
@@ -21584,9 +21489,9 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
+      25056,
       17829,
-      25055,
-      25056
+      25055
     ]
   },
   {
@@ -21604,7 +21509,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      12005
+      "MUSHROOM_TORCH"
     ]
   },
   {
@@ -21622,7 +21527,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      12006
+      "MUSHROOM_TORCH_12006"
     ]
   },
   {
@@ -21677,8 +21582,8 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      16469,
-      16657
+      "FURNACE_16657",
+      "FURNACE_16469"
     ]
   },
   {
@@ -21696,7 +21601,7 @@
     "duration": 4000.0,
     "range": 15.0,
     "objectIds": [
-      16648
+      "ECTOFUNTUS"
     ]
   },
   {
@@ -21714,7 +21619,7 @@
     "duration": 4000.0,
     "range": 15.0,
     "objectIds": [
-      16649
+      "ECTOFUNTUS_16649"
     ]
   },
   {
@@ -21732,12 +21637,12 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      20720,
-      20721,
-      20722,
-      20770,
-      20771,
-      20772
+      "SARCOPHAGUS_20720",
+      "SARCOPHAGUS_20721",
+      "SARCOPHAGUS_20722",
+      "SARCOPHAGUS_20770",
+      "SARCOPHAGUS_20771",
+      "SARCOPHAGUS_20772"
     ]
   },
   {
@@ -21755,7 +21660,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      2282
+      "HEARTH"
     ]
   },
   {
@@ -21773,9 +21678,9 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      6197,
-      6199,
-      6201
+      "TABLE_6197",
+      "TABLE_6199",
+      "TABLE_6201"
     ]
   },
   {
@@ -21793,7 +21698,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      26765
+      "CHAOS_RIFT_26765"
     ]
   },
   {
@@ -21829,7 +21734,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      4470
+      "ENERGY_BARRIER_4470"
     ]
   },
   {
@@ -21847,7 +21752,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      4469
+      "ENERGY_BARRIER"
     ]
   },
   {
@@ -21865,9 +21770,9 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      4388,
-      4390,
-      4407
+      "ZAMORAK_PORTAL",
+      "PORTAL_4390",
+      "PORTAL_4407"
     ]
   },
   {
@@ -21885,8 +21790,8 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      4387,
-      4389
+      "SARADOMIN_PORTAL",
+      "PORTAL_4389"
     ]
   },
   {
@@ -21904,7 +21809,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      4408
+      "GUTHIX_PORTAL"
     ]
   },
   {
@@ -21922,7 +21827,7 @@
     "duration": 1600.0,
     "range": 20.0,
     "objectIds": [
-      40454
+      "BLUE_BARRIER_40454"
     ]
   },
   {
@@ -21940,8 +21845,8 @@
     "duration": 1600.0,
     "range": 20.0,
     "objectIds": [
-      40456,
-      40457
+      "RED_BARRIER_40456",
+      "RED_BARRIER_40457"
     ]
   },
   {
@@ -21959,7 +21864,7 @@
     "duration": 1600.0,
     "range": 20.0,
     "objectIds": [
-      41200
+      "BARRIER_41200"
     ]
   },
   {
@@ -21977,7 +21882,7 @@
     "duration": 1600.0,
     "range": 20.0,
     "objectIds": [
-      41199
+      "BARRIER_41199"
     ]
   },
   {
@@ -21995,8 +21900,8 @@
     "duration": 1000.0,
     "range": 20.0,
     "objectIds": [
-      40474,
-      40476
+      "SOUL_WARS_PORTAL",
+      "PORTAL_40476"
     ]
   },
   {
@@ -22014,7 +21919,7 @@
     "duration": 1000.0,
     "range": 20.0,
     "objectIds": [
-      40460
+      "PORTAL_40460"
     ]
   },
   {
@@ -22032,7 +21937,7 @@
     "duration": 1000.0,
     "range": 20.0,
     "objectIds": [
-      40461
+      "PORTAL_40461"
     ]
   },
   {
@@ -22050,7 +21955,7 @@
     "duration": 1000.0,
     "range": 20.0,
     "objectIds": [
-      40475
+      "SOUL_WARS_PORTAL_40475"
     ]
   },
   {
@@ -22068,8 +21973,8 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      40550,
-      40551
+      "TORCH_40550",
+      "TORCH_40551"
     ]
   },
   {
@@ -22087,7 +21992,7 @@
     "duration": 1000.0,
     "range": 30.0,
     "objectIds": [
-      40449,
+      "SOUL_OBELISK_40449",
       40765
     ]
   },
@@ -22106,7 +22011,7 @@
     "duration": 3000.0,
     "range": 30.0,
     "objectIds": [
-      40451
+      "SOUL_OBELISK_40451"
     ]
   },
   {
@@ -22124,7 +22029,7 @@
     "duration": 3000.0,
     "range": 30.0,
     "objectIds": [
-      40450
+      "SOUL_OBELISK_40450"
     ]
   },
   {
@@ -22142,7 +22047,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      30386
+      "CASTLE_WARS_PORTAL"
     ]
   },
   {
@@ -22160,7 +22065,7 @@
     "duration": 1600.0,
     "range": 20.0,
     "objectIds": [
-      39640
+      "COMPETITIVE"
     ]
   },
   {
@@ -22178,7 +22083,7 @@
     "duration": 1500.0,
     "range": 20.0,
     "objectIds": [
-      39639
+      "CASUAL"
     ]
   },
   {
@@ -22214,7 +22119,7 @@
     "duration": 1750.0,
     "range": 20.0,
     "objectIds": [
-      26642
+      "CHALLENGE_PORTAL"
     ]
   },
   {
@@ -22232,7 +22137,7 @@
     "duration": 1850.0,
     "range": 20.0,
     "objectIds": [
-      26645
+      "FREEFORALL_PORTAL"
     ]
   },
   {
@@ -22250,7 +22155,7 @@
     "duration": 1850.0,
     "range": 20.0,
     "objectIds": [
-      26646
+      "PORTAL_26646"
     ]
   },
   {
@@ -22268,7 +22173,7 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      39651
+      "POOL_OF_REFRESHMENT"
     ]
   },
   {
@@ -22304,7 +22209,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      29322
+      "DOORS_OF_DINH"
     ]
   },
   {
@@ -22358,7 +22263,7 @@
     "duration": 1850.0,
     "range": 20.0,
     "objectIds": [
-      39549
+      "PORTAL_39549"
     ]
   },
   {
@@ -22376,8 +22281,8 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      11833,
-      11834
+      "CAVE_ENTRANCE_11833",
+      "CAVE_ENTRANCE_11834"
     ]
   },
   {
@@ -22395,7 +22300,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      11836
+      "CAVE_EXIT_11836"
     ]
   },
   {
@@ -22431,7 +22336,7 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      4525
+      "PORTAL_4525"
     ]
   },
   {
@@ -22449,13 +22354,13 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      15477,
-      15478,
-      15479,
-      15480,
-      15481,
-      15482,
-      28822
+      "PORTAL_15477",
+      "PORTAL_15478",
+      "PORTAL_28822",
+      "PORTAL_15479",
+      "PORTAL_15480",
+      "PORTAL_15481",
+      15482
     ]
   },
   {
@@ -22473,7 +22378,7 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      34947
+      "PORTAL_34947"
     ]
   },
   {
@@ -22491,108 +22396,108 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      27097,
-      33354,
-      33355,
-      33356,
-      33357,
-      33358,
-      33359,
-      33360,
-      33361,
-      33362,
-      33363,
-      33364,
-      33365,
-      33366,
-      33367,
-      33368,
-      33369,
-      33370,
-      33371,
-      33372,
-      33373,
-      33374,
-      33375,
-      33376,
-      33377,
-      33378,
-      33379,
-      33380,
-      33381,
-      33382,
-      33383,
-      33384,
-      33385,
-      33386,
-      33387,
-      33388,
-      33389,
-      33390,
-      33391,
-      33392,
-      33393,
-      33394,
-      33395,
-      33396,
-      33397,
-      33398,
-      33399,
-      33400,
-      33401,
-      33402,
-      33403,
-      33404,
-      33405,
-      33406,
-      33407,
-      33408,
-      33409,
-      33410,
-      33423,
-      33424,
-      33425,
-      33426,
-      33427,
-      33428,
-      33429,
-      33430,
-      33431,
-      37547,
-      37548,
-      37549,
-      37550,
-      37551,
-      37552,
-      37553,
-      37554,
-      37555,
-      37556,
-      37557,
-      37559,
-      37560,
-      37561,
-      37562,
-      37563,
-      37564,
-      37565,
-      37566,
-      37567,
-      37568,
-      37569,
-      37571,
-      37572,
-      37573,
-      37574,
-      37575,
-      37576,
-      37577,
-      37578,
-      37579,
-      37580,
-      41413,
-      41414,
-      41415
+      "PORTAL_NEXUS_33354",
+      "PORTAL_NEXUS_33355",
+      "PORTAL_NEXUS_33356",
+      "PORTAL_NEXUS_33357",
+      "PORTAL_NEXUS_33358",
+      "PORTAL_NEXUS_33359",
+      "PORTAL_NEXUS_33360",
+      "PORTAL_NEXUS_33361",
+      "PORTAL_NEXUS_33362",
+      "PORTAL_NEXUS_33363",
+      "PORTAL_NEXUS_33364",
+      "PORTAL_NEXUS_33365",
+      "PORTAL_NEXUS_33366",
+      "PORTAL_NEXUS_33367",
+      "PORTAL_NEXUS_33368",
+      "PORTAL_NEXUS_33369",
+      "PORTAL_NEXUS_33370",
+      "PORTAL_NEXUS_33371",
+      "PORTAL_NEXUS_33372",
+      "PORTAL_NEXUS_33373",
+      "PORTAL_NEXUS_33374",
+      "PORTAL_NEXUS_33375",
+      "PORTAL_NEXUS_33376",
+      "PORTAL_NEXUS_33377",
+      "PORTAL_NEXUS_33378",
+      "PORTAL_NEXUS_33379",
+      "PORTAL_NEXUS_33380",
+      "PORTAL_NEXUS_33381",
+      "PORTAL_NEXUS_33382",
+      "PORTAL_NEXUS_33383",
+      "PORTAL_NEXUS_33384",
+      "PORTAL_NEXUS_33385",
+      "PORTAL_NEXUS_33386",
+      "PORTAL_NEXUS_33387",
+      "PORTAL_NEXUS_33388",
+      "PORTAL_NEXUS_33389",
+      "PORTAL_NEXUS_33390",
+      "PORTAL_NEXUS_33391",
+      "PORTAL_NEXUS_33392",
+      "PORTAL_NEXUS_33393",
+      "PORTAL_NEXUS_33394",
+      "PORTAL_NEXUS_33395",
+      "PORTAL_NEXUS_33396",
+      "PORTAL_NEXUS_33397",
+      "PORTAL_NEXUS_33398",
+      "PORTAL_NEXUS_33399",
+      "PORTAL_NEXUS_33400",
+      "PORTAL_NEXUS_33401",
+      "PORTAL_NEXUS_33402",
+      "PORTAL_NEXUS_33403",
+      "PORTAL_NEXUS_33404",
+      "PORTAL_NEXUS_33405",
+      "PORTAL_NEXUS_33406",
+      "PORTAL_NEXUS_33407",
+      "PORTAL_NEXUS_33408",
+      "PORTAL_NEXUS_33409",
+      "PORTAL_NEXUS_33410",
+      "PORTAL_NEXUS_33423",
+      "PORTAL_NEXUS_33424",
+      "PORTAL_NEXUS_33425",
+      "PORTAL_NEXUS_33426",
+      "PORTAL_NEXUS_33427",
+      "PORTAL_NEXUS_33428",
+      "PORTAL_NEXUS_33429",
+      "PORTAL_NEXUS_33430",
+      "PORTAL_NEXUS_33431",
+      "PORTAL_NEXUS_37547",
+      "PORTAL_NEXUS_37548",
+      "PORTAL_NEXUS_37549",
+      "PORTAL_NEXUS_37550",
+      "PORTAL_NEXUS_37551",
+      "PORTAL_NEXUS_37552",
+      "PORTAL_NEXUS_37553",
+      "PORTAL_NEXUS_37554",
+      "PORTAL_NEXUS_37555",
+      "PORTAL_NEXUS_37556",
+      "PORTAL_NEXUS_37557",
+      "PORTAL_NEXUS_37559",
+      "PORTAL_NEXUS_37560",
+      "PORTAL_NEXUS_37561",
+      "PORTAL_NEXUS_37562",
+      "PORTAL_NEXUS_37563",
+      "PORTAL_NEXUS_37564",
+      "PORTAL_NEXUS_37565",
+      "PORTAL_NEXUS_37566",
+      "PORTAL_NEXUS_37567",
+      "PORTAL_NEXUS_37568",
+      "PORTAL_NEXUS_37569",
+      "PORTAL_NEXUS_37571",
+      "PORTAL_NEXUS_37572",
+      "PORTAL_NEXUS_37573",
+      "PORTAL_NEXUS_41413",
+      "PORTAL_NEXUS_37574",
+      "PORTAL_NEXUS_41414",
+      "PORTAL_NEXUS_37575",
+      "PORTAL_NEXUS_41415",
+      "PORTAL_NEXUS_37576",
+      "PORTAL_NEXUS_37577",
+      "PORTAL_NEXUS_37578",
+      "PORTAL_NEXUS_37579",
+      "PORTAL_NEXUS_37580",
+      "PORTAL_NEXUS"
     ]
   },
   {
@@ -22610,8 +22515,8 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      29237,
-      40844
+      "POOL_OF_RESTORATION",
+      "FROZEN_POOL_OF_RESTORATION"
     ]
   },
   {
@@ -22629,8 +22534,8 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      29238,
-      40845
+      "POOL_OF_REVITALISATION",
+      "FROZEN_POOL_OF_REVITALISATION"
     ]
   },
   {
@@ -22648,8 +22553,8 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      29239,
-      40846
+      "POOL_OF_REJUVENATION",
+      "FROZEN_POOL_OF_REJUVENATION"
     ]
   },
   {
@@ -22667,8 +22572,8 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      29240,
-      40847
+      "FANCY_POOL_OF_REJUVENATION",
+      "FROZEN_FANCY_POOL_OF_REJUVENATION"
     ]
   },
   {
@@ -22686,8 +22591,8 @@
     "duration": 1250.0,
     "range": 20.0,
     "objectIds": [
-      29241,
-      40848
+      "FROZEN_ORNATE_POOL_OF_REJUVENATION",
+      "ORNATE_POOL_OF_REJUVENATION"
     ]
   },
   {
@@ -22705,9 +22610,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      13640,
-      13641,
-      13639
+      "SCRYING_POOL",
+      "TELEPORTATION_FOCUS",
+      "GREATER_TELEPORT_FOCUS"
     ]
   },
   {
@@ -22725,9 +22630,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      41416,
-      41417,
-      41418
+      "ARCEUUS_LIBRARY_PORTAL",
+      "ARCEUUS_LIBRARY_PORTAL_41417",
+      "ARCEUUS_LIBRARY_PORTAL_41418"
     ]
   },
   {
@@ -22745,9 +22650,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37583,
-      37595,
-      37607
+      "DRAYNOR_MANOR_PORTAL_37607",
+      "DRAYNOR_MANOR_PORTAL_37595",
+      "DRAYNOR_MANOR_PORTAL"
     ]
   },
   {
@@ -22765,9 +22670,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37584,
-      37596,
-      37608
+      "BATTLEFRONT_PORTAL",
+      "BATTLEFRONT_PORTAL_37608",
+      "BATTLEFRONT_PORTAL_37596"
     ]
   },
   {
@@ -22785,13 +22690,13 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
+      "VARROCK_PORTAL_33104",
+      "GRAND_EXCHANGE_PORTAL_33105",
+      "VARROCK_PORTAL",
+      "GRAND_EXCHANGE_PORTAL",
+      "VARROCK_PORTAL_33098",
+      "GRAND_EXCHANGE_PORTAL_33099",
       13629,
-      33092,
-      33098,
-      33104,
-      33093,
-      33099,
-      33105,
       13615
     ]
   },
@@ -22810,9 +22715,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37585,
-      37597,
-      37609
+      "MIND_ALTAR_PORTAL",
+      "MIND_ALTAR_PORTAL_37609",
+      "MIND_ALTAR_PORTAL_37597"
     ]
   },
   {
@@ -22830,9 +22735,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      13616,
-      13623,
-      13630
+      "LUMBRIDGE_PORTAL",
+      "LUMBRIDGE_PORTAL_13623",
+      "LUMBRIDGE_PORTAL_13630"
     ]
   },
   {
@@ -22850,9 +22755,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      13617,
-      13624,
-      13631
+      "FALADOR_PORTAL",
+      "FALADOR_PORTAL_13624",
+      "FALADOR_PORTAL_13631"
     ]
   },
   {
@@ -22870,9 +22775,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37586,
-      37598,
-      37610
+      "SALVE_GRAVEYARD_PORTAL",
+      "SALVE_GRAVEYARD_PORTAL_37610",
+      "SALVE_GRAVEYARD_PORTAL_37598"
     ]
   },
   {
@@ -22891,13 +22796,13 @@
     "range": 20.0,
     "objectIds": [
       13632,
-      33094,
-      33100,
-      33106,
-      33095,
-      33101,
-      33107,
-      13618
+      "CAMELOT_PORTAL_33106",
+      13618,
+      "SEERS_VILLAGE_PORTAL_33107",
+      "CAMELOT_PORTAL",
+      "SEERS_VILLAGE_PORTAL",
+      "CAMELOT_PORTAL_33100",
+      "SEERS_VILLAGE_PORTAL_33101"
     ]
   },
   {
@@ -22915,9 +22820,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37587,
-      37599,
-      37611
+      "FENKENSTRAINS_CASTLE_PORTAL",
+      "FENKENSTRAINS_CASTLE_PORTAL_37611",
+      "FENKENSTRAINS_CASTLE_PORTAL_37599"
     ]
   },
   {
@@ -22935,9 +22840,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      13619,
-      13626,
-      13633
+      "ARDOUGNE_PORTAL_13633",
+      "ARDOUGNE_PORTAL",
+      "ARDOUGNE_PORTAL_13626"
     ]
   },
   {
@@ -22956,12 +22861,12 @@
     "range": 20.0,
     "objectIds": [
       13634,
-      33097,
-      33102,
-      33103,
-      33109,
-      33096,
-      33108
+      "YANILLE_WATCHTOWER_PORTAL_33108",
+      "YANILLE_PORTAL_33109",
+      "YANILLE_WATCHTOWER_PORTAL",
+      "YANILLE_PORTAL",
+      "YANILLE_PORTAL_33102",
+      "YANILLE_PORTAL_33103"
     ]
   },
   {
@@ -22979,9 +22884,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29340,
-      29348,
-      29356
+      "SENNTISTEN_PORTAL_29348",
+      "SENNTISTEN_PORTAL",
+      "SENNTISTEN_PORTAL_29356"
     ]
   },
   {
@@ -22999,9 +22904,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37588,
-      37600,
-      37612
+      "WEST_ARDOUGNE_PORTAL_37600",
+      "WEST_ARDOUGNE_PORTAL",
+      "WEST_ARDOUGNE_PORTAL_37612"
     ]
   },
   {
@@ -23019,9 +22924,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29344,
-      29352,
-      29360
+      "MARIM_PORTAL",
+      "MARIM_PORTAL_29360",
+      "MARIM_PORTAL_29352"
     ]
   },
   {
@@ -23039,9 +22944,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37589,
-      37601,
-      37613
+      "HARMONY_ISLAND_PORTAL_37601",
+      "HARMONY_ISLAND_PORTAL",
+      "HARMONY_ISLAND_PORTAL_37613"
     ]
   },
   {
@@ -23059,9 +22964,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29338,
-      29346,
-      29354
+      "KHARYRLL_PORTAL_29346",
+      "KHARYRLL_PORTAL",
+      "KHARYRLL_PORTAL_29354"
     ]
   },
   {
@@ -23079,9 +22984,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29339,
-      29347,
-      29355
+      "LUNAR_ISLE_PORTAL_29347",
+      "LUNAR_ISLE_PORTAL",
+      "LUNAR_ISLE_PORTAL_29355"
     ]
   },
   {
@@ -23099,9 +23004,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29345,
-      29353,
-      29361
+      "KOUREND_PORTAL",
+      "KOUREND_PORTAL_29361",
+      "KOUREND_PORTAL_29353"
     ]
   },
   {
@@ -23119,9 +23024,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37590,
-      37602,
-      37614
+      "CEMETERY_PORTAL_37602",
+      "CEMETERY_PORTAL",
+      "CEMETERY_PORTAL_37614"
     ]
   },
   {
@@ -23139,9 +23044,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29342,
-      29350,
-      29358
+      "WATERBIRTH_ISLAND_PORTAL_29350",
+      "WATERBIRTH_ISLAND_PORTAL",
+      "WATERBIRTH_ISLAND_PORTAL_29358"
     ]
   },
   {
@@ -23159,9 +23064,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37591,
-      37603,
-      37615
+      "BARROWS_PORTAL_37603",
+      "BARROWS_PORTAL",
+      "BARROWS_PORTAL_37615"
     ]
   },
   {
@@ -23179,9 +23084,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      33434,
-      33437,
-      33440
+      "CARRALLANGAR_PORTAL_33440",
+      "CARRALLANGAR_PORTAL",
+      "CARRALLANGAR_PORTAL_33437"
     ]
   },
   {
@@ -23199,9 +23104,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29343,
-      29351,
-      29359
+      "FISHING_GUILD_PORTAL_29351",
+      "FISHING_GUILD_PORTAL",
+      "FISHING_GUILD_PORTAL_29359"
     ]
   },
   {
@@ -23219,9 +23124,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      33432,
-      33435,
-      33438
+      "CATHERBY_PORTAL",
+      "CATHERBY_PORTAL_33435",
+      "CATHERBY_PORTAL_33438"
     ]
   },
   {
@@ -23239,9 +23144,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      29341,
-      29349,
-      29357
+      "ANNAKARL_PORTAL_29349",
+      "ANNAKARL_PORTAL",
+      "ANNAKARL_PORTAL_29357"
     ]
   },
   {
@@ -23259,9 +23164,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37592,
-      37604,
-      37616
+      "APE_ATOLL_DUNGEON_PORTAL_37616",
+      "APE_ATOLL_DUNGEON_PORTAL_37604",
+      "APE_ATOLL_DUNGEON_PORTAL"
     ]
   },
   {
@@ -23279,9 +23184,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      33433,
-      33436,
-      33439
+      "GHORROCK_PORTAL",
+      "GHORROCK_PORTAL_33436",
+      "GHORROCK_PORTAL_33439"
     ]
   },
   {
@@ -23299,9 +23204,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      33179,
-      33180,
-      33181
+      "TROLL_STRONGHOLD_PORTAL",
+      "TROLL_STRONGHOLD_PORTAL_33180",
+      "TROLL_STRONGHOLD_PORTAL_33181"
     ]
   },
   {
@@ -23319,9 +23224,9 @@
     "duration": 4100.0,
     "range": 20.0,
     "objectIds": [
-      37581,
-      37593,
-      37605
+      "WEISS_PORTAL_37605",
+      "WEISS_PORTAL_37593",
+      "WEISS_PORTAL"
     ]
   },
   {
@@ -23339,7 +23244,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      3760
+      "CAVE_EXIT_3760"
     ]
   },
   {
@@ -23357,8 +23262,8 @@
     "duration": 1200.0,
     "range": 30.0,
     "objectIds": [
-      4004,
-      4005
+      "WELL_4004",
+      "WELL_4005"
     ]
   },
   {
@@ -23376,12 +23281,12 @@
     "duration": 1000.0,
     "range": 10.0,
     "objectIds": [
-      3918,
-      8767,
-      36492,
-      34958,
-      35867,
-      35868
+      "ELVEN_LAMP_35867",
+      "ELVEN_LAMP_36492",
+      "ELVEN_LAMP_35868",
+      "ELVEN_LAMP",
+      "ELVEN_LAMP_34958",
+      "ELVEN_LAMP_8767"
     ]
   },
   {
@@ -23399,7 +23304,7 @@
     "duration": 1200.0,
     "range": 10.0,
     "objectIds": [
-      35075
+      "PORTAL_35075"
     ]
   },
   {
@@ -23435,9 +23340,9 @@
     "duration": 3200.0,
     "range": 5.0,
     "objectIds": [
-      35384,
       35059,
-      35061
+      35061,
+      35384
     ]
   },
   {
@@ -23493,31 +23398,31 @@
     "duration": 3200.0,
     "range": 5.0,
     "objectIds": [
-      35467,
-      35455,
-      35456,
-      35451,
-      35452,
-      35453,
-      35454,
-      35457,
-      35458,
-      35459,
-      35460,
-      35461,
-      35462,
-      35463,
-      35464,
-      35465,
-      35466,
+      "SEAL_OF_AMLODD_35456",
+      "SEAL_OF_HEFIN",
+      "SEAL_OF_HEFIN_35458",
+      "SEAL_OF_IORWERTH",
+      "SEAL_OF_IORWERTH_35460",
+      "SEAL_OF_ITHELL",
+      "SEAL_OF_ITHELL_35462",
+      "SEAL_OF_MEILYR",
+      "SEAL_OF_MEILYR_35464",
+      "SEAL_OF_TRAHAEARN",
+      "SEAL_OF_TRAHAEARN_35466",
+      "SEAL_OF_THE_FORGOTTEN",
       36725,
       36726,
       36727,
       36728,
       36729,
       36730,
+      "SEAL_OF_CADARN",
       36731,
-      36732
+      "SEAL_OF_CADARN_35452",
+      36732,
+      "SEAL_OF_CRWYS",
+      "SEAL_OF_CRWYS_35454",
+      "SEAL_OF_AMLODD"
     ]
   },
   {
@@ -23553,15 +23458,15 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      35984,
-      35985,
-      36062,
-      36082,
-      36197,
-      36198,
-      36490,
-      36614,
-      36615
+      "TELEPORT_PLATFORM_35984",
+      "TELEPORT_PLATFORM_35985",
+      "TELEPORT_PLATFORM_36082",
+      "TELEPORT_PLATFORM_36197",
+      "TELEPORT_PLATFORM_36198",
+      "TELEPORT_PLATFORM_36614",
+      "TELEPORT_PLATFORM_36615",
+      "TELEPORT_PLATFORM_36490",
+      "TELEPORT_PLATFORM_36062"
     ]
   },
   {
@@ -23579,7 +23484,7 @@
     "duration": 5000.0,
     "range": 20.0,
     "objectIds": [
-      36081
+      "GAUNTLET_PORTAL"
     ]
   },
   {
@@ -23633,7 +23538,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      36074
+      "TOOL_STORAGE_36074"
     ]
   },
   {
@@ -23651,7 +23556,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      36077
+      "RANGE_36077"
     ]
   },
   {
@@ -23669,7 +23574,7 @@
     "duration": 3100.0,
     "range": 20.0,
     "objectIds": [
-      36063
+      "SINGING_BOWL_36063"
     ]
   },
   {
@@ -23723,7 +23628,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      36066
+      "PHREN_ROOTS_36066"
     ]
   },
   {
@@ -23741,7 +23646,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      36064
+      "CRYSTAL_DEPOSIT"
     ]
   },
   {
@@ -23759,7 +23664,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      35965
+      "TELEPORT_PLATFORM"
     ]
   },
   {
@@ -23777,7 +23682,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      35977
+      "TOOL_STORAGE"
     ]
   },
   {
@@ -23795,7 +23700,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      35980
+      "RANGE_35980"
     ]
   },
   {
@@ -23813,7 +23718,7 @@
     "duration": 3100.0,
     "range": 20.0,
     "objectIds": [
-      35966
+      "SINGING_BOWL_35966"
     ]
   },
   {
@@ -23867,7 +23772,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      35969
+      "PHREN_ROOTS"
     ]
   },
   {
@@ -23885,7 +23790,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      35967
+      "CORRUPT_DEPOSIT"
     ]
   },
   {
@@ -23903,7 +23808,7 @@
     "duration": 4300.0,
     "range": 20.0,
     "objectIds": [
-      36192
+      "ROCK_FORMATION_GLOWING"
     ]
   },
   {
@@ -23921,7 +23826,7 @@
     "duration": 4300.0,
     "range": 20.0,
     "objectIds": [
-      36193
+      "ROCK_FORMATION"
     ]
   },
   {
@@ -23939,7 +23844,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      36196
+      "ALTAR_36196"
     ]
   },
   {
@@ -23957,7 +23862,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      36195
+      "FURNACE_36195"
     ]
   },
   {
@@ -23975,8 +23880,8 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      6551,
-      6550
+      6550,
+      "PORTAL_6551"
     ]
   },
   {
@@ -24066,10 +23971,10 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      20931,
-      20932,
-      20948,
-      20949
+      "TOMB_DOOR",
+      "TOMB_DOOR_20932",
+      "TOMB_DOOR_20948",
+      "TOMB_DOOR_20949"
     ]
   },
   {
@@ -24088,9 +23993,9 @@
     "range": 30.0,
     "objectIds": [
       14839,
-      29228,
       29495,
-      29560
+      29560,
+      29228
     ]
   },
   {
@@ -24108,7 +24013,7 @@
     "duration": 6200.0,
     "range": 30.0,
     "objectIds": [
-      27878
+      "ARCANE_CRYSTAL"
     ]
   },
   {
@@ -24126,7 +24031,7 @@
     "duration": 4000.0,
     "range": 30.0,
     "objectIds": [
-      27882
+      "ARCANE_CRYSTAL_27882"
     ]
   },
   {
@@ -24144,7 +24049,7 @@
     "duration": 2400.0,
     "range": 30.0,
     "objectIds": [
-      27886
+      "ARCANE_CRYSTAL_27886"
     ]
   },
   {
@@ -24162,7 +24067,7 @@
     "duration": 6100.0,
     "range": 30.0,
     "objectIds": [
-      27879
+      "DARK_CRYSTAL"
     ]
   },
   {
@@ -24180,7 +24085,7 @@
     "duration": 3900.0,
     "range": 30.0,
     "objectIds": [
-      27883
+      "DARK_CRYSTAL_27883"
     ]
   },
   {
@@ -24198,7 +24103,7 @@
     "duration": 2300.0,
     "range": 30.0,
     "objectIds": [
-      27887
+      "DARK_CRYSTAL_27887"
     ]
   },
   {
@@ -24234,8 +24139,8 @@
     "duration": 4100.0,
     "range": 30.0,
     "objectIds": [
-      27885,
-      27884
+      "BLOOD_CRYSTAL_27884",
+      27885
     ]
   },
   {
@@ -24253,7 +24158,7 @@
     "duration": 2500.0,
     "range": 30.0,
     "objectIds": [
-      27888
+      "BLOOD_CRYSTAL_27888"
     ]
   },
   {
@@ -24271,7 +24176,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      27978
+      "BLOOD_ALTAR"
     ]
   },
   {
@@ -24289,7 +24194,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      27979
+      "DARK_ALTAR"
     ]
   },
   {
@@ -24307,7 +24212,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      27980
+      "SOUL_ALTAR"
     ]
   },
   {
@@ -24325,10 +24230,10 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29794,
-      30015,
-      30018,
-      30027
+      "LARGE_CRYSTAL",
+      "CRYSTAL_30018",
+      "CRYSTAL_30027",
+      "CRYSTAL_30015"
     ]
   },
   {
@@ -24382,8 +24287,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29775,
-      30016
+      "CRYSTAL_30016",
+      29775
     ]
   },
   {
@@ -24419,8 +24324,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29798,
-      30017
+      "CRYSTAL_30017",
+      29798
     ]
   },
   {
@@ -24456,8 +24361,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      30014,
-      33147
+      "BLOOD_CRYSTAL_33147",
+      "BLOOD_CRYSTAL_30014"
     ]
   },
   {
@@ -24475,7 +24380,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29867
+      "GIANT_ANVIL"
     ]
   },
   {
@@ -24493,7 +24398,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      29748
+      "BRAZIER_29748"
     ]
   },
   {
@@ -24511,7 +24416,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      30019
+      "MAGICAL_FIRE"
     ]
   },
   {
@@ -24529,8 +24434,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29760,
-      31958
+      "MAGENTA_CRYSTAL",
+      "MAGENTA_CRYSTAL_31958"
     ]
   },
   {
@@ -24548,8 +24453,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29759,
-      31957
+      "CYAN_CRYSTAL_31957",
+      "CYAN_CRYSTAL"
     ]
   },
   {
@@ -24567,8 +24472,8 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29761,
-      31959
+      "YELLOW_CRYSTAL",
+      "YELLOW_CRYSTAL_31959"
     ]
   },
   {
@@ -24586,7 +24491,7 @@
     "duration": 2400.0,
     "range": 20.0,
     "objectIds": [
-      29758
+      "BLACK_CRYSTAL"
     ]
   },
   {
@@ -24604,8 +24509,8 @@
     "duration": 1400.0,
     "range": 20.0,
     "objectIds": [
-      29879,
-      34432
+      "MYSTICAL_BARRIER_34432",
+      "MYSTICAL_BARRIER"
     ]
   },
   {
@@ -24623,7 +24528,7 @@
     "duration": 1400.0,
     "range": 20.0,
     "objectIds": [
-      34433
+      "MYSTICAL_BARRIER_ORANGE"
     ]
   },
   {
@@ -24641,7 +24546,7 @@
     "duration": 1400.0,
     "range": 20.0,
     "objectIds": [
-      34434
+      "MYSTICAL_BARRIER_RED"
     ]
   },
   {
@@ -24659,7 +24564,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      10433
+      "FIRE_10433"
     ]
   },
   {
@@ -24677,7 +24582,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      34421
+      "LIGHT_34421"
     ]
   },
   {
@@ -24717,8 +24622,8 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      9368,
-      9369,
+      "PRIVATE_PORTAL",
+      "PRIVATE_PORTAL_9369",
       9370
     ]
   },
@@ -24737,7 +24642,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      2141
+      "TUNNEL"
     ]
   },
   {
@@ -24755,7 +24660,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      31790
+      "VINE_LADDER_31790"
     ]
   },
   {
@@ -24773,7 +24678,7 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      32119
+      "BRAZIER_32119"
     ]
   },
   {
@@ -24791,8 +24696,8 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      6665,
-      6661
+      "BLUE_TEARS",
+      "BLUE_TEARS_6665"
     ]
   },
   {
@@ -24810,8 +24715,8 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      6662,
-      6666
+      "GREEN_TEARS",
+      "GREEN_TEARS_6666"
     ]
   },
   {
@@ -24866,8 +24771,8 @@
     "duration": 2200.0,
     "range": 20.0,
     "objectIds": [
-      41547,
-      41548
+      "ROCKS_41547",
+      "ROCKS_41548"
     ]
   },
   {
@@ -24921,7 +24826,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      41588
+      "WATER_41588"
     ]
   },
   {
@@ -24957,7 +24862,7 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      41236
+      "SHRINE_41236"
     ]
   },
   {
@@ -24975,10 +24880,10 @@
     "duration": 0.0,
     "range": 40.0,
     "objectIds": [
-      41242,
-      41243,
-      41244,
-      41245
+      "ELECTRIFIED_HARPOONFISH_CANNON",
+      "ELECTRIFIED_HARPOONFISH_CANNON_41243",
+      "ELECTRIFIED_HARPOONFISH_CANNON_41244",
+      "ELECTRIFIED_HARPOONFISH_CANNON_41245"
     ]
   },
   {
@@ -24996,7 +24901,7 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      41724
+      "CLAN_HALL_PORTAL"
     ]
   },
   {
@@ -25032,7 +24937,7 @@
     "duration": 2100.0,
     "range": 20.0,
     "objectIds": [
-      38451
+      "MAGICAL_OBELISK"
     ]
   },
   {
@@ -25069,7 +24974,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      39152
+      "LAMP_39152"
     ]
   },
   {
@@ -25087,11 +24992,11 @@
     "duration": 0.0,
     "range": 0.0,
     "objectIds": [
-      32990,
-      32991,
-      32992,
-      32993,
-      32994
+      "MONUMENTAL_CHEST_32992",
+      "MONUMENTAL_CHEST_32993",
+      "MONUMENTAL_CHEST_32994",
+      "MONUMENTAL_CHEST",
+      "MONUMENTAL_CHEST_32991"
     ]
   },
   {
@@ -25128,7 +25033,7 @@
     "duration": 1800.0,
     "range": 30.0,
     "objectIds": [
-      32996
+      "TELEPORT_CRYSTAL"
     ]
   },
   {
@@ -25146,7 +25051,7 @@
     "duration": 2200.0,
     "range": 30.0,
     "objectIds": [
-      32755
+      "BARRIER_32755"
     ]
   },
   {
@@ -25164,7 +25069,7 @@
     "duration": 1800.0,
     "range": 10.0,
     "objectIds": [
-      32957
+      "CHAMBER"
     ]
   },
   {
@@ -25272,7 +25177,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      34748
+      "PORTAL_34748"
     ]
   },
   {
@@ -25290,7 +25195,7 @@
     "duration": 500.0,
     "range": 20.0,
     "objectIds": [
-      34790
+      "MYSTERIOUS_GLOW_34790"
     ]
   },
   {
@@ -25308,17 +25213,17 @@
     "duration": 2200.0,
     "range": 30.0,
     "objectIds": [
-      20199,
-      20200,
-      20201,
-      20202,
-      20203,
-      20204,
-      20205,
-      20206,
-      20207,
-      20208,
-      20209
+      "DOOR_20208",
+      "DOOR_20209",
+      "DOOR_20199",
+      "DOOR_20200",
+      "DOOR_20201",
+      "DOOR_20202",
+      "DOOR_20203",
+      "DOOR_20204",
+      "DOOR_20205",
+      "DOOR_20206",
+      "DOOR_20207"
     ]
   },
   {
@@ -25354,7 +25259,7 @@
     "duration": 500.0,
     "range": 20.0,
     "objectIds": [
-      34789
+      "MYSTERIOUS_GLOW"
     ]
   },
   {
@@ -25372,7 +25277,7 @@
     "duration": 500.0,
     "range": 20.0,
     "objectIds": [
-      34791
+      "MYSTERIOUS_GLOW_34791"
     ]
   },
   {
@@ -25390,9 +25295,9 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      2156,
-      2157,
-      2158
+      "MAGIC_PORTAL",
+      "MAGIC_PORTAL_2157",
+      "MAGIC_PORTAL_2158"
     ]
   },
   {
@@ -25410,11 +25315,9 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      22760,
-      22761,
-      22762,
-      22764,
-      22976,
+      "LAMP_22976",
+      23040,
+      23041,
       22980,
       22983,
       22984,
@@ -25432,10 +25335,14 @@
       23013,
       23014,
       23015,
+      "LAMP_22760",
       23016,
+      "LAMP_22761",
       23017,
+      "LAMP_22762",
       23018,
       23019,
+      "LAMP_22764",
       23020,
       23021,
       23022,
@@ -25454,9 +25361,7 @@
       23036,
       23037,
       23038,
-      23039,
-      23040,
-      23041
+      23039
     ]
   },
   {
@@ -25474,9 +25379,9 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      22735,
-      22736,
-      22737
+      "ZAPPER_22736",
+      "ZAPPER_22737",
+      "ZAPPER"
     ]
   },
   {
@@ -25494,7 +25399,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      22826
+      "MAGIC_BALL"
     ]
   },
   {
@@ -25512,7 +25417,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      22823
+      "THINGYMAJIG"
     ]
   },
   {
@@ -25530,7 +25435,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      9098
+      "MELTING_POT"
     ]
   },
   {
@@ -25548,7 +25453,7 @@
     "duration": 0.0,
     "range": 30.0,
     "objectIds": [
-      15469
+      "EMBALMING_TUBE"
     ]
   },
   {
@@ -25566,7 +25471,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      26181
+      "RANGE_26181"
     ]
   },
   {
@@ -25656,7 +25561,7 @@
     "duration": 0.0,
     "range": 10.0,
     "objectIds": [
-      42859
+      "ANCIENT_FORGE"
     ]
   },
   {
@@ -25674,7 +25579,7 @@
     "duration": 1550.0,
     "range": 20.0,
     "objectIds": [
-      20843
+      "EXIT_PORTAL_20843"
     ]
   },
   {
@@ -25692,7 +25597,7 @@
     "duration": 2800.0,
     "range": 30.0,
     "objectIds": [
-      14985
+      "STRANGE_SHRINE"
     ]
   },
   {
@@ -26485,7 +26390,7 @@
     "height": 100,
     "alignment": "CENTER",
     "radius": 4000,
-    "strength": 10,
+    "strength": 10.0,
     "color": [
       0.92156863,
       0.38039216,
@@ -26504,7 +26409,7 @@
     "height": 100,
     "alignment": "CENTER",
     "radius": 4000,
-    "strength": 10,
+    "strength": 10.0,
     "color": [
       0.92156863,
       0.38039216,
@@ -26523,7 +26428,7 @@
     "height": 100,
     "alignment": "CENTER",
     "radius": 4000,
-    "strength": 10,
+    "strength": 10.0,
     "color": [
       0.92156863,
       0.38039216,
@@ -26539,7 +26444,7 @@
     "height": 80,
     "alignment": "CENTER",
     "radius": 800,
-    "strength": 20,
+    "strength": 20.0,
     "color": [
       0.9743002,
       0.3021255,
@@ -26549,8 +26454,8 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      732,
-      23105
+      "FLAMES",
+      732
     ]
   },
   {
@@ -26558,7 +26463,7 @@
     "height": 80,
     "alignment": "CENTER",
     "radius": 5000,
-    "strength": 30,
+    "strength": 30.0,
     "color": [
       0.9743002,
       0.3021255,
@@ -26568,7 +26473,158 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      21773
+      "SOUL_DEVOURER"
+    ]
+  },
+  {
+    "description": "ANCIENT_CAVERN_DRAGON_HEAD",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.9743002,
+      0.19751643,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "npcIds": [
+      "DRAGON_HEAD_8144"
+    ]
+  },
+  {
+    "description": "WALL_CANDLE",
+    "height": 300,
+    "alignment": "FRONT",
+    "radius": 300,
+    "strength": 10.0,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      9746
+    ]
+  },
+  {
+    "description": "CAMDOZAAL_STATUE",
+    "height": 200,
+    "alignment": "FRONT",
+    "radius": 600,
+    "strength": 2.0,
+    "color": [
+      0.0,
+      0.2673581,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 30.0,
+    "objectIds": [
+      41467
+    ]
+  },
+  {
+    "description": "CAMDOZAAL_SACRED_FORGE",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 1400,
+    "strength": 12.5,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 30.0,
+    "objectIds": [
+      "SACRED_FORGE"
+    ]
+  },
+  {
+    "description": "ANCIENT_CAVERN_LAVA_POOL",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 300,
+    "strength": 7.5,
+    "color": [
+      0.9743002,
+      0.19751643,
+      5.6921755E-5
+    ],
+    "type": "STATIC",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      "ANVIL_32215",
+      "ANVIL_32216",
+      32217,
+      32218,
+      32219,
+      32220
+    ]
+  },
+  {
+    "description": "ANCIENT_CAVERN_DRAGON_HEADS",
+    "height": 200,
+    "alignment": "FRONT",
+    "radius": 500,
+    "strength": 12.5,
+    "color": [
+      0.9743002,
+      0.19751643,
+      5.6921755E-5
+    ],
+    "type": "STATIC",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      "DRAGON_HEAD_32213"
+    ]
+  },
+  {
+    "description": "ANCIENT_CAVERN_LAVA_FLOOR",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 300,
+    "strength": 7.5,
+    "color": [
+      0.9743002,
+      0.19751643,
+      5.6921755E-5
+    ],
+    "type": "STATIC",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      32224,
+      32222,
+      32223
+    ]
+  },
+  {
+    "description": "ANCIENT_CAVERN_ORB",
+    "height": 250,
+    "alignment": "CENTER",
+    "radius": 1000,
+    "strength": 25.0,
+    "color": [
+      0.9743002,
+      0.19751643,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      29899
     ]
   }
 ]
