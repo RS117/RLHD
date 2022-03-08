@@ -138,10 +138,14 @@ public class EnvironmentManager
 
 	public void update()
 	{
-		WorldPoint camPosition = hdPlugin.getClient().getLocalPlayer().getWorldLocation();
-		int posX = camPosition.getX();
-		int posY = camPosition.getY();
-		int plane = camPosition.getPlane();
+		WorldPoint playerPosition = client.getLocalPlayer().getWorldLocation();
+		if (playerPosition == null) {
+			log.debug("Unable to get Players Position");
+			return;
+		}
+		int posX = playerPosition.getX();
+		int posY = playerPosition.getY();
+		int plane = playerPosition.getPlane();
 
 		for (Environment environment : sceneEnvironments)
 		{
