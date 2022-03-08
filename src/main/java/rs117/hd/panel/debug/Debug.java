@@ -25,11 +25,20 @@
 package rs117.hd.panel.debug;
 
 import com.google.inject.Inject;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import javax.swing.*;
+import java.util.stream.Collectors;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,19 +48,18 @@ import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.ImageUtil;
 import rs117.hd.HdPlugin;
 import rs117.hd.panel.HdPanel;
+import rs117.hd.panel.components.CategoryBuilder;
 import rs117.hd.panel.components.FixedWidthPanel;
 import rs117.hd.panel.components.Header;
-import rs117.hd.panel.components.Selection;
+import rs117.hd.panel.debug.overlays.LightInfoOverlay;
 import rs117.hd.panel.debug.sections.Buttons;
 import rs117.hd.panel.debug.sections.Specifications;
-import rs117.hd.panel.debug.overlays.LightInfoOverlay;
 
 public class Debug extends PluginPanel
 {
 
 	@Getter
-	private static final HashMap<Selection, JPanel> expanding = new HashMap<>();
-
+	private static final HashMap<Integer, CategoryBuilder> category = new HashMap<>();
 	public static ImageIcon SECTION_EXPAND_ICON;
 	public static ImageIcon SECTION_EXPAND_ICON_HOVER;
 	public static ImageIcon SECTION_RETRACT_ICON;
@@ -120,16 +128,35 @@ public class Debug extends PluginPanel
 		setSpecifications(new Specifications(plugin));
 		setButtons(new Buttons(plugin));
 
-		expanding.put(new Selection("Toggle Buttons"), buttons);
-		expanding.put(new Selection("Computer Specifications"), specifications);
+		new CategoryBuilder().
+			setName("Toggle Buttons").
+			setPosition(0).
+			setPanel(buttons).
+			setEnabled(true)
+		.build();
 
-		for (Map.Entry<Selection, JPanel> entry : expanding.entrySet())
-		{
-			mainPanel.add(entry.getKey());
-			mainPanel.add(entry.getValue());
-			entry.getKey().getSectionContents().add(entry.getValue());
-			entry.getKey().repaint();
-		}
+		new CategoryBuilder().
+			setName("Computer Specifications").
+			setPosition(1).
+			setPanel(specifications).
+			setEnabled(false)
+		.build();
+
+		List<Map.Entry<Integer, CategoryBuilder>> result =
+			category.entrySet()
+				.stream()
+				.sorted(Map.Entry.comparingByKey())
+				.collect(Collectors.toList());
+
+
+		result.forEach(entry -> {
+			mainPanel.add(entry.getValue().getCategory());
+			mainPanel.add(entry.getValue().getPanel());
+			entry.getValue().getCategory().getSectionContents().add(entry.getValue().getPanel());
+			entry.getValue().getCategory().toggleSelection(entry.getValue().getEnabled());
+			entry.getValue().getCategory().repaint();
+		});
+
 
 	}
 

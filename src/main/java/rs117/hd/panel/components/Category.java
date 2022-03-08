@@ -36,37 +36,34 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import lombok.Getter;
-import lombok.Setter;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.ui.FontManager;
 import static net.runelite.client.ui.PluginPanel.BORDER_OFFSET;
 import static net.runelite.client.ui.PluginPanel.PANEL_WIDTH;
 import net.runelite.client.util.SwingUtil;
-import rs117.hd.panel.debug.Debug;
 import static rs117.hd.panel.debug.Debug.SECTION_EXPAND_ICON;
 import static rs117.hd.panel.debug.Debug.SECTION_EXPAND_ICON_HOVER;
 import static rs117.hd.panel.debug.Debug.SECTION_RETRACT_ICON;
 import static rs117.hd.panel.debug.Debug.SECTION_RETRACT_ICON_HOVER;
 
-public class Selection extends JPanel
+public class Category extends JPanel
 {
-	@Getter
-	private String title;
-	@Setter
-	private boolean selected;
+
 	@Getter
 	private JButton sectionToggle;
 	@Getter
 	private final JPanel sectionContents;
+	@Getter
+	private JPanel content = new JPanel();
 
-	public Selection(String title)
+	public Category(String title)
 	{
-		this.title = title;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setMinimumSize(new Dimension(PANEL_WIDTH, 0));
 		JPanel sectionHeader = new JPanel();
+		content.setVisible(false);
 		sectionHeader.setLayout(new BorderLayout());
 		sectionHeader.setMinimumSize(new Dimension(PANEL_WIDTH, 0));
 		MouseListener mouseListener = new MouseListener()
@@ -74,7 +71,7 @@ public class Selection extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				toggleSelection();
+				toggleSelection(!content.isVisible());
 			}
 
 			@Override
@@ -109,15 +106,15 @@ public class Selection extends JPanel
 			new EmptyBorder(0, 0, 3, 1)));
 		add(sectionHeader, BorderLayout.NORTH);
 
-		sectionToggle = new JButton(selected ? SECTION_RETRACT_ICON : SECTION_EXPAND_ICON);
-		sectionToggle.setRolloverIcon(selected ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
+		sectionToggle = new JButton(content.isVisible() ? SECTION_RETRACT_ICON : SECTION_EXPAND_ICON);
+		sectionToggle.setRolloverIcon(content.isVisible() ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
 		sectionToggle.setPreferredSize(new Dimension(18, 0));
 		sectionToggle.setBorder(new EmptyBorder(0, 0, 0, 5));
-		sectionToggle.setToolTipText(selected ? "Retract" : "Expand");
+		sectionToggle.setToolTipText(content.isVisible() ? "Retract" : "Expand");
 
 		SwingUtil.removeButtonDecorations(sectionToggle);
 		sectionHeader.add(sectionToggle, BorderLayout.WEST);
-		sectionToggle.addActionListener(e -> toggleSelection());
+		sectionToggle.addActionListener(e -> toggleSelection(!content.isVisible()));
 		final JLabel sectionName = new JLabel(title);
 
 		sectionName.setForeground(ColorScheme.BRAND_ORANGE);
@@ -135,18 +132,15 @@ public class Selection extends JPanel
 
 	}
 
-	public void toggleSelection()
+	public void toggleSelection(boolean state)
 	{
-		JPanel panel = Debug.getExpanding().get(this);
-		panel.setVisible(!panel.isVisible());
+		content.setVisible(state);
 		getParent().validate();
-
-		setSelected(!selected);
-		sectionToggle.setIcon(selected ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
-		sectionToggle.setRolloverIcon(selected ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
-		sectionToggle.setToolTipText(selected ? "Retract" : "Expand");
-		sectionContents.getComponent(0).setVisible(selected);
-		sectionContents.setVisible(selected);
+		sectionToggle.setIcon(state ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
+		sectionToggle.setRolloverIcon(state ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
+		sectionToggle.setToolTipText(state? "Retract" : "Expand");
+		sectionContents.getComponent(0).setVisible(state);
+		sectionContents.setVisible(state);
 		repaint();
 	}
 
