@@ -36,6 +36,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.jogamp.opengl.math.FloatUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -77,14 +78,15 @@ public class LightManager
 	@Inject
 	private HdPlugin hdPlugin;
 
-	private static final ArrayList<SceneLight> WORLD_LIGHTS = new ArrayList<>();
+	@Getter private static final ArrayList<SceneLight> WORLD_LIGHTS = new ArrayList<>();
 	private static final ListMultimap<Integer, Light> NPC_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> PROJECTILE_LIGHTS = ArrayListMultimap.create();
 
 	private FileWatcher fileWatcher;
-
+	@Getter
 	ArrayList<SceneLight> sceneLights = new ArrayList<>();
+	@Getter
 	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
 
 	long lastFrameTime = -1;

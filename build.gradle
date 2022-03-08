@@ -24,6 +24,8 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    implementation 'org.jfree:jfreechart:1.5.3'
 }
 
 group = 'rs117.hd'

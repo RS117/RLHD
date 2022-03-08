@@ -65,11 +65,13 @@ import java.nio.IntBuffer;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import jogamp.nativewindow.macosx.OSXUtil;
 import jogamp.newt.awt.NewtFactoryAWT;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -79,10 +81,16 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.externalplugins.ExternalPluginManager;
+import net.runelite.client.externalplugins.ExternalPluginManifest;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.ui.ClientToolbar;
+import net.runelite.client.ui.NavigationButton;
+import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.util.ImageUtil;
 import static rs117.hd.GLUtil.glDeleteBuffer;
 import static rs117.hd.GLUtil.glDeleteFrameBuffer;
 import static rs117.hd.GLUtil.glDeleteRenderbuffers;
@@ -103,6 +111,8 @@ import rs117.hd.lighting.LightManager;
 import rs117.hd.lighting.SceneLight;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
+import rs117.hd.panel.HdPanel;
+import rs117.hd.panel.debug.overlays.LightInfoOverlay;
 import rs117.hd.template.Template;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.OSType;
@@ -139,9 +149,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private static final int SCALAR_BYTES = 4;
 
 	private static final int[] eightIntWrite = new int[8];
+	private NavigationButton nav;
+	
+	@Getter
+	@Setter
+	private HdPanel panel;
 
 	@Inject
+	@Getter
+	@Named("runelite.version")
+	public String runeliteVersion;
+
+	@Inject
+	@Getter
 	private Client client;
+
+	@Inject
+	private ClientToolbar clientToolbar;
 	
 	@Inject
 	private OpenCLManager openCLManager;
@@ -150,12 +174,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private ClientThread clientThread;
 
 	@Inject
+	private OverlayManager overlayManager;
+
+	@Inject
+	@Getter
 	private HdPluginConfig config;
 
 	@Inject
 	private TextureManager textureManager;
 
 	@Inject
+	@Getter
 	private LightManager lightManager;
 
 	@Inject
@@ -190,8 +219,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private Canvas canvas;
 	private JAWTWindow jawtWindow;
 	private GL4 gl;
+	@Getter
 	private GLContext glContext;
 	private GLDrawable glDrawable;
+
+	@Getter
+	@Setter
+	private String renderer,version;
+
+	@Getter
+	@Setter
+	String pluginVersion = "";
 
 	private Path shaderPath;
 	private FileWatcher fileWatcher;
@@ -443,7 +481,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
+
+		ExternalPluginManifest manifest = ExternalPluginManager.getExternalPluginManifest(getClass());
+		setPluginVersion(manifest == null ? "Not Available" : manifest.getVersion());
+
 		convertOldBrightnessConfig();
+
+		log.info(Utils.getSpecs(runeliteVersion,pluginVersion));
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
@@ -512,6 +556,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 						log.info("Using device: {}", versionGL.glGetString(GL.GL_RENDERER));
 						log.info("Using driver: {}", versionGL.glGetString(GL.GL_VERSION));
 						log.info("Client is {}-bit", System.getProperty("sun.arch.data.model"));
+						setRenderer(versionGL.glGetString(GL.GL_RENDERER));
+						setVersion(versionGL.glGetString(GL.GL_VERSION));
+
 						versionContext.destroy();
 					} catch (Exception ex) {
 						log.error("failed to get device information", ex);
@@ -598,6 +645,24 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					initShadowMapFbo();
 				});
 
+
+				SwingUtilities.invokeAndWait(() -> {
+					setPanel(injector.getInstance(HdPanel.class));
+
+
+					final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "icon.png");
+
+					nav = NavigationButton.builder()
+							.tooltip("HD 117")
+							.icon(icon)
+							.priority(3)
+							.panel(panel)
+							.build();
+
+					clientToolbar.addNavigation(nav);
+					setupOverlays();
+				});
+
 				client.setDrawCallbacks(this);
 				client.setGpu(true);
 
@@ -648,6 +713,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 			return true;
 		});
+	}
+
+	@Inject
+	private LightInfoOverlay lightInfoOverlay;
+
+	public void setupOverlays() {
+		overlayManager.add(lightInfoOverlay);
+	}
+
+	public void removeOverlays() {
+		overlayManager.remove(lightInfoOverlay);
 	}
 
 	@Override
