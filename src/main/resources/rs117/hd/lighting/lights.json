@@ -20947,15 +20947,18 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      11474,
       196,
       197,
       "OIL_LAMP",
-      4501,
       7432,
       "CANDLES",
       "CANDLES_203",
+      "HARP",
       206,
+      11474,
+      5746,
+      4501,
+      5787,
       24414,
       2175
     ]
@@ -26643,37 +26646,6 @@
     "range": 30.0,
     "objectIds": [
       6384
-    ]
-  },
-  {
-    "description": "WALL_TORCH_MID",
-    "height": 200,
-    "alignment": "CENTER",
-    "radius": 300,
-    "strength": 12.5,
-    "color": [
-      0.9743002,
-      0.3021255,
-      5.6921755E-5
-    ],
-    "type": "FLICKER",
-    "duration": 0.0,
-    "range": 20.0,
-    "objectIds": [
-      196,
-      197,
-      "OIL_LAMP",
-      7432,
-      "CANDLES",
-      "CANDLES_203",
-      "HARP",
-      206,
-      11474,
-      5746,
-      4501,
-      5787,
-      24414,
-      2175
     ]
   }
 ]
