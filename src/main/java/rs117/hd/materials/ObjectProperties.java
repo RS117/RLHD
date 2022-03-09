@@ -24,6 +24,7 @@
  */
 package rs117.hd.materials;
 
+import java.awt.Color;
 import java.util.HashMap;
 import lombok.Getter;
 import static net.runelite.api.ObjectID.*;
@@ -92,6 +93,10 @@ public enum ObjectProperties
 
 	// Ape Atoll
 	APE_ATOLL_DUNGEON_WALLS(Material.GRUNGE_1, 4898),
+
+
+	LIGHT_WALLS(Material.GRUNGE_1, new Properties(), 1422),
+
 
 	// Zeah
 	SHAYZIEN_SHAY_SHRINE(Material.MARBLE_3_GLOSS, CAT_SHRINE),
