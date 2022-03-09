@@ -53,13 +53,13 @@ public class HdPanel extends PluginPanel
 	private final JPanel display = new JPanel();
 
 	private final MaterialTabGroup tabGroup = new MaterialTabGroup(display);
-	private MaterialTab preset;
-	private MaterialTab debug;
 
 	@Getter
 	private final Preset presetPanel;
 	@Getter
 	private final Debug debugPanel;
+	@Getter
+	private final Updates updatePanel;
 
 	@Inject
 	private HdPanel(Preset presetPanel, Debug debugPanel)
@@ -73,6 +73,7 @@ public class HdPanel extends PluginPanel
 
 		this.presetPanel = presetPanel;
 		this.debugPanel = debugPanel;
+		this.updatePanel = new Updates();
 
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 		setLayout(new BorderLayout());
@@ -86,8 +87,9 @@ public class HdPanel extends PluginPanel
 	{
 
 
-		preset = new MaterialTab("Presets", tabGroup, presetPanel);
-		debug = new MaterialTab("Debug", tabGroup, debugPanel);
+		MaterialTab preset = new MaterialTab("Presets", tabGroup, presetPanel);
+		MaterialTab debug = new MaterialTab("Debug", tabGroup, debugPanel);
+		MaterialTab updates = new MaterialTab("Updates", tabGroup, updatePanel);
 
 		JPanel container = new JPanel();
 		container.setBorder(new EmptyBorder(10, 0, 5, 0));
@@ -95,6 +97,7 @@ public class HdPanel extends PluginPanel
 
 		tabGroup.addTab(preset);
 		tabGroup.addTab(debug);
+		tabGroup.addTab(updates);
 
 		tabGroup.select(preset);
 
