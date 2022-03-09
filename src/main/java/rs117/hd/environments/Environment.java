@@ -31,6 +31,15 @@ import rs117.hd.HDUtils;
 @Getter
 public enum Environment
 {
+
+	EVIL_BOB_ISLAND(Area.EVIL_BOB_ISLAND, new Properties()
+		.setFogColor("#B8D6FF")
+		.setFogDepth(70)
+		.setAmbientColor("#C0AE94")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#F5BC67")
+		.setDirectionalStrength(1.0f)
+	),
 	// Wilderness
 	REVENANT_CAVES(Area.REVENANT_CAVES, new Properties()
 		.setFogColor("#081F1C")

@@ -31,7 +31,7 @@ import net.runelite.api.Constants;
 public enum Area
 {
 	// items higher on the list take precedent over those below
-
+	EVIL_BOB_ISLAND(2495, 4805, 2559, 4747),
 	// Tutorial Island
 	TUTORIAL_ISLAND_WIZARD_BUILDING(3136, 3097, 3144, 3076),
 	TUTORIAL_ISLAND_CHURCH(3114, 3111, 3129, 3102),
