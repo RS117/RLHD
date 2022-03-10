@@ -28,14 +28,18 @@ package rs117.hd.lighting;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.primitives.Ints;
+import com.jogamp.opengl.math.FloatUtil;
+import static com.jogamp.opengl.math.FloatUtil.cos;
+import static com.jogamp.opengl.math.FloatUtil.pow;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import com.jogamp.opengl.math.FloatUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
@@ -51,14 +55,15 @@ import net.runelite.api.TileObject;
 import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcChanged;
+import net.runelite.api.events.NpcDespawned;
+import net.runelite.client.config.ConfigManager;
+import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.plugins.entityhider.EntityHiderConfig;
+import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
+import rs117.hd.HDUtils;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
-import rs117.hd.HDUtils;
-
-import static com.jogamp.opengl.math.FloatUtil.cos;
-import static com.jogamp.opengl.math.FloatUtil.pow;
 import rs117.hd.utils.Env;
 import rs117.hd.utils.FileWatcher;
 
@@ -69,6 +74,9 @@ public class LightManager
 	public static String LIGHTS_CONFIG_ENV = "RLHD_LIGHTS_PATH";
 
 	@Inject
+	private ConfigManager configManager;
+
+	@Inject
 	private HdPluginConfig config;
 
 	@Inject
@@ -77,14 +85,21 @@ public class LightManager
 	@Inject
 	private HdPlugin hdPlugin;
 
+	@Inject
+	private EntityHiderPlugin entityHiderPlugin;
+
+	@Inject
+	private PluginManager pluginManager;
+
 	private static final ArrayList<SceneLight> WORLD_LIGHTS = new ArrayList<>();
 	private static final ListMultimap<Integer, Light> NPC_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> PROJECTILE_LIGHTS = ArrayListMultimap.create();
 
 	private FileWatcher fileWatcher;
-
+	@Getter
 	ArrayList<SceneLight> sceneLights = new ArrayList<>();
+	@Getter
 	ArrayList<Projectile> sceneProjectiles = new ArrayList<>();
 
 	long lastFrameTime = -1;
@@ -97,8 +112,13 @@ public class LightManager
 
 	public int visibleLightsCount = 0;
 
+	private EntityHiderConfig entityHiderConfig;
+
 	public void startUp()
 	{
+
+		entityHiderConfig = configManager.getConfig(EntityHiderConfig.class);
+
 		Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
 		if (lightsConfigPath == null)
 		{
@@ -201,7 +221,7 @@ public class LightManager
 				light.y = (int) light.projectile.getY();
 				light.z = (int) light.projectile.getZ();
 
-				light.visible = hdPlugin.configProjectileLights;
+				light.visible = projectileLightVisible();
 			}
 
 			if (light.npc != null)
@@ -258,12 +278,7 @@ public class LightManager
 					float tileHeight = HDUtils.lerp(heightSouth, heightNorth, lerpY);
 					light.z = (int) tileHeight - 1 - light.height;
 
-					light.visible = light.npc.getModel() != null;
-
-					if (!hdPlugin.configNpcLights)
-					{
-						light.visible = false;
-					}
+					light.visible = npcLightVisible(light.npc);
 				}
 				else
 				{
@@ -279,11 +294,11 @@ public class LightManager
 
 				float flicker = (
 					pow(cos(11 * t), 2) +
-					pow(cos(17 * t), 4) +
-					pow(cos(23 * t), 6) +
-					pow(cos(31 * t), 2) +
-					pow(cos(179 * t), 2) / 3 +
-					pow(cos(331 * t), 2) / 7
+						pow(cos(17 * t), 4) +
+						pow(cos(23 * t), 6) +
+						pow(cos(31 * t), 2) +
+						pow(cos(179 * t), 2) / 3 +
+						pow(cos(331 * t), 2) / 7
 				) / 4.335f;
 
 				float maxFlicker = 1f + (light.range / 100f);
@@ -321,7 +336,7 @@ public class LightManager
 
 				float multiplier = (1.0f - range) + output * fullRange;
 
-				light.currentSize = (int)(light.radius * multiplier);
+				light.currentSize = (int) (light.radius * multiplier);
 				light.currentStrength = light.strength * multiplier;
 			}
 			else
@@ -333,7 +348,7 @@ public class LightManager
 			// Apply fade-in
 			if (light.fadeInDuration > 0)
 			{
-				light.currentStrength *= Math.min((float)light.currentFadeIn / (float)light.fadeInDuration, 1.0f);
+				light.currentStrength *= Math.min((float) light.currentFadeIn / (float) light.fadeInDuration, 1.0f);
 
 				light.currentFadeIn += frameTime;
 			}
@@ -342,8 +357,8 @@ public class LightManager
 			// lights to display based on the 'max dynamic lights' config option
 			light.distance = (int) Math.sqrt(Math.pow(camX - light.x, 2) + Math.pow(camY - light.y, 2) + Math.pow(camZ - light.z, 2));
 
-			int tileX = (int)Math.floor(light.x / 128f);
-			int tileY = (int)Math.floor(light.y / 128f);
+			int tileX = (int) Math.floor(light.x / 128f);
+			int tileY = (int) Math.floor(light.y / 128f);
 			int tileZ = light.plane;
 
 			light.belowFloor = false;
@@ -370,6 +385,44 @@ public class LightManager
 		sceneLights.sort(Comparator.comparingInt(light -> light.distance));
 
 		lastFrameTime = System.currentTimeMillis();
+	}
+
+	public boolean npcLightVisible(NPC npc)
+	{
+		if (npc.getModel() == null)
+		{
+			return false;
+		}
+
+		if (pluginManager.isPluginEnabled(entityHiderPlugin))
+		{
+			boolean isPet = npc.getComposition().isFollower();
+			if (entityHiderConfig.hideNPCs() && !isPet)
+			{
+				return false;
+			}
+			if (entityHiderConfig.hidePets() && isPet)
+			{
+				return false;
+			}
+		}
+
+		return hdPlugin.configNpcLights;
+	}
+
+	public boolean projectileLightVisible()
+	{
+
+		if (pluginManager.isPluginEnabled(entityHiderPlugin))
+		{
+			if (entityHiderConfig.hideProjectiles())
+			{
+				return false;
+			}
+
+		}
+
+		return hdPlugin.configProjectileLights;
 	}
 
 	public void reset()
@@ -589,7 +642,9 @@ public class LightManager
 		{
 			// prevent duplicate lights being spawned for the same object
 			if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(tileObject)))
+			{
 				continue;
+			}
 
 			WorldPoint worldLocation = tileObject.getWorldLocation();
 			SceneLight light = new SceneLight(
@@ -609,7 +664,7 @@ public class LightManager
 				float radius = localSizeX / 2f;
 				if (!light.alignment.radial)
 				{
-					radius = (float)Math.sqrt(localSizeX * localSizeX + localSizeX * localSizeX) / 2;
+					radius = (float) Math.sqrt(localSizeX * localSizeX + localSizeX * localSizeX) / 2;
 				}
 
 				if (!light.alignment.relative)
@@ -621,21 +676,21 @@ public class LightManager
 
 				float sine = Perspective.SINE[orientation] / 65536f;
 				float cosine = Perspective.COSINE[orientation] / 65536f;
-				cosine /= (float)localSizeX / (float)localSizeY;
+				cosine /= (float) localSizeX / (float) localSizeY;
 
-				int offsetX = (int)(radius * sine);
-				int offsetY = (int)(radius * cosine);
+				int offsetX = (int) (radius * sine);
+				int offsetY = (int) (radius * cosine);
 
 				lightX += offsetX;
 				lightY += offsetY;
 			}
 
-			float tileX = (float)lightX / Perspective.LOCAL_TILE_SIZE;
-			float tileY = (float)lightY / Perspective.LOCAL_TILE_SIZE;
-			float lerpX = (lightX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-			float lerpY = (lightY % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-			int tileMinX = (int)Math.floor(tileX);
-			int tileMinY = (int)Math.floor(tileY);
+			float tileX = (float) lightX / Perspective.LOCAL_TILE_SIZE;
+			float tileY = (float) lightY / Perspective.LOCAL_TILE_SIZE;
+			float lerpX = (lightX % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+			float lerpY = (lightY % Perspective.LOCAL_TILE_SIZE) / (float) Perspective.LOCAL_TILE_SIZE;
+			int tileMinX = (int) Math.floor(tileX);
+			int tileMinY = (int) Math.floor(tileY);
 			int tileMaxX = tileMinX + 1;
 			int tileMaxY = tileMinY + 1;
 			tileMinX = Ints.constrainToRange(tileMinX, 0, Constants.SCENE_SIZE - 1);
@@ -671,8 +726,8 @@ public class LightManager
 
 			sceneLights.removeIf(light ->
 				light.x == localLocation.getX() &&
-				light.y == localLocation.getY() &&
-				light.plane == plane);
+					light.y == localLocation.getY() &&
+					light.plane == plane);
 		}
 	}
 
