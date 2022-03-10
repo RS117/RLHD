@@ -27712,5 +27712,23 @@
     "objectIds": [
       43743
     ]
+  },
+  {
+    "description": "HALLOWED_TORCH",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 700,
+    "strength": 12.5,
+    "color": [
+      0.2673581,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 30.0,
+    "objectIds": [
+      6384
+    ]
   }
 ]
