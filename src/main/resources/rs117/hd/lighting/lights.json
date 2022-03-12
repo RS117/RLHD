@@ -20929,7 +20929,14 @@
       10297,
       15161,
       25659,
-      5247
+      5247,
+      18891,
+      "GRAVE_43122",
+      "GRAVE_43123",
+      "GRAVE_43124",
+      "GRAVE_43125",
+      "GRAVE_43126",
+      43127
     ]
   },
   {
@@ -25321,7 +25328,10 @@
       "LAMP_22976",
       23040,
       23041,
+      22978,
+      22979,
       22980,
+      22981,
       22983,
       22984,
       22985,
@@ -25330,6 +25340,7 @@
       22991,
       22994,
       22995,
+      22997,
       22998,
       22999,
       23003,
@@ -25372,7 +25383,7 @@
     "height": 100,
     "alignment": "CENTER",
     "radius": 250,
-    "strength": 7.5,
+    "strength": 12.5,
     "color": [
       0.12752977,
       0.40982577,
@@ -25421,6 +25432,60 @@
     "range": 20.0,
     "objectIds": [
       "THINGYMAJIG"
+    ]
+  },
+  {
+    "description": "DORGESHKAAN FURNACE",
+    "height": 120,
+    "alignment": "CENTER",
+    "radius": 700,
+    "strength": 7.5,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 30.0,
+    "objectIds": [
+      "FURNACE_22721"
+    ]
+  },
+  {
+    "description": "GOBLIN FIRE",
+    "height": 20,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      43146
+    ]
+  },
+  {
+    "description": "GOBLIN ALTAR",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 12.5,
+    "color": [
+      0.9743002,
+      0.3021255,
+      5.6921755E-5
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 20.0,
+    "objectIds": [
+      43089
     ]
   },
   {
