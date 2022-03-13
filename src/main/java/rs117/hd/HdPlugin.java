@@ -1630,6 +1630,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			log.debug("resetting the plugin after probable OS suspend");
 			shutDown();
 			startUp();
+			return;
 		}
 
 		// shader variables for water, lava animations
