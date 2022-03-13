@@ -1640,7 +1640,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		final int canvasHeight = client.getCanvasHeight();
 		final int canvasWidth = client.getCanvasWidth();
 
-		prepareInterfaceTexture(canvasWidth, canvasHeight);
+		try
+		{
+			prepareInterfaceTexture(canvasWidth, canvasHeight);
+		}
+		catch (Exception ex)
+		{
+			// Fixes: https://github.com/runelite/runelite/issues/12930
+			// Gracefully Handle loss of opengl buffers and context
+			log.warn("prepareInterfaceTexture exception", ex);
+			shutDown();
+			startUp();
+			return;
+		}
 
 		gl.glClearColor(0, 0, 0, 1f);
 		gl.glClear(gl.GL_COLOR_BUFFER_BIT);
