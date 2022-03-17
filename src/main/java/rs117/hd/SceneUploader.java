@@ -396,7 +396,7 @@ class SceneUploader
 					nwMaterial = proceduralGenerator.vertexTerrainTexture.getOrDefault(nwVertexKey, nwMaterial);
 				}
 			}
-			else if (hdPlugin.configGroundTextures)
+			else if (hdPlugin.configGroundTextures && !shouldSkipTile(baseX + tileX, baseY + tileY))
 			{
 				GroundMaterial groundMaterial;
 
@@ -1007,5 +1007,15 @@ class SceneUploader
 	{
 		byte isTerrain = 0b1;
 		return ((waterDepth << 4 | underwaterType.getValue()) << 2 | plane) << 1 | isTerrain;
+	}
+
+	private boolean shouldSkipTile(int worldX, int worldY) {
+		// Horrible hack to solve for poorly textured bridge west of shilo
+		// https://github.com/RS117/RLHD/issues/166
+		if (worldX == 2796 && worldY >= 2961 && worldY <= 2967)
+		{
+			return true;
+		}
+		return false;
 	}
 }
