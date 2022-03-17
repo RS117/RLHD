@@ -19504,10 +19504,10 @@
   },
   {
     "description": "ABHORRENT_SPECTRE",
-    "height": 200,
+    "height": 220,
     "alignment": "CENTER",
-    "radius": 1000,
-    "strength": 25.0,
+    "radius": 900,
+    "strength": 18.0,
     "color": [
       0.59,
       1.0,
@@ -19522,13 +19522,13 @@
   },
   {
     "description": "REPUGNANT_SPECTRE",
-    "height": 200,
+    "height": 220,
     "alignment": "CENTER",
-    "radius": 1000,
-    "strength": 25.0,
+    "radius": 900,
+    "strength": 18.0,
     "color": [
       1.0,
-      0.09,
+      0.0,
       1.0
     ],
     "type": "FLICKER",
