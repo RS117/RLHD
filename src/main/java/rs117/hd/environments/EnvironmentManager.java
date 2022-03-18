@@ -223,10 +223,9 @@ public class EnvironmentManager
 		// If menu and environment overrides are active, set skybox to selected color. Otherwise, set to environment color
 		if(config.overrideSky() && currentEnvironment.isAllowSkyOverride())
 		{
-			DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
-			if (defaultSkyColor != DefaultSkyColor.DEFAULT)
+			if (lastSkyColor != DefaultSkyColor.DEFAULT)
 			{
-				targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+				targetFogColor = new float[]{lastSkyColor.getR() / 255f, lastSkyColor.getG() / 255f, lastSkyColor.getB() / 255f};
 			}
 		}
 		else
