@@ -26,6 +26,9 @@ public class Light
 	public Alignment alignment;
 	public int radius;
 	public float strength;
+	/**
+	 * Linear color space RGBA in the range [0, 1]
+	 */
 	public float[] color;
 	public LightType type;
 	public float duration;

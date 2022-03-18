@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import lombok.extern.slf4j.Slf4j;
+import rs117.hd.HDUtils;
 
 @Slf4j
 public class LightConfig
@@ -67,6 +68,15 @@ public class LightConfig
 
 			for (Light l : lights)
 			{
+				// Map values from [0, 255] in gamma color space to [0, 1] in linear color space
+				// Also ensure that each color always has 4 components with sensible defaults
+				float[] linearRGBA = { 0, 0, 0, 1 };
+				for (int i = 0; i < Math.min(l.color.length, linearRGBA.length); i++)
+				{
+					linearRGBA[i] = HDUtils.gammaToLinear(l.color[i] /= 255f);
+				}
+				l.color = linearRGBA;
+
 				if (l.worldX != null && l.worldY != null)
 				{
 					worldLights.add(new SceneLight(l));
