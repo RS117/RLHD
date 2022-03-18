@@ -53,6 +53,7 @@ public enum Environment
 	RFD_QUIZ(Area.RFD_QUIZ, new Properties()
 		.setFogColor("#000000")
 		.setFogDepth(0)
+		.setAllowSkyOverride(false)
 	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
 		.setFogColor("#252C37")
@@ -485,12 +486,14 @@ public enum Environment
 		.setFogDepth(30)
 		.setAmbientStrength(1.0f)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	SOTE_LLETYA_ON_FIRE(Area.SOTE_LLETYA_ON_FIRE, new Properties()
 		.setFogColor(91, 139, 120)
 		.setFogDepth(50)
 		.setAmbientStrength(0.9f)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	POSION_WASTE(Area.POISON_WASTE, new Properties()
 		.setFogColor(50, 55, 47)
@@ -512,9 +515,11 @@ public enum Environment
 		.setFogColor(18, 64, 83)
 		.setAmbientStrength(0.3f)
 		.setDirectionalStrength(1.0f)
+		.setAllowSkyOverride(false)
 	),
 	SOTE_FRAGMENT_OF_SEREN_ARENA(Area.SOTE_FRAGMENT_OF_SEREN_ARENA, new Properties()
 		.setFogColor(0, 0, 0)
+		.setAllowSkyOverride(false)
 	),
 
 	// Yanille
@@ -624,6 +629,7 @@ public enum Environment
 		.setDirectionalStrength(3.0f)
 		.setDirectionalColor("#57FF00")
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 	ZANARIS(Area.ZANARIS, new Properties()
 		.setFogColor(22, 63, 71)
@@ -642,6 +648,7 @@ public enum Environment
 		.setAmbientStrength(1.2f)
 		.setAmbientColor(255, 255, 255)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	DS2_FLEET_ATTACKED(Area.DS2_FLEET_ATTACKED, new Properties()
 		.setFogColor("#FFD3C7")
@@ -715,6 +722,7 @@ public enum Environment
 		.setAmbientColor(255, 255, 255)
 		.setDirectionalStrength(0.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Fishing Trawler
@@ -751,6 +759,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(0.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Chambers of Xeric
@@ -773,6 +782,7 @@ public enum Environment
 		.setDirectionalStrength(2.0f)
 		.setDirectionalColor("#00FF60")
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Underwater areas
@@ -816,6 +826,7 @@ public enum Environment
 		.setDirectionalColor("#CAB6CD")
 		.setDirectionalStrength(0.7f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Runecrafting altars
@@ -830,6 +841,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(3.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	TARNS_LAIR(Area.TARNS_LAIR, new Properties()
@@ -919,6 +931,7 @@ public enum Environment
 	private final float groundFogOpacity;
 	private final float lightPitch;
 	private final float lightYaw;
+	private final boolean allowSkyOverride;
 
 	private static class Properties
 	{
@@ -942,6 +955,7 @@ public enum Environment
 		private float groundFogOpacity = 0;
 		private float lightPitch = -128f;
 		private float lightYaw = 55f;
+		private boolean allowSkyOverride = true;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -1048,6 +1062,11 @@ public enum Environment
 			this.lightYaw = yaw;
 			return this;
 		}
+		public Properties setAllowSkyOverride(boolean s)
+		{
+			this.allowSkyOverride = s;
+			return this;
+		}
 	}
 
 	Environment(Area area, Properties properties)
@@ -1073,6 +1092,7 @@ public enum Environment
 		this.groundFogOpacity = properties.groundFogOpacity;
 		this.lightPitch = properties.lightPitch;
 		this.lightYaw = properties.lightYaw;
+		this.allowSkyOverride = properties.allowSkyOverride;
 	}
 
 	private static float[] rgb(int r, int g, int b)
