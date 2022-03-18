@@ -27,6 +27,8 @@ package rs117.hd;
 
 import com.google.common.primitives.Ints;
 import com.google.inject.Provides;
+import com.jogamp.nativewindow.AbstractGraphicsConfiguration;
+import com.jogamp.nativewindow.NativeWindowFactory;
 import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.GL;
@@ -69,7 +71,6 @@ import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import jogamp.nativewindow.macosx.OSXUtil;
-import jogamp.newt.awt.NewtFactoryAWT;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -522,7 +523,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					AWTGraphicsConfiguration config = AWTGraphicsConfiguration.create(canvas.getGraphicsConfiguration(), glCaps, glCaps);
 
-					jawtWindow = NewtFactoryAWT.getNativeWindow(canvas, config);
+					jawtWindow = (JAWTWindow) NativeWindowFactory.getNativeWindow(canvas, config);
 					canvas.setFocusable(true);
 
 					GLDrawableFactory glDrawableFactory = GLDrawableFactory.getFactory(glProfile);
@@ -717,7 +718,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					// we'll just leak the window...
 					if (OSType.getOSType() != OSType.MacOS)
 					{
-						NewtFactoryAWT.destroyNativeWindow(jawtWindow);
+						final AbstractGraphicsConfiguration config = jawtWindow.getGraphicsConfiguration();
+						jawtWindow.destroy();
+						config.getScreen().getDevice().close();
 					}
 				}
 			});
