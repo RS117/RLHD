@@ -31,6 +31,7 @@ import com.jogamp.nativewindow.AbstractGraphicsConfiguration;
 import com.jogamp.nativewindow.NativeWindowFactory;
 import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
+import com.jogamp.opengl.DebugGL4;
 import com.jogamp.opengl.GL;
 import static com.jogamp.opengl.GL.*;
 import static com.jogamp.opengl.GL2ES2.GL_STREAM_DRAW;
@@ -564,6 +565,15 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					if (log.isDebugEnabled())
 					{
+						try
+						{
+							gl = new DebugGL4(gl);
+						}
+						catch (NoClassDefFoundError ex)
+						{
+							log.debug("Disabling DebugGL due to jogl-gldesktop-dbg not being present on the classpath");
+						}
+
 						gl.glEnable(gl.GL_DEBUG_OUTPUT);
 
 						//	GLDebugEvent[ id 0x20071
