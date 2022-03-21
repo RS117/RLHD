@@ -71,6 +71,7 @@ public class EnvironmentManager
 	// used for tracking changes to settings
 	DefaultSkyColor lastSkyColor = DefaultSkyColor.DEFAULT;
 	boolean lastEnvironmentLighting = true;
+	boolean lastSkyOverride = false;
 
 	// previous camera target world X
 	private int prevCamTargetX = 0;
@@ -164,7 +165,7 @@ public class EnvironmentManager
 			}
 		}
 
-		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting())
+		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting() || lastSkyOverride != config.overrideSky())
 		{
 			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
 		}
@@ -218,20 +219,8 @@ public class EnvironmentManager
 		prevCamTargetY = camTargetY;
 		lastFrameTime = System.currentTimeMillis();
 		lastSkyColor = config.defaultSkyColor();
+		lastSkyOverride = config.overrideSky();
 		lastEnvironmentLighting = config.atmosphericLighting();
-
-		// If menu and environment overrides are active, set skybox to selected color. Otherwise, set to environment color
-		if(config.overrideSky() && currentEnvironment.isAllowSkyOverride())
-		{
-			if (lastSkyColor != DefaultSkyColor.DEFAULT)
-			{
-				targetFogColor = new float[]{lastSkyColor.getR() / 255f, lastSkyColor.getG() / 255f, lastSkyColor.getB() / 255f};
-			}
-		}
-		else
-		{
-			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
-		}
 	}
 
 	/**
@@ -284,6 +273,12 @@ public class EnvironmentManager
 				}
 			}
 		}
+
+		// If configured and the environment allows it override the skybox color to the default sky color.
+		if (config.overrideSky() && newEnvironment.isAllowSkyOverride()) {
+			targetFogColor = new float[]{ config.defaultSkyColor().getR() / 255f, config.defaultSkyColor().getG() / 255f, config.defaultSkyColor().getB() / 255f };
+		}
+
 		targetFogDepth = newEnvironment.getFogDepth();
 		if (hdPlugin.configWinterTheme)
 		{
