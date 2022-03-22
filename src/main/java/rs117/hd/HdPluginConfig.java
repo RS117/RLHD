@@ -350,7 +350,16 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-
+	@ConfigItem(
+		keyName = "hideBakedEffects",
+		name = "Hide Fake Lights and Shadows",
+		description = "Hides the fake light and shadow effects that Jagex often includes with models",
+		position = 109,
+		section = lightingSettings
+	)
+	default boolean hideBakedEffects() {
+		return true;
+	}
 
 	/*====== Environment settings ======*/
 

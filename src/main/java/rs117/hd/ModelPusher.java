@@ -4,13 +4,12 @@ import com.google.common.primitives.Ints;
 import com.jogamp.opengl.math.VectorUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import rs117.hd.lighting.BakedModels;
 import rs117.hd.materials.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
 class ModelData {
     private int[] colors;
@@ -43,6 +42,9 @@ class ModelData {
 public class ModelPusher {
     @Inject
     private HdPlugin hdPlugin;
+
+    @Inject
+    private HdPluginConfig config;
 
     @Inject
     private Client client;
@@ -82,7 +84,7 @@ public class ModelPusher {
         modelCache.clear();
     }
 
-    public int[] pushModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache) {
+    public int[] pushModel(Renderable renderable, Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache) {
         final int faceCount = Math.min(model.getFaceCount(), HdPlugin.MAX_TRIANGLE);
 
         // skip models with zero faces
@@ -99,7 +101,7 @@ public class ModelPusher {
         normalBuffer.ensureCapacity(12 * 2 * faceCount);
         uvBuffer.ensureCapacity(12 * 2 * faceCount);
 
-        ModelData modelData = getCachedModelData(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache);
+        ModelData modelData = getCachedModelData(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache);
 
         int vertexLength = 0;
         int uvLength = 0;
@@ -275,9 +277,9 @@ public class ModelPusher {
         return materialId << 1 | (isOverlay ? 0b1 : 0b0);
     }
 
-    private ModelData getCachedModelData(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache) {
+    private ModelData getCachedModelData(Renderable renderable, Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache) {
         if (noCache) {
-            tempModelData.setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
+            tempModelData.setColors(getColorsForModel(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
             return tempModelData;
         }
 
@@ -296,26 +298,44 @@ public class ModelPusher {
         ModelData modelData = modelCache.get(hash);
         if (modelData == null || modelData.getFaceCount() != model.getFaceCount()) {
             // get new data if there was no cache or if we detected an exception causing hash collision
-            modelData = new ModelData().setColors(getColorsForModel(model, objectProperties, objectType, tileX, tileY, tileZ, faceCount)).setFaceCount(model.getFaceCount());
+            modelData = new ModelData().setColors(getColorsForModel(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount)).setFaceCount(model.getFaceCount());
             modelCache.put(hash, modelData);
         }
 
         return modelData;
     }
 
-    private int[] getColorsForModel(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount) {
+    private int[] getColorsForModel(Renderable renderable, Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount) {
         for (int face = 0; face < faceCount; face++) {
-            System.arraycopy(getColorsForFace(model, objectProperties, objectType, tileX, tileY, tileZ, face), 0, modelColors, face*4, 4);
+            System.arraycopy(getColorsForFace(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, face), 0, modelColors, face * 4, 4);
         }
 
-        return Arrays.copyOfRange(modelColors, 0, faceCount*4);
+        return Arrays.copyOfRange(modelColors, 0, faceCount * 4);
     }
 
-    private int[] getColorsForFace(Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int face) {
+    private int[] removeBakedGroundShading(int face, int triA, int triB, int triC, byte[] faceTransparencies, short[] faceTextures, int[] yVertices) {
+        if (faceTransparencies != null && (faceTextures == null || faceTextures[face] == -1) && (faceTransparencies[face] & 0xFF) > 100) {
+            int aHeight = yVertices[triA];
+            int bHeight = yVertices[triB];
+            int cHeight = yVertices[triC];
+            if (aHeight >= -8 && aHeight == bHeight && aHeight == cHeight) {
+                fourInts[0] = 0;
+                fourInts[1] = 0;
+                fourInts[2] = 0;
+                fourInts[3] = 0xFF << 24;
+                return fourInts;
+            }
+        }
+
+        return null;
+    }
+
+    private int[] getColorsForFace(Renderable renderable, Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int face) {
         int color1 = model.getFaceColors1()[face];
         int color2 = model.getFaceColors2()[face];
         int color3 = model.getFaceColors3()[face];
         final short[] faceTextures = model.getFaceTextures();
+        final byte[] faceTransparencies = model.getFaceTransparencies();
         final byte overrideAmount = model.getOverrideAmount();
         final byte overrideHue = model.getOverrideHue();
         final byte overrideSat = model.getOverrideSaturation();
@@ -328,6 +348,18 @@ public class ModelPusher {
         final int[] yVertexNormals = model.getVertexNormalsY();
         final int[] zVertexNormals = model.getVertexNormalsZ();
         final Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
+
+        if (config.hideBakedEffects()) {
+            // hide the shadows and lights that are often baked into models by setting the colors for the shadow faces to transparent
+            NPC npc = renderable instanceof NPC ? (NPC) renderable : null;
+            GraphicsObject graphicsObject = renderable instanceof GraphicsObject ? (GraphicsObject) renderable : null;
+            if ((npc != null && BakedModels.NPCS.contains(npc.getId())) || (graphicsObject != null && BakedModels.OBJECTS.contains(graphicsObject.getId()))) {
+                int[] transparency = removeBakedGroundShading(face, triA, triB, triC, faceTransparencies, faceTextures, yVertices);
+                if (transparency != null) {
+                    return transparency;
+                }
+            }
+        }
 
         if (color3 == -2) {
             fourInts[0] = 0;
