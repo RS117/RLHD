@@ -10,7 +10,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.14-SNAPSHOT'
+def runeLiteVersion = '1.8.15-SNAPSHOT'
 def joglVersion = '2.4.0-rc-20220318'
 
 dependencies {
@@ -30,7 +30,7 @@ dependencies {
 }
 
 group = 'rs117.hd'
-version = '1.0.14.1'
+version = '1.0.15'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
