@@ -940,6 +940,7 @@ public class BakedModels
             NpcID.YOUNG_IMPLING,
             NpcID.YOUNG_IMPLING_1646,
             NpcID.ZAKLN_GRITCH,
+            NpcID.ZALCANO,
             NpcID.ZALCANO_9050,
             NpcID.SMOLCANO,
             NpcID.SMOLCANO_8739,
