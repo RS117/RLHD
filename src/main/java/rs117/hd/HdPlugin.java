@@ -27,8 +27,11 @@ package rs117.hd;
 
 import com.google.common.primitives.Ints;
 import com.google.inject.Provides;
+import com.jogamp.nativewindow.AbstractGraphicsConfiguration;
+import com.jogamp.nativewindow.NativeWindowFactory;
 import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
+import com.jogamp.opengl.DebugGL4;
 import com.jogamp.opengl.GL;
 import static com.jogamp.opengl.GL.*;
 import static com.jogamp.opengl.GL2ES2.GL_STREAM_DRAW;
@@ -69,7 +72,6 @@ import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import jogamp.nativewindow.macosx.OSXUtil;
-import jogamp.newt.awt.NewtFactoryAWT;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -493,8 +495,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					System.setProperty("jogl.debug", "true");
 				}
 
-				System.setProperty("jogamp.gluegen.UseNativeExeFile", "true");
-
 				GLProfile.initSingleton();
 
 				invokeOnMainThread(() ->
@@ -524,7 +524,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					AWTGraphicsConfiguration config = AWTGraphicsConfiguration.create(canvas.getGraphicsConfiguration(), glCaps, glCaps);
 
-					jawtWindow = NewtFactoryAWT.getNativeWindow(canvas, config);
+					jawtWindow = (JAWTWindow) NativeWindowFactory.getNativeWindow(canvas, config);
 					canvas.setFocusable(true);
 
 					GLDrawableFactory glDrawableFactory = GLDrawableFactory.getFactory(glProfile);
@@ -565,6 +565,15 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					if (log.isDebugEnabled())
 					{
+						try
+						{
+							gl = new DebugGL4(gl);
+						}
+						catch (NoClassDefFoundError ex)
+						{
+							log.debug("Disabling DebugGL due to jogl-gldesktop-dbg not being present on the classpath");
+						}
+
 						gl.glEnable(gl.GL_DEBUG_OUTPUT);
 
 						//	GLDebugEvent[ id 0x20071
@@ -719,7 +728,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					// we'll just leak the window...
 					if (OSType.getOSType() != OSType.MacOS)
 					{
-						NewtFactoryAWT.destroyNativeWindow(jawtWindow);
+						final AbstractGraphicsConfiguration config = jawtWindow.getGraphicsConfiguration();
+						jawtWindow.destroy();
+						config.getScreen().getDevice().close();
 					}
 				}
 			});
@@ -1630,6 +1641,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			log.debug("resetting the plugin after probable OS suspend");
 			shutDown();
 			startUp();
+			return;
 		}
 
 		// shader variables for water, lava animations
@@ -1639,7 +1651,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		final int canvasHeight = client.getCanvasHeight();
 		final int canvasWidth = client.getCanvasWidth();
 
-		prepareInterfaceTexture(canvasWidth, canvasHeight);
+		try
+		{
+			prepareInterfaceTexture(canvasWidth, canvasHeight);
+		}
+		catch (Exception ex)
+		{
+			// Fixes: https://github.com/runelite/runelite/issues/12930
+			// Gracefully Handle loss of opengl buffers and context
+			log.warn("prepareInterfaceTexture exception", ex);
+			shutDown();
+			startUp();
+			return;
+		}
 
 		gl.glClearColor(0, 0, 0, 1f);
 		gl.glClear(gl.GL_COLOR_BUFFER_BIT);
@@ -2305,6 +2329,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "shadowsEnabled":
 				configShadowsEnabled = config.shadowsEnabled();
+				modelPusher.clearModelCache();
 				clientThread.invoke(() ->
 					invokeOnMainThread(() ->
 					{
@@ -2354,6 +2379,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "hdInfernalTexture":
 				configHdInfernalTexture = config.hdInfernalTexture();
+				break;
+			case "hideBakedEffects":
+				modelPusher.clearModelCache();
 				break;
 		}
 	}
@@ -2518,7 +2546,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			model.calculateExtreme(orientation);
 			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-			final int[] lengths = modelPusher.pushModel(model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, config.disableModelCaching());
+			final int[] lengths = modelPusher.pushModel(renderable, model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, config.disableModelCaching());
 
 			eightIntWrite[0] = tempOffset;
 			eightIntWrite[1] = lengths[1] > 0 ? tempUvOffset : -1;

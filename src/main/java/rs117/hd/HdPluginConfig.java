@@ -350,7 +350,16 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-
+	@ConfigItem(
+		keyName = "hideBakedEffects",
+		name = "Hide Fake Lights and Shadows",
+		description = "Hides the fake light and shadow effects that Jagex often includes with models",
+		position = 109,
+		section = lightingSettings
+	)
+	default boolean hideBakedEffects() {
+		return true;
+	}
 
 	/*====== Environment settings ======*/
 
@@ -413,10 +422,21 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "overrideSky",
+			name = "Override Sky Color",
+			description = "Forces the selected sky color in all environments",
+			position = 205,
+			section = environmentSettings
+	)
+	default boolean overrideSky() {
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "objectTextures",
 		name = "Object Textures",
 		description = "Adds detail textures to certain world objects.",
-		position = 205,
+		position = 206,
 		section = environmentSettings
 	)
 	default boolean objectTextures()
@@ -428,7 +448,7 @@ public interface HdPluginConfig extends Config
 		keyName = "groundTextures",
 		name = "Ground Textures",
 		description = "Adds detail textures to the ground.",
-		position = 206,
+		position = 207,
 		section = environmentSettings
 	)
 	default boolean groundTextures()
@@ -440,7 +460,7 @@ public interface HdPluginConfig extends Config
 			keyName = "groundBlending",
 			name = "Ground Blending",
 			description = "Affects the quality of blending between different ground/terrain textures.",
-			position = 207,
+			position = 208,
 			section = environmentSettings
 	)
 	default boolean groundBlending()
@@ -452,7 +472,7 @@ public interface HdPluginConfig extends Config
 		keyName = "waterEffects",
 		name = "Water Effects",
 		description = "Changes the appearance of the water.",
-		position = 208,
+		position = 209,
 		section = environmentSettings
 	)
 	default WaterEffects waterEffects()
@@ -464,7 +484,7 @@ public interface HdPluginConfig extends Config
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
 		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
-		position = 209,
+		position = 210,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()
