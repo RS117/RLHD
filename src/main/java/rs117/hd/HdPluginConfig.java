@@ -66,7 +66,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean winterTheme()
 	{
-		return true;
+		return false;
 	}
 
 
