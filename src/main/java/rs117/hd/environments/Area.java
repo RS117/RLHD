@@ -726,6 +726,9 @@ public enum Area
 	// Tempoross
 	TEMPOROSS_COVE(3005, 3011, 3066, 2941),
 
+	// Guardians of the Rift
+	TEMPLE_OF_THE_EYE(3550, 9525, 3660, 9450),
+
 	// Death's office
 	DEATHS_OFFICE(3166, 5734, 3185, 4288),
 

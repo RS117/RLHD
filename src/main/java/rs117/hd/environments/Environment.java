@@ -750,6 +750,14 @@ public enum Environment
 		.enableLightning()
 	),
 
+	// Guardians of the Rift
+	TEMPLE_OF_THE_EYE(Area.TEMPLE_OF_THE_EYE, new Properties()
+			.setFogColor(0,32,51)
+			.setFogDepth(15)
+			.setAmbientStrength(1.0f)
+			.setAmbientColor(0, 32, 51)
+	),
+
 	// Death's office
 	DEATHS_OFFICE(Area.DEATHS_OFFICE, new Properties()
 		.setFogColor("#000000")

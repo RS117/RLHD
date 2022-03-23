@@ -26711,5 +26711,275 @@
     "objectIds": [
       6384
     ]
+  },
+  {
+    "description": "RIFT_PORTAL",
+    "height": 280,
+    "alignment": "FRONT",
+    "radius": 2500,
+    "strength": 20,
+    "color": [
+      0.0,
+      0.25,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 12.0,
+    "objectIds": [
+      43692
+    ]
+  },
+  {
+    "description": "WIZARD_TOWER_RIFT_PORTAL",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 400,
+    "strength": 80,
+    "color": [
+      0.0,
+      0.25,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 10.0,
+    "objectIds": [
+      43841
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_FIRE",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      0.2,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43704
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_NATURE",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43711
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_EARTH",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.31,
+      0.2,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43703
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_WATER",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43702
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_COSMIC",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43710
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_AIR",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43701
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_MIND",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      0.41,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43705
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_BODY",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.1,
+      0.1,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43709
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_CHAOS",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      0.41,
+      0.2
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43706
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_DEATH",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.7,
+      0.7,
+      0.7
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43707
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_LAW",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      0.2,
+      0.2,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43712
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_BLOOD",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 500,
+    "strength": 10.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43708
+    ]
+  },
+  {
+    "description": "ABYSSAL_RIFT",
+    "height": 160,
+    "alignment": "FRONT",
+    "radius": 2000,
+    "strength": 20,
+    "color": [
+      0.91,
+      0.1,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 12.0,
+    "objectIds": [
+      43713
+    ]
   }
 ]
