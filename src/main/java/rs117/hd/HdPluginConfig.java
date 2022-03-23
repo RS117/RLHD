@@ -58,7 +58,7 @@ public interface HdPluginConfig extends Config
 	String limitedTimeSettings = "limitedTimeSettings";
 
 	@ConfigItem(
-		keyName = "winterTheme",
+		keyName = "winterTheme0",
 		name = "Winter theme",
 		description = "Covers the Gielinor overworld with a layer of snow!",
 		position = -9,
