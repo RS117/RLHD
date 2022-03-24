@@ -754,8 +754,9 @@ public enum Environment
 	TEMPLE_OF_THE_EYE(Area.TEMPLE_OF_THE_EYE, new Properties()
 			.setFogColor(0,32,51)
 			.setFogDepth(15)
-			.setAmbientStrength(1.0f)
-			.setAmbientColor(0, 32, 51)
+			.setAmbientStrength(0.1f)
+			.setAmbientColor(255, 255, 255)
+			.setDirectionalStrength(3.0f)
 	),
 
 	// Death's office
