@@ -26753,7 +26753,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       0.2,
@@ -26771,7 +26771,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.0,
       1.0,
@@ -26789,7 +26789,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.31,
       0.2,
@@ -26807,7 +26807,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.0,
       0.0,
@@ -26825,7 +26825,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       1.0,
@@ -26843,7 +26843,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       1.0,
@@ -26861,7 +26861,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       0.41,
@@ -26879,7 +26879,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.1,
       0.1,
@@ -26897,7 +26897,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       0.41,
@@ -26915,7 +26915,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.7,
       0.7,
@@ -26933,7 +26933,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       0.2,
       0.2,
@@ -26951,7 +26951,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 500,
-    "strength": 10.0,
+    "strength": 6.0,
     "color": [
       1.0,
       0.0,
