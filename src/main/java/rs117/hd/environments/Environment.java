@@ -757,6 +757,7 @@ public enum Environment
 			.setAmbientStrength(0.1f)
 			.setAmbientColor(255, 255, 255)
 			.setDirectionalStrength(3.0f)
+			.setDirectionalColor(230, 244, 255)
 	),
 
 	// Death's office

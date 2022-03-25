@@ -26713,24 +26713,6 @@
     ]
   },
   {
-    "description": "GOTR_RIFT_PORTAL",
-    "height": 280,
-    "alignment": "FRONT",
-    "radius": 2500,
-    "strength": 20,
-    "color": [
-      0.0,
-      0.25,
-      1.0
-    ],
-    "type": "PULSE",
-    "duration": 1200.0,
-    "range": 12.0,
-    "objectIds": [
-      43692
-    ]
-  },
-  {
     "description": "WIZARD_TOWER_RIFT_PORTAL",
     "height": 100,
     "alignment": "CENTER",
@@ -26738,7 +26720,7 @@
     "strength": 80,
     "color": [
       0.0,
-      0.25,
+      0.5325205447,
       1.0
     ],
     "type": "PULSE",
@@ -26749,6 +26731,24 @@
     ]
   },
   {
+    "description": "GOTR_RIFT_PORTAL",
+    "height": 280,
+    "alignment": "FRONT",
+    "radius": 2500,
+    "strength": 20,
+    "color": [
+      0.0,
+      0.5325205447,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 12.0,
+    "objectIds": [
+      43692
+    ]
+  },
+  {
     "description": "GOTR_GUARDIAN_OF_FIRE",
     "height": 300,
     "alignment": "CENTER",
@@ -26756,7 +26756,7 @@
     "strength": 6.0,
     "color": [
       1.0,
-      0.2,
+      0.4811565051,
       0.0
     ],
     "type": "FLICKER",
@@ -26791,8 +26791,8 @@
     "radius": 500,
     "strength": 6.0,
     "color": [
-      0.31,
-      0.2,
+      0.587219907,
+      0.4811565051,
       0.0
     ],
     "type": "FLICKER",
@@ -26864,7 +26864,7 @@
     "strength": 6.0,
     "color": [
       1.0,
-      0.41,
+      0.6667955029,
       0.0
     ],
     "type": "FLICKER",
@@ -26881,8 +26881,8 @@
     "radius": 500,
     "strength": 6.0,
     "color": [
-      0.1,
-      0.1,
+      0.3511191734,
+      0.3511191734,
       1.0
     ],
     "type": "FLICKER",
@@ -26900,8 +26900,8 @@
     "strength": 6.0,
     "color": [
       1.0,
-      0.41,
-      0.2
+      0.6667955029,
+      0.4811565051
     ],
     "type": "FLICKER",
     "duration": 0.0,
@@ -26917,9 +26917,9 @@
     "radius": 500,
     "strength": 6.0,
     "color": [
-      0.7,
-      0.7,
-      0.7
+      0.8503349277,
+      0.8503349277,
+      0.8503349277
     ],
     "type": "FLICKER",
     "duration": 0.0,
@@ -26935,8 +26935,8 @@
     "radius": 500,
     "strength": 6.0,
     "color": [
-      0.2,
-      0.2,
+      0.4811565051,
+      0.4811565051,
       1.0
     ],
     "type": "FLICKER",
@@ -26972,7 +26972,7 @@
     "strength": 15.0,
     "color": [
       1.0,
-      0.85,
+      0.8774243147,
       0.0
     ],
     "type": "FLICKER",
@@ -26990,8 +26990,8 @@
     "radius": 2000,
     "strength": 20,
     "color": [
-      0.91,
-      0.1,
+      0.9580373726,
+      0.3511191734,
       1.0
     ],
     "type": "PULSE",
