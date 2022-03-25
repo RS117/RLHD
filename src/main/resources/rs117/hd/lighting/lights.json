@@ -26713,7 +26713,7 @@
     ]
   },
   {
-    "description": "RIFT_PORTAL",
+    "description": "GOTR_RIFT_PORTAL",
     "height": 280,
     "alignment": "FRONT",
     "radius": 2500,
@@ -26965,7 +26965,26 @@
     ]
   },
   {
-    "description": "ABYSSAL_RIFT",
+    "description": "GOTR_YELLOW_PORTAL",
+    "height": 60,
+    "alignment": "CENTER",
+    "radius": 200,
+    "strength": 15.0,
+    "color": [
+      1.0,
+      0.85,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43729,
+      38044
+    ]
+  },
+  {
+    "description": "GOTR_ABYSSAL_RIFT",
     "height": 160,
     "alignment": "FRONT",
     "radius": 2000,
