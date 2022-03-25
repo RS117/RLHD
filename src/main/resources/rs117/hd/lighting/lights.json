@@ -26732,7 +26732,7 @@
   },
   {
     "description": "GOTR_RIFT_PORTAL",
-    "height": 280,
+    "height": 250,
     "alignment": "FRONT",
     "radius": 2500,
     "strength": 20,
@@ -26750,10 +26750,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_FIRE",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       0.4811565051,
@@ -26768,10 +26768,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_NATURE",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.0,
       1.0,
@@ -26786,10 +26786,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_EARTH",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.587219907,
       0.4811565051,
@@ -26804,10 +26804,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_WATER",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.0,
       0.0,
@@ -26822,10 +26822,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_COSMIC",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       1.0,
@@ -26840,10 +26840,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_AIR",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       1.0,
@@ -26858,10 +26858,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_MIND",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       0.6667955029,
@@ -26876,10 +26876,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_BODY",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.3511191734,
       0.3511191734,
@@ -26894,10 +26894,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_CHAOS",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       0.6667955029,
@@ -26912,10 +26912,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_DEATH",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.8503349277,
       0.8503349277,
@@ -26930,10 +26930,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_LAW",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       0.4811565051,
       0.4811565051,
@@ -26948,10 +26948,10 @@
   },
   {
     "description": "GOTR_GUARDIAN_OF_BLOOD",
-    "height": 300,
+    "height": 250,
     "alignment": "CENTER",
-    "radius": 500,
-    "strength": 6.0,
+    "radius": 150,
+    "strength": 5.0,
     "color": [
       1.0,
       0.0,
@@ -26966,10 +26966,10 @@
   },
   {
     "description": "GOTR_YELLOW_PORTAL",
-    "height": 60,
+    "height": 125,
     "alignment": "CENTER",
     "radius": 200,
-    "strength": 15.0,
+    "strength": 10.0,
     "color": [
       1.0,
       0.8774243147,
@@ -26985,7 +26985,7 @@
   },
   {
     "description": "GOTR_ABYSSAL_RIFT",
-    "height": 160,
+    "height": 250,
     "alignment": "FRONT",
     "radius": 2000,
     "strength": 20,
