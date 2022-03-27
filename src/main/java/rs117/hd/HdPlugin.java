@@ -593,6 +593,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 							gl.GL_DONT_CARE, 1, new int[]{0x20052}, 0, false);
 					}
 
+					lastFrameTime = System.currentTimeMillis();
+
 					initVao();
 					try
 					{
