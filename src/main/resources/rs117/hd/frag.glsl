@@ -355,9 +355,17 @@ void main() {
 
     vec4 fragColor = vColor1 * texBlend.x + vColor2 * texBlend.y + vColor3 * texBlend.z;
 
-    vec2 uv1 = baseUv1 + textureOffsets[diffuseMapId1];
-    vec2 uv2 = baseUv2 + textureOffsets[diffuseMapId2];
-    vec2 uv3 = baseUv3 + textureOffsets[diffuseMapId3];
+    vec2 uv1 = baseUv1;
+    vec2 uv2 = baseUv2;
+    vec2 uv3 = baseUv3;
+
+    // Fetch texture animation offsets for vanilla textures
+    if (diffuseMapId1 < 128)
+        uv1 += textureOffsets[diffuseMapId1];
+    if (diffuseMapId2 < 128)
+        uv2 += textureOffsets[diffuseMapId2];
+    if (diffuseMapId3 < 128)
+        uv3 += textureOffsets[diffuseMapId3];
 
     uv1 = vec2((uv1.x - 0.5) / material1.textureScale.x + 0.5, (uv1.y - 0.5) / material1.textureScale.y + 0.5);
     uv2 = vec2((uv2.x - 0.5) / material2.textureScale.x + 0.5, (uv2.y - 0.5) / material2.textureScale.y + 0.5);
