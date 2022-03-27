@@ -1803,7 +1803,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				// bind uniforms
 				gl.glUniformBlockBinding(glShadowProgram, uniShadowBlockMaterials, 1);
 				gl.glUniform1i(uniShadowTexturesHD, 2); // HD texture sampler array is bound to texture2
-				gl.glUniform2fv(uniShadowTextureOffsets, textureOffsets.length, textureOffsets, 0);
+				gl.glUniform2fv(uniShadowTextureOffsets, 128, textureOffsets, 0);
 
 				gl.glEnable(gl.GL_CULL_FACE);
 				gl.glEnable(gl.GL_DEPTH_TEST);
