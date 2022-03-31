@@ -754,9 +754,9 @@ public enum Environment
 	TEMPLE_OF_THE_EYE(Area.TEMPLE_OF_THE_EYE, new Properties()
 			.setFogColor(0,32,51)
 			.setFogDepth(15)
-			.setAmbientStrength(0.125f)
+			.setAmbientStrength(1.0f)
 			.setAmbientColor(255, 255, 255)
-			.setDirectionalStrength(2.0f)
+			.setDirectionalStrength(0.3f)
 			.setDirectionalColor(230, 244, 255)
 			.setLightDirection(-130, 55f)
 	),
