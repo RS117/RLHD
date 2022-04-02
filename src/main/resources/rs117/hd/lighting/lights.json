@@ -21600,8 +21600,8 @@
     "description": "ECTOFUNTUS",
     "height": 300,
     "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 10.0,
+    "radius": 1800,
+    "strength": 12.0,
     "color": [
       0.14497213,
       1.0,
@@ -21613,6 +21613,443 @@
     "objectIds": [
       "ECTOFUNTUS"
     ]
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_1",
+    "worldX": 3683,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_2",
+    "worldX": 3683,
+    "worldY": 9890,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_3",
+    "worldX": 3683,
+    "worldY": 9886,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_4",
+    "worldX": 3683,
+    "worldY": 9883,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_1",
+    "worldX": 3681,
+    "worldY": 9894,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_2",
+    "worldX": 3681,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_3",
+    "worldX": 3681,
+    "worldY": 9890,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_4",
+    "worldX": 3681,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_5",
+    "worldX": 3681,
+    "worldY": 9886,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_6",
+    "worldX": 3681,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_7",
+    "worldX": 3681,
+    "worldY": 9882,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_1",
+    "worldX": 3679,
+    "worldY": 9894,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_2",
+    "worldX": 3679,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_3",
+    "worldX": 3679,
+    "worldY": 9890,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_4",
+    "worldX": 3679,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_5",
+    "worldX": 3679,
+    "worldY": 9886,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_6",
+    "worldX": 3679,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_7",
+    "worldX": 3679,
+    "worldY": 9882,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_4_1",
+    "worldX": 3677,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_4_2",
+    "worldX": 3677,
+    "worldY": 9890,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_4_3",
+    "worldX": 3677,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_4_4",
+    "worldX": 3677,
+    "worldY": 9886,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_4_5",
+    "worldX": 3677,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 3000,
+    "strength": 0.75,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
   },
   {
     "description": "ECTOFUNTUS_SMALL",
