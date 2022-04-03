@@ -797,7 +797,9 @@ public enum Environment
 	),
 
 	// Underwater areas
-	MOGRE_CAMP_CUTSCENE(Area.MOGRE_CAMP_CUTSCENE, new Properties()),
+	MOGRE_CAMP_CUTSCENE(Area.MOGRE_CAMP_CUTSCENE, new Properties()
+		.setUnderwater(true)
+	),
 	MOGRE_CAMP(Area.MOGRE_CAMP, new Properties()
 		.setFogColor("#133156")
 		.setFogDepth(60)
@@ -806,6 +808,7 @@ public enum Environment
 		.setDirectionalStrength(5.0f)
 		.setDirectionalColor("#71A3D0")
 		.setGroundFog(0, -500, 0.5f)
+		.setUnderwater(true)
 	),
 	HARMONY_ISLAND_UNDERWATER_TUNNEL(Area.HARMONY_ISLAND_UNDERWATER_TUNNEL, new Properties()
 		.setFogColor("#133156")
@@ -816,6 +819,7 @@ public enum Environment
 		.setDirectionalColor("#71A3D0")
 		.setLightDirection(260f, 10f)
 		.setGroundFog(-800, -1100, 0.5f)
+		.setUnderwater(true)
 	),
 	FOSSIL_ISLAND_UNDERWATER_AREA(Area.FOSSIL_ISLAND_UNDERWATER_AREA, new Properties()
 		.setFogColor("#133156")
@@ -826,6 +830,7 @@ public enum Environment
 		.setDirectionalColor("#71A3D0")
 		.setLightDirection(260f, 10f)
 		.setGroundFog(-400, -750, 0.5f)
+		.setUnderwater(true)
 	),
 
 	// Lunar Isle
@@ -943,6 +948,9 @@ public enum Environment
 	private final float lightPitch;
 	private final float lightYaw;
 	private final boolean allowSkyOverride;
+	private final boolean underwater;
+	private final float[] underwaterCausticsColor;
+	private final float underwaterCausticsStrength;
 
 	private static class Properties
 	{
@@ -967,6 +975,9 @@ public enum Environment
 		private float lightPitch = -128f;
 		private float lightYaw = 55f;
 		private boolean allowSkyOverride = true;
+		private boolean underwater = false;
+		private float[] underwaterCausticsColor = null;
+		private float underwaterCausticsStrength = 0;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -1073,9 +1084,40 @@ public enum Environment
 			this.lightYaw = yaw;
 			return this;
 		}
+
 		public Properties setAllowSkyOverride(boolean s)
 		{
 			this.allowSkyOverride = s;
+			return this;
+		}
+
+		public Properties setUnderwater(boolean underwater)
+		{
+			this.underwater = underwater;
+			return this;
+		}
+
+		/**
+		 * Use a different color than the directional lighting color
+		 * @param r 0-255 gamma
+		 * @param g 0-255 gamma
+		 * @param b 0-255 gamma
+		 * @return the same properties instance
+		 */
+		public Properties setUnderwaterCausticsColor(int r, int g, int b)
+		{
+			this.underwaterCausticsColor = rgb(r, g, b);
+			return this;
+		}
+
+		/**
+		 * Use a different light strength than the directional lighting strength
+		 * @param strength a float value to replace directional strength
+		 * @return the same properties instance
+		 */
+		public Properties setUnderwaterCausticsStrength(float strength)
+		{
+			this.underwaterCausticsStrength = strength;
 			return this;
 		}
 	}
@@ -1104,6 +1146,11 @@ public enum Environment
 		this.lightPitch = properties.lightPitch;
 		this.lightYaw = properties.lightYaw;
 		this.allowSkyOverride = properties.allowSkyOverride;
+		this.underwater = properties.underwater;
+		this.underwaterCausticsColor = properties.underwaterCausticsColor == null ?
+			properties.directionalColor : properties.underwaterCausticsColor;
+		this.underwaterCausticsStrength = properties.underwaterCausticsStrength == 0 ?
+			properties.directionalStrength : properties.underwaterCausticsStrength;
 	}
 
 	private static float[] rgb(int r, int g, int b)

@@ -26,8 +26,6 @@
 package rs117.hd;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.primitives.Ints;
-import com.jogamp.opengl.math.VectorUtil;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -45,14 +43,11 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
-import rs117.hd.config.WaterEffects;
 import rs117.hd.materials.GroundMaterial;
 import rs117.hd.materials.ObjectProperties;
 import rs117.hd.materials.Overlay;
 import rs117.hd.materials.Material;
-import rs117.hd.materials.TzHaarRecolorType;
 import rs117.hd.materials.Underlay;
-import rs117.hd.materials.UvType;
 
 @Singleton
 @Slf4j
@@ -566,7 +561,7 @@ class SceneUploader
 		int nwVertexKey = vertexKeys[2];
 		int neVertexKey = vertexKeys[3];
 
-		if (hdPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
+		if (proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
 		{
 			// underwater terrain
 
@@ -904,7 +899,7 @@ class SceneUploader
 			return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 		}
 
-		if (hdPlugin.configWaterEffects == WaterEffects.ALL && proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
+		if (proceduralGenerator.tileIsWater[tileZ][tileX][tileY])
 		{
 			underwaterTerrain = 1;
 

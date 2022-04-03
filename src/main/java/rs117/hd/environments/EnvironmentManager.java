@@ -26,6 +26,7 @@ package rs117.hd.environments;
 
 import com.google.common.primitives.Floats;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -72,15 +73,17 @@ public class EnvironmentManager
 	DefaultSkyColor lastSkyColor = DefaultSkyColor.DEFAULT;
 	boolean lastEnvironmentLighting = true;
 	boolean lastSkyOverride = false;
+	boolean lastUnderwater = false;
 
 	// previous camera target world X
 	private int prevCamTargetX = 0;
 	// previous camera target world Y
 	private int prevCamTargetY = 0;
 
+	public static final float[] BLACK_COLOR = {0,0,0};
+
 	private float[] startFogColor = new float[]{0,0,0};
 	public float[] currentFogColor = new float[]{0,0,0};
-	public int currentFogColorInt = 0;
 	private float[] targetFogColor = new float[]{0,0,0};
 
 	private float[] startWaterColor = new float[]{0,0,0};
@@ -102,6 +105,14 @@ public class EnvironmentManager
 	private float startDirectionalStrength = 0f;
 	public float currentDirectionalStrength = 0f;
 	private float targetDirectionalStrength = 0f;
+
+	private float[] startUnderwaterCausticsColor = new float[]{0,0,0};
+	public float[] currentUnderwaterCausticsColor = new float[]{0,0,0};
+	private float[] targetUnderwaterCausticsColor = new float[]{0,0,0};
+
+	private float startUnderwaterCausticsStrength = 1f;
+	public float currentUnderwaterCausticsStrength = 1f;
+	private float targetUnderwaterCausticsStrength = 1f;
 
 	private float[] startDirectionalColor = new float[]{0,0,0};
 	public float[] currentDirectionalColor = new float[]{0,0,0};
@@ -165,7 +176,10 @@ public class EnvironmentManager
 			}
 		}
 
-		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting() || lastSkyOverride != config.overrideSky())
+		if (lastSkyColor != config.defaultSkyColor() ||
+			lastEnvironmentLighting != config.atmosphericLighting() ||
+			lastSkyOverride != config.overrideSky() ||
+			lastUnderwater != isUnderwater())
 		{
 			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
 		}
@@ -188,6 +202,8 @@ public class EnvironmentManager
 			currentGroundFogOpacity = targetGroundFogOpacity;
 			currentLightPitch = targetLightPitch;
 			currentLightYaw = targetLightYaw;
+			currentUnderwaterCausticsColor = targetUnderwaterCausticsColor;
+			currentUnderwaterCausticsStrength = targetUnderwaterCausticsStrength;
 		}
 		else
 		{
@@ -208,11 +224,11 @@ public class EnvironmentManager
 			currentGroundFogOpacity  = HDUtils.lerp(startGroundFogOpacity, targetGroundFogOpacity, t);
 			currentLightPitch = HDUtils.lerp(startLightPitch, targetLightPitch, t);
 			currentLightYaw = HDUtils.lerp(startLightYaw, targetLightYaw, t);
+			currentUnderwaterCausticsColor = HDUtils.lerpVectors(startUnderwaterCausticsColor, targetUnderwaterCausticsColor, t);
+			currentUnderwaterCausticsStrength = HDUtils.lerp(startUnderwaterCausticsStrength, targetUnderwaterCausticsStrength, t);
 		}
 
 		updateLightning();
-
-		currentFogColorInt = HDUtils.colorRGBToInt(currentFogColor);
 
 		// update some things for use next frame
 		prevCamTargetX = camTargetX;
@@ -221,6 +237,7 @@ public class EnvironmentManager
 		lastSkyColor = config.defaultSkyColor();
 		lastSkyOverride = config.overrideSky();
 		lastEnvironmentLighting = config.atmosphericLighting();
+		lastUnderwater = isUnderwater();
 	}
 
 	/**
@@ -253,6 +270,8 @@ public class EnvironmentManager
 		startGroundFogOpacity = currentGroundFogOpacity;
 		startLightPitch = currentLightPitch;
 		startLightYaw = currentLightYaw;
+		startUnderwaterCausticsColor = currentUnderwaterCausticsColor;
+		startUnderwaterCausticsStrength = currentUnderwaterCausticsStrength;
 
 		// set target variables to ones from new environment
 		targetFogColor = newEnvironment.getFogColor();
@@ -353,6 +372,8 @@ public class EnvironmentManager
 		targetGroundFogStart = newEnvironment.getGroundFogStart();
 		targetGroundFogEnd = newEnvironment.getGroundFogEnd();
 		targetGroundFogOpacity = newEnvironment.getGroundFogOpacity();
+		targetUnderwaterCausticsColor = newEnvironment.getUnderwaterCausticsColor();
+		targetUnderwaterCausticsStrength = newEnvironment.getUnderwaterCausticsStrength();
 
 		lightningEnabled = newEnvironment.isLightningEnabled();
 
@@ -503,9 +524,10 @@ public class EnvironmentManager
 	 *
 	 * @return
 	 */
-	public int getFogColor()
+	public float[] getFogColor()
 	{
-		return client.getGameState().getState() >= GameState.LOADING.getState() ? currentFogColorInt : 0;
+		return Arrays.copyOf(client.getGameState().getState() >= GameState.LOADING.getState() ?
+			currentFogColor : BLACK_COLOR, 3);
 	}
 
 	/**
@@ -532,5 +554,10 @@ public class EnvironmentManager
 		{
 			return WorldPoint.fromLocal(client, localPoint);
 		}
+	}
+
+	public boolean isUnderwater()
+	{
+		return currentEnvironment != null && currentEnvironment.isUnderwater();
 	}
 }

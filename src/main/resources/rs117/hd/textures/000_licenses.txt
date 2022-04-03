@@ -13,3 +13,6 @@ Some textures copyright (c) 2021 117.
 
 Wooden Grain(247) & Rock(224) Texture 2021 j-meds.
 https://github.com/j-meds
+
+Caustics texture (240) by leenor_net, licensed under CC0 1.0 Universal.
+-- https://opengameart.org/content/water-caustics-effect-small

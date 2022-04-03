@@ -42,7 +42,6 @@ import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.ShadowDistance;
 import rs117.hd.config.ShadowResolution;
 import rs117.hd.config.UIScalingMode;
-import rs117.hd.config.WaterEffects;
 
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
@@ -469,15 +468,15 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "waterEffects",
-		name = "Water Effects",
-		description = "Changes the appearance of the water.",
+		keyName = "underwaterCaustics",
+		name = "Underwater Caustics",
+		description = "Apply underwater lighting effects to imitate sunlight moving through waves on the surface.",
 		position = 209,
 		section = environmentSettings
 	)
-	default WaterEffects waterEffects()
+	default boolean underwaterCaustics()
 	{
-		return WaterEffects.ALL;
+		return true;
 	}
 
 	@ConfigItem(
