@@ -2091,9 +2091,15 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		// Texture on UI
 		drawUi(overlayColor, canvasHeight, canvasWidth);
 
-		glDrawable.swapBuffers();
+		try {
+			glDrawable.swapBuffers();
 
-		drawManager.processDrawComplete(this::screenshot);
+			drawManager.processDrawComplete(this::screenshot);
+		} catch (GLException ex) {
+			log.warn("swapBuffers exception", ex);
+			shutDown();
+			startUp();
+		}
 	}
 
 	private float[] makeProjectionMatrix(float w, float h, float n)
@@ -2605,6 +2611,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		else
 		{
 			final Graphics2D graphics = (Graphics2D) canvas.getGraphics();
+			if (graphics == null) return;
 			final AffineTransform t = graphics.getTransform();
 			gl.glViewport(
 				getScaledValue(t.getScaleX(), x),
