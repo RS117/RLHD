@@ -854,6 +854,10 @@ public enum Environment
 		.setLightDirection(260f, 10f)
 		.setAllowSkyOverride(false)
 	),
+	TRUE_BLOOD_ALTAR(Area.TRUE_BLOOD_ALTAR, new Properties()
+			.setFogColor("#000000")
+			.setFogDepth(25)
+	),
 
 	TARNS_LAIR(Area.TARNS_LAIR, new Properties()
 		.setFogColor("#241809")

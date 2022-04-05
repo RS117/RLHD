@@ -24551,6 +24551,136 @@
     ]
   },
   {
+    "description": "TRUE_BLOOD_ALTAR",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 4000,
+    "strength": 7.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "PULSE",
+    "duration": 2000.0,
+    "range": 10.0,
+    "objectIds": [
+      43479
+    ]
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_PORTALS",
+    "height": 20,
+    "alignment": "CENTER",
+    "radius": 400,
+    "strength": 8.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 1800.0,
+    "range": 5.0,
+    "objectIds": [
+      43478
+    ]
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_PILLARS",
+    "height": 270,
+    "alignment": "CENTER",
+    "radius": 1000,
+    "strength": 4.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "PULSE",
+    "duration": 500.0,
+    "range": 10.0,
+    "objectIds": [
+      34792
+    ]
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_CRYSTAL_1",
+    "worldX": 3232,
+    "worldY": 4847,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2000,
+    "strength": 4.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 2000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_CRYSTAL_PURPLE",
+    "worldX": 3232,
+    "worldY": 4847,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2500,
+    "strength": 3.0,
+    "color": [
+      1.0,
+      0.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 1280.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_CRYSTAL_3",
+    "worldX": 3232,
+    "worldY": 4847,
+    "plane": 0,
+    "height": 1200,
+    "alignment": "CENTER",
+    "radius": 2500,
+    "strength": 2.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 1280.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "TRUE_BLOOD_ALTAR_CRYSTAL_4",
+    "worldX": 3232,
+    "worldY": 4847,
+    "plane": 0,
+    "height": 2000,
+    "alignment": "CENTER",
+    "radius": 2500,
+    "strength": 2.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 1280.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
     "description": "DARK_ALTAR",
     "height": 350,
     "alignment": "CENTER",
