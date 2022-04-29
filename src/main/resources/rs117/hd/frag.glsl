@@ -128,6 +128,7 @@ out vec4 FragColor;
 #include utils.glsl
 #include colorblind.glsl
 #include utils/fetch_material.glsl
+#include utils/caustics.glsl
 
 #define WATER 1
 #define SWAMP_WATER 3
@@ -162,8 +163,6 @@ void main() {
 
     // only use one displacement map
     int displacementMapId = material1.displacementMapId;
-
-    int causticsMapId = 240;
 
     bool isWater = false;
     bool simpleWater = true;
@@ -724,16 +723,10 @@ void main() {
         // height offset
         causticsUv += lightDir.xy * position.y / (128 * scale);
 
-        vec2 flow1 = causticsUv + animationFrame(19) * vec2(1, -1);
-        vec2 flow2 = causticsUv * 1.5 + animationFrame(37) * vec2(-1, 1);
-
-        float caustics = min(
-            texture(texturesHD, vec3(flow1, causticsMapId)).r,
-            texture(texturesHD, vec3(flow2, causticsMapId)).r
-        );
+        vec3 caustics = sampleCaustics(causticsUv, .0025);
 
         vec3 causticsColor = underwaterCausticsColor * underwaterCausticsStrength;
-        dirLightColor += caustics * causticsColor * lightDotNormals * 40;
+        dirLightColor += caustics * causticsColor * lightDotNormals * pow(lightStrength, 1.5);
     }
 
     // apply shadows
@@ -876,26 +869,21 @@ void main() {
         // caustics
         if (underwaterCaustics)
         {
-            float scale = 1.75;
+            const float scale = 1.75;
+            const float maxCausticsDepth = 128 * 4;
+
             vec2 causticsUv = worldUvs(scale);
 
-            float maxCausticsDepth = 128 * 4;
             float depthMultiplier = (position.y - surfaceLevel - maxCausticsDepth) / -maxCausticsDepth;
             depthMultiplier *= depthMultiplier;
 
             // height offset
             causticsUv += lightDir.xy * position.y / (128 * scale);
 
-            vec2 flow1 = causticsUv + animationFrame(19) * vec2(0, -1);
-            vec2 flow2 = causticsUv * 1.5 + animationFrame(37) * vec2(-1, 2);
-
-            float caustics = min(
-                texture(texturesHD, vec3(flow1, causticsMapId)).r,
-                texture(texturesHD, vec3(flow2, causticsMapId)).r
-            );
+            vec3 caustics = sampleCaustics(causticsUv, .005);
 
             vec3 causticsColor = underwaterCausticsColor * underwaterCausticsStrength;
-            compositeColor *= 1 + caustics * causticsColor * depthMultiplier * lightDotNormals * 5;
+            compositeColor *= 1 + caustics * causticsColor * depthMultiplier * lightDotNormals * lightStrength;
         }
     }
 
