@@ -31,11 +31,10 @@ import lombok.Getter;
 import net.runelite.api.NpcID;
 import static net.runelite.api.NpcID.*;
 import rs117.hd.HDUtils;
-import rs117.hd.lighting.LightManager.LightType;
-import rs117.hd.lighting.LightManager.Alignment;
 
 @AllArgsConstructor
 @Getter
+@Deprecated
 enum NpcLight
 {
 	HELLCAT(20, Alignment.CENTER, 220, 7.5f , rgb(255, 0, 0), LightType.STATIC, 0, 0, NpcID.HELLCAT, HELLCAT_6668, LAZY_HELLCAT, OVERGROWN_HELLCAT, WILY_HELLCAT, LAZY_HELLCAT_6689, OVERGROWN_HELLCAT_6682, WILY_HELLCAT_6696, HELLKITTEN),
@@ -188,6 +187,9 @@ enum NpcLight
 	REVENANT_ORK(100, Alignment.CENTER, 400, 12.5f, rgb(183, 234, 225), LightType.PULSE, 3400, 10, NpcID.REVENANT_ORK),
 	REVENANT_PYREFIEND(30, Alignment.CENTER, 200, 12.5f, rgb(183, 234, 225), LightType.PULSE, 3400, 10, NpcID.REVENANT_PYREFIEND),
 
+  // Ancient Cavern
+	ANCIENT_CAVERN_DRAGON_HEAD(200, Alignment.CENTER, 500, 10.0f, rgb(252, 122, 3), LightType.FLICKER, 0, 20, DRAGON_HEAD_8144),
+  
 	;
 
 

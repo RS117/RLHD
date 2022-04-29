@@ -54,8 +54,6 @@ import rs117.hd.materials.TzHaarRecolorType;
 import rs117.hd.materials.Underlay;
 import rs117.hd.materials.UvType;
 
-import java.util.Arrays;
-
 @Singleton
 @Slf4j
 class SceneUploader
@@ -68,6 +66,9 @@ class SceneUploader
 
 	@Inject
 	ProceduralGenerator proceduralGenerator;
+
+	@Inject
+	private ModelPusher modelPusher;
 
 	int sceneId = (int) (System.currentTimeMillis() / 1000L);
 	private int offset;
@@ -111,19 +112,13 @@ class SceneUploader
 		}
 
 		byte skipObject = 0b00;
-
-		if (objectType == ObjectType.GROUND_OBJECT || objectType == ObjectType.DECORATIVE_OBJECT)
+		if (client.getBaseX() + tileX == 2558 && client.getBaseY() + tileY >= 3249 && client.getBaseY() + tileY <= 3252)
 		{
-			// mark it as low priority
-			skipObject = 0b01;
-
-			if (client.getBaseX() + tileX == 2558 && client.getBaseY() + tileY >= 3249 && client.getBaseY() + tileY <= 3252)
-			{
-				// fix for water by khazard spirit tree
-				// marks object to never be drawn
-				skipObject = 0b11;
-			}
+			// fix for water by khazard spirit tree
+			// marks object to never be drawn
+			skipObject = 0b11;
 		}
+
 		// pack a bit into bufferoffset that we can use later to hide
 		// some low-importance objects based on Level of Detail setting
 		model.setBufferOffset(offset << 2 | skipObject);
@@ -137,19 +132,10 @@ class SceneUploader
 		}
 		model.setSceneId(sceneId);
 
-		final int faceCount = model.getTrianglesCount();
-		int vertexLength = 0;
-		int uvLength = 0;
+		final int[] lengths = modelPusher.pushModel(null, model, vertexBuffer, uvBuffer, normalBuffer, tileX, tileY, tileZ, objectProperties, objectType, true);
 
-		for (int face = 0; face < faceCount; ++face)
-		{
-			int[] bufferLengths = pushFace(model, face, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, objectType);
-			vertexLength += bufferLengths[0];
-			uvLength += bufferLengths[1];
-		}
-
-		offset += vertexLength;
-		uvoffset += uvLength;
+		offset += lengths[0];
+		uvoffset += lengths[1];
 	}
 
 	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
@@ -410,13 +396,14 @@ class SceneUploader
 					nwMaterial = proceduralGenerator.vertexTerrainTexture.getOrDefault(nwVertexKey, nwMaterial);
 				}
 			}
-			else if (hdPlugin.configGroundTextures)
+			else if (hdPlugin.configGroundTextures && !shouldSkipTile(baseX + tileX, baseY + tileY))
 			{
 				GroundMaterial groundMaterial;
 
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
 					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
@@ -427,6 +414,7 @@ class SceneUploader
 				else
 				{
 					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(swColor)));
@@ -439,6 +427,29 @@ class SceneUploader
 				seMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY);
 				nwMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX, baseY + tileY + 1);
 				neMaterial = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + 1, baseY + tileY + 1);
+			}
+			else if (hdPlugin.configWinterTheme)
+			{
+				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
+				{
+					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
+
+					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
+					seColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(seColor)));
+					nwColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(nwColor)));
+					neColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(neColor)));
+				}
+				else
+				{
+					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+
+					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(swColor)));
+					seColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(seColor)));
+					nwColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(nwColor)));
+					neColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(neColor)));
+				}
 			}
 
 			if (proceduralGenerator.vertexIsOverlay.containsKey(neVertexKey) && proceduralGenerator.vertexIsUnderlay.containsKey(neVertexKey))
@@ -498,10 +509,10 @@ class SceneUploader
 
 			bufferLength += 6;
 
-			int packedMaterialDataSW = packMaterialData(Material.getIndex(swMaterial), swVertexIsOverlay);
-			int packedMaterialDataSE = packMaterialData(Material.getIndex(seMaterial), seVertexIsOverlay);
-			int packedMaterialDataNW = packMaterialData(Material.getIndex(nwMaterial), nwVertexIsOverlay);
-			int packedMaterialDataNE = packMaterialData(Material.getIndex(neMaterial), neVertexIsOverlay);
+			int packedMaterialDataSW = modelPusher.packMaterialData(Material.getIndex(swMaterial), swVertexIsOverlay);
+			int packedMaterialDataSE = modelPusher.packMaterialData(Material.getIndex(seMaterial), seVertexIsOverlay);
+			int packedMaterialDataNW = modelPusher.packMaterialData(Material.getIndex(nwMaterial), nwVertexIsOverlay);
+			int packedMaterialDataNE = modelPusher.packMaterialData(Material.getIndex(neMaterial), neVertexIsOverlay);
 
 			uvBuffer.ensureCapacity(24);
 			uvBuffer.put(packedMaterialDataNE, 1.0f, 1.0f, 0f);
@@ -618,10 +629,10 @@ class SceneUploader
 
 			bufferLength += 6;
 
-			int packedMaterialDataSW = packMaterialData(Material.getIndex(swMaterial), false);
-			int packedMaterialDataSE = packMaterialData(Material.getIndex(seMaterial), false);
-			int packedMaterialDataNW = packMaterialData(Material.getIndex(nwMaterial), false);
-			int packedMaterialDataNE = packMaterialData(Material.getIndex(neMaterial), false);
+			int packedMaterialDataSW = modelPusher.packMaterialData(Material.getIndex(swMaterial), false);
+			int packedMaterialDataSE = modelPusher.packMaterialData(Material.getIndex(seMaterial), false);
+			int packedMaterialDataNW = modelPusher.packMaterialData(Material.getIndex(nwMaterial), false);
+			int packedMaterialDataNE = modelPusher.packMaterialData(Material.getIndex(neMaterial), false);
 
 			uvBuffer.ensureCapacity(24);
 			uvBuffer.put(packedMaterialDataNE, 1.0f, 1.0f, 0f);
@@ -714,6 +725,10 @@ class SceneUploader
 				materialC = Material.getTexture(faceTextures[face]);
 			}
 
+			materialA = proceduralGenerator.getSeasonalMaterial(materialA);
+			materialB = proceduralGenerator.getSeasonalMaterial(materialB);
+			materialC = proceduralGenerator.getSeasonalMaterial(materialC);
+
 			WaterType waterType = proceduralGenerator.faceWaterType(tile, face, sceneTileModel);
 
 			if (waterType != WaterType.NONE)
@@ -763,6 +778,7 @@ class SceneUploader
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
 					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));
@@ -772,6 +788,7 @@ class SceneUploader
 				else
 				{
 					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorA)));
@@ -782,6 +799,27 @@ class SceneUploader
 				materialA = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[0][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[0][1] / Perspective.LOCAL_TILE_SIZE));
 				materialB = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[1][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[1][1] / Perspective.LOCAL_TILE_SIZE));
 				materialC = groundMaterial.getRandomMaterial(tileZ, baseX + tileX + (int) Math.floor((float) localVertices[2][0] / Perspective.LOCAL_TILE_SIZE), baseY + tileY + (int) Math.floor((float) localVertices[2][1] / Perspective.LOCAL_TILE_SIZE));
+			}
+			else if (hdPlugin.configWinterTheme)
+			{
+				if (proceduralGenerator.isOverlayFace(tile, face))
+				{
+					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
+
+					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));
+					colorB = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorB)));
+					colorC = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorC)));
+				}
+				else
+				{
+					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
+
+					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorA)));
+					colorB = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorB)));
+					colorC = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorC)));
+				}
 			}
 
 			if (proceduralGenerator.vertexIsOverlay.containsKey(vertexKeyA) && proceduralGenerator.vertexIsUnderlay.containsKey(vertexKeyA))
@@ -825,9 +863,9 @@ class SceneUploader
 
 			bufferLength += 3;
 
-			int packedMaterialDataA = packMaterialData(Material.getIndex(materialA), vertexAIsOverlay);
-			int packedMaterialDataB = packMaterialData(Material.getIndex(materialB), vertexBIsOverlay);
-			int packedMaterialDataC = packMaterialData(Material.getIndex(materialC), vertexCIsOverlay);
+			int packedMaterialDataA = modelPusher.packMaterialData(Material.getIndex(materialA), vertexAIsOverlay);
+			int packedMaterialDataB = modelPusher.packMaterialData(Material.getIndex(materialB), vertexBIsOverlay);
+			int packedMaterialDataC = modelPusher.packMaterialData(Material.getIndex(materialC), vertexCIsOverlay);
 
 			uvBuffer.ensureCapacity(12);
 			uvBuffer.put(packedMaterialDataA, localVertices[0][0] / 128f, localVertices[0][1] / 128f, 0f);
@@ -949,9 +987,9 @@ class SceneUploader
 
 				bufferLength += 3;
 
-				int packedMaterialDataA = packMaterialData(Material.getIndex(materialA), false);
-				int packedMaterialDataB = packMaterialData(Material.getIndex(materialB), false);
-				int packedMaterialDataC = packMaterialData(Material.getIndex(materialC), false);
+				int packedMaterialDataA = modelPusher.packMaterialData(Material.getIndex(materialA), false);
+				int packedMaterialDataB = modelPusher.packMaterialData(Material.getIndex(materialB), false);
+				int packedMaterialDataC = modelPusher.packMaterialData(Material.getIndex(materialC), false);
 
 				uvBuffer.ensureCapacity(12);
 				uvBuffer.put(packedMaterialDataA, localVertices[0][0] / 128f, localVertices[0][1] / 128f, 0f);
@@ -965,421 +1003,19 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	static int color1H;
-	static int color1S;
-	static int color1L;
-	static int color2H;
-	static int color2S;
-	static int color2L;
-	static int color3H;
-	static int color3S;
-	static int color3L;
-	static int[] HSL = new int[3];
-	static float[] vertex = new float[3];
-	static int[] bufferLengths = new int[2];
-
-	// a directional vector approximately opposite of the directional light
-	// used by the client
-	static float[] inverseLightDirection = new float[]{0.57735026f, 0.57735026f, 0.57735026f};
-	// multiplier applied to vertex' lightness value.
-	// results in greater lightening of lighter colors
-	static float lightnessMultiplier = 3f;
-	// the minimum amount by which each color will be lightened
-	static int baseLighten = 10;
-	// subtracts the X lowest lightness levels from the formula.
-	// helps keep darker colors appropriately dark
-	static int ignoreLowLightness = 3;
-	static int lightenA;
-	static float dotA;
-	static int lightenB;
-	static float dotB;
-	static int lightenC;
-	static float dotC;
-
-	// 12 zeroes to replace the duplicated zero calls to vertexBuffer
-	final static int[] zeroInts = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-	// same thing but for the normalBuffer and uvBuffer
-	final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-	// allocate these arrays up front to reduce the garbage created we're writing to the buffers
-	final static int[] twelveIntArray = new int[12];
-	final static float[] twelveFloatArray = new float[12];
-
-	int[] pushFace(Model model, int face, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
-	{
-		final int[] vertexX = model.getVerticesX();
-		final int[] vertexY = model.getVerticesY();
-		final int[] vertexZ = model.getVerticesZ();
-
-		final int[] trianglesX = model.getTrianglesX();
-		final int[] trianglesY = model.getTrianglesY();
-		final int[] trianglesZ = model.getTrianglesZ();
-
-		final int[] color1s = model.getFaceColors1();
-		final int[] color2s = model.getFaceColors2();
-		final int[] color3s = model.getFaceColors3();
-
-		final byte[] transparencies = model.getTriangleTransparencies();
-		final short[] faceTextures = model.getFaceTextures();
-		final byte[] facePriorities = model.getFaceRenderPriorities();
-
-		int triangleA = trianglesX[face];
-		int triangleB = trianglesY[face];
-		int triangleC = trianglesZ[face];
-
-		int color1 = color1s[face];
-		int color2 = color2s[face];
-		int color3 = color3s[face];
-
-		int uvLength = 0;
-
-		int packedAlphaPriority = packAlphaPriority(faceTextures, transparencies, facePriorities, face);
-
-		if (color3 == -1)
-		{
-			color2 = color3 = color1;
-		}
-		else if (color3 == -2)
-		{
-			vertexBuffer.ensureCapacity(12);
-			vertexBuffer.put(zeroInts);
-
-			normalBuffer.ensureCapacity(12);
-			normalBuffer.put(zeroFloats);
-
-			if (faceTextures != null || (objectProperties != null && objectProperties.getMaterial() != Material.NONE))
-			{
-				uvBuffer.ensureCapacity(12);
-				uvBuffer.put(zeroFloats);
-				uvLength = 3;
-			}
-
-			bufferLengths[0] = 3;
-			bufferLengths[1] = uvLength;
-			return bufferLengths;
-		}
-
-		int vnAX, vnAY, vnAZ;
-		int vnBX, vnBY, vnBZ;
-		int vnCX, vnCY, vnCZ;
-
-		int[] vertexNormalsX = model.getVertexNormalsX();
-		int[] vertexNormalsY = model.getVertexNormalsY();
-		int[] vertexNormalsZ = model.getVertexNormalsZ();
-
-		vnAX = vertexNormalsX[triangleA];
-		vnAY = vertexNormalsY[triangleA];
-		vnAZ = vertexNormalsZ[triangleA];
-
-		vnBX = vertexNormalsX[triangleB];
-		vnBY = vertexNormalsY[triangleB];
-		vnBZ = vertexNormalsZ[triangleB];
-
-		vnCX = vertexNormalsX[triangleC];
-		vnCY = vertexNormalsY[triangleC];
-		vnCZ = vertexNormalsZ[triangleC];
-
-
-		color1H = color1 >> 10 & 0x3F;
-		color1S = color1 >> 7 & 0x7;
-		color1L = color1 & 0x7F;
-		color2H = color2 >> 10 & 0x3F;
-		color2S = color2 >> 7 & 0x7;
-		color2L = color2 & 0x7F;
-		color3H = color3 >> 10 & 0x3F;
-		color3S = color3 >> 7 & 0x7;
-		color3L = color3 & 0x7F;
-
-		// reduce the effect of the baked shading by approximately inverting the process by which
-		// the shading is added initially.
-
-		lightenA = (int) (Math.max((color1L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-		// use the dot product of the inverse light vector and each vertex' normal vector to
-		// interpolate between the lightened color value and the original color value
-		vertex[0] = vnAX;
-		vertex[1] = vnAY;
-		vertex[2] = vnAZ;
-		dotA = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
-		dotA = Math.max(dotA, 0);
-		color1L = (int) HDUtils.lerp(color1L, lightenA, dotA);
-
-		lightenB = (int) (Math.max((color2L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-		vertex[0] = vnBX;
-		vertex[1] = vnBY;
-		vertex[2] = vnBZ;
-		dotB = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
-		dotB = Math.max(dotB, 0);
-		color2L = (int) HDUtils.lerp(color2L, lightenB, dotB);
-
-		lightenC = (int) (Math.max((color3L - ignoreLowLightness), 0) * lightnessMultiplier) + baseLighten;
-		vertex[0] = vnCX;
-		vertex[1] = vnCY;
-		vertex[2] = vnCZ;
-		dotC = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vertex), inverseLightDirection);
-		dotC = Math.max(dotC, 0);
-		color3L = (int) HDUtils.lerp(color3L, lightenC, dotC);
-
-		if (faceTextures != null && faceTextures[face] != -1)
-		{
-			// set textured faces to pure white as they are harder to remove shadows from for some reason
-			color1H = color2H = color3H = 0;
-			color1S = color2S = color3S = 0;
-			color1L = color2L = color3L = 127;
-		}
-
-		if (objectProperties != null && objectProperties.isInheritTileColor())
-		{
-			Tile tile = client.getScene().getTiles()[tileZ][tileX][tileY];
-
-			if (tile != null && (tile.getSceneTilePaint() != null || tile.getSceneTileModel() != null))
-			{
-				int[] tileColorHSL;
-
-				if (tile.getSceneTilePaint() != null && tile.getSceneTilePaint().getTexture() == -1)
-				{
-					// pull any corner color as either one should be OK
-					tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSwColor());
-
-					// average saturation and lightness
-					tileColorHSL[1] =
-						(
-							tileColorHSL[1] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[1] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[1] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[1]
-						) / 4;
-
-					tileColorHSL[2] =
-						(
-							tileColorHSL[2] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getSeColor())[2] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNwColor())[2] +
-								HDUtils.colorIntToHSL(tile.getSceneTilePaint().getNeColor())[2]
-						) / 4;
-
-					color1H = color2H = color3H = tileColorHSL[0];
-					color1S = color2S = color3S = tileColorHSL[1];
-					color1L = color2L = color3L = tileColorHSL[2];
-				}
-				else if (tile.getSceneTileModel() != null && tile.getSceneTileModel().getTriangleTextureId() == null)
-				{
-					int faceColorIndex = -1;
-					for (int i = 0; i < tile.getSceneTileModel().getTriangleColorA().length; i++)
-					{
-						if (!proceduralGenerator.isOverlayFace(tile, i))
-						{
-							// get a color from an underlay face as it's generally more desirable
-							// than pulling colors from paths and other overlays
-							faceColorIndex = i;
-							break;
-						}
-					}
-
-					if (faceColorIndex != -1)
-					{
-						tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
-						color1H = color2H = color3H = tileColorHSL[0];
-						color1S = color2S = color3S = tileColorHSL[1];
-						color1L = color2L = color3L = tileColorHSL[2];
-					}
-				}
-			}
-		}
-
-		if (hdPlugin.configTzhaarHD && objectProperties != null && objectProperties.getTzHaarRecolorType() != TzHaarRecolorType.NONE)
-		{
-			int[][] tzHaarRecolored = proceduralGenerator.recolorTzHaar(objectProperties, vertexY[triangleA], vertexY[triangleB], vertexY[triangleC], packedAlphaPriority, objectType, color1H, color1S, color1L, color2H, color2S, color2L, color3H, color3S, color3L);
-			color1H = tzHaarRecolored[0][0];
-			color1S = tzHaarRecolored[0][1];
-			color1L = tzHaarRecolored[0][2];
-			color2H = tzHaarRecolored[1][0];
-			color2S = tzHaarRecolored[1][1];
-			color2L = tzHaarRecolored[1][2];
-			color3H = tzHaarRecolored[2][0];
-			color3S = tzHaarRecolored[2][1];
-			color3L = tzHaarRecolored[2][2];
-			packedAlphaPriority = tzHaarRecolored[3][0];
-		}
-
-		// adjust overly-bright vertex colors to reduce ugly washed-out areas of
-		// brightly-colored models
-		int maxBrightness = 55;
-		if (faceTextures != null && faceTextures[face] != -1)
-		{
-			maxBrightness = 90;
-		}
-		color1L = Ints.constrainToRange(color1L, 0, maxBrightness);
-		color2L = Ints.constrainToRange(color2L, 0, maxBrightness);
-		color3L = Ints.constrainToRange(color3L, 0, maxBrightness);
-
-		color1 = (color1H << 3 | color1S) << 7 | color1L;
-		color2 = (color2H << 3 | color2S) << 7 | color2L;
-		color3 = (color3H << 3 | color3S) << 7 | color3L;
-
-		normalBuffer.ensureCapacity(12);
-
-		// if color3 is -1, the object is flat-shaded
-		if (color3s[face] == -1 || (objectProperties != null && objectProperties.isFlatNormals()))
-		{
-			normalBuffer.put(zeroFloats);
-		}
-		else
-		{
-			twelveFloatArray[0] = vnAX;
-			twelveFloatArray[1] = vnAY;
-			twelveFloatArray[2] = vnAZ;
-			twelveFloatArray[3] = 0;
-			twelveFloatArray[4] = vnBX;
-			twelveFloatArray[5] = vnBY;
-			twelveFloatArray[6] = vnBZ;
-			twelveFloatArray[7] = 0;
-			twelveFloatArray[8] = vnCX;
-			twelveFloatArray[9] = vnCY;
-			twelveFloatArray[10] = vnCZ;
-			twelveFloatArray[11] = 0;
-			normalBuffer.put(twelveFloatArray);
-		}
-
-		int aX = vertexX[triangleA];
-		int aY = vertexY[triangleA];
-		int aZ = vertexZ[triangleA];
-
-		int bX = vertexX[triangleB];
-		int bY = vertexY[triangleB];
-		int bZ = vertexZ[triangleB];
-
-		int cX = vertexX[triangleC];
-		int cY = vertexY[triangleC];
-		int cZ = vertexZ[triangleC];
-
-		vertexBuffer.ensureCapacity(12);
-		twelveIntArray[0] = aX;
-		twelveIntArray[1] = aY;
-		twelveIntArray[2] = aZ;
-		twelveIntArray[3] = packedAlphaPriority | color1;
-		twelveIntArray[4] = bX;
-		twelveIntArray[5] = bY;
-		twelveIntArray[6] = bZ;
-		twelveIntArray[7] = packedAlphaPriority | color2;
-		twelveIntArray[8] = cX;
-		twelveIntArray[9] = cY;
-		twelveIntArray[10] = cZ;
-		twelveIntArray[11] = packedAlphaPriority | color3;
-		vertexBuffer.put(twelveIntArray);
-
-		float[] uv = model.getFaceTextureUVCoordinates();
-
-		if (faceTextures != null && faceTextures[face] != -1 && uv != null)
-		{
-			int packedMaterialData = packMaterialData(Material.getIndexFromDiffuseID(faceTextures[face]), false);
-			int idx = face * 6;
-
-			uvBuffer.ensureCapacity(12);
-			twelveFloatArray[0] = packedMaterialData;
-			twelveFloatArray[1] = uv[idx];
-			twelveFloatArray[2] = uv[idx + 1];
-			twelveFloatArray[3] = 0;
-			twelveFloatArray[4] = packedMaterialData;
-			twelveFloatArray[5] = uv[idx + 2];
-			twelveFloatArray[6] = uv[idx + 3];
-			twelveFloatArray[7] = 0;
-			twelveFloatArray[8] = packedMaterialData;
-			twelveFloatArray[9] = uv[idx + 4];
-			twelveFloatArray[10] = uv[idx + 5];
-			twelveFloatArray[11] = 0;
-			uvBuffer.put(twelveFloatArray);
-			uvLength = 3;
-		}
-		else if (objectProperties != null && objectProperties.getMaterial() != Material.NONE)
-		{
-			Material material = hdPlugin.configObjectTextures ? objectProperties.getMaterial() : Material.NONE;
-			int packedMaterialData = packMaterialData(Material.getIndex(material), false);
-
-			uvBuffer.ensureCapacity(12);
-
-			if (objectProperties.getUvType() == UvType.GROUND_PLANE)
-			{
-				float aU = (aX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-				float aV = (aZ % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-				float bU = (bX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-				float bV = (bZ % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-				float cU = (cX % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-				float cV = (cZ % Perspective.LOCAL_TILE_SIZE) / (float)Perspective.LOCAL_TILE_SIZE;
-
-				twelveFloatArray[0] = packedMaterialData;
-				twelveFloatArray[1] = aU;
-				twelveFloatArray[2] = aV;
-				twelveFloatArray[3] = 0;
-				twelveFloatArray[4] = packedMaterialData;
-				twelveFloatArray[5] = bU;
-				twelveFloatArray[6] = bV;
-				twelveFloatArray[7] = 0;
-				twelveFloatArray[8] = packedMaterialData;
-				twelveFloatArray[9] = cU;
-				twelveFloatArray[10] = cV;
-				twelveFloatArray[11] = 0;
-				uvBuffer.put(twelveFloatArray);
-				uvLength = 3;
-			}
-			else
-			{
-				// UvType.GEOMETRY
-				twelveFloatArray[0] = packedMaterialData;
-				twelveFloatArray[1] = 0;
-				twelveFloatArray[2] = 0;
-				twelveFloatArray[3] = 0;
-				twelveFloatArray[4] = packedMaterialData;
-				twelveFloatArray[5] = 1;
-				twelveFloatArray[6] = 0;
-				twelveFloatArray[7] = 0;
-				twelveFloatArray[8] = packedMaterialData;
-				twelveFloatArray[9] = 0;
-				twelveFloatArray[10] = 1;
-				twelveFloatArray[11] = 0;
-				uvBuffer.put(twelveFloatArray);
-				uvLength = 3;
-			}
-		}
-		else if (faceTextures != null)
-		{
-			uvBuffer.ensureCapacity(12);
-			uvBuffer.put(zeroFloats);
-			uvLength = 3;
-		}
-
-		bufferLengths[0] = 3;
-		bufferLengths[1] = uvLength;
-		return bufferLengths;
-	}
-
-	private static int packAlphaPriority(short[] faceTextures, byte[] faceTransparencies, byte[] facePriorities, int face)
-	{
-		int alpha = 0;
-		if (faceTransparencies != null && (faceTextures == null || faceTextures[face] == -1))
-		{
-			alpha = (faceTransparencies[face] & 0xFF) << 24;
-		}
-		int priority = 0;
-		if (facePriorities != null)
-		{
-			priority = (facePriorities[face] & 0xff) << 16;
-		}
-		return alpha | priority;
-	}
-
-	private int packMaterialData(int materialId, boolean isOverlay)
-	{
-		if (materialId == Material.getIndex(Material.INFERNAL_CAPE) && hdPlugin.configHdInfernalTexture)
-		{
-			materialId = Material.getIndex(Material.HD_INFERNAL_CAPE);
-		}
-		return materialId << 1 | (isOverlay ? 0b1 : 0b0);
-	}
-
 	private int packTerrainData(int waterDepth, WaterType underwaterType, int plane)
 	{
 		byte isTerrain = 0b1;
 		return ((waterDepth << 4 | underwaterType.getValue()) << 2 | plane) << 1 | isTerrain;
+	}
+
+	private boolean shouldSkipTile(int worldX, int worldY) {
+		// Horrible hack to solve for poorly textured bridge west of shilo
+		// https://github.com/RS117/RLHD/issues/166
+		if (worldX == 2796 && worldY >= 2961 && worldY <= 2967)
+		{
+			return true;
+		}
+		return false;
 	}
 }

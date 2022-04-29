@@ -31,7 +31,7 @@ import net.runelite.api.Constants;
 public enum Area
 {
 	// items higher on the list take precedent over those below
-
+	EVIL_BOB_ISLAND(2495, 4805, 2559, 4747),
 	// Tutorial Island
 	TUTORIAL_ISLAND_WIZARD_BUILDING(3136, 3097, 3144, 3076),
 	TUTORIAL_ISLAND_CHURCH(3114, 3111, 3129, 3102),
@@ -48,6 +48,7 @@ public enum Area
 	),
 
 	// Lumbridge
+	RFD_QUIZ(2589, 4618, 2566, 4642),
 	LUM_BRIDGE(3240, 3226, 3250, 3225),
 	LUMBRIDGE_CASTLE_BASEMENT(3205, 9613, 3220, 9626),
 	LUMBRIDGE_CASTLE_ENTRYWAY(3213, 3212, 3216, 3225),
@@ -505,9 +506,10 @@ public enum Area
 
 	ZANARIS(2315, 4345, 2500, 4485),
 
-	FROZEN_DOOR(2884, 5280, 2883, 5280),
 	GOD_WARS_DUNGEON(
 		new Rect(2816, 5375, 2971, 5216),
+		new Rect(2848, 5199, 2948, 5153), // ancient prison
+		new Rect(2848, 5246, 2948, 5185), // ancient prison
 		new Rect(3008, 10178, 3072, 10112) // wilderness dungeon
 	),
 
@@ -802,6 +804,7 @@ public enum Area
 
 	OVERWORLD(700, 2300, 4200, 4095),
 	ALL(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+	NONE(0, 0, 0, 0),
 	;
 
 	private final Rect[] rects;

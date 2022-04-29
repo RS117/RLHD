@@ -80,7 +80,7 @@ public enum Material
 	LEAVES_2(41, new Properties().setTextureScale(1.1f, 1.1f)),
 	MARBLE(42, new Properties().setSpecular(1.0f, 400f)),
 	TILE_DARK(43),
-	TEXTURE_44(44),
+	ROOF_SHINGLES_2(44),
 	TEXTURE_45(45),
 	STONE_PATTERN(46),
 	TEXTURE_47(47),
@@ -96,7 +96,7 @@ public enum Material
 	TEXTURE_57(57),
 	TEXTURE_58(58),
 	INFERNAL_CAPE(59, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 0f)),
-	TEXTURE_60(60),
+	LEAVES_3(60),
 	TEXTURE_61(61),
 	TEXTURE_62(62),
 	TEXTURE_63(63),
@@ -234,6 +234,24 @@ public enum Material
 	WOOD_GRAIN(247),
 
 	HD_INFERNAL_CAPE(248, new Properties().setEmissive(1).setDisplacement(235, 0.02f, 12f, 4f).setScroll(0f, 3f)),
+
+	HD_BRICK(249),
+	HD_ROOF_SHINGLES_1(250, new Properties().setSpecular(0.5f, 30f)),
+	HD_MARBLE_DARK(251, new Properties().setSpecular(1.1f, 380f)),
+	HD_BRICK_BROWN(252),
+	HD_LAVA_3(253, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36f, 22f).setScroll(0f, 3f)),
+	HD_ROOF_SHINGLES_2(254),
+
+	// Seasonal
+	WINTER_WILLOW_LEAVES(255, new Properties().setTextureScale(1.025f, 1.0f)),
+	WINTER_MAPLE_LEAVES(256, new Properties().setTextureScale(1.3f, 1.0f)),
+	WINTER_LEAVES_1(257, new Properties().setTextureScale(1.3f, 1.0f)),
+	WINTER_LEAVES_2(258, new Properties().setTextureScale(1.1f, 1.1f)),
+	WINTER_LEAVES_3(259),
+	WINTER_PAINTING_LANDSCAPE(260),
+	WINTER_PAINTING_KING(261),
+	WINTER_PAINTING_ELF(262),
+
 
 	// water/fluid variants
 	WATER(7001),

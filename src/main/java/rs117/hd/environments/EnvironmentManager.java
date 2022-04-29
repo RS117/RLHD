@@ -71,6 +71,7 @@ public class EnvironmentManager
 	// used for tracking changes to settings
 	DefaultSkyColor lastSkyColor = DefaultSkyColor.DEFAULT;
 	boolean lastEnvironmentLighting = true;
+	boolean lastSkyOverride = false;
 
 	// previous camera target world X
 	private int prevCamTargetX = 0;
@@ -149,13 +150,22 @@ public class EnvironmentManager
 			{
 				if (environment != currentEnvironment)
 				{
+					if (environment == Environment.PLAYER_OWNED_HOUSE || environment == Environment.PLAYER_OWNED_HOUSE_SNOWY) {
+						hdPlugin.setInHouse(true);
+						hdPlugin.setNextSceneReload(System.currentTimeMillis() + 2500);
+					} else {
+						hdPlugin.setInHouse(false);
+					}
+
+					hdPlugin.setInGauntlet(environment == Environment.THE_GAUNTLET || environment == Environment.THE_GAUNTLET_CORRUPTED);
+
 					changeEnvironment(environment, camTargetX, camTargetY, false);
 				}
 				break;
 			}
 		}
 
-		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting())
+		if (lastSkyColor != config.defaultSkyColor() || lastEnvironmentLighting != config.atmosphericLighting() || lastSkyOverride != config.overrideSky())
 		{
 			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
 		}
@@ -209,6 +219,7 @@ public class EnvironmentManager
 		prevCamTargetY = camTargetY;
 		lastFrameTime = System.currentTimeMillis();
 		lastSkyColor = config.defaultSkyColor();
+		lastSkyOverride = config.overrideSky();
 		lastEnvironmentLighting = config.atmosphericLighting();
 	}
 
@@ -245,16 +256,38 @@ public class EnvironmentManager
 
 		// set target variables to ones from new environment
 		targetFogColor = newEnvironment.getFogColor();
+		targetWaterColor = targetFogColor;
 		if (!newEnvironment.isCustomFogColor())
 		{
-			DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
-			if (defaultSkyColor != DefaultSkyColor.DEFAULT)
+			if (hdPlugin.configWinterTheme)
 			{
-				targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+				targetFogColor = Environment.WINTER.getFogColor();
+				targetWaterColor = targetFogColor;
+			}
+			else
+			{
+				DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
+				if (defaultSkyColor != DefaultSkyColor.DEFAULT)
+				{
+					targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+				}
 			}
 		}
-		targetWaterColor = newEnvironment.getFogColor();
+
+		// If configured and the environment allows it override the skybox color to the default sky color.
+		if (config.overrideSky() && newEnvironment.isAllowSkyOverride()) {
+			targetFogColor = new float[]{ config.defaultSkyColor().getR() / 255f, config.defaultSkyColor().getG() / 255f, config.defaultSkyColor().getB() / 255f };
+		}
+
 		targetFogDepth = newEnvironment.getFogDepth();
+		if (hdPlugin.configWinterTheme)
+		{
+			if (!newEnvironment.isCustomFogDepth())
+			{
+				targetFogDepth = Environment.WINTER.getFogDepth();
+			}
+		}
+
 		if (config.atmosphericLighting())
 		{
 			targetAmbientStrength = newEnvironment.getAmbientStrength();
@@ -265,6 +298,26 @@ public class EnvironmentManager
 			targetUnderglowColor = newEnvironment.getUnderglowColor();
 			targetLightPitch = newEnvironment.getLightPitch();
 			targetLightYaw = newEnvironment.getLightYaw();
+
+			if (hdPlugin.configWinterTheme)
+			{
+				if (!newEnvironment.isCustomAmbientStrength())
+				{
+					targetAmbientStrength = Environment.WINTER.getAmbientStrength();
+				}
+				if (!newEnvironment.isCustomAmbientColor())
+				{
+					targetAmbientColor = Environment.WINTER.getAmbientColor();
+				}
+				if (!newEnvironment.isCustomDirectionalStrength())
+				{
+					targetDirectionalStrength = Environment.WINTER.getDirectionalStrength();
+				}
+				if (!newEnvironment.isCustomDirectionalColor())
+				{
+					targetDirectionalColor = Environment.WINTER.getDirectionalColor();
+				}
+			}
 		}
 		else
 		{
@@ -276,6 +329,26 @@ public class EnvironmentManager
 			targetUnderglowColor = defaultEnvironment.getUnderglowColor();
 			targetLightPitch = defaultEnvironment.getLightPitch();
 			targetLightYaw = defaultEnvironment.getLightYaw();
+
+			if (hdPlugin.configWinterTheme)
+			{
+				if (!defaultEnvironment.isCustomAmbientStrength())
+				{
+					targetAmbientStrength = Environment.WINTER.getAmbientStrength();
+				}
+				if (!defaultEnvironment.isCustomAmbientColor())
+				{
+					targetAmbientColor = Environment.WINTER.getAmbientColor();
+				}
+				if (!defaultEnvironment.isCustomDirectionalStrength())
+				{
+					targetDirectionalStrength = Environment.WINTER.getDirectionalStrength();
+				}
+				if (!defaultEnvironment.isCustomDirectionalColor())
+				{
+					targetDirectionalColor = Environment.WINTER.getDirectionalColor();
+				}
+			}
 		}
 		targetGroundFogStart = newEnvironment.getGroundFogStart();
 		targetGroundFogEnd = newEnvironment.getGroundFogEnd();
@@ -341,6 +414,14 @@ public class EnvironmentManager
 		for (Environment environment : sceneEnvironments)
 		{
 			log.debug("sceneArea: " + environment.name());
+		}
+
+		if (currentEnvironment != null)
+		{
+			WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
+			int camTargetX = camPosition.getX();
+			int camTargetY = camPosition.getY();
+			changeEnvironment(currentEnvironment, camTargetX, camTargetY, false);
 		}
 	}
 

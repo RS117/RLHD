@@ -301,6 +301,9 @@ public enum Overlay
 	OVERLAY_119(119, GroundMaterial.GRAVEL),
 	OVERLAY_123(123, GroundMaterial.DIRT),
 
+	// Seasonal
+	WINTER_GRASS(-999, GroundMaterial.SNOW_1, new Properties().setHue(0).setSaturation(0).setShiftLightness(40).setBlended(true)),
+
 	DEFAULT(-1, GroundMaterial.DIRT),
 	;
 

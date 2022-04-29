@@ -35,12 +35,10 @@ import java.util.Objects;
 import javax.inject.Singleton;
 import jogamp.opengl.GLContextImpl;
 import jogamp.opengl.GLDrawableImpl;
-import jogamp.opengl.egl.EGLContext;
 import jogamp.opengl.macosx.cgl.CGL;
 import jogamp.opengl.windows.wgl.WindowsWGLContext;
 import jogamp.opengl.x11.glx.X11GLXContext;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.gpu.GpuPlugin;
 import net.runelite.client.plugins.gpu.template.Template;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
@@ -306,12 +304,6 @@ class OpenCLManager
 			long surfaceHandle = nativeSurface.getSurfaceHandle();
 			contextProps.addProperty(CL_GL_CONTEXT_KHR, glContextHandle);
 			contextProps.addProperty(CL_WGL_HDC_KHR, surfaceHandle);
-		}
-		else if (glContext instanceof EGLContext)
-		{
-			long displayHandle = nativeSurface.getDisplayHandle();
-			contextProps.addProperty(CL_GL_CONTEXT_KHR, glContextHandle);
-			contextProps.addProperty(CL_EGL_DISPLAY_KHR, displayHandle);
 		}
 
 		log.debug("Creating context with props: {}", contextProps);

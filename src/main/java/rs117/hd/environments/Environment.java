@@ -31,6 +31,15 @@ import rs117.hd.HDUtils;
 @Getter
 public enum Environment
 {
+
+	EVIL_BOB_ISLAND(Area.EVIL_BOB_ISLAND, new Properties()
+		.setFogColor("#B8D6FF")
+		.setFogDepth(70)
+		.setAmbientColor("#C0AE94")
+		.setAmbientStrength(3.0f)
+		.setDirectionalColor("#F5BC67")
+		.setDirectionalStrength(1.0f)
+	),
 	// Wilderness
 	REVENANT_CAVES(Area.REVENANT_CAVES, new Properties()
 		.setFogColor("#081F1C")
@@ -40,6 +49,11 @@ public enum Environment
 		.setDirectionalColor("#AECFC9")
 		.setDirectionalStrength(1.0f)
 		.setLightDirection(260f, 10f)
+	),
+	RFD_QUIZ(Area.RFD_QUIZ, new Properties()
+		.setFogColor("#000000")
+		.setFogDepth(0)
+		.setAllowSkyOverride(false)
 	),
 	FROZEN_WASTE_PLATEAU(Area.FROZEN_WASTE_PLATEAU, new Properties()
 		.setFogColor("#252C37")
@@ -320,8 +334,6 @@ public enum Environment
 		.setLightDirection(260f, 10f)
 	),
 
-	FALADOR(Area.FALADOR, new Properties()),
-
 	GAMES_ROOM(Area.GAMES_ROOM, new Properties()
 		.setFogColor("#190D02")
 		.setFogDepth(20)
@@ -450,16 +462,6 @@ public enum Environment
 		.setDirectionalStrength(1.5f)
 	),
 
-	FROZEN_DOOR(Area.FROZEN_DOOR, new Properties()
-		.setFogColor(3, 16, 25)
-		.setFogDepth(30)
-		.setAmbientColor(200, 228, 247)
-		.setAmbientStrength(0.3f)
-		.setDirectionalColor(146, 209, 250)
-		.setDirectionalStrength(1.0f)
-		.setLightDirection(260f, 10f)
-		.enableLightning()
-	),
 	GOD_WARS_DUNGEON(Area.GOD_WARS_DUNGEON, new Properties()
 		.setFogColor(14, 59, 89)
 		.setFogDepth(30)
@@ -484,12 +486,14 @@ public enum Environment
 		.setFogDepth(30)
 		.setAmbientStrength(1.0f)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	SOTE_LLETYA_ON_FIRE(Area.SOTE_LLETYA_ON_FIRE, new Properties()
 		.setFogColor(91, 139, 120)
 		.setFogDepth(50)
 		.setAmbientStrength(0.9f)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	POSION_WASTE(Area.POISON_WASTE, new Properties()
 		.setFogColor(50, 55, 47)
@@ -511,9 +515,11 @@ public enum Environment
 		.setFogColor(18, 64, 83)
 		.setAmbientStrength(0.3f)
 		.setDirectionalStrength(1.0f)
+		.setAllowSkyOverride(false)
 	),
 	SOTE_FRAGMENT_OF_SEREN_ARENA(Area.SOTE_FRAGMENT_OF_SEREN_ARENA, new Properties()
 		.setFogColor(0, 0, 0)
+		.setAllowSkyOverride(false)
 	),
 
 	// Yanille
@@ -623,6 +629,7 @@ public enum Environment
 		.setDirectionalStrength(3.0f)
 		.setDirectionalColor("#57FF00")
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 	ZANARIS(Area.ZANARIS, new Properties()
 		.setFogColor(22, 63, 71)
@@ -641,6 +648,7 @@ public enum Environment
 		.setAmbientStrength(1.2f)
 		.setAmbientColor(255, 255, 255)
 		.setDirectionalStrength(0.0f)
+		.setAllowSkyOverride(false)
 	),
 	DS2_FLEET_ATTACKED(Area.DS2_FLEET_ATTACKED, new Properties()
 		.setFogColor("#FFD3C7")
@@ -714,6 +722,7 @@ public enum Environment
 		.setAmbientColor(255, 255, 255)
 		.setDirectionalStrength(0.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Fishing Trawler
@@ -750,6 +759,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(0.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Chambers of Xeric
@@ -772,6 +782,7 @@ public enum Environment
 		.setDirectionalStrength(2.0f)
 		.setDirectionalColor("#00FF60")
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Underwater areas
@@ -815,6 +826,7 @@ public enum Environment
 		.setDirectionalColor("#CAB6CD")
 		.setDirectionalStrength(0.7f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	// Runecrafting altars
@@ -829,6 +841,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(3.0f)
 		.setLightDirection(260f, 10f)
+		.setAllowSkyOverride(false)
 	),
 
 	TARNS_LAIR(Area.TARNS_LAIR, new Properties()
@@ -873,6 +886,15 @@ public enum Environment
 	),
 	UNKNOWN_OVERWORLD(Area.UNKNOWN_OVERWORLD, new Properties()),
 
+	WINTER(Area.NONE, new Properties()
+		.setFogColor("#B8C5DB")
+		.setFogDepth(35)
+		.setAmbientColor("#8FCAFF")
+		.setAmbientStrength(3.5f)
+		.setDirectionalColor("#FFFFFF")
+		.setDirectionalStrength(1.5f)
+	),
+
 	// overrides 'ALL' to provide default daylight conditions for the overworld area
 	OVERWORLD(Area.OVERWORLD, new Properties()),
 	// used for underground, instances, etc.
@@ -909,6 +931,7 @@ public enum Environment
 	private final float groundFogOpacity;
 	private final float lightPitch;
 	private final float lightYaw;
+	private final boolean allowSkyOverride;
 
 	private static class Properties
 	{
@@ -932,6 +955,7 @@ public enum Environment
 		private float groundFogOpacity = 0;
 		private float lightPitch = -128f;
 		private float lightYaw = 55f;
+		private boolean allowSkyOverride = true;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -1038,6 +1062,11 @@ public enum Environment
 			this.lightYaw = yaw;
 			return this;
 		}
+		public Properties setAllowSkyOverride(boolean s)
+		{
+			this.allowSkyOverride = s;
+			return this;
+		}
 	}
 
 	Environment(Area area, Properties properties)
@@ -1063,6 +1092,7 @@ public enum Environment
 		this.groundFogOpacity = properties.groundFogOpacity;
 		this.lightPitch = properties.lightPitch;
 		this.lightYaw = properties.lightYaw;
+		this.allowSkyOverride = properties.allowSkyOverride;
 	}
 
 	private static float[] rgb(int r, int g, int b)

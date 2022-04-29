@@ -35,7 +35,6 @@ import static rs117.hd.HdPlugin.MAX_FOG_DEPTH;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.ColorBlindMode;
 import rs117.hd.config.Contrast;
-import rs117.hd.config.LevelOfDetail;
 import rs117.hd.config.MaxDynamicLights;
 import rs117.hd.config.Saturation;
 import rs117.hd.config.DefaultSkyColor;
@@ -48,6 +47,29 @@ import rs117.hd.config.WaterEffects;
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
 {
+	/*====== Limited-time settings ======*/
+
+	@ConfigSection(
+		name = "Limited-time",
+		description = "Fun and/or experimental settings that are available for a limited time",
+		position = -10,
+		closedByDefault = false
+	)
+	String limitedTimeSettings = "limitedTimeSettings";
+
+	@ConfigItem(
+		keyName = "winterTheme",
+		name = "Winter theme",
+		description = "Covers the Gielinor overworld with a layer of snow!",
+		position = -9,
+		section = limitedTimeSettings
+	)
+	default boolean winterTheme()
+	{
+		return true;
+	}
+
+
 	/*====== General settings ======*/
 
 	@ConfigSection(
@@ -76,7 +98,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "antiAliasingMode",
 		name = "Anti Aliasing",
-		description = "Configures the anti-aliasing mode",
+		description = "Improves jagged/shimmering edges at a cost of GPU performance. 8x/16x MSAA are highly expensive.",
 		position = 2,
 		section = generalSettings
 	)
@@ -104,19 +126,19 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "anisotropicFilteringLevel",
 		name = "Anisotropic Filtering",
-		description = "Configures the anisotropic filtering level.",
+		description = "Configures the anisotropic filtering level from 0 to 16x.",
 		position = 4,
 		section = generalSettings
 	)
 	default int anisotropicFilteringLevel()
 	{
-		return 1;
+		return 16;
 	}
 
 	@ConfigItem(
 		keyName = "unlockFps",
 		name = "Unlock FPS",
-		description = "Removes the 50 FPS cap for camera movement",
+		description = "Removes the 50 FPS cap for some game content such as camera movement and dynamic lighting.",
 		position = 5,
 		section = generalSettings
 	)
@@ -125,11 +147,46 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
+	enum SyncMode
+	{
+		OFF,
+		ON,
+		ADAPTIVE
+	}
+
+	@ConfigItem(
+			keyName = "vsyncMode",
+			name = "VSync Mode",
+			description = "Method to synchronize frame rate with refresh rate",
+			position = 6,
+			section = generalSettings
+	)
+	default SyncMode syncMode()
+	{
+		return SyncMode.ADAPTIVE;
+	}
+
+	@ConfigItem(
+			keyName = "fpsTarget",
+			name = "FPS Target",
+			description = "Target FPS when unlock FPS is enabled and Vsync mode is OFF",
+			position = 7,
+			section = generalSettings
+	)
+	@Range(
+			min = 0,
+			max = 999
+	)
+	default int fpsTarget()
+	{
+		return 60;
+	}
+
 	@ConfigItem(
 		keyName = "colorBlindMode",
 		name = "Colorblindness Correction",
 		description = "Adjusts colors to account for colorblindness",
-		position = 6,
+		position = 8,
 		section = generalSettings
 	)
 	default ColorBlindMode colorBlindMode()
@@ -141,7 +198,7 @@ public interface HdPluginConfig extends Config
 		keyName = "flashingEffects",
 		name = "Flashing Effects",
 		description = "Displays fast flashing effects, such as lightning, in certain areas.",
-		position = 7,
+		position = 9,
 		section = generalSettings
 	)
 	default boolean flashingEffects()
@@ -153,7 +210,7 @@ public interface HdPluginConfig extends Config
 		keyName = "saturation",
 		name = "Saturation",
 		description = "Controls the saturation of the final rendered image.",
-		position = 8,
+		position = 10,
 		section = generalSettings
 	)
 	default Saturation saturation()
@@ -165,7 +222,7 @@ public interface HdPluginConfig extends Config
 		keyName = "contrast",
 		name = "Contrast",
 		description = "Controls the contrast of the final rendered image.",
-		position = 9,
+		position = 11,
 		section = generalSettings
 	)
 	default Contrast contrast()
@@ -181,23 +238,10 @@ public interface HdPluginConfig extends Config
 		keyName = "brightness2",
 		name = "Brightness",
 		description = "Controls the brightness of scene lighting.",
-		position = 10,
+		position = 12,
 		section = generalSettings
 	)
 	default int brightness() { return 20; }
-
-	@ConfigItem(
-		keyName = "levelOfDetail",
-		name = "Level of Detail",
-		description = "Improves performance by preventing certain distant objects from being drawn.",
-		position = 11,
-		section = generalSettings
-	)
-	default LevelOfDetail levelOfDetail()
-	{
-		return LevelOfDetail.MEDIUM;
-	}
-
 
 
 	/*====== Lighting settings ======*/
@@ -273,7 +317,7 @@ public interface HdPluginConfig extends Config
 	@ConfigItem(
 		keyName = "shadowResolution",
 		name = "Shadow Quality",
-		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of performance.",
+		description = "The resolution of the shadow maps. Higher resolutions result in sharper, higher quality shadows at the cost of GPU performance.",
 		position = 106,
 		section = lightingSettings
 	)
@@ -306,7 +350,16 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-
+	@ConfigItem(
+		keyName = "hideBakedEffects",
+		name = "Hide Fake Lights and Shadows",
+		description = "Hides the fake light and shadow effects that Jagex often includes with models",
+		position = 109,
+		section = lightingSettings
+	)
+	default boolean hideBakedEffects() {
+		return true;
+	}
 
 	/*====== Environment settings ======*/
 
@@ -369,10 +422,21 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "overrideSky",
+			name = "Override Sky Color",
+			description = "Forces the selected sky color in all environments",
+			position = 205,
+			section = environmentSettings
+	)
+	default boolean overrideSky() {
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "objectTextures",
 		name = "Object Textures",
 		description = "Adds detail textures to certain world objects.",
-		position = 205,
+		position = 206,
 		section = environmentSettings
 	)
 	default boolean objectTextures()
@@ -384,7 +448,7 @@ public interface HdPluginConfig extends Config
 		keyName = "groundTextures",
 		name = "Ground Textures",
 		description = "Adds detail textures to the ground.",
-		position = 206,
+		position = 207,
 		section = environmentSettings
 	)
 	default boolean groundTextures()
@@ -396,7 +460,7 @@ public interface HdPluginConfig extends Config
 			keyName = "groundBlending",
 			name = "Ground Blending",
 			description = "Affects the quality of blending between different ground/terrain textures.",
-			position = 207,
+			position = 208,
 			section = environmentSettings
 	)
 	default boolean groundBlending()
@@ -408,7 +472,7 @@ public interface HdPluginConfig extends Config
 		keyName = "waterEffects",
 		name = "Water Effects",
 		description = "Changes the appearance of the water.",
-		position = 208,
+		position = 209,
 		section = environmentSettings
 	)
 	default WaterEffects waterEffects()
@@ -420,7 +484,7 @@ public interface HdPluginConfig extends Config
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
 		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
-		position = 209,
+		position = 210,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()
@@ -464,4 +528,13 @@ public interface HdPluginConfig extends Config
 	{
 		return true;
 	}
+
+	@ConfigItem(
+		keyName = "modelCaching",
+		name = "Disable model caching",
+		description = "Model caching improves performance with increased memory usage.",
+		position = 303,
+		section = miscellaneousSettings
+	)
+	default boolean disableModelCaching() { return false; }
 }
