@@ -25,21 +25,24 @@
 
 #define CAUSTICS_MAP_ID 240
 
-float sampleCausticsChannel(const vec2 flow1, const vec2 flow2, const vec2 aberration) {
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2) {
     return min(
-        texture(texturesHD, vec3(flow1 + aberration, CAUSTICS_MAP_ID)).r,
-        texture(texturesHD, vec3(flow2 + aberration, CAUSTICS_MAP_ID)).r
+        texture(texturesHD, vec3(flow1, CAUSTICS_MAP_ID)).r,
+        texture(texturesHD, vec3(flow2, CAUSTICS_MAP_ID)).r
     );
 }
 
-vec3 sampleCaustics(const vec2 uv, const float aberration) {
-    const ivec2 direction = ivec2(1, -1);
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2, const vec2 aberration) {
+    return sampleCausticsChannel(flow1 + aberration, flow2 + aberration);
+}
 
-    vec2 flow1 = uv + animationFrame(19) * direction;
-    vec2 flow2 = uv * 1.5 + animationFrame(37) * -direction;
-
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2, const float aberration) {
     float r = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1,  1));
     float g = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1, -1));
     float b = sampleCausticsChannel(flow1, flow2, aberration * vec2(-1, -1));
     return vec3(r, g, b);
+}
+
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2) {
+    return vec3(sampleCausticsChannel(flow1, flow2));
 }

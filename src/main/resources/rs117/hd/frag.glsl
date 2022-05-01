@@ -723,7 +723,13 @@ void main() {
         // height offset
         causticsUv += lightDir.xy * position.y / (128 * scale);
 
-        vec3 caustics = sampleCaustics(causticsUv, .0025);
+        const ivec2 direction = ivec2(1, -1);
+        const int driftSpeed = 231;
+        vec2 drift = animationFrame(231) * ivec2(1, -2);
+        vec2 flow1 = causticsUv + animationFrame(19) * direction + drift;
+        vec2 flow2 = causticsUv * 1.25 + animationFrame(37) * -direction + drift;
+
+        vec3 caustics = sampleCaustics(flow1, flow2) * 2;
 
         vec3 causticsColor = underwaterCausticsColor * underwaterCausticsStrength;
         dirLightColor += caustics * causticsColor * lightDotNormals * pow(lightStrength, 1.5);
@@ -880,7 +886,10 @@ void main() {
             // height offset
             causticsUv += lightDir.xy * position.y / (128 * scale);
 
-            vec3 caustics = sampleCaustics(causticsUv, .005);
+            const ivec2 direction = ivec2(1, -2);
+            vec2 flow1 = causticsUv + animationFrame(17) * direction;
+            vec2 flow2 = causticsUv * 1.5 + animationFrame(23) * -direction;
+            vec3 caustics = sampleCaustics(flow1, flow2, .005);
 
             vec3 causticsColor = underwaterCausticsColor * underwaterCausticsStrength;
             compositeColor *= 1 + caustics * causticsColor * depthMultiplier * lightDotNormals * lightStrength;
