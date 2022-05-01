@@ -89,7 +89,7 @@ public enum ObjectProperties
 
 	// TzHaar
 	TZHAAR_ROCK_GRADIENT(Material.ROCK_1, new Properties().setTzHaarRecolorType(TzHaarRecolorType.GRADIENT), 11818, 11819, 11820, 11821, 11822, 11823, 11824, 11825, 11826, 11827, 11828, 11829, 11833, 11834, 11836, 11837, 11838, 11839, 11840, 11841, 11842, 11971, 11972, 11973, 11974, 11981, 11983, 11984, 11985, 30269, 30270, 30271, 30272, 30273, 41013),
-	TZHAAR_GRADIENT(Material.NONE, new Properties().setTzHaarRecolorType(TzHaarRecolorType.GRADIENT), 11847, 11848, 11849, 11850),
+	TZHAAR_GRADIENT(Material.NONE, new Properties().setTzHaarRecolorType(TzHaarRecolorType.GRADIENT), 11847, 11848, 11849, 11850, 11982),
 	TZHAAR_ROCK_HUESHIFT(Material.ROCK_1, new Properties().setTzHaarRecolorType(TzHaarRecolorType.HUE_SHIFT), 26723, 26724, 26725, 30263, 30264, 30265),
 
 	// Ape Atoll
