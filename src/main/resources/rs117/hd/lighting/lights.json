@@ -25333,12 +25333,12 @@
     "description": "RED_STREET_LAMP",
     "height": 250,
     "alignment": "CENTER",
-    "radius": 300,
-    "strength": 7.5,
+    "radius": 500,
+    "strength": 5,
     "color": [
       255,
-      0,
-      0
+      100,
+      100
     ],
     "type": "FLICKER",
     "duration": 0,
