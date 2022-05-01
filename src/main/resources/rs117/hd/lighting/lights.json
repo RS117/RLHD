@@ -24555,17 +24555,17 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 4000,
-    "strength": 7.0,
+    "strength": 4,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "PULSE",
-    "duration": 2000.0,
-    "range": 10.0,
+    "duration": 2000,
+    "range": 10,
     "objectIds": [
-      43479
+      "ALTAR_43479"
     ]
   },
   {
@@ -24573,35 +24573,35 @@
     "height": 20,
     "alignment": "CENTER",
     "radius": 400,
-    "strength": 8.0,
+    "strength": 6,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
-    "duration": 1800.0,
-    "range": 5.0,
+    "duration": 1800,
+    "range": 5,
     "objectIds": [
-      43478
+      "PORTAL_43478"
     ]
   },
   {
     "description": "TRUE_BLOOD_ALTAR_PILLARS",
     "height": 270,
     "alignment": "CENTER",
-    "radius": 1000,
-    "strength": 4.0,
+    "radius": 800,
+    "strength": 1,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "PULSE",
-    "duration": 500.0,
-    "range": 10.0,
+    "duration": 500,
+    "range": 10,
     "objectIds": [
-      34792
+      "MYSTERIOUS_GLOW_34792"
     ]
   },
   {
@@ -24612,15 +24612,15 @@
     "height": 200,
     "alignment": "CENTER",
     "radius": 2000,
-    "strength": 4.0,
+    "strength": 1,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
-    "duration": 2000.0,
-    "range": 5.0,
+    "duration": 2000,
+    "range": 5,
     "fadeInDuration": 0
   },
   {
@@ -24630,16 +24630,16 @@
     "plane": 0,
     "height": 600,
     "alignment": "CENTER",
-    "radius": 2500,
-    "strength": 3.0,
+    "radius": 1500,
+    "strength": 1,
     "color": [
-      1.0,
-      0.0,
-      1.0
+      255,
+      0,
+      255
     ],
     "type": "FLICKER",
-    "duration": 1280.0,
-    "range": 5.0,
+    "duration": 1280,
+    "range": 5,
     "fadeInDuration": 0
   },
   {
@@ -24649,16 +24649,16 @@
     "plane": 0,
     "height": 1200,
     "alignment": "CENTER",
-    "radius": 2500,
-    "strength": 2.0,
+    "radius": 1250,
+    "strength": 1,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
-    "duration": 1280.0,
-    "range": 5.0,
+    "duration": 1280,
+    "range": 5,
     "fadeInDuration": 0
   },
   {
@@ -24669,15 +24669,15 @@
     "height": 2000,
     "alignment": "CENTER",
     "radius": 2500,
-    "strength": 2.0,
+    "strength": 1,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
-    "duration": 1280.0,
-    "range": 5.0,
+    "duration": 1280,
+    "range": 5,
     "fadeInDuration": 0
   },
   {
