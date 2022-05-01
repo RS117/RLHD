@@ -297,8 +297,8 @@ public class LightManager
 						pow(cos(17 * t), 4) +
 						pow(cos(23 * t), 6) +
 						pow(cos(31 * t), 2) +
-						pow(cos(179 * t), 2) / 3 +
-						pow(cos(331 * t), 2) / 7
+						pow(cos(71 * t), 2) / 3 +
+						pow(cos(151 * t), 2) / 7
 				) / 4.335f;
 
 				float maxFlicker = 1f + (light.range / 100f);
