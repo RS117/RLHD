@@ -760,8 +760,7 @@ public enum Environment
 		.setDirectionalColor(230, 244, 255)
 		.setLightDirection(-130, 55f)
 		.setUnderwater(true)
-		.setUnderwaterCausticsStrength(30)
-		.setUnderwaterCausticsColor(135, 240, 255)
+		.setUnderwaterCausticsStrength(40)
 	),
 
 	// Death's office
