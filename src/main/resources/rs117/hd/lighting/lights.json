@@ -21600,8 +21600,8 @@
     "description": "ECTOFUNTUS",
     "height": 300,
     "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 10.0,
+    "radius": 1800,
+    "strength": 12.0,
     "color": [
       0.14497213,
       1.0,
@@ -21613,6 +21613,139 @@
     "objectIds": [
       "ECTOFUNTUS"
     ]
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_1",
+    "worldX": 3681,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_2",
+    "worldX": 3681,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_3",
+    "worldX": 3681,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_1",
+    "worldX": 3678,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_2",
+    "worldX": 3679,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_3",
+    "worldX": 3678,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_1",
+    "worldX": 3677,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
   },
   {
     "description": "ECTOFUNTUS_SMALL",
@@ -21631,6 +21764,234 @@
     "objectIds": [
       "ECTOFUNTUS_16649"
     ]
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_1",
+    "worldX": 3659,
+    "worldY": 3508,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_2",
+    "worldX": 3660,
+    "worldY": 3508,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_3",
+    "worldX": 3659,
+    "worldY": 3507,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_4",
+    "worldX": 3660,
+    "worldY": 3507,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_1",
+    "worldX": 3652,
+    "worldY": 3485,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_2",
+    "worldX": 3652,
+    "worldY": 3486,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_3",
+    "worldX": 3653,
+    "worldY": 3485,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_4",
+    "worldX": 3653,
+    "worldY": 3486,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_1",
+    "worldX": 3669,
+    "worldY": 3453,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_2",
+    "worldX": 3670,
+    "worldY": 3453,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_3",
+    "worldX": 3669,
+    "worldY": 3454,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_4",
+    "worldX": 3670,
+    "worldY": 3454,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
   },
   {
     "description": "BARROWS_SARCOPHAGUS",
