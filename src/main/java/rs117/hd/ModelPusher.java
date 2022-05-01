@@ -136,15 +136,6 @@ public class ModelPusher {
     public int[] pushModel(Renderable renderable, Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache, int hash) {
         final int faceCount = Math.min(model.getFaceCount(), HdPlugin.MAX_TRIANGLE);
 
-        // skip models with zero faces
-        // this does seem to happen sometimes (mostly during loading)
-        // should save some CPU cycles here and there
-        if (faceCount == 0) {
-            twoInts[0] = 0;
-            twoInts[1] = 0;
-            return twoInts;
-        }
-
         // ensure capacity upfront
         vertexBuffer.ensureCapacity(12 * 2 * faceCount);
         normalBuffer.ensureCapacity(12 * 2 * faceCount);

@@ -31,7 +31,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum DefaultSkyColor
 {
-	DEFAULT("Default (Blue)", -1, -1, -1),
+	DEFAULT("Client Default", -1, -1, -1),
+	BLUE("117HD (Blue)", 185, 214, 255),
 	OSRS("Old School (Black)", 0, 0, 0),
 	HD2008("2008 HD (Tan)", 200, 192, 169);
 

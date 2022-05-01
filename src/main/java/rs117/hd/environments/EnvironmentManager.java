@@ -294,8 +294,12 @@ public class EnvironmentManager
 		}
 
 		// If configured and the environment allows it override the skybox color to the default sky color.
-		if (config.overrideSky() && newEnvironment.isAllowSkyOverride()) {
-			targetFogColor = new float[]{ config.defaultSkyColor().getR() / 255f, config.defaultSkyColor().getG() / 255f, config.defaultSkyColor().getB() / 255f };
+		if (config.overrideSky() && newEnvironment.isAllowSkyOverride() && config.defaultSkyColor() != DefaultSkyColor.DEFAULT) {
+			if (config.defaultSkyColor() == DefaultSkyColor.BLUE) {
+				targetFogColor = Environment.rgb(185, 214, 255);
+			} else {
+				targetFogColor = new float[]{ config.defaultSkyColor().getR() / 255f, config.defaultSkyColor().getG() / 255f, config.defaultSkyColor().getB() / 255f };
+			}
 		}
 
 		targetFogDepth = newEnvironment.getFogDepth();

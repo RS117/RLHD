@@ -1160,7 +1160,7 @@ public enum Environment
 			properties.directionalStrength : properties.underwaterCausticsStrength;
 	}
 
-	private static float[] rgb(int r, int g, int b)
+	public static float[] rgb(int r, int g, int b)
 	{
 		return new float[]{
 			HDUtils.gammaToLinear(r / 255f),

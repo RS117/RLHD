@@ -2501,7 +2501,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public void draw(Renderable renderable, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash)
 	{
 		Model model = renderable instanceof Model ? (Model) renderable : renderable.getModel();
-		if (model == null) {
+		if (model == null || model.getFaceCount() == 0) {
+			// skip models with zero faces
+			// this does seem to happen sometimes (mostly during loading)
+			// should save some CPU cycles here and there
 			return;
 		}
 
