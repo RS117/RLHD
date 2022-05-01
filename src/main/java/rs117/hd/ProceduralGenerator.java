@@ -40,7 +40,6 @@ import net.runelite.api.Scene;
 import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
-import rs117.hd.config.WaterEffects;
 import rs117.hd.materials.GroundMaterial;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
@@ -368,11 +367,6 @@ class ProceduralGenerator
 		// the world-space height offsets of each vertex on the tile grid
 		// these offsets are interpolated to calculate offsets for vertices not on the grid (tilemodels)
 		final int[][][] underwaterDepths = new int[Constants.MAX_Z][Constants.SCENE_SIZE + 1][Constants.SCENE_SIZE + 1];
-
-		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
-		{
-			return;
-		}
 
 		Tile[][][] tiles = scene.getTiles();
 		for (int z = 0; z < Constants.MAX_Z; ++z)
@@ -857,25 +851,6 @@ class ProceduralGenerator
 
 		waterType = getSeasonalWaterType(waterType);
 
-		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
-		{
-			switch(waterType)
-			{
-				case WATER:
-					waterType = WaterType.WATER_FLAT;
-					break;
-				case SWAMP_WATER:
-					waterType = WaterType.SWAMP_WATER_FLAT;
-					break;
-				case POISON_WASTE:
-					waterType = WaterType.POISON_WASTE_FLAT;
-					break;
-				case ICE:
-					waterType = WaterType.ICE_FLAT;
-					break;
-			}
-		}
-
 		return waterType;
 	}
 
@@ -911,22 +886,6 @@ class ProceduralGenerator
 		}
 
 		waterType = getSeasonalWaterType(waterType);
-
-		if (hdPlugin.configWaterEffects == WaterEffects.SIMPLE)
-		{
-			switch(waterType)
-			{
-				case WATER:
-					waterType = WaterType.WATER_FLAT;
-					break;
-				case SWAMP_WATER:
-					waterType = WaterType.SWAMP_WATER_FLAT;
-					break;
-				case POISON_WASTE:
-					waterType = WaterType.POISON_WASTE_FLAT;
-					break;
-			}
-		}
 
 		return waterType;
 	}

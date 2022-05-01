@@ -146,6 +146,8 @@ class TextureManager
 				byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 				assert width * height * bytesPerPixel == pixels.length;
 
+				assert width == TEXTURE_SIZE && height == TEXTURE_SIZE;
+
 //				ByteBuffer pixelData = BufferUtils.createByteBuffer(width * height * bytesPerPixel);
 				ByteBuffer pixelData = ByteBuffer.allocateDirect(width * height * bytesPerPixel).order(ByteOrder.nativeOrder());
 				if (hasAlphaChannel)
@@ -162,6 +164,7 @@ class TextureManager
 				}
 				else
 				{
+					assert (width * 3) % 4 == 0 : "OpenGL expects each line of the image to start at a memory address divisible by 4";
 					for (int i = 0; i < pixels.length; i += 3)
 					{
 						byte r = pixels[i];

@@ -103,7 +103,6 @@ import static rs117.hd.GLUtil.glGetInteger;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
-import rs117.hd.config.WaterEffects;
 import rs117.hd.environments.EnvironmentManager;
 import rs117.hd.lighting.LightManager;
 import rs117.hd.lighting.SceneLight;
@@ -349,7 +348,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private int uniGroundFogEnd;
 	private int uniGroundFogOpacity;
 	private int uniLightningBrightness;
-	private int uniWaterEffects;
 	private int uniSaturation;
 	private int uniContrast;
 	private int uniLightX;
@@ -357,6 +355,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private int uniLightZ;
 	private int uniShadowMaxBias;
 	private int uniShadowsEnabled;
+	private int uniUnderwaterEnvironment;
+	private int uniUnderwaterCaustics;
+	private int uniUnderwaterCausticsColor;
+	private int uniUnderwaterCausticsStrength;
 
 	// Shadow program uniforms
 	private int uniShadowTexturesHD;
@@ -404,7 +406,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	// Config settings used very frequently - thousands/frame
 	public boolean configGroundTextures = false;
 	public boolean configGroundBlending = false;
-	public WaterEffects configWaterEffects = WaterEffects.ALL;
 	public boolean configObjectTextures = true;
 	public boolean configTzhaarHD = true;
 	public boolean configProjectileLights = true;
@@ -459,7 +460,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
-		configWaterEffects = config.waterEffects();
 		configObjectTextures = config.objectTextures();
 		configTzhaarHD = config.tzhaarHD();
 		configProjectileLights = config.projectileLights();
@@ -883,7 +883,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		uniProjectionMatrix = gl.glGetUniformLocation(glProgram, "projectionMatrix");
 		uniLightProjectionMatrix = gl.glGetUniformLocation(glProgram, "lightProjectionMatrix");
 		uniShadowMap = gl.glGetUniformLocation(glProgram, "shadowMap");
-		uniWaterEffects = gl.glGetUniformLocation(glProgram, "waterEffects");
 		uniSaturation = gl.glGetUniformLocation(glProgram, "saturation");
 		uniContrast = gl.glGetUniformLocation(glProgram, "contrast");
 		uniUseFog = gl.glGetUniformLocation(glProgram, "useFog");
@@ -910,6 +909,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		uniLightZ = gl.glGetUniformLocation(glProgram, "lightZ");
 		uniShadowMaxBias = gl.glGetUniformLocation(glProgram, "shadowMaxBias");
 		uniShadowsEnabled = gl.glGetUniformLocation(glProgram, "shadowsEnabled");
+		uniUnderwaterEnvironment = gl.glGetUniformLocation(glProgram, "underwaterEnvironment");
+		uniUnderwaterCaustics = gl.glGetUniformLocation(glProgram, "underwaterCaustics");
+		uniUnderwaterCausticsColor = gl.glGetUniformLocation(glProgram, "underwaterCausticsColor");
+		uniUnderwaterCausticsStrength = gl.glGetUniformLocation(glProgram, "underwaterCausticsStrength");
 
 		uniTex = gl.glGetUniformLocation(glUiProgram, "tex");
 		uniTexSamplingMode = gl.glGetUniformLocation(glUiProgram, "samplingMode");
@@ -1906,8 +1909,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			lastAntiAliasingMode = antiAliasingMode;
 
 			// Clear scene
-			int sky = hasLoggedIn ? environmentManager.getFogColor() : 0;
-			float[] fogColor = new float[]{(sky >> 16 & 0xFF) / 255f, (sky >> 8 & 0xFF) / 255f, (sky & 0xFF) / 255f};
+			float[] fogColor = hasLoggedIn ? environmentManager.getFogColor() : EnvironmentManager.BLACK_COLOR;
 			for (int i = 0; i < fogColor.length; i++)
 			{
 				fogColor[i] = HDUtils.linearToGamma(fogColor[i]);
@@ -1997,9 +1999,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glUniform1f(uniLightningBrightness, environmentManager.lightningBrightness);
 			gl.glUniform1i(uniPointLightsCount, config.maxDynamicLights().getValue() > 0 ? lightManager.visibleLightsCount : 0);
 
-			gl.glUniform1i(uniWaterEffects, configWaterEffects.getMode());
 			gl.glUniform1f(uniSaturation, config.saturation().getAmount());
 			gl.glUniform1f(uniContrast, config.contrast().getAmount());
+			gl.glUniform1i(uniUnderwaterEnvironment, environmentManager.isUnderwater() ? 1 : 0);
+			gl.glUniform1i(uniUnderwaterCaustics, config.underwaterCaustics() ? 1 : 0);
+			gl.glUniform3fv(uniUnderwaterCausticsColor, 1, environmentManager.currentUnderwaterCausticsColor, 0);
+			gl.glUniform1f(uniUnderwaterCausticsStrength, environmentManager.currentUnderwaterCausticsStrength);
 
 			double lightPitchRadians = Math.toRadians(lightPitch);
 			double lightYawRadians = Math.toRadians(lightYaw);
@@ -2339,10 +2344,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "groundBlending":
 				configGroundBlending = config.groundBlending();
-				reloadScene();
-				break;
-			case "waterEffects":
-				configWaterEffects = config.waterEffects();
 				reloadScene();
 				break;
 			case "shadowsEnabled":

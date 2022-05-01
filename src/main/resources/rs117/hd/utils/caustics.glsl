@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 117 <https://twitter.com/117scape>
+ * Copyright (c) 2022, Hooder <ahooder@protonmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,24 +22,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.config;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+#define CAUSTICS_MAP_ID 240
 
-@Getter
-@RequiredArgsConstructor
-public enum WaterEffects
-{
-	ALL("All", 0),
-	SIMPLE("Simple", 1);
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2) {
+    return min(
+        texture(texturesHD, vec3(flow1, CAUSTICS_MAP_ID)).r,
+        texture(texturesHD, vec3(flow2, CAUSTICS_MAP_ID)).r
+    );
+}
 
-	private final String name;
-	private final int mode;
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2, const vec2 aberration) {
+    return sampleCausticsChannel(flow1 + aberration, flow2 + aberration);
+}
 
-	@Override
-	public String toString()
-	{
-		return name;
-	}
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2, const float aberration) {
+    float r = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1,  1));
+    float g = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1, -1));
+    float b = sampleCausticsChannel(flow1, flow2, aberration * vec2(-1, -1));
+    return vec3(r, g, b);
+}
+
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2) {
+    return vec3(sampleCausticsChannel(flow1, flow2));
 }
