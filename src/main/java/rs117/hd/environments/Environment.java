@@ -752,13 +752,16 @@ public enum Environment
 
 	// Guardians of the Rift
 	TEMPLE_OF_THE_EYE(Area.TEMPLE_OF_THE_EYE, new Properties()
-			.setFogColor(0,32,51)
-			.setFogDepth(15)
-			.setAmbientStrength(1.0f)
-			.setAmbientColor(255, 255, 255)
-			.setDirectionalStrength(0.3f)
-			.setDirectionalColor(230, 244, 255)
-			.setLightDirection(-130, 55f)
+		.setFogColor(0,32,51)
+		.setFogDepth(15)
+		.setAmbientStrength(1.0f)
+		.setAmbientColor(255, 255, 255)
+		.setDirectionalStrength(0.3f)
+		.setDirectionalColor(230, 244, 255)
+		.setLightDirection(-130, 55f)
+		.setUnderwater(true)
+		.setUnderwaterCausticsStrength(30)
+		.setUnderwaterCausticsColor(135, 240, 255)
 	),
 
 	// Death's office
