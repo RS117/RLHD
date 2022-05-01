@@ -67,6 +67,8 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
@@ -183,6 +185,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private ModelPusher modelPusher;
+
+	@Inject
+	private ModelHasher modelHasher;
 
 	enum ComputeMode
 	{
@@ -416,6 +421,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Setter
 	private boolean isInGauntlet = false;
+
+	private final Map<Integer, TempModelInfo> tempModelInfoMap = new HashMap<>();
 
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
@@ -2083,6 +2090,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			smallModels = largeModels = unorderedModels = 0;
 			tempOffset = 0;
 			tempUvOffset = 0;
+			tempModelInfoMap.clear();
 
 			// reload the scene if it was requested
 			if (nextSceneReload != 0 && nextSceneReload <= System.currentTimeMillis()) {
@@ -2556,21 +2564,46 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			model.calculateExtreme(orientation);
 			client.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
 
-			final int[] lengths = modelPusher.pushModel(renderable, model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, config.disableModelCaching());
-
-			eightIntWrite[0] = tempOffset;
-			eightIntWrite[1] = lengths[1] > 0 ? tempUvOffset : -1;
-			eightIntWrite[2] = lengths[0]  / 3;
 			eightIntWrite[3] = targetBufferOffset;
 			eightIntWrite[4] = (model.getRadius() << 12) | orientation;
 			eightIntWrite[5] = x + client.getCameraX2();
 			eightIntWrite[6] = y + client.getCameraY2();
 			eightIntWrite[7] = z + client.getCameraZ2();
-			bufferForTriangles(lengths[0]).ensureCapacity(8).put(eightIntWrite);
 
-			tempOffset += lengths[0];
-			tempUvOffset += lengths[1];
-			targetBufferOffset += lengths[0];
+			modelHasher.setModel(model);
+			final int batchHash = modelHasher.calculateBatchHash();
+
+			TempModelInfo tempModelInfo = tempModelInfoMap.get(batchHash);
+			if (tempModelInfo == null) {
+				final int[] lengths = modelPusher.pushModel(renderable, model, vertexBuffer, uvBuffer, normalBuffer, 0, 0, 0, ObjectProperties.NONE, ObjectType.NONE, config.disableModelCaching(), modelHasher.calculateColorCacheHash());
+				final int faceCount = lengths[0] / 3;
+				final int actualTempUvOffset = lengths[1] > 0 ? tempUvOffset : -1;
+
+				// add this temporary model to the map for batching purposes
+				tempModelInfo = new TempModelInfo();
+				tempModelInfo
+						.setTempOffset(tempOffset)
+						.setTempUvOffset(actualTempUvOffset)
+						.setFaceCount(faceCount);
+				tempModelInfoMap.put(batchHash, tempModelInfo);
+
+				eightIntWrite[0] = tempOffset;
+				eightIntWrite[1] = actualTempUvOffset;
+				eightIntWrite[2] = faceCount;
+				bufferForTriangles(faceCount).ensureCapacity(8).put(eightIntWrite);
+
+				tempOffset += lengths[0];
+				tempUvOffset += lengths[1];
+				targetBufferOffset += lengths[0];
+			} else {
+				eightIntWrite[0] = tempModelInfo.getTempOffset();
+				eightIntWrite[1] = tempModelInfo.getTempUvOffset();
+				eightIntWrite[2] = tempModelInfo.getFaceCount();
+
+				bufferForTriangles(tempModelInfo.getFaceCount()).ensureCapacity(8).put(eightIntWrite);
+
+				targetBufferOffset += tempModelInfo.getFaceCount()*3;
+			}
 		}
 	}
 
