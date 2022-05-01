@@ -24555,7 +24555,7 @@
     "height": 300,
     "alignment": "CENTER",
     "radius": 4000,
-    "strength": 7.0,
+    "strength": 4.0,
     "color": [
       1.0,
       0.0,
@@ -24573,7 +24573,7 @@
     "height": 20,
     "alignment": "CENTER",
     "radius": 400,
-    "strength": 8.0,
+    "strength": 6.0,
     "color": [
       1.0,
       0.0,
@@ -24590,8 +24590,8 @@
     "description": "TRUE_BLOOD_ALTAR_PILLARS",
     "height": 270,
     "alignment": "CENTER",
-    "radius": 1000,
-    "strength": 4.0,
+    "radius": 800,
+    "strength": 1.0,
     "color": [
       1.0,
       0.0,
@@ -24612,7 +24612,7 @@
     "height": 200,
     "alignment": "CENTER",
     "radius": 2000,
-    "strength": 4.0,
+    "strength": 1.0,
     "color": [
       1.0,
       0.0,
@@ -24630,8 +24630,8 @@
     "plane": 0,
     "height": 600,
     "alignment": "CENTER",
-    "radius": 2500,
-    "strength": 3.0,
+    "radius": 1500,
+    "strength": 1.0,
     "color": [
       1.0,
       0.0,
@@ -24649,8 +24649,8 @@
     "plane": 0,
     "height": 1200,
     "alignment": "CENTER",
-    "radius": 2500,
-    "strength": 2.0,
+    "radius": 1250,
+    "strength": 1.0,
     "color": [
       1.0,
       0.0,
@@ -24668,8 +24668,8 @@
     "plane": 0,
     "height": 2000,
     "alignment": "CENTER",
-    "radius": 2500,
-    "strength": 2.0,
+    "radius": 1250,
+    "strength": 1.0,
     "color": [
       1.0,
       0.0,
