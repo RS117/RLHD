@@ -14,6 +14,9 @@ public class SceneLight extends Light
 
 	public int currentSize;
 	public float currentStrength;
+	/**
+	 * Linear color space RGBA in the range [0, 1]
+	 */
 	public float[] currentColor;
 	public float currentAnimation = 0.5f;
 	public int currentFadeIn = 0;

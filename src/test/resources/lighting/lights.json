@@ -6,16 +6,16 @@
     "radius": 250,
     "strength": 12.5,
     "color": [
-      0.9743002,
-      0.3021255,
-      5.6921755E-5
+      252,
+      148,
+      3
     ],
     "type": "FLICKER",
-    "duration": 0.0,
-    "range": 20.0,
+    "duration": 0,
+    "range": 20,
     "objectIds": [
       "SPIT_ROAST_5608",
       "SPIT_ROAST"
     ]
   }
-]
+]
