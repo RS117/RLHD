@@ -34,6 +34,55 @@ class ModelData {
     }
 }
 
+@Singleton
+class ModelHasher {
+    private Model model;
+    private int faceColors1Hash;
+    private int faceColors2Hash;
+    private int faceColors3Hash;
+    private int faceTransparenciesHash;
+    private int faceTexturesHash;
+    private int faceTexturesUvHash;
+
+    public void setModel(Model model) {
+        this.model = model;
+        this.faceColors1Hash = Arrays.hashCode(model.getFaceColors1());
+        this.faceColors2Hash = Arrays.hashCode(model.getFaceColors2());
+        this.faceColors3Hash = Arrays.hashCode(model.getFaceColors3());
+        this.faceTransparenciesHash = Arrays.hashCode(model.getFaceTransparencies());
+        this.faceTexturesHash = Arrays.hashCode(model.getFaceTextures());
+        this.faceTexturesUvHash = Arrays.hashCode(model.getFaceTextureUVCoordinates());
+    }
+
+    public int calculateColorCacheHash() {
+        return Arrays.hashCode(new int[] {
+                this.faceColors1Hash,
+                this.faceColors2Hash,
+                this.faceColors3Hash,
+                this.faceTransparenciesHash,
+                this.faceTexturesHash,
+                this.faceTexturesUvHash,
+                this.model.getOverrideAmount(),
+                this.model.getOverrideHue(),
+                this.model.getOverrideSaturation(),
+                this.model.getOverrideLuminance()
+        });
+    }
+
+    public int calculateBatchHash() {
+        return Arrays.hashCode(new int[] {
+                Arrays.hashCode(this.model.getVerticesX()),
+                Arrays.hashCode(this.model.getVerticesY()),
+                Arrays.hashCode(this.model.getVerticesZ()),
+                this.faceColors1Hash,
+                this.faceColors2Hash,
+                this.faceColors3Hash,
+                this.faceTexturesHash,
+                this.faceTexturesUvHash,
+        });
+    }
+}
+
 /**
  * Pushes models
  */
@@ -78,13 +127,13 @@ public class ModelPusher {
 
     private final static FixedLengthHashCode hasher = new FixedLengthHashCode(HdPlugin.MAX_TRIANGLE);
 
-    private final Map<Integer, ModelData> modelCache = new WeakHashMap<>();
+    private final Map<Integer, ModelData> modelCache = new ModelCache(4096);
 
     public void clearModelCache() {
         modelCache.clear();
     }
 
-    public int[] pushModel(Renderable renderable, Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache) {
+    public int[] pushModel(Renderable renderable, Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache, int hash) {
         final int faceCount = Math.min(model.getFaceCount(), HdPlugin.MAX_TRIANGLE);
 
         // skip models with zero faces
@@ -101,7 +150,7 @@ public class ModelPusher {
         normalBuffer.ensureCapacity(12 * 2 * faceCount);
         uvBuffer.ensureCapacity(12 * 2 * faceCount);
 
-        ModelData modelData = getCachedModelData(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache);
+        ModelData modelData = getCachedModelData(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache, hash);
 
         int vertexLength = 0;
         int uvLength = 0;
@@ -277,23 +326,12 @@ public class ModelPusher {
         return materialId << 1 | (isOverlay ? 0b1 : 0b0);
     }
 
-    private ModelData getCachedModelData(Renderable renderable, Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache) {
+    private ModelData getCachedModelData(Renderable renderable, Model model, ObjectProperties objectProperties, ObjectType objectType, int tileX, int tileY, int tileZ, int faceCount, boolean noCache, int hash) {
         if (noCache) {
             tempModelData.setColors(getColorsForModel(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount));
             return tempModelData;
         }
 
-        // note for future spelunkers:
-        // this hash code is accurate for caching the model colors but will probably need to be expanded if you're attempting to include other data
-        eightInts[0] = hasher.hashCode(model.getFaceColors1());
-        eightInts[1] = hasher.hashCode(model.getFaceColors2());
-        eightInts[2] = hasher.hashCode(model.getFaceColors3());
-        eightInts[3] = Arrays.hashCode(model.getFaceTransparencies());
-        eightInts[4] = model.getOverrideAmount();
-        eightInts[5] = model.getOverrideHue();
-        eightInts[6] = model.getOverrideSaturation();
-        eightInts[7] = model.getOverrideLuminance();
-        int hash = hasher.hashCode(eightInts);
 
         ModelData modelData = modelCache.get(hash);
         if (modelData == null || modelData.getFaceCount() != model.getFaceCount()) {
