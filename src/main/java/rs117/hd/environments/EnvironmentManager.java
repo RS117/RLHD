@@ -288,7 +288,11 @@ public class EnvironmentManager
 				DefaultSkyColor defaultSkyColor = config.defaultSkyColor();
 				if (defaultSkyColor != DefaultSkyColor.DEFAULT)
 				{
-					targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+					if (defaultSkyColor == DefaultSkyColor.BLUE) {
+						targetFogColor = Environment.rgb(185, 214, 255);
+					} else {
+						targetFogColor = new float[]{defaultSkyColor.getR() / 255f, defaultSkyColor.getG() / 255f, defaultSkyColor.getB() / 255f};
+					}
 				}
 			}
 		}
