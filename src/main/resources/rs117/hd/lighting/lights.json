@@ -21600,8 +21600,8 @@
     "description": "ECTOFUNTUS",
     "height": 300,
     "alignment": "CENTER",
-    "radius": 1500,
-    "strength": 10.0,
+    "radius": 1800,
+    "strength": 12.0,
     "color": [
       0.14497213,
       1.0,
@@ -21613,6 +21613,139 @@
     "objectIds": [
       "ECTOFUNTUS"
     ]
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_1",
+    "worldX": 3681,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_2",
+    "worldX": 3681,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_1_3",
+    "worldX": 3681,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_1",
+    "worldX": 3678,
+    "worldY": 9892,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_2",
+    "worldX": 3679,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_2_3",
+    "worldX": 3678,
+    "worldY": 9884,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "ECTOFUNTUS_SLIME_POOL_3_1",
+    "worldX": 3677,
+    "worldY": 9888,
+    "plane": 0,
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 3500,
+    "strength": 1.0,
+    "color": [
+      0.28,
+      1.0,
+      0.255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
   },
   {
     "description": "ECTOFUNTUS_SMALL",
@@ -21631,6 +21764,234 @@
     "objectIds": [
       "ECTOFUNTUS_16649"
     ]
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_1",
+    "worldX": 3659,
+    "worldY": 3508,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_2",
+    "worldX": 3660,
+    "worldY": 3508,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_3",
+    "worldX": 3659,
+    "worldY": 3507,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_NORTH_4",
+    "worldX": 3660,
+    "worldY": 3507,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_1",
+    "worldX": 3652,
+    "worldY": 3485,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_2",
+    "worldX": 3652,
+    "worldY": 3486,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_3",
+    "worldX": 3653,
+    "worldY": 3485,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_WEST_4",
+    "worldX": 3653,
+    "worldY": 3486,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_1",
+    "worldX": 3669,
+    "worldY": 3453,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_2",
+    "worldX": 3670,
+    "worldY": 3453,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_3",
+    "worldX": 3669,
+    "worldY": 3454,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "PHASMATYS_ENERGY_BARRIER_SOUTH_4",
+    "worldX": 3670,
+    "worldY": 3454,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 2.0,
+    "color": [
+      0.4,
+      1.0,
+      0.4
+    ],
+    "type": "PULSE",
+    "duration": 4000.0,
+    "range": 5.0,
+    "fadeInDuration": 0
   },
   {
     "description": "BARROWS_SARCOPHAGUS",
@@ -26521,8 +26882,7 @@
     "duration": 0.0,
     "range": 20.0,
     "objectIds": [
-      "FLAMES",
-      732
+      "FLAMES"
     ]
   },
   {
@@ -26710,6 +27070,517 @@
     "range": 30.0,
     "objectIds": [
       6384
+    ]
+  },
+  {
+    "description": "WIZARD_TOWER_RIFT_PORTAL",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 400,
+    "strength": 80,
+    "color": [
+      0.0,
+      0.5325205447,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 10.0,
+    "objectIds": [
+      43841
+    ]
+  },
+  {
+    "description": "GOTR_RIFT_PORTAL",
+    "worldX": 3615,
+    "worldY": 9470,
+    "plane": 0,
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 2500,
+    "strength": 11.0,
+    "color": [
+      0.0,
+      0.5325205447,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 12.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GOTR_REWARDS_GUARDIAN",
+    "height": 130,
+    "alignment": "CENTER",
+    "radius": 300,
+    "strength": 5.5,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 0.0,
+    "objectIds": [
+      43695
+    ]
+  },
+  {
+    "description": "GOTR_DEPOSIT_POOL",
+    "height": 220,
+    "alignment": "CENTER",
+    "radius": 180,
+    "strength": 11.0,
+    "color": [
+      0.0,
+      0.4,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43696
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_FIRE",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      0.4811565051,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43704
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_NATURE",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43711
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_EARTH",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.587219907,
+      0.4811565051,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43703
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_WATER",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43702
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_COSMIC",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43710
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_AIR",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43701
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_MIND",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      0.6667955029,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43705
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_BODY",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.3511191734,
+      0.3511191734,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43709
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_CHAOS",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      0.6667955029,
+      0.4811565051
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43706
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_DEATH",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.8503349277,
+      0.8503349277,
+      0.8503349277
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43707
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_LAW",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      0.4811565051,
+      0.4811565051,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43712
+    ]
+  },
+  {
+    "description": "GOTR_GUARDIAN_OF_BLOOD",
+    "height": 260,
+    "alignment": "CENTER",
+    "radius": 150,
+    "strength": 7.7,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43708
+    ]
+  },
+  {
+    "description": "GOTR_YELLOW_PORTAL",
+    "height": 125,
+    "alignment": "CENTER",
+    "radius": 200,
+    "strength": 5.5,
+    "color": [
+      1.0,
+      0.8774243147,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43729,
+      38044
+    ]
+  },
+  {
+    "description": "GOTR_ABYSSAL_RIFT",
+    "height": 250,
+    "alignment": "SOUTH",
+    "radius": 2000,
+    "strength": 25,
+    "color": [
+      0.9580373726,
+      0.3511191734,
+      1.0
+    ],
+    "type": "PULSE",
+    "duration": 1200.0,
+    "range": 15.0,
+    "objectIds": [
+      43713,
+      43714
+    ]
+  },
+  {
+    "description": "GOTR_ENTRANCE_BARRIER_YELLOW",
+    "height": 250,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 4.0,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43700
+    ]
+  },
+  {
+    "description": "GOTR_ENTRANCE_BARRIER_RED",
+    "height": 250,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 6.0,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43849
+    ]
+  },
+  {
+    "description": "GOTR_WEAK_BARRIER",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 250,
+    "strength": 0.75,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43744,
+      43745
+    ]
+  },
+  {
+    "description": "GOTR_MED_BARRIER",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 250,
+    "strength": 1.5,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43746,
+      43747
+    ]
+  },
+  {
+    "description": "GOTR_STRONG_BARRIER",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 250,
+    "strength": 2.25,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      43748,
+      43749
+    ]
+  },
+  {
+    "description": "GOTR_OVERCHARGED_BARRIER",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 250,
+    "strength": 3.0,
+    "color": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43750,
+      43751
+    ]
+  },
+  {
+    "description": "GOTR_WEAK_CELL_TILE",
+    "height": 60,
+    "alignment": "CENTER",
+    "radius": 100,
+    "strength": 2,
+    "color": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43740
+    ]
+  },
+  {
+    "description": "GOTR_MED_CELL_TILE",
+    "height": 60,
+    "alignment": "CENTER",
+    "radius": 100,
+    "strength": 2.75,
+    "color": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43741
+    ]
+  },
+  {
+    "description": "GOTR_STRONG_CELL_TILE",
+    "height": 60,
+    "alignment": "CENTER",
+    "radius": 100,
+    "strength": 2.75,
+    "color": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43742
+    ]
+  },
+  {
+    "description": "GOTR_OVERCHARGED_CELL_TILE",
+    "height": 60,
+    "alignment": "CENTER",
+    "radius": 100,
+    "strength": 2.75,
+    "color": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 5.0,
+    "objectIds": [
+      43743
     ]
   }
 ]

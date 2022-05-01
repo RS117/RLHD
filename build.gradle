@@ -10,7 +10,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.15-SNAPSHOT'
+def runeLiteVersion = '1.8.19-SNAPSHOT'
 def joglVersion = '2.4.0-rc-20220318'
 
 dependencies {
