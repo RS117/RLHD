@@ -24539,9 +24539,9 @@
     "radius": 500,
     "strength": 25.0,
     "color": [
-      255,
-      0,
-      0
+      1.0,
+      0.0,
+      0.0
     ],
     "type": "STATIC",
     "duration": 0.0,
