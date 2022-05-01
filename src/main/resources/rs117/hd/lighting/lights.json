@@ -24539,9 +24539,9 @@
     "radius": 500,
     "strength": 25.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "STATIC",
     "duration": 0.0,
@@ -24557,9 +24557,9 @@
     "radius": 4000,
     "strength": 4.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "PULSE",
     "duration": 2000.0,
@@ -24575,9 +24575,9 @@
     "radius": 400,
     "strength": 6.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
     "duration": 1800.0,
@@ -24593,9 +24593,9 @@
     "radius": 800,
     "strength": 1.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "PULSE",
     "duration": 500.0,
@@ -24614,9 +24614,9 @@
     "radius": 2000,
     "strength": 1.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
     "duration": 2000.0,
@@ -24633,9 +24633,9 @@
     "radius": 1500,
     "strength": 1.0,
     "color": [
-      1.0,
-      0.0,
-      1.0
+      255,
+      0,
+      255
     ],
     "type": "FLICKER",
     "duration": 1280.0,
@@ -24652,9 +24652,9 @@
     "radius": 1250,
     "strength": 1.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
     "duration": 1280.0,
@@ -24671,9 +24671,9 @@
     "radius": 1250,
     "strength": 1.0,
     "color": [
-      1.0,
-      0.0,
-      0.0
+      255,
+      0,
+      0
     ],
     "type": "FLICKER",
     "duration": 1280.0,
