@@ -421,11 +421,11 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "overrideSky",
-			name = "Override Sky Color",
-			description = "Forces the selected sky color in all environments",
-			position = 205,
-			section = environmentSettings
+		keyName = "overrideSky",
+		name = "Override Sky Color",
+		description = "Forces the selected sky color in all environments",
+		position = 205,
+		section = environmentSettings
 	)
 	default boolean overrideSky() {
 		return false;

@@ -26,12 +26,14 @@ package rs117.hd.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.runelite.api.Client;
+import rs117.hd.HDUtils;
 
 @Getter
 @RequiredArgsConstructor
 public enum DefaultSkyColor
 {
-	DEFAULT("Client Default", -1, -1, -1),
+	DEFAULT("RuneLite Skybox", -1, -1, -1),
 	BLUE("117HD (Blue)", 185, 214, 255),
 	OSRS("Old School (Black)", 0, 0, 0),
 	HD2008("2008 HD (Tan)", 200, 192, 169);
@@ -45,5 +47,23 @@ public enum DefaultSkyColor
 	public String toString()
 	{
 		return name;
+	}
+
+	public float[] getRgb(Client client) {
+		int r = this.r;
+		int g = this.g;
+		int b = this.b;
+		if (this == DEFAULT)
+		{
+			int sky = client.getSkyboxColor();
+			r = sky >> 16 & 0xFF;
+			g = sky >> 8 & 0xFF;
+			b = sky & 0xFF;
+		}
+		return new float[]{
+			HDUtils.gammaToLinear(r / 255f),
+			HDUtils.gammaToLinear(g / 255f),
+			HDUtils.gammaToLinear(b / 255f)
+		};
 	}
 }
