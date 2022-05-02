@@ -528,12 +528,29 @@ public interface HdPluginConfig extends Config
 		return true;
 	}
 
+	@ConfigSection(
+			name = "Experimental",
+			description = "Experimental features - you likely won't need to modify these settings",
+			position = 400,
+			closedByDefault = true
+	)
+	String experimentalSettings = "experimentalSettings";
+
 	@ConfigItem(
-		keyName = "modelCaching",
-		name = "Disable model caching",
-		description = "Model caching improves performance with increased memory usage.",
-		position = 303,
-		section = miscellaneousSettings
+			keyName = "modelCaching",
+			name = "Disable model caching",
+			description = "Model caching improves performance with increased memory usage.",
+			position = 401,
+			section = experimentalSettings
 	)
 	default boolean disableModelCaching() { return false; }
+
+	@ConfigItem(
+			keyName = "modelBatching",
+			name = "Disable model batching",
+			description = "Model batching generally improves performance but could cause some graphical artifacts",
+			position = 402,
+			section = experimentalSettings
+	)
+	default boolean disableModelBatching() { return false; }
 }
