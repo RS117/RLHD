@@ -101,6 +101,7 @@ import static rs117.hd.GLUtil.glGenTexture;
 import static rs117.hd.GLUtil.glGenVertexArrays;
 import static rs117.hd.GLUtil.glGetInteger;
 import rs117.hd.config.AntiAliasingMode;
+import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.environments.EnvironmentManager;
@@ -2326,9 +2327,26 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		log.debug("-- generateUnderwaterTerrain: {}ms", timerGenerateUnderwaterTerrain);
 	}
 
+	private boolean skyboxColorChanged = false;
+
+	@Subscribe(priority = -1)
+	public void onBeforeRender(BeforeRender event) {
+		// Update sky color after the skybox plugin has had time to update the client's sky color
+		if (skyboxColorChanged) {
+			skyboxColorChanged = false;
+			environmentManager.updateSkyColor();
+		}
+	}
+
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
 	{
+		if (event.getGroup().equals("skybox") && config.defaultSkyColor() == DefaultSkyColor.RUNELITE)
+		{
+			skyboxColorChanged = true;
+			return;
+		}
+
 		if (!event.getGroup().equals("hd"))
 		{
 			return;
