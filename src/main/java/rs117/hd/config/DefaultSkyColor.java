@@ -33,8 +33,8 @@ import rs117.hd.HDUtils;
 @RequiredArgsConstructor
 public enum DefaultSkyColor
 {
-	DEFAULT("RuneLite Skybox", -1, -1, -1),
-	BLUE("117HD (Blue)", 185, 214, 255),
+	DEFAULT("117HD (Blue)", 185, 214, 255),
+	RUNELITE("RuneLite Skybox", -1, -1, -1),
 	OSRS("Old School (Black)", 0, 0, 0),
 	HD2008("2008 HD (Tan)", 200, 192, 169);
 
@@ -53,7 +53,7 @@ public enum DefaultSkyColor
 		int r = this.r;
 		int g = this.g;
 		int b = this.b;
-		if (this == DEFAULT)
+		if (this == RUNELITE)
 		{
 			int sky = client.getSkyboxColor();
 			r = sky >> 16 & 0xFF;

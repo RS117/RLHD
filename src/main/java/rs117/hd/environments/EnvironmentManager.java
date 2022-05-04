@@ -273,26 +273,7 @@ public class EnvironmentManager
 		startUnderwaterCausticsColor = currentUnderwaterCausticsColor;
 		startUnderwaterCausticsStrength = currentUnderwaterCausticsStrength;
 
-		// set target variables to ones from new environment
-		targetFogColor = newEnvironment.getFogColor();
-		targetWaterColor = targetFogColor;
-		if (!newEnvironment.isCustomFogColor())
-		{
-			if (hdPlugin.configWinterTheme)
-			{
-				targetFogColor = Environment.WINTER.getFogColor();
-				targetWaterColor = targetFogColor;
-			}
-			else
-			{
-				targetFogColor = config.defaultSkyColor().getRgb(client);
-			}
-		}
-
-		// If configured and the environment allows it override the skybox color to the default sky color.
-		if (config.overrideSky() && newEnvironment.isAllowSkyOverride()) {
-			targetFogColor = config.defaultSkyColor().getRgb(client);
-		}
+		updateSkyColor();
 
 		targetFogDepth = newEnvironment.getFogDepth();
 		if (hdPlugin.configWinterTheme)
@@ -383,6 +364,25 @@ public class EnvironmentManager
 		if (tileChange >= skipTransitionTiles)
 		{
 			transitionCompleteTime = startTime;
+		}
+	}
+
+	public void updateSkyColor()
+	{
+		Environment env = hdPlugin.configWinterTheme ? Environment.WINTER : currentEnvironment;
+		if (!env.isCustomAmbientColor() || env.isAllowSkyOverride() && config.overrideSky())
+		{
+			DefaultSkyColor sky = config.defaultSkyColor();
+			targetFogColor = sky.getRgb(client);
+			if (sky == DefaultSkyColor.OSRS)
+			{
+				sky = DefaultSkyColor.DEFAULT;
+			}
+			targetWaterColor = sky.getRgb(client);
+		}
+		else
+		{
+			targetFogColor = targetWaterColor = env.getFogColor();
 		}
 	}
 
