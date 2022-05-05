@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.NpcID;
-import net.runelite.api.ObjectID;
+import rs117.hd.rlapi.NpcID;
+import rs117.hd.rlapi.ObjectID;
 
 @Slf4j
 public class Light
