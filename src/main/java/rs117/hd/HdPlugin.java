@@ -33,6 +33,9 @@ import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.math.Matrix4;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.inject.Named;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import lombok.Setter;
@@ -42,11 +45,15 @@ import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.config.Keybind;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.input.KeyListener;
+import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
 import net.runelite.client.ui.DrawManager;
+import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
 import static rs117.hd.HdPluginConfig.KEY_WINTER_THEME;
@@ -65,6 +72,7 @@ import rs117.hd.opengl.compute.OpenCLManager;
 import rs117.hd.opengl.shader.Shader;
 import rs117.hd.opengl.shader.ShaderException;
 import rs117.hd.opengl.shader.Template;
+import rs117.hd.overlays.TileInfoOverlay;
 import rs117.hd.scene.EnvironmentManager;
 import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.scene.SceneUploader;
@@ -108,9 +116,11 @@ import static rs117.hd.utils.GLUtil.*;
 )
 @PluginDependency(EntityHiderPlugin.class)
 @Slf4j
-public class HdPlugin extends Plugin implements DrawCallbacks
+public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 {
-	public static String SHADER_PATH = "RLHD_SHADER_PATH";
+	public static final String ENV_SHADER_PATH = "RLHD_SHADER_PATH";
+
+	private static final Keybind KEY_TOGGLE_TILE_INFO = new Keybind(KeyEvent.VK_F3, InputEvent.CTRL_DOWN_MASK);
 
 	// This is the maximum number of triangles the compute shaders support
 	public static final int MAX_TRIANGLE = 6144;
@@ -169,6 +179,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private ModelHasher modelHasher;
+
+	@Inject
+	private KeyManager keyManager;
+
+	@Inject
+	private OverlayManager overlayManager;
+
+	@Inject
+	private TileInfoOverlay tileInfoOverlay;
+
+	@Inject
+	@Named("developerMode")
+	private boolean developerMode;
 
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
@@ -401,6 +424,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private final Map<Integer, TempModelInfo> tempModelInfoMap = new HashMap<>();
 
+	private boolean tileInfoOverlayEnabled = false;
+
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
 		if (!isInGauntlet) {
@@ -478,6 +503,30 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				}
 				
 				System.setProperty("jogamp.gluegen.TestTempDirExec", "false");
+
+				if (developerMode)
+				{
+					keyManager.registerKeyListener(this);
+					if (tileInfoOverlayEnabled)
+					{
+						overlayManager.add(tileInfoOverlay);
+					}
+
+					shaderPath = Env.getPath(ENV_SHADER_PATH);
+					if (shaderPath != null)
+					{
+						fileWatcher	= new FileWatcher()
+							.watchPath(shaderPath)
+							.addChangeHandler(path ->
+							{
+								if (path.getFileName().toString().endsWith(".glsl"))
+								{
+									log.debug("Reloading shaders...");
+									recompileProgram();
+								}
+							});
+					}
+				}
 
 				GLProfile.initSingleton();
 
@@ -612,21 +661,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				// load all dynamic scene lights from text file
 				lightManager.startUp();
 
-				shaderPath = Env.getPath(SHADER_PATH);
-				if (shaderPath != null)
-				{
-					fileWatcher	= new FileWatcher()
-						.watchPath(shaderPath)
-						.addChangeHandler(path ->
-						{
-							if (path.getFileName().toString().endsWith(".glsl"))
-							{
-								log.debug("Reloading shaders...");
-								recompileProgram();
-							}
-						});
-				}
-
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
 					ThreadUtils.invokeOnMainThread(this::uploadScene);
@@ -637,7 +671,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					SwingUtilities.invokeAndWait(() -> ((Component) client).addComponentListener(resizeListener));
 					needsReset = 5; // plugin startup races with ClientUI positioning, so do a reset in a little bit
 				}
-
 			}
 			catch (Throwable e)
 			{
@@ -651,13 +684,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void shutDown()
 	{
-
 		((Component) client).removeComponentListener(resizeListener);
 
-		if (fileWatcher != null)
+		if (developerMode)
 		{
-			fileWatcher.close();
-			fileWatcher = null;
+			if (fileWatcher != null)
+			{
+				fileWatcher.close();
+				fileWatcher = null;
+			}
+
+			keyManager.unregisterKeyListener(this);
+			overlayManager.remove(tileInfoOverlay);
 		}
 
 		lightManager.shutDown();
@@ -2877,5 +2915,35 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		{
 			hasLoggedIn = true;
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent event)
+	{
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event)
+	{
+		if (KEY_TOGGLE_TILE_INFO.matches(event))
+		{
+			event.consume();
+			tileInfoOverlayEnabled = !tileInfoOverlayEnabled;
+			if (tileInfoOverlayEnabled)
+			{
+				overlayManager.add(tileInfoOverlay);
+			}
+			else
+			{
+				overlayManager.remove(tileInfoOverlay);
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent event)
+	{
+
 	}
 }
