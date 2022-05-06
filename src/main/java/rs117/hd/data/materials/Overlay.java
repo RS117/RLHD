@@ -284,6 +284,7 @@ public enum Overlay
 	OVERLAY_49(49, GroundMaterial.VARIED_DIRT),
 	OVERLAY_52(52, GroundMaterial.WOOD_PLANKS_1),
 	OVERLAY_60(60, GroundMaterial.DIRT),
+	OVERLAY_72(72, WaterType.BLOOD),
 	OVERLAY_77(77, GroundMaterial.DIRT),
 	OVERLAY_81(81, GroundMaterial.DIRT),
 	OVERLAY_82(82, GroundMaterial.DIRT),
