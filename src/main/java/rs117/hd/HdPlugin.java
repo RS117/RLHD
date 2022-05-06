@@ -49,6 +49,7 @@ import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
+import static rs117.hd.HdPluginConfig.KEY_WINTER_THEME;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
@@ -2365,7 +2366,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configTzhaarHD = config.tzhaarHD();
 				reloadScene();
 				break;
-			case "winterTheme":
+			case KEY_WINTER_THEME:
 				configWinterTheme = config.winterTheme();
 				reloadScene();
 				break;
