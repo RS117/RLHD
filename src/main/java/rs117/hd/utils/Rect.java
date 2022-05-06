@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.environments;
+package rs117.hd.utils;
 
 import lombok.Getter;
 
@@ -35,7 +35,7 @@ public class Rect
 	private final int maxY;
 	private final int plane;
 
-	Rect(int pointAX, int pointAY, int pointBX, int pointBY)
+	public Rect(int pointAX, int pointAY, int pointBX, int pointBY)
 	{
 		this.minX = Math.min(pointAX, pointBX);
 		this.minY = Math.min(pointAY, pointBY);
@@ -44,7 +44,7 @@ public class Rect
 		this.plane = -1;
 	}
 
-	Rect(int pointAX, int pointAY, int pointBX, int pointBY, int plane)
+	public Rect(int pointAX, int pointAY, int pointBX, int pointBY, int plane)
 	{
 		this.minX = Math.min(pointAX, pointBX);
 		this.minY = Math.min(pointAY, pointBY);

@@ -1,4 +1,4 @@
-package rs117.hd.lighting;
+package rs117.hd.data;
 
 import java.util.Arrays;
 import java.util.HashSet;

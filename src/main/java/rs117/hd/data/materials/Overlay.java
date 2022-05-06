@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.materials;
+package rs117.hd.data.materials;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -32,8 +32,8 @@ import net.runelite.api.Client;
 import net.runelite.api.Tile;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import rs117.hd.environments.Area;
-import rs117.hd.scene.data.WaterType;
+import rs117.hd.data.environments.Area;
+import rs117.hd.data.WaterType;
 
 @Getter
 public enum Overlay

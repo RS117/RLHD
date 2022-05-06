@@ -1,4 +1,4 @@
-package rs117.hd.lighting;
+package rs117.hd.scene.lighting;
 
 public enum LightType
 {

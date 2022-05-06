@@ -41,13 +41,13 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
 import rs117.hd.HdPlugin;
-import rs117.hd.scene.data.WaterType;
-import rs117.hd.materials.GroundMaterial;
-import rs117.hd.materials.Material;
+import rs117.hd.data.WaterType;
+import rs117.hd.data.materials.GroundMaterial;
+import rs117.hd.data.materials.Material;
 import rs117.hd.model.objects.ObjectProperties;
-import rs117.hd.materials.Overlay;
+import rs117.hd.data.materials.Overlay;
 import rs117.hd.model.objects.TzHaarRecolorType;
-import rs117.hd.materials.Underlay;
+import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.objects.ObjectType;
 import rs117.hd.utils.HDUtils;
 

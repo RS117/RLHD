@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
+import rs117.hd.scene.lighting.Alignment;
+import rs117.hd.scene.lighting.Light;
+import rs117.hd.scene.lighting.LightType;
 
 @Slf4j
 public class LightConfigParser

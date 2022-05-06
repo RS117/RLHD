@@ -26,8 +26,8 @@ package rs117.hd.model.objects;
 
 import java.util.HashMap;
 import lombok.Getter;
-import rs117.hd.materials.Material;
-import rs117.hd.materials.UvType;
+import rs117.hd.data.materials.Material;
+import rs117.hd.data.materials.UvType;
 
 import static net.runelite.api.ObjectID.*;
 

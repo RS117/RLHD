@@ -1,6 +1,6 @@
-package rs117.hd.lighting;
+package rs117.hd.scene.lighting;
 
-enum Alignment
+public enum Alignment
 {
 	CENTER(0, false, false),
 

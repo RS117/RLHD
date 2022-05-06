@@ -1,4 +1,4 @@
-package rs117.hd.lighting;
+package rs117.hd.scene.lighting;
 
 import com.google.common.collect.ListMultimap;
 import com.google.gson.Gson;

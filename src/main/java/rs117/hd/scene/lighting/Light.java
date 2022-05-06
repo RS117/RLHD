@@ -1,4 +1,4 @@
-package rs117.hd.lighting;
+package rs117.hd.scene.lighting;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.TypeAdapter;
@@ -19,7 +19,7 @@ import rs117.hd.utils.ObjectID;
 public class Light
 {
 	@VisibleForTesting
-	static boolean THROW_WHEN_PARSING_FAILS = false;
+    public static boolean THROW_WHEN_PARSING_FAILS = false;
 
 	public String description;
 	public Integer worldX, worldY, plane, height;

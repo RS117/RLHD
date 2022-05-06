@@ -22,6 +22,8 @@ import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
+import rs117.hd.scene.lighting.Light;
+import rs117.hd.scene.lighting.LightConfig;
 import rs117.hd.utils.HDUtils;
 
 @SuppressWarnings("deprecation")

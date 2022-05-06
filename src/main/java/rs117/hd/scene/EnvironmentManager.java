@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.environments;
+package rs117.hd.scene;
 
 import com.google.common.primitives.Floats;
 import java.util.ArrayList;
@@ -38,8 +38,10 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
+import rs117.hd.data.environments.Environment;
 import rs117.hd.utils.HDUtils;
 import rs117.hd.config.DefaultSkyColor;
+import rs117.hd.utils.Rect;
 
 @Singleton
 @Slf4j

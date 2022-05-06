@@ -22,28 +22,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.scene.data;
+package rs117.hd.data.materials;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import rs117.hd.materials.GroundMaterial;
-
-@Getter
-@RequiredArgsConstructor
-public enum WaterType
+public enum UvType
 {
-	NONE(0, GroundMaterial.NONE),
-	WATER(1, GroundMaterial.WATER),
-	WATER_FLAT(2, GroundMaterial.WATER_FLAT),
-	SWAMP_WATER(3, GroundMaterial.SWAMP_WATER),
-	SWAMP_WATER_FLAT(4, GroundMaterial.SWAMP_WATER_FLAT),
-	POISON_WASTE(5, GroundMaterial.POISON_WASTE),
-	POISON_WASTE_FLAT(6, GroundMaterial.POISON_WASTE_FLAT),
-	BLOOD(7, GroundMaterial.BLOOD_FLAT),
-	ICE(8, GroundMaterial.ICE),
-	ICE_FLAT(9, GroundMaterial.ICE_FLAT),
-	;
-
-	private final int value;
-	private final GroundMaterial groundMaterial;
+	GEOMETRY, GROUND_PLANE
 }
