@@ -92,60 +92,7 @@ public class ExportLightsToJson
 					null, null, null))
 				.collect(Collectors.toList()));
 			System.out.println("Loaded " + sceneLights.size() + " lights from old txt format");
-
-			uniqueLights.addAll(Arrays.stream(NpcLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, l.getHeight(),
-					l.getAlignment(),
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					null,
-					toSet(l.getId()),
-					null,
-					null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + NpcLight.values().length + " lights from old NpcLight enum");
-
-			uniqueLights.addAll(Arrays.stream(ObjectLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, l.getHeight(),
-					l.getAlignment(),
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					null,
-					null,
-					toSet(l.getId()),
-					null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + ObjectLight.values().length + " lights from old ObjectLight enum");
-
-			uniqueLights.addAll(Arrays.stream(ProjectileLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, null,
-					null,
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					l.getFadeInDuration(),
-					null,
-					null,
-					toSet(l.getId())))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + ProjectileLight.values().length + " lights from old ProjectileLight enum");
+			
 		}
 
 		if (options.has(linearToGammaOption))
