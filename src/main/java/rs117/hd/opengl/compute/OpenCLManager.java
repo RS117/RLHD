@@ -39,7 +39,6 @@ import jogamp.opengl.macosx.cgl.CGL;
 import jogamp.opengl.windows.wgl.WindowsWGLContext;
 import jogamp.opengl.x11.glx.X11GLXContext;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.gpu.template.Template;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
 import static org.jocl.CL.*;
@@ -56,6 +55,7 @@ import org.jocl.cl_mem;
 import org.jocl.cl_platform_id;
 import org.jocl.cl_program;
 import rs117.hd.HdPlugin;
+import rs117.hd.opengl.shader.Template;
 import rs117.hd.utils.buffer.GLBuffer;
 
 @Singleton
