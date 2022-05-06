@@ -135,9 +135,9 @@ import rs117.hd.utils.buffer.GpuFloatBuffer;
 import rs117.hd.utils.buffer.GpuIntBuffer;
 
 @PluginDescriptor(
-	name = "117 HD (beta)",
+	name = "117 HD",
 	description = "GPU renderer with a suite of graphical enhancements",
-	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},
+	tags = {"hd", "high", "detail", "graphics", "shaders", "textures", "gpu", "shadows", "lights"},
 	conflicts = "GPU"
 )
 @PluginDependency(EntityHiderPlugin.class)
