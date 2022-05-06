@@ -100,6 +100,8 @@ import static rs117.hd.GLUtil.glGenRenderbuffer;
 import static rs117.hd.GLUtil.glGenTexture;
 import static rs117.hd.GLUtil.glGenVertexArrays;
 import static rs117.hd.GLUtil.glGetInteger;
+
+import net.runelite.client.ui.overlay.OverlayManager;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
@@ -109,6 +111,7 @@ import rs117.hd.lighting.LightManager;
 import rs117.hd.lighting.SceneLight;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
+import rs117.hd.settingsInterface.InterfaceOverlay;
 import rs117.hd.template.Template;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.OSType;
@@ -149,7 +152,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private Client client;
-	
+
+	@Inject
+	private OverlayManager overlayManager;
+
+	@Inject
+	private InterfaceOverlay interfaceOverlay;
+
 	@Inject
 	private OpenCLManager openCLManager;
 
@@ -658,6 +667,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					invokeOnMainThread(this::uploadScene);
 				}
 
+				overlayManager.add(interfaceOverlay);
 				if (OSType.getOSType() == OSType.MacOS)
 				{
 					SwingUtilities.invokeAndWait(() -> ((Component) client).addComponentListener(resizeListener));
@@ -763,7 +773,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			modelBufferUnordered = null;
 
 			lastAnisotropicFilteringLevel = -1;
-
+			overlayManager.remove(interfaceOverlay);
 			// force main buffer provider rebuild to turn off alpha channel
 			client.resizeCanvas();
 		});
@@ -1596,6 +1606,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public void draw(int overlayColor)
 	{
 		invokeOnMainThread(() -> drawFrame(overlayColor));
+	}
+
+	@Subscribe
+	public void onCanvasSizeChanged(CanvasSizeChanged size)
+	{
+		interfaceOverlay.reload();
 	}
 
 	private void prepareInterfaceTexture(int canvasWidth, int canvasHeight)
