@@ -108,6 +108,7 @@ import rs117.hd.environments.EnvironmentManager;
 import rs117.hd.lighting.LightManager;
 import rs117.hd.lighting.SceneLight;
 import rs117.hd.materials.Material;
+import rs117.hd.model.TempModelInfo;
 import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.model.ModelHasher;
 import rs117.hd.model.ModelPusher;
@@ -123,6 +124,9 @@ import static org.jocl.CL.CL_MEM_READ_ONLY;
 import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
 
+import rs117.hd.scene.ProceduralGenerator;
+import rs117.hd.scene.SceneUploader;
+import rs117.hd.scene.data.TextureManager;
 import rs117.hd.utils.*;
 import rs117.hd.utils.buffer.GLBuffer;
 import rs117.hd.utils.buffer.GpuFloatBuffer;

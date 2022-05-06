@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.scene;
 
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
@@ -40,6 +40,8 @@ import net.runelite.api.Scene;
 import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
+import rs117.hd.HdPlugin;
+import rs117.hd.scene.data.WaterType;
 import rs117.hd.materials.GroundMaterial;
 import rs117.hd.materials.Material;
 import rs117.hd.model.objects.ObjectProperties;
@@ -86,7 +88,7 @@ public class ProceduralGenerator
 	 *
 	 * @param scene
 	 */
-	void generateTerrainData(Scene scene)
+	public void generateTerrainData(Scene scene)
 	{
 		vertexTerrainColor = new HashMap<>();
 		// used for overriding potentially undesirable vertex colors
@@ -347,7 +349,7 @@ public class ProceduralGenerator
 	 *
 	 * @param scene
 	 */
-	void generateUnderwaterTerrain(Scene scene)
+	public void generateUnderwaterTerrain(Scene scene)
 	{
 		// true if a tile contains at least 1 face which qualifies as water
 		tileIsWater = new boolean[Constants.MAX_Z][Constants.SCENE_SIZE][Constants.SCENE_SIZE];
@@ -717,7 +719,7 @@ public class ProceduralGenerator
 	 *
 	 * @param scene
 	 */
-	void calculateTerrainNormals(Scene scene)
+	public void calculateTerrainNormals(Scene scene)
 	{
 		vertexTerrainNormals = new HashMap<>();
 		Tile[][][] tiles = scene.getTiles();

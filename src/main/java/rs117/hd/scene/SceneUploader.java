@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.scene;
 
 import com.google.common.base.Stopwatch;
 import javax.inject.Inject;
@@ -43,6 +43,8 @@ import net.runelite.api.SceneTileModel;
 import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
+import rs117.hd.HdPlugin;
+import rs117.hd.scene.data.WaterType;
 import rs117.hd.materials.GroundMaterial;
 import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.materials.Overlay;
@@ -56,6 +58,7 @@ import rs117.hd.utils.buffer.GpuIntBuffer;
 
 @Singleton
 @Slf4j
+public
 class SceneUploader
 {
 	@Inject
@@ -65,16 +68,16 @@ class SceneUploader
 	private HdPlugin hdPlugin;
 
 	@Inject
-	ProceduralGenerator proceduralGenerator;
+	public ProceduralGenerator proceduralGenerator;
 
 	@Inject
 	private ModelPusher modelPusher;
 
-	int sceneId = (int) (System.currentTimeMillis() / 1000L);
+	public int sceneId = (int) (System.currentTimeMillis() / 1000L);
 	private int offset;
 	private int uvoffset;
 
-	void upload(Scene scene, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
+	public void upload(Scene scene, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
 	{
 		Stopwatch stopwatch = Stopwatch.createStarted();
 

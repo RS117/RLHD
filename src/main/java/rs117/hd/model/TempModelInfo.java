@@ -1,4 +1,4 @@
-package rs117.hd;
+package rs117.hd.model;
 
 public class TempModelInfo {
     private int tempOffset;

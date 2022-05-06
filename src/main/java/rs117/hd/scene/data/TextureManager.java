@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.scene.data;
 
 import com.jogamp.opengl.GL4;
 import java.awt.image.BufferedImage;
@@ -36,18 +36,19 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
+import rs117.hd.HdPlugin;
 import rs117.hd.utils.GLUtil;
 
 @Singleton
 @Slf4j
-class TextureManager
+public class TextureManager
 {
 	private static final float PERC_64 = 1f / 64f;
 	private static final float PERC_128 = 1f / 128f;
 
 	private static final int TEXTURE_SIZE = 128;
 
-	int initTextureArray(TextureProvider textureProvider, GL4 gl)
+	public int initTextureArray(TextureProvider textureProvider, GL4 gl)
 	{
 		if (!allTexturesLoaded(textureProvider))
 		{
@@ -81,7 +82,7 @@ class TextureManager
 		return textureArrayId;
 	}
 
-	int initTextureHDArray(TextureProvider textureProvider, GL4 gl)
+	public int initTextureHDArray(TextureProvider textureProvider, GL4 gl)
 	{
 		if (!allTexturesLoaded(textureProvider))
 		{
@@ -130,7 +131,7 @@ class TextureManager
 		int width = 0;
 		int height = 0;
 		//Create the PNGDecoder object and decode the texture to a buffer
-		try (InputStream in = getClass().getResourceAsStream("textures/" + textureId + ".png"))
+		try (InputStream in = HdPlugin.class.getResourceAsStream("textures/" + textureId + ".png"))
 		{
 			if (in != null)
 			{
@@ -221,7 +222,7 @@ class TextureManager
 		return false;
 	}
 
-	void setAnisotropicFilteringLevel(int textureArrayId, int level, GL4 gl, boolean trilinearFiltering)
+	public void setAnisotropicFilteringLevel(int textureArrayId, int level, GL4 gl, boolean trilinearFiltering)
 	{
 		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
 
@@ -258,7 +259,7 @@ class TextureManager
 		}
 	}
 
-	void freeTextureArray(GL4 gl, int textureArrayId)
+	public void freeTextureArray(GL4 gl, int textureArrayId)
 	{
 		GLUtil.glDeleteTexture(gl, textureArrayId);
 	}
@@ -369,7 +370,7 @@ class TextureManager
 	 * @param texture
 	 * @param diff    Number of elapsed client ticks since last animation
 	 */
-	void animate(Texture texture, int diff)
+	public void animate(Texture texture, int diff)
 	{
 		final int[] pixels = texture.getPixels();
 		if (pixels == null)

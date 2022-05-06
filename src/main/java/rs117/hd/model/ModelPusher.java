@@ -8,7 +8,7 @@ import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.model.objects.ObjectType;
-import rs117.hd.ProceduralGenerator;
+import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.lighting.BakedModels;
 import rs117.hd.materials.*;
 import rs117.hd.model.objects.TzHaarRecolorType;

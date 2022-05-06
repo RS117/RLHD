@@ -33,7 +33,7 @@ import net.runelite.api.Tile;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import rs117.hd.environments.Area;
-import rs117.hd.WaterType;
+import rs117.hd.scene.data.WaterType;
 
 @Getter
 public enum Underlay
