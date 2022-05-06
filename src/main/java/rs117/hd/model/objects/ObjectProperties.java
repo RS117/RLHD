@@ -22,11 +22,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.materials;
+package rs117.hd.model.objects;
 
-import java.awt.Color;
 import java.util.HashMap;
 import lombok.Getter;
+import rs117.hd.materials.Material;
+import rs117.hd.materials.UvType;
+
 import static net.runelite.api.ObjectID.*;
 
 @Getter

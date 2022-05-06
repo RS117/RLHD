@@ -42,15 +42,16 @@ import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
 import rs117.hd.materials.GroundMaterial;
 import rs117.hd.materials.Material;
-import rs117.hd.materials.ObjectProperties;
+import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.materials.Overlay;
-import rs117.hd.materials.TzHaarRecolorType;
+import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.materials.Underlay;
+import rs117.hd.model.objects.ObjectType;
 import rs117.hd.utils.HDUtils;
 
 @Slf4j
 @Singleton
-class ProceduralGenerator
+public class ProceduralGenerator
 {
 	@Inject
 	private Client client;
@@ -920,7 +921,7 @@ class ProceduralGenerator
 		}
 	}
 
-	boolean isOverlayFace(Tile tile, int face)
+	public boolean isOverlayFace(Tile tile, int face)
 	{
 		int tileShapeIndex = tile.getSceneTileModel().getShape() - 1;
 		if (face >= getTileOverlayTris(tileShapeIndex).length)
@@ -1074,7 +1075,7 @@ class ProceduralGenerator
 		return vertexHashes;
 	}
 
-	int[] recolorOverlay(Overlay overlay, int[] colorHSL)
+	public int[] recolorOverlay(Overlay overlay, int[] colorHSL)
 	{
 		colorHSL[0] = overlay.getHue() >= 0 ? overlay.getHue() : colorHSL[0];
 		colorHSL[0] += overlay.getShiftHue();
@@ -1091,7 +1092,7 @@ class ProceduralGenerator
 		return colorHSL;
 	}
 
-	int[] recolorUnderlay(Underlay underlay, int[] colorHSL)
+	public int[] recolorUnderlay(Underlay underlay, int[] colorHSL)
 	{
 		colorHSL[0] = underlay.getHue() >= 0 ? underlay.getHue() : colorHSL[0];
 		colorHSL[0] += underlay.getShiftHue();
@@ -1138,7 +1139,7 @@ class ProceduralGenerator
 		return false;
 	}
 
-	Underlay getSeasonalUnderlay(Underlay underlay)
+	public Underlay getSeasonalUnderlay(Underlay underlay)
 	{
 		if (hdPlugin.configWinterTheme)
 		{
@@ -1155,7 +1156,7 @@ class ProceduralGenerator
 		return underlay;
 	}
 
-	Overlay getSeasonalOverlay(Overlay overlay)
+	public Overlay getSeasonalOverlay(Overlay overlay)
 	{
 		if (hdPlugin.configWinterTheme)
 		{
@@ -1183,7 +1184,7 @@ class ProceduralGenerator
 		return waterType;
 	}
 
-	Material getSeasonalMaterial(Material material)
+	public Material getSeasonalMaterial(Material material)
 	{
 		if (hdPlugin.configWinterTheme)
 		{
@@ -1226,7 +1227,7 @@ class ProceduralGenerator
 	final int gradientBottom = 200;
 	final int gradientTop = -200;
 
-	int[][] recolorTzHaar(ObjectProperties objectProperties, int aY, int bY, int cY, int packedAlphaPriority, ObjectType objectType, int color1H, int color1S, int color1L, int color2H, int color2S, int color2L, int color3H, int color3S, int color3L)
+	public int[][] recolorTzHaar(ObjectProperties objectProperties, int aY, int bY, int cY, int packedAlphaPriority, ObjectType objectType, int color1H, int color1S, int color1L, int color2H, int color2S, int color2L, int color3H, int color3S, int color3L)
 	{
 		// recolor tzhaar to look like the 2008+ HD version
 		if (objectType == ObjectType.GROUND_OBJECT)

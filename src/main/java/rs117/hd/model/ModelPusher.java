@@ -1,11 +1,17 @@
-package rs117.hd;
+package rs117.hd.model;
 
 import com.google.common.primitives.Ints;
 import com.jogamp.opengl.math.VectorUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import rs117.hd.HdPlugin;
+import rs117.hd.HdPluginConfig;
+import rs117.hd.model.objects.ObjectProperties;
+import rs117.hd.model.objects.ObjectType;
+import rs117.hd.ProceduralGenerator;
 import rs117.hd.lighting.BakedModels;
 import rs117.hd.materials.*;
+import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.utils.HDUtils;
 import rs117.hd.utils.buffer.FixedLengthHashCode;
 import rs117.hd.utils.buffer.GpuFloatBuffer;
@@ -15,84 +21,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.*;
 
-class ModelData {
-    private int[] colors;
-    private int faceCount;
-
-    public int getFaceCount() {
-        return faceCount;
-    }
-
-    public ModelData setFaceCount(int faceCount) {
-        this.faceCount = faceCount;
-        return this;
-    }
-
-    public ModelData setColors(int[] colors) {
-        this.colors = colors;
-        return this;
-    }
-
-    public int getColorForFace(int face, int index) {
-        return this.colors[(face * 4) + index];
-    }
-}
-
-@Singleton
-class ModelHasher {
-    private Model model;
-    private int faceColors1Hash;
-    private int faceColors2Hash;
-    private int faceColors3Hash;
-    private int faceTransparenciesHash;
-    private int faceTexturesHash;
-    private int faceTexturesUvHash;
-
-    public void setModel(Model model) {
-        this.model = model;
-        this.faceColors1Hash = Arrays.hashCode(model.getFaceColors1());
-        this.faceColors2Hash = Arrays.hashCode(model.getFaceColors2());
-        this.faceColors3Hash = Arrays.hashCode(model.getFaceColors3());
-        this.faceTransparenciesHash = Arrays.hashCode(model.getFaceTransparencies());
-        this.faceTexturesHash = Arrays.hashCode(model.getFaceTextures());
-        this.faceTexturesUvHash = Arrays.hashCode(model.getFaceTextureUVCoordinates());
-    }
-
-    public int calculateColorCacheHash() {
-        return Arrays.hashCode(new int[] {
-                this.faceColors1Hash,
-                this.faceColors2Hash,
-                this.faceColors3Hash,
-                this.faceTransparenciesHash,
-                this.faceTexturesHash,
-                this.faceTexturesUvHash,
-                this.model.getOverrideAmount(),
-                this.model.getOverrideHue(),
-                this.model.getOverrideSaturation(),
-                this.model.getOverrideLuminance()
-        });
-    }
-
-    public int calculateBatchHash() {
-        return Arrays.hashCode(new int[] {
-                Arrays.hashCode(this.model.getVerticesX()),
-                Arrays.hashCode(this.model.getVerticesY()),
-                Arrays.hashCode(this.model.getVerticesZ()),
-                this.faceColors1Hash,
-                this.faceColors2Hash,
-                this.faceColors3Hash,
-                this.faceTexturesHash,
-                this.faceTexturesUvHash,
-        });
-    }
-}
-
 /**
  * Pushes models
  */
 @Singleton
 @Slf4j
-public class ModelPusher {
+public class ModelPusher
+{
     @Inject
     private HdPlugin hdPlugin;
 

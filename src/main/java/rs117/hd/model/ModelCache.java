@@ -1,4 +1,4 @@
-package rs117.hd;
+package rs117.hd.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
