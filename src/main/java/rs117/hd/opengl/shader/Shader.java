@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.opengl.shader;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.jogamp.opengl.GL4;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import rs117.hd.template.Template;
+import rs117.hd.utils.GLUtil;
 
 public class Shader
 {

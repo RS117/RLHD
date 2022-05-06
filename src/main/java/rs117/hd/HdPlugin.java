@@ -89,17 +89,17 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
-import static rs117.hd.GLUtil.glDeleteBuffer;
-import static rs117.hd.GLUtil.glDeleteFrameBuffer;
-import static rs117.hd.GLUtil.glDeleteRenderbuffers;
-import static rs117.hd.GLUtil.glDeleteTexture;
-import static rs117.hd.GLUtil.glDeleteVertexArrays;
-import static rs117.hd.GLUtil.glGenBuffers;
-import static rs117.hd.GLUtil.glGenFrameBuffer;
-import static rs117.hd.GLUtil.glGenRenderbuffer;
-import static rs117.hd.GLUtil.glGenTexture;
-import static rs117.hd.GLUtil.glGenVertexArrays;
-import static rs117.hd.GLUtil.glGetInteger;
+import static rs117.hd.utils.GLUtil.glDeleteBuffer;
+import static rs117.hd.utils.GLUtil.glDeleteFrameBuffer;
+import static rs117.hd.utils.GLUtil.glDeleteRenderbuffers;
+import static rs117.hd.utils.GLUtil.glDeleteTexture;
+import static rs117.hd.utils.GLUtil.glDeleteVertexArrays;
+import static rs117.hd.utils.GLUtil.glGenBuffers;
+import static rs117.hd.utils.GLUtil.glGenFrameBuffer;
+import static rs117.hd.utils.GLUtil.glGenRenderbuffer;
+import static rs117.hd.utils.GLUtil.glGenTexture;
+import static rs117.hd.utils.GLUtil.glGenVertexArrays;
+import static rs117.hd.utils.GLUtil.glGetInteger;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
@@ -109,15 +109,21 @@ import rs117.hd.lighting.LightManager;
 import rs117.hd.lighting.SceneLight;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.ObjectProperties;
-import rs117.hd.template.Template;
+import rs117.hd.opengl.compute.OpenCLManager;
+import rs117.hd.opengl.shader.Shader;
+import rs117.hd.opengl.shader.ShaderException;
+import rs117.hd.opengl.shader.Template;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
 import static org.jocl.CL.CL_MEM_READ_ONLY;
 import static org.jocl.CL.CL_MEM_WRITE_ONLY;
 import static org.jocl.CL.clCreateFromGLBuffer;
-import rs117.hd.utils.Env;
-import rs117.hd.utils.FileWatcher;
+
+import rs117.hd.utils.*;
+import rs117.hd.utils.buffer.GLBuffer;
+import rs117.hd.utils.buffer.GpuFloatBuffer;
+import rs117.hd.utils.buffer.GpuIntBuffer;
 
 @PluginDescriptor(
 	name = "117 HD (beta)",
@@ -132,8 +138,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public static String SHADER_PATH = "RLHD_SHADER_PATH";
 
 	// This is the maximum number of triangles the compute shaders support
-	static final int MAX_TRIANGLE = 6144;
-	static final int SMALL_TRIANGLE_COUNT = 512;
+	public static final int MAX_TRIANGLE = 6144;
+	public static final int SMALL_TRIANGLE_COUNT = 512;
 	private static final int FLAG_SCENE_BUFFER = Integer.MIN_VALUE;
 	private static final int DEFAULT_DISTANCE = 25;
 	static final int MAX_DISTANCE = 90;

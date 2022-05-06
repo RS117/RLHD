@@ -27,7 +27,7 @@ package rs117.hd.config;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.runelite.api.Client;
-import rs117.hd.HDUtils;
+import rs117.hd.utils.HDUtils;
 
 @Getter
 @RequiredArgsConstructor

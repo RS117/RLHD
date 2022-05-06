@@ -6,6 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import rs117.hd.lighting.BakedModels;
 import rs117.hd.materials.*;
+import rs117.hd.utils.HDUtils;
+import rs117.hd.utils.buffer.FixedLengthHashCode;
+import rs117.hd.utils.buffer.GpuFloatBuffer;
+import rs117.hd.utils.buffer.GpuIntBuffer;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import lombok.extern.slf4j.Slf4j;
-import rs117.hd.HDUtils;
+import rs117.hd.utils.HDUtils;
 
 @Slf4j
 public class LightConfig

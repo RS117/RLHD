@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.opengl.compute;
 
 import com.google.common.base.Charsets;
 import com.jogamp.nativewindow.NativeSurface;
@@ -55,10 +55,12 @@ import org.jocl.cl_kernel;
 import org.jocl.cl_mem;
 import org.jocl.cl_platform_id;
 import org.jocl.cl_program;
+import rs117.hd.HdPlugin;
+import rs117.hd.utils.buffer.GLBuffer;
 
 @Singleton
 @Slf4j
-class OpenCLManager
+public class OpenCLManager
 {
 	private static final String GL_SHARING_PLATFORM_EXT = "cl_khr_gl_sharing";
 
@@ -83,7 +85,7 @@ class OpenCLManager
 
 	private cl_platform_id platform;
 	private cl_device_id device;
-	cl_context context;
+	public cl_context context;
 	private cl_command_queue commandQueue;
 
 	private cl_program programUnordered;
@@ -94,7 +96,7 @@ class OpenCLManager
 	private cl_kernel kernelSmall;
 	private cl_kernel kernelLarge;
 
-	void init(GL4 gl)
+	public void init(GL4 gl)
 	{
 		CL.setExceptionsEnabled(true);
 
@@ -117,7 +119,7 @@ class OpenCLManager
 		compilePrograms();
 	}
 
-	void cleanup()
+	public void cleanup()
 	{
 		if (programUnordered != null)
 		{
@@ -418,7 +420,7 @@ class OpenCLManager
 		kernelLarge = getKernel(programLarge, KERNEL_NAME_LARGE);
 	}
 
-	void compute(int unorderedModels, int smallModels, int largeModels,
+	public void compute(int unorderedModels, int smallModels, int largeModels,
 		GLBuffer sceneVertexBuffer,
 		GLBuffer sceneUvBuffer,
 		GLBuffer vertexBuffer,
@@ -529,7 +531,7 @@ class OpenCLManager
 		}
 	}
 
-	void finish()
+	public void finish()
 	{
 		clFinish(commandQueue);
 	}

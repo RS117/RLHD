@@ -22,41 +22,36 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.utils.buffer;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.IntBuffer;
+import java.nio.FloatBuffer;
 
-class GpuIntBuffer
+public class GpuFloatBuffer
 {
-	private IntBuffer buffer = allocateDirect(65536);
+	private FloatBuffer buffer = allocateDirect(65536);
 
-	void put(int x, int y, int z)
+	public void put(float texture, float u, float v, float pad)
 	{
-		buffer.put(x).put(y).put(z);
+		buffer.put(texture).put(u).put(v).put(pad);
 	}
 
-	void put(int x, int y, int z, int c)
-	{
-		buffer.put(x).put(y).put(z).put(c);
+	public void put(float[] floats) {
+		buffer.put(floats);
 	}
 
-	void put(int[] ints) {
-		buffer.put(ints);
-	}
-
-	void flip()
+	public void flip()
 	{
 		buffer.flip();
 	}
 
-	void clear()
+	public void clear()
 	{
 		buffer.clear();
 	}
 
-	GpuIntBuffer ensureCapacity(int size)
+	public void ensureCapacity(int size)
 	{
 		int capacity = buffer.capacity();
 		final int position = buffer.position();
@@ -68,24 +63,22 @@ class GpuIntBuffer
 			}
 			while ((capacity - position) < size);
 
-			IntBuffer newB = allocateDirect(capacity);
+			FloatBuffer newB = allocateDirect(capacity);
 			buffer.flip();
 			newB.put(buffer);
 			buffer = newB;
 		}
-
-		return this;
 	}
 
-	IntBuffer getBuffer()
+	public FloatBuffer getBuffer()
 	{
 		return buffer;
 	}
 
-	static IntBuffer allocateDirect(int size)
+	public static FloatBuffer allocateDirect(int size)
 	{
-		return ByteBuffer.allocateDirect(size * Integer.BYTES)
+		return ByteBuffer.allocateDirect(size * Float.BYTES)
 			.order(ByteOrder.nativeOrder())
-			.asIntBuffer();
+			.asFloatBuffer();
 	}
 }

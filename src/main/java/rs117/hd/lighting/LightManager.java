@@ -61,7 +61,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.plugins.entityhider.EntityHiderConfig;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
-import rs117.hd.HDUtils;
+import rs117.hd.utils.HDUtils;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.utils.Env;

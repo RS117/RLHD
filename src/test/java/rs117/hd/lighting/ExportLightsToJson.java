@@ -22,7 +22,7 @@ import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
-import rs117.hd.HDUtils;
+import rs117.hd.utils.HDUtils;
 
 @SuppressWarnings("deprecation")
 public class ExportLightsToJson
@@ -92,7 +92,7 @@ public class ExportLightsToJson
 					null, null, null))
 				.collect(Collectors.toList()));
 			System.out.println("Loaded " + sceneLights.size() + " lights from old txt format");
-			
+
 		}
 
 		if (options.has(linearToGammaOption))

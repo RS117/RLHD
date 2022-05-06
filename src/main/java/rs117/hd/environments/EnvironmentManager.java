@@ -38,7 +38,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
-import rs117.hd.HDUtils;
+import rs117.hd.utils.HDUtils;
 import rs117.hd.config.DefaultSkyColor;
 
 @Singleton

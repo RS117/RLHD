@@ -22,11 +22,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.opengl.shader;
 
-class ShaderException extends Exception
+public class ShaderException extends Exception
 {
-	ShaderException(String message)
+	public ShaderException(String message)
 	{
 		super(message);
 	}

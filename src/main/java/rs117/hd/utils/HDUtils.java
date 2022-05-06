@@ -22,33 +22,19 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.utils;
 
 import static com.jogamp.opengl.math.VectorUtil.crossVec3;
 import static com.jogamp.opengl.math.VectorUtil.subVec3;
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 
 @Slf4j
 @Singleton
-public
-class HDUtils
+public class HDUtils
 {
-	@Inject
-	private Client client;
 
-	@Inject
-	private SceneUploader sceneUploader;
-
-	@Inject
-	private HdPlugin hdPlugin;
-
-	@Inject
-	private ProceduralGenerator proceduralGenerator;
-
-	static float[] vectorAdd(float[] vec1, float[] vec2)
+	public static float[] vectorAdd(float[] vec1, float[] vec2)
 	{
 		float[] out = new float[vec1.length];
 		for (int i = 0; i < vec1.length; i++)
@@ -135,7 +121,7 @@ class HDUtils
 		return out;
 	}
 
-	static int vertexHash(int[] vPos)
+	public static int vertexHash(int[] vPos)
 	{
 		// simple custom hashing function for vertex position data
 		StringBuilder s = new StringBuilder();
@@ -146,7 +132,7 @@ class HDUtils
 		return s.toString().hashCode();
 	}
 
-	static float[] calculateSurfaceNormals(int[] vertexX, int[] vertexY, int[] vertexZ)
+	public static float[] calculateSurfaceNormals(int[] vertexX, int[] vertexY, int[] vertexZ)
 	{
 		float[][] vPosition = new float[3][3];
 
@@ -164,7 +150,7 @@ class HDUtils
 		return crossVec3(new float[3], a,b);
 	}
 
-	static int[] colorIntToHSL(int colorInt)
+	public static int[] colorIntToHSL(int colorInt)
 	{
 		int[] outHSL = new int[3];
 		outHSL[0] = colorInt >> 10 & 0x3F;
@@ -173,7 +159,7 @@ class HDUtils
 		return outHSL;
 	}
 
-	static int colorHSLToInt(int[] colorHSL)
+	public static int colorHSLToInt(int[] colorHSL)
 	{
 		return (colorHSL[0] << 3 | colorHSL[1]) << 7 | colorHSL[2];
 	}

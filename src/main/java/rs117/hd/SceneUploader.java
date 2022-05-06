@@ -48,6 +48,9 @@ import rs117.hd.materials.ObjectProperties;
 import rs117.hd.materials.Overlay;
 import rs117.hd.materials.Material;
 import rs117.hd.materials.Underlay;
+import rs117.hd.utils.HDUtils;
+import rs117.hd.utils.buffer.GpuFloatBuffer;
+import rs117.hd.utils.buffer.GpuIntBuffer;
 
 @Singleton
 @Slf4j

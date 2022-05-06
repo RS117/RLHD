@@ -1,10 +1,10 @@
-package rs117.hd;
+package rs117.hd.utils.buffer;
 
 public class FixedLengthHashCode {
     private final int[] coefficients;
     private final int seed;
 
-    FixedLengthHashCode(int size) {
+    public FixedLengthHashCode(int size) {
         coefficients = new int[size];
         coefficients[size - 1] = 1;
         for (int i = size - 2; i >= 0; --i) {

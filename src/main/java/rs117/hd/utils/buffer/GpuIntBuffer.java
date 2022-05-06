@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, Adam <Adam@sigterm.info>
+ * Copyright (c) 2018, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,19 +22,70 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd;
+package rs117.hd.utils.buffer;
 
-import org.jocl.Pointer;
-import org.jocl.cl_mem;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 
-class GLBuffer
+public class GpuIntBuffer
 {
-	int glBufferId = -1;
-	int size = -1;
-	cl_mem cl_mem;
+	private IntBuffer buffer = allocateDirect(65536);
 
-	Pointer ptr()
+	public void put(int x, int y, int z)
 	{
-		return cl_mem != null ? Pointer.to(cl_mem) : null;
+		buffer.put(x).put(y).put(z);
+	}
+
+	public void put(int x, int y, int z, int c)
+	{
+		buffer.put(x).put(y).put(z).put(c);
+	}
+
+	public void put(int[] ints) {
+		buffer.put(ints);
+	}
+
+	public void flip()
+	{
+		buffer.flip();
+	}
+
+	public void clear()
+	{
+		buffer.clear();
+	}
+
+	public GpuIntBuffer ensureCapacity(int size)
+	{
+		int capacity = buffer.capacity();
+		final int position = buffer.position();
+		if ((capacity - position) < size)
+		{
+			do
+			{
+				capacity *= 2;
+			}
+			while ((capacity - position) < size);
+
+			IntBuffer newB = allocateDirect(capacity);
+			buffer.flip();
+			newB.put(buffer);
+			buffer = newB;
+		}
+
+		return this;
+	}
+
+	public IntBuffer getBuffer()
+	{
+		return buffer;
+	}
+
+	public static IntBuffer allocateDirect(int size)
+	{
+		return ByteBuffer.allocateDirect(size * Integer.BYTES)
+			.order(ByteOrder.nativeOrder())
+			.asIntBuffer();
 	}
 }
