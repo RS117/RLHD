@@ -470,7 +470,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
-		convertOldBrightnessConfig();
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
@@ -2769,36 +2768,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			gl.glBufferSubData(target, 0, size, data);
 		}
 	}
-
-	//Sets the new brightness setting from the old brightness setting.
-	//This can be removed later on when most people have updated the plugin
-	private void convertOldBrightnessConfig()
-	{
-		try
-		{
-			String oldBrightnessValue = configManager.getConfiguration("hd", "brightness");
-
-			if (!oldBrightnessValue.equals("set"))
-			{
-				String[][] newBrightnessValues = {{"LOWEST", "10"}, {"LOWER", "15"}, {"DEFAULT", "20"}, {"HIGHER", "25"}, {"HIGHEST", "30"}};
-				for (String[] newValue : newBrightnessValues)
-				{
-					if (newValue[0].equals(oldBrightnessValue))
-					{
-						configManager.setConfiguration("hd", "brightness2", newValue[1]);
-						break;
-					}
-				}
-
-				configManager.setConfiguration("hd", "brightness", "set");
-			}
-		}
-		catch (Exception e)
-		{
-			//Happens if people don't have the old brightness setting, then it doesn't need converting anyway.
-		}
-	}
-
+	
 	@Subscribe
 	public void onProjectileMoved(ProjectileMoved projectileMoved)
 	{
