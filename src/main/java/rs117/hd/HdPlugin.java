@@ -104,6 +104,7 @@ import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
+import rs117.hd.opengl.compute.ComputeMode;
 import rs117.hd.scene.EnvironmentManager;
 import rs117.hd.scene.lighting.LightManager;
 import rs117.hd.scene.lighting.SceneLight;
@@ -203,12 +204,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Inject
 	private ModelHasher modelHasher;
 
-	enum ComputeMode
-	{
-		OPENGL,
-		OPENCL,
-	}
-	
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
 	private Canvas canvas;
