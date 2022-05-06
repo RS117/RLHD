@@ -27712,5 +27712,1638 @@
     "objectIds": [
       "OVERPOWERED_CELL_TILE"
     ]
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_1",
+    "worldX": 1307,
+    "worldY": 10193,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_2",
+    "worldX": 1300,
+    "worldY": 10198,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3",
+    "worldX": 1292,
+    "worldY": 10202,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_4",
+    "worldX": 1291,
+    "worldY": 10190,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_5",
+    "worldX": 1290,
+    "worldY": 10182,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_6",
+    "worldX": 1283,
+    "worldY": 10174,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_7",
+    "worldX": 1274,
+    "worldY": 10172,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_8",
+    "worldX": 1278,
+    "worldY": 10162,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_9",
+    "worldX": 1274,
+    "worldY": 10149,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_10",
+    "worldX": 1262,
+    "worldY": 10147,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_11",
+    "worldX": 1252,
+    "worldY": 10147,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_12",
+    "worldX": 1249,
+    "worldY": 10155,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_13",
+    "worldX": 1245,
+    "worldY": 10162,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_14",
+    "worldX": 1249,
+    "worldY": 10170,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_15",
+    "worldX": 1260,
+    "worldY": 10165,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_16",
+    "worldX": 1266,
+    "worldY": 10171,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_17",
+    "worldX": 1257,
+    "worldY": 10176,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_18",
+    "worldX": 1251,
+    "worldY": 10183,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_19",
+    "worldX": 1248,
+    "worldY": 10191,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_20",
+    "worldX": 1253,
+    "worldY": 10195,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_21",
+    "worldX": 1261,
+    "worldY": 10206,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_22",
+    "worldX": 1272,
+    "worldY": 10202,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_23",
+    "worldX": 1278,
+    "worldY": 10198,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_24",
+    "worldX": 1284,
+    "worldY": 10206,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_25",
+    "worldX": 1292,
+    "worldY": 10213,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_26",
+    "worldX": 1300,
+    "worldY": 10212,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_27",
+    "worldX": 1308,
+    "worldY": 10221,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_28",
+    "worldX": 1299,
+    "worldY": 10228,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_29",
+    "worldX": 1296,
+    "worldY": 10231,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_30",
+    "worldX": 1294,
+    "worldY": 10241,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_31",
+    "worldX": 1299,
+    "worldY": 10251,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_32",
+    "worldX": 1295,
+    "worldY": 10255,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_33",
+    "worldX": 1300,
+    "worldY": 10260,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_34",
+    "worldX": 1307,
+    "worldY": 10254,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_35",
+    "worldX": 1319,
+    "worldY": 10254,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 4800,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_36",
+    "worldX": 1318,
+    "worldY": 10261,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_37",
+    "worldX": 1333,
+    "worldY": 10257,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_38",
+    "worldX": 1330,
+    "worldY": 10244,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_39",
+    "worldX": 1343,
+    "worldY": 10247,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_40",
+    "worldX": 1357,
+    "worldY": 10247,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_40",
+    "worldX": 1357,
+    "worldY": 10235,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_41",
+    "worldX": 1349,
+    "worldY": 10228,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_42",
+    "worldX": 1338,
+    "worldY": 10227,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_43",
+    "worldX": 1328,
+    "worldY": 10233,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_44",
+    "worldX": 1319,
+    "worldY": 10229,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_45",
+    "worldX": 1318,
+    "worldY": 10217,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_46",
+    "worldX": 1323,
+    "worldY": 10211,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_2_1",
+    "worldX": 1316,
+    "worldY": 10193,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_2_2",
+    "worldX": 1320,
+    "worldY": 10197,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_2_3",
+    "worldX": 1324,
+    "worldY": 10201,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_1",
+    "worldX": 1338,
+    "worldY": 10264,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_2",
+    "worldX": 1334,
+    "worldY": 10273,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_3",
+    "worldX": 1327,
+    "worldY": 10275,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_4",
+    "worldX": 1319,
+    "worldY": 10273,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_5",
+    "worldX": 1315,
+    "worldY": 10284,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_6",
+    "worldX": 1308,
+    "worldY": 10280,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_7",
+    "worldX": 1301,
+    "worldY": 10274,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_INDOOR_LAVA_3_8",
+    "worldX": 1297,
+    "worldY": 10268,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 3.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_1_1",
+    "worldX": 1316,
+    "worldY": 3784,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_1_2",
+    "worldX": 1311,
+    "worldY": 3790,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_1_3",
+    "worldX": 1305,
+    "worldY": 3790,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_1_4",
+    "worldX": 1301,
+    "worldY": 3784,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_2_1",
+    "worldX": 1345,
+    "worldY": 3773,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_2_2",
+    "worldX": 1341,
+    "worldY": 3777,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_3_1",
+    "worldX": 1348,
+    "worldY": 3811,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_4_1",
+    "worldX": 1327,
+    "worldY": 3820,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_5_1",
+    "worldX": 1296,
+    "worldY": 3792,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_6_1",
+    "worldX": 1299,
+    "worldY": 3808,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_7_1",
+    "worldX": 1288,
+    "worldY": 3817,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_8_1",
+    "worldX": 1283,
+    "worldY": 3796,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_8_2",
+    "worldX": 1275,
+    "worldY": 3797,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_9_1",
+    "worldX": 1251,
+    "worldY": 3800,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_10_1",
+    "worldX": 1256,
+    "worldY": 3824,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_11_1",
+    "worldX": 1263,
+    "worldY": 3848,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_12_1",
+    "worldX": 1291,
+    "worldY": 3828,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_12_1",
+    "worldX": 1294,
+    "worldY": 3823,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_13_1",
+    "worldX": 1306,
+    "worldY": 3847,
+    "plane": 0,
+    "height": 600,
+    "alignment": "CENTER",
+    "radius": 3200,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_14_1",
+    "worldX": 1318,
+    "worldY": 3862,
+    "plane": 0,
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_15_1",
+    "worldX": 1315,
+    "worldY": 3812,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_15_2",
+    "worldX": 1314,
+    "worldY": 3801,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_15_3",
+    "worldX": 1318,
+    "worldY": 3807,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_16_1",
+    "worldX": 1306,
+    "worldY": 3811,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_LAVA_16_2",
+    "worldX": 1307,
+    "worldY": 3803,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_SULPHUR_VENT",
+    "height": 80,
+    "alignment": "CENTER",
+    "radius": 200,
+    "strength": 12,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      34335
+    ]
+  },
+  {
+    "description": "KARUULM_VOLCANIC_FURNACE_1",
+    "worldX": 1326,
+    "worldY": 3809,
+    "plane": 0,
+    "height": 400,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "KARUULM_VOLCANIC_FURNACE_2",
+    "worldX": 1326,
+    "worldY": 3807,
+    "plane": 0,
+    "height": 400,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      112,
+      200,
+      255
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
   }
 ]
