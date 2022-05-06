@@ -129,7 +129,7 @@ import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.scene.SceneUploader;
 import rs117.hd.scene.TextureManager;
 import rs117.hd.utils.*;
-import rs117.hd.utils.Thread;
+import rs117.hd.utils.ThreadUtils;
 import rs117.hd.utils.buffer.GLBuffer;
 import rs117.hd.utils.buffer.GpuFloatBuffer;
 import rs117.hd.utils.buffer.GpuIntBuffer;
@@ -515,7 +515,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				GLProfile.initSingleton();
 
-				Thread.invokeOnMainThread(() ->
+				ThreadUtils.invokeOnMainThread(() ->
 				{
 					GLProfile glProfile;
 					GLCapabilities glCaps;
@@ -663,7 +663,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
-					Thread.invokeOnMainThread(this::uploadScene);
+					ThreadUtils.invokeOnMainThread(this::uploadScene);
 				}
 
 				if (OSType.getOSType() == OSType.MacOS)
@@ -702,7 +702,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			client.setDrawCallbacks(null);
 			client.setUnlockedFps(false);
 
-			Thread.invokeOnMainThread(() ->
+			ThreadUtils.invokeOnMainThread(() ->
 			{
 				openCLManager.cleanup();
 				
@@ -971,7 +971,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private void recompileProgram()
 	{
 		clientThread.invoke(() ->
-			Thread.invokeOnMainThread(() ->
+			ThreadUtils.invokeOnMainThread(() ->
 			{
 				try
 				{
@@ -1297,7 +1297,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		// viewport buffer.
 		targetBufferOffset = 0;
 
-		Thread.invokeOnMainThread(() ->
+		ThreadUtils.invokeOnMainThread(() ->
 		{
 			// UBO. Only the first 32 bytes get modified here, the rest is the constant sin/cos table.
 			// We can reuse the vertex buffer since it isn't used yet.
@@ -1360,7 +1360,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void postDrawScene()
 	{
-		Thread.invokeOnMainThread(this::postDraw);
+		ThreadUtils.invokeOnMainThread(this::postDraw);
 	}
 
 	private void postDraw()
@@ -1603,7 +1603,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void draw(int overlayColor)
 	{
-		Thread.invokeOnMainThread(() -> drawFrame(overlayColor));
+		ThreadUtils.invokeOnMainThread(() -> drawFrame(overlayColor));
 	}
 
 	private void prepareInterfaceTexture(int canvasWidth, int canvasHeight)
@@ -2259,7 +2259,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		switch (gameStateChanged.getGameState()) {
 			case LOGGED_IN:
-				Thread.invokeOnMainThread(this::uploadScene);
+				ThreadUtils.invokeOnMainThread(this::uploadScene);
 				break;
 			case LOGIN_SCREEN:
 				// Avoid drawing the last frame's buffer during LOADING after LOGIN_SCREEN
@@ -2376,7 +2376,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configShadowsEnabled = config.shadowsEnabled();
 				modelPusher.clearModelCache();
 				clientThread.invoke(() ->
-						Thread.invokeOnMainThread(() ->
+						ThreadUtils.invokeOnMainThread(() ->
 					{
 						shutdownShadowMapFbo();
 						initShadowMapFbo();
@@ -2385,7 +2385,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "shadowResolution":
 				clientThread.invoke(() ->
-						Thread.invokeOnMainThread(() ->
+						ThreadUtils.invokeOnMainThread(() ->
 					{
 						shutdownShadowMapFbo();
 						initShadowMapFbo();
@@ -2420,7 +2420,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case "vsyncMode":
 			case "fpsTarget":
 				log.debug("Rebuilding sync mode");
-				clientThread.invokeLater(() -> Thread.invokeOnMainThread(this::setupSyncMode));
+				clientThread.invokeLater(() -> ThreadUtils.invokeOnMainThread(this::setupSyncMode));
 				break;
 			case "hdInfernalTexture":
 				configHdInfernalTexture = config.hdInfernalTexture();

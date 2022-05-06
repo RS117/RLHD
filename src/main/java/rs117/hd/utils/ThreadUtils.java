@@ -3,7 +3,7 @@ package rs117.hd.utils;
 import jogamp.nativewindow.macosx.OSXUtil;
 import net.runelite.client.util.OSType;
 
-public class Thread
+public class ThreadUtils
 {
 
     public static void invokeOnMainThread(Runnable runnable)
