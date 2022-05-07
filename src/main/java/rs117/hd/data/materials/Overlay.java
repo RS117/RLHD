@@ -195,6 +195,9 @@ public enum Overlay
 	// Kebos Lowlands
 	LIZARDMAN_TEMPLE_WATER(-100, Area.LIZARDMAN_TEMPLE, WaterType.SWAMP_WATER_FLAT),
 
+	// Temple of the Eye
+	TEMPLE_OF_THE_EYE_INCORRECT_WATER(-100, Area.TEMPLE_OF_THE_EYE, GroundMaterial.DIRT),
+
 	// God Wars Dungeon (GWD)
 	GWD_WATER(104, Area.GOD_WARS_DUNGEON, WaterType.ICE_FLAT),
 
