@@ -31,49 +31,10 @@ import com.jogamp.nativewindow.AbstractGraphicsConfiguration;
 import com.jogamp.nativewindow.NativeWindowFactory;
 import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
-import com.jogamp.opengl.DebugGL4;
-import com.jogamp.opengl.GL;
-import static com.jogamp.opengl.GL.*;
-import static com.jogamp.opengl.GL2ES2.GL_STREAM_DRAW;
-import static com.jogamp.opengl.GL2ES3.GL_STATIC_COPY;
-import static com.jogamp.opengl.GL2ES3.GL_UNIFORM_BUFFER;
-import com.jogamp.opengl.GL4;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLContext;
-import com.jogamp.opengl.GLDrawable;
-import com.jogamp.opengl.GLDrawableFactory;
-import com.jogamp.opengl.GLException;
-import com.jogamp.opengl.GLFBODrawable;
-import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.*;
 import com.jogamp.opengl.math.Matrix4;
-import java.awt.Canvas;
-import java.awt.Component;
-import java.awt.Color;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javax.inject.Inject;
-import javax.swing.SwingUtilities;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
-import jogamp.nativewindow.macosx.OSXUtil;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -83,46 +44,65 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginDependency;
-import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginInstantiationException;
-import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
-import static rs117.hd.GLUtil.glDeleteBuffer;
-import static rs117.hd.GLUtil.glDeleteFrameBuffer;
-import static rs117.hd.GLUtil.glDeleteRenderbuffers;
-import static rs117.hd.GLUtil.glDeleteTexture;
-import static rs117.hd.GLUtil.glDeleteVertexArrays;
-import static rs117.hd.GLUtil.glGenBuffers;
-import static rs117.hd.GLUtil.glGenFrameBuffer;
-import static rs117.hd.GLUtil.glGenRenderbuffer;
-import static rs117.hd.GLUtil.glGenTexture;
-import static rs117.hd.GLUtil.glGenVertexArrays;
-import static rs117.hd.GLUtil.glGetInteger;
+import net.runelite.client.ui.DrawManager;
+import net.runelite.client.util.OSType;
+import org.jocl.CL;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
-import rs117.hd.environments.EnvironmentManager;
-import rs117.hd.lighting.LightManager;
-import rs117.hd.lighting.SceneLight;
-import rs117.hd.materials.Material;
-import rs117.hd.materials.ObjectProperties;
-import rs117.hd.template.Template;
-import net.runelite.client.ui.DrawManager;
-import net.runelite.client.util.OSType;
-import org.jocl.CL;
-import static org.jocl.CL.CL_MEM_READ_ONLY;
-import static org.jocl.CL.CL_MEM_WRITE_ONLY;
-import static org.jocl.CL.clCreateFromGLBuffer;
-import rs117.hd.utils.Env;
-import rs117.hd.utils.FileWatcher;
+import rs117.hd.data.materials.Material;
+import rs117.hd.model.ModelHasher;
+import rs117.hd.model.ModelPusher;
+import rs117.hd.model.TempModelInfo;
+import rs117.hd.model.objects.ObjectProperties;
+import rs117.hd.model.objects.ObjectType;
+import rs117.hd.opengl.compute.ComputeMode;
+import rs117.hd.opengl.compute.OpenCLManager;
+import rs117.hd.opengl.shader.Shader;
+import rs117.hd.opengl.shader.ShaderException;
+import rs117.hd.opengl.shader.Template;
+import rs117.hd.scene.EnvironmentManager;
+import rs117.hd.scene.ProceduralGenerator;
+import rs117.hd.scene.SceneUploader;
+import rs117.hd.scene.TextureManager;
+import rs117.hd.scene.lighting.LightManager;
+import rs117.hd.scene.lighting.SceneLight;
+import rs117.hd.utils.*;
+import rs117.hd.utils.buffer.GLBuffer;
+import rs117.hd.utils.buffer.GpuFloatBuffer;
+import rs117.hd.utils.buffer.GpuIntBuffer;
+
+import javax.inject.Inject;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.jogamp.opengl.GL.*;
+import static com.jogamp.opengl.GL2ES2.GL_STREAM_DRAW;
+import static com.jogamp.opengl.GL2ES3.GL_STATIC_COPY;
+import static com.jogamp.opengl.GL2ES3.GL_UNIFORM_BUFFER;
+import static org.jocl.CL.*;
+import static rs117.hd.utils.GLUtil.*;
 
 @PluginDescriptor(
 	name = "117 HD (beta)",
 	description = "GPU renderer with a suite of graphical enhancements",
-	tags = {"hd", "high", "detail", "graphics", "shaders", "textures"},
+	tags = {"hd", "high", "detail", "graphics", "shaders", "textures", "gpu", "shadows", "lights"},
 	conflicts = "GPU"
 )
 @PluginDependency(EntityHiderPlugin.class)
@@ -132,8 +112,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public static String SHADER_PATH = "RLHD_SHADER_PATH";
 
 	// This is the maximum number of triangles the compute shaders support
-	static final int MAX_TRIANGLE = 6144;
-	static final int SMALL_TRIANGLE_COUNT = 512;
+	public static final int MAX_TRIANGLE = 6144;
+	public static final int SMALL_TRIANGLE_COUNT = 512;
 	private static final int FLAG_SCENE_BUFFER = Integer.MIN_VALUE;
 	private static final int DEFAULT_DISTANCE = 25;
 	static final int MAX_DISTANCE = 90;
@@ -189,12 +169,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Inject
 	private ModelHasher modelHasher;
 
-	enum ComputeMode
-	{
-		OPENGL,
-		OPENCL,
-	}
-	
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
 	private Canvas canvas;
@@ -457,7 +431,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
-		convertOldBrightnessConfig();
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
@@ -507,7 +480,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				GLProfile.initSingleton();
 
-				invokeOnMainThread(() ->
+				ThreadUtils.invokeOnMainThread(() ->
 				{
 					GLProfile glProfile;
 					GLCapabilities glCaps;
@@ -655,7 +628,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
-					invokeOnMainThread(this::uploadScene);
+					ThreadUtils.invokeOnMainThread(this::uploadScene);
 				}
 
 				if (OSType.getOSType() == OSType.MacOS)
@@ -694,7 +667,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			client.setDrawCallbacks(null);
 			client.setUnlockedFps(false);
 
-			invokeOnMainThread(() ->
+			ThreadUtils.invokeOnMainThread(() ->
 			{
 				openCLManager.cleanup();
 				
@@ -963,7 +936,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private void recompileProgram()
 	{
 		clientThread.invoke(() ->
-			invokeOnMainThread(() ->
+			ThreadUtils.invokeOnMainThread(() ->
 			{
 				try
 				{
@@ -1289,7 +1262,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		// viewport buffer.
 		targetBufferOffset = 0;
 
-		invokeOnMainThread(() ->
+		ThreadUtils.invokeOnMainThread(() ->
 		{
 			// UBO. Only the first 32 bytes get modified here, the rest is the constant sin/cos table.
 			// We can reuse the vertex buffer since it isn't used yet.
@@ -1352,7 +1325,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void postDrawScene()
 	{
-		invokeOnMainThread(this::postDraw);
+		ThreadUtils.invokeOnMainThread(this::postDraw);
 	}
 
 	private void postDraw()
@@ -1595,7 +1568,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	public void draw(int overlayColor)
 	{
-		invokeOnMainThread(() -> drawFrame(overlayColor));
+		ThreadUtils.invokeOnMainThread(() -> drawFrame(overlayColor));
 	}
 
 	private void prepareInterfaceTexture(int canvasWidth, int canvasHeight)
@@ -2251,7 +2224,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	{
 		switch (gameStateChanged.getGameState()) {
 			case LOGGED_IN:
-				invokeOnMainThread(this::uploadScene);
+				ThreadUtils.invokeOnMainThread(this::uploadScene);
 				break;
 			case LOGIN_SCREEN:
 				// Avoid drawing the last frame's buffer during LOADING after LOGIN_SCREEN
@@ -2368,7 +2341,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configShadowsEnabled = config.shadowsEnabled();
 				modelPusher.clearModelCache();
 				clientThread.invoke(() ->
-					invokeOnMainThread(() ->
+						ThreadUtils.invokeOnMainThread(() ->
 					{
 						shutdownShadowMapFbo();
 						initShadowMapFbo();
@@ -2377,7 +2350,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				break;
 			case "shadowResolution":
 				clientThread.invoke(() ->
-					invokeOnMainThread(() ->
+						ThreadUtils.invokeOnMainThread(() ->
 					{
 						shutdownShadowMapFbo();
 						initShadowMapFbo();
@@ -2412,7 +2385,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			case "vsyncMode":
 			case "fpsTarget":
 				log.debug("Rebuilding sync mode");
-				clientThread.invokeLater(() -> invokeOnMainThread(this::setupSyncMode));
+				clientThread.invokeLater(() -> ThreadUtils.invokeOnMainThread(this::setupSyncMode));
 				break;
 			case "hdInfernalTexture":
 				configHdInfernalTexture = config.hdInfernalTexture();
@@ -2709,18 +2682,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		return new int[]{camX, camY, camZ};
 	}
 
-	private static void invokeOnMainThread(Runnable runnable)
-	{
-		if (OSType.getOSType() == OSType.MacOS)
-		{
-			OSXUtil.RunOnMainThread(true, false, runnable);
-		}
-		else
-		{
-			runnable.run();
-		}
-	}
-
 	private void updateBuffer(GLBuffer glBuffer, int target, int size, Buffer data, int usage, long clFlags)
 	{
 		gl.glBindBuffer(target, glBuffer.glBufferId);
@@ -2754,35 +2715,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		else if (data != null)
 		{
 			gl.glBufferSubData(target, 0, size, data);
-		}
-	}
-
-	//Sets the new brightness setting from the old brightness setting.
-	//This can be removed later on when most people have updated the plugin
-	private void convertOldBrightnessConfig()
-	{
-		try
-		{
-			String oldBrightnessValue = configManager.getConfiguration("hd", "brightness");
-
-			if (!oldBrightnessValue.equals("set"))
-			{
-				String[][] newBrightnessValues = {{"LOWEST", "10"}, {"LOWER", "15"}, {"DEFAULT", "20"}, {"HIGHER", "25"}, {"HIGHEST", "30"}};
-				for (String[] newValue : newBrightnessValues)
-				{
-					if (newValue[0].equals(oldBrightnessValue))
-					{
-						configManager.setConfiguration("hd", "brightness2", newValue[1]);
-						break;
-					}
-				}
-
-				configManager.setConfiguration("hd", "brightness", "set");
-			}
-		}
-		catch (Exception e)
-		{
-			//Happens if people don't have the old brightness setting, then it doesn't need converting anyway.
 		}
 	}
 

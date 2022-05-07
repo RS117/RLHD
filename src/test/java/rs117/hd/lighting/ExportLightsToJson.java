@@ -22,7 +22,9 @@ import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
-import rs117.hd.HDUtils;
+import rs117.hd.scene.lighting.Light;
+import rs117.hd.scene.lighting.LightConfig;
+import rs117.hd.utils.HDUtils;
 
 @SuppressWarnings("deprecation")
 public class ExportLightsToJson
@@ -71,83 +73,7 @@ public class ExportLightsToJson
 			Collections.addAll(uniqueLights, currentLights);
 			System.out.println("Loaded " + currentLights.length + " lights");
 		}
-
-		if (options.has(convertOldFormats))
-		{
-			System.out.println("Loading old lights from old formats...");
-
-			ArrayList<Light> sceneLights = LightConfigParser.loadLightsFromFile(true);
-			uniqueLights.addAll(sceneLights.stream()
-				.map(l -> new Light(
-					l.description,
-					l.worldX, l.worldY, l.plane, l.height,
-					l.alignment,
-					l.radius,
-					l.strength,
-					l.color,
-					l.type,
-					l.duration,
-					l.range,
-					l.fadeInDuration,
-					null, null, null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + sceneLights.size() + " lights from old txt format");
-
-			uniqueLights.addAll(Arrays.stream(NpcLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, l.getHeight(),
-					l.getAlignment(),
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					null,
-					toSet(l.getId()),
-					null,
-					null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + NpcLight.values().length + " lights from old NpcLight enum");
-
-			uniqueLights.addAll(Arrays.stream(ObjectLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, l.getHeight(),
-					l.getAlignment(),
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					null,
-					null,
-					toSet(l.getId()),
-					null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + ObjectLight.values().length + " lights from old ObjectLight enum");
-
-			uniqueLights.addAll(Arrays.stream(ProjectileLight.values())
-				.map(l -> new Light(
-					l.name(),
-					null, null, null, null,
-					null,
-					l.getSize(),
-					l.getStrength(),
-					l.getColor(),
-					l.getLightType(),
-					l.getDuration(),
-					l.getRange(),
-					l.getFadeInDuration(),
-					null,
-					null,
-					toSet(l.getId())))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + ProjectileLight.values().length + " lights from old ProjectileLight enum");
-		}
-
+		
 		if (options.has(linearToGammaOption))
 		{
 			enableValidation = false;

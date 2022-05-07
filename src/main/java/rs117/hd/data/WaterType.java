@@ -22,48 +22,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.config;
+package rs117.hd.data;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.runelite.api.Client;
-import rs117.hd.utils.HDUtils;
+import rs117.hd.data.materials.GroundMaterial;
 
 @Getter
 @RequiredArgsConstructor
-public enum DefaultSkyColor
+public enum WaterType
 {
-	DEFAULT("117HD (Blue)", 185, 214, 255),
-	RUNELITE("RuneLite Skybox", -1, -1, -1),
-	OSRS("Old School (Black)", 0, 0, 0),
-	HD2008("2008 HD (Tan)", 200, 192, 169);
+	NONE(0, GroundMaterial.NONE),
+	WATER(1, GroundMaterial.WATER),
+	WATER_FLAT(2, GroundMaterial.WATER_FLAT),
+	SWAMP_WATER(3, GroundMaterial.SWAMP_WATER),
+	SWAMP_WATER_FLAT(4, GroundMaterial.SWAMP_WATER_FLAT),
+	POISON_WASTE(5, GroundMaterial.POISON_WASTE),
+	POISON_WASTE_FLAT(6, GroundMaterial.POISON_WASTE_FLAT),
+	BLOOD(7, GroundMaterial.BLOOD_FLAT),
+	ICE(8, GroundMaterial.ICE),
+	ICE_FLAT(9, GroundMaterial.ICE_FLAT),
+	;
 
-	private final String name;
-	private final int r;
-	private final int g;
-	private final int b;
-
-	@Override
-	public String toString()
-	{
-		return name;
-	}
-
-	public float[] getRgb(Client client) {
-		int r = this.r;
-		int g = this.g;
-		int b = this.b;
-		if (this == RUNELITE)
-		{
-			int sky = client.getSkyboxColor();
-			r = sky >> 16 & 0xFF;
-			g = sky >> 8 & 0xFF;
-			b = sky & 0xFF;
-		}
-		return new float[]{
-			HDUtils.gammaToLinear(r / 255f),
-			HDUtils.gammaToLinear(g / 255f),
-			HDUtils.gammaToLinear(b / 255f)
-		};
-	}
+	private final int value;
+	private final GroundMaterial groundMaterial;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 117 <https://twitter.com/117scape>
+ * Copyright (c) 2018, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,48 +22,63 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.config;
+package rs117.hd.utils.buffer;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import net.runelite.api.Client;
-import rs117.hd.utils.HDUtils;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
-@Getter
-@RequiredArgsConstructor
-public enum DefaultSkyColor
+public class GpuFloatBuffer
 {
-	DEFAULT("117HD (Blue)", 185, 214, 255),
-	RUNELITE("RuneLite Skybox", -1, -1, -1),
-	OSRS("Old School (Black)", 0, 0, 0),
-	HD2008("2008 HD (Tan)", 200, 192, 169);
+	private FloatBuffer buffer = allocateDirect(65536);
 
-	private final String name;
-	private final int r;
-	private final int g;
-	private final int b;
-
-	@Override
-	public String toString()
+	public void put(float texture, float u, float v, float pad)
 	{
-		return name;
+		buffer.put(texture).put(u).put(v).put(pad);
 	}
 
-	public float[] getRgb(Client client) {
-		int r = this.r;
-		int g = this.g;
-		int b = this.b;
-		if (this == RUNELITE)
+	public void put(float[] floats) {
+		buffer.put(floats);
+	}
+
+	public void flip()
+	{
+		buffer.flip();
+	}
+
+	public void clear()
+	{
+		buffer.clear();
+	}
+
+	public void ensureCapacity(int size)
+	{
+		int capacity = buffer.capacity();
+		final int position = buffer.position();
+		if ((capacity - position) < size)
 		{
-			int sky = client.getSkyboxColor();
-			r = sky >> 16 & 0xFF;
-			g = sky >> 8 & 0xFF;
-			b = sky & 0xFF;
+			do
+			{
+				capacity *= 2;
+			}
+			while ((capacity - position) < size);
+
+			FloatBuffer newB = allocateDirect(capacity);
+			buffer.flip();
+			newB.put(buffer);
+			buffer = newB;
 		}
-		return new float[]{
-			HDUtils.gammaToLinear(r / 255f),
-			HDUtils.gammaToLinear(g / 255f),
-			HDUtils.gammaToLinear(b / 255f)
-		};
+	}
+
+	public FloatBuffer getBuffer()
+	{
+		return buffer;
+	}
+
+	public static FloatBuffer allocateDirect(int size)
+	{
+		return ByteBuffer.allocateDirect(size * Float.BYTES)
+			.order(ByteOrder.nativeOrder())
+			.asFloatBuffer();
 	}
 }

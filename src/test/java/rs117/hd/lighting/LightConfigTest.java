@@ -9,6 +9,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import rs117.hd.scene.lighting.Light;
+import rs117.hd.scene.lighting.LightConfig;
+import rs117.hd.scene.lighting.SceneLight;
 
 import java.util.ArrayList;
 
