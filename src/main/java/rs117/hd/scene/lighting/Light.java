@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
-import rs117.hd.utils.NpcID;
-import rs117.hd.utils.ObjectID;
+import rs117.hd.data.NpcID;
+import rs117.hd.data.ObjectID;
 
 @Slf4j
 public class Light
