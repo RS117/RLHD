@@ -210,26 +210,26 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		.add(GL4.GL_VERTEX_SHADER, "vertui.glsl")
 		.add(GL4.GL_FRAGMENT_SHADER, "fragui.glsl");
 
-	private int glProgram;
-	private int glComputeProgram;
-	private int glSmallComputeProgram;
-	private int glUnorderedComputeProgram;
-	private int glUiProgram;
-	private int glShadowProgram;
+	private int glProgram = -1;
+	private int glComputeProgram = -1;
+	private int glSmallComputeProgram = -1;
+	private int glUnorderedComputeProgram = -1;
+	private int glUiProgram = -1;
+	private int glShadowProgram = -1;
 
-	private int vaoHandle;
+	private int vaoHandle = -1;
 
-	private int interfaceTexture;
-	private int interfacePbo;
+	private int interfaceTexture = -1;
+	private int interfacePbo = -1;
 
-	private int vaoUiHandle;
-	private int vboUiHandle;
+	private int vaoUiHandle = -1;
+	private int vboUiHandle = -1;
 
-	private int fboSceneHandle;
-	private int rboSceneHandle;
+	private int fboSceneHandle = -1;
+	private int rboSceneHandle = -1;
 
-	private int fboShadowMap;
-	private int texShadowMap;
+	private int fboShadowMap = -1;
+	private int texShadowMap = -1;
 
 	// scene vertex buffer
 	private final GLBuffer sceneVertexBuffer = new GLBuffer();
@@ -915,23 +915,41 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void shutdownProgram()
 	{
-		gl.glDeleteProgram(glProgram);
-		glProgram = -1;
+		if (glProgram != -1)
+		{
+			gl.glDeleteProgram(glProgram);
+			glProgram = -1;
+		}
 
-		gl.glDeleteProgram(glComputeProgram);
-		glComputeProgram = -1;
+		if (glComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glComputeProgram);
+			glComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glSmallComputeProgram);
-		glSmallComputeProgram = -1;
+		if (glSmallComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glSmallComputeProgram);
+			glSmallComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glUnorderedComputeProgram);
-		glUnorderedComputeProgram = -1;
+		if (glUnorderedComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glUnorderedComputeProgram);
+			glUnorderedComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glUiProgram);
-		glUiProgram = -1;
+		if (glUiProgram != -1)
+		{
+			gl.glDeleteProgram(glUiProgram);
+			glUiProgram = -1;
+		}
 
-		gl.glDeleteProgram(glShadowProgram);
-		glShadowProgram = -1;
+		if (glShadowProgram != -1)
+		{
+			gl.glDeleteProgram(glShadowProgram);
+			glShadowProgram = -1;
+		}
 	}
 
 	private void recompileProgram()
@@ -992,14 +1010,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void shutdownVao()
 	{
-		glDeleteVertexArrays(gl, vaoHandle);
-		vaoHandle = -1;
+		if (vaoHandle != -1)
+		{
+			glDeleteVertexArrays(gl, vaoHandle);
+			vaoHandle = -1;
+		}
 
-		glDeleteBuffer(gl, vboUiHandle);
-		vboUiHandle = -1;
+		if (vboUiHandle != -1)
+		{
+			glDeleteBuffer(gl, vboUiHandle);
+			vboUiHandle = -1;
+		}
 
-		glDeleteVertexArrays(gl, vaoUiHandle);
-		vaoUiHandle = -1;
+		if (vaoUiHandle != -1)
+		{
+			glDeleteVertexArrays(gl, vaoUiHandle);
+			vaoUiHandle = -1;
+		}
 	}
 
 	private void initBuffers()
@@ -1071,9 +1098,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void shutdownInterfaceTexture()
 	{
-		glDeleteBuffer(gl, interfacePbo);
-		glDeleteTexture(gl, interfaceTexture);
-		interfaceTexture = -1;
+		if (interfacePbo != -1)
+		{
+			glDeleteBuffer(gl, interfacePbo);
+			interfacePbo = -1;
+		}
+
+		if (interfaceTexture != -1)
+		{
+			glDeleteTexture(gl, interfaceTexture);
+			interfaceTexture = -1;
+		}
 	}
 
 	private void initUniformBuffer()
