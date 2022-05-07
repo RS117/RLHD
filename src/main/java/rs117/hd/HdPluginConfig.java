@@ -46,28 +46,7 @@ import rs117.hd.config.UIScalingMode;
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
 {
-	/*====== Limited-time settings ======*/
-
-	@ConfigSection(
-		name = "Limited-time",
-		description = "Fun and/or experimental settings that are available for a limited time",
-		position = -10,
-		closedByDefault = false
-	)
-	String limitedTimeSettings = "limitedTimeSettings";
-
-	@ConfigItem(
-		keyName = "winterTheme0",
-		name = "Winter theme",
-		description = "Covers the Gielinor overworld with a layer of snow!",
-		position = -9,
-		section = limitedTimeSettings
-	)
-	default boolean winterTheme()
-	{
-		return false;
-	}
-
+	String KEY_WINTER_THEME = "winterTheme0";
 
 	/*====== General settings ======*/
 
@@ -360,6 +339,7 @@ public interface HdPluginConfig extends Config
 		return true;
 	}
 
+
 	/*====== Environment settings ======*/
 
 	@ConfigSection(
@@ -492,7 +472,6 @@ public interface HdPluginConfig extends Config
 	}
 
 
-
 	/*====== Miscellaneous settings ======*/
 
 	@ConfigSection(
@@ -526,6 +505,18 @@ public interface HdPluginConfig extends Config
 	default boolean hdInfernalTexture()
 	{
 		return true;
+	}
+
+	@ConfigItem(
+		keyName = KEY_WINTER_THEME,
+		name = "Winter theme",
+		description = "Covers the Gielinor overworld with a layer of snow!",
+		position = 303,
+		section = miscellaneousSettings
+	)
+	default boolean winterTheme()
+	{
+		return false;
 	}
 
 	@ConfigSection(
