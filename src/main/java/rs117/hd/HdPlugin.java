@@ -135,7 +135,7 @@ import rs117.hd.utils.buffer.GpuFloatBuffer;
 import rs117.hd.utils.buffer.GpuIntBuffer;
 
 @PluginDescriptor(
-	name = "117 HD",
+	name = "117 HD (beta)",
 	description = "GPU renderer with a suite of graphical enhancements",
 	tags = {"hd", "high", "detail", "graphics", "shaders", "textures", "gpu", "shadows", "lights"},
 	conflicts = "GPU"
