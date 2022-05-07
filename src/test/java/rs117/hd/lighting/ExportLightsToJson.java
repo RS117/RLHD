@@ -73,30 +73,7 @@ public class ExportLightsToJson
 			Collections.addAll(uniqueLights, currentLights);
 			System.out.println("Loaded " + currentLights.length + " lights");
 		}
-
-		if (options.has(convertOldFormats))
-		{
-			System.out.println("Loading old lights from old formats...");
-
-			ArrayList<Light> sceneLights = LightConfigParser.loadLightsFromFile(true);
-			uniqueLights.addAll(sceneLights.stream()
-				.map(l -> new Light(
-					l.description,
-					l.worldX, l.worldY, l.plane, l.height,
-					l.alignment,
-					l.radius,
-					l.strength,
-					l.color,
-					l.type,
-					l.duration,
-					l.range,
-					l.fadeInDuration,
-					null, null, null))
-				.collect(Collectors.toList()));
-			System.out.println("Loaded " + sceneLights.size() + " lights from old txt format");
-
-		}
-
+		
 		if (options.has(linearToGammaOption))
 		{
 			enableValidation = false;
