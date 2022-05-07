@@ -16,7 +16,6 @@ import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.data.BakedModels;
 import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.utils.HDUtils;
-import rs117.hd.utils.buffer.FixedLengthHashCode;
 import rs117.hd.utils.buffer.GpuFloatBuffer;
 import rs117.hd.utils.buffer.GpuIntBuffer;
 
@@ -66,9 +65,7 @@ public class ModelPusher
     private final static float[] twelveFloats = new float[12];
     private final static int[] modelColors = new int[HdPlugin.MAX_TRIANGLE * 4];
     private final static ModelData tempModelData = new ModelData();
-
-    private final static FixedLengthHashCode hasher = new FixedLengthHashCode(HdPlugin.MAX_TRIANGLE);
-
+    
     private final Map<Integer, ModelData> modelCache = new ModelCache(4096);
 
     public void clearModelCache() {
