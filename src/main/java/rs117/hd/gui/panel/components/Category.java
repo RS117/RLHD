@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components;
+package rs117.hd.gui.panel.components;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -42,10 +42,7 @@ import net.runelite.client.ui.FontManager;
 import static net.runelite.client.ui.PluginPanel.BORDER_OFFSET;
 import static net.runelite.client.ui.PluginPanel.PANEL_WIDTH;
 import net.runelite.client.util.SwingUtil;
-import static rs117.hd.panel.debug.Debug.SECTION_EXPAND_ICON;
-import static rs117.hd.panel.debug.Debug.SECTION_EXPAND_ICON_HOVER;
-import static rs117.hd.panel.debug.Debug.SECTION_RETRACT_ICON;
-import static rs117.hd.panel.debug.Debug.SECTION_RETRACT_ICON_HOVER;
+import rs117.hd.gui.panel.debug.Debug;
 
 public class Category extends JPanel
 {
@@ -106,8 +103,8 @@ public class Category extends JPanel
 			new EmptyBorder(0, 0, 3, 1)));
 		add(sectionHeader, BorderLayout.NORTH);
 
-		sectionToggle = new JButton(content.isVisible() ? SECTION_RETRACT_ICON : SECTION_EXPAND_ICON);
-		sectionToggle.setRolloverIcon(content.isVisible() ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
+		sectionToggle = new JButton(content.isVisible() ? Debug.SECTION_RETRACT_ICON : Debug.SECTION_EXPAND_ICON);
+		sectionToggle.setRolloverIcon(content.isVisible() ? Debug.SECTION_RETRACT_ICON_HOVER : Debug.SECTION_EXPAND_ICON_HOVER);
 		sectionToggle.setPreferredSize(new Dimension(18, 0));
 		sectionToggle.setBorder(new EmptyBorder(0, 0, 0, 5));
 		sectionToggle.setToolTipText(content.isVisible() ? "Retract" : "Expand");
@@ -136,8 +133,8 @@ public class Category extends JPanel
 	{
 		content.setVisible(state);
 		getParent().validate();
-		sectionToggle.setIcon(state ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
-		sectionToggle.setRolloverIcon(state ? SECTION_RETRACT_ICON_HOVER : SECTION_EXPAND_ICON_HOVER);
+		sectionToggle.setIcon(state ? Debug.SECTION_RETRACT_ICON_HOVER : Debug.SECTION_EXPAND_ICON_HOVER);
+		sectionToggle.setRolloverIcon(state ? Debug.SECTION_RETRACT_ICON_HOVER : Debug.SECTION_EXPAND_ICON_HOVER);
 		sectionToggle.setToolTipText(state? "Retract" : "Expand");
 		sectionContents.getComponent(0).setVisible(state);
 		sectionContents.setVisible(state);

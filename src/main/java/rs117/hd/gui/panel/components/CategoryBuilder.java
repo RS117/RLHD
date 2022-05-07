@@ -1,8 +1,8 @@
-package rs117.hd.panel.components;
+package rs117.hd.gui.panel.components;
 
 import javax.swing.JPanel;
 import lombok.Data;
-import rs117.hd.panel.debug.Debug;
+import rs117.hd.gui.panel.debug.Debug;
 
 @Data
 public class CategoryBuilder

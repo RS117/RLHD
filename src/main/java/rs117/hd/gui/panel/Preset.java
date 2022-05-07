@@ -22,47 +22,34 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components;
+package rs117.hd.gui.panel;
 
-import net.runelite.client.ui.FontManager;
-import net.runelite.client.ui.components.shadowlabel.JShadowedLabel;
+import com.google.inject.Inject;
+import net.runelite.client.ui.ColorScheme;
+import net.runelite.client.ui.components.PluginErrorPanel;
+import rs117.hd.HdPlugin;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
-public class Header extends JPanel
+public class Preset extends JPanel
 {
-	private final JLabel noResultsTitle = new JShadowedLabel();
-	private final JLabel noResultsDescription = new JShadowedLabel();
 
-	public Header()
+	private final PluginErrorPanel errorPanel = new PluginErrorPanel();
+
+	private final HdPlugin plugin;
+
+	@Inject
+	private Preset(HdPlugin plugin)
 	{
-		setOpaque(false);
-		setBorder(new EmptyBorder(10, 0, 7, 0));
-		setLayout(new BorderLayout());
+		super();
+		this.plugin = plugin;
 
-		noResultsTitle.setForeground(Color.WHITE);
-		noResultsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		noResultsDescription.setFont(FontManager.getRunescapeSmallFont());
-		noResultsDescription.setForeground(Color.GRAY);
-		noResultsDescription.setHorizontalAlignment(SwingConstants.CENTER);
+		errorPanel.setContent("Coming Soon", "Preset Panel Coming Soon.");
+		add(errorPanel);
 
-		add(noResultsTitle, BorderLayout.NORTH);
-		add(noResultsDescription, BorderLayout.CENTER);
-
-		setVisible(false);
 	}
 
-	/**
-	 * Changes the content of the panel to the given parameters.
-	 * The description has to be wrapped in html so that its text can be wrapped.
-	 */
-	public void setContent(String title, String description)
-	{
-		noResultsTitle.setText(title);
-		noResultsDescription.setText("<html><body style = 'text-align:center'>" + description + "</body></html>");
-		setVisible(true);
-	}
+
 }

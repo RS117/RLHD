@@ -22,16 +22,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.debug.buttons;
+package rs117.hd.gui.panel.debug.buttons;
 
 import com.google.inject.Inject;
 import net.runelite.api.Client;
 import org.jfree.data.time.Millisecond;
-import rs117.hd.panel.components.DebugFrame;
-import rs117.hd.panel.components.graph.Chart;
-import rs117.hd.panel.components.graph.builder.ChartBuilder;
-import rs117.hd.panel.components.graph.builder.DataSet;
-import rs117.hd.panel.components.graph.DataTimer;
+import rs117.hd.gui.panel.components.DebugFrame;
+import rs117.hd.gui.panel.components.graph.Chart;
+import rs117.hd.gui.panel.components.graph.builder.ChartBuilder;
+import rs117.hd.gui.panel.components.graph.builder.DataSet;
+import rs117.hd.gui.panel.components.graph.DataTimer;
 
 import java.awt.*;
 import java.text.NumberFormat;

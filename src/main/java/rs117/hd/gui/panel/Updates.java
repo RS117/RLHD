@@ -1,4 +1,4 @@
-package rs117.hd.panel;
+package rs117.hd.gui.panel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,9 +32,8 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.DynamicGridLayout;
 import static net.runelite.client.ui.PluginPanel.PANEL_WIDTH;
 import rs117.hd.HdPlugin;
-import rs117.hd.panel.components.CategoryBuilder;
-import rs117.hd.panel.components.FixedWidthPanel;
-import rs117.hd.panel.components.Header;
+import rs117.hd.gui.panel.components.FixedWidthPanel;
+import rs117.hd.gui.panel.components.Header;
 
 public class Updates extends JPanel
 {

@@ -22,31 +22,44 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components.graph;
+package rs117.hd.gui.panel.debug.sections;
 
+import java.awt.GridLayout;
+import javax.swing.JPanel;
 import lombok.Getter;
+import net.runelite.client.ui.ColorScheme;
+import rs117.hd.HdPlugin;
+import rs117.hd.gui.panel.components.ToggleButton;
+import rs117.hd.gui.panel.debug.buttons.FpsInspector;
+import rs117.hd.gui.panel.debug.buttons.MemoryInspector;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.function.Consumer;
-
-public class DataTimer extends Timer implements ActionListener
+public class Buttons extends JPanel
 {
 
 	@Getter
-	private Consumer consumer;
+	private final ToggleButton lightInfo;
+	private final ToggleButton memoryInspector;
+	private final ToggleButton fpsInspector;
+	private final ToggleButton shadowMap;
 
-	public DataTimer(int interval, Consumer consumer)
-	{
-		super(interval, null);
-		this.consumer = consumer;
-		addActionListener(this);
+	public Buttons(HdPlugin plugin) {
+
+		shadowMap = new ToggleButton("Shadow Map", "Show Current Shadow Map");
+		lightInfo = new ToggleButton("Light Info", "Show Light Information");
+		memoryInspector = new ToggleButton("Memory Inspector", "Memory Inspector");
+		fpsInspector = new ToggleButton("Fps Inspector", "Fps Inspector");
+
+		setBackground(ColorScheme.DARK_GRAY_COLOR);
+		setLayout(new GridLayout(0, 2, 1, 2));
+
+		memoryInspector.addFrame(new MemoryInspector(plugin.getClient()));
+		fpsInspector.addFrame(new FpsInspector(plugin.getClient()));
+
+		add(shadowMap);
+		add(lightInfo);
+		add(memoryInspector);
+		add(fpsInspector);
+
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		consumer.accept(this);
-	}
 }

@@ -22,34 +22,47 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel;
+package rs117.hd.gui.panel.components;
 
-import com.google.inject.Inject;
-import net.runelite.client.ui.ColorScheme;
-import net.runelite.client.ui.components.PluginErrorPanel;
-import rs117.hd.HdPlugin;
+import net.runelite.client.ui.FontManager;
+import net.runelite.client.ui.components.shadowlabel.JShadowedLabel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
-public class Preset extends JPanel
+public class Header extends JPanel
 {
+	private final JLabel noResultsTitle = new JShadowedLabel();
+	private final JLabel noResultsDescription = new JShadowedLabel();
 
-	private final PluginErrorPanel errorPanel = new PluginErrorPanel();
-
-	private final HdPlugin plugin;
-
-	@Inject
-	private Preset(HdPlugin plugin)
+	public Header()
 	{
-		super();
-		this.plugin = plugin;
+		setOpaque(false);
+		setBorder(new EmptyBorder(10, 0, 7, 0));
+		setLayout(new BorderLayout());
 
-		setBackground(ColorScheme.DARK_GRAY_COLOR);
+		noResultsTitle.setForeground(Color.WHITE);
+		noResultsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-		errorPanel.setContent("Coming Soon", "Preset Panel Coming Soon.");
-		add(errorPanel);
+		noResultsDescription.setFont(FontManager.getRunescapeSmallFont());
+		noResultsDescription.setForeground(Color.GRAY);
+		noResultsDescription.setHorizontalAlignment(SwingConstants.CENTER);
 
+		add(noResultsTitle, BorderLayout.NORTH);
+		add(noResultsDescription, BorderLayout.CENTER);
+
+		setVisible(false);
 	}
 
-
+	/**
+	 * Changes the content of the panel to the given parameters.
+	 * The description has to be wrapped in html so that its text can be wrapped.
+	 */
+	public void setContent(String title, String description)
+	{
+		noResultsTitle.setText(title);
+		noResultsDescription.setText("<html><body style = 'text-align:center'>" + description + "</body></html>");
+		setVisible(true);
+	}
 }

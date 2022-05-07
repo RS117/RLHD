@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package rs117.hd.panel.components.graph;
+package rs117.hd.gui.panel.components.graph;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,8 +44,8 @@ import org.jfree.data.time.TimeSeriesCollection;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import rs117.hd.panel.components.graph.builder.ChartBuilder;
-import rs117.hd.panel.components.graph.builder.DataSet;
+import rs117.hd.gui.panel.components.graph.builder.ChartBuilder;
+import rs117.hd.gui.panel.components.graph.builder.DataSet;
 
 public class Chart extends JPanel
 {

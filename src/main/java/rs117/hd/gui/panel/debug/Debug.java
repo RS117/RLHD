@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.debug;
+package rs117.hd.gui.panel.debug;
 
 import com.google.inject.Inject;
 import java.awt.BorderLayout;
@@ -47,13 +47,13 @@ import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.ImageUtil;
 import rs117.hd.HdPlugin;
-import rs117.hd.panel.HdPanel;
-import rs117.hd.panel.components.CategoryBuilder;
-import rs117.hd.panel.components.FixedWidthPanel;
-import rs117.hd.panel.components.Header;
-import rs117.hd.panel.debug.overlays.LightInfoOverlay;
-import rs117.hd.panel.debug.sections.Buttons;
-import rs117.hd.panel.debug.sections.Specifications;
+import rs117.hd.gui.panel.HdPanel;
+import rs117.hd.gui.panel.components.CategoryBuilder;
+import rs117.hd.gui.panel.components.FixedWidthPanel;
+import rs117.hd.gui.panel.components.Header;
+import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
+import rs117.hd.gui.panel.debug.sections.Buttons;
+import rs117.hd.gui.panel.debug.sections.Specifications;
 
 public class Debug extends PluginPanel
 {

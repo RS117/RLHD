@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.debug.sections;
+package rs117.hd.gui.panel.debug.sections;
 
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -37,7 +37,7 @@ import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.util.LinkBrowser;
 import rs117.hd.HdPlugin;
 import rs117.hd.Utils;
-import rs117.hd.panel.components.ToggleButton;
+import rs117.hd.gui.panel.components.ToggleButton;
 
 public class Specifications extends JPanel
 {

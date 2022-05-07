@@ -22,81 +22,42 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components.graph.builder;
+package rs117.hd.gui.panel.components.graph.builder;
 
 import lombok.Data;
+import org.jfree.data.time.TimeSeries;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
 
 @Data
-public class ChartBuilder
+public class DataSet
 {
 
-	private int maxAge;
-	private String title;
-	private String bottomAxisLabel;
-	private String rightAxisLabel;
+	private TimeSeries value;
+	private String name;
+	private Color color;
 
-	private NumberFormat numberFormat;
-	private List<DataSet> dataset = new ArrayList<>();
-
-	public ChartBuilder()
+	public DataSet(String name, Color color)
 	{
+		this.name = name;
+		this.color = color;
 	}
 
-	public ChartBuilder(int maxAge, String bottomAxisLabel, String rightAxisLabel, String title, List<DataSet> dataset, NumberFormat numberFormat)
+	public DataSet setName(String name)
 	{
-		this.maxAge = maxAge;
-		this.bottomAxisLabel = bottomAxisLabel;
-		this.rightAxisLabel = rightAxisLabel;
-		this.title = title;
-		this.dataset = dataset;
-		this.numberFormat = numberFormat;
-
-	}
-
-	public ChartBuilder setMaxAge(int maxAge)
-	{
-		this.maxAge = maxAge;
+		this.name = name;
 		return this;
 	}
 
-	public ChartBuilder setTitle(String title)
+	public DataSet setColor(Color color)
 	{
-		this.title = title;
+		this.color = color;
 		return this;
 	}
 
-	public ChartBuilder setBottomAxisLabel(String bottomAxisLabel)
+	public DataSet build()
 	{
-		this.bottomAxisLabel = bottomAxisLabel;
-		return this;
-	}
-
-	public ChartBuilder setRightAxisLabel(String rightAxisLabel)
-	{
-		this.rightAxisLabel = rightAxisLabel;
-		return this;
-	}
-
-	public ChartBuilder setNumberFormat(NumberFormat format)
-	{
-		this.numberFormat = format;
-		return this;
-	}
-
-
-	public ChartBuilder addDataset(DataSet dataset)
-	{
-		this.dataset.add(dataset);
-		return this;
-	}
-
-	public ChartBuilder build()
-	{
-		return new ChartBuilder(maxAge, bottomAxisLabel, rightAxisLabel, title, dataset, numberFormat);
+		return new DataSet(name, color);
 	}
 
 }

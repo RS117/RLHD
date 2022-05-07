@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel;
+package rs117.hd.gui.panel;
 
 import com.google.inject.Inject;
 import lombok.Getter;
@@ -39,7 +39,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import rs117.hd.panel.debug.Debug;
+import rs117.hd.gui.panel.debug.Debug;
 
 public class HdPanel extends PluginPanel
 {

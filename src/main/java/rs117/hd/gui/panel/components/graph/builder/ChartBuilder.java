@@ -22,42 +22,81 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package rs117.hd.panel.components.graph.builder;
+package rs117.hd.gui.panel.components.graph.builder;
 
 import lombok.Data;
-import org.jfree.data.time.TimeSeries;
 
-import java.awt.*;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-public class DataSet
+public class ChartBuilder
 {
 
-	private TimeSeries value;
-	private String name;
-	private Color color;
+	private int maxAge;
+	private String title;
+	private String bottomAxisLabel;
+	private String rightAxisLabel;
 
-	public DataSet(String name, Color color)
+	private NumberFormat numberFormat;
+	private List<DataSet> dataset = new ArrayList<>();
+
+	public ChartBuilder()
 	{
-		this.name = name;
-		this.color = color;
 	}
 
-	public DataSet setName(String name)
+	public ChartBuilder(int maxAge, String bottomAxisLabel, String rightAxisLabel, String title, List<DataSet> dataset, NumberFormat numberFormat)
 	{
-		this.name = name;
+		this.maxAge = maxAge;
+		this.bottomAxisLabel = bottomAxisLabel;
+		this.rightAxisLabel = rightAxisLabel;
+		this.title = title;
+		this.dataset = dataset;
+		this.numberFormat = numberFormat;
+
+	}
+
+	public ChartBuilder setMaxAge(int maxAge)
+	{
+		this.maxAge = maxAge;
 		return this;
 	}
 
-	public DataSet setColor(Color color)
+	public ChartBuilder setTitle(String title)
 	{
-		this.color = color;
+		this.title = title;
 		return this;
 	}
 
-	public DataSet build()
+	public ChartBuilder setBottomAxisLabel(String bottomAxisLabel)
 	{
-		return new DataSet(name, color);
+		this.bottomAxisLabel = bottomAxisLabel;
+		return this;
+	}
+
+	public ChartBuilder setRightAxisLabel(String rightAxisLabel)
+	{
+		this.rightAxisLabel = rightAxisLabel;
+		return this;
+	}
+
+	public ChartBuilder setNumberFormat(NumberFormat format)
+	{
+		this.numberFormat = format;
+		return this;
+	}
+
+
+	public ChartBuilder addDataset(DataSet dataset)
+	{
+		this.dataset.add(dataset);
+		return this;
+	}
+
+	public ChartBuilder build()
+	{
+		return new ChartBuilder(maxAge, bottomAxisLabel, rightAxisLabel, title, dataset, numberFormat);
 	}
 
 }
