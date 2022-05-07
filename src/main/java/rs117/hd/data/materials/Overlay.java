@@ -169,6 +169,7 @@ public enum Overlay
 	// Morytania
 	MORYTANIA_SLAYER_TOWER(102, Area.MORYTANIA_SLAYER_TOWER, GroundMaterial.VARROCK_PATHS_LIGHT),
 	ABANDONED_MINE_ROCK(11, Area.MORYTANIA, GroundMaterial.DIRT),
+	TRUE_BLOOD_ALTAR_BLOOD(72, Area.TRUE_BLOOD_ALTAR, WaterType.BLOOD),
 
 	// Tirannwn
 	POISON_WASTE(85, Area.POISON_WASTE, WaterType.POISON_WASTE),
@@ -284,7 +285,6 @@ public enum Overlay
 	OVERLAY_49(49, GroundMaterial.VARIED_DIRT),
 	OVERLAY_52(52, GroundMaterial.WOOD_PLANKS_1),
 	OVERLAY_60(60, GroundMaterial.DIRT),
-	OVERLAY_72(72, WaterType.BLOOD),
 	OVERLAY_77(77, GroundMaterial.DIRT),
 	OVERLAY_81(81, GroundMaterial.DIRT),
 	OVERLAY_82(82, GroundMaterial.DIRT),
