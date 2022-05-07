@@ -2,7 +2,16 @@ package rs117.hd.lighting;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import rs117.hd.scene.lighting.Light;
+import rs117.hd.scene.lighting.LightConfig;
+import rs117.hd.scene.lighting.SceneLight;
 
 import java.util.ArrayList;
 
@@ -14,9 +23,28 @@ public class LightConfigTest {
     private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
     private static final ListMultimap<Integer, Light> PROJECTILE_LIGHTS = ArrayListMultimap.create();
 
-    @Test
+	private final ByteArrayOutputStream stderr = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+	private final PrintStream originalStdout = System.out;
+	private final PrintStream originalStderr = System.err;
+
+	@Before
+	public void setupStreams() {
+		System.setOut(new PrintStream(stdout));
+		System.setErr(new PrintStream(stderr));
+	}
+
+	@After
+	public void restoreStreams() {
+		System.setErr(originalStdout);
+		System.setErr(originalStderr);
+	}
+
+	@Test
     public void testLoad() {
-        LightConfig.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("lighting/lights.json"), WORLD_LIGHTS, NPC_LIGHTS, OBJECT_LIGHTS, PROJECTILE_LIGHTS);
+        LightConfig.load(Thread.currentThread().getContextClassLoader()
+			.getResourceAsStream("lighting/lights.json"),
+			WORLD_LIGHTS, NPC_LIGHTS, OBJECT_LIGHTS, PROJECTILE_LIGHTS);
 
         // can we get the same light for both of its raw IDs?
         Light spitRoastLight = OBJECT_LIGHTS.get(5608).get(0);
@@ -35,4 +63,11 @@ public class LightConfigTest {
         assertEquals(0.3021255, spitRoastLight.color[1], 0.001);
         assertEquals(5.6921755E-5, spitRoastLight.color[2], 0.001);
     }
+
+	@Test
+	public void validateLightsConfig() throws IOException
+	{
+		ExportLightsToJson.main(new String[] { "--dry-run" });
+		Assert.assertEquals(stderr.toString(), "");
+	}
 }

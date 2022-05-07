@@ -22,63 +22,63 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#version 330
+package rs117.hd.utils.buffer;
 
-#include MAX_MATERIALS
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
-struct Material
+public class GpuFloatBuffer
 {
-    int diffuseMapId;
-    float specularStrength;
-    float specularGloss;
-    float emissiveStrength;
-    int displacementMapId;
-    float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
-    vec2 textureScale;
-};
+	private FloatBuffer buffer = allocateDirect(65536);
 
-layout(std140) uniform materials {
-    Material material[MAX_MATERIALS];
-};
+	public void put(float texture, float u, float v, float pad)
+	{
+		buffer.put(texture).put(u).put(v).put(pad);
+	}
 
-uniform sampler2DArray texturesHD;
-uniform vec2 textureOffsets[128];
+	public void put(float[] floats) {
+		buffer.put(floats);
+	}
 
-in float alpha;
-in vec2 fUv;
-flat in int materialId;
-flat in int terrainPlane;
+	public void flip()
+	{
+		buffer.flip();
+	}
 
-out vec4 FragColor;
+	public void clear()
+	{
+		buffer.clear();
+	}
 
-void main()
-{
-    if (terrainPlane == 0)
-    {
-        discard;
-    }
+	public void ensureCapacity(int size)
+	{
+		int capacity = buffer.capacity();
+		final int position = buffer.position();
+		if ((capacity - position) < size)
+		{
+			do
+			{
+				capacity *= 2;
+			}
+			while ((capacity - position) < size);
 
-    // skip water surfaces
-    switch (material[materialId].diffuseMapId)
-    {
-        case 7001:
-        case 7025:
-        case 7997:
-        case 7998:
-        case 7999:
-            discard;
-    }
+			FloatBuffer newB = allocateDirect(capacity);
+			buffer.flip();
+			newB.put(buffer);
+			buffer = newB;
+		}
+	}
 
-    vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
-    uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
-    vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
+	public FloatBuffer getBuffer()
+	{
+		return buffer;
+	}
 
-    if (min(texture.a, alpha) < 0.81)
-    {
-        discard;
-    }
-
-    FragColor = vec4(1.0);
+	public static FloatBuffer allocateDirect(int size)
+	{
+		return ByteBuffer.allocateDirect(size * Float.BYTES)
+			.order(ByteOrder.nativeOrder())
+			.asFloatBuffer();
+	}
 }

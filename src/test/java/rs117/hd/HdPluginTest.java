@@ -3,8 +3,8 @@ package rs117.hd;
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 import static rs117.hd.HdPlugin.SHADER_PATH;
-import rs117.hd.lighting.LightManager;
-import static rs117.hd.lighting.LightManager.LIGHTS_CONFIG_ENV;
+import rs117.hd.scene.lighting.LightManager;
+import static rs117.hd.scene.lighting.LightManager.LIGHTS_CONFIG_ENV;
 import rs117.hd.utils.Env;
 import rs117.hd.utils.FileWatcher;
 

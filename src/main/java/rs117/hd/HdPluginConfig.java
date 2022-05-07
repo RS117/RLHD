@@ -42,7 +42,6 @@ import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.ShadowDistance;
 import rs117.hd.config.ShadowResolution;
 import rs117.hd.config.UIScalingMode;
-import rs117.hd.config.WaterEffects;
 
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
@@ -58,7 +57,7 @@ public interface HdPluginConfig extends Config
 	String limitedTimeSettings = "limitedTimeSettings";
 
 	@ConfigItem(
-		keyName = "winterTheme",
+		keyName = "winterTheme0",
 		name = "Winter theme",
 		description = "Covers the Gielinor overworld with a layer of snow!",
 		position = -9,
@@ -66,7 +65,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean winterTheme()
 	{
-		return true;
+		return false;
 	}
 
 
@@ -350,7 +349,16 @@ public interface HdPluginConfig extends Config
 		return false;
 	}
 
-
+	@ConfigItem(
+		keyName = "hideBakedEffects",
+		name = "Hide Fake Lights and Shadows",
+		description = "Hides the fake light and shadow effects that Jagex often includes with models",
+		position = 109,
+		section = lightingSettings
+	)
+	default boolean hideBakedEffects() {
+		return true;
+	}
 
 	/*====== Environment settings ======*/
 
@@ -413,10 +421,21 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "overrideSky",
+		name = "Override Sky Color",
+		description = "Forces the selected sky color in all environments",
+		position = 205,
+		section = environmentSettings
+	)
+	default boolean overrideSky() {
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "objectTextures",
 		name = "Object Textures",
 		description = "Adds detail textures to certain world objects.",
-		position = 205,
+		position = 206,
 		section = environmentSettings
 	)
 	default boolean objectTextures()
@@ -428,7 +447,7 @@ public interface HdPluginConfig extends Config
 		keyName = "groundTextures",
 		name = "Ground Textures",
 		description = "Adds detail textures to the ground.",
-		position = 206,
+		position = 207,
 		section = environmentSettings
 	)
 	default boolean groundTextures()
@@ -440,7 +459,7 @@ public interface HdPluginConfig extends Config
 			keyName = "groundBlending",
 			name = "Ground Blending",
 			description = "Affects the quality of blending between different ground/terrain textures.",
-			position = 207,
+			position = 208,
 			section = environmentSettings
 	)
 	default boolean groundBlending()
@@ -449,22 +468,22 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "waterEffects",
-		name = "Water Effects",
-		description = "Changes the appearance of the water.",
-		position = 208,
+		keyName = "underwaterCaustics",
+		name = "Underwater Caustics",
+		description = "Apply underwater lighting effects to imitate sunlight moving through waves on the surface.",
+		position = 209,
 		section = environmentSettings
 	)
-	default WaterEffects waterEffects()
+	default boolean underwaterCaustics()
 	{
-		return WaterEffects.ALL;
+		return true;
 	}
 
 	@ConfigItem(
 		keyName = "tzhaarHD",
 		name = "HD TzHaar Reskin",
 		description = "Recolors the TzHaar city of Mor Ul Rek to give it an appearance similar to that of its 2008 HD variant.",
-		position = 209,
+		position = 210,
 		section = environmentSettings
 	)
 	default boolean tzhaarHD()
@@ -509,12 +528,29 @@ public interface HdPluginConfig extends Config
 		return true;
 	}
 
+	@ConfigSection(
+			name = "Experimental",
+			description = "Experimental features - you likely won't need to modify these settings",
+			position = 400,
+			closedByDefault = true
+	)
+	String experimentalSettings = "experimentalSettings";
+
 	@ConfigItem(
-		keyName = "modelCaching",
-		name = "Disable model caching",
-		description = "Model caching improves performance with increased memory usage.",
-		position = 303,
-		section = miscellaneousSettings
+			keyName = "modelCaching",
+			name = "Disable model caching",
+			description = "Model caching improves performance with increased memory usage.",
+			position = 401,
+			section = experimentalSettings
 	)
 	default boolean disableModelCaching() { return false; }
+
+	@ConfigItem(
+			keyName = "modelBatching",
+			name = "Disable model batching",
+			description = "Model batching generally improves performance but could cause some graphical artifacts",
+			position = 402,
+			section = experimentalSettings
+	)
+	default boolean disableModelBatching() { return false; }
 }

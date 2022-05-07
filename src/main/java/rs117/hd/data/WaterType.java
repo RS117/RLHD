@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Adam <Adam@sigterm.info>
+ * Copyright (c) 2021, 117 <https://twitter.com/117scape>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,63 +22,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#version 330
+package rs117.hd.data;
 
-#include MAX_MATERIALS
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import rs117.hd.data.materials.GroundMaterial;
 
-struct Material
+@Getter
+@RequiredArgsConstructor
+public enum WaterType
 {
-    int diffuseMapId;
-    float specularStrength;
-    float specularGloss;
-    float emissiveStrength;
-    int displacementMapId;
-    float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
-    vec2 textureScale;
-};
+	NONE(0, GroundMaterial.NONE),
+	WATER(1, GroundMaterial.WATER),
+	WATER_FLAT(2, GroundMaterial.WATER_FLAT),
+	SWAMP_WATER(3, GroundMaterial.SWAMP_WATER),
+	SWAMP_WATER_FLAT(4, GroundMaterial.SWAMP_WATER_FLAT),
+	POISON_WASTE(5, GroundMaterial.POISON_WASTE),
+	POISON_WASTE_FLAT(6, GroundMaterial.POISON_WASTE_FLAT),
+	BLOOD(7, GroundMaterial.BLOOD_FLAT),
+	ICE(8, GroundMaterial.ICE),
+	ICE_FLAT(9, GroundMaterial.ICE_FLAT),
+	;
 
-layout(std140) uniform materials {
-    Material material[MAX_MATERIALS];
-};
-
-uniform sampler2DArray texturesHD;
-uniform vec2 textureOffsets[128];
-
-in float alpha;
-in vec2 fUv;
-flat in int materialId;
-flat in int terrainPlane;
-
-out vec4 FragColor;
-
-void main()
-{
-    if (terrainPlane == 0)
-    {
-        discard;
-    }
-
-    // skip water surfaces
-    switch (material[materialId].diffuseMapId)
-    {
-        case 7001:
-        case 7025:
-        case 7997:
-        case 7998:
-        case 7999:
-            discard;
-    }
-
-    vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
-    uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
-    vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
-
-    if (min(texture.a, alpha) < 0.81)
-    {
-        discard;
-    }
-
-    FragColor = vec4(1.0);
+	private final int value;
+	private final GroundMaterial groundMaterial;
 }
