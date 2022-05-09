@@ -277,7 +277,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean atmosphericLighting()
 	{
-		return false;
+		return true;
 	}
 
 	@ConfigItem(
