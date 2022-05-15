@@ -731,6 +731,7 @@ public enum Area
 
 	// Guardians of the Rift
 	TEMPLE_OF_THE_EYE(3550, 9525, 3660, 9450),
+	TEMPLE_OF_THE_EYE_ENTRANCE_FIX(3613,9471,3617,9481),
 
 	// Death's office
 	DEATHS_OFFICE(3166, 5734, 3185, 4288),
