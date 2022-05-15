@@ -138,6 +138,7 @@ public enum Overlay
 	YANILLE_BANK_TILE_1(3, Area.YANILLE_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	YANILLE_BANK_TILE_2(4, Area.YANILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	YANILLE_HUNTER_SHOP_FLOOR(16, Area.YANILLE, GroundMaterial.CARPET, new Properties().setBlended(false)),
+	GUTANOTH_CAVE(29, Area.GUTANOTH_CAVE, WaterType.SWAMP_WATER_FLAT),
 
 	// Draynor
 	WISE_OLD_MANS_HOUSE_CARPET(86, Area.DRAYNOR, GroundMaterial.CARPET, new Properties().setBlended(false)),
