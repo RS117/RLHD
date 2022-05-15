@@ -263,6 +263,7 @@ public enum Area
 		new Rect(2531, 3127, 2622, 3070),
 		new Rect(2880, 4671, 2944, 4735) // instance
 	),
+	GUTANOTH_CAVE(2560, 9408, 2626, 9475),
 	// Nightmare Zone
 	NIGHTMARE_ZONE(2241, 4676, 2303, 4722),
 
