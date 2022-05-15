@@ -238,6 +238,10 @@ public enum Overlay
 	// Random events
 	PRISON_PETE_TILE_1(2, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_1, new Properties().setBlended(false)),
 	PRISON_PETE_TILE_2(-125, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_2, new Properties().setBlended(false)),
+	
+	// GOTR Entrance fix
+	TEMPLE_OF_THE_EYE_ENTRANCE(0, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
+	TEMPLE_OF_THE_EYE_ENTRANCE_2(-53, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
 
 
 
