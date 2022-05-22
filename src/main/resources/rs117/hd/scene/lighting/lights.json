@@ -22566,24 +22566,6 @@
     ]
   },
   {
-    "description": "WINTERTODT_DOOR",
-    "height": 500,
-    "alignment": "SOUTH",
-    "radius": 1500,
-    "strength": 15,
-    "color": [
-      165,
-      255,
-      56
-    ],
-    "type": "STATIC",
-    "duration": 0,
-    "range": 0,
-    "objectIds": [
-      "DOORS_OF_DINH"
-    ]
-  },
-  {
     "description": "PURPLE_FLAME",
     "height": 250,
     "alignment": "CENTER",
@@ -29345,5 +29327,42 @@
     "duration": 7000.0,
     "range": 10.0,
     "fadeInDuration": 0
+  },
+  {
+    "description": "WINTERTODT_LIT_BRAZIER",
+    "height": 300,
+    "alignment": "CENTER",
+    "radius": 450,
+    "strength": 25,
+    "color": [
+        165,
+        255,
+        56
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 20,
+    "objectIds": [
+        "BURNING_BRAZIER_29314",
+        "BURNING_BRAZIER_31926"
+    ]
+  },
+  {
+    "description": "WINTERTODT_DOOR",
+    "height": 500,
+    "alignment": "SOUTH",
+    "radius": 1500,
+    "strength": 15,
+    "color": [
+        165,
+        255,
+        56
+    ],
+    "type": "STATIC",
+    "duration": 0,
+    "range": 0,
+    "objectIds": [
+        "DOORS_OF_DINH"
+    ]
   }
 ]
