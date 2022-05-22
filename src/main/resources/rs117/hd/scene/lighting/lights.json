@@ -29332,8 +29332,8 @@
     "description": "WINTERTODT_LIT_BRAZIER",
     "height": 300,
     "alignment": "CENTER",
-    "radius": 450,
-    "strength": 25,
+    "radius": 600,
+    "strength": 15,
     "color": [
         165,
         255,
@@ -29341,7 +29341,7 @@
     ],
     "type": "FLICKER",
     "duration": 0,
-    "range": 20,
+    "range": 15,
     "objectIds": [
         "BURNING_BRAZIER_29314",
         "BURNING_BRAZIER_31926"
