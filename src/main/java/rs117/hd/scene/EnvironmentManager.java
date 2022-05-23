@@ -63,7 +63,8 @@ public class EnvironmentManager
 	// transition time
 	private final int transitionDuration = 3000;
 	// distance in tiles to skip transition (e.g. entering cave, teleporting)
-	private final int skipTransitionTiles = 20;
+	// walking across a loading line causes a movement of 40-41 tiles
+	private final int skipTransitionTiles = 41;
 
 	// last environment change time
 	private long startTime = 0;
