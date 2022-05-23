@@ -261,6 +261,7 @@ public enum Overlay
 	OVERLAY_N84(-84, GroundMaterial.DIRT),
 	OVERLAY_N83(-83, GroundMaterial.DIRT),
 	OVERLAY_N82(-82, GroundMaterial.TILE_DARK),
+	OVERLAY_N49(-49, GroundMaterial.SAND_BRICK),
 	OVERLAY_2(2, GroundMaterial.GRAVEL),
 	OVERLAY_3(3, GroundMaterial.GRAVEL),
 	OVERLAY_4(4, GroundMaterial.GRAVEL),
