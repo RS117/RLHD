@@ -16,10 +16,10 @@ The recommended values throughout this guide will be targeting a stable 60 FPS o
 This determines how much of the world is rendered. The maximum value is 90 and we're recommending that you max this out because
 it dramatically improves the experience.
 
-### Anti Aliasing (default: disabled) (recommended: MSAA x8)
+### Anti Aliasing (default: disabled) (recommended: MSAA x4)
 
-Anti aliasing [smooths the edges of geometry](https://icdn.digitaltrends.com/image/digitaltrends/gta-5-msaa-1500x1000.jpg)
-and can dramatically improve the image quality. We recommend x8 because x16 is exponentially more expensive for a relatively minor improvement.
+Anti aliasing [smooths the edges of geometry](https://cdn.discordapp.com/attachments/886739974555316294/973289127485247508/MSAA_off-on.png)
+and can dramatically improve the image quality. We recommend x4 or x8 because x16 is exponentially more expensive for a relatively minor improvement.
 
 ### Anisotropic Filtering (default: 16) (recommended: 16)
 
@@ -28,13 +28,12 @@ This setting significantly improves the quality of textures as they get further 
 ### VSync Mode (default: adaptive)
 
 VSync syncs the framerate to monitors refresh rate to reduce screen tearing. 
-It is only applied if you use the unlock FPS setting. The default is "adaptive" which will make use of gysnc/free-sync if your setup
-supports it. The alternatives are on (traditional vsync) and off. If you set vsync to off with your FPS unlocked you should consider setting an FPS target.
+It is only applied if you use the unlock FPS setting. The default is "adaptive" which enables vsync when the framerate exceeds your monitors refresh rate. The alternatives are on (traditional vsync) and off. If you set vsync to off with your FPS unlocked you should consider setting a reasonable FPS target.
 
-### Dynamic Lights (default: 25) (recommended: 25)
+### Dynamic Lights (default: 25) (recommended: 50)
 
-The dynamic lights in 117HD are beautiful but very taxing on the GPU. We recommend leaving this setting at the default but you might
-want to consider bumping this up if you can stomach some frame drops in heavily lit areas.
+The dynamic lights in 117HD are beautiful but very taxing on the GPU. We recommend setting this just above the default but you might
+want to consider bumping this up to the maximum if you can stomach some frame drops in heavily lit areas.
 
 ### Shadows (default: enabled) (recommended: enabled)
 
