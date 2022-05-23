@@ -18,7 +18,7 @@ it dramatically improves the experience.
 
 ### Anti Aliasing (default: disabled) (recommended: MSAA x4)
 
-Anti aliasing [smooths the edges of geometry](https://cdn.discordapp.com/attachments/886739974555316294/973289127485247508/MSAA_off-on.png)
+Anti aliasing [smooths the edges of geometry](https://i.imgur.com/N4Qnapu.png)
 and can dramatically improve the image quality. We recommend x4 or x8 because x16 is exponentially more expensive for a relatively minor improvement.
 
 ### Anisotropic Filtering (default: 16) (recommended: 16)
