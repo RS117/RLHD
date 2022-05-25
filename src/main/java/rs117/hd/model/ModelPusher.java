@@ -4,6 +4,7 @@ import com.google.common.primitives.Ints;
 import com.jogamp.opengl.math.VectorUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.kit.KitType;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
 import rs117.hd.data.materials.Material;
@@ -320,8 +321,10 @@ public class ModelPusher
         if (config.hideBakedEffects()) {
             // hide the shadows and lights that are often baked into models by setting the colors for the shadow faces to transparent
             NPC npc = renderable instanceof NPC ? (NPC) renderable : null;
+            Player player = renderable instanceof Player  ? (Player) renderable : null;
             GraphicsObject graphicsObject = renderable instanceof GraphicsObject ? (GraphicsObject) renderable : null;
-            if ((npc != null && BakedModels.NPCS.contains(npc.getId())) || (graphicsObject != null && BakedModels.OBJECTS.contains(graphicsObject.getId()))) {
+
+            if ((npc != null && BakedModels.NPCS.contains(npc.getId())) || (graphicsObject != null && BakedModels.OBJECTS.contains(graphicsObject.getId())) || (player != null &&  player.getPlayerComposition().getEquipmentId(KitType.WEAPON) == ItemID.MAGIC_CARPET)) {
                 int[] transparency = removeBakedGroundShading(face, triA, triB, triC, faceTransparencies, faceTextures, yVertices);
                 if (transparency != null) {
                     return transparency;
