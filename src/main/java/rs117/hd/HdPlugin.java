@@ -33,8 +33,6 @@ import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.math.Matrix4;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import javax.inject.Named;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
@@ -45,15 +43,11 @@ import net.runelite.api.events.*;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
-import net.runelite.client.config.Keybind;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.input.KeyListener;
-import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
 import net.runelite.client.ui.DrawManager;
-import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
 import static rs117.hd.HdPluginConfig.KEY_WINTER_THEME;
@@ -72,7 +66,6 @@ import rs117.hd.opengl.compute.OpenCLManager;
 import rs117.hd.opengl.shader.Shader;
 import rs117.hd.opengl.shader.ShaderException;
 import rs117.hd.opengl.shader.Template;
-import rs117.hd.overlays.TileInfoOverlay;
 import rs117.hd.scene.EnvironmentManager;
 import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.scene.SceneUploader;
@@ -93,10 +86,7 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,12 +106,8 @@ import static rs117.hd.utils.GLUtil.*;
 )
 @PluginDependency(EntityHiderPlugin.class)
 @Slf4j
-public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
+public class HdPlugin extends Plugin implements DrawCallbacks
 {
-	public static final String ENV_SHADER_PATH = "RLHD_SHADER_PATH";
-
-	private static final Keybind KEY_TOGGLE_TILE_INFO = new Keybind(KeyEvent.VK_F3, InputEvent.CTRL_DOWN_MASK);
-
 	// This is the maximum number of triangles the compute shaders support
 	public static final int MAX_TRIANGLE = 6144;
 	public static final int SMALL_TRIANGLE_COUNT = 512;
@@ -181,17 +167,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 	private ModelHasher modelHasher;
 
 	@Inject
-	private KeyManager keyManager;
-
-	@Inject
-	private OverlayManager overlayManager;
-
-	@Inject
-	private TileInfoOverlay tileInfoOverlay;
-
-	@Inject
 	@Named("developerMode")
 	private boolean developerMode;
+
+	@Inject
+	private DeveloperTools developerTools;
 
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
@@ -200,9 +180,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 	private GL4 gl;
 	private GLContext glContext;
 	private GLDrawable glDrawable;
-
-	private Path shaderPath;
-	private FileWatcher fileWatcher;
 
 	static final String LINUX_VERSION_HEADER =
 		"#version 420\n" +
@@ -424,8 +401,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 
 	private final Map<Integer, TempModelInfo> tempModelInfoMap = new HashMap<>();
 
-	private boolean tileInfoOverlayEnabled = false;
-
 	@Subscribe
 	public void onChatMessage(final ChatMessage event) {
 		if (!isInGauntlet) {
@@ -457,7 +432,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 	@Override
 	protected void startUp()
 	{
-
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
 		configObjectTextures = config.objectTextures();
@@ -506,26 +480,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 
 				if (developerMode)
 				{
-					keyManager.registerKeyListener(this);
-					if (tileInfoOverlayEnabled)
-					{
-						overlayManager.add(tileInfoOverlay);
-					}
-
-					shaderPath = Env.getPath(ENV_SHADER_PATH);
-					if (shaderPath != null)
-					{
-						fileWatcher	= new FileWatcher()
-							.watchPath(shaderPath)
-							.addChangeHandler(path ->
-							{
-								if (path.getFileName().toString().endsWith(".glsl"))
-								{
-									log.debug("Reloading shaders...");
-									recompileProgram();
-								}
-							});
-					}
+					developerTools.activate();
 				}
 
 				GLProfile.initSingleton();
@@ -631,7 +586,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 					initVao();
 					try
 					{
-						initProgram();
+						initPrograms();
 					}
 					catch (ShaderException ex)
 					{
@@ -684,20 +639,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 	@Override
 	protected void shutDown()
 	{
+		developerTools.deactivate();
+
 		((Component) client).removeComponentListener(resizeListener);
-
-		if (developerMode)
-		{
-			if (fileWatcher != null)
-			{
-				fileWatcher.close();
-				fileWatcher = null;
-			}
-
-			keyManager.unregisterKeyListener(this);
-			overlayManager.remove(tileInfoOverlay);
-		}
-
 		lightManager.shutDown();
 
 		clientThread.invoke(() ->
@@ -730,7 +674,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 
 					shutdownBuffers();
 					shutdownInterfaceTexture();
-					shutdownProgram();
+					shutdownPrograms();
 					shutdownVao();
 					shutdownAAFbo();
 					shutdownShadowMapFbo();
@@ -818,7 +762,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 			" : " + generateFetchMaterialCases(middle, to);
 	}
 
-	private void initProgram() throws ShaderException
+	private void initPrograms() throws ShaderException
 	{
 		String versionHeader = OSType.getOSType() == OSType.Linux ? LINUX_VERSION_HEADER : WINDOWS_VERSION_HEADER;
 		Template template = new Template();
@@ -838,20 +782,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 			}
 			return null;
 		});
-		if (shaderPath != null)
+		if (developerMode)
 		{
-			template.add(path -> {
-				Path fullPath = shaderPath.resolve(path);
-				try
-				{
-					log.debug("Loading shader from file: {}", fullPath);
-					return Template.inputStreamToString(new FileInputStream(fullPath.toFile()));
-				}
-				catch (FileNotFoundException ex)
-				{
-					throw new RuntimeException("Failed to load shader from file: " + fullPath, ex);
-				}
-			});
+			template.add(developerTools::shaderResolver);
 		}
 		template.addInclude(HdPlugin.class);
 
@@ -951,7 +884,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 		uniShadowTextureOffsets = gl.glGetUniformLocation(glShadowProgram, "textureOffsets");
 	}
 
-	private void shutdownProgram()
+	private void shutdownPrograms()
 	{
 		if (glProgram != -1)
 		{
@@ -990,17 +923,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 		}
 	}
 
-	private void recompileProgram()
+	public void recompilePrograms()
 	{
 		clientThread.invoke(() ->
 			ThreadUtils.invokeOnMainThread(() ->
 			{
 				try
 				{
-					shutdownProgram();
+					shutdownPrograms();
 					shutdownVao();
 					initVao();
-					initProgram();
+					initPrograms();
 				}
 				catch (ShaderException ex)
 				{
@@ -2453,7 +2386,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 				configExpandShadowDraw = config.expandShadowDraw();
 				break;
 			case "macosIntelWorkaround":
-				recompileProgram();
+				recompilePrograms();
 				break;
 			case "unlockFps":
 			case "vsyncMode":
@@ -2915,35 +2848,5 @@ public class HdPlugin extends Plugin implements DrawCallbacks, KeyListener
 		{
 			hasLoggedIn = true;
 		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent event)
-	{
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent event)
-	{
-		if (KEY_TOGGLE_TILE_INFO.matches(event))
-		{
-			event.consume();
-			tileInfoOverlayEnabled = !tileInfoOverlayEnabled;
-			if (tileInfoOverlayEnabled)
-			{
-				overlayManager.add(tileInfoOverlay);
-			}
-			else
-			{
-				overlayManager.remove(tileInfoOverlay);
-			}
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent event)
-	{
-
 	}
 }

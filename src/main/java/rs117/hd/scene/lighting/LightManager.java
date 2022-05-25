@@ -116,7 +116,6 @@ public class LightManager
 
 	public void startUp()
 	{
-
 		entityHiderConfig = configManager.getConfig(EntityHiderConfig.class);
 
 		Path lightsConfigPath = Env.getPath(ENV_LIGHTS_CONFIG);
