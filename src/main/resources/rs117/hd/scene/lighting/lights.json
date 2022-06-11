@@ -29364,5 +29364,249 @@
     "objectIds": [
         "DOORS_OF_DINH"
     ]
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_VENT_LARGE",
+    "height": 140,
+    "alignment": "CENTER",
+    "radius": 180,
+    "strength": 12,
+    "color": [
+      255,
+      255,
+      15
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      14437
+    ]
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_VENT_SMALL",
+    "height": 90,
+    "alignment": "CENTER",
+    "radius": 100,
+    "strength": 6,
+    "color": [
+      255,
+      255,
+      15
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      14438
+    ]
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_HOLE",
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 250,
+    "strength": 8,
+    "color": [
+      255,
+      255,
+      15
+    ],
+    "type": "FLICKER",
+    "duration": 0.0,
+    "range": 10.0,
+    "objectIds": [
+      14419
+    ]
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_1",
+    "worldX": 3801,
+    "worldY": 3811,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_2",
+    "worldX": 3802,
+    "worldY": 3804,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_3",
+    "worldX": 3787,
+    "worldY": 3801,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_4",
+    "worldX": 3790,
+    "worldY": 3796,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_5",
+    "worldX": 3791,
+    "worldY": 3788,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_6",
+    "worldX": 3802,
+    "worldY": 3791,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_7",
+    "worldX": 3806,
+    "worldY": 3786,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_8",
+    "worldX": 3804,
+    "worldY": 3796,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_9",
+    "worldX": 3810,
+    "worldY": 3789,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "FOSSIL_ISLAND_LAVA_10",
+    "worldX": 3810,
+    "worldY": 3801,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 4.0,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000.0,
+    "range": 10.0,
+    "fadeInDuration": 0
   }
 ]
