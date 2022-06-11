@@ -952,7 +952,11 @@ public class BakedModels
             NpcID.ZILYANA_JR_6646,
             NpcID.ZOMBIE_RAT,
             NpcID.ZOMBIE_RAT_3970,
-            NpcID.ZOMBIE_RAT_3971
+            NpcID.ZOMBIE_RAT_3971,
+            NpcID.YOUNGLLEF,
+            NpcID.CORRUPTED_YOUNGLLEF,
+            NpcID.YOUNGLLEF_8737,
+            NpcID.CORRUPTED_YOUNGLLEF_8738
     ));
 
     public static final HashSet<Integer> OBJECTS = new HashSet<>(Arrays.asList(
