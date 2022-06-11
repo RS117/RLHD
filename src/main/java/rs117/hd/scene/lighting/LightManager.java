@@ -71,7 +71,7 @@ import rs117.hd.utils.FileWatcher;
 @Slf4j
 public class LightManager
 {
-	public static String LIGHTS_CONFIG_ENV = "RLHD_LIGHTS_PATH";
+	public static String ENV_LIGHTS_CONFIG = "RLHD_LIGHTS_PATH";
 
 	@Inject
 	private ConfigManager configManager;
@@ -116,10 +116,9 @@ public class LightManager
 
 	public void startUp()
 	{
-
 		entityHiderConfig = configManager.getConfig(EntityHiderConfig.class);
 
-		Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
+		Path lightsConfigPath = Env.getPath(ENV_LIGHTS_CONFIG);
 		if (lightsConfigPath == null)
 		{
 			reloadLightConfiguration();
@@ -181,7 +180,7 @@ public class LightManager
 		if (hotswapScheduled)
 		{
 			hotswapScheduled = false;
-			Path lightsConfigPath = Env.getPath(LIGHTS_CONFIG_ENV);
+			Path lightsConfigPath = Env.getPath(ENV_LIGHTS_CONFIG);
 			if (lightsConfigPath != null && lightsConfigPath.toFile().exists())
 			{
 				reloadLightConfiguration(lightsConfigPath.toFile());

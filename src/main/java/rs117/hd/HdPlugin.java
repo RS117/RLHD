@@ -33,6 +33,7 @@ import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.math.Matrix4;
+import javax.inject.Named;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import lombok.Setter;
@@ -85,10 +86,7 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -110,8 +108,6 @@ import static rs117.hd.utils.GLUtil.*;
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
-	public static String SHADER_PATH = "RLHD_SHADER_PATH";
-
 	// This is the maximum number of triangles the compute shaders support
 	public static final int MAX_TRIANGLE = 6144;
 	public static final int SMALL_TRIANGLE_COUNT = 512;
@@ -170,6 +166,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Inject
 	private ModelHasher modelHasher;
 
+	@Inject
+	@Named("developerMode")
+	private boolean developerMode;
+
+	@Inject
+	private DeveloperTools developerTools;
+
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
 	private Canvas canvas;
@@ -177,9 +180,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private GL4 gl;
 	private GLContext glContext;
 	private GLDrawable glDrawable;
-
-	private Path shaderPath;
-	private FileWatcher fileWatcher;
 
 	static final String LINUX_VERSION_HEADER =
 		"#version 420\n" +
@@ -432,7 +432,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
-
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
 		configObjectTextures = config.objectTextures();
@@ -478,6 +477,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				}
 				
 				System.setProperty("jogamp.gluegen.TestTempDirExec", "false");
+
+				if (developerMode)
+				{
+					developerTools.activate();
+				}
 
 				GLProfile.initSingleton();
 
@@ -582,7 +586,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					initVao();
 					try
 					{
-						initProgram();
+						initPrograms();
 					}
 					catch (ShaderException ex)
 					{
@@ -612,21 +616,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				// load all dynamic scene lights from text file
 				lightManager.startUp();
 
-				shaderPath = Env.getPath(SHADER_PATH);
-				if (shaderPath != null)
-				{
-					fileWatcher	= new FileWatcher()
-						.watchPath(shaderPath)
-						.addChangeHandler(path ->
-						{
-							if (path.getFileName().toString().endsWith(".glsl"))
-							{
-								log.debug("Reloading shaders...");
-								recompileProgram();
-							}
-						});
-				}
-
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
 					ThreadUtils.invokeOnMainThread(this::uploadScene);
@@ -637,7 +626,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					SwingUtilities.invokeAndWait(() -> ((Component) client).addComponentListener(resizeListener));
 					needsReset = 5; // plugin startup races with ClientUI positioning, so do a reset in a little bit
 				}
-
 			}
 			catch (Throwable e)
 			{
@@ -651,15 +639,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void shutDown()
 	{
+		developerTools.deactivate();
 
 		((Component) client).removeComponentListener(resizeListener);
-
-		if (fileWatcher != null)
-		{
-			fileWatcher.close();
-			fileWatcher = null;
-		}
-
 		lightManager.shutDown();
 
 		clientThread.invoke(() ->
@@ -692,7 +674,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					shutdownBuffers();
 					shutdownInterfaceTexture();
-					shutdownProgram();
+					shutdownPrograms();
 					shutdownVao();
 					shutdownAAFbo();
 					shutdownShadowMapFbo();
@@ -780,7 +762,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			" : " + generateFetchMaterialCases(middle, to);
 	}
 
-	private void initProgram() throws ShaderException
+	private void initPrograms() throws ShaderException
 	{
 		String versionHeader = OSType.getOSType() == OSType.Linux ? LINUX_VERSION_HEADER : WINDOWS_VERSION_HEADER;
 		Template template = new Template();
@@ -800,20 +782,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 			return null;
 		});
-		if (shaderPath != null)
+		if (developerMode)
 		{
-			template.add(path -> {
-				Path fullPath = shaderPath.resolve(path);
-				try
-				{
-					log.debug("Loading shader from file: {}", fullPath);
-					return Template.inputStreamToString(new FileInputStream(fullPath.toFile()));
-				}
-				catch (FileNotFoundException ex)
-				{
-					throw new RuntimeException("Failed to load shader from file: " + fullPath, ex);
-				}
-			});
+			template.add(developerTools::shaderResolver);
 		}
 		template.addInclude(HdPlugin.class);
 
@@ -913,7 +884,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		uniShadowTextureOffsets = gl.glGetUniformLocation(glShadowProgram, "textureOffsets");
 	}
 
-	private void shutdownProgram()
+	private void shutdownPrograms()
 	{
 		if (glProgram != -1)
 		{
@@ -952,17 +923,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 	}
 
-	private void recompileProgram()
+	public void recompilePrograms()
 	{
 		clientThread.invoke(() ->
 			ThreadUtils.invokeOnMainThread(() ->
 			{
 				try
 				{
-					shutdownProgram();
+					shutdownPrograms();
 					shutdownVao();
 					initVao();
-					initProgram();
+					initPrograms();
 				}
 				catch (ShaderException ex)
 				{
@@ -2415,7 +2386,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configExpandShadowDraw = config.expandShadowDraw();
 				break;
 			case "macosIntelWorkaround":
-				recompileProgram();
+				recompilePrograms();
 				break;
 			case "unlockFps":
 			case "vsyncMode":
