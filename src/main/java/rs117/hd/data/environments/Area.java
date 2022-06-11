@@ -256,6 +256,12 @@ public enum Area
 		new Rect(2558, 3342, 2686, 3257),
 		new Rect(3328, 5887, 3392, 5951) // SOTE cutscene
 	),
+	EAST_ARDOUGNE_CASTLE_DIRT_FIX(
+		new Rect(2565, 3279, 2592, 3313)
+	),
+	EAST_ARDOUGNE_CASTLE_PATH_FIX(
+		new Rect(2585, 3298, 2593, 3314)
+	),
 
 	// Yanille
 	YANILLE_BANK(2609, 3088, 2616, 3097),
