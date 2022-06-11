@@ -2,23 +2,24 @@ package rs117.hd;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
-import static rs117.hd.HdPlugin.SHADER_PATH;
 import rs117.hd.scene.lighting.LightManager;
-import static rs117.hd.scene.lighting.LightManager.LIGHTS_CONFIG_ENV;
+import static rs117.hd.scene.lighting.LightManager.ENV_LIGHTS_CONFIG;
+import static rs117.hd.utils.DeveloperTools.ENV_SHADER_PATH;
 import rs117.hd.utils.Env;
 import rs117.hd.utils.FileWatcher;
 
+@SuppressWarnings("unchecked")
 public class HdPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		if (Env.missing(LIGHTS_CONFIG_ENV))
+		if (Env.missing(ENV_LIGHTS_CONFIG))
 		{
-			Env.set(LIGHTS_CONFIG_ENV, FileWatcher.getResourcePath(LightManager.class).resolve("lights.json"));
+			Env.set(ENV_LIGHTS_CONFIG, FileWatcher.getResourcePath(LightManager.class).resolve("lights.json"));
 		}
-		if (Env.missing(SHADER_PATH))
+		if (Env.missing(ENV_SHADER_PATH))
 		{
-			Env.set(SHADER_PATH, FileWatcher.getResourcePath(HdPlugin.class));
+			Env.set(ENV_SHADER_PATH, FileWatcher.getResourcePath(HdPlugin.class));
 		}
 
 		ExternalPluginManager.loadBuiltin(HdPlugin.class);

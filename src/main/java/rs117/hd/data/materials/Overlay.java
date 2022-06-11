@@ -130,6 +130,8 @@ public enum Overlay
 	CATHERBY_BANK_TILE_2(4, Area.CATHERBY_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 
 	// Ardougne
+	EAST_ARDOUGNE_CASTLE_DIRT_FIX(14, Area.EAST_ARDOUGNE_CASTLE_DIRT_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(7).setBlended(false)),
+	EAST_ARDOUGNE_CASTLE_PATH_FIX(10, Area.EAST_ARDOUGNE_CASTLE_PATH_FIX, GroundMaterial.VARROCK_PATHS_LIGHT, new Properties().setShiftLightness(16).setBlended(false)),
 	EAST_ARDOUGNE_PATHS_1(10, Area.EAST_ARDOUGNE, GroundMaterial.VARROCK_PATHS_LIGHT, new Properties().setShiftLightness(6)),
 	WIZARD_HOUSE_TILE_LIGHT(38, Area.EAST_ARDOUGNE, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),
 	WIZARD_HOUSE_TILE_DARK(40, Area.EAST_ARDOUGNE, GroundMaterial.MARBLE_2_SEMIGLOSS, new Properties().setBlended(false)),
@@ -138,6 +140,7 @@ public enum Overlay
 	YANILLE_BANK_TILE_1(3, Area.YANILLE_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	YANILLE_BANK_TILE_2(4, Area.YANILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	YANILLE_HUNTER_SHOP_FLOOR(16, Area.YANILLE, GroundMaterial.CARPET, new Properties().setBlended(false)),
+	GUTANOTH_CAVE(29, Area.GUTANOTH_CAVE, WaterType.SWAMP_WATER_FLAT),
 
 	// Draynor
 	WISE_OLD_MANS_HOUSE_CARPET(86, Area.DRAYNOR, GroundMaterial.CARPET, new Properties().setBlended(false)),
@@ -169,6 +172,7 @@ public enum Overlay
 	// Morytania
 	MORYTANIA_SLAYER_TOWER(102, Area.MORYTANIA_SLAYER_TOWER, GroundMaterial.VARROCK_PATHS_LIGHT),
 	ABANDONED_MINE_ROCK(11, Area.MORYTANIA, GroundMaterial.DIRT),
+	TRUE_BLOOD_ALTAR_BLOOD(72, Area.TRUE_BLOOD_ALTAR, WaterType.BLOOD),
 
 	// Tirannwn
 	POISON_WASTE(85, Area.POISON_WASTE, WaterType.POISON_WASTE),
@@ -193,6 +197,9 @@ public enum Overlay
 	MOUNT_QUIDAMORTEM_SYMBOL(-93, Area.MOUNT_QUIDAMORTEM, GroundMaterial.DIRT, new Properties().setBlended(false)),
 	// Kebos Lowlands
 	LIZARDMAN_TEMPLE_WATER(-100, Area.LIZARDMAN_TEMPLE, WaterType.SWAMP_WATER_FLAT),
+
+	// Temple of the Eye
+	TEMPLE_OF_THE_EYE_INCORRECT_WATER(-100, Area.TEMPLE_OF_THE_EYE, GroundMaterial.DIRT),
 
 	// God Wars Dungeon (GWD)
 	GWD_WATER(104, Area.GOD_WARS_DUNGEON, WaterType.ICE_FLAT),
@@ -234,6 +241,10 @@ public enum Overlay
 	// Random events
 	PRISON_PETE_TILE_1(2, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_1, new Properties().setBlended(false)),
 	PRISON_PETE_TILE_2(-125, Area.RANDOM_EVENT_PRISON_PETE, GroundMaterial.MARBLE_2, new Properties().setBlended(false)),
+	
+	// GOTR Entrance fix
+	TEMPLE_OF_THE_EYE_ENTRANCE(0, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
+	TEMPLE_OF_THE_EYE_ENTRANCE_2(-53, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
 
 
 
@@ -252,6 +263,7 @@ public enum Overlay
 	OVERLAY_N84(-84, GroundMaterial.DIRT),
 	OVERLAY_N83(-83, GroundMaterial.DIRT),
 	OVERLAY_N82(-82, GroundMaterial.TILE_DARK),
+	OVERLAY_N49(-49, GroundMaterial.SAND_BRICK),
 	OVERLAY_2(2, GroundMaterial.GRAVEL),
 	OVERLAY_3(3, GroundMaterial.GRAVEL),
 	OVERLAY_4(4, GroundMaterial.GRAVEL),

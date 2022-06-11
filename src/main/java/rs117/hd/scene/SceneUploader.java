@@ -26,6 +26,7 @@
 package rs117.hd.scene;
 
 import com.google.common.base.Stopwatch;
+import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,7 @@ class SceneUploader
 	@Inject
 	private ModelPusher modelPusher;
 
-	public int sceneId = (int) (System.currentTimeMillis() / 1000L);
+	public int sceneId = new Random().nextInt();
 	private int offset;
 	private int uvoffset;
 

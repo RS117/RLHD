@@ -10,7 +10,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.19-SNAPSHOT'
+def runeLiteVersion = '1.8.22'
 def joglVersion = '2.4.0-rc-20220318'
 
 dependencies {
@@ -28,8 +28,8 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    compile 'org.jfree:jfreechart:1.5.3'
-    compile 'org.commonmark:commonmark:0.18.2'
+    implementation('org.jfree:jfreechart:1.5.3')
+	implementation('org.commonmark:commonmark:0.18.2')
 }
 
 group = 'rs117.hd'

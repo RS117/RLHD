@@ -33,6 +33,7 @@ import com.jogamp.nativewindow.awt.AWTGraphicsConfiguration;
 import com.jogamp.nativewindow.awt.JAWTWindow;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.math.Matrix4;
+import javax.inject.Named;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
 import lombok.Getter;
@@ -56,11 +57,14 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.ImageUtil;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
+import static rs117.hd.HdPluginConfig.KEY_WINTER_THEME;
 import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.data.materials.Material;
+import rs117.hd.gui.panel.HdPanel;
+import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
 import rs117.hd.model.ModelHasher;
 import rs117.hd.model.ModelPusher;
 import rs117.hd.model.TempModelInfo;
@@ -71,8 +75,6 @@ import rs117.hd.opengl.compute.OpenCLManager;
 import rs117.hd.opengl.shader.Shader;
 import rs117.hd.opengl.shader.ShaderException;
 import rs117.hd.opengl.shader.Template;
-import rs117.hd.gui.panel.HdPanel;
-import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
 import rs117.hd.scene.EnvironmentManager;
 import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.scene.SceneUploader;
@@ -85,7 +87,6 @@ import rs117.hd.utils.buffer.GpuFloatBuffer;
 import rs117.hd.utils.buffer.GpuIntBuffer;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -94,10 +95,7 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,8 +117,6 @@ import static rs117.hd.utils.GLUtil.*;
 @Slf4j
 public class HdPlugin extends Plugin implements DrawCallbacks
 {
-	public static String SHADER_PATH = "RLHD_SHADER_PATH";
-
 	// This is the maximum number of triangles the compute shaders support
 	public static final int MAX_TRIANGLE = 6144;
 	public static final int SMALL_TRIANGLE_COUNT = 512;
@@ -199,6 +195,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Inject
 	private ModelHasher modelHasher;
 
+	@Inject
+	@Named("developerMode")
+	private boolean developerMode;
+
+	@Inject
+	private DeveloperTools developerTools;
+
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
 	private Canvas canvas;
@@ -215,9 +218,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Getter
 	@Setter
 	String pluginVersion = "";
-
-	private Path shaderPath;
-	private FileWatcher fileWatcher;
 
 	static final String LINUX_VERSION_HEADER =
 			"#version 420\n" +
@@ -248,26 +248,26 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			.add(GL4.GL_VERTEX_SHADER, "vertui.glsl")
 			.add(GL4.GL_FRAGMENT_SHADER, "fragui.glsl");
 
-	private int glProgram;
-	private int glComputeProgram;
-	private int glSmallComputeProgram;
-	private int glUnorderedComputeProgram;
-	private int glUiProgram;
-	private int glShadowProgram;
+	private int glProgram = -1;
+	private int glComputeProgram = -1;
+	private int glSmallComputeProgram = -1;
+	private int glUnorderedComputeProgram = -1;
+	private int glUiProgram = -1;
+	private int glShadowProgram = -1;
 
-	private int vaoHandle;
+	private int vaoHandle = -1;
 
-	private int interfaceTexture;
-	private int interfacePbo;
+	private int interfaceTexture = -1;
+	private int interfacePbo = -1;
 
-	private int vaoUiHandle;
-	private int vboUiHandle;
+	private int vaoUiHandle = -1;
+	private int vboUiHandle = -1;
 
-	private int fboSceneHandle;
-	private int rboSceneHandle;
+	private int fboSceneHandle = -1;
+	private int rboSceneHandle = -1;
 
-	private int fboShadowMap;
-	private int texShadowMap;
+	private int fboShadowMap = -1;
+	private int texShadowMap = -1;
 
 	// scene vertex buffer
 	private final GLBuffer sceneVertexBuffer = new GLBuffer();
@@ -470,10 +470,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
+
 		ExternalPluginManifest manifest = ExternalPluginManager.getExternalPluginManifest(getClass());
 		setPluginVersion(manifest == null ? "Not Available" : manifest.getVersion());
 		log.info(Utils.getSpecs(runeliteVersion,pluginVersion));
-
 
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
@@ -520,6 +520,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				}
 
 				System.setProperty("jogamp.gluegen.TestTempDirExec", "false");
+
+				if (developerMode)
+				{
+					developerTools.activate();
+				}
 
 				GLProfile.initSingleton();
 
@@ -626,7 +631,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					initVao();
 					try
 					{
-						initProgram();
+						initPrograms();
 					}
 					catch (ShaderException ex)
 					{
@@ -657,7 +662,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					setupOverlays();
 				});
 
-
 				client.setDrawCallbacks(this);
 				client.setGpu(true);
 
@@ -674,21 +678,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				// load all dynamic scene lights from text file
 				lightManager.startUp();
 
-				shaderPath = Env.getPath(SHADER_PATH);
-				if (shaderPath != null)
-				{
-					fileWatcher	= new FileWatcher()
-							.watchPath(shaderPath)
-							.addChangeHandler(path ->
-							{
-								if (path.getFileName().toString().endsWith(".glsl"))
-								{
-									log.debug("Reloading shaders...");
-									recompileProgram();
-								}
-							});
-				}
-
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
 					ThreadUtils.invokeOnMainThread(this::uploadScene);
@@ -699,7 +688,6 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					SwingUtilities.invokeAndWait(() -> ((Component) client).addComponentListener(resizeListener));
 					needsReset = 5; // plugin startup races with ClientUI positioning, so do a reset in a little bit
 				}
-
 			}
 			catch (Throwable e)
 			{
@@ -724,15 +712,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void shutDown()
 	{
+		developerTools.deactivate();
 
 		((Component) client).removeComponentListener(resizeListener);
-
-		if (fileWatcher != null)
-		{
-			fileWatcher.close();
-			fileWatcher = null;
-		}
-
 		lightManager.shutDown();
 		removeOverlays();
 		clientThread.invoke(() ->
@@ -765,7 +747,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 					shutdownBuffers();
 					shutdownInterfaceTexture();
-					shutdownProgram();
+					shutdownPrograms();
 					shutdownVao();
 					shutdownAAFbo();
 					shutdownShadowMapFbo();
@@ -853,7 +835,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				" : " + generateFetchMaterialCases(middle, to);
 	}
 
-	private void initProgram() throws ShaderException
+	private void initPrograms() throws ShaderException
 	{
 		String versionHeader = OSType.getOSType() == OSType.Linux ? LINUX_VERSION_HEADER : WINDOWS_VERSION_HEADER;
 		Template template = new Template();
@@ -873,20 +855,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			}
 			return null;
 		});
-		if (shaderPath != null)
+		if (developerMode)
 		{
-			template.add(path -> {
-				Path fullPath = shaderPath.resolve(path);
-				try
-				{
-					log.debug("Loading shader from file: {}", fullPath);
-					return Template.inputStreamToString(new FileInputStream(fullPath.toFile()));
-				}
-				catch (FileNotFoundException ex)
-				{
-					throw new RuntimeException("Failed to load shader from file: " + fullPath, ex);
-				}
-			});
+			template.add(developerTools::shaderResolver);
 		}
 		template.addInclude(HdPlugin.class);
 
@@ -986,38 +957,56 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		uniShadowTextureOffsets = gl.glGetUniformLocation(glShadowProgram, "textureOffsets");
 	}
 
-	private void shutdownProgram()
+	private void shutdownPrograms()
 	{
-		gl.glDeleteProgram(glProgram);
-		glProgram = -1;
+		if (glProgram != -1)
+		{
+			gl.glDeleteProgram(glProgram);
+			glProgram = -1;
+		}
 
-		gl.glDeleteProgram(glComputeProgram);
-		glComputeProgram = -1;
+		if (glComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glComputeProgram);
+			glComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glSmallComputeProgram);
-		glSmallComputeProgram = -1;
+		if (glSmallComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glSmallComputeProgram);
+			glSmallComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glUnorderedComputeProgram);
-		glUnorderedComputeProgram = -1;
+		if (glUnorderedComputeProgram != -1)
+		{
+			gl.glDeleteProgram(glUnorderedComputeProgram);
+			glUnorderedComputeProgram = -1;
+		}
 
-		gl.glDeleteProgram(glUiProgram);
-		glUiProgram = -1;
+		if (glUiProgram != -1)
+		{
+			gl.glDeleteProgram(glUiProgram);
+			glUiProgram = -1;
+		}
 
-		gl.glDeleteProgram(glShadowProgram);
-		glShadowProgram = -1;
+		if (glShadowProgram != -1)
+		{
+			gl.glDeleteProgram(glShadowProgram);
+			glShadowProgram = -1;
+		}
 	}
 
-	private void recompileProgram()
+	public void recompilePrograms()
 	{
 		clientThread.invoke(() ->
 				ThreadUtils.invokeOnMainThread(() ->
 				{
 					try
 					{
-						shutdownProgram();
+						shutdownPrograms();
 						shutdownVao();
 						initVao();
-						initProgram();
+						initPrograms();
 					}
 					catch (ShaderException ex)
 					{
@@ -1065,14 +1054,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void shutdownVao()
 	{
-		glDeleteVertexArrays(gl, vaoHandle);
-		vaoHandle = -1;
+		if (vaoHandle != -1)
+		{
+			glDeleteVertexArrays(gl, vaoHandle);
+			vaoHandle = -1;
+		}
 
-		glDeleteBuffer(gl, vboUiHandle);
-		vboUiHandle = -1;
+		if (vboUiHandle != -1)
+		{
+			glDeleteBuffer(gl, vboUiHandle);
+			vboUiHandle = -1;
+		}
 
-		glDeleteVertexArrays(gl, vaoUiHandle);
-		vaoUiHandle = -1;
+		if (vaoUiHandle != -1)
+		{
+			glDeleteVertexArrays(gl, vaoUiHandle);
+			vaoUiHandle = -1;
+		}
 	}
 
 	private void initBuffers()
@@ -1144,9 +1142,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private void shutdownInterfaceTexture()
 	{
-		glDeleteBuffer(gl, interfacePbo);
-		glDeleteTexture(gl, interfaceTexture);
-		interfaceTexture = -1;
+		if (interfacePbo != -1)
+		{
+			glDeleteBuffer(gl, interfacePbo);
+			interfacePbo = -1;
+		}
+
+		if (interfaceTexture != -1)
+		{
+			glDeleteTexture(gl, interfaceTexture);
+			interfaceTexture = -1;
+		}
 	}
 
 	private void initUniformBuffer()
@@ -2439,7 +2445,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configTzhaarHD = config.tzhaarHD();
 				reloadScene();
 				break;
-			case "winterTheme":
+			case KEY_WINTER_THEME:
 				configWinterTheme = config.winterTheme();
 				reloadScene();
 				break;
@@ -2453,7 +2459,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				configExpandShadowDraw = config.expandShadowDraw();
 				break;
 			case "macosIntelWorkaround":
-				recompileProgram();
+				recompilePrograms();
 				break;
 			case "unlockFps":
 			case "vsyncMode":

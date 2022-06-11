@@ -562,13 +562,17 @@ public enum Environment
 	LMS_ARENA_DESERTED_ISLAND(Area.LMS_ARENA_DESERTED_ISLAND, new Properties()),
 
 	// Zeah
+	MOUNT_KARUULM(Area.MOUNT_KARUULM, new Properties()
+			.setAmbientStrength(1.0f)
+			.setDirectionalStrength(3.0f)
+	),
 	KARUULM_SLAYER_DUNGEON(Area.KARUULM_SLAYER_DUNGEON, new Properties()
 		.setFogColor("#051E22")
 		.setFogDepth(40)
 		.setAmbientColor("#A4D2E5")
-		.setAmbientStrength(3.0f)
+		.setAmbientStrength(2.0f)
 		.setDirectionalColor("#9AEAFF")
-		.setDirectionalStrength(1.0f)
+		.setDirectionalStrength(0.75f)
 		.setLightDirection(260f, 10f)
 	),
 	KOUREND_CATACOMBS(Area.KOUREND_CATACOMBS, new Properties()

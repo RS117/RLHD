@@ -164,7 +164,7 @@ public class HDUtils
 		return (colorHSL[0] << 3 | colorHSL[1]) << 7 | colorHSL[2];
 	}
 
-	static int[] colorIntToRGB(int colorInt)
+	public static int[] colorIntToRGB(int colorInt)
 	{
 		int[] outHSL = new int[3];
 		outHSL[0] = colorInt >> 10 & 0x3F;
