@@ -29609,5 +29609,195 @@
     "duration": 7000,
     "range": 10,
     "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_1",
+    "worldX": 3375,
+    "worldY": 11489,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_2",
+    "worldX": 3379,
+    "worldY": 11490,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_3",
+    "worldX": 3385,
+    "worldY": 11490,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_4",
+    "worldX": 3374,
+    "worldY": 11497,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_5",
+    "worldX": 3374,
+    "worldY": 11501,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_6",
+    "worldX": 3374,
+    "worldY": 11505,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_7",
+    "worldX": 3368,
+    "worldY": 11503,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_8",
+    "worldX": 3378,
+    "worldY": 11508,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_LAVA_9",
+    "worldX": 3378,
+    "worldY": 11503,
+    "plane": 0,
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 3,
+    "color": [
+      255,
+      182,
+      38
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "GIANTS_FOUNDRY_DOORWAY",
+    "worldX": 3366,
+    "worldY": 11481,
+    "plane": 0,
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 8,
+    "color": [
+      255,
+      255,
+      220
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
   }
 ]
