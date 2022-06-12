@@ -387,6 +387,13 @@ public class EnvironmentManager
 		{
 			targetFogColor = targetWaterColor = env.getFogColor();
 		}
+
+
+		//override with decoupled water/sky color if present
+		if(currentEnvironment.isCustomWaterColor())
+		{
+			targetWaterColor=currentEnvironment.getWaterColor();
+		}
 	}
 
 	/**

@@ -900,12 +900,14 @@ public enum Environment
 	FISHER_KINGS_REALM(Area.FISHER_KINGS_REALM, new Properties()),
 	ENCHANTED_VALLEY(Area.ENCHANTED_VALLEY, new Properties()),
 	GIANTS_FOUNDRY(Area.GIANTS_FOUNDRY, new Properties()
-			.setFogColor("#241809")
-			.setAmbientStrength(0.7f)
+			.setFogColor(10, 6, 2)
+			.setFogDepth(12)
+			.setAmbientStrength(1.4f)
 			.setAmbientColor(255, 255, 255)
-			.setDirectionalStrength(0.7f)
-			.setDirectionalColor(255, 255, 255)
-			.setLightDirection(-100, 55f)
+			.setDirectionalStrength(1.0f)
+			.setDirectionalColor(255, 193, 153)
+			.setLightDirection(-113, -120f)
+			.setWaterColor(102, 234, 255)
 	),
 
 
@@ -940,6 +942,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(1.0f)
 		.setLightDirection(260f, 10f)
+		.setWaterColor(185, 214, 255)
 	),
 
 	;
@@ -969,6 +972,8 @@ public enum Environment
 	private final boolean underwater;
 	private final float[] underwaterCausticsColor;
 	private final float underwaterCausticsStrength;
+	private final float[] waterColor;
+	private final boolean customWaterColor;
 
 	private static class Properties
 	{
@@ -996,6 +1001,8 @@ public enum Environment
 		private boolean underwater = false;
 		private float[] underwaterCausticsColor = null;
 		private float underwaterCausticsStrength = 0;
+		private float[] waterColor = rgb(185, 214, 255);
+		private boolean customWaterColor = false;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -1030,6 +1037,13 @@ public enum Environment
 		{
 			this.ambientColor = rgb(r, g, b);
 			this.customAmbientColor = true;
+			return this;
+		}
+
+		public Properties setWaterColor(int r, int g, int b)
+		{
+			this.waterColor = rgb(r, g, b);
+			this.customWaterColor = true;
 			return this;
 		}
 
@@ -1169,6 +1183,8 @@ public enum Environment
 			properties.directionalColor : properties.underwaterCausticsColor;
 		this.underwaterCausticsStrength = properties.underwaterCausticsStrength == 0 ?
 			properties.directionalStrength : properties.underwaterCausticsStrength;
+		this.waterColor = properties.waterColor;
+		this.customWaterColor = properties.customWaterColor;
 	}
 
 	public static float[] rgb(int r, int g, int b)
