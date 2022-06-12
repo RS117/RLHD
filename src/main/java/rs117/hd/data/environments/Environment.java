@@ -899,6 +899,14 @@ public enum Environment
 	CANOE_CUTSCENE(Area.CANOE_CUTSCENE, new Properties()),
 	FISHER_KINGS_REALM(Area.FISHER_KINGS_REALM, new Properties()),
 	ENCHANTED_VALLEY(Area.ENCHANTED_VALLEY, new Properties()),
+	GIANTS_FOUNDRY(Area.GIANTS_FOUNDRY, new Properties()
+			.setFogColor("#241809")
+			.setAmbientStrength(0.7f)
+			.setAmbientColor(255, 255, 255)
+			.setDirectionalStrength(0.7f)
+			.setDirectionalColor(255, 255, 255)
+			.setLightDirection(-100, 55f)
+	),
 
 
 
