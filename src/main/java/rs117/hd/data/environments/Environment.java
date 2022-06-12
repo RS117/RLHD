@@ -900,14 +900,14 @@ public enum Environment
 	FISHER_KINGS_REALM(Area.FISHER_KINGS_REALM, new Properties()),
 	ENCHANTED_VALLEY(Area.ENCHANTED_VALLEY, new Properties()),
 	GIANTS_FOUNDRY(Area.GIANTS_FOUNDRY, new Properties()
-			.setFogColor(0, 0, 0)
-			.setFogDepth(12)
-			.setAmbientStrength(1.1f)
-			.setAmbientColor(255, 255, 255)
-			.setDirectionalStrength(1.0f)
-			.setDirectionalColor(255, 193, 153)
-			.setLightDirection(-113, -120f)
-			.setWaterColor(102, 234, 255)
+		.setFogColor(0, 0, 0)
+		.setFogDepth(12)
+		.setAmbientStrength(1.1f)
+		.setAmbientColor(255, 255, 255)
+		.setDirectionalStrength(1.0f)
+		.setDirectionalColor(255, 193, 153)
+		.setLightDirection(-113, -120f)
+		.setWaterColor(102, 234, 255)
 	),
 
 

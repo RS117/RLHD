@@ -29795,9 +29795,9 @@
       255,
       220
     ],
-    "type": "PULSE",
-    "duration": 7000,
-    "range": 10,
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 0,
     "fadeInDuration": 0
   }
 ]

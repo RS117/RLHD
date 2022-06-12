@@ -392,7 +392,7 @@ public class EnvironmentManager
 		//override with decoupled water/sky color if present
 		if(currentEnvironment.isCustomWaterColor())
 		{
-			targetWaterColor=currentEnvironment.getWaterColor();
+			targetWaterColor = currentEnvironment.getWaterColor();
 		}
 	}
 
