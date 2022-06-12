@@ -373,7 +373,7 @@ public class EnvironmentManager
 	public void updateSkyColor()
 	{
 		Environment env = hdPlugin.configWinterTheme ? Environment.WINTER : currentEnvironment;
-		if (!env.isCustomAmbientColor() || env.isAllowSkyOverride() && config.overrideSky())
+		if (!env.isCustomFogColor() || env.isAllowSkyOverride() && config.overrideSky())
 		{
 			DefaultSkyColor sky = config.defaultSkyColor();
 			targetFogColor = sky.getRgb(client);
