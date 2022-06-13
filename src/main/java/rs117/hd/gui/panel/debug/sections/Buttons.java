@@ -40,13 +40,11 @@ public class Buttons extends JPanel
 	private final ToggleButton lightInfo;
 	private final ToggleButton memoryInspector;
 	private final ToggleButton fpsInspector;
-	private final ToggleButton shadowMap;
 	@Getter
 	private final ToggleButton tileInfoOverlay;
 
 	public Buttons(HdPlugin plugin) {
 
-		shadowMap = new ToggleButton("Shadow Map", "Show Current Shadow Map");
 		lightInfo = new ToggleButton("Light Info", "Show Light Information");
 		memoryInspector = new ToggleButton("Memory Inspector", "Memory Inspector");
 		fpsInspector = new ToggleButton("Fps Inspector", "Fps Inspector");
@@ -58,7 +56,6 @@ public class Buttons extends JPanel
 		memoryInspector.addFrame(new MemoryInspector(plugin.getClient()));
 		fpsInspector.addFrame(new FpsInspector(plugin.getClient()));
 
-		add(shadowMap);
 		add(lightInfo);
 		add(memoryInspector);
 		add(fpsInspector);
