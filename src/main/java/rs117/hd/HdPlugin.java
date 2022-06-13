@@ -48,6 +48,7 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 import net.runelite.client.externalplugins.ExternalPluginManifest;
+import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
 import net.runelite.client.ui.ClientToolbar;
@@ -136,6 +137,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private NavigationButton nav;
 
+	@Inject
+	@Getter
+	private KeyManager keyManager;
+
 	@Getter
 	@Setter
 	private HdPanel panel;
@@ -188,6 +193,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private ProceduralGenerator proceduralGenerator;
 
 	@Inject
+	@Getter
 	private ConfigManager configManager;
 
 	@Inject

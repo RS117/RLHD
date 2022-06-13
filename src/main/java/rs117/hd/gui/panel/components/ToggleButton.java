@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.util.function.Consumer;
 import javax.swing.JButton;
 import lombok.Getter;
+import lombok.Setter;
 import net.runelite.client.util.LinkBrowser;
 
 public class ToggleButton extends JButton
@@ -55,6 +56,10 @@ public class ToggleButton extends JButton
 		super(title);
 		addActionListener((ev) -> LinkBrowser.browse(url));
 		this.setToolTipText(tooltip);
+	}
+
+	public void toggle() {
+		setToggled(!this.toggled);
 	}
 
 	void setToggled(boolean toggled)

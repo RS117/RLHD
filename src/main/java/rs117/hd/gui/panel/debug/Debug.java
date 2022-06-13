@@ -54,6 +54,7 @@ import rs117.hd.gui.panel.components.Header;
 import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
 import rs117.hd.gui.panel.debug.overlays.TileInfoOverlay;
 import rs117.hd.gui.panel.debug.sections.Buttons;
+import rs117.hd.gui.panel.debug.sections.HotKeys;
 import rs117.hd.gui.panel.debug.sections.Specifications;
 
 public class Debug extends PluginPanel
@@ -72,7 +73,11 @@ public class Debug extends PluginPanel
 
 	@Getter
 	@Setter
-	private Buttons buttons;
+	public Buttons buttons;
+
+	@Getter
+	@Setter
+	private HotKeys hotKeys;
 
 	@Inject
 	private LightInfoOverlay lightInfoOverlay;
@@ -131,6 +136,7 @@ public class Debug extends PluginPanel
 
 		setSpecifications(new Specifications(plugin));
 		setButtons(new Buttons(plugin));
+		setHotKeys(new HotKeys(plugin));
 
 		new CategoryBuilder().
 			setName("Toggle Buttons").
@@ -144,6 +150,13 @@ public class Debug extends PluginPanel
 			setPosition(1).
 			setPanel(specifications).
 			setEnabled(false)
+		.build();
+
+		new CategoryBuilder().
+				setName("Developer Hotkeys").
+				setPosition(2).
+				setPanel(hotKeys).
+				setEnabled(false)
 		.build();
 
 		List<Map.Entry<Integer, CategoryBuilder>> result =

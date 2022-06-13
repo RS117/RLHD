@@ -17,12 +17,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 @Slf4j
-public class DeveloperTools implements KeyListener
+public class DeveloperTools
 {
 	public static final String ENV_SHADER_PATH = "RLHD_SHADER_PATH";
-
-	// This could be part of the config if we had developer mode config sections
-	private static final Keybind KEY_TOGGLE_TILE_INFO = new Keybind(KeyEvent.VK_F3, InputEvent.CTRL_DOWN_MASK);
 
 	@Inject
 	private HdPluginConfig config;
@@ -30,15 +27,10 @@ public class DeveloperTools implements KeyListener
 	@Inject
 	private HdPlugin plugin;
 
-	@Inject
-	private KeyManager keyManager;
-
 	private Path shaderPath;
 	private FileWatcher shaderSourceWatcher;
-	public static boolean tileInfoOverlayEnabled = false;
 
 	public void activate() {
-		keyManager.registerKeyListener(this);
 
 		shaderPath = Env.getPath(ENV_SHADER_PATH);
 		if (shaderPath != null)
@@ -70,7 +62,6 @@ public class DeveloperTools implements KeyListener
 			shaderSourceWatcher = null;
 		}
 
-		keyManager.unregisterKeyListener(this);
 	}
 
 	public String shaderResolver(String path) {
@@ -86,25 +77,4 @@ public class DeveloperTools implements KeyListener
 		}
 	}
 
-	@Override
-	public void keyPressed(KeyEvent event)
-	{
-		if (KEY_TOGGLE_TILE_INFO.matches(event))
-		{
-			event.consume();
-			tileInfoOverlayEnabled = !tileInfoOverlayEnabled;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent event)
-	{
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent event)
-	{
-
-	}
 }

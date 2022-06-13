@@ -39,7 +39,7 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 	@Override
 	public Dimension render(Graphics2D g)
 	{
-		if (!plugin.getPanel().getDebugPanel().getButtons().getTileInfoOverlay().isToggled() && !DeveloperTools.tileInfoOverlayEnabled)
+		if (!plugin.getPanel().getDebugPanel().getButtons().getTileInfoOverlay().isToggled())
 		{
 			return null;
 		}
