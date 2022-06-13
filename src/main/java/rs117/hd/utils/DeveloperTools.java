@@ -1,21 +1,20 @@
 package rs117.hd.utils;
 
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.config.Keybind;
+import net.runelite.client.input.KeyListener;
+import net.runelite.client.input.KeyManager;
+import rs117.hd.HdPlugin;
+import rs117.hd.HdPluginConfig;
+import rs117.hd.opengl.shader.Template;
+
+import javax.inject.Inject;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
-import javax.inject.Inject;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.config.Keybind;
-import net.runelite.client.input.KeyListener;
-import net.runelite.client.input.KeyManager;
-import net.runelite.client.ui.overlay.OverlayManager;
-import rs117.hd.HdPlugin;
-import rs117.hd.HdPluginConfig;
-import rs117.hd.opengl.shader.Template;
-import rs117.hd.overlays.TileInfoOverlay;
 
 @Slf4j
 public class DeveloperTools implements KeyListener
@@ -34,22 +33,12 @@ public class DeveloperTools implements KeyListener
 	@Inject
 	private KeyManager keyManager;
 
-	@Inject
-	private OverlayManager overlayManager;
-
-	@Inject
-	private TileInfoOverlay tileInfoOverlay;
-
 	private Path shaderPath;
 	private FileWatcher shaderSourceWatcher;
-	private boolean tileInfoOverlayEnabled = false;
+	public static boolean tileInfoOverlayEnabled = false;
 
 	public void activate() {
 		keyManager.registerKeyListener(this);
-		if (tileInfoOverlayEnabled)
-		{
-			overlayManager.add(tileInfoOverlay);
-		}
 
 		shaderPath = Env.getPath(ENV_SHADER_PATH);
 		if (shaderPath != null)
@@ -82,7 +71,6 @@ public class DeveloperTools implements KeyListener
 		}
 
 		keyManager.unregisterKeyListener(this);
-		overlayManager.remove(tileInfoOverlay);
 	}
 
 	public String shaderResolver(String path) {
@@ -105,14 +93,6 @@ public class DeveloperTools implements KeyListener
 		{
 			event.consume();
 			tileInfoOverlayEnabled = !tileInfoOverlayEnabled;
-			if (tileInfoOverlayEnabled)
-			{
-				overlayManager.add(tileInfoOverlay);
-			}
-			else
-			{
-				overlayManager.remove(tileInfoOverlay);
-			}
 		}
 	}
 

@@ -65,6 +65,7 @@ import rs117.hd.config.UIScalingMode;
 import rs117.hd.data.materials.Material;
 import rs117.hd.gui.panel.HdPanel;
 import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
+import rs117.hd.gui.panel.debug.overlays.TileInfoOverlay;
 import rs117.hd.model.ModelHasher;
 import rs117.hd.model.ModelPusher;
 import rs117.hd.model.TempModelInfo;
@@ -701,12 +702,18 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Inject
 	private LightInfoOverlay lightInfoOverlay;
 
+	@Inject
+	private TileInfoOverlay tileInfoOverlay;
+
 	public void setupOverlays() {
 		overlayManager.add(lightInfoOverlay);
+		overlayManager.add(tileInfoOverlay);
 	}
 
 	public void removeOverlays() {
 		overlayManager.remove(lightInfoOverlay);
+		overlayManager.remove(tileInfoOverlay);
+
 	}
 
 	@Override

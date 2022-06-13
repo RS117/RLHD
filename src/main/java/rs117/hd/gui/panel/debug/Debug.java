@@ -52,6 +52,7 @@ import rs117.hd.gui.panel.components.CategoryBuilder;
 import rs117.hd.gui.panel.components.FixedWidthPanel;
 import rs117.hd.gui.panel.components.Header;
 import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
+import rs117.hd.gui.panel.debug.overlays.TileInfoOverlay;
 import rs117.hd.gui.panel.debug.sections.Buttons;
 import rs117.hd.gui.panel.debug.sections.Specifications;
 
@@ -75,6 +76,9 @@ public class Debug extends PluginPanel
 
 	@Inject
 	private LightInfoOverlay lightInfoOverlay;
+
+	@Inject
+	private TileInfoOverlay tileInfoOverlay;
 
 	static
 	{
