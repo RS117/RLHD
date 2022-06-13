@@ -358,7 +358,7 @@ public class LightManager
 
 			int tileX = (int) Math.floor(light.x / 128f);
 			int tileY = (int) Math.floor(light.y / 128f);
-			int tileZ = light.plane;
+			int tileZ = light.plane <= -1 ? 0 : light.plane;
 
 			light.belowFloor = false;
 			light.aboveFloor = false;
