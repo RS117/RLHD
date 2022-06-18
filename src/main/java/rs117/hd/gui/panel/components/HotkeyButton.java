@@ -36,14 +36,7 @@ public class HotkeyButton extends JButton implements KeyListener
     public HotkeyButton(Keybind value, String key, Consumer consumer)
     {
 
-        String keyFormatted = key.replace(" ","_").toUpperCase();
-        Keybind bind = null;
-
-        if (plugin.getConfigManager().getConfiguration("117Debug",keyFormatted) != null) {
-            bind = plugin.getConfigManager().getConfiguration("117Debug", keyFormatted, Keybind.class);
-        }
-
-        setValue(bind == null ? value : bind);
+        setValue(value);
         setConsumer(consumer);
         setKey(key);
         setFont(FontManager.getDefaultFont().deriveFont(12.f));
@@ -65,6 +58,17 @@ public class HotkeyButton extends JButton implements KeyListener
                 setValue(new Keybind(e));
             }
         });
+    }
+
+    public void init()
+    {
+        String keyFormatted = key.replace(" ","_").toUpperCase();
+        Keybind bind = null;
+
+        if (plugin.getConfigManager().getConfiguration("117Debug",keyFormatted) != null) {
+            bind = plugin.getConfigManager().getConfiguration("117Debug", keyFormatted, Keybind.class);
+        }
+        setValue(bind == null ? value : bind);
     }
 
     public void setValue(Keybind value)

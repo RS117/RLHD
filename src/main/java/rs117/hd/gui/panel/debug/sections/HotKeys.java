@@ -51,6 +51,7 @@ public class HotKeys extends JPanel
 
 		for(HotkeyButton button: buttons) {
 			button.setPlugin(plugin);
+			button.init();
 			add(new JLabel(button.getKey() + ":"));
 			plugin.getKeyManager().registerKeyListener(button);
 			add(button);
