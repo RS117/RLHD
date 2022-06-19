@@ -91,6 +91,7 @@ public class LightManager
 	@Inject
 	private PluginManager pluginManager;
 
+	@Getter
 	private static final ArrayList<SceneLight> WORLD_LIGHTS = new ArrayList<>();
 	private static final ListMultimap<Integer, Light> NPC_LIGHTS = ArrayListMultimap.create();
 	private static final ListMultimap<Integer, Light> OBJECT_LIGHTS = ArrayListMultimap.create();
@@ -130,8 +131,8 @@ public class LightManager
 			try
 			{
 				fileWatcher = new FileWatcher()
-					.watchFile(lightsConfigPath)
-					.addChangeHandler(path -> hotswapScheduled = true);
+						.watchFile(lightsConfigPath)
+						.addChangeHandler(path -> hotswapScheduled = true);
 			}
 			catch (IOException ex)
 			{
@@ -292,12 +293,12 @@ public class LightManager
 				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * FloatUtil.TWO_PI;
 
 				float flicker = (
-					pow(cos(11 * t), 2) +
-						pow(cos(17 * t), 4) +
-						pow(cos(23 * t), 6) +
-						pow(cos(31 * t), 2) +
-						pow(cos(71 * t), 2) / 3 +
-						pow(cos(151 * t), 2) / 7
+						pow(cos(11 * t), 2) +
+								pow(cos(17 * t), 4) +
+								pow(cos(23 * t), 6) +
+								pow(cos(31 * t), 2) +
+								pow(cos(71 * t), 2) / 3 +
+								pow(cos(151 * t), 2) / 7
 				) / 4.335f;
 
 				float maxFlicker = 1f + (light.range / 100f);
@@ -588,8 +589,8 @@ public class LightManager
 			}
 
 			SceneLight light = new SceneLight(
-				0, 0, projectile.getFloor(), 0, Alignment.CENTER, l.radius,
-				l.strength, l.color, l.type, l.duration, l.range, 300);
+					0, 0, projectile.getFloor(), 0, Alignment.CENTER, l.radius,
+					l.strength, l.color, l.type, l.duration, l.range, 300);
 			light.projectile = projectile;
 			light.x = (int) projectile.getX();
 			light.y = (int) projectile.getY();
@@ -611,8 +612,8 @@ public class LightManager
 			}
 
 			SceneLight light = new SceneLight(
-				0, 0, -1, l.height, l.alignment, l.radius,
-				l.strength, l.color, l.type, l.duration, l.range, 0);
+					0, 0, -1, l.height, l.alignment, l.radius,
+					l.strength, l.color, l.type, l.duration, l.range, 0);
 			light.npc = npc;
 			light.visible = false;
 
@@ -647,8 +648,8 @@ public class LightManager
 
 			WorldPoint worldLocation = tileObject.getWorldLocation();
 			SceneLight light = new SceneLight(
-				worldLocation.getX(), worldLocation.getY(), worldLocation.getPlane(), l.height, l.alignment, l.radius,
-				l.strength, l.color, l.type, l.duration, l.range, 0);
+					worldLocation.getX(), worldLocation.getY(), worldLocation.getPlane(), l.height, l.alignment, l.radius,
+					l.strength, l.color, l.type, l.duration, l.range, 0);
 			LocalPoint localLocation = tileObject.getLocalLocation();
 			light.x = localLocation.getX();
 			light.y = localLocation.getY();
@@ -698,13 +699,13 @@ public class LightManager
 			tileMaxY = Ints.constrainToRange(tileMaxY, 0, Constants.SCENE_SIZE - 1);
 
 			float heightNorth = HDUtils.lerp(
-				client.getTileHeights()[plane][tileMinX][tileMaxY],
-				client.getTileHeights()[plane][tileMaxX][tileMaxY],
-				lerpX);
+					client.getTileHeights()[plane][tileMinX][tileMaxY],
+					client.getTileHeights()[plane][tileMaxX][tileMaxY],
+					lerpX);
 			float heightSouth = HDUtils.lerp(
-				client.getTileHeights()[plane][tileMinX][tileMinY],
-				client.getTileHeights()[plane][tileMaxX][tileMinY],
-				lerpX);
+					client.getTileHeights()[plane][tileMinX][tileMinY],
+					client.getTileHeights()[plane][tileMaxX][tileMinY],
+					lerpX);
 			float tileHeight = HDUtils.lerp(heightSouth, heightNorth, lerpY);
 
 			light.x = lightX;
@@ -724,9 +725,9 @@ public class LightManager
 			int plane = tileObject.getWorldLocation().getPlane();
 
 			sceneLights.removeIf(light ->
-				light.x == localLocation.getX() &&
-					light.y == localLocation.getY() &&
-					light.plane == plane);
+					light.x == localLocation.getX() &&
+							light.y == localLocation.getY() &&
+							light.plane == plane);
 		}
 	}
 

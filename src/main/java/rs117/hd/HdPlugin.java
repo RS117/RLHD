@@ -36,6 +36,7 @@ import com.jogamp.opengl.math.Matrix4;
 import javax.inject.Named;
 import jogamp.nativewindow.SurfaceScaleUtils;
 import jogamp.nativewindow.jawt.x11.X11JAWTWindow;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -45,9 +46,16 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.externalplugins.ExternalPluginManager;
+import net.runelite.client.externalplugins.ExternalPluginManifest;
+import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
+import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.DrawManager;
+import net.runelite.client.ui.NavigationButton;
+import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.util.ImageUtil;
 import net.runelite.client.util.OSType;
 import org.jocl.CL;
 import static rs117.hd.HdPluginConfig.KEY_WINTER_THEME;
@@ -56,6 +64,9 @@ import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.data.materials.Material;
+import rs117.hd.gui.panel.HdPanel;
+import rs117.hd.gui.panel.debug.overlays.LightInfoOverlay;
+import rs117.hd.gui.panel.debug.overlays.TileInfoOverlay;
 import rs117.hd.model.ModelHasher;
 import rs117.hd.model.ModelPusher;
 import rs117.hd.model.TempModelInfo;
@@ -99,10 +110,10 @@ import static org.jocl.CL.*;
 import static rs117.hd.utils.GLUtil.*;
 
 @PluginDescriptor(
-	name = "117 HD (beta)",
-	description = "GPU renderer with a suite of graphical enhancements",
-	tags = {"hd", "high", "detail", "graphics", "shaders", "textures", "gpu", "shadows", "lights"},
-	conflicts = "GPU"
+		name = "117 HD (beta)",
+		description = "GPU renderer with a suite of graphical enhancements",
+		tags = {"hd", "high", "detail", "graphics", "shaders", "textures", "gpu", "shadows", "lights"},
+		conflicts = "GPU"
 )
 @PluginDependency(EntityHiderPlugin.class)
 @Slf4j
@@ -124,9 +135,28 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	private static final int[] eightIntWrite = new int[8];
 
+	private NavigationButton nav;
+
 	@Inject
+	@Getter
+	private KeyManager keyManager;
+
+	@Getter
+	@Setter
+	private HdPanel panel;
+
+	@Inject
+	@Getter
+	@Named("runelite.version")
+	public String runeliteVersion;
+
+	@Inject
+	private ClientToolbar clientToolbar;
+
+	@Inject
+	@Getter
 	private Client client;
-	
+
 	@Inject
 	private OpenCLManager openCLManager;
 
@@ -134,12 +164,17 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private ClientThread clientThread;
 
 	@Inject
+	private OverlayManager overlayManager;
+
+	@Inject
+	@Getter
 	private HdPluginConfig config;
 
 	@Inject
 	private TextureManager textureManager;
 
 	@Inject
+	@Getter
 	private LightManager lightManager;
 
 	@Inject
@@ -158,6 +193,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private ProceduralGenerator proceduralGenerator;
 
 	@Inject
+	@Getter
 	private ConfigManager configManager;
 
 	@Inject
@@ -178,37 +214,46 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private Canvas canvas;
 	private JAWTWindow jawtWindow;
 	private GL4 gl;
+	@Getter
 	private GLContext glContext;
 	private GLDrawable glDrawable;
 
+	@Getter
+	@Setter
+	private String renderer,version;
+
+	@Getter
+	@Setter
+	String pluginVersion = "";
+
 	static final String LINUX_VERSION_HEADER =
-		"#version 420\n" +
-			"#extension GL_ARB_compute_shader : require\n" +
-			"#extension GL_ARB_shader_storage_buffer_object : require\n" +
-			"#extension GL_ARB_explicit_attrib_location : require\n";
+			"#version 420\n" +
+					"#extension GL_ARB_compute_shader : require\n" +
+					"#extension GL_ARB_shader_storage_buffer_object : require\n" +
+					"#extension GL_ARB_explicit_attrib_location : require\n";
 	static final String WINDOWS_VERSION_HEADER = "#version 430\n";
 
 	static final Shader PROGRAM = new Shader()
-		.add(GL4.GL_VERTEX_SHADER, "vert.glsl")
-		.add(GL4.GL_GEOMETRY_SHADER, "geom.glsl")
-		.add(GL4.GL_FRAGMENT_SHADER, "frag.glsl");
+			.add(GL4.GL_VERTEX_SHADER, "vert.glsl")
+			.add(GL4.GL_GEOMETRY_SHADER, "geom.glsl")
+			.add(GL4.GL_FRAGMENT_SHADER, "frag.glsl");
 
 	static final Shader SHADOW_PROGRAM = new Shader()
-		.add(GL4.GL_VERTEX_SHADER, "shadow_vert.glsl")
-		.add(GL4.GL_FRAGMENT_SHADER, "shadow_frag.glsl");
+			.add(GL4.GL_VERTEX_SHADER, "shadow_vert.glsl")
+			.add(GL4.GL_FRAGMENT_SHADER, "shadow_frag.glsl");
 
 	static final Shader COMPUTE_PROGRAM = new Shader()
-		.add(GL4.GL_COMPUTE_SHADER, "comp.glsl");
+			.add(GL4.GL_COMPUTE_SHADER, "comp.glsl");
 
 	static final Shader SMALL_COMPUTE_PROGRAM = new Shader()
-		.add(GL4.GL_COMPUTE_SHADER, "comp_small.glsl");
+			.add(GL4.GL_COMPUTE_SHADER, "comp_small.glsl");
 
 	static final Shader UNORDERED_COMPUTE_PROGRAM = new Shader()
-		.add(GL4.GL_COMPUTE_SHADER, "comp_unordered.glsl");
+			.add(GL4.GL_COMPUTE_SHADER, "comp_unordered.glsl");
 
 	static final Shader UI_PROGRAM = new Shader()
-		.add(GL4.GL_VERTEX_SHADER, "vertui.glsl")
-		.add(GL4.GL_FRAGMENT_SHADER, "fragui.glsl");
+			.add(GL4.GL_VERTEX_SHADER, "vertui.glsl")
+			.add(GL4.GL_FRAGMENT_SHADER, "fragui.glsl");
 
 	private int glProgram = -1;
 	private int glComputeProgram = -1;
@@ -432,6 +477,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	@Override
 	protected void startUp()
 	{
+
+		ExternalPluginManifest manifest = ExternalPluginManager.getExternalPluginManifest(getClass());
+		setPluginVersion(manifest == null ? "Not Available" : manifest.getVersion());
+		log.info(Utils.getSpecs(runeliteVersion,pluginVersion));
+
 		configGroundTextures = config.groundTextures();
 		configGroundBlending = config.groundBlending();
 		configObjectTextures = config.objectTextures();
@@ -458,7 +508,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					return false;
 				}
-				
+
 				computeMode = OSType.getOSType() == OSType.MacOS ? ComputeMode.OPENCL : ComputeMode.OPENGL;
 
 				canvas.setIgnoreRepaint(true);
@@ -475,7 +525,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					System.setProperty("jogl.debug", "true");
 				}
-				
+
 				System.setProperty("jogamp.gluegen.TestTempDirExec", "false");
 
 				if (developerMode)
@@ -503,6 +553,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 						log.info("Using device: {}", versionGL.glGetString(GL.GL_RENDERER));
 						log.info("Using driver: {}", versionGL.glGetString(GL.GL_VERSION));
 						log.info("Client is {}-bit", System.getProperty("sun.arch.data.model"));
+						setRenderer(versionGL.glGetString(GL.GL_RENDERER));
+						setVersion(versionGL.glGetString(GL.GL_VERSION));
 						versionContext.destroy();
 					} catch (Exception ex) {
 						log.error("failed to get device information", ex);
@@ -570,7 +622,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 						//		source GL API
 						//		msg Buffer detailed info: Buffer object 11 (bound to GL_ARRAY_BUFFER_ARB, and GL_SHADER_STORAGE_BUFFER (4), usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
 						glContext.glDebugMessageControl(gl.GL_DEBUG_SOURCE_API, gl.GL_DEBUG_TYPE_OTHER,
-							gl.GL_DONT_CARE, 1, new int[]{0x20071}, 0, false);
+								gl.GL_DONT_CARE, 1, new int[]{0x20071}, 0, false);
 
 						//	GLDebugMessageHandler: GLDebugEvent[ id 0x20052
 						//		type Warning: implementation dependent performance
@@ -578,7 +630,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 						//		source GL API
 						//		msg Pixel-path performance warning: Pixel transfer is synchronized with 3D rendering.
 						glContext.glDebugMessageControl(gl.GL_DEBUG_SOURCE_API, gl.GL_DEBUG_TYPE_PERFORMANCE,
-							gl.GL_DONT_CARE, 1, new int[]{0x20052}, 0, false);
+								gl.GL_DONT_CARE, 1, new int[]{0x20052}, 0, false);
 					}
 
 					lastFrameTime = System.currentTimeMillis();
@@ -598,6 +650,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					initLightsUniformBuffer();
 					initBuffers();
 					initShadowMapFbo();
+				});
+
+				SwingUtilities.invokeAndWait(() -> {
+					setPanel(injector.getInstance(HdPanel.class));
+
+
+					final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "icon.png");
+
+					nav = NavigationButton.builder()
+							.tooltip("HD 117")
+							.icon(icon)
+							.priority(3)
+							.panel(panel)
+							.build();
+
+					clientToolbar.addNavigation(nav);
+					setupOverlays();
 				});
 
 				client.setDrawCallbacks(this);
@@ -636,6 +705,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		});
 	}
 
+	@Inject
+	private LightInfoOverlay lightInfoOverlay;
+
+	@Inject
+	private TileInfoOverlay tileInfoOverlay;
+
+	public void setupOverlays() {
+		overlayManager.add(lightInfoOverlay);
+		overlayManager.add(tileInfoOverlay);
+	}
+
+	public void removeOverlays() {
+		overlayManager.remove(lightInfoOverlay);
+		overlayManager.remove(tileInfoOverlay);
+
+	}
+
 	@Override
 	protected void shutDown()
 	{
@@ -643,7 +729,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		((Component) client).removeComponentListener(resizeListener);
 		lightManager.shutDown();
-
+		removeOverlays();
 		clientThread.invoke(() ->
 		{
 			client.setGpu(false);
@@ -653,7 +739,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			ThreadUtils.invokeOnMainThread(() ->
 			{
 				openCLManager.cleanup();
-				
+
 				if (gl != null)
 				{
 					if (textureArrayId != -1)
@@ -758,8 +844,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 		int middle = from + length / 2;
 		return "i < " + middle +
-			" ? " + generateFetchMaterialCases(from, middle) +
-			" : " + generateFetchMaterialCases(middle, to);
+				" ? " + generateFetchMaterialCases(from, middle) +
+				" : " + generateFetchMaterialCases(middle, to);
 	}
 
 	private void initPrograms() throws ShaderException
@@ -791,7 +877,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		glProgram = PROGRAM.compile(gl, template);
 		glUiProgram = UI_PROGRAM.compile(gl, template);
 		glShadowProgram = SHADOW_PROGRAM.compile(gl, template);
-		
+
 		if (computeMode == ComputeMode.OPENCL)
 		{
 			openCLManager.init(gl);
@@ -926,21 +1012,21 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	public void recompilePrograms()
 	{
 		clientThread.invoke(() ->
-			ThreadUtils.invokeOnMainThread(() ->
-			{
-				try
+				ThreadUtils.invokeOnMainThread(() ->
 				{
-					shutdownPrograms();
-					shutdownVao();
-					initVao();
-					initPrograms();
-				}
-				catch (ShaderException ex)
-				{
-					log.error("Failed to recompile shader program", ex);
-					stopPlugin();
-				}
-			})
+					try
+					{
+						shutdownPrograms();
+						shutdownVao();
+						initVao();
+						initPrograms();
+					}
+					catch (ShaderException ex)
+					{
+						log.error("Failed to recompile shader program", ex);
+						stopPlugin();
+					}
+				})
 		);
 	}
 
@@ -957,11 +1043,11 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		FloatBuffer vboUiBuf = GpuFloatBuffer.allocateDirect(5 * 4);
 		vboUiBuf.put(new float[]{
-			// positions     // texture coords
-			1f, 1f, 0.0f, 1.0f, 0f, // top right
-			1f, -1f, 0.0f, 1.0f, 1f, // bottom right
-			-1f, -1f, 0.0f, 0.0f, 1f, // bottom left
-			-1f, 1f, 0.0f, 0.0f, 0f  // top left
+				// positions     // texture coords
+				1f, 1f, 0.0f, 1.0f, 0f, // top right
+				1f, -1f, 0.0f, 1.0f, 1f, // bottom right
+				-1f, -1f, 0.0f, 0.0f, 1f, // bottom left
+				-1f, 1f, 0.0f, 0.0f, 0f  // top left
 		});
 		vboUiBuf.rewind();
 		gl.glBindBuffer(GL_ARRAY_BUFFER, vboUiHandle);
@@ -1111,7 +1197,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		initGlBuffer(materialsUniformBuffer);
 
 		ByteBuffer materialUniformBuf = ByteBuffer.allocateDirect(MAX_MATERIALS * MATERIAL_PROPERTIES_COUNT * SCALAR_BYTES)
-			.order(ByteOrder.nativeOrder());
+				.order(ByteOrder.nativeOrder());
 		for (int i = 0; i < Math.min(MAX_MATERIALS, Material.values().length); i++)
 		{
 			Material material = Material.values()[i];
@@ -1277,14 +1363,14 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			vertexBuffer.ensureCapacity(32);
 			IntBuffer uniformBuf = vertexBuffer.getBuffer();
 			uniformBuf
-				.put(yaw)
-				.put(pitch)
-				.put(client.getCenterX())
-				.put(client.getCenterY())
-				.put(client.getScale())
-				.put(cameraX)
-				.put(cameraY)
-				.put(cameraZ);
+					.put(yaw)
+					.put(pitch)
+					.put(client.getCenterX())
+					.put(client.getCenterY())
+					.put(client.getScale())
+					.put(cameraX)
+					.put(cameraY)
+					.put(cameraZ);
 			uniformBuf.flip();
 
 			gl.glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer.glBufferId);
@@ -1364,23 +1450,23 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		// Output buffers
 		updateBuffer(tmpOutBuffer,
-			GL_ARRAY_BUFFER,
-			targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
-			null,
-			GL_STREAM_DRAW,
-			CL_MEM_WRITE_ONLY);
+				GL_ARRAY_BUFFER,
+				targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
+				null,
+				GL_STREAM_DRAW,
+				CL_MEM_WRITE_ONLY);
 		updateBuffer(tmpOutUvBuffer,
-			GL_ARRAY_BUFFER,
-			targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
-			null,
-			GL_STREAM_DRAW,
-			CL_MEM_WRITE_ONLY);
+				GL_ARRAY_BUFFER,
+				targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
+				null,
+				GL_STREAM_DRAW,
+				CL_MEM_WRITE_ONLY);
 		updateBuffer(tmpOutNormalBuffer,
-			GL_ARRAY_BUFFER,
-			targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
-			null,
-			GL_STREAM_DRAW,
-			CL_MEM_WRITE_ONLY);
+				GL_ARRAY_BUFFER,
+				targetBufferOffset * 16, // each vertex is an ivec4, which is 16 bytes
+				null,
+				GL_STREAM_DRAW,
+				CL_MEM_WRITE_ONLY);
 
 
 
@@ -1392,13 +1478,13 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			// gl.glFinish();
 
 			openCLManager.compute(
-				unorderedModels, smallModels, largeModels,
-				sceneVertexBuffer, sceneUvBuffer,
-				tmpVertexBuffer, tmpUvBuffer,
-				tmpModelBufferUnordered, tmpModelBufferSmall, tmpModelBufferLarge,
-				tmpOutBuffer, tmpOutUvBuffer,
-				uniformBuffer,
-				tmpOutNormalBuffer, sceneNormalBuffer, tmpNormalBuffer);
+					unorderedModels, smallModels, largeModels,
+					sceneVertexBuffer, sceneUvBuffer,
+					tmpVertexBuffer, tmpUvBuffer,
+					tmpModelBufferUnordered, tmpModelBufferSmall, tmpModelBufferLarge,
+					tmpOutBuffer, tmpOutUvBuffer,
+					uniformBuffer,
+					tmpOutNormalBuffer, sceneNormalBuffer, tmpNormalBuffer);
 			return;
 		}
 
@@ -1617,8 +1703,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		gl.glBindBuffer(gl.GL_PIXEL_UNPACK_BUFFER, interfacePbo);
 		gl.glMapBuffer(gl.GL_PIXEL_UNPACK_BUFFER, gl.GL_WRITE_ONLY)
-			.asIntBuffer()
-			.put(pixels, 0, width * height);
+				.asIntBuffer()
+				.put(pixels, 0, width * height);
 		gl.glUnmapBuffer(gl.GL_PIXEL_UNPACK_BUFFER);
 		gl.glBindTexture(gl.GL_TEXTURE_2D, interfaceTexture);
 		gl.glTexSubImage2D(gl.GL_TEXTURE_2D, 0, 0, 0, width, height, gl.GL_BGRA, gl.GL_UNSIGNED_INT_8_8_8_8_REV, 0);
@@ -1859,8 +1945,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				// Re-create fbo
 				if (lastStretchedCanvasWidth != stretchedCanvasWidth
-					|| lastStretchedCanvasHeight != stretchedCanvasHeight
-					|| lastAntiAliasingMode != antiAliasingMode)
+						|| lastStretchedCanvasHeight != stretchedCanvasHeight
+						|| lastAntiAliasingMode != antiAliasingMode)
 				{
 					shutdownAAFbo();
 
@@ -1869,7 +1955,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 					final int forcedAASamples = glGetInteger(gl, gl.GL_SAMPLES);
 					final int maxSamples = glGetInteger(gl, gl.GL_MAX_SAMPLES);
 					final int samples = forcedAASamples != 0 ? forcedAASamples :
-						Math.min(antiAliasingMode.getSamples(), maxSamples);
+							Math.min(antiAliasingMode.getSamples(), maxSamples);
 
 					log.debug("AA samples: {}, max samples: {}, forced samples: {}", samples, maxSamples, forcedAASamples);
 
@@ -2059,8 +2145,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, fboSceneHandle);
 				gl.glBindFramebuffer(gl.GL_DRAW_FRAMEBUFFER, 0);
 				gl.glBlitFramebuffer(0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
-					0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
-					gl.GL_COLOR_BUFFER_BIT, gl.GL_NEAREST);
+						0, 0, lastStretchedCanvasWidth, lastStretchedCanvasHeight,
+						gl.GL_COLOR_BUFFER_BIT, gl.GL_NEAREST);
 
 				// Reset
 				gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, 0);
@@ -2103,12 +2189,12 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 	private float[] makeProjectionMatrix(float w, float h, float n)
 	{
 		return new float[]
-		{
-			2 / w, 0, 0, 0,
-			0, 2 / h, 0, 0,
-			0, 0, -1, -1,
-			0, 0, -2 * n, 0
-		};
+				{
+						2 / w, 0, 0, 0,
+						0, 2 / h, 0, 0,
+						0, 0, -1, -1,
+						0, 0, -2 * n, 0
+				};
 	}
 
 	private void drawUi(final int overlayColor, final int canvasHeight, final int canvasWidth)
@@ -2126,10 +2212,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		gl.glUniform2i(uniTexSourceDimensions, canvasWidth, canvasHeight);
 		gl.glUniform1i(uniUiColorBlindMode, config.colorBlindMode().ordinal());
 		gl.glUniform4f(uniUiAlphaOverlay,
-			(overlayColor >> 16 & 0xFF) / 255f,
-			(overlayColor >> 8 & 0xFF) / 255f,
-			(overlayColor & 0xFF) / 255f,
-			(overlayColor >>> 24) / 255f
+				(overlayColor >> 16 & 0xFF) / 255f,
+				(overlayColor >> 8 & 0xFF) / 255f,
+				(overlayColor & 0xFF) / 255f,
+				(overlayColor >>> 24) / 255f
 		);
 
 		if (client.isStretchedEnabled())
@@ -2196,7 +2282,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 		}
 
 		ByteBuffer buffer = ByteBuffer.allocateDirect(width * height * 4)
-			.order(ByteOrder.nativeOrder());
+				.order(ByteOrder.nativeOrder());
 
 		gl.glReadBuffer(gl.GL_FRONT);
 		gl.glReadPixels(0, 0, width, height, GL.GL_RGBA, gl.GL_UNSIGNED_BYTE, buffer);
@@ -2349,19 +2435,19 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				modelPusher.clearModelCache();
 				clientThread.invoke(() ->
 						ThreadUtils.invokeOnMainThread(() ->
-					{
-						shutdownShadowMapFbo();
-						initShadowMapFbo();
-					})
+						{
+							shutdownShadowMapFbo();
+							initShadowMapFbo();
+						})
 				);
 				break;
 			case "shadowResolution":
 				clientThread.invoke(() ->
 						ThreadUtils.invokeOnMainThread(() ->
-					{
-						shutdownShadowMapFbo();
-						initShadowMapFbo();
-					})
+						{
+							shutdownShadowMapFbo();
+							initShadowMapFbo();
+						})
 				);
 				break;
 			case "objectTextures":
@@ -2653,10 +2739,10 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			if (graphics == null) return;
 			final AffineTransform t = graphics.getTransform();
 			gl.glViewport(
-				getScaledValue(t.getScaleX(), x),
-				getScaledValue(t.getScaleY(), y),
-				getScaledValue(t.getScaleX(), width),
-				getScaledValue(t.getScaleY(), height));
+					getScaledValue(t.getScaleX(), x),
+					getScaledValue(t.getScaleY(), y),
+					getScaledValue(t.getScaleX(), width),
+					getScaledValue(t.getScaleY(), height));
 			graphics.dispose();
 		}
 	}
@@ -2698,7 +2784,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 			glBuffer.size = size;
 			gl.glBufferData(target, size, data, usage);
-			
+
 			if (computeMode == ComputeMode.OPENCL)
 			{
 				// cleanup previous buffer
@@ -2706,7 +2792,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 				{
 					CL.clReleaseMemObject(glBuffer.cl_mem);
 				}
-				
+
 				// allocate new
 				if (size == 0)
 				{

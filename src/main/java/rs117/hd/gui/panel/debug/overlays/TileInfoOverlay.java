@@ -1,53 +1,49 @@
-package rs117.hd.overlays;
+package rs117.hd.gui.panel.debug.overlays;
 
 import com.google.inject.Inject;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-import net.runelite.api.Client;
-import static net.runelite.api.Constants.MAX_Z;
-import static net.runelite.api.Constants.SCENE_SIZE;
-import net.runelite.api.Perspective;
-import static net.runelite.api.Perspective.LOCAL_TILE_SIZE;
 import net.runelite.api.Point;
-import net.runelite.api.Scene;
-import net.runelite.api.SceneTileModel;
-import net.runelite.api.SceneTilePaint;
-import net.runelite.api.Tile;
+import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import org.apache.commons.lang3.tuple.Pair;
+import rs117.hd.HdPlugin;
 import rs117.hd.data.materials.Material;
 import rs117.hd.data.materials.Overlay;
 import rs117.hd.data.materials.Underlay;
+import rs117.hd.utils.DeveloperTools;
 import rs117.hd.utils.HDUtils;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.*;
+import java.util.function.Function;
+
+import static net.runelite.api.Constants.SCENE_SIZE;
+import static net.runelite.api.Perspective.LOCAL_TILE_SIZE;
 
 public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 {
 	private final Client client;
 	private Point mousePos;
+	@Inject
+	private final HdPlugin plugin;
 
 	@Inject
-	public TileInfoOverlay(Client client)
+	public TileInfoOverlay(Client client, HdPlugin plugin)
 	{
 		this.client = client;
+		this.plugin = plugin;
 	}
 
 	@Override
 	public Dimension render(Graphics2D g)
 	{
+		if (!plugin.getPanel().getDebugPanel().getButtons().getTileInfoOverlay().isToggled())
+		{
+			return null;
+		}
+
 		mousePos = client.getMouseCanvasPosition();
 		if (mousePos != null && mousePos.getX() == -1 && mousePos.getY() == -1)
 		{
