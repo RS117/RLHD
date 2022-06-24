@@ -1,34 +1,2862 @@
 [
   {
-    "description": "Karamja",
     "rects": [
-      { "minX": 2817, "minY": 2840, "maxX": 2907, "maxY": 3212, "plane": 0 },
-      { "minX": 2714, "minY": 2843, "maxX": 2776, "maxY": 3256, "plane": 0 },
-      { "minX": 2777, "minY": 2837, "maxX": 2816, "maxY": 3224, "plane": 0 },
-      { "minX": 2687, "minY": 3132, "maxX": 2728, "maxY": 3228, "plane": 0 },
-      { "minX": 2908, "minY": 2871, "maxX": 2974, "maxY": 3127, "plane": 0 },
-      { "minX": 2975, "minY": 2881, "maxX": 3006, "maxY": 3070, "plane": 0 },
-      { "minX": 2907, "minY": 3123, "maxX": 2933, "maxY": 3194, "plane": 0 },
-      { "minX": 2932, "minY": 3127, "maxX": 2963, "maxY": 3168, "plane": 0 }
+      { "minX": 2495, "minY": 4747, "maxX": 2559, "maxY": 4805 }
     ],
-    "theme": "HOT",
-    "children": [
-      {
-        "description": "Karamja Test",
-        "rects": [
-          { "minX": 2906, "minY": 3186, "maxX": 2933, "maxY": 3166, "plane": 0 }
-        ]
-      }
-    ]
+    "description": "EVIL_BOB_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
   },
   {
-    "description": "Over World",
     "rects": [
-      { "minX": 700, "minY": 2300, "maxX": 4200, "maxY": 4095, "plane": 0 }
-    ]
+      { "minX": 3136, "minY": 3076, "maxX": 3144, "maxY": 3097 }
+    ],
+    "description": "TUTORIAL_ISLAND_WIZARD_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
   },
   {
-    "description": "ALL"
+    "rects": [
+      { "minX": 3114, "minY": 3102, "maxX": 3129, "maxY": 3111 }
+    ],
+    "description": "TUTORIAL_ISLAND_CHURCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3113, "minY": 3117, "maxX": 3130, "maxY": 3131 }
+    ],
+    "description": "TUTORIAL_ISLAND_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3067, "minY": 9491, "maxX": 3120, "maxY": 9534 }
+    ],
+    "description": "TUTORIAL_ISLAND_UNDERGROUND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3079, "minY": 3118, "maxX": 3090, "maxY": 3126 }
+    ],
+    "description": "TUTORIAL_ISLAND_QUEST_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3072, "minY": 3080, "maxX": 3079, "maxY": 3092 }
+    ],
+    "description": "TUTORIAL_ISLAND_KITCHEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3086, "minY": 3099, "maxX": 3098, "maxY": 3113 }
+    ],
+    "description": "TUTORIAL_ISLAND_START_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3084, "minY": 3006, "maxX": 3124, "maxY": 3048 }
+    ],
+    "description": "TUTORIAL_ISLAND_THE_NODE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3052, "minY": 3057, "maxX": 3155, "maxY": 3137 },
+      { "minX": 3084, "minY": 3006, "maxX": 3124, "maxY": 3048 }
+    ],
+    "description": "TUTORIAL_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1600, "minY": 6015, "maxX": 1792, "maxY": 6207 }
+    ],
+    "description": "TUTORIAL_ISLAND_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2566, "minY": 4618, "maxX": 2589, "maxY": 4642 }
+    ],
+    "description": "RFD_QUIZ",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3240, "minY": 3225, "maxX": 3250, "maxY": 3226 }
+    ],
+    "description": "LUM_BRIDGE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3206, "minY": 9614, "maxX": 3220, "maxY": 9628 }
+    ],
+    "description": "LUMBRIDGE_CASTLE_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3213, "minY": 3212, "maxX": 3216, "maxY": 3225 }
+    ],
+    "description": "LUMBRIDGE_CASTLE_ENTRYWAY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3205, "minY": 3218, "maxX": 3212, "maxY": 3226 }
+    ],
+    "description": "LUMBRIDGE_CASTLE_DINING_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3137, "minY": 9602, "maxX": 3192, "maxY": 9661 }
+    ],
+    "description": "HAM_HIDEOUT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3204, "minY": 3207, "maxX": 3216, "maxY": 3230 }
+    ],
+    "description": "LUMBRIDGE_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3136, "minY": 3137, "maxX": 3254, "maxY": 3327 },
+      { "minX": 3254, "minY": 3189, "maxX": 3263, "maxY": 3200 },
+      { "minX": 3247, "minY": 3200, "maxX": 3266, "maxY": 3327 },
+      { "minX": 3264, "minY": 3322, "maxX": 3271, "maxY": 3330 }
+    ],
+    "description": "LUMBRIDGE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3400, "minY": 4807, "maxX": 3448, "maxY": 4847 }
+    ],
+    "description": "CLAN_WARS_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1992, "minY": 4867, "maxX": 2044, "maxY": 4914 },
+      { "minX": 1922, "minY": 4801, "maxX": 1981, "maxY": 4861 },
+      { "minX": 1990, "minY": 4804, "maxX": 2038, "maxY": 4861 },
+      { "minX": 1862, "minY": 4802, "maxX": 1909, "maxY": 4856 },
+      { "minX": 1793, "minY": 4738, "maxX": 1853, "maxY": 4792 }
+    ],
+    "description": "FISHING_TRAWLER_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1988, "minY": 5027, "maxX": 2010, "maxY": 5052 },
+      { "minX": 1999, "minY": 5002, "maxX": 2021, "maxY": 5022 },
+      { "minX": 2014, "minY": 5027, "maxX": 2042, "maxY": 5052 },
+      { "minX": 2047, "minY": 5040, "maxX": 2055, "maxY": 5049 },
+      { "minX": 2056, "minY": 5026, "maxX": 2068, "maxY": 5044 },
+      { "minX": 2078, "minY": 5031, "maxX": 2105, "maxY": 5049 },
+      { "minX": 2078, "minY": 5001, "maxX": 2101, "maxY": 5025 },
+      { "minX": 2052, "minY": 4999, "maxX": 2065, "maxY": 5017 },
+      { "minX": 2123, "minY": 4995, "maxX": 2163, "maxY": 5034 },
+      { "minX": 2181, "minY": 5027, "maxX": 2202, "maxY": 5053 },
+      { "minX": 2207, "minY": 5027, "maxX": 2233, "maxY": 5051 },
+      { "minX": 2192, "minY": 5002, "maxX": 2213, "maxY": 5022 },
+      { "minX": 2256, "minY": 5002, "maxX": 2276, "maxY": 5022 },
+      { "minX": 2243, "minY": 5027, "maxX": 2265, "maxY": 5053 },
+      { "minX": 2270, "minY": 5027, "maxX": 2297, "maxY": 5053 },
+      { "minX": 2307, "minY": 5026, "maxX": 2330, "maxY": 5053 },
+      { "minX": 2334, "minY": 5026, "maxX": 2362, "maxY": 5053 },
+      { "minX": 2320, "minY": 5001, "maxX": 2342, "maxY": 5023 },
+      { "minX": 2373, "minY": 5025, "maxX": 2396, "maxY": 5053 },
+      { "minX": 2385, "minY": 5000, "maxX": 2407, "maxY": 5023 },
+      { "minX": 2401, "minY": 5025, "maxX": 2428, "maxY": 5053 },
+      { "minX": 2441, "minY": 5017, "maxX": 2471, "maxY": 5046 }
+    ],
+    "description": "TEMPLE_TREAKING",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2687, "minY": 5247, "maxX": 2752, "maxY": 5376 },
+      { "minX": 2751, "minY": 5311, "maxX": 2816, "maxY": 5440 },
+      { "minX": 2815, "minY": 5375, "maxX": 2880, "maxY": 5504 }
+    ],
+    "description": "DORGESHKAAN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1729, "minY": 4929, "maxX": 1790, "maxY": 4990 },
+      { "minX": 1601, "minY": 4929, "maxX": 1663, "maxY": 4990 }
+    ],
+    "description": "VARROCK_MUSEUM_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3253, "minY": 3442, "maxX": 3267, "maxY": 3455 }
+    ],
+    "description": "VARROCK_MUSEUM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3200, "minY": 3458, "maxX": 3226, "maxY": 3500 }
+    ],
+    "description": "VARROCK_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3161, "minY": 3444, "maxX": 3171, "maxY": 3450 }
+    ],
+    "description": "VARROCK_JULIETS_HOUSE_FLOWER_BED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3149, "minY": 3427, "maxX": 3164, "maxY": 3441 }
+    ],
+    "description": "VARROCK_JULIETS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3272, "minY": 3486, "maxX": 3288, "maxY": 3510 }
+    ],
+    "description": "VARROCK_JOLLY_BOAR_INN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3249, "minY": 3471, "maxX": 3259, "maxY": 3488 }
+    ],
+    "description": "VARROCK_CHURCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3185, "minY": 3420, "maxX": 3190, "maxY": 3427 }
+    ],
+    "description": "VARROCK_ANVILS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3185, "minY": 3416, "maxX": 3194, "maxY": 3427 },
+      { "minX": 3193, "minY": 3410, "maxX": 3197, "maxY": 3416 },
+      { "minX": 3254, "minY": 3406, "maxX": 3263, "maxY": 3411 }
+    ],
+    "description": "VARROCK_BUILDING_RUINS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3250, "minY": 3416, "maxX": 3257, "maxY": 3423 }
+    ],
+    "description": "VARROCK_EAST_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3136, "minY": 3397, "maxX": 3290, "maxY": 3518 },
+      { "minX": 3177, "minY": 3371, "maxX": 3291, "maxY": 3410 }
+    ],
+    "description": "VARROCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3008, "minY": 5216, "maxX": 3039, "maxY": 5247 },
+      { "minX": 2963, "minY": 5198, "maxX": 2995, "maxY": 5228 },
+      { "minX": 3264, "minY": 9823, "maxX": 3298, "maxY": 9855 }
+    ],
+    "description": "TOLNA_DUNGEON_ANGER",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3040, "minY": 5216, "maxX": 3071, "maxY": 5247 },
+      { "minX": 3072, "minY": 5184, "maxX": 3103, "maxY": 5215 },
+      { "minX": 3008, "minY": 5184, "maxX": 3039, "maxY": 5215 },
+      { "minX": 3264, "minY": 9792, "maxX": 3296, "maxY": 9822 },
+      { "minX": 3299, "minY": 9823, "maxX": 3327, "maxY": 9855 }
+    ],
+    "description": "TOLNA_DUNGEON_FEAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3040, "minY": 5184, "maxX": 3071, "maxY": 5215 },
+      { "minX": 3297, "minY": 9792, "maxX": 3327, "maxY": 9822 }
+    ],
+    "description": "TOLNA_DUNGEON_CONFUSION",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3348, "minY": 3444, "maxX": 3404, "maxY": 3460 }
+    ],
+    "description": "DIGSITE_DOCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3091, "minY": 3353, "maxX": 3096, "maxY": 3363 },
+      { "minX": 3097, "minY": 3353, "maxX": 3119, "maxY": 3374 },
+      { "minX": 3120, "minY": 3353, "maxX": 3126, "maxY": 3360 }
+    ],
+    "description": "DRAYNOR_MANOR_INTERIOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3083, "minY": 3329, "maxX": 3129, "maxY": 3386 }
+    ],
+    "description": "DRAYNOR_MANOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3073, "minY": 9766, "maxX": 3082, "maxY": 9780 }
+    ],
+    "description": "DRAYNOR_MANOR_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3071, "minY": 3226, "maxX": 3133, "maxY": 3292 }
+    ],
+    "description": "DRAYNOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2112, "minY": 4893, "maxX": 2166, "maxY": 4930 }
+    ],
+    "description": "DRAYNOR_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1600, "minY": 4779, "maxX": 1727, "maxY": 4863 }
+    ],
+    "description": "MISTHALIN_MYSTERY_MANOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2941, "minY": 3376, "maxX": 2946, "maxY": 3389 },
+      { "minX": 2946, "minY": 3376, "maxX": 2949, "maxY": 3382 }
+    ],
+    "description": "FALADOR_HAIRDRESSER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3034, "minY": 3369, "maxX": 3057, "maxY": 3387 }
+    ],
+    "description": "FALADOR_PARTY_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2932, "minY": 3306, "maxX": 3068, "maxY": 3401 }
+    ],
+    "description": "FALADOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3456, "minY": 4734, "maxX": 3528, "maxY": 4783 }
+    ],
+    "description": "FALADOR_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3713, "minY": 5633, "maxX": 3776, "maxY": 5696 },
+      { "minX": 3827, "minY": 5652, "maxX": 3868, "maxY": 5692 }
+    ],
+    "description": "MOTHERLODE_MINE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3087, "minY": 3501, "maxX": 3099, "maxY": 3502 },
+      { "minX": 3079, "minY": 3502, "maxX": 3085, "maxY": 3503 },
+      { "minX": 3105, "minY": 3507, "maxX": 3113, "maxY": 3508 },
+      { "minX": 3112, "minY": 3514, "maxX": 3119, "maxY": 3515 },
+      { "minX": 3120, "minY": 3516, "maxX": 3129, "maxY": 3517 },
+      { "minX": 3119, "minY": 3515, "maxX": 3120, "maxY": 3516 },
+      { "minX": 3107, "minY": 3502, "maxX": 3108, "maxY": 3508 },
+      { "minX": 3079, "minY": 3501, "maxX": 3080, "maxY": 3502 },
+      { "minX": 3079, "minY": 3504, "maxX": 3080, "maxY": 3506 },
+      { "minX": 3099, "minY": 3496, "maxX": 3100, "maxY": 3501 },
+      { "minX": 3103, "minY": 3498, "maxX": 3104, "maxY": 3499 },
+      { "minX": 3102, "minY": 3499, "maxX": 3103, "maxY": 3500 },
+      { "minX": 3101, "minY": 3500, "maxX": 3102, "maxY": 3501 },
+      { "minX": 3084, "minY": 3501, "maxX": 3088, "maxY": 3502 },
+      { "minX": 3113, "minY": 3509, "maxX": 3114, "maxY": 3514 },
+      { "minX": 3112, "minY": 3508, "maxX": 3114, "maxY": 3509 },
+      { "minX": 3101, "minY": 3509, "maxX": 3103, "maxY": 3510 },
+      { "minX": 3103, "minY": 3508, "maxX": 3104, "maxY": 3509 },
+      { "minX": 3104, "minY": 3506, "maxX": 3105, "maxY": 3507 },
+      { "minX": 3103, "minY": 3505, "maxX": 3104, "maxY": 3506 },
+      { "minX": 3102, "minY": 3504, "maxX": 3103, "maxY": 3505 },
+      { "minX": 3101, "minY": 3503, "maxX": 3102, "maxY": 3504 },
+      { "minX": 3100, "minY": 3502, "maxX": 3101, "maxY": 3503 }
+    ],
+    "description": "EDGEVILLE_PATH_OVERLAY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3090, "minY": 3488, "maxX": 3098, "maxY": 3499 }
+    ],
+    "description": "EDGEVILLE_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3087, "minY": 3483, "maxX": 3098, "maxY": 3502 }
+    ],
+    "description": "EDGEVILLE_BANK_SURROUNDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3077, "minY": 3489, "maxX": 3081, "maxY": 3496 }
+    ],
+    "description": "EDGEVILLE_DORIS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3041, "minY": 3471, "maxX": 3062, "maxY": 3509 }
+    ],
+    "description": "EDGEVILLE_MONASTERY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2719, "minY": 3487, "maxX": 2730, "maxY": 3497 }
+    ],
+    "description": "SEERS_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2789, "minY": 3488, "maxX": 2879, "maxY": 3530 },
+      { "minX": 2832, "minY": 3439, "maxX": 2879, "maxY": 3502 }
+    ],
+    "description": "WHITE_WOLF_MOUNTAIN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2431, "minY": 5374, "maxX": 2496, "maxY": 5439 }
+    ],
+    "description": "WHITE_WOLF_MOUNTAIN_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2747, "minY": 3389, "maxX": 2782, "maxY": 3415 }
+    ],
+    "description": "KEEP_LE_FAYE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1670, "minY": 4230, "maxX": 1721, "maxY": 4280 }
+    ],
+    "description": "KEEP_LE_FAYE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2843, "minY": 3421, "maxX": 2845, "maxY": 3423 }
+    ],
+    "description": "CATHERBY_BEACH_OBELISK_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2842, "minY": 3424, "maxX": 2842, "maxY": 3424 }
+    ],
+    "description": "CATHERBY_BEACH_LADDER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2869, "minY": 3414, "maxX": 2870, "maxY": 3416 },
+      { "minX": 2864, "minY": 3420, "maxX": 2865, "maxY": 3423 },
+      { "minX": 2851, "minY": 3423, "maxX": 2863, "maxY": 3426 },
+      { "minX": 2848, "minY": 3427, "maxX": 2848, "maxY": 3428 },
+      { "minX": 2847, "minY": 3429, "maxX": 2847, "maxY": 3429 },
+      { "minX": 2843, "minY": 3430, "maxX": 2845, "maxY": 3430 }
+    ],
+    "description": "CATHERBY_BEACH_SHORELINE_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2806, "minY": 3438, "maxX": 2812, "maxY": 3445 }
+    ],
+    "description": "CATHERBY_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2788, "minY": 3407, "maxX": 2864, "maxY": 3435 },
+      { "minX": 2788, "minY": 3435, "maxX": 2855, "maxY": 3447 },
+      { "minX": 2788, "minY": 3447, "maxX": 2839, "maxY": 3474 }
+    ],
+    "description": "CATHERBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2905, "minY": 3195, "maxX": 2995, "maxY": 3265 },
+      { "minX": 2945, "minY": 3186, "maxX": 2989, "maxY": 3195 }
+    ],
+    "description": "RIMMINGTON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3005, "minY": 3174, "maxX": 3064, "maxY": 3265 }
+    ],
+    "description": "PORT_SARIM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2977, "minY": 3102, "maxX": 3008, "maxY": 3132 }
+    ],
+    "description": "MUDSKIPPER_POINT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3011, "minY": 3279, "maxX": 3069, "maxY": 3322 }
+    ],
+    "description": "SOUTH_FALADOR_FARM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2910, "minY": 3265, "maxX": 2945, "maxY": 3296 }
+    ],
+    "description": "CRAFTING_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2900, "minY": 3195, "maxX": 3069, "maxY": 3308 },
+      { "minX": 2971, "minY": 3100, "maxX": 3060, "maxY": 3195 },
+      { "minX": 2924, "minY": 3185, "maxX": 2980, "maxY": 3202 }
+    ],
+    "description": "SOUTH_FALADOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2892, "minY": 3507, "maxX": 2898, "maxY": 3514 },
+      { "minX": 2894, "minY": 3504, "maxX": 2896, "maxY": 3517 },
+      { "minX": 2899, "minY": 3509, "maxX": 2901, "maxY": 3512 }
+    ],
+    "description": "HEROES_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2837, "minY": 3533, "maxX": 2877, "maxY": 3557 }
+    ],
+    "description": "WARRIORS_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2837, "minY": 3533, "maxX": 2877, "maxY": 3557, "plane": 1 }
+    ],
+    "description": "WARRIORS_GUILD_FLOOR_2",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2830, "minY": 3533, "maxX": 2938, "maxY": 3576 },
+      { "minX": 2880, "minY": 3576, "maxX": 2938, "maxY": 3581 },
+      { "minX": 2838, "minY": 3538, "maxX": 2928, "maxY": 3553 },
+      { "minX": 2873, "minY": 3521, "maxX": 2935, "maxY": 3533 }
+    ],
+    "description": "BURTHORPE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2194, "minY": 4946, "maxX": 2221, "maxY": 4973 }
+    ],
+    "description": "GAMES_ROOM_INNER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2179, "minY": 4929, "maxX": 2239, "maxY": 4990 }
+    ],
+    "description": "GAMES_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2460, "minY": 3279, "maxX": 2558, "maxY": 3335 },
+      { "minX": 2510, "minY": 3264, "maxX": 2558, "maxY": 3279 },
+      { "minX": 2429, "minY": 3305, "maxX": 2466, "maxY": 3323 }
+    ],
+    "description": "WEST_ARDOUGNE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2558, "minY": 3257, "maxX": 2686, "maxY": 3342 }
+    ],
+    "description": "EAST_ARDOUGNE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3328, "minY": 5887, "maxX": 3392, "maxY": 5951 }
+    ],
+    "description": "EAST_ARDOUGNE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2565, "minY": 3279, "maxX": 2592, "maxY": 3313 }
+    ],
+    "description": "EAST_ARDOUGNE_CASTLE_DIRT_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2585, "minY": 3298, "maxX": 2593, "maxY": 3314 }
+    ],
+    "description": "EAST_ARDOUGNE_CASTLE_PATH_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2609, "minY": 3088, "maxX": 2616, "maxY": 3097 }
+    ],
+    "description": "YANILLE_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2531, "minY": 3070, "maxX": 2622, "maxY": 3127 }
+    ],
+    "description": "YANILLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2880, "minY": 4671, "maxX": 2944, "maxY": 4735 }
+    ],
+    "description": "YANILLE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2560, "minY": 9408, "maxX": 2626, "maxY": 9475 }
+    ],
+    "description": "GUTANOTH_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2241, "minY": 4676, "maxX": 2303, "maxY": 4722 }
+    ],
+    "description": "NIGHTMARE_ZONE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2434, "minY": 3080, "maxX": 2448, "maxY": 3104 }
+    ],
+    "description": "CASTLE_WARS_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2373, "minY": 3068, "maxX": 2435, "maxY": 3086 },
+      { "minX": 2435, "minY": 3086, "maxX": 3282, "maxY": 3091 },
+      { "minX": 2388, "minY": 3091, "maxX": 2435, "maxY": 3093 },
+      { "minX": 2404, "minY": 3093, "maxX": 2435, "maxY": 3095 },
+      { "minX": 2407, "minY": 3095, "maxX": 2435, "maxY": 3098 },
+      { "minX": 2409, "minY": 3098, "maxX": 2435, "maxY": 3117 },
+      { "minX": 2414, "minY": 3117, "maxX": 2435, "maxY": 3123 },
+      { "minX": 2420, "minY": 3123, "maxX": 2430, "maxY": 3127 },
+      { "minX": 2400, "minY": 3092, "maxX": 2411, "maxY": 3104 },
+      { "minX": 2400, "minY": 3103, "maxX": 2411, "maxY": 3113 }
+    ],
+    "description": "CASTLE_WARS_ARENA_SARADOMIN_SIDE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2364, "minY": 3125, "maxX": 2423, "maxY": 3139 },
+      { "minX": 2364, "minY": 3120, "maxX": 2417, "maxY": 3125 },
+      { "minX": 2364, "minY": 3114, "maxX": 2412, "maxY": 3120 },
+      { "minX": 2364, "minY": 3104, "maxX": 2400, "maxY": 3114 },
+      { "minX": 2364, "minY": 3093, "maxX": 2399, "maxY": 3105 },
+      { "minX": 2354, "minY": 3087, "maxX": 2384, "maxY": 3093 },
+      { "minX": 2364, "minY": 3082, "maxX": 2374, "maxY": 3087 }
+    ],
+    "description": "CASTLE_WARS_ARENA_ZAMORAK_SIDE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2364, "minY": 3068, "maxX": 2435, "maxY": 3139 }
+    ],
+    "description": "CASTLE_WARS_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2361, "minY": 9473, "maxX": 2444, "maxY": 9544 }
+    ],
+    "description": "CASTLE_WARS_UNDERGROUND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2364, "minY": 3068, "maxX": 2435, "maxY": 3139 },
+      { "minX": 2434, "minY": 3080, "maxX": 2448, "maxY": 3104 }
+    ],
+    "description": "CASTLE_WARS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3455, "minY": 6015, "maxX": 3647, "maxY": 6205 },
+      { "minX": 3520, "minY": 5886, "maxX": 3648, "maxY": 6015 }
+    ],
+    "description": "LMS_ARENA_WILD_VARROCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3391, "minY": 5759, "maxX": 3520, "maxY": 5951 }
+    ],
+    "description": "LMS_ARENA_DESERTED_ISLAND",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3198, "minY": 9341, "maxX": 3329, "maxY": 9409 }
+    ],
+    "description": "SMOKE_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3326, "minY": 3199, "maxX": 3407, "maxY": 3290 }
+    ],
+    "description": "DUEL_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3294, "minY": 3114, "maxX": 3311, "maxY": 3135 }
+    ],
+    "description": "SHANTAY_PASS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3347, "minY": 3288, "maxX": 3374, "maxY": 3327 }
+    ],
+    "description": "MAGE_TRAINING_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3265, "minY": 3161, "maxX": 3272, "maxY": 3173 },
+      { "minX": 3270, "minY": 3179, "maxX": 3279, "maxY": 3194 },
+      { "minX": 3285, "minY": 3187, "maxX": 3290, "maxY": 3192 },
+      { "minX": 3289, "minY": 3202, "maxX": 3296, "maxY": 3206 },
+      { "minX": 3297, "minY": 3185, "maxX": 3306, "maxY": 3194 },
+      { "minX": 3319, "minY": 3191, "maxX": 3323, "maxY": 3197 },
+      { "minX": 3312, "minY": 3173, "maxX": 3318, "maxY": 3186 },
+      { "minX": 3313, "minY": 3160, "maxX": 3318, "maxY": 3165 },
+      { "minX": 3282, "minY": 3159, "maxX": 3303, "maxY": 3177 }
+    ],
+    "description": "AL_KHARID_BUILDINGS",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3276, "minY": 3195, "maxX": 3337, "maxY": 3265 },
+      { "minX": 3259, "minY": 3135, "maxX": 3345, "maxY": 3201 },
+      { "minX": 3253, "minY": 3155, "maxX": 3265, "maxY": 3182 }
+    ],
+    "description": "AL_KHARID",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3344, "minY": 3129, "maxX": 3384, "maxY": 3200 },
+      { "minX": 3384, "minY": 3141, "maxX": 3391, "maxY": 3203 },
+      { "minX": 3391, "minY": 3164, "maxX": 3412, "maxY": 3203 },
+      { "minX": 3412, "minY": 3170, "maxX": 3426, "maxY": 3197 }
+    ],
+    "description": "EAST_AL_KHARID",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3270, "minY": 3258, "maxX": 3337, "maxY": 3322 }
+    ],
+    "description": "AL_KHARID_MINE",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3272, "minY": 3011, "maxX": 3306, "maxY": 3042 }
+    ],
+    "description": "DESERT_MINING_CAMP",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3198, "minY": 2817, "maxX": 3322, "maxY": 2989 },
+      { "minX": 3315, "minY": 2812, "maxX": 3469, "maxY": 2928 }
+    ],
+    "description": "KHARIDIAN_DESERT_DEEP",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3135, "minY": 2885, "maxX": 3524, "maxY": 3051 }
+    ],
+    "description": "KHARIDIAN_DESERT_MID",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3196, "minY": 2997, "maxX": 3526, "maxY": 3134 },
+      { "minX": 3134, "minY": 2600, "maxX": 3565, "maxY": 3069 },
+      { "minX": 3114, "minY": 2786, "maxX": 3216, "maxY": 2974 }
+    ],
+    "description": "KHARIDIAN_DESERT",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3008, "minY": 4671, "maxX": 3072, "maxY": 4734 }
+    ],
+    "description": "KHARIDIAN_DESERT_INSTANCE",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3268, "minY": 3178, "maxX": 3345, "maxY": 3326 },
+      { "minX": 3255, "minY": 3119, "maxX": 3433, "maxY": 3188 },
+      { "minX": 3319, "minY": 3196, "maxX": 3411, "maxY": 3288 },
+      { "minX": 3338, "minY": 3122, "maxX": 3432, "maxY": 3202 },
+      { "minX": 3376, "minY": 3200, "maxX": 3401, "maxY": 3321 },
+      { "minX": 3382, "minY": 3191, "maxX": 3421, "maxY": 3263 },
+      { "minX": 3200, "minY": 3044, "maxX": 3533, "maxY": 3134 },
+      { "minX": 3399, "minY": 3129, "maxX": 3484, "maxY": 3164 },
+      { "minX": 3399, "minY": 3129, "maxX": 3450, "maxY": 3179 },
+      { "minX": 3169, "minY": 3023, "maxX": 3527, "maxY": 3072 },
+      { "minX": 3142, "minY": 2842, "maxX": 3527, "maxY": 3063 },
+      { "minX": 3127, "minY": 2590, "maxX": 3538, "maxY": 3021 }
+    ],
+    "description": "KHARID_DESERT_REGION",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3198, "minY": 9275, "maxX": 3267, "maxY": 9339 },
+      { "minX": 2755, "minY": 4934, "maxX": 2812, "maxY": 4982 },
+      { "minX": 2825, "minY": 4938, "maxX": 2873, "maxY": 4976 },
+      { "minX": 2894, "minY": 4941, "maxX": 2933, "maxY": 4972 }
+    ],
+    "description": "DESERT_TREASURE_PYRAMID",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1922, "minY": 4447, "maxX": 1945, "maxY": 4470 },
+      { "minX": 1955, "minY": 4417, "maxX": 1980, "maxY": 4441 },
+      { "minX": 1955, "minY": 4445, "maxX": 1980, "maxY": 4471 },
+      { "minX": 1922, "minY": 4416, "maxX": 1946, "maxY": 4440 },
+      { "minX": 1919, "minY": 4414, "maxX": 1988, "maxY": 4481 }
+    ],
+    "description": "PYRAMID_PLUNDER",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2380, "minY": 5958, "maxX": 2420, "maxY": 6000 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2220, "minY": 5938, "maxX": 2325, "maxY": 6032 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_1",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2475, "minY": 5938, "maxX": 2580, "maxY": 6032 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_2",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2350, "minY": 5800, "maxX": 2455, "maxY": 5906 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_3",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2475, "minY": 5800, "maxX": 2580, "maxY": 5906 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_4",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2220, "minY": 5800, "maxX": 2325, "maxY": 5906 }
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_5",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3682, "minY": 3257, "maxX": 3682, "maxY": 3257 },
+      { "minX": 3681, "minY": 3256, "maxX": 3681, "maxY": 3256 },
+      { "minX": 3678, "minY": 3259, "maxX": 3684, "maxY": 3263 },
+      { "minX": 3683, "minY": 3258, "maxX": 3683, "maxY": 3258 }
+    ],
+    "description": "VER_SINHAZA_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3641, "minY": 3202, "maxX": 3684, "maxY": 3236 }
+    ],
+    "description": "VER_SINHAZA",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3583, "minY": 3169, "maxX": 3648, "maxY": 3331 }
+    ],
+    "description": "MEIYERDITCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3520, "minY": 3328, "maxX": 3594, "maxY": 3388 }
+    ],
+    "description": "CASTLE_DRAKAN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3590, "minY": 3330, "maxX": 3636, "maxY": 3399 },
+      { "minX": 3636, "minY": 3330, "maxX": 3662, "maxY": 3392 },
+      { "minX": 3662, "minY": 3335, "maxX": 3669, "maxY": 3384 }
+    ],
+    "description": "DARKMEYER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3649, "minY": 3456, "maxX": 3688, "maxY": 3508 },
+      { "minX": 3688, "minY": 3456, "maxX": 3710, "maxY": 3484 },
+      { "minX": 3670, "minY": 3503, "maxX": 3684, "maxY": 3514 }
+    ],
+    "description": "PORT_PHASMATYS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3527, "minY": 3533, "maxX": 3564, "maxY": 3576 }
+    ],
+    "description": "FENKENSTRAINS_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3405, "minY": 3531, "maxX": 3452, "maxY": 3579 }
+    ],
+    "description": "MORYTANIA_SLAYER_TOWER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3456, "minY": 3456, "maxX": 3520, "maxY": 3520 }
+    ],
+    "description": "CANIFIS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3456, "minY": 3264, "maxX": 3520, "maxY": 3328 }
+    ],
+    "description": "MORTTON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3524, "minY": 9669, "maxX": 3586, "maxY": 9726, "plane": 3
+      }
+    ],
+    "description": "BARROWS_CRYPTS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3522, "minY": 9666, "maxX": 3581, "maxY": 9728, "plane": 0
+      }
+    ],
+    "description": "BARROWS_TUNNELS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3520, "minY": 3264, "maxX": 3584, "maxY": 3328 }
+    ],
+    "description": "BARROWS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3468, "minY": 3164, "maxX": 3583, "maxY": 3258 }
+    ],
+    "description": "BURGH_DE_ROTT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3423, "minY": 3201, "maxX": 3461, "maxY": 3261 }
+    ],
+    "description": "ABANDONED_MINE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3422, "minY": 3202, "maxX": 3782, "maxY": 3467 },
+      { "minX": 3426, "minY": 3467, "maxX": 3775, "maxY": 3603 },
+      { "minX": 3399, "minY": 3511, "maxX": 3426, "maxY": 3603 },
+      { "minX": 3410, "minY": 3500, "maxX": 3457, "maxY": 3524 },
+      { "minX": 3416, "minY": 3495, "maxX": 3457, "maxY": 3500 },
+      { "minX": 3420, "minY": 3481, "maxX": 3451, "maxY": 3495 },
+      { "minX": 3424, "minY": 3435, "maxX": 3451, "maxY": 3481 },
+      { "minX": 3403, "minY": 3435, "maxX": 3424, "maxY": 3462 },
+      { "minX": 3399, "minY": 3321, "maxX": 3422, "maxY": 3442 },
+      { "minX": 3414, "minY": 3255, "maxX": 3435, "maxY": 3327 },
+      { "minX": 3469, "minY": 3161, "maxX": 3726, "maxY": 3209 },
+      { "minX": 1670, "minY": 4546, "maxX": 1724, "maxY": 4600 }
+    ],
+    "description": "MORYTANIA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2064, "minY": 4880, "maxX": 2087, "maxY": 4903 }
+    ],
+    "description": "SINHAZA_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2257, "minY": 5319, "maxX": 2292, "maxY": 5363 },
+      { "minX": 2466, "minY": 4994, "maxX": 2523, "maxY": 5053 }
+    ],
+    "description": "THE_INFERNO",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2367, "minY": 4993, "maxX": 2559, "maxY": 5184 }
+    ],
+    "description": "TZHAAR",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2368, "minY": 3387, "maxX": 2496, "maxY": 3525 },
+      { "minX": 2404, "minY": 3511, "maxX": 2431, "maxY": 3547 },
+      { "minX": 2484, "minY": 3387, "maxX": 2507, "maxY": 3406 }
+    ],
+    "description": "TREE_GNOME_STRONGHOLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1920, "minY": 5502, "maxX": 2048, "maxY": 5631 }
+    ],
+    "description": "TREE_GNOME_STRONGHOLD_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3139, "minY": 10052, "maxX": 3271, "maxY": 10238 }
+    ],
+    "description": "REVENANT_CAVES",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3904, "maxX": 2988, "maxY": 3970 },
+      { "minX": 2988, "minY": 3907, "maxX": 3002, "maxY": 3940 },
+      { "minX": 2939, "minY": 3865, "maxX": 2980, "maxY": 3909 },
+      { "minX": 2939, "minY": 3834, "maxX": 2958, "maxY": 3865 }
+    ],
+    "description": "FROZEN_WASTE_PLATEAU",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3903, "maxX": 3391, "maxY": 3974 }
+    ],
+    "description": "WILDERNESS_HIGH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3806, "maxX": 3391, "maxY": 3903 }
+    ],
+    "description": "WILDERNESS_MID_HIGH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3730, "maxX": 3391, "maxY": 3806 }
+    ],
+    "description": "WILDERNESS_MID",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3558, "maxX": 3391, "maxY": 3730 }
+    ],
+    "description": "WILDERNESS_MID_LOW",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3522, "maxX": 3391, "maxY": 3558 }
+    ],
+    "description": "WILDERNESS_LOW",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2939, "minY": 3522, "maxX": 3391, "maxY": 3974 }
+    ],
+    "description": "WILDERNESS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2748, "minY": 3711, "maxX": 2942, "maxY": 3980 },
+      { "minX": 2696, "minY": 3799, "maxX": 2741, "maxY": 3839 },
+      { "minX": 2714, "minY": 3767, "maxX": 2757, "maxY": 3803 },
+      { "minX": 2723, "minY": 3710, "maxX": 2758, "maxY": 3743 }
+    ],
+    "description": "GIELINOR_SNOWY_NORTHERN_REGION",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2754, "minY": 3675, "maxX": 2789, "maxY": 3707 },
+      { "minX": 2789, "minY": 3682, "maxX": 2802, "maxY": 3708 }
+    ],
+    "description": "MOUNTAIN_CAMP_LAKE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2766, "minY": 3655, "maxX": 2780, "maxY": 3673 }
+    ],
+    "description": "MOUNTAIN_CAMP_ENTRY_PATH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2750, "minY": 3671, "maxX": 2815, "maxY": 3711 },
+      { "minX": 2779, "minY": 3652, "maxX": 2815, "maxY": 3671 }
+    ],
+    "description": "MOUNTAIN_CAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2594, "minY": 3646, "maxX": 2692, "maxY": 3747 }
+    ],
+    "description": "RELLEKKA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2574, "minY": 3585, "maxX": 2800, "maxY": 3750 },
+      { "minX": 2800, "minY": 3642, "maxX": 2822, "maxY": 3717 },
+      { "minX": 2686, "minY": 3724, "maxX": 2751, "maxY": 3811 }
+    ],
+    "description": "FREMENNIK_PROVINCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2187, "minY": 3397, "maxX": 2229, "maxY": 3424 }
+    ],
+    "description": "GWENITH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3136, "minY": 5952, "maxX": 3391, "maxY": 6207 }
+    ],
+    "description": "PRIFDDINAS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2119, "minY": 3384, "maxX": 22112, "maxY": 3453 }
+    ],
+    "description": "MYNYDD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2313, "minY": 3147, "maxX": 2363, "maxY": 3194 }
+    ],
+    "description": "LLETYA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2166, "minY": 3025, "maxX": 2315, "maxY": 3119 },
+      { "minX": 2181, "minY": 3117, "maxX": 2280, "maxY": 3131 }
+    ],
+    "description": "POISON_WASTE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2309, "minY": 3234, "maxX": 2394, "maxY": 3337 }
+    ],
+    "description": "ARANDAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2752, "minY": 6080, "maxX": 2879, "maxY": 6207 }
+    ],
+    "description": "SOTE_GRAND_LIBRARY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2881, "minY": 6152, "maxX": 2937, "maxY": 6206 }
+    ],
+    "description": "SOTE_LLETYA_ON_FIRE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2730, "minY": 6080, "maxX": 2820, "maxY": 6160 }
+    ],
+    "description": "SOTE_LLETYA_SMALL_FIRES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3219, "minY": 5913, "maxX": 3237, "maxY": 5933 }
+    ],
+    "description": "SOTE_TEMPLE_OF_LIGHT_SEREN_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3264, "minY": 5887, "maxX": 3328, "maxY": 5951 }
+    ],
+    "description": "SOTE_FRAGMENT_OF_SEREN_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2116, "minY": 3021, "maxX": 2320, "maxY": 3455 },
+      { "minX": 2295, "minY": 3140, "maxX": 2365, "maxY": 3202 }
+    ],
+    "description": "TIRANNWN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2688, "minY": 6015, "maxX": 2944, "maxY": 6207 }
+    ],
+    "description": "TIRANNWN_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2315, "minY": 4345, "maxX": 2500, "maxY": 4485 }
+    ],
+    "description": "ZANARIS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2816, "minY": 5216, "maxX": 2971, "maxY": 5375 },
+      { "minX": 2848, "minY": 5153, "maxX": 2948, "maxY": 5199 },
+      { "minX": 2848, "minY": 5185, "maxX": 2948, "maxY": 5246 },
+      { "minX": 3008, "minY": 10112, "maxX": 3072, "maxY": 10178 }
+    ],
+    "description": "GOD_WARS_DUNGEON",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2079, "minY": 2763, "maxX": 2348, "maxY": 3014 }
+    ],
+    "description": "ISLE_OF_SOULS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2113, "minY": 2878, "maxX": 2302, "maxY": 2946 }
+    ],
+    "description": "SOUL_WARS_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2272, "minY": 2910, "maxX": 2302, "maxY": 2946 },
+      { "minX": 2268, "minY": 2884, "maxX": 2297, "maxY": 2910 },
+      { "minX": 2240, "minY": 2891, "maxX": 2273, "maxY": 2938 },
+      { "minX": 2240, "minY": 2882, "maxX": 2260, "maxY": 2938 }
+    ],
+    "description": "SOUL_WARS_RED_BASE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2116, "minY": 2881, "maxX": 2145, "maxY": 2941 },
+      { "minX": 2145, "minY": 2889, "maxX": 2177, "maxY": 2941 }
+    ],
+    "description": "SOUL_WARS_BLUE_BASE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1855, "minY": 5823, "maxX": 2175, "maxY": 6078 }
+    ],
+    "description": "ISLE_OF_SOULS_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1921, "minY": 5950, "maxX": 2110, "maxY": 6018 }
+    ],
+    "description": "SOUL_WARS_ARENA_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2080, "minY": 5982, "maxX": 2110, "maxY": 6018 },
+      { "minX": 2076, "minY": 5956, "maxX": 2105, "maxY": 5982 },
+      { "minX": 2048, "minY": 5963, "maxX": 2081, "maxY": 6010 },
+      { "minX": 2048, "minY": 5954, "maxX": 2068, "maxY": 6010 }
+    ],
+    "description": "SOUL_WARS_RED_BASE_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1924, "minY": 5953, "maxX": 1953, "maxY": 6013 },
+      { "minX": 1953, "minY": 5961, "maxX": 1985, "maxY": 6013 }
+    ],
+    "description": "SOUL_WARS_BLUE_BASE_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1178, "minY": 10260, "maxX": 1195, "maxY": 10273 },
+      { "minX": 1296, "minY": 10255, "maxX": 1333, "maxY": 10277 },
+      { "minX": 1371, "minY": 10214, "maxX": 1392, "maxY": 10233 },
+      { "minX": 1112, "minY": 10124, "maxX": 1384, "maxY": 10295 },
+      { "minX": 1247, "minY": 10146, "maxX": 1278, "maxY": 10172 }
+    ],
+    "description": "KARUULM_SLAYER_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1245, "minY": 3765, "maxX": 1358, "maxY": 3860 }
+    ],
+    "description": "MOUNT_KARUULM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1280, "minY": 10047, "maxX": 1341, "maxY": 10109 }
+    ],
+    "description": "LIZARDMAN_TEMPLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1580, "minY": 3526, "maxX": 1596, "maxY": 3534 }
+    ],
+    "description": "XERICS_LOOKOUT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1539, "minY": 3618, "maxX": 1548, "maxY": 3627 }
+    ],
+    "description": "SHAYZIEN_COMBAT_RING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1467, "minY": 3607, "maxX": 1540, "maxY": 3678 },
+      { "minX": 1540, "minY": 3613, "maxX": 1559, "maxY": 3650 }
+    ],
+    "description": "SHAYZIEN_ENCAMPMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1577, "minY": 3587, "maxX": 1594, "maxY": 3604 }
+    ],
+    "description": "SHAYZIEN_SHAYZIA_RUIN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1472, "minY": 3541, "maxX": 1515, "maxY": 3583 }
+    ],
+    "description": "SHAYZIEN_GRAVEYARD_OF_HEROES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1467, "minY": 3607, "maxX": 1540, "maxY": 3678 },
+      { "minX": 1540, "minY": 3613, "maxX": 1559, "maxY": 3650 },
+      { "minX": 1477, "minY": 3584, "maxX": 1525, "maxY": 3616 },
+      { "minX": 1460, "minY": 3537, "maxX": 1574, "maxY": 3599 },
+      { "minX": 1535, "minY": 3523, "maxX": 1574, "maxY": 3537 },
+      { "minX": 1567, "minY": 3584, "maxX": 1595, "maxY": 3606 }
+    ],
+    "description": "SHAYZIEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1720, "minY": 3560, "maxX": 1802, "maxY": 3641 }
+    ],
+    "description": "HOSIDIUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1600, "minY": 9977, "maxX": 1732, "maxY": 10111 }
+    ],
+    "description": "KOUREND_CATACOMBS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1703, "minY": 3815, "maxX": 1739, "maxY": 3844 },
+      { "minX": 1739, "minY": 3817, "maxX": 1751, "maxY": 3839 },
+      { "minX": 1751, "minY": 3815, "maxX": 1791, "maxY": 3833 }
+    ],
+    "description": "BLOOD_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1660, "minY": 3864, "maxX": 1747, "maxY": 3904 }
+    ],
+    "description": "DARK_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1572, "minY": 3799, "maxX": 1597, "maxY": 3838 },
+      { "minX": 1566, "minY": 3805, "maxX": 1586, "maxY": 3832 },
+      { "minX": 1562, "minY": 3811, "maxX": 1570, "maxY": 3823 },
+      { "minX": 1588, "minY": 3778, "maxX": 1608, "maxY": 3838 },
+      { "minX": 1598, "minY": 3731, "maxX": 1730, "maxY": 3854 },
+      { "minX": 1623, "minY": 3710, "maxX": 1730, "maxY": 3731 },
+      { "minX": 1616, "minY": 3842, "maxX": 1658, "maxY": 3874 },
+      { "minX": 1625, "minY": 3817, "maxX": 1856, "maxY": 3898 }
+    ],
+    "description": "ARCEUUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1493, "minY": 3905, "maxX": 1870, "maxY": 4061 },
+      { "minX": 1518, "minY": 3875, "maxX": 1608, "maxY": 3908 },
+      { "minX": 1532, "minY": 3859, "maxX": 1595, "maxY": 3875 },
+      { "minX": 1532, "minY": 3847, "maxX": 1582, "maxY": 3859 },
+      { "minX": 1591, "minY": 3895, "maxX": 1633, "maxY": 3910 }
+    ],
+    "description": "ZEAH_SNOWY_NORTHERN_REGION",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1416, "minY": 3835, "maxX": 1521, "maxY": 3899 },
+      { "minX": 1420, "minY": 3787, "maxX": 1560, "maxY": 3840 },
+      { "minX": 1434, "minY": 3755, "maxX": 1586, "maxY": 3787 },
+      { "minX": 1448, "minY": 3737, "maxX": 1595, "maxY": 3767 },
+      { "minX": 1460, "minY": 3719, "maxX": 1598, "maxY": 3737 }
+    ],
+    "description": "LOVAKENGJ",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1194, "minY": 3520, "maxX": 1292, "maxY": 3594 },
+      { "minX": 1287, "minY": 3556, "maxX": 1300, "maxY": 3596 },
+      { "minX": 1300, "minY": 3580, "maxX": 1308, "maxY": 3596 },
+      { "minX": 1230, "minY": 3588, "maxX": 1269, "maxY": 3611 }
+    ],
+    "description": "MOUNT_QUIDAMORTEM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1167, "minY": 3582, "maxX": 1345, "maxY": 3664 },
+      { "minX": 1292, "minY": 3526, "maxX": 1355, "maxY": 3588 },
+      { "minX": 1275, "minY": 3631, "maxX": 1329, "maxY": 3692 }
+    ],
+    "description": "KEBOS_LOWLANDS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1643, "minY": 3622, "maxX": 1649, "maxY": 3631 }
+    ],
+    "description": "MESS_HALL_KITCHEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1152, "minY": 3270, "maxX": 1938, "maxY": 4078 }
+    ],
+    "description": "ZEAH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3632, "minY": 3694, "maxX": 3712, "maxY": 3800 },
+      { "minX": 3631, "minY": 3782, "maxX": 3697, "maxY": 3809 }
+    ],
+    "description": "TAR_SWAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3626, "minY": 3693, "maxX": 3851, "maxY": 3908 }
+    ],
+    "description": "FOSSIL_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2821, "minY": 9541, "maxX": 2875, "maxY": 9663 }
+    ],
+    "description": "KARAMJA_VOLCANO_DUNGEON",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2686, "minY": 3124, "maxX": 2809, "maxY": 3257 },
+      { "minX": 2809, "minY": 3124, "maxX": 2917, "maxY": 3209 },
+      { "minX": 2917, "minY": 3132, "maxX": 2964, "maxY": 3184 },
+      { "minX": 2746, "minY": 2873, "maxX": 2973, "maxY": 3151 },
+      { "minX": 2973, "minY": 2873, "maxX": 3012, "maxY": 3081 }
+    ],
+    "description": "KARAMJA",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2496, "minY": 4542, "maxX": 2642, "maxY": 4606 }
+    ],
+    "description": "KARAMJA_INSTANCE",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2048, "minY": 4800, "maxX": 2111, "maxY": 4863 }
+    ],
+    "description": "COSMIC_ENTITYS_PLANE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2624, "minY": 2624, "maxX": 2688, "maxY": 2688 }
+    ],
+    "description": "VOID_KNIGHTS_OUTPOST",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2624, "minY": 2560, "maxX": 2688, "maxY": 2624 }
+    ],
+    "description": "PEST_CONTROL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2880, "minY": 2688, "maxX": 2944, "maxY": 2752 }
+    ],
+    "description": "CRASH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2798, "minY": 3326, "maxX": 2873, "maxY": 3396 },
+      { "minX": 2873, "minY": 3326, "maxX": 2882, "maxY": 3344 }
+    ],
+    "description": "ENTRANA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2810, "minY": 3221, "maxX": 2869, "maxY": 3314 }
+    ],
+    "description": "CRANDOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2756, "minY": 3268, "maxX": 2799, "maxY": 3295 }
+    ],
+    "description": "FISHING_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3643, "minY": 2923, "maxX": 3858, "maxY": 3075 }
+    ],
+    "description": "MOS_LE_HARMLESS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2112, "minY": 5041, "maxX": 2176, "maxY": 5182 },
+      { "minX": 2176, "minY": 5118, "maxX": 2240, "maxY": 5182 }
+    ],
+    "description": "BRAINDEATH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3776, "minY": 2816, "maxX": 3840, "maxY": 2880 }
+    ],
+    "description": "HARMONY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3776, "minY": 3520, "maxX": 3840, "maxY": 3584 }
+    ],
+    "description": "DRAGONTOOTH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2622, "minY": 3974, "maxX": 2686, "maxY": 4091 }
+    ],
+    "description": "ICEBERG",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2432, "minY": 3968, "maxX": 2496, "maxY": 4032 }
+    ],
+    "description": "ISLAND_OF_STONE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2485, "minY": 3080, "maxX": 2629, "maxY": 3923 }
+    ],
+    "description": "MISCELLANIA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2496, "minY": 3712, "maxX": 2560, "maxY": 3776 }
+    ],
+    "description": "WATERBIRTH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2304, "minY": 3776, "maxX": 2368, "maxY": 3840 }
+    ],
+    "description": "NEITIZNOT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2368, "minY": 3776, "maxX": 2432, "maxY": 3840 }
+    ],
+    "description": "JATIZSO",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2299, "minY": 3769, "maxX": 2436, "maxY": 3907 }
+    ],
+    "description": "FREMENNIK_ISLES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2240, "minY": 4032, "maxX": 2304, "maxY": 4096 }
+    ],
+    "description": "UNGAEL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2176, "minY": 3776, "maxX": 2240, "maxY": 3840 }
+    ],
+    "description": "PIRATES_COVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1728, "minY": 5055, "maxX": 1792, "maxY": 5120 },
+      { "minX": 1800, "minY": 5066, "maxX": 1850, "maxY": 5109 }
+    ],
+    "description": "LUNAR_DIPLOMACY_DREAM_WORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2050, "minY": 3841, "maxX": 2174, "maxY": 3965 }
+    ],
+    "description": "LUNAR_ISLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2056, "minY": 5375, "maxX": 2109, "maxY": 5442 }
+    ],
+    "description": "MM2_AIRSHIP_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2685, "minY": 2684, "maxX": 2819, "maxY": 2819 }
+    ],
+    "description": "APE_ATOLL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2669, "minY": 3166, "maxX": 2673, "maxY": 3183 }
+    ],
+    "description": "FISHING_TRAWLER_BOAT_PORT_KHAZARD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2012, "minY": 4824, "maxX": 2021, "maxY": 4826 }
+    ],
+    "description": "FISHING_TRAWLER_BOAT_FLOODED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1792, "minY": 4734, "maxX": 1855, "maxY": 4863 },
+      { "minX": 1855, "minY": 4798, "maxX": 1920, "maxY": 4893 },
+      { "minX": 1920, "minY": 4798, "maxX": 1990, "maxY": 4863 },
+      { "minX": 1990, "minY": 4798, "maxX": 2047, "maxY": 4917 }
+    ],
+    "description": "FISHING_TRAWLER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1832, "minY": 4776, "maxX": 1934, "maxY": 4878 }
+    ],
+    "description": "MOGRE_CAMP_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2944, "minY": 9472, "maxX": 3007, "maxY": 9535 }
+    ],
+    "description": "MOGRE_CAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3779, "minY": 9216, "maxX": 3839, "maxY": 9278, "plane": 1 }
+    ],
+    "description": "HARMONY_ISLAND_UNDERWATER_TUNNEL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3721, "minY": 10243, "maxX": 3838, "maxY": 10304 }
+    ],
+    "description": "FOSSIL_ISLAND_UNDERWATER_AREA",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2112, "minY": 4799, "maxX": 2176, "maxY": 4863 }
+    ],
+    "description": "COSMIC_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2176, "minY": 4799, "maxX": 2240, "maxY": 4863 }
+    ],
+    "description": "DEATH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2240, "minY": 4799, "maxX": 2304, "maxY": 4863 }
+    ],
+    "description": "CHAOS_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2304, "minY": 4799, "maxX": 2368, "maxY": 4863 }
+    ],
+    "description": "WRATH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2368, "minY": 4799, "maxX": 2427, "maxY": 4863 }
+    ],
+    "description": "NATURE_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2427, "minY": 4799, "maxX": 2495, "maxY": 4863 }
+    ],
+    "description": "LAW_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2495, "minY": 4799, "maxX": 2553, "maxY": 4863 }
+    ],
+    "description": "BODY_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2553, "minY": 4799, "maxX": 2624, "maxY": 4863 }
+    ],
+    "description": "FIRE_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2624, "minY": 4799, "maxX": 2688, "maxY": 4863 }
+    ],
+    "description": "EARTH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2688, "minY": 4799, "maxX": 2752, "maxY": 4863 }
+    ],
+    "description": "WATER_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2752, "minY": 4799, "maxX": 2816, "maxY": 4863 }
+    ],
+    "description": "MIND_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2816, "minY": 4799, "maxX": 2880, "maxY": 4863 }
+    ],
+    "description": "AIR_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3200, "minY": 4800, "maxX": 3262, "maxY": 4862 }
+    ],
+    "description": "TRUE_BLOOD_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1528, "minY": 5052, "maxX": 1606, "maxY": 5125 },
+      { "minX": 3535, "minY": 10440, "maxX": 3570, "maxY": 10490 }
+    ],
+    "description": "LITHKREN_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3519, "minY": 3967, "maxX": 3602, "maxY": 4032 }
+    ],
+    "description": "LITHKREN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1800, "minY": 5250, "maxX": 1814, "maxY": 5277 }
+    ],
+    "description": "DS2_FLASHBACK_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1648, "minY": 5480, "maxX": 1750, "maxY": 5582 },
+      { "minX": 8166, "minY": 16360, "maxX": 8206, "maxY": 16400 }
+    ],
+    "description": "DS2_FLEET_ATTACKED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1600, "minY": 5503, "maxX": 1727, "maxY": 5758 }
+    ],
+    "description": "DS2_SHIPS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1856, "minY": 5632, "maxX": 1919, "maxY": 5695 }
+    ],
+    "description": "THE_GAUNTLET",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1920, "minY": 5632, "maxX": 1983, "maxY": 5695 }
+    ],
+    "description": "THE_GAUNTLET_CORRUPTED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3025, "minY": 6116, "maxX": 3040, "maxY": 6131 }
+    ],
+    "description": "THE_GAUNTLET_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1984, "minY": 5696, "maxX": 2047, "maxY": 5767 }
+    ],
+    "description": "PLAYER_OWNED_HOUSE_SNOWY",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1856, "minY": 5696, "maxX": 2047, "maxY": 5767 }
+    ],
+    "description": "PLAYER_OWNED_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1616, "minY": 4728, "maxX": 1623, "maxY": 4735 }
+    ],
+    "description": "BLACKHOLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2897, "minY": 5760, "maxX": 3036, "maxY": 5848 }
+    ],
+    "description": "CAMDOZAAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3005, "minY": 2941, "maxX": 3066, "maxY": 3011 }
+    ],
+    "description": "TEMPOROSS_COVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3550, "minY": 9450, "maxX": 3660, "maxY": 9525 }
+    ],
+    "description": "TEMPLE_OF_THE_EYE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3613, "minY": 9471, "maxX": 3617, "maxY": 9481 }
+    ],
+    "description": "TEMPLE_OF_THE_EYE_ENTRANCE_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3166, "minY": 4288, "maxX": 3185, "maxY": 5734 }
+    ],
+    "description": "DEATHS_OFFICE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3152, "minY": 4416, "maxX": 3231, "maxY": 4468 }
+    ],
+    "description": "TOB_ROOM_MAIDEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3260, "minY": 4427, "maxX": 3327, "maxY": 4474 }
+    ],
+    "description": "TOB_ROOM_BLOAT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3274, "minY": 4226, "maxX": 3318, "maxY": 4290 }
+    ],
+    "description": "TOB_ROOM_NYCOLAS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3264, "minY": 4288, "maxX": 3295, "maxY": 4336 }
+    ],
+    "description": "TOB_ROOM_SOTETSEG",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3151, "minY": 4368, "maxX": 3191, "maxY": 4406 }
+    ],
+    "description": "TOB_ROOM_XARPUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3152, "minY": 4296, "maxX": 3186, "maxY": 4332 }
+    ],
+    "description": "TOB_ROOM_VERZIK",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3224, "minY": 4305, "maxX": 3250, "maxY": 4334 }
+    ],
+    "description": "TOB_ROOM_VAULT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3151, "minY": 4226, "maxX": 3327, "maxY": 4474 }
+    ],
+    "description": "THEATRE_OF_BLOOD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3262, "minY": 5341, "maxX": 3360, "maxY": 5373 }
+    ],
+    "description": "COX_SNOW",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3120, "minY": 5694, "maxX": 3360, "maxY": 5760 },
+      { "minX": 3262, "minY": 5118, "maxX": 3360, "maxY": 5694 }
+    ],
+    "description": "CHAMBERS_OF_XERIC",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3840, "minY": 9920, "maxX": 3903, "maxY": 9983 }
+    ],
+    "description": "NIGHTMARE_OF_ASHIHAMA_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2660, "minY": 2638, "maxX": 2663, "maxY": 2644 },
+      { "minX": 2638, "minY": 2642, "maxX": 2641, "maxY": 2648 },
+      { "minX": 2632, "minY": 2649, "maxX": 2635, "maxY": 2655 },
+      { "minX": 2656, "minY": 2609, "maxX": 2659, "maxY": 2615 }
+    ],
+    "description": "PEST_CONTROL_LANDER_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2571, "minY": 5252, "maxX": 2616, "maxY": 5305 }
+    ],
+    "description": "BARBARIAN_ASSAULT_WAITING_ROOMS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3136, "minY": 4544, "maxX": 3391, "maxY": 4608 },
+      { "minX": 3168, "minY": 4604, "maxX": 3196, "maxY": 4639 }
+    ],
+    "description": "TARNS_LAIR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1878, "minY": 5014, "maxX": 1894, "maxY": 5036 }
+    ],
+    "description": "RANDOM_EVENT_CLASSROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2588, "minY": 4762, "maxX": 2615, "maxY": 4786 }
+    ],
+    "description": "RANDOM_EVENT_FREAKY_FORESTER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1920, "minY": 4992, "maxX": 1935, "maxY": 5007 }
+    ],
+    "description": "RANDOM_EVENT_GRAVEDIGGER",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3136, "minY": 4799, "maxX": 3200, "maxY": 4863 }
+    ],
+    "description": "RANDOM_EVENT_DRILL_DEMON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2450, "minY": 4764, "maxX": 2480, "maxY": 4794 }
+    ],
+    "description": "RANDOM_EVENT_FROG_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2059, "minY": 4447, "maxX": 2111, "maxY": 4479 }
+    ],
+    "description": "RANDOM_EVENT_PRISON_PETE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1730, "minY": 5442, "maxX": 1789, "maxY": 5501 }
+    ],
+    "description": "CLAN_HALL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2493, "minY": 3606, "maxX": 2594, "maxY": 3648 },
+      { "minX": 2564, "minY": 3582, "maxX": 2600, "maxY": 3613 }
+    ],
+    "description": "LIGHTHOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2879, "minY": 5438, "maxX": 2943, "maxY": 5503 }
+    ],
+    "description": "SORCERESSS_GARDEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2558, "minY": 4286, "maxX": 2625, "maxY": 4352 }
+    ],
+    "description": "PURO_PURO",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2821, "minY": 5059, "maxX": 2875, "maxY": 5114 }
+    ],
+    "description": "RATCATCHERS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 1791, "minY": 4479, "maxX": 1856, "maxY": 4543 }
+    ],
+    "description": "CANOE_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2620, "minY": 4667, "maxX": 2691, "maxY": 4743 },
+      { "minX": 2729, "minY": 4637, "maxX": 2815, "maxY": 4762 },
+      { "minX": 2575, "minY": 4745, "maxX": 2624, "maxY": 4799 }
+    ],
+    "description": "FISHER_KINGS_REALM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 3010, "minY": 4478, "maxX": 3073, "maxY": 4540 }
+    ],
+    "description": "ENCHANTED_VALLEY",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "children": []
+  },
+  {
+    "rects": [],
+    "description": "UNKNOWN_OVERWORLD_SNOWY",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 2303, "minY": 4542, "maxX": 2368, "maxY": 4607 },
+      { "minX": 3392, "minY": 4927, "maxX": 3456, "maxY": 5055 },
+      { "minX": 1920, "minY": 4990, "maxX": 1984, "maxY": 5055 },
+      { "minX": 2111, "minY": 5502, "maxX": 2176, "maxY": 5567 },
+      { "minX": 1729, "minY": 5440, "maxX": 1790, "maxY": 5501 },
+      { "minX": 3647, "minY": 6014, "maxX": 3775, "maxY": 6142 },
+      { "minX": 2111, "minY": 4931, "maxX": 2166, "maxY": 4990 },
+      { "minX": 1599, "minY": 4778, "maxX": 1728, "maxY": 4863 }
+    ],
+    "description": "UNKNOWN_OVERWORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 700, "minY": 2300, "maxX": 4200, "maxY": 4095 }
+    ],
+    "description": "OVERWORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
+  },
+  {
+    "rects": [
+      { "minX": 0, "minY": 0, "maxX": 2147483647, "maxY": 2147483647 }
+    ],
+    "description": "ALL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "children": []
   }
-
 ]
