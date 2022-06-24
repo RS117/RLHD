@@ -55,6 +55,7 @@ import rs117.hd.config.AntiAliasingMode;
 import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
+import rs117.hd.data.area.AreaManager;
 import rs117.hd.data.materials.Material;
 import rs117.hd.model.ModelHasher;
 import rs117.hd.model.ModelPusher;
@@ -172,6 +173,9 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	private DeveloperTools developerTools;
+
+	@Inject
+	private AreaManager areaManager;
 
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 
@@ -615,7 +619,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 				// load all dynamic scene lights from text file
 				lightManager.startUp();
-
+				areaManager.startUp();
 				if (client.getGameState() == GameState.LOGGED_IN)
 				{
 					ThreadUtils.invokeOnMainThread(this::uploadScene);
@@ -643,7 +647,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		((Component) client).removeComponentListener(resizeListener);
 		lightManager.shutDown();
-
+		areaManager.shutDown();
 		clientThread.invoke(() ->
 		{
 			client.setGpu(false);
@@ -2262,6 +2266,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		generateHDSceneData();
 
+		areaManager.update(client.getLocalPlayer().getWorldLocation());
 		sceneUploader.upload(client.getScene(), vertexBuffer, uvBuffer, normalBuffer);
 
 		vertexBuffer.flip();

@@ -1,0 +1,34 @@
+[
+  {
+    "description": "Karamja",
+    "rects": [
+      { "minX": 2817, "minY": 2840, "maxX": 2907, "maxY": 3212, "plane": 0 },
+      { "minX": 2714, "minY": 2843, "maxX": 2776, "maxY": 3256, "plane": 0 },
+      { "minX": 2777, "minY": 2837, "maxX": 2816, "maxY": 3224, "plane": 0 },
+      { "minX": 2687, "minY": 3132, "maxX": 2728, "maxY": 3228, "plane": 0 },
+      { "minX": 2908, "minY": 2871, "maxX": 2974, "maxY": 3127, "plane": 0 },
+      { "minX": 2975, "minY": 2881, "maxX": 3006, "maxY": 3070, "plane": 0 },
+      { "minX": 2907, "minY": 3123, "maxX": 2933, "maxY": 3194, "plane": 0 },
+      { "minX": 2932, "minY": 3127, "maxX": 2963, "maxY": 3168, "plane": 0 }
+    ],
+    "theme": "HOT",
+    "children": [
+      {
+        "description": "Karamja Test",
+        "rects": [
+          { "minX": 2906, "minY": 3186, "maxX": 2933, "maxY": 3166, "plane": 0 }
+        ]
+      }
+    ]
+  },
+  {
+    "description": "Over World",
+    "rects": [
+      { "minX": 700, "minY": 2300, "maxX": 4200, "maxY": 4095, "plane": 0 }
+    ]
+  },
+  {
+    "description": "ALL"
+  }
+
+]

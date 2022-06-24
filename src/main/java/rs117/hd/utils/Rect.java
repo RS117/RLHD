@@ -25,6 +25,7 @@
 package rs117.hd.utils;
 
 import lombok.Getter;
+import net.runelite.api.coords.WorldPoint;
 
 @Getter
 public class Rect
@@ -32,6 +33,18 @@ public class Rect
 	private final int minX;
 	private final int minY;
 	private final int maxX;
+
+	@Override
+	public String toString() {
+		return "Rect{" +
+				"minX=" + minX +
+				", minY=" + minY +
+				", maxX=" + maxX +
+				", maxY=" + maxY +
+				", plane=" + plane +
+				'}';
+	}
+
 	private final int maxY;
 	private final int plane;
 
@@ -56,5 +69,10 @@ public class Rect
 	public boolean containsPoint(int pointX, int pointY, int pointZ)
 	{
 		return pointX <= maxX && pointX >= minX && pointY <= maxY && pointY >= minY && (plane == -1 || plane == pointZ);
+	}
+
+	public boolean containsPoint(WorldPoint w)
+	{
+		return containsPoint(w.getX(),w.getY(),w.getPlane());
 	}
 }
