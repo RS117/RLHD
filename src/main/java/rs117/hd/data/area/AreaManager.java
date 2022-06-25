@@ -8,12 +8,21 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.Perspective;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.HdPlugin;
+import rs117.hd.data.WaterType;
+import rs117.hd.data.area.effects.LargeTile;
+import rs117.hd.data.materials.GroundMaterial;
+import rs117.hd.data.materials.Material;
+import rs117.hd.scene.SceneUploader;
 import rs117.hd.utils.Env;
 import rs117.hd.utils.FileWatcher;
+import rs117.hd.utils.Rect;
+import rs117.hd.utils.buffer.GpuFloatBuffer;
+import rs117.hd.utils.buffer.GpuIntBuffer;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -85,13 +94,23 @@ public class AreaManager {
                 clientThread.invoke(() -> client.setGameState(GameState.LOADING));
             }
         }
-        log.info("Loaded " + areas.size() + " Bounded Areas");
+        log.info("Loaded " + areas.size() + " Areas");
     }
 
     public void loadAreas(Reader reader) {
         Gson gson = new GsonBuilder().setLenient().create();
         Area[] area = gson.fromJson(reader, Area[].class);
-        areas.addAll(Arrays.asList(area));
+        for (Area data : area) {
+            List<Rect> list = new ArrayList<>();
+            if(!data.getRects().isEmpty()) {
+                data.getRects().forEach(it -> {
+                    list.add(new Rect(it[0],it[1],it[2],it[3],it.length == 4 ? 0 : it[4]));
+                });
+                data.setRectangles(list);
+            }
+            areas.add(data);
+        }
+
         DEFAULT = getArea("ALL");
     }
 
@@ -110,6 +129,82 @@ public class AreaManager {
             log.debug("Unable to Find: " + name + " Switching to ALL");
         }
         return area;
+    }
+
+    public boolean shouldHide(WorldPoint point) {
+        if(!plugin.configHideAreas) {
+            return false;
+        }
+
+        if(currentArea.isHideOtherRegions()) {
+            return !currentArea.contains(point);
+        }
+
+        return false;
+    }
+
+    @Inject
+    private SceneUploader sceneUploader;
+
+    public void addTileData(GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer) {
+        LargeTile tile = getCurrentArea().getLargeTile();
+        int color = 127;
+        int size = 10000 * Perspective.LOCAL_TILE_SIZE;
+        int height = 0;
+
+        if(tile.getMaterialBelow() != null) {
+            int materialData = sceneUploader.modelPusher.packMaterialData(Material.getIndex(Material.DIRT_1), false);
+            int terrainData = sceneUploader.packTerrainData(600, WaterType.WATER, 0);
+            // North-west
+            vertexBuffer.put(-size, height, size, color);
+            uvBuffer.put(materialData, -size, size, 0);
+            // South-west
+            vertexBuffer.put(-size, height, -size, color);
+            uvBuffer.put(materialData, -size, -size, 0);
+            // North-east
+            vertexBuffer.put(size, height, size, color);
+            uvBuffer.put(materialData, size, size, 0);
+            // South-west
+            vertexBuffer.put(-size, height, -size, color);
+            uvBuffer.put(materialData, -size, -size, 0);
+            // South-east
+            vertexBuffer.put(size, height, -size, color);
+            uvBuffer.put(materialData, size, -size, 0);
+            // North-east
+            vertexBuffer.put(size, height, size, color);
+            uvBuffer.put(materialData, size, size, 0);
+            for (int i = 0; i < 6; i++) {
+                normalBuffer.put(0, 1, 0, terrainData);
+            }
+        }
+
+        int materialData = sceneUploader.modelPusher.packMaterialData(Material.getIndex(Material.valueOf(tile.getMaterial())), true);
+        int terrainData = sceneUploader.packTerrainData(0, WaterType.valueOf(tile.getWaterType()), 0);
+
+        // North-west
+        vertexBuffer.put(-size, height, size, color);
+        uvBuffer.put(materialData, -size, size, 0);
+        // South-west
+        vertexBuffer.put(-size, height, -size, color);
+        uvBuffer.put(materialData, -size, -size, 0);
+        // North-east
+        vertexBuffer.put(size, height, size, color);
+        uvBuffer.put(materialData, size, size, 0);
+        // South-west
+        vertexBuffer.put(-size, height, -size, color);
+        uvBuffer.put(materialData, -size, -size, 0);
+        // South-east
+        vertexBuffer.put(size, height, -size, color);
+        uvBuffer.put(materialData, size, -size, 0);
+        // North-east
+        vertexBuffer.put(size, height, size, color);
+        uvBuffer.put(materialData, size, size, 0);
+
+        for (int i = 0; i < 6; i++) {
+            normalBuffer.put(0, 1, 0, terrainData);
+        }
+
+
     }
 
 }

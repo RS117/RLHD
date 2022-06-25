@@ -1,10 +1,10 @@
 package rs117.hd.areas
 
 import com.google.gson.GsonBuilder
-import rs117.hd.HdPlugin
 import rs117.hd.data.area.Area
 import rs117.hd.data.area.AreaTheme
 import rs117.hd.data.environments.Area.*
+import rs117.hd.utils.Rect
 import java.io.File
 
 
@@ -20,7 +20,19 @@ object GenerateAreas {
             val area = Area()
             area.description = it.name
 
-            area.rects = it.rects.toMutableList()
+            val rects : MutableList<IntArray> = emptyList<IntArray>().toMutableList()
+
+            it.rects.forEach {
+                val plane = if(it.plane == -1) 0 else it.plane
+                if(plane == 0) {
+                    rects.add(arrayOf(it.minX,it.maxY,it.maxX,it.minY).toIntArray())
+                } else {
+                    rects.add(arrayOf(it.minX,it.maxY,it.maxX,it.minY,plane).toIntArray())
+                }
+            }
+
+            area.rects = rects
+
 
             val name = it.name.lowercase()
 
@@ -58,14 +70,9 @@ object GenerateAreas {
 
      private fun String.formatJson() : String {
         return this.
-            replace("\n" + "        \"minX"," \"minX").
-            replace("\n" + "        \"minY"," \"minY").
-            replace("\n" + "        \"maxX"," \"maxX").
-            replace("\n" + "        \"maxY"," \"maxY").
-            replace("\n" + "        \"plane"," \"plane").
-            replace(": -1\n" + "      }"," : -1 }").
-            replace("\"plane\": 1\n" + "      }","\"plane\": 1 }").
-            replace(", \"plane\" : -1","")
+            replace("\n" + "        "," ").
+            replace("\n" + "      ],"," ],").
+            replace("\n" + "      ]"," ]")
      }
 
     private val hideOther = listOf(

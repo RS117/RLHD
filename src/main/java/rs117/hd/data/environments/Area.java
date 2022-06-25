@@ -29,6 +29,7 @@ import net.runelite.api.Constants;
 import rs117.hd.utils.Rect;
 
 @Getter
+@Deprecated
 public enum Area
 {
 	// items higher on the list take precedent over those below

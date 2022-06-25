@@ -501,7 +501,7 @@ object HiddenAreas {
         Rect(2676, 9857, 2687, 9847),
         Rect(2594, 9727, 2560, 9760),
         Rect(2559, 9718, 2580, 9700),
-        Rect(2533, 9674, 2543, 9668),
+        Rect(2533, 9674, 2543, 9668,1),
         Rect(2325, 9584, 2340, 9570),
         Rect(2393, 9561, 2398, 9556),
         Rect(2500, 10292, 2509, 10282),
@@ -546,7 +546,7 @@ object HiddenAreas {
     private fun makeArray(rects : List<Rect>) : String {
         var array = ""
         rects.forEach {
-            array += "  ${System.lineSeparator()} new Area(${it.minX}, ${it.minY}, ${it.maxX}, ${it.maxY}),"
+            array += "  ${System.lineSeparator()} new Area(${it.minX}, ${it.minY}, ${it.maxX}, ${it.maxY})${ if(it.plane > 0) ".setPlane(${it.plane})" else "" },"
         }
         return array
     }

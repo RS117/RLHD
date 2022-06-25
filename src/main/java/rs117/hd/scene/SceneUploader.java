@@ -46,6 +46,7 @@ import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
+import rs117.hd.data.area.effects.LargeTile;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.data.materials.Overlay;
@@ -72,7 +73,7 @@ class SceneUploader
 	public ProceduralGenerator proceduralGenerator;
 
 	@Inject
-	private ModelPusher modelPusher;
+	public ModelPusher modelPusher;
 
 	public int sceneId = new Random().nextInt();
 	private int offset;
@@ -88,6 +89,15 @@ class SceneUploader
 		vertexBuffer.clear();
 		uvBuffer.clear();
 		normalBuffer.clear();
+
+		LargeTile largeTile = hdPlugin.getAreaManager().getCurrentArea().getLargeTile();
+
+		if(largeTile != null) {
+			hdPlugin.getAreaManager().addTileData(vertexBuffer, uvBuffer, normalBuffer);
+			int size = largeTile.getMaterialBelow() == null ? 6 : 12;
+			offset += size;
+			uvoffset += size;
+		}
 
 		for (int z = 0; z < Constants.MAX_Z; ++z)
 		{
@@ -144,6 +154,10 @@ class SceneUploader
 
 	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
 	{
+		if(hdPlugin.getAreaManager().shouldHide(tile.getWorldLocation())) {
+			return;
+		}
+
 		Tile bridge = tile.getBridge();
 		if (bridge != null)
 		{
@@ -1007,7 +1021,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	private int packTerrainData(int waterDepth, WaterType underwaterType, int plane)
+	public int packTerrainData(int waterDepth, WaterType underwaterType, int plane)
 	{
 		byte isTerrain = 0b1;
 		return ((waterDepth << 4 | underwaterType.getValue()) << 2 | plane) << 1 | isTerrain;
