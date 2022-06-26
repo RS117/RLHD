@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder
 import rs117.hd.data.WaterType
 import rs117.hd.data.area.Area
 import rs117.hd.data.area.AreaTheme
-import rs117.hd.data.area.effects.Overlay
+import rs117.hd.data.area.effects.TileData
 import rs117.hd.data.environments.Area.*
 import java.io.File
 
@@ -48,10 +48,10 @@ object GenerateAreas {
                 else -> AreaTheme.NORMAL
             }
 
-            val overlays = emptyList<Overlay>().toMutableList()
+            val overlays = emptyList<TileData>().toMutableList()
 
             rs117.hd.data.materials.Overlay.values().filter { d -> d.area == currentArea }.forEach { data ->
-                val overlay = Overlay()
+                val overlay = TileData()
                 overlay.id = data.id
                 if (data.waterType != WaterType.NONE) {
                     overlay.waterType = data.waterType
@@ -68,8 +68,29 @@ object GenerateAreas {
                 overlays.add(overlay)
             }
 
+            val underlays = emptyList<TileData>().toMutableList()
+
+            rs117.hd.data.materials.Underlay.values().filter { d -> d.area == currentArea }.forEach { data ->
+                val underlay = TileData()
+                underlay.id = data.id
+                if (data.waterType != WaterType.NONE) {
+                    underlay.waterType = data.waterType
+                }
+                underlay.groundMaterial = data.groundMaterial
+                underlay.hue = data.hue
+                underlay.isBlended = data.isBlended
+                underlay.isBlendedAsUnderlay = data.isBlendedAsOverlay
+                underlay.lightness = data.lightness
+                underlay.saturation = data.saturation
+                underlay.shiftHue = data.shiftHue
+                underlay.shiftLightness = data.shiftLightness
+                underlay.shiftSaturation = data.shiftSaturation
+                underlays.add(underlay)
+            }
+
 
             area.overlays = overlays
+            area.underlays = underlays
 
             areaList.add(area)
         }
@@ -101,13 +122,21 @@ object GenerateAreas {
         replace("\n" + "        \"shiftSaturation\": 0,","").
         replace("\n" + "        \"blended\": true,","").
         replace("\n" + "        \"blendedAsOverlay\": false,","").
+        replace("\n" + "        \"blendedAsUnderlay\": false,","").
         replace("\n" + "    \"rectangles\": [],","").
+        replace("\n" + "    \"underlays\": []","").
+        replace(",\n" + "  },\n" + "  {","\n" + "  },\n" + "  {").
+        replace(",\n" + "    \"underlays\": []","").
         replace("\n" + "    \"overlays\": []","").
         replace("\n" + "    \"children\": [],","").
         replace("\n" + "        \"shiftLightness\": 0","").
         replace(",\n" + "  },\n" + "  {","${System.lineSeparator()}  },${System.lineSeparator()}  {").
         replace(",\n" + "      }\n" + "    ]\n" + "  }","${System.lineSeparator()}      } ${System.lineSeparator()}    ] ${System.lineSeparator()}  }").
-        replace(",\n" + "      },\n" + "      {","${System.lineSeparator()}      },${System.lineSeparator()}      {")
+        replace(",\n" + "      },\n" + "      {","${System.lineSeparator()}      },${System.lineSeparator()}      {").
+        replace(": true,,",": true,").
+        replace(": false,,",": false,").
+        replace(",\n" + "      }\n" + "    ],","${System.lineSeparator()}   } ${System.lineSeparator()}   ],")
+
      }
 
     private val hideOther = listOf(

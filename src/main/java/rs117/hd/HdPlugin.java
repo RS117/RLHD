@@ -58,7 +58,7 @@ import rs117.hd.config.DefaultSkyColor;
 import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.UIScalingMode;
 import rs117.hd.data.area.AreaManager;
-import rs117.hd.data.area.OverlayManager;
+import rs117.hd.data.area.TileManager;
 import rs117.hd.data.area.effects.LargeTile;
 import rs117.hd.data.materials.Material;
 import rs117.hd.model.ModelHasher;
@@ -184,7 +184,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 	@Inject
 	@Getter
-	private OverlayManager overlayManager;
+	private TileManager tileManager;
 
 	private ComputeMode computeMode = ComputeMode.OPENGL;
 

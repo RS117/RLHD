@@ -55,15 +55,13 @@
         "id": 2,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 3,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -97,15 +95,13 @@
         "id": 13,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 26,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -126,15 +122,13 @@
         "id": 9,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 11,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -225,8 +219,7 @@
       {
         "id": 10,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -246,8 +239,15 @@
       {
         "id": 3,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": 56,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -268,15 +268,13 @@
         "id": 2,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 3,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -323,7 +321,6 @@
         "id": 10,
         "groundMaterial": "VARROCK_PATHS_LIGHT",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "shiftLightness": 10
       }
     ]
@@ -363,7 +360,6 @@
         "id": 10,
         "groundMaterial": "GRAVEL",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "hue": 7,
         "saturation": 1,
         "shiftLightness": 12
@@ -607,8 +603,7 @@
         "id": 56,
         "groundMaterial": "TILES_2x2_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -629,8 +624,7 @@
         "id": 56,
         "groundMaterial": "TILES_2x2_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -651,22 +645,19 @@
         "id": 2,
         "groundMaterial": "GRAVEL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -83,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -84,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -686,8 +677,7 @@
       {
         "id": 81,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -708,22 +698,27 @@
         "id": -85,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -93,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -96,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 8,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
       }
     ]
   },
@@ -744,8 +739,7 @@
         "id": -84,
         "groundMaterial": "NONE",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -766,8 +760,7 @@
         "id": -83,
         "groundMaterial": "NONE",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -787,8 +780,7 @@
       {
         "id": 81,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -820,8 +812,7 @@
       {
         "id": 81,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -842,8 +833,7 @@
         "id": -83,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -870,22 +860,19 @@
         "id": 81,
         "groundMaterial": "TILE_SMALL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "NONE",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 89,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -912,7 +899,14 @@
     ],
     "description": "TOLNA_DUNGEON_ANGER",
     "theme": "NORMAL",
-    "hideOtherRegions": true
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -949,7 +943,14 @@
     ],
     "description": "TOLNA_DUNGEON_FEAR",
     "theme": "NORMAL",
-    "hideOtherRegions": true
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -987,8 +988,7 @@
         "id": 93,
         "groundMaterial": "TILES_2x2_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1021,36 +1021,31 @@
         "id": 2,
         "groundMaterial": "MARBLE_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 10,
         "groundMaterial": "MARBLE_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 11,
         "groundMaterial": "TILE_SMALL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 119,
         "groundMaterial": "WOOD_PLANKS_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 127,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1070,14 +1065,12 @@
       {
         "id": 2,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 127,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -1111,8 +1104,7 @@
         "id": 86,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1146,36 +1138,31 @@
         "id": 11,
         "groundMaterial": "MARBLE_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 10,
         "groundMaterial": "MARBLE_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 127,
         "groundMaterial": "MARBLE_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 2,
         "groundMaterial": "MARBLE_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 119,
         "groundMaterial": "WOOD_PLANKS_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1202,15 +1189,13 @@
         "id": 77,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 123,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1231,15 +1216,13 @@
         "id": 33,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 123,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1260,7 +1243,6 @@
         "id": -119,
         "groundMaterial": "FALADOR_PATHS",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "hue": 7,
         "saturation": 1,
         "shiftLightness": 7
@@ -1269,29 +1251,25 @@
         "id": 123,
         "groundMaterial": "TILES_2x2_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 33,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 77,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 13,
         "groundMaterial": "NONE",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1470,7 +1448,36 @@
     ],
     "description": "EDGEVILLE_PATH_OVERLAY",
     "theme": "NORMAL",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 48,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      },
+      {
+        "id": 50,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      },
+      {
+        "id": 64,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      }
+    ]
   },
   {
     "rects": [
@@ -1489,15 +1496,13 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1517,8 +1522,7 @@
       {
         "id": 10,
         "groundMaterial": "VARROCK_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -1538,8 +1542,7 @@
       {
         "id": 119,
         "groundMaterial": "TILE_SMALL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -1560,8 +1563,7 @@
         "id": 10,
         "groundMaterial": "GRAVEL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1582,22 +1584,19 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 8,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1676,8 +1675,7 @@
         "id": 6,
         "groundMaterial": "WATER_FLAT",
         "waterType": "WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1698,8 +1696,7 @@
         "id": 11,
         "groundMaterial": "NONE",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1763,15 +1760,13 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1798,7 +1793,14 @@
     ],
     "description": "CATHERBY",
     "theme": "NORMAL",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 62,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -1875,22 +1877,19 @@
         "id": 2,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 3,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1948,15 +1947,13 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -1977,22 +1974,31 @@
         "id": 87,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 11,
         "groundMaterial": "VARROCK_PATHS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 86,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 55,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
       }
     ]
   },
@@ -2014,15 +2020,13 @@
         "id": 10,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 11,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2068,7 +2072,15 @@
     ],
     "description": "GAMES_ROOM_INNER",
     "theme": "NORMAL",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 64,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
   },
   {
     "rects": [
@@ -2087,8 +2099,15 @@
         "id": 22,
         "groundMaterial": "WOOD_PLANKS_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 64,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE",
+        "blended": false
       }
     ]
   },
@@ -2134,22 +2153,19 @@
         "id": 10,
         "groundMaterial": "VARROCK_PATHS_LIGHT",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "shiftLightness": 6
       },
       {
         "id": 38,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 40,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2184,7 +2200,6 @@
         "groundMaterial": "DIRT",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "shiftLightness": 7
       }
     ]
@@ -2207,7 +2222,6 @@
         "groundMaterial": "VARROCK_PATHS_LIGHT",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "shiftLightness": 16
       }
     ]
@@ -2229,15 +2243,13 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2258,8 +2270,7 @@
         "id": 16,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2293,8 +2304,7 @@
         "id": 29,
         "groundMaterial": "SWAMP_WATER_FLAT",
         "waterType": "SWAMP_WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2329,7 +2339,6 @@
         "groundMaterial": "TILES_2x2_2_GLOSS",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "saturation": 0,
         "shiftLightness": 4
       }
@@ -2407,10 +2416,26 @@
         "groundMaterial": "FALADOR_PATHS",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "hue": 9,
         "saturation": 1,
         "shiftLightness": 18
+      }
+    ],
+    "underlays": [
+      {
+        "id": 98,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 4
+      },
+      {
+        "id": 56,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 4,
+        "shiftLightness": 3
       }
     ]
   },
@@ -2513,7 +2538,6 @@
         "groundMaterial": "FALADOR_PATHS",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "saturation": 1,
         "shiftLightness": 5
       },
@@ -2522,7 +2546,6 @@
         "groundMaterial": "TILES_2x2_2_GLOSS",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "saturation": 1,
         "shiftLightness": 5
       }
@@ -2616,8 +2639,15 @@
         "id": -122,
         "groundMaterial": "TILES_2x2_2_GLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 56,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
       }
     ]
   },
@@ -2687,7 +2717,6 @@
         "groundMaterial": "TILES_2x2_2_SEMIGLOSS",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "shiftSaturation": -1,
         "shiftLightness": 7
       },
@@ -2695,22 +2724,19 @@
         "id": 1,
         "groundMaterial": "TILES_2x2_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 3,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -2949,7 +2975,6 @@
         "id": 26,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "hue": 6,
         "saturation": 2,
         "shiftLightness": 5
@@ -2958,7 +2983,6 @@
         "id": 76,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "hue": 6,
         "saturation": 3,
         "shiftLightness": -10
@@ -2967,7 +2991,85 @@
         "id": 25,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
+        "hue": 6,
+        "saturation": 3
+      }
+    ],
+    "underlays": [
+      {
+        "id": 61,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 62,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 67,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 68,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": -127,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 126,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 49,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 58,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 63,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 64,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 50,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
         "hue": 6,
         "saturation": 3
       }
@@ -3148,7 +3250,15 @@
     ],
     "description": "VER_SINHAZA_WATER_FIX",
     "theme": "NORMAL",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 54,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
   },
   {
     "rects": [
@@ -3268,8 +3378,7 @@
       {
         "id": 102,
         "groundMaterial": "VARROCK_PATHS_LIGHT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -3447,8 +3556,7 @@
       {
         "id": 11,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -3482,7 +3590,59 @@
     ],
     "description": "THE_INFERNO",
     "theme": "HOT",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": -118,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -115,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 1,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 61,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 118,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 122,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -3495,7 +3655,15 @@
     ],
     "description": "TZHAAR",
     "theme": "HOT",
-    "hideOtherRegions": true
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT_SHINY",
+        "waterType": "NONE",
+        "shiftLightness": 2
+      }
+    ]
   },
   {
     "rects": [
@@ -3852,8 +4020,7 @@
         "id": 85,
         "groundMaterial": "POISON_WASTE",
         "waterType": "POISON_WASTE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4015,8 +4182,19 @@
         "id": 104,
         "groundMaterial": "ICE_FLAT",
         "waterType": "ICE_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 59,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
       }
     ]
   },
@@ -4239,8 +4417,7 @@
         "id": -100,
         "groundMaterial": "SWAMP_WATER_FLAT",
         "waterType": "SWAMP_WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4261,15 +4438,13 @@
         "id": 50,
         "groundMaterial": "TILES_2x2_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 2,
         "groundMaterial": "TILES_2x2_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4290,29 +4465,25 @@
         "id": 30,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 37,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 72,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 73,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4408,15 +4579,13 @@
         "id": 2,
         "groundMaterial": "GRAVEL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -117,
         "groundMaterial": "GRAVEL",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4436,8 +4605,7 @@
       {
         "id": 123,
         "groundMaterial": "FALADOR_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -4483,8 +4651,7 @@
         "id": 72,
         "groundMaterial": "BLOOD_FLAT",
         "waterType": "BLOOD",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4597,8 +4764,7 @@
         "id": 68,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4674,8 +4840,7 @@
         "id": -93,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4721,15 +4886,13 @@
         "id": 30,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 99,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4782,8 +4945,7 @@
         "id": 95,
         "groundMaterial": "SWAMP_WATER_FLAT",
         "waterType": "SWAMP_WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -4868,7 +5030,22 @@
         "groundMaterial": "NONE",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
+        "lightness": 0
+      }
+    ],
+    "underlays": [
+      {
+        "id": 72,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false,
+        "lightness": 0
+      },
+      {
+        "id": 2,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false,
         "lightness": 0
       }
     ]
@@ -4947,8 +5124,16 @@
       {
         "id": 11,
         "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": -110,
+        "groundMaterial": "SAND",
         "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "hue": 6,
+        "saturation": 3
       }
     ]
   },
@@ -5215,8 +5400,7 @@
         "id": 42,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5237,8 +5421,7 @@
         "id": 6,
         "groundMaterial": "WATER_FLAT",
         "waterType": "WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5473,22 +5656,27 @@
         "id": 3,
         "groundMaterial": "MARBLE_1_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 4,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 10,
         "groundMaterial": "MARBLE_2_SEMIGLOSS",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 55,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
       }
     ]
   },
@@ -5522,8 +5710,7 @@
         "id": 72,
         "groundMaterial": "BLOOD_FLAT",
         "waterType": "BLOOD",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5595,8 +5782,7 @@
         "id": 6,
         "groundMaterial": "WATER_FLAT",
         "waterType": "WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5617,8 +5803,7 @@
         "id": 6,
         "groundMaterial": "WATER_FLAT",
         "waterType": "WATER_FLAT",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5691,15 +5876,13 @@
         "id": 26,
         "groundMaterial": "TILES_2x2_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 99,
         "groundMaterial": "TILES_2x2_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5733,8 +5916,7 @@
         "id": -75,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -5767,8 +5949,7 @@
       {
         "id": -100,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       }
     ]
   },
@@ -5790,7 +5971,6 @@
         "groundMaterial": "DIRT",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "shiftLightness": -10
       },
       {
@@ -5798,7 +5978,6 @@
         "groundMaterial": "DIRT",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "shiftLightness": -10
       }
     ]
@@ -5814,7 +5993,14 @@
     ],
     "description": "DEATHS_OFFICE",
     "theme": "NORMAL",
-    "hideOtherRegions": true
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": -110,
+        "groundMaterial": "TILES_2x2_1_SEMIGLOSS",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -5931,7 +6117,19 @@
     ],
     "description": "COX_SNOW",
     "theme": "SNOW",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 16,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 59,
+        "groundMaterial": "SNOW_2",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -6000,15 +6198,13 @@
         "id": -95,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 42,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -6029,8 +6225,7 @@
         "id": 89,
         "groundMaterial": "DIRT",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -6135,15 +6330,13 @@
         "id": 2,
         "groundMaterial": "MARBLE_1",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -125,
         "groundMaterial": "MARBLE_2",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       }
     ]
   },
@@ -6229,7 +6422,24 @@
     ],
     "description": "CANOE_CUTSCENE",
     "theme": "NORMAL",
-    "hideOtherRegions": true
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": 48,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -6341,7 +6551,184 @@
     ],
     "description": "OVERWORLD",
     "theme": "NORMAL",
-    "hideOtherRegions": false
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 10,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 25,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 33,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 34,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 40,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 48,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 49,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 51,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 52,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 53,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 54,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 55,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 57,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 67,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 70,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 75,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 93,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 96,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 97,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 103,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 114,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 115,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 126,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 64,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 65,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 66,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 80,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 92,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 94,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      }
+    ]
   },
   {
     "rects": [
@@ -6360,183 +6747,154 @@
         "id": -128,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -124,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -122,
         "groundMaterial": "TILES_2x2_2_GLOSS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -119,
         "groundMaterial": "FALADOR_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -105,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -100,
         "groundMaterial": "SWAMP_WATER",
         "waterType": "SWAMP_WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -98,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": -93,
         "groundMaterial": "CARPET",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -85,
         "groundMaterial": "VARROCK_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -77,
         "groundMaterial": "VARROCK_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -76,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -84,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -83,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -82,
         "groundMaterial": "TILE_DARK",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -49,
         "groundMaterial": "SAND_BRICK",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 2,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 3,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 4,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 5,
         "groundMaterial": "WOOD_PLANKS_1",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 6,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 7,
         "groundMaterial": "SWAMP_WATER",
         "waterType": "SWAMP_WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 8,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 10,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 11,
         "groundMaterial": "VARROCK_PATHS",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 12,
         "groundMaterial": "STONE_PATTERN",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 13,
         "groundMaterial": "CARPET",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 14,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 15,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 19,
         "groundMaterial": "HD_LAVA",
         "waterType": "NONE",
         "blended": false,
-        "blendedAsUnderlay": false,
         "hue": 0,
         "saturation": 0,
         "shiftLightness": 127
@@ -6544,217 +6902,182 @@
       {
         "id": 20,
         "groundMaterial": "MARBLE_DARK",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 21,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 22,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 23,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 25,
         "groundMaterial": "SAND",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 26,
         "groundMaterial": "SAND",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 27,
         "groundMaterial": "BRICK_BROWN",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 28,
         "groundMaterial": "BRICK",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 29,
         "groundMaterial": "GRASS_1",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 30,
         "groundMaterial": "SNOW_2",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 32,
         "groundMaterial": "CONCRETE",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 33,
         "groundMaterial": "SNOW_2",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 35,
         "groundMaterial": "WOOD_PLANKS_1",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 41,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 46,
         "groundMaterial": "BRICK_BROWN",
         "waterType": "NONE",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 49,
         "groundMaterial": "VARIED_DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 52,
         "groundMaterial": "WOOD_PLANKS_1",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 60,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 77,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 81,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 82,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 83,
         "groundMaterial": "VARIED_DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 84,
         "groundMaterial": "SAND_BRICK",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 88,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 89,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 101,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 102,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 104,
         "groundMaterial": "WATER",
         "waterType": "WATER",
-        "blended": false,
-        "blendedAsUnderlay": false
+        "blended": false
       },
       {
         "id": 107,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 108,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 110,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 115,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 119,
         "groundMaterial": "GRAVEL",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": 123,
         "groundMaterial": "DIRT",
-        "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "waterType": "NONE"
       },
       {
         "id": -999,
         "groundMaterial": "SNOW_1",
         "waterType": "NONE",
-        "blendedAsUnderlay": false,
         "hue": 0,
         "saturation": 0,
         "shiftLightness": 40
@@ -6762,8 +7085,235 @@
       {
         "id": -1,
         "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": -127,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": -118,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 10,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 25,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 33,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 34,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 40,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 48,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 49,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 51,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 52,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 53,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 54,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 55,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 57,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 58,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 61,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 64,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 66,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 67,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 68,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 70,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 75,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 80,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 92,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 93,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 94,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 96,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 97,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 103,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 114,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 115,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 126,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 98,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -999,
+        "groundMaterial": "SNOW_1",
         "waterType": "NONE",
-        "blendedAsUnderlay": false
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 40
+      },
+      {
+        "id": -999,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 40
+      },
+      {
+        "id": -1,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
       }
     ]
   }

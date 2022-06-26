@@ -1,16 +1,13 @@
 package rs117.hd.data.area.effects;
 
-import com.google.common.collect.ListMultimap;
 import lombok.Data;
 import rs117.hd.data.WaterType;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.utils.Rect;
 
-import java.util.List;
-
 @Data
-public class Overlay {
-    public Overlay(int id, GroundMaterial groundMaterial, int hue, int saturation, int shiftLightness,boolean blended) {
+public class TileData {
+    public TileData(int id, GroundMaterial groundMaterial, int hue, int saturation, int shiftLightness, boolean blended) {
         this.id = id;
         this.blended = blended;
         this.hue = hue;
@@ -21,17 +18,19 @@ public class Overlay {
 
     private int id;
 
-    public Overlay(int id, GroundMaterial groundMaterial) {
+    public TileData(int id, GroundMaterial groundMaterial) {
         this.id = id;
         this.groundMaterial = groundMaterial;
     }
 
-    public Overlay() {}
+    public TileData() {}
 
     private GroundMaterial groundMaterial = null;
     private WaterType waterType = WaterType.NONE;
     private boolean blended = true;
     private boolean blendedAsUnderlay = false;
+    private boolean blendedAsOverlay = false;
+
     private int hue = -1;
     private int shiftHue = 0;
     private int saturation = -1;

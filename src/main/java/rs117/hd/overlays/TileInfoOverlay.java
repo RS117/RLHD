@@ -29,9 +29,8 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.HdPlugin;
-import rs117.hd.data.area.effects.Overlay;
+import rs117.hd.data.area.effects.TileData;
 import rs117.hd.data.materials.Material;
-import rs117.hd.data.materials.Underlay;
 import rs117.hd.utils.HDUtils;
 
 public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
@@ -146,12 +145,12 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 
 		Scene scene = client.getScene();
 		int overlayId = scene.getOverlayIds()[plane][x][y];
-		Overlay overlay = plugin.getOverlayManager().getOverlay(overlayId, tile, client);
+		TileData overlay = plugin.getTileManager().getTile(overlayId, tile, client,false);
 		lines.add(String.format("Overlay: %s (%d)", overlay.getGroundMaterial().name(), overlayId));
 
 		int underlayId = scene.getOverlayIds()[plane][x][y];
-		Underlay underlay = Underlay.getUnderlay(underlayId, tile, client);
-		lines.add(String.format("Underlay: %s (%d)", underlay.name(), underlayId));
+		TileData underlay = plugin.getTileManager().getTile(underlayId, tile, client,true);
+		lines.add(String.format("Underlay: %s (%d)", underlay.getGroundMaterial().name(), underlayId));
 
 		Color polyColor;
 		if (paint != null)

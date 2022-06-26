@@ -5,7 +5,7 @@ import net.runelite.api.coords.WorldPoint;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.data.area.effects.Caustics;
 import rs117.hd.data.area.effects.LargeTile;
-import rs117.hd.data.area.effects.Overlay;
+import rs117.hd.data.area.effects.TileData;
 import rs117.hd.utils.Rect;
 
 import java.util.Collections;
@@ -22,7 +22,8 @@ public class Area {
     private LargeTile largeTile = null;
     private List<Area> children = Collections.emptyList();
 
-    private List<Overlay> overlays = Collections.emptyList();
+    private List<TileData> overlays = Collections.emptyList();
+    private List<TileData> underlays = Collections.emptyList();
 
     public boolean contains(WorldPoint point) {
         return rectangles.stream().anyMatch(rect -> rect.containsPoint(point));

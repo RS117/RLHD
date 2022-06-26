@@ -1,6 +1,5 @@
 package rs117.hd.data.area;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,16 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.Perspective;
-import net.runelite.api.Tile;
-import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
 import rs117.hd.data.area.effects.LargeTile;
-import rs117.hd.data.area.effects.Overlay;
-import rs117.hd.data.materials.GroundMaterial;
+import rs117.hd.data.area.effects.TileData;
 import rs117.hd.data.materials.Material;
 import rs117.hd.scene.SceneUploader;
 import rs117.hd.utils.Env;
@@ -63,7 +59,7 @@ public class AreaManager {
     @Getter
     public ArrayList<Area> areas = new ArrayList<>();
 
-    private static ListMultimap<Integer, Overlay> GROUND_MATERIAL_MAP;
+    private static ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP;
 
     public void startUp() {
         load();
@@ -114,9 +110,9 @@ public class AreaManager {
                     Rect rect = new Rect(it[0],it[1],it[2],it[3],it.length == 4 ? 0 : it[4]);
                     list.add(rect);
                     if(!data.getOverlays().isEmpty()) {
-                        List<Overlay> overlays = new ArrayList<>();
+                        List<TileData> overlays = new ArrayList<>();
                         data.getOverlays().forEach(overlay -> {
-                            Overlay overlayData = overlay;
+                            TileData overlayData = overlay;
                             if (overlay.getWaterType() != WaterType.NONE && overlay.getGroundMaterial() == null) {
                                 overlayData.setGroundMaterial(overlay.getWaterType().getGroundMaterial());
                             }
@@ -125,12 +121,24 @@ public class AreaManager {
                         });
                         data.setOverlays(overlays);
                     }
+                    if(!data.getUnderlays().isEmpty()) {
+                        List<TileData> underlays = new ArrayList<>();
+                        data.getUnderlays().forEach(overlay -> {
+                            TileData underlayData = overlay;
+                            if (overlay.getWaterType() != WaterType.NONE && overlay.getGroundMaterial() == null) {
+                                underlayData.setGroundMaterial(overlay.getWaterType().getGroundMaterial());
+                            }
+                            underlayData.setArea(rect);
+                            underlays.add(underlayData);
+                        });
+                        data.setUnderlays(underlays);
+                    }
                 });
                 data.setRectangles(list);
             }
             areas.add(data);
         }
-        plugin.getOverlayManager().loadOverlays();
+        plugin.getTileManager().loadOverlays();
         DEFAULT = getArea("ALL");
     }
 
@@ -163,70 +171,6 @@ public class AreaManager {
         }
 
         return false;
-    }
-
-    @Inject
-    private SceneUploader sceneUploader;
-
-    public void addTileData(GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer) {
-        LargeTile tile = getCurrentArea().getLargeTile();
-        int color = 127;
-        int size = 10000 * Perspective.LOCAL_TILE_SIZE;
-        int height = 0;
-
-        if(tile.getMaterialBelow() != null) {
-            int materialData = sceneUploader.modelPusher.packMaterialData(Material.getIndex(Material.DIRT_1), false);
-            int terrainData = sceneUploader.packTerrainData(600, WaterType.WATER, 0);
-            // North-west
-            vertexBuffer.put(-size, height, size, color);
-            uvBuffer.put(materialData, -size, size, 0);
-            // South-west
-            vertexBuffer.put(-size, height, -size, color);
-            uvBuffer.put(materialData, -size, -size, 0);
-            // North-east
-            vertexBuffer.put(size, height, size, color);
-            uvBuffer.put(materialData, size, size, 0);
-            // South-west
-            vertexBuffer.put(-size, height, -size, color);
-            uvBuffer.put(materialData, -size, -size, 0);
-            // South-east
-            vertexBuffer.put(size, height, -size, color);
-            uvBuffer.put(materialData, size, -size, 0);
-            // North-east
-            vertexBuffer.put(size, height, size, color);
-            uvBuffer.put(materialData, size, size, 0);
-            for (int i = 0; i < 6; i++) {
-                normalBuffer.put(0, 1, 0, terrainData);
-            }
-        }
-
-        int materialData = sceneUploader.modelPusher.packMaterialData(Material.getIndex(Material.valueOf(tile.getMaterial())), true);
-        int terrainData = sceneUploader.packTerrainData(0, WaterType.valueOf(tile.getWaterType()), 0);
-
-        // North-west
-        vertexBuffer.put(-size, height, size, color);
-        uvBuffer.put(materialData, -size, size, 0);
-        // South-west
-        vertexBuffer.put(-size, height, -size, color);
-        uvBuffer.put(materialData, -size, -size, 0);
-        // North-east
-        vertexBuffer.put(size, height, size, color);
-        uvBuffer.put(materialData, size, size, 0);
-        // South-west
-        vertexBuffer.put(-size, height, -size, color);
-        uvBuffer.put(materialData, -size, -size, 0);
-        // South-east
-        vertexBuffer.put(size, height, -size, color);
-        uvBuffer.put(materialData, size, -size, 0);
-        // North-east
-        vertexBuffer.put(size, height, size, color);
-        uvBuffer.put(materialData, size, size, 0);
-
-        for (int i = 0; i < 6; i++) {
-            normalBuffer.put(0, 1, 0, terrainData);
-        }
-
-
     }
 
 }
