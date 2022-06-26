@@ -7,23 +7,7 @@ import rs117.hd.utils.Rect;
 
 @Data
 public class TileData {
-    public TileData(int id, GroundMaterial groundMaterial, int hue, int saturation, int shiftLightness, boolean blended) {
-        this.id = id;
-        this.blended = blended;
-        this.hue = hue;
-        this.saturation = saturation;
-        this.shiftLightness = shiftLightness;
-        this.groundMaterial = groundMaterial;
-    }
-
     private int id;
-
-    public TileData(int id, GroundMaterial groundMaterial) {
-        this.id = id;
-        this.groundMaterial = groundMaterial;
-    }
-
-    public TileData() {}
 
     private GroundMaterial groundMaterial = null;
     private WaterType waterType = WaterType.NONE;
@@ -39,7 +23,21 @@ public class TileData {
     private int shiftLightness = 0;
     private Rect area;
 
+    public TileData(int id, GroundMaterial groundMaterial, int hue, int saturation, int shiftLightness, boolean blended) {
+        this.id = id;
+        this.blended = blended;
+        this.hue = hue;
+        this.saturation = saturation;
+        this.shiftLightness = shiftLightness;
+        this.groundMaterial = groundMaterial;
+    }
 
+    public TileData(int id, GroundMaterial groundMaterial) {
+        this.id = id;
+        this.groundMaterial = groundMaterial;
+    }
+
+    public TileData() {}
 
 }
 

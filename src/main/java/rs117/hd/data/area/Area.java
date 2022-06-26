@@ -4,6 +4,7 @@ import lombok.Data;
 import net.runelite.api.coords.WorldPoint;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.data.area.effects.Caustics;
+import rs117.hd.data.area.effects.Environment;
 import rs117.hd.data.area.effects.LargeTile;
 import rs117.hd.data.area.effects.TileData;
 import rs117.hd.utils.Rect;
@@ -18,12 +19,13 @@ public class Area {
     private String description = "Unknown";
     private AreaTheme theme = AreaTheme.NORMAL;
     private boolean hideOtherRegions = false;
-    private Caustics caustics = null;
+    private Environment environment = null;
     private LargeTile largeTile = null;
     private List<Area> children = Collections.emptyList();
 
     private List<TileData> overlays = Collections.emptyList();
     private List<TileData> underlays = Collections.emptyList();
+
 
     public boolean contains(WorldPoint point) {
         return rectangles.stream().anyMatch(rect -> rect.containsPoint(point));

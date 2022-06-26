@@ -21,8 +21,8 @@ import javax.inject.Inject;
 import java.util.List;
 
 public class TileManager {
-    private static ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_OVERLAY = ArrayListMultimap.create();
-    private static ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_UNDERLAY = ArrayListMultimap.create();
+    private static final ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_OVERLAY = ArrayListMultimap.create();
+    private static final ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_UNDERLAY = ArrayListMultimap.create();
     private static final TileData DEFAULT = new TileData(-1, GroundMaterial.DIRT);
     public static final TileData WINTER_GRASS = new TileData(-999, GroundMaterial.SNOW_1,0,0,40,true);
     public static final TileData WINTER_DIRT = new TileData(-999, GroundMaterial.DIRT,0,0,40,true);
@@ -33,16 +33,8 @@ public class TileManager {
     public void loadOverlays() {
         GROUND_MATERIAL_MAP_OVERLAY.clear();
         GROUND_MATERIAL_MAP_UNDERLAY.clear();
-        plugin.getAreaManager().areas.stream().filter(it -> !it.getOverlays().isEmpty()).forEach(overlays -> {
-            overlays.getOverlays().forEach(overlay -> {
-                GROUND_MATERIAL_MAP_OVERLAY.put(overlay.getId(), overlay);
-            });
-        });
-        plugin.getAreaManager().areas.stream().filter(it -> !it.getUnderlays().isEmpty()).forEach(underlays -> {
-            underlays.getUnderlays().forEach(underlay -> {
-                GROUND_MATERIAL_MAP_UNDERLAY.put(underlay.getId(), underlay);
-            });
-        });
+        plugin.getAreaManager().areas.stream().filter(it -> !it.getOverlays().isEmpty()).forEach(overlays -> overlays.getOverlays().forEach(overlay -> GROUND_MATERIAL_MAP_OVERLAY.put(overlay.getId(), overlay)));
+        plugin.getAreaManager().areas.stream().filter(it -> !it.getUnderlays().isEmpty()).forEach(underlays -> underlays.getUnderlays().forEach(underlay -> GROUND_MATERIAL_MAP_UNDERLAY.put(underlay.getId(), underlay)));
     }
 
     public TileData getTile(int id, Tile tile, Client client, boolean underlay)
@@ -55,12 +47,12 @@ public class TileManager {
             worldPoint = WorldPoint.fromLocalInstance(client, localPoint);
         }
 
-        List<TileData> overlays = underlay ? GROUND_MATERIAL_MAP_UNDERLAY.get(id) : GROUND_MATERIAL_MAP_OVERLAY.get(id);
+        List<TileData> tileData = underlay ? GROUND_MATERIAL_MAP_UNDERLAY.get(id) : GROUND_MATERIAL_MAP_OVERLAY.get(id);
 
         final WorldPoint finalWorldPoint = worldPoint;
 
-        return overlays.stream().filter(overlay ->
-                overlay.getArea().containsPoint(finalWorldPoint)
+        return tileData.stream().filter(data ->
+                data.getArea().containsPoint(finalWorldPoint)
         ).findFirst().orElse(DEFAULT);
 
     }

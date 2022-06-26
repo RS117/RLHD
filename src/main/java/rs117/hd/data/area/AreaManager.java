@@ -15,6 +15,7 @@ import net.runelite.client.callback.ClientThread;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
+import rs117.hd.data.area.effects.Environment;
 import rs117.hd.data.area.effects.LargeTile;
 import rs117.hd.data.area.effects.TileData;
 import rs117.hd.data.materials.Material;
@@ -58,8 +59,14 @@ public class AreaManager {
 
     @Getter
     public ArrayList<Area> areas = new ArrayList<>();
+    public ArrayList<Environment> environments = new ArrayList<>();
 
-    private static ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP;
+    public Environment OVERWORLD = new Environment();
+    public Environment PLAYER_OWNED_HOUSE;
+    public Environment PLAYER_OWNED_HOUSE_SNOWY;
+    public Environment THE_GAUNTLET;
+    public Environment THE_GAUNTLET_CORRUPTED;
+    public Environment WINTER;
 
     public void startUp() {
         load();
@@ -104,6 +111,7 @@ public class AreaManager {
         Gson gson = new GsonBuilder().setLenient().create();
         Area[] area = gson.fromJson(reader, Area[].class);
         for (Area data : area) {
+
             List<Rect> list = new ArrayList<>();
             if(!data.getRects().isEmpty()) {
                 data.getRects().forEach(it -> {
@@ -135,13 +143,65 @@ public class AreaManager {
                     }
                 });
                 data.setRectangles(list);
+                if(data.getEnvironment() != null) {
+
+                    Environment environment = data.getEnvironment();
+
+                    environment.setRects(list);
+                    environment.setName(data.getDescription());
+
+
+                    if(environment.getCaustics().getUnderwaterCausticsColor().isEmpty()) {
+                        environment.getCaustics().setUnderwaterCausticsColor(environment.getLighting().getDirectionalColor());
+                    }
+
+                    if (environment.getFog().getFogDepth() != 65) {
+                        environment.getFog().setFogDepth(environment.getFog().getFogDepth() * 10);
+                        environment.getFog().setCustomFogDepth(true);
+                    }
+
+                    if (environment.getFog().getFogColor().equals("B9D6FF")) {
+                        environment.getFog().setCustomFogColor(true);
+                    }
+
+                    if(environment.getLighting().getDirectionalStrength() != 4.0f) {
+                        environment.getLighting().setCustomDirectionalStrength(true);
+                    }
+
+                    if(!environment.getLighting().getDirectionalColor().equals("#FFFFFF")) {
+                        environment.getLighting().setCustomDirectionalColor(true);
+                    }
+
+                    if(environment.getLighting().getAmbientStrength() != 1.0f) {
+                        environment.getLighting().setCustomAmbientStrength(true);
+                    }
+
+                    if(!environment.getLighting().getAmbientColor().equals("#97BAFF")) {
+                        environment.getLighting().setCustomAmbientColor(true);
+                    }
+
+                    data.setEnvironment(environment);
+                    environments.add(data.getEnvironment());
+
+                }
             }
+
             areas.add(data);
+
         }
         plugin.getTileManager().loadOverlays();
         DEFAULT = getArea("ALL");
+
+        PLAYER_OWNED_HOUSE = getEnvironment("PLAYER_OWNED_HOUSE");
+        PLAYER_OWNED_HOUSE_SNOWY = getEnvironment("PLAYER_OWNED_HOUSE_SNOWY");
+        THE_GAUNTLET = getEnvironment("THE_GAUNTLET");
+        THE_GAUNTLET_CORRUPTED = getEnvironment("THE_GAUNTLET_CORRUPTED");
+        WINTER = getEnvironment("WINTER");
     }
 
+    public Environment getEnvironment(String name) {
+        return getArea(name).getEnvironment();
+    }
 
 
     public void update(WorldPoint point) {

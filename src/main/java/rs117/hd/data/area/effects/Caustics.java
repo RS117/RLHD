@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Caustics {
-
-    private final int strength = 40;
-
+    private boolean underwater = false;
+    private String underwaterCausticsColor = "";
+    private float underwaterCausticsStrength = 0;
 }

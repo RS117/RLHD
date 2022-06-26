@@ -1,10 +1,11 @@
 package rs117.hd.areas
 
 import com.google.gson.GsonBuilder
+import org.apache.commons.lang3.StringUtils
 import rs117.hd.data.WaterType
 import rs117.hd.data.area.Area
 import rs117.hd.data.area.AreaTheme
-import rs117.hd.data.area.effects.TileData
+import rs117.hd.data.area.effects.*
 import rs117.hd.data.environments.Area.*
 import java.io.File
 
@@ -88,6 +89,52 @@ object GenerateAreas {
                 underlays.add(underlay)
             }
 
+            rs117.hd.data.environments.Environment.values().filter { d -> d.area == currentArea }.forEach { data ->
+                val environment = Environment()
+
+                val fog = Fog()
+                fog.fogColor = data.fogColor1
+                fog.fogDepth = data.fogDepthBefore
+                fog.groundFogOpacity = data.groundFogOpacity
+                fog.groundFogEnd = data.groundFogEnd
+                fog.groundFogOpacity = data.groundFogOpacity
+                fog.groundFogStart = data.groundFogStart
+                fog.isCustomFogDepth = data.isCustomFogDepth
+
+                val caustics = Caustics()
+
+                caustics.isUnderwater = data.isUnderwater
+                if(data.underwaterCausticsStrength != data.directionalStrength) {
+                    caustics.underwaterCausticsStrength = data.underwaterCausticsStrength
+                }
+
+
+                val light = Lighting()
+
+                light.ambientStrength = data.ambientStrength
+                light.isCustomAmbientColor = data.isCustomAmbientStrength
+                light.ambientColor = data.ambientColor1
+                light.isCustomAmbientColor = data.isCustomAmbientColor
+                light.directionalStrength = data.directionalStrength
+                light.isCustomDirectionalStrength = data.isCustomDirectionalStrength
+                light.directionalColor = data.directionalColor1
+                light.isCustomDirectionalColor = data.isCustomDirectionalColor
+                light.underglowStrength = data.underglowStrength
+                light.underglowColor = data.underglowColor1
+                light.lightPitch = data.lightPitch
+                light.lightYaw = data.lightYaw
+
+                environment.isAllowSkyOverride = data.isAllowSkyOverride
+                environment.isLightningEnabled = data.isLightningEnabled
+
+                environment.fog = fog
+                environment.caustics = caustics
+                environment.lighting = light
+
+
+                area.environment = environment
+            }
+
 
             area.overlays = overlays
             area.underlays = underlays
@@ -130,13 +177,62 @@ object GenerateAreas {
         replace("\n" + "    \"overlays\": []","").
         replace("\n" + "    \"children\": [],","").
         replace("\n" + "        \"shiftLightness\": 0","").
-        replace(",\n" + "  },\n" + "  {","${System.lineSeparator()}  },${System.lineSeparator()}  {").
-        replace(",\n" + "      }\n" + "    ]\n" + "  }","${System.lineSeparator()}      } ${System.lineSeparator()}    ] ${System.lineSeparator()}  }").
-        replace(",\n" + "      },\n" + "      {","${System.lineSeparator()}      },${System.lineSeparator()}      {").
         replace(": true,,",": true,").
         replace(": false,,",": false,").
-        replace(",\n" + "      }\n" + "    ],","${System.lineSeparator()}   } ${System.lineSeparator()}   ],")
-
+        replace("\n" + "      \"lightningEnabled\": false,","").
+        replace("\n" + "      \"allowSkyOverride\": true,","").
+        replace("\n" + "        \"customFogDepth\": true,","").
+        replace("\n" + "        \"customFogColor\": false,","").
+        replace("\n" + "        \"groundFogStart\": -200,","").
+        replace("\n" + "        \"groundFogEnd\": -500,","").
+        replace("\n" + "        \"groundFogOpacity\": 0.0,","").
+        replace("\n" + "        \"groundFogOpacity\": 0.0","").
+        replace("},,","},").
+        replace("\"underwater\": false,","").
+        replace("\"underwaterCausticsStrength\": 0.0","").
+        replace("\"customAmbientColor\": false,","").
+        replace("\"directionalStrength\": 4.0,","").
+        replace("\"customDirectionalColor\": false,","").
+        replace("\"underglowStrength\": 0.0,","").
+        replace("\"customDirectionalStrength\": false,","").
+        replace("\"lightYaw\": 55.0","").
+        replace("\"directionalColor\": \"#FFFFFF\",","").
+        replace("\"underglowColor\": \"#000000\",","").
+        replace("\"lightPitch\": -128.0,","").
+        replace("\"ambientStrength\": 1.0,","").
+        replace("\"customAmbientStrength\": false,","").
+        replace("\"ambientColor\": \"#97baff\",","").
+        replace("\n" + "        \"customAmbientColor\": true,","").
+        replace("\n" + "        \"customDirectionalStrength\": true,","").
+        replace("\n" + "        \"customDirectionalColor\": true,","").
+        replace("\n" + "        \"underwaterCausticsColor\": \"\",","${System.lineSeparator()}").
+        replace("\"caustics\": {\n" + "        \n" + "        \n" + "      },","").
+        replace("\"caustics\": {\n" + "        \n" + "        \"","\"caustics\": {\n        \"").
+        replace("\n" + "      \"caustics\": {\n" + "      },","").
+        replace(Regex("(?m)^[ \t]*\r?\n"), "").
+        replace(Regex(",[\\n\\s\\t]*(?=[}\\]])"),"${System.lineSeparator()}      ").
+        replace("      },\n" + "  {","  },\n" + "  {").
+        replace(Regex("\\[\\d+(?:,\\\"\\d+\\\")\\]"),"").
+        replace(",\n" + "        \"fogColor\": \"\"","").
+        replace(",\n" + "      \"lighting\": {\n" + "      }","").
+        replace(",\n" + "        \"customFogDepth\": false","").
+        replace("\"fogDepth\": 65","").
+        replace("\"caustics\": {\n" + "      },","").
+        replace(",\n" + "      \n" + "      \"lighting\": {",",\n" + "      \"lighting\": {").
+        replace("        ,","").
+        replace(",\n" + "      \"caustics\": {\n" + "      }","").
+        replace(Regex("(?m)^[ \t]*\r?\n"), "").
+        replace("\"fog\": {\n" + "      }","").
+        replace("\"environment\": {\n" + "      \n" + "    },","").
+        replace(Regex("(?m)^[ \t]*\r?\n"), "").
+        replace("\n" + "    \"environment\": {\n" + "    }","").
+        replace("\"hideOtherRegions\": false,\n" + "  },","\"hideOtherRegions\": false\n" + "  },").
+        replace("\"hideOtherRegions\": true,\n" + "  },","\"hideOtherRegions\": true\n" + "  },").
+        replace("\"environment\": {\n" + "      ,","\"environment\": {" + "      ").
+        replace(Regex("(?m)^[ \t]*\r?\n"), "").
+        replace(Regex("(?m)^[ \t]*\r?\n"), "").
+        replace(Regex(",[\\n\\s\\t]*(?=[}\\]])"),"${System.lineSeparator()}  ").
+        replace(Regex("\\[\\d+(?:,\\\"\\d+\\\")\\]"),"")
      }
 
     private val hideOther = listOf(
