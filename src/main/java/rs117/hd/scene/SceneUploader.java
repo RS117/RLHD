@@ -47,9 +47,9 @@ import net.runelite.api.WallObject;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
 import rs117.hd.data.area.effects.LargeTile;
+import rs117.hd.data.area.effects.Overlay;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.model.objects.ObjectProperties;
-import rs117.hd.data.materials.Overlay;
 import rs117.hd.data.materials.Material;
 import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.ModelPusher;
@@ -420,7 +420,7 @@ class SceneUploader
 
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					Overlay overlay = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
@@ -450,7 +450,7 @@ class SceneUploader
 			{
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					Overlay overlay = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
@@ -795,7 +795,7 @@ class SceneUploader
 
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					Overlay overlay = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
@@ -822,7 +822,7 @@ class SceneUploader
 			{
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					Overlay overlay = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));

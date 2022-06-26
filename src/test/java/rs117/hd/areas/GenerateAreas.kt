@@ -1,10 +1,11 @@
 package rs117.hd.areas
 
 import com.google.gson.GsonBuilder
+import rs117.hd.data.WaterType
 import rs117.hd.data.area.Area
 import rs117.hd.data.area.AreaTheme
+import rs117.hd.data.area.effects.Overlay
 import rs117.hd.data.environments.Area.*
-import rs117.hd.utils.Rect
 import java.io.File
 
 
@@ -17,6 +18,7 @@ object GenerateAreas {
 
         values().filter { it.name != "NONE" }.forEach {
 
+            val currentArea = it
             val area = Area()
             area.description = it.name
 
@@ -46,6 +48,29 @@ object GenerateAreas {
                 else -> AreaTheme.NORMAL
             }
 
+            val overlays = emptyList<Overlay>().toMutableList()
+
+            rs117.hd.data.materials.Overlay.values().filter { d -> d.area == currentArea }.forEach { data ->
+                val overlay = Overlay()
+                overlay.id = data.id
+                if (data.waterType != WaterType.NONE) {
+                    overlay.waterType = data.waterType
+                }
+                overlay.groundMaterial = data.groundMaterial
+                overlay.hue = data.hue
+                overlay.isBlended = data.isBlended
+                overlay.isBlendedAsUnderlay = data.isBlendedAsUnderlay
+                overlay.lightness = data.lightness
+                overlay.saturation = data.saturation
+                overlay.shiftHue = data.shiftHue
+                overlay.shiftLightness = data.shiftLightness
+                overlay.shiftSaturation = data.shiftSaturation
+                overlays.add(overlay)
+            }
+
+
+            area.overlays = overlays
+
             areaList.add(area)
         }
 
@@ -69,10 +94,20 @@ object GenerateAreas {
     )
 
      private fun String.formatJson() : String {
-        return this.
-            replace("\n" + "        "," ").
-            replace("\n" + "      ],"," ],").
-            replace("\n" + "      ]"," ]")
+        return this.replace("\n" + "        \"hue\": -1,","").
+        replace("\n" + "        \"shiftHue\": 0,","").
+        replace("\n" + "        \"saturation\": -1,","").
+        replace("\n" + "        \"lightness\": -1,","").
+        replace("\n" + "        \"shiftSaturation\": 0,","").
+        replace("\n" + "        \"blended\": true,","").
+        replace("\n" + "        \"blendedAsOverlay\": false,","").
+        replace("\n" + "    \"rectangles\": [],","").
+        replace("\n" + "    \"overlays\": []","").
+        replace("\n" + "    \"children\": [],","").
+        replace("\n" + "        \"shiftLightness\": 0","").
+        replace(",\n" + "  },\n" + "  {","${System.lineSeparator()}  },${System.lineSeparator()}  {").
+        replace(",\n" + "      }\n" + "    ]\n" + "  }","${System.lineSeparator()}      } ${System.lineSeparator()}    ] ${System.lineSeparator()}  }").
+        replace(",\n" + "      },\n" + "      {","${System.lineSeparator()}      },${System.lineSeparator()}      {")
      }
 
     private val hideOther = listOf(

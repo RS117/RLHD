@@ -7,8 +7,8 @@ import net.runelite.api.*;
 import net.runelite.api.kit.KitType;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
+import rs117.hd.data.area.effects.Overlay;
 import rs117.hd.data.materials.Material;
-import rs117.hd.data.materials.Overlay;
 import rs117.hd.data.materials.Underlay;
 import rs117.hd.data.materials.UvType;
 import rs117.hd.model.objects.ObjectProperties;
@@ -420,7 +420,7 @@ public class ModelPusher
                     int overlayId = client.getScene().getOverlayIds()[tileZ][tileX][tileY];
                     int underlayId = client.getScene().getUnderlayIds()[tileZ][tileX][tileY];
                     if (overlayId != 0) {
-                        Overlay overlay = Overlay.getOverlay(overlayId, tile, client);
+                        Overlay overlay = hdPlugin.getOverlayManager().getOverlay(overlayId, tile, client);
                         overlay = proceduralGenerator.getSeasonalOverlay(overlay);
                         tileColorHSL = proceduralGenerator.recolorOverlay(overlay, tileColorHSL);
                     } else {

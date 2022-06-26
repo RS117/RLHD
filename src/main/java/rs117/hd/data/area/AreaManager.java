@@ -1,5 +1,7 @@
 package rs117.hd.data.area;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
@@ -9,12 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.Perspective;
+import net.runelite.api.Tile;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
 import rs117.hd.data.area.effects.LargeTile;
+import rs117.hd.data.area.effects.Overlay;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.data.materials.Material;
 import rs117.hd.scene.SceneUploader;
@@ -57,6 +62,8 @@ public class AreaManager {
 
     @Getter
     public ArrayList<Area> areas = new ArrayList<>();
+
+    private static ListMultimap<Integer, Overlay> GROUND_MATERIAL_MAP;
 
     public void startUp() {
         load();
@@ -104,15 +111,30 @@ public class AreaManager {
             List<Rect> list = new ArrayList<>();
             if(!data.getRects().isEmpty()) {
                 data.getRects().forEach(it -> {
-                    list.add(new Rect(it[0],it[1],it[2],it[3],it.length == 4 ? 0 : it[4]));
+                    Rect rect = new Rect(it[0],it[1],it[2],it[3],it.length == 4 ? 0 : it[4]);
+                    list.add(rect);
+                    if(!data.getOverlays().isEmpty()) {
+                        List<Overlay> overlays = new ArrayList<>();
+                        data.getOverlays().forEach(overlay -> {
+                            Overlay overlayData = overlay;
+                            if (overlay.getWaterType() != WaterType.NONE && overlay.getGroundMaterial() == null) {
+                                overlayData.setGroundMaterial(overlay.getWaterType().getGroundMaterial());
+                            }
+                            overlayData.setArea(rect);
+                            overlays.add(overlayData);
+                        });
+                        data.setOverlays(overlays);
+                    }
                 });
                 data.setRectangles(list);
             }
             areas.add(data);
         }
-
+        plugin.getOverlayManager().loadOverlays();
         DEFAULT = getArea("ALL");
     }
+
+
 
     public void update(WorldPoint point) {
         currentArea = areas.stream().filter(area -> area.contains(point)).map(area ->

@@ -42,10 +42,11 @@ import net.runelite.api.SceneTilePaint;
 import net.runelite.api.Tile;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
+import rs117.hd.data.area.OverlayManager;
+import rs117.hd.data.area.effects.Overlay;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.data.materials.Material;
 import rs117.hd.model.objects.ObjectProperties;
-import rs117.hd.data.materials.Overlay;
 import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.objects.ObjectType;
@@ -291,7 +292,7 @@ public class ProceduralGenerator
 			Material material = Material.DIRT_1;
 			if (vertexOverlays[vertex] != 0)
 			{
-				Overlay overlay = Overlay.getOverlay(vertexOverlays[vertex], tile, client);
+				Overlay overlay = hdPlugin.getOverlayManager().getOverlay(vertexOverlays[vertex], tile, client);
 				overlay = getSeasonalOverlay(overlay);
 				GroundMaterial groundMaterial = overlay.getGroundMaterial();
 				material = groundMaterial.getRandomMaterial(z, worldX, worldY);
@@ -845,7 +846,7 @@ public class ProceduralGenerator
 		{
 			if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 			{
-				waterType = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
+				waterType = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
 			}
 			else
 			{
@@ -881,7 +882,7 @@ public class ProceduralGenerator
 		{
 			if (isOverlayFace(tile, face))
 			{
-				waterType = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
+				waterType = hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client).getWaterType();
 			}
 			else
 			{
@@ -1126,7 +1127,7 @@ public class ProceduralGenerator
 
 		if (client.getScene().getOverlayIds()[z][x][y] != 0)
 		{
-			if (!Overlay.getOverlay(client.getScene().getOverlayIds()[z][x][y], tile, client).isBlended())
+			if (!hdPlugin.getOverlayManager().getOverlay(client.getScene().getOverlayIds()[z][x][y], tile, client).isBlended())
 			{
 				return true;
 			}
@@ -1165,7 +1166,7 @@ public class ProceduralGenerator
 			switch (overlay.getGroundMaterial())
 			{
 				case OVERWORLD_GRASS_1:
-					overlay = Overlay.WINTER_GRASS;
+					overlay = OverlayManager.WINTER_GRASS;
 					break;
 			}
 		}
