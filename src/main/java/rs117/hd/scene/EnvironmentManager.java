@@ -61,8 +61,8 @@ public class EnvironmentManager
 	@Inject
 	private HdPlugin hdPlugin;
 
-	private ArrayList<Environment> sceneEnvironments;
-	private Environment currentEnvironment;
+	public ArrayList<Environment> sceneEnvironments;
+	public Environment currentEnvironment;
 
 
 	// transition time
@@ -158,7 +158,7 @@ public class EnvironmentManager
 
 	public void update()
 	{
-		WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
+		WorldPoint camPosition = client.getLocalPlayer().getWorldLocation();
 		int camTargetX = camPosition.getX();
 		int camTargetY = camPosition.getY();
 		int camTargetZ = camPosition.getPlane();
@@ -178,7 +178,6 @@ public class EnvironmentManager
 
 					hdPlugin.setInGauntlet(environment == hdPlugin.getAreaManager().THE_GAUNTLET || environment == hdPlugin.getAreaManager().THE_GAUNTLET_CORRUPTED);
 
-					System.out.println("Editing To: " + environment.getName());
 					changeEnvironment(environment, camTargetX, camTargetY, false);
 				}
 				break;
@@ -190,7 +189,6 @@ public class EnvironmentManager
 			lastSkyOverride != config.overrideSky() ||
 			lastUnderwater != isUnderwater())
 		{
-			System.out.println("Editing To: " + currentEnvironment.getName());
 			changeEnvironment(currentEnvironment, camTargetX, camTargetY, true);
 		}
 
@@ -260,8 +258,8 @@ public class EnvironmentManager
 	private void changeEnvironment(Environment newEnvironment, int camTargetX, int camTargetY, boolean instantChange)
 	{
 		currentEnvironment = newEnvironment;
-		log.debug("currentEnvironment changed to " + newEnvironment);
-		System.out.println("currentEnvironment changed to " + newEnvironment.getName());
+		log.debug("currentEnvironment changed to " + newEnvironment.getName());
+		log.info("Environment Changed to: " + newEnvironment.getName());
 
 		startTime = System.currentTimeMillis();
 		transitionCompleteTime = instantChange ? 0 : startTime + transitionDuration;
@@ -441,7 +439,6 @@ public class EnvironmentManager
 					continue;
 				}
 				log.debug("added environment {} to sceneArea list", environment.getName());
-				System.out.println("added environment {} to sceneArea list" + environment.getName());
 				sceneEnvironments.add(environment);
 				break;
 			}
@@ -457,7 +454,6 @@ public class EnvironmentManager
 			WorldPoint camPosition = localPointToWorldTile(hdPlugin.camTarget[0], hdPlugin.camTarget[1]);
 			int camTargetX = camPosition.getX();
 			int camTargetY = camPosition.getY();
-			System.out.println("Editing To: " + currentEnvironment.getName());
 			changeEnvironment(currentEnvironment, camTargetX, camTargetY, false);
 		}
 	}
@@ -574,6 +570,6 @@ public class EnvironmentManager
 
 	public boolean isUnderwater()
 	{
-		return currentEnvironment != null && currentEnvironment.getCaustics() != null;
+		return currentEnvironment != null && currentEnvironment.getCaustics().isUnderwater();
 	}
 }

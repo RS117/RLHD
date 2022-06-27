@@ -1152,7 +1152,7 @@
       "lightningEnabled": true,
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#0F0E0DFF"
+        "fogColor": "#0F0E0D"
       },
       "lighting": {
         "ambientStrength": 1.5,
@@ -1194,7 +1194,7 @@
       "lighting": {
         "ambientColor": "#7891B5",
         "directionalStrength": 0.0,
-        "directionalColor": "#4C78B6FF",
+        "directionalColor": "#4C78B6",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -1250,7 +1250,7 @@
       "lightningEnabled": true,
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#0F0E0DFF"
+        "fogColor": "#0F0E0D"
       },
       "lighting": {
         "ambientStrength": 1.5,
@@ -2240,9 +2240,9 @@
       },
       "lighting": {
         "ambientStrength": 1.5,
-        "ambientColor": "#B59B79FF",
+        "ambientColor": "#B59B79",
         "directionalStrength": 1.0,
-        "directionalColor": "#A29794FF",
+        "directionalColor": "#A29794",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -2759,7 +2759,7 @@
       },
       "lighting": {
         "ambientStrength": 0.6,
-        "ambientColor": "#D7D2D2FF",
+        "ambientColor": "#D7D2D2",
         "directionalStrength": 2.5,
         "directionalColor": "#C5B8B6"
       }
@@ -2793,12 +2793,12 @@
     "environment": {
       "fog": {
         "fogDepth": 80,
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       },
       "lighting": {
-        "ambientColor": "#ABABABFF",
+        "ambientColor": "#ABABAB",
         "directionalStrength": 1.0,
-        "directionalColor": "#565656FF",
+        "directionalColor": "#565656",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3352,12 +3352,12 @@
     "environment": {
       "fog": {
         "fogDepth": 40,
-        "fogColor": "#271704FF"
+        "fogColor": "#271704"
       },
       "lighting": {
-        "ambientColor": "#C09F6EFF",
+        "ambientColor": "#C09F6E",
         "directionalStrength": 0.25,
-        "directionalColor": "#8A9EB6FF"
+        "directionalColor": "#8A9EB6"
       }
     }
   },
@@ -3403,9 +3403,9 @@
         "fogColor": "#190D02"
       },
       "lighting": {
-        "ambientColor": "#B59B79FF",
+        "ambientColor": "#B59B79",
         "directionalStrength": 0.75,
-        "directionalColor": "#8A9EB6FF",
+        "directionalColor": "#8A9EB6",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3453,13 +3453,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#111C1AFF"
+        "fogColor": "#111C1A"
       },
       "lighting": {
         "ambientStrength": 0.9,
-        "ambientColor": "#9BBBB1FF",
+        "ambientColor": "#9BBBB1",
         "directionalStrength": 1.8,
-        "directionalColor": "#75E7FFFF",
+        "directionalColor": "#75E7FF",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3480,13 +3480,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#111C1BFF"
+        "fogColor": "#111C1B"
       },
       "lighting": {
         "ambientStrength": 0.875,
-        "ambientColor": "#A0BFBFFF",
+        "ambientColor": "#A0BFBF",
         "directionalStrength": 1.5,
-        "directionalColor": "#74D6F7FF",
+        "directionalColor": "#74D6F7",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3507,13 +3507,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#121C1DFF"
+        "fogColor": "#121C1D"
       },
       "lighting": {
         "ambientStrength": 0.85,
-        "ambientColor": "#A5C3CDFF",
+        "ambientColor": "#A5C3CD",
         "directionalStrength": 1.5,
-        "directionalColor": "#73C4F0FF",
+        "directionalColor": "#73C4F0",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3534,13 +3534,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#121B1FFF"
+        "fogColor": "#121B1F"
       },
       "lighting": {
         "ambientStrength": 0.825,
-        "ambientColor": "#AAC7DCFF",
+        "ambientColor": "#AAC7DC",
         "directionalStrength": 1.5,
-        "directionalColor": "#72B2E9FF",
+        "directionalColor": "#72B2E9",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3561,13 +3561,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#131B21FF"
+        "fogColor": "#131B21"
       },
       "lighting": {
         "ambientStrength": 0.8,
-        "ambientColor": "#AFCAEAFF",
+        "ambientColor": "#AFCAEA",
         "directionalStrength": 1.5,
-        "directionalColor": "#71A0E2FF",
+        "directionalColor": "#71A0E2",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3804,13 +3804,13 @@
     "environment": {
       "fog": {
         "fogDepth": 20,
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       },
       "lighting": {
         "ambientStrength": 3.5,
-        "ambientColor": "#B58F7CFF",
+        "ambientColor": "#B58F7C",
         "directionalStrength": 0.0,
-        "directionalColor": "#FFC875FF",
+        "directionalColor": "#FFC875",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -3831,13 +3831,13 @@
     "environment": {
       "fog": {
         "fogDepth": 20,
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       },
       "lighting": {
         "ambientStrength": 3.0,
-        "ambientColor": "#B58F7CFF",
+        "ambientColor": "#B58F7C",
         "directionalStrength": 0.5,
-        "directionalColor": "#FFC875FF",
+        "directionalColor": "#FFC875",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -4032,15 +4032,15 @@
     "environment": {
       "fog": {
         "fogDepth": 20,
-        "fogColor": "#170B07FF"
+        "fogColor": "#170B07"
       },
       "lighting": {
         "ambientStrength": 1.7,
-        "ambientColor": "#F0B8B8FF",
+        "ambientColor": "#F0B8B8",
         "directionalStrength": 0.7,
-        "directionalColor": "#FFF6CAFF",
+        "directionalColor": "#FFF6CA",
         "underglowStrength": 2.0,
-        "underglowColor": "#FF0000FF",
+        "underglowColor": "#FF0000",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -4264,7 +4264,7 @@
       },
       "lighting": {
         "ambientStrength": 0.5,
-        "ambientColor": "#D7D2D2FF",
+        "ambientColor": "#D7D2D2",
         "directionalStrength": 2.0,
         "directionalColor": "#C5B8B6"
       }
@@ -4328,9 +4328,9 @@
       },
       "lighting": {
         "ambientStrength": 0.6,
-        "ambientColor": "#D7D2D2FF",
+        "ambientColor": "#D7D2D2",
         "directionalStrength": 2.5,
-        "directionalColor": "#8A9EB6FF"
+        "directionalColor": "#8A9EB6"
       }
     }
   },
@@ -4356,7 +4356,7 @@
       },
       "lighting": {
         "ambientStrength": 0.6,
-        "ambientColor": "#D7D2D2FF",
+        "ambientColor": "#D7D2D2",
         "directionalStrength": 2.5,
         "directionalColor": "#C5B8B6"
       }
@@ -4439,7 +4439,7 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#B2BBC5FF",
+        "fogColor": "#B2BBC5",
         "groundFogStart": -600,
         "groundFogEnd": -900,
         "groundFogOpacity": 0.4
@@ -4471,7 +4471,7 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#B2BBC5FF",
+        "fogColor": "#B2BBC5",
         "groundFogStart": -1200,
         "groundFogEnd": -1600,
         "groundFogOpacity": 0.5
@@ -4613,12 +4613,12 @@
     "environment": {
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#32372FFF"
+        "fogColor": "#32372F"
       },
       "lighting": {
-        "ambientColor": "#C0DBADFF",
+        "ambientColor": "#C0DBAD",
         "directionalStrength": 2.0,
-        "directionalColor": "#ADB08BFF"
+        "directionalColor": "#ADB08B"
       }
     },
     "overlays": [
@@ -4658,7 +4658,7 @@
     "environment": {
       "allowSkyOverride": false,
       "fog": {
-        "fogColor": "#124053FF"
+        "fogColor": "#124053"
       },
       "lighting": {
         "ambientStrength": 0.3,
@@ -4682,7 +4682,7 @@
       "allowSkyOverride": false,
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#5B8B78FF"
+        "fogColor": "#5B8B78"
       },
       "lighting": {
         "ambientStrength": 0.9,
@@ -4706,7 +4706,7 @@
       "allowSkyOverride": false,
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#5B8B78FF"
+        "fogColor": "#5B8B78"
       },
       "lighting": {
         "directionalStrength": 0.0
@@ -4741,7 +4741,7 @@
     "environment": {
       "allowSkyOverride": false,
       "fog": {
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       }
     }
   },
@@ -4798,13 +4798,13 @@
     "environment": {
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#163F47FF"
+        "fogColor": "#163F47"
       },
       "lighting": {
         "ambientStrength": 0.5,
-        "ambientColor": "#73B5C3FF",
+        "ambientColor": "#73B5C3",
         "directionalStrength": 1.3,
-        "directionalColor": "#F5D67AFF",
+        "directionalColor": "#F5D67A",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -4843,13 +4843,13 @@
     "environment": {
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#0E3B59FF"
+        "fogColor": "#0E3B59"
       },
       "lighting": {
         "ambientStrength": 0.5,
         "ambientColor": "#68ACFF",
         "directionalStrength": 1.8,
-        "directionalColor": "#92D1FAFF",
+        "directionalColor": "#92D1FA",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -4933,7 +4933,7 @@
     "hideOtherRegions": false,
     "environment": {
       "fog": {
-        "fogColor": "#1C150DFF"
+        "fogColor": "#1C150D"
       }
     }
   },
@@ -5014,7 +5014,7 @@
     "hideOtherRegions": false,
     "environment": {
       "fog": {
-        "fogColor": "#1C150DFF"
+        "fogColor": "#1C150D"
       }
     }
   },
@@ -5366,12 +5366,12 @@
     "environment": {
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#4F1325FF"
+        "fogColor": "#4F1325"
       },
       "lighting": {
-        "ambientColor": "#BE48AEFF",
+        "ambientColor": "#BE48AE",
         "directionalStrength": 2.5,
-        "directionalColor": "#4EEEFFFF"
+        "directionalColor": "#4EEEFF"
       }
     },
     "overlays": [
@@ -5453,12 +5453,12 @@
     "environment": {
       "fog": {
         "fogDepth": 30,
-        "fogColor": "#13184FFF"
+        "fogColor": "#13184F"
       },
       "lighting": {
-        "ambientColor": "#6369FFFF",
+        "ambientColor": "#6369FF",
         "directionalStrength": 3.5,
-        "directionalColor": "#4EEEFFFF"
+        "directionalColor": "#4EEEFF"
       }
     }
   },
@@ -5558,11 +5558,11 @@
     "environment": {
       "fog": {
         "fogDepth": 40,
-        "fogColor": "#150A05FF"
+        "fogColor": "#150A05"
       },
       "lighting": {
-        "ambientColor": "#FFD785FF",
-        "directionalColor": "#7D8DB3FF"
+        "ambientColor": "#FFD785",
+        "directionalColor": "#7D8DB3"
       }
     }
   },
@@ -5632,13 +5632,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#292C10FF"
+        "fogColor": "#292C10"
       },
       "lighting": {
         "ambientStrength": 0.8,
-        "ambientColor": "#FFD785FF",
+        "ambientColor": "#FFD785",
         "directionalStrength": 1.0,
-        "directionalColor": "#CFE5B5FF"
+        "directionalColor": "#CFE5B5"
       }
     }
   },
@@ -5703,13 +5703,13 @@
     "environment": {
       "fog": {
         "fogDepth": 50,
-        "fogColor": "#2A3124FF"
+        "fogColor": "#2A3124"
       },
       "lighting": {
         "ambientStrength": 0.8,
-        "ambientColor": "#F8E0ACFF",
+        "ambientColor": "#F8E0AC",
         "directionalStrength": 1.25,
-        "directionalColor": "#A8AB90FF"
+        "directionalColor": "#A8AB90"
       }
     }
   },
@@ -5755,7 +5755,7 @@
         "ambientStrength": 0.5,
         "ambientColor": "#7891B5",
         "directionalStrength": 1.0,
-        "directionalColor": "#4C78B6FF",
+        "directionalColor": "#4C78B6",
         "lightPitch": 260.0,
         "lightYaw": 10.0
       }
@@ -6127,13 +6127,13 @@
     "environment": {
       "fog": {
         "fogDepth": 40,
-        "fogColor": "#E2E6EDFF"
+        "fogColor": "#E2E6ED"
       },
       "lighting": {
         "ambientStrength": 0.6,
-        "ambientColor": "#EAE2CDFF",
+        "ambientColor": "#EAE2CD",
         "directionalStrength": 1.5,
-        "directionalColor": "#82ACE0FF"
+        "directionalColor": "#82ACE0"
       }
     }
   },
@@ -6684,11 +6684,11 @@
       "allowSkyOverride": false,
       "fog": {
         "fogDepth": 20,
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       },
       "lighting": {
         "ambientStrength": 1.2,
-        "ambientColor": "#FFFFFFFF",
+        "ambientColor": "#FFFFFF",
         "directionalStrength": 0.0
       }
     }
@@ -6912,11 +6912,11 @@
       "allowSkyOverride": false,
       "fog": {
         "fogDepth": 20,
-        "fogColor": "#000000FF"
+        "fogColor": "#000000"
       },
       "lighting": {
         "ambientStrength": 1.2,
-        "ambientColor": "#FFFFFFFF",
+        "ambientColor": "#FFFFFF",
         "directionalStrength": 0.0,
         "lightPitch": 260.0,
         "lightYaw": 10.0
@@ -6999,16 +6999,16 @@
     "environment": {
       "fog": {
         "fogDepth": 15,
-        "fogColor": "#002033FF"
+        "fogColor": "#002033"
       },
       "caustics": {
         "underwater": true,
         "underwaterCausticsStrength": 40.0
       },
       "lighting": {
-        "ambientColor": "#FFFFFFFF",
+        "ambientColor": "#FFFFFF",
         "directionalStrength": 0.3,
-        "directionalColor": "#E6F4FFFF",
+        "directionalColor": "#E6F4FF",
         "lightPitch": -130.0
       }
     },
@@ -7718,6 +7718,19 @@
     "description": "OVERWORLD",
     "theme": "NORMAL",
     "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 65,
+        "fogColor": "#B9D6FF"
+      },
+      "lighting": {
+        "ambientStrength": 1.0,
+        "ambientColor": "#97BAFF",
+        "directionalStrength": 4.0,
+        "lightPitch": -128,
+        "lightYaw": 55.0
+      }
+    },
     "underlays": [
       {
         "id": 10,

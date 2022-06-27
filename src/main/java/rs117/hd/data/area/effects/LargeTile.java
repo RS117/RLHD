@@ -13,13 +13,11 @@ import javax.inject.Inject;
 
 @Slf4j
 @Data
-public class LargeTile
-{
+public class LargeTile {
     private final String material;
     private final String materialBelow;
     private final Boolean isOverlay;
     private final String waterType;
     private final int height;
     private final int color;
-
 }

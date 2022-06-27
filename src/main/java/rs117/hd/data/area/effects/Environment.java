@@ -3,6 +3,7 @@ package rs117.hd.data.area.effects;
 import lombok.Data;
 import rs117.hd.utils.Rect;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Environment {
     private Fog fog = new Fog();
     private Caustics caustics = new Caustics();
     private Lighting lighting = new Lighting();
-    private List<Rect> rects = Collections.emptyList();
-    private String name = "";
+    private ArrayList<Rect> rects = null;
+    private String name = null;
 }
 

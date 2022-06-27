@@ -8,6 +8,7 @@ import rs117.hd.data.area.AreaTheme
 import rs117.hd.data.area.effects.*
 import rs117.hd.data.environments.Area.*
 import java.io.File
+import java.util.ArrayList
 
 
 object GenerateAreas {
@@ -136,8 +137,8 @@ object GenerateAreas {
             }
 
 
-            area.overlays = overlays
-            area.underlays = underlays
+            area.overlays = overlays as ArrayList<TileData>?
+            area.underlays = underlays as ArrayList<TileData>?
 
             areaList.add(area)
         }

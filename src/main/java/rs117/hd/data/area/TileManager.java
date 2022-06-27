@@ -24,11 +24,23 @@ public class TileManager {
     private static final ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_OVERLAY = ArrayListMultimap.create();
     private static final ListMultimap<Integer, TileData> GROUND_MATERIAL_MAP_UNDERLAY = ArrayListMultimap.create();
     private static final TileData DEFAULT = new TileData(-1, GroundMaterial.DIRT);
-    public static final TileData WINTER_GRASS = new TileData(-999, GroundMaterial.SNOW_1,0,0,40,true);
-    public static final TileData WINTER_DIRT = new TileData(-999, GroundMaterial.DIRT,0,0,40,true);
+    public static final TileData WINTER_GRASS = new TileData(-999,
+            GroundMaterial.SNOW_1,
+            0,
+            0,
+            40,
+            true
+    );
+    public static final TileData WINTER_DIRT = new TileData(-999,
+            GroundMaterial.DIRT,
+            0,
+            0,
+            40,
+            true
+    );
 
     @Inject
-    HdPlugin plugin;
+    private HdPlugin plugin;
 
     public void loadOverlays() {
         GROUND_MATERIAL_MAP_OVERLAY.clear();
@@ -69,7 +81,7 @@ public class TileManager {
         if(tile.getMaterialBelow() != null) {
             int materialData = sceneUploader.modelPusher.packMaterialData(Material.getIndex(Material.DIRT_1), false);
             int terrainData = sceneUploader.packTerrainData(600, WaterType.WATER, 0);
-            // North-west
+
             vertexBuffer.put(-size, height, size, color);
             uvBuffer.put(materialData, -size, size, 0);
             // South-west
