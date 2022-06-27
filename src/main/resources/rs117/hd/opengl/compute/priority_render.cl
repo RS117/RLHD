@@ -82,14 +82,15 @@ int count_prio_offset(__local struct shared_data *shared, int priority) {
 void get_face(
   __local struct shared_data *shared,
   __constant struct uniform *uni,
-  __global const int4 *vb,
-  __global const int4 *tempvb,
-  uint localId, struct modelinfo minfo, int cameraYaw, int cameraPitch,
-  /* out */ int *prio, int *dis, int4 *o1, int4 *o2, int4 *o3) {
+  __global const struct VertexInfo *vb,
+  __global const struct VertexInfo *tempvb,
+  int localId, struct modelinfo minfo, int cameraYaw, int cameraPitch,
+  /* out */ int *prio, int *dis,
+  /* out */ struct VertexInfo *oA, struct VertexInfo *oB, struct VertexInfo *oC) {
   int size = minfo.size;
   int offset = minfo.offset;
   int flags = minfo.flags;
-  uint ssboOffset;
+  int ssboOffset;
 
   if (localId < size) {
     ssboOffset = localId;
@@ -97,49 +98,37 @@ void get_face(
     ssboOffset = 0;
   }
 
-  int4 thisA;
-  int4 thisB;
-  int4 thisC;
-
   // Grab triangle vertices from the correct buffer
   if (flags < 0) {
-    thisA = vb[offset + ssboOffset * 3];
-    thisB = vb[offset + ssboOffset * 3 + 1];
-    thisC = vb[offset + ssboOffset * 3 + 2];
+    *oA = vb[offset + ssboOffset * 3];
+    *oB = vb[offset + ssboOffset * 3 + 1];
+    *oC = vb[offset + ssboOffset * 3 + 2];
   } else {
-    thisA = tempvb[offset + ssboOffset * 3];
-    thisB = tempvb[offset + ssboOffset * 3 + 1];
-    thisC = tempvb[offset + ssboOffset * 3 + 2];
+    *oA = tempvb[offset + ssboOffset * 3];
+    *oB = tempvb[offset + ssboOffset * 3 + 1];
+    *oC = tempvb[offset + ssboOffset * 3 + 2];
   }
 
   if (localId < size) {
     int radius = (flags & 0x7fffffff) >> 12;
     int orientation = flags & 0x7ff;
+    *prio = (oA->position.w >> 16) & 0xff;// all vertices on the face have the same priority
 
     // rotate for model orientation
-    int4 thisrvA = rotate_vertex(uni, thisA, orientation);
-    int4 thisrvB = rotate_vertex(uni, thisB, orientation);
-    int4 thisrvC = rotate_vertex(uni, thisC, orientation);
+    oA->position = rotate_vertex(uni, oA->position, orientation);
+    oB->position = rotate_vertex(uni, oB->position, orientation);
+    oC->position = rotate_vertex(uni, oC->position, orientation);
 
     // calculate distance to face
-    int thisPriority = (thisA.w >> 16) & 0xff;// all vertices on the face have the same priority
-    int thisDistance;
     if (radius == 0) {
-      thisDistance = 0;
+      *dis = 0;
     } else {
-      thisDistance = face_distance(thisrvA, thisrvB, thisrvC, cameraYaw, cameraPitch) + radius;
+      *dis = face_distance(oA->position, oB->position, oC->position, cameraYaw, cameraPitch) + radius;
     }
-
-    *o1 = thisrvA;
-    *o2 = thisrvB;
-    *o3 = thisrvC;
-
-    *prio = thisPriority;
-    *dis = thisDistance;
   } else {
-    *o1 = (int4)(0, 0, 0, 0);
-    *o2 = (int4)(0, 0, 0, 0);
-    *o3 = (int4)(0, 0, 0, 0);
+    *oA = (struct VertexInfo) { 0, 0 };
+    *oB = (struct VertexInfo) { 0, 0 };
+    *oC = (struct VertexInfo) { 0, 0 };
     *prio = 0;
     *dis = 0;
   }
@@ -148,10 +137,12 @@ void get_face(
 void add_face_prio_distance(
   __local struct shared_data *shared,
   __constant struct uniform *uni,
-  uint localId, struct modelinfo minfo, int4 thisrvA, int4 thisrvB, int4 thisrvC, int thisPriority, int thisDistance, int4 pos) {
+  uint localId, struct modelinfo minfo,
+  struct VertexInfo *thisA, struct VertexInfo *thisB, struct VertexInfo *thisC,
+  int thisPriority, int thisDistance, int4 pos) {
   if (localId < minfo.size) {
     // if the face is not culled, it is calculated into priority distance averages
-    if (face_visible(uni, thisrvA, thisrvB, thisrvC, pos)) {
+    if (face_visible(uni, thisA->position, thisB->position, thisC->position, pos)) {
       atomic_add(&shared->totalNum[thisPriority], 1);
       atomic_add(&shared->totalDistance[thisPriority], thisDistance);
 
@@ -163,7 +154,7 @@ void add_face_prio_distance(
   }
 }
 
-int map_face_priority(__local struct shared_data *shared, uint localId, struct modelinfo minfo, int thisPriority, int thisDistance, int *prio) {
+int map_face_priority(__local struct shared_data *shared, int localId, struct modelinfo minfo, int thisPriority, int thisDistance, int *prio) {
   int size = minfo.size;
 
   // Compute average distances for 0/2, 3/4, and 6/8
@@ -196,14 +187,14 @@ int map_face_priority(__local struct shared_data *shared, uint localId, struct m
   return 0;
 }
 
-void insert_dfs(__local struct shared_data *shared, uint localId, struct modelinfo minfo, int adjPrio, int distance, int prioIdx) {
+void insert_dfs(__local struct shared_data *shared, int localId, struct modelinfo minfo, int adjPrio, int distance, int prioIdx) {
   int size = minfo.size;
 
   if (localId < size) {
     // calculate base offset into dfs based on number of faces with a lower priority
     int baseOff = count_prio_offset(shared, adjPrio);
     // store into face array offset array by unique index
-    shared->dfs[baseOff + prioIdx] = ((int) localId << 16) | distance;
+    shared->dfs[baseOff + prioIdx] = localId << 16 | distance;
   }
 }
 
@@ -211,15 +202,12 @@ void sort_and_insert(
   __local struct shared_data *shared,
   __global const float4 *uv,
   __global const float4 *tempuv,
-  __global int4 *vout,
+  __global struct VertexInfo *vout,
   __global float4 *uvout,
-  __global float4 *normalout,
-  __global float4 *normal,
-  __global float4 *tempnormal,
   __constant struct uniform *uni,
-  uint localId, struct modelinfo minfo, int thisPriority, int thisDistance, int4 thisrvA, int4 thisrvB, int4 thisrvC) {
+  int localId, struct modelinfo minfo, int thisPriority, int thisDistance,
+  struct VertexInfo *thisA, struct VertexInfo *thisB, struct VertexInfo *thisC) {
   /* compute face distance */
-  int offset = minfo.offset;
   int size = minfo.size;
 
   if (localId < size) {
@@ -235,8 +223,6 @@ void sort_and_insert(
     int end = priorityOffset + numOfPriority; // index of last face with this priority
     int myOffset = priorityOffset;
     
-    uint ssboOffset = localId;
-
     // we only have to order faces against others of the same priority
     // calculate position this face will be in
     for (int i = start; i < end; ++i) {
@@ -253,15 +239,25 @@ void sort_and_insert(
       }
     }
 
+    thisA->position += pos;
+    thisB->position += pos;
+    thisC->position += pos;
+    thisA->normal.xyz = normalize(thisA->normal.xyz);
+    thisB->normal.xyz = normalize(thisB->normal.xyz);
+    thisC->normal.xyz = normalize(thisC->normal.xyz);
+    thisA->normal = rotate2(uni, thisA->normal, orientation);
+    thisB->normal = rotate2(uni, thisB->normal, orientation);
+    thisC->normal = rotate2(uni, thisC->normal, orientation);
+
     // position vertices in scene and write to out buffer
-    vout[outOffset + myOffset * 3]     = pos + thisrvA;
-    vout[outOffset + myOffset * 3 + 1] = pos + thisrvB;
-    vout[outOffset + myOffset * 3 + 2] = pos + thisrvC;
+    vout[outOffset + myOffset * 3]     = *thisA;
+    vout[outOffset + myOffset * 3 + 1] = *thisB;
+    vout[outOffset + myOffset * 3 + 2] = *thisC;
 
     if (uvOffset < 0) {
-      uvout[outOffset + myOffset * 3]     = (float4)(0, 0, 0, 0);
-      uvout[outOffset + myOffset * 3 + 1] = (float4)(0, 0, 0, 0);
-      uvout[outOffset + myOffset * 3 + 2] = (float4)(0, 0, 0, 0);
+      uvout[outOffset + myOffset * 3]     = (float4)(0);
+      uvout[outOffset + myOffset * 3 + 1] = (float4)(0);
+      uvout[outOffset + myOffset * 3 + 2] = (float4)(0);
     } else if (flags >= 0) {
       uvout[outOffset + myOffset * 3]     = tempuv[uvOffset + localId * 3];
       uvout[outOffset + myOffset * 3 + 1] = tempuv[uvOffset + localId * 3 + 1];
@@ -271,32 +267,5 @@ void sort_and_insert(
       uvout[outOffset + myOffset * 3 + 1] = uv[uvOffset + localId * 3 + 1];
       uvout[outOffset + myOffset * 3 + 2] = uv[uvOffset + localId * 3 + 2];
     }
-    
-    float4 normA, normB, normC;
-    
-    // Grab vertex normals from the correct buffer
-    if (flags < 0) {
-      normA = normal[offset + ssboOffset * 3    ];
-      normB = normal[offset + ssboOffset * 3 + 1];
-      normC = normal[offset + ssboOffset * 3 + 2];
-    } else {
-      normA = tempnormal[offset + ssboOffset * 3    ];
-      normB = tempnormal[offset + ssboOffset * 3 + 1];
-      normC = tempnormal[offset + ssboOffset * 3 + 2];
-    }
-    
-    normA = (float4) (normalize(normA.xyz), normA.w);
-    normB = (float4) (normalize(normB.xyz), normB.w);
-    normC = (float4) (normalize(normC.xyz), normC.w);
-    
-    float4 normrvA, normrvB, normrvC;
-    
-    normrvA = rotate2(uni, normA, orientation);
-    normrvB = rotate2(uni, normB, orientation);
-    normrvC = rotate2(uni, normC, orientation);
-    
-    normalout[outOffset + myOffset * 3    ] = normrvA;
-    normalout[outOffset + myOffset * 3 + 1] = normrvB;
-    normalout[outOffset + myOffset * 3 + 2] = normrvC;
   }
 }

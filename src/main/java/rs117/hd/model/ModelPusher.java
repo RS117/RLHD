@@ -17,8 +17,7 @@ import rs117.hd.scene.ProceduralGenerator;
 import rs117.hd.data.BakedModels;
 import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.utils.HDUtils;
-import rs117.hd.utils.buffer.GpuFloatBuffer;
-import rs117.hd.utils.buffer.GpuIntBuffer;
+import rs117.hd.utils.buffer.GpuBuffer;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -61,8 +60,7 @@ public class ModelPusher
     private final static float[] zeroFloats = new float[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final static int[] twoInts = new int[2];
     private final static int[] fourInts = new int[4];
-    private final static int[] eightInts = new int[8];
-    private final static int[] twelveInts = new int[12];
+    private final static int[] vertexNormalInts = new int[24];
     private final static float[] twelveFloats = new float[12];
     private final static int[] modelColors = new int[HdPlugin.MAX_TRIANGLE * 4];
     private final static ModelData tempModelData = new ModelData();
@@ -73,23 +71,21 @@ public class ModelPusher
         modelCache.clear();
     }
 
-    public int[] pushModel(Renderable renderable, Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache, int hash) {
+    public int[] pushModel(Renderable renderable, Model model, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int tileX, int tileY, int tileZ, ObjectProperties objectProperties, ObjectType objectType, boolean noCache, int hash) {
         final int faceCount = Math.min(model.getFaceCount(), HdPlugin.MAX_TRIANGLE);
+		final int vertexCount = faceCount * 3;
 
         // ensure capacity upfront
-        vertexBuffer.ensureCapacity(12 * 2 * faceCount);
-        normalBuffer.ensureCapacity(12 * 2 * faceCount);
-        uvBuffer.ensureCapacity(12 * 2 * faceCount);
+        vertexBuffer.ensureCapacity(vertexCount * 8);
+        uvBuffer.ensureCapacity(vertexCount * 4);
 
         ModelData modelData = getCachedModelData(renderable, model, objectProperties, objectType, tileX, tileY, tileZ, faceCount, noCache, hash);
 
         int vertexLength = 0;
         int uvLength = 0;
         for (int face = 0; face < faceCount; face++) {
-            vertexBuffer.put(getVertexDataForFace(model, modelData, face));
+            vertexBuffer.put(getVertexNormalDataForFace(model, modelData, objectProperties, face));
             vertexLength += 3;
-
-            normalBuffer.put(getNormalDataForFace(model, objectProperties, face));
 
             float[] uvData = getUvDataForFace(model, objectProperties, face);
             if (uvData != null) {
@@ -104,7 +100,7 @@ public class ModelPusher
         return twoInts;
     }
 
-    private int[] getVertexDataForFace(Model model, ModelData modelData, int face) {
+    private int[] getVertexNormalDataForFace(Model model, ModelData modelData, ObjectProperties objectProperties, int face) {
         final int[] xVertices = model.getVerticesX();
         final int[] yVertices = model.getVerticesY();
         final int[] zVertices = model.getVerticesZ();
@@ -112,48 +108,46 @@ public class ModelPusher
         final int triB = model.getFaceIndices2()[face];
         final int triC = model.getFaceIndices3()[face];
 
-        twelveInts[0] = xVertices[triA];
-        twelveInts[1] = yVertices[triA];
-        twelveInts[2] = zVertices[triA];
-        twelveInts[3] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 0);
-        twelveInts[4] = xVertices[triB];
-        twelveInts[5] = yVertices[triB];
-        twelveInts[6] = zVertices[triB];
-        twelveInts[7] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 1);
-        twelveInts[8] = xVertices[triC];
-        twelveInts[9] = yVertices[triC];
-        twelveInts[10] = zVertices[triC];
-        twelveInts[11] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 2);
+		boolean zeroNormals = model.getFaceColors3()[face] == -1 || (objectProperties != null && objectProperties.isFlatNormals());
+		if (zeroNormals)
+		{
+			Arrays.fill(vertexNormalInts, 0);
+		}
 
-        return twelveInts;
-    }
+        vertexNormalInts[0] = xVertices[triA];
+        vertexNormalInts[1] = yVertices[triA];
+        vertexNormalInts[2] = zVertices[triA];
+        vertexNormalInts[3] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 0);
+        vertexNormalInts[8] = xVertices[triB];
+        vertexNormalInts[9] = yVertices[triB];
+        vertexNormalInts[10] = zVertices[triB];
+        vertexNormalInts[11] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 1);
+        vertexNormalInts[16] = xVertices[triC];
+        vertexNormalInts[17] = yVertices[triC];
+        vertexNormalInts[18] = zVertices[triC];
+        vertexNormalInts[19] = modelData.getColorForFace(face, 3) | modelData.getColorForFace(face, 2);
 
-    private float[] getNormalDataForFace(Model model, ObjectProperties objectProperties, int face) {
-        if (model.getFaceColors3()[face] == -1 || (objectProperties != null && objectProperties.isFlatNormals())) {
-            return zeroFloats;
-        }
+		if (!zeroNormals)
+		{
+			final int[] xVertexNormals = model.getVertexNormalsX();
+			final int[] yVertexNormals = model.getVertexNormalsY();
+			final int[] zVertexNormals = model.getVertexNormalsZ();
 
-        final int triA = model.getFaceIndices1()[face];
-        final int triB = model.getFaceIndices2()[face];
-        final int triC = model.getFaceIndices3()[face];
-        final int[] xVertexNormals = model.getVertexNormalsX();
-        final int[] yVertexNormals = model.getVertexNormalsY();
-        final int[] zVertexNormals = model.getVertexNormalsZ();
+			vertexNormalInts[4] = Float.floatToIntBits(xVertexNormals[triA]);
+			vertexNormalInts[5] = Float.floatToIntBits(yVertexNormals[triA]);
+			vertexNormalInts[6] = Float.floatToIntBits(zVertexNormals[triA]);
+			vertexNormalInts[7] = 0;
+			vertexNormalInts[12] = Float.floatToIntBits(xVertexNormals[triB]);
+			vertexNormalInts[13] = Float.floatToIntBits(yVertexNormals[triB]);
+			vertexNormalInts[14] = Float.floatToIntBits(zVertexNormals[triB]);
+			vertexNormalInts[15] = 0;
+			vertexNormalInts[20] = Float.floatToIntBits(xVertexNormals[triC]);
+			vertexNormalInts[21] = Float.floatToIntBits(yVertexNormals[triC]);
+			vertexNormalInts[22] = Float.floatToIntBits(zVertexNormals[triC]);
+			vertexNormalInts[23] = 0;
+		}
 
-        twelveFloats[0] = xVertexNormals[triA];
-        twelveFloats[1] = yVertexNormals[triA];
-        twelveFloats[2] = zVertexNormals[triA];
-        twelveFloats[3] = 0;
-        twelveFloats[4] = xVertexNormals[triB];
-        twelveFloats[5] = yVertexNormals[triB];
-        twelveFloats[6] = zVertexNormals[triB];
-        twelveFloats[7] = 0;
-        twelveFloats[8] = xVertexNormals[triC];
-        twelveFloats[9] = yVertexNormals[triC];
-        twelveFloats[10] = zVertexNormals[triC];
-        twelveFloats[11] = 0;
-
-        return twelveFloats;
+        return vertexNormalInts;
     }
 
     private float[] getUvDataForFace(Model model, ObjectProperties objectProperties, int face) {

@@ -23,68 +23,61 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
- #define PI 3.1415926535897932384626433832795f
- #define UNIT PI / 1024.0f
+#define PI 3.1415926535897932384626433832795f
+#define UNIT PI / 1024.0f
 
- layout(std140) uniform uniforms {
-   int cameraYaw;
-   int cameraPitch;
-   int centerX;
-   int centerY;
-   int zoom;
-   int cameraX;
-   int cameraY;
-   int cameraZ;
-   ivec2 sinCosTable[2048];
- };
-
- struct modelinfo {
-   int offset;   // offset into buffer
-   int uvOffset; // offset into uv buffer
-   int size;     // length in faces
-   int idx;      // write idx in target buffer
-   int flags;    // radius, orientation
-   int x;        // scene position x
-   int y;        // scene position y
-   int z;        // scene position z
- };
-
- layout(std430, binding = 0) readonly buffer modelbuffer_in {
-   modelinfo ol[];
- };
-
- layout(std430, binding = 1) readonly buffer vertexbuffer_in {
-   ivec4 vb[];
- };
-
- layout(std430, binding = 2) readonly buffer tempvertexbuffer_in {
-   ivec4 tempvb[];
- };
-
- layout(std430, binding = 3) writeonly buffer vertex_out {
-   ivec4 vout[];
- };
-
- layout(std430, binding = 4) writeonly buffer uv_out {
-   vec4 uvout[];
- };
-
- layout(std430, binding = 5) readonly buffer uvbuffer_in {
-   vec4 uv[];
- };
-
- layout(std430, binding = 6) readonly buffer tempuvbuffer_in {
-   vec4 tempuv[];
- };
-
-layout(std430, binding = 7) writeonly buffer normal_out {
-    vec4 normalout[];
+layout(std140) uniform uniforms {
+    int cameraYaw;
+    int cameraPitch;
+    int centerX;
+    int centerY;
+    int zoom;
+    int cameraX;
+    int cameraY;
+    int cameraZ;
+    ivec2 sinCosTable[2048];
 };
 
-layout(std430, binding = 8) readonly buffer normalbuffer_in {
-    vec4 normal[];
+struct modelinfo {
+    int offset;   // offset into buffer
+    int uvOffset; // offset into uv buffer
+    int size;     // length in faces
+    int idx;      // write idx in target buffer
+    int flags;    // radius, orientation
+    int x;        // scene position x
+    int y;        // scene position y
+    int z;        // scene position z
 };
 
-layout(std430, binding = 9) readonly buffer tempnormalbuffer_in {
-    vec4 tempnormal[];
+struct VertexInfo {
+    ivec4 position;
+    vec4 normal;
+};
+
+layout(std430, binding = 0) readonly buffer modelbuffer_in {
+    modelinfo ol[];
+};
+
+layout(std430, binding = 1) readonly buffer vertexbuffer_in {
+    VertexInfo vb[];
+};
+
+layout(std430, binding = 2) readonly buffer tempvertexbuffer_in {
+    VertexInfo tempvb[];
+};
+
+layout(std430, binding = 3) writeonly buffer vertex_out {
+    VertexInfo vout[];
+};
+
+layout(std430, binding = 4) writeonly buffer uv_out {
+    vec4 uvout[];
+};
+
+layout(std430, binding = 5) readonly buffer uvbuffer_in {
+    vec4 uv[];
+};
+
+layout(std430, binding = 6) readonly buffer tempuvbuffer_in {
+    vec4 tempuv[];
 };

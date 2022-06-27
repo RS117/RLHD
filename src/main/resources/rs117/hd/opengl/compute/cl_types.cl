@@ -53,3 +53,8 @@ struct modelinfo {
   int y;        // scene position y
   int z;        // scene position z
 };
+
+struct VertexInfo {
+  int4 position;
+  float4 normal;
+};

@@ -100,6 +100,12 @@ public class OpenCLManager
 	{
 		CL.setExceptionsEnabled(true);
 
+		if (log.isTraceEnabled()) {
+			CL.setLogLevel(CL.LogLevel.LOG_DEBUGTRACE);
+		} else if (log.isDebugEnabled()) {
+			CL.setLogLevel(CL.LogLevel.LOG_DEBUG);
+		}
+
 		switch (OSType.getOSType())
 		{
 			case Windows:
@@ -421,35 +427,29 @@ public class OpenCLManager
 	}
 
 	public void compute(int unorderedModels, int smallModels, int largeModels,
-		GLBuffer sceneVertexBuffer,
+		GLBuffer sceneVertexNormalBuffer,
 		GLBuffer sceneUvBuffer,
-		GLBuffer vertexBuffer,
+		GLBuffer vertexNormalBuffer,
 		GLBuffer uvBuffer,
 		GLBuffer unorderedBuffer,
 		GLBuffer smallBuffer,
 		GLBuffer largeBuffer,
-		GLBuffer outVertexBuffer,
+		GLBuffer outVertexNormalBuffer,
 		GLBuffer outUvBuffer,
-		GLBuffer uniformBuffer,
-	    GLBuffer normalOutBuffer,
-	    GLBuffer normalBuffer,
-	    GLBuffer tempNormalBuffer
+		GLBuffer uniformBuffer
 	)
 	{
 		cl_mem[] glBuffersAll = {
-			sceneVertexBuffer.cl_mem,
+			sceneVertexNormalBuffer.cl_mem,
 			sceneUvBuffer.cl_mem,
 			unorderedBuffer.cl_mem,
 			smallBuffer.cl_mem,
 			largeBuffer.cl_mem,
-			vertexBuffer.cl_mem,
+			vertexNormalBuffer.cl_mem,
 			uvBuffer.cl_mem,
-			outVertexBuffer.cl_mem,
+			outVertexNormalBuffer.cl_mem,
 			outUvBuffer.cl_mem,
-			uniformBuffer.cl_mem,
-			normalOutBuffer.cl_mem,
-			normalBuffer.cl_mem,
-			tempNormalBuffer.cl_mem,
+			uniformBuffer.cl_mem
 		};
 		cl_mem[] glBuffers = Arrays.stream(glBuffersAll)
 			.filter(Objects::nonNull)
@@ -468,15 +468,12 @@ public class OpenCLManager
 		if (unorderedModels > 0)
 		{
 			clSetKernelArg(kernelUnordered, 0, Sizeof.cl_mem, unorderedBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 1, Sizeof.cl_mem, sceneVertexBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 2, Sizeof.cl_mem, vertexBuffer.ptr());
+			clSetKernelArg(kernelUnordered, 1, Sizeof.cl_mem, sceneVertexNormalBuffer.ptr());
+			clSetKernelArg(kernelUnordered, 2, Sizeof.cl_mem, vertexNormalBuffer.ptr());
 			clSetKernelArg(kernelUnordered, 3, Sizeof.cl_mem, sceneUvBuffer.ptr());
 			clSetKernelArg(kernelUnordered, 4, Sizeof.cl_mem, uvBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 5, Sizeof.cl_mem, outVertexBuffer.ptr());
+			clSetKernelArg(kernelUnordered, 5, Sizeof.cl_mem, outVertexNormalBuffer.ptr());
 			clSetKernelArg(kernelUnordered, 6, Sizeof.cl_mem, outUvBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 7, Sizeof.cl_mem, normalOutBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 8, Sizeof.cl_mem, normalBuffer.ptr());
-			clSetKernelArg(kernelUnordered, 9, Sizeof.cl_mem, tempNormalBuffer.ptr());
 
 			// queue compute call after acquireGLBuffers
 			clEnqueueNDRangeKernel(commandQueue, kernelUnordered, 1, null,
@@ -487,35 +484,29 @@ public class OpenCLManager
 		{
 			clSetKernelArg(kernelSmall, 0, (SHARED_SIZE + SMALL_SIZE) * Integer.BYTES, null);
 			clSetKernelArg(kernelSmall, 1, Sizeof.cl_mem, smallBuffer.ptr());
-			clSetKernelArg(kernelSmall, 2, Sizeof.cl_mem, sceneVertexBuffer.ptr());
-			clSetKernelArg(kernelSmall, 3, Sizeof.cl_mem, vertexBuffer.ptr());
+			clSetKernelArg(kernelSmall, 2, Sizeof.cl_mem, sceneVertexNormalBuffer.ptr());
+			clSetKernelArg(kernelSmall, 3, Sizeof.cl_mem, vertexNormalBuffer.ptr());
 			clSetKernelArg(kernelSmall, 4, Sizeof.cl_mem, sceneUvBuffer.ptr());
 			clSetKernelArg(kernelSmall, 5, Sizeof.cl_mem, uvBuffer.ptr());
-			clSetKernelArg(kernelSmall, 6, Sizeof.cl_mem, outVertexBuffer.ptr());
+			clSetKernelArg(kernelSmall, 6, Sizeof.cl_mem, outVertexNormalBuffer.ptr());
 			clSetKernelArg(kernelSmall, 7, Sizeof.cl_mem, outUvBuffer.ptr());
-			clSetKernelArg(kernelSmall, 8, Sizeof.cl_mem, normalOutBuffer.ptr());
-			clSetKernelArg(kernelSmall, 9, Sizeof.cl_mem, normalBuffer.ptr());
-			clSetKernelArg(kernelSmall, 10, Sizeof.cl_mem, tempNormalBuffer.ptr());
-			clSetKernelArg(kernelSmall, 11, Sizeof.cl_mem, uniformBuffer.ptr());
+			clSetKernelArg(kernelSmall, 8, Sizeof.cl_mem, uniformBuffer.ptr());
 
 			clEnqueueNDRangeKernel(commandQueue, kernelSmall, 1, null,
-				new long[]{smallModels * (SMALL_SIZE / smallFaceCount)}, new long[]{SMALL_SIZE / smallFaceCount}, 1, new cl_event[]{acquireGLBuffers}, computeEvents[numComputeEvents++]);
+				new long[]{(long) smallModels * (SMALL_SIZE / smallFaceCount)}, new long[]{SMALL_SIZE / smallFaceCount}, 1, new cl_event[]{acquireGLBuffers}, computeEvents[numComputeEvents++]);
 		}
 
 		if (largeModels > 0)
 		{
 			clSetKernelArg(kernelLarge, 0, (SHARED_SIZE + LARGE_SIZE) * Integer.BYTES, null);
 			clSetKernelArg(kernelLarge, 1, Sizeof.cl_mem, largeBuffer.ptr());
-			clSetKernelArg(kernelLarge, 2, Sizeof.cl_mem, sceneVertexBuffer.ptr());
-			clSetKernelArg(kernelLarge, 3, Sizeof.cl_mem, vertexBuffer.ptr());
+			clSetKernelArg(kernelLarge, 2, Sizeof.cl_mem, sceneVertexNormalBuffer.ptr());
+			clSetKernelArg(kernelLarge, 3, Sizeof.cl_mem, vertexNormalBuffer.ptr());
 			clSetKernelArg(kernelLarge, 4, Sizeof.cl_mem, sceneUvBuffer.ptr());
 			clSetKernelArg(kernelLarge, 5, Sizeof.cl_mem, uvBuffer.ptr());
-			clSetKernelArg(kernelLarge, 6, Sizeof.cl_mem, outVertexBuffer.ptr());
+			clSetKernelArg(kernelLarge, 6, Sizeof.cl_mem, outVertexNormalBuffer.ptr());
 			clSetKernelArg(kernelLarge, 7, Sizeof.cl_mem, outUvBuffer.ptr());
-			clSetKernelArg(kernelLarge, 8, Sizeof.cl_mem, normalOutBuffer.ptr());
-			clSetKernelArg(kernelLarge, 9, Sizeof.cl_mem, normalBuffer.ptr());
-			clSetKernelArg(kernelLarge, 10, Sizeof.cl_mem, tempNormalBuffer.ptr());
-			clSetKernelArg(kernelLarge, 11, Sizeof.cl_mem, uniformBuffer.ptr());
+			clSetKernelArg(kernelLarge, 8, Sizeof.cl_mem, uniformBuffer.ptr());
 
 			clEnqueueNDRangeKernel(commandQueue, kernelLarge, 1, null,
 				new long[]{(long) largeModels * (LARGE_SIZE / largeFaceCount)}, new long[]{LARGE_SIZE / largeFaceCount}, 1, new cl_event[]{acquireGLBuffers}, computeEvents[numComputeEvents++]);

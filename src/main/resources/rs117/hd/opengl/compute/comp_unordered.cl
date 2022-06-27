@@ -29,15 +29,12 @@
 __kernel
 __attribute__((reqd_work_group_size(6, 1, 1)))
 void computeUnordered(__global const struct modelinfo *ol,
-                      __global const int4 *vb,
-                      __global const int4 *tempvb,
+                      __global const struct VertexInfo *vb,
+                      __global const struct VertexInfo *tempvb,
                       __global const float4 *uv,
                       __global const float4 *tempuv,
-                      __global int4 *vout,
-                      __global float4 *uvout,
-                      __global float4 *normalout,
-                      __global float4 *normal,
-                      __global float4 *tempnormal) {
+                      __global struct VertexInfo *vout,
+                      __global float4 *uvout) {
   size_t groupId = get_group_id(0);
   size_t localId = get_local_id(0);
   struct modelinfo minfo = ol[groupId];
@@ -55,7 +52,7 @@ void computeUnordered(__global const struct modelinfo *ol,
   }
 
   uint ssboOffset = localId;
-  int4 thisA, thisB, thisC;
+  struct VertexInfo thisA, thisB, thisC;
 
   // Grab triangle vertices from the correct buffer
   if (flags < 0) {
@@ -68,12 +65,16 @@ void computeUnordered(__global const struct modelinfo *ol,
     thisC = tempvb[offset + ssboOffset * 3 + 2];
   }
 
-  uint myOffset = localId;
+  int myOffset = localId;
+
+  thisA.position += pos;
+  thisB.position += pos;
+  thisC.position += pos;
 
   // position vertices in scene and write to out buffer
-  vout[outOffset + myOffset * 3]     = pos + thisA;
-  vout[outOffset + myOffset * 3 + 1] = pos + thisB;
-  vout[outOffset + myOffset * 3 + 2] = pos + thisC;
+  vout[outOffset + myOffset * 3]     = thisA;
+  vout[outOffset + myOffset * 3 + 1] = thisB;
+  vout[outOffset + myOffset * 3 + 2] = thisC;
 
   if (uvOffset < 0) {
     uvout[outOffset + myOffset * 3]     = (float4)(0.0f, 0.0f, 0.0f, 0.0f);
@@ -88,21 +89,4 @@ void computeUnordered(__global const struct modelinfo *ol,
     uvout[outOffset + myOffset * 3 + 1] = uv[uvOffset + localId * 3 + 1];
     uvout[outOffset + myOffset * 3 + 2] = uv[uvOffset + localId * 3 + 2];
   }
-  
-  float4 normA, normB, normC;
-  
-  // Grab triangle normals from the correct buffer
-  if (flags < 0) {
-	  normA = normal[offset + ssboOffset * 3    ];
-	  normB = normal[offset + ssboOffset * 3 + 1];
-	  normC = normal[offset + ssboOffset * 3 + 2];
-  } else {
-	  normA = tempnormal[offset + ssboOffset * 3    ];
-	  normB = tempnormal[offset + ssboOffset * 3 + 1];
-	  normC = tempnormal[offset + ssboOffset * 3 + 2];
-  }
-  
-  normalout[outOffset + myOffset * 3]     = normA;
-  normalout[outOffset + myOffset * 3 + 1] = normB;
-  normalout[outOffset + myOffset * 3 + 2] = normC;
 }

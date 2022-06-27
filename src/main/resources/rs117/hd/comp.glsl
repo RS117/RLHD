@@ -58,22 +58,22 @@ void main() {
     }
 
     int prio1, dis1;
-    ivec4 vA1, vA2, vA3;
+    VertexInfo vA1, vA2, vA3;
 
     int prio2, dis2;
-    ivec4 vB1, vB2, vB3;
+    VertexInfo vB1, vB2, vB3;
 
     int prio3, dis3;
-    ivec4 vC1, vC2, vC3;
+    VertexInfo vC1, vC2, vC3;
 
     int prio4, dis4;
-    ivec4 vD1, vD2, vD3;
+    VertexInfo vD1, vD2, vD3;
 
     int prio5, dis5;
-    ivec4 vE1, vE2, vE3;
+    VertexInfo vE1, vE2, vE3;
 
     int prio6, dis6;
-    ivec4 vF1, vF2, vF3;
+    VertexInfo vF1, vF2, vF3;
 
     get_face(localId,     minfo, cameraYaw, cameraPitch, prio1, dis1, vA1, vA2, vA3);
     get_face(localId + 1, minfo, cameraYaw, cameraPitch, prio2, dis2, vB1, vB2, vB3);

@@ -80,7 +80,7 @@ int count_prio_offset(int priority) {
 }
 
 void get_face(uint localId, modelinfo minfo, int cameraYaw, int cameraPitch,
-out int prio, out int dis, out ivec4 o1, out ivec4 o2, out ivec4 o3) {
+out int prio, out int dis, out VertexInfo o1, out VertexInfo o2, out VertexInfo o3) {
     int size = minfo.size;
     int offset = minfo.offset;
     int flags = minfo.flags;
@@ -92,58 +92,50 @@ out int prio, out int dis, out ivec4 o1, out ivec4 o2, out ivec4 o3) {
         ssboOffset = 0;
     }
 
-    ivec4 thisA;
-    ivec4 thisB;
-    ivec4 thisC;
-
     // Grab triangle vertices from the correct buffer
     if (flags < 0) {
-        thisA = vb[offset + ssboOffset * 3];
-        thisB = vb[offset + ssboOffset * 3 + 1];
-        thisC = vb[offset + ssboOffset * 3 + 2];
+        o1 = vb[offset + ssboOffset * 3];
+        o2 = vb[offset + ssboOffset * 3 + 1];
+        o3 = vb[offset + ssboOffset * 3 + 2];
     } else {
-        thisA = tempvb[offset + ssboOffset * 3];
-        thisB = tempvb[offset + ssboOffset * 3 + 1];
-        thisC = tempvb[offset + ssboOffset * 3 + 2];
+        o1 = tempvb[offset + ssboOffset * 3];
+        o2 = tempvb[offset + ssboOffset * 3 + 1];
+        o3 = tempvb[offset + ssboOffset * 3 + 2];
     }
 
     if (localId < size) {
         int radius = (flags & 0x7fffffff) >> 12;
         int orientation = flags & 0x7ff;
+        int thisPriority = (o1.position.w >> 16) & 0xff;// all vertices on the face have the same priority
 
         // rotate for model orientation
-        ivec4 thisrvA = rotate(thisA, orientation);
-        ivec4 thisrvB = rotate(thisB, orientation);
-        ivec4 thisrvC = rotate(thisC, orientation);
+        o1.position.xyz = rotate(o1.position.xyz, orientation);
+        o2.position.xyz = rotate(o2.position.xyz, orientation);
+        o3.position.xyz = rotate(o3.position.xyz, orientation);
 
         // calculate distance to face
-        int thisPriority = (thisA.w >> 16) & 0xff;// all vertices on the face have the same priority
         int thisDistance;
         if (radius == 0) {
             thisDistance = 0;
         } else {
-            thisDistance = face_distance(thisrvA, thisrvB, thisrvC, cameraYaw, cameraPitch) + radius;
+            thisDistance = face_distance(o1.position, o2.position, o3.position, cameraYaw, cameraPitch) + radius;
         }
-
-        o1 = thisrvA;
-        o2 = thisrvB;
-        o3 = thisrvC;
 
         prio = thisPriority;
         dis = thisDistance;
     } else {
-        o1 = ivec4(0);
-        o2 = ivec4(0);
-        o3 = ivec4(0);
+        o1 = VertexInfo(ivec4(0), vec4(0));
+        o2 = VertexInfo(ivec4(0), vec4(0));
+        o3 = VertexInfo(ivec4(0), vec4(0));
         prio = 0;
         dis = 0;
     }
 }
 
-void add_face_prio_distance(uint localId, modelinfo minfo, ivec4 thisrvA, ivec4 thisrvB, ivec4 thisrvC, int thisPriority, int thisDistance, ivec4 pos) {
+void add_face_prio_distance(uint localId, modelinfo minfo, VertexInfo thisrvA, VertexInfo thisrvB, VertexInfo thisrvC, int thisPriority, int thisDistance, ivec4 pos) {
     if (localId < minfo.size) {
         // if the face is not culled, it is calculated into priority distance averages
-        if (face_visible(thisrvA, thisrvB, thisrvC, pos)) {
+        if (face_visible(thisrvA.position, thisrvB.position, thisrvC.position, pos)) {
             atomicAdd(totalNum[thisPriority], 1);
             atomicAdd(totalDistance[thisPriority], thisDistance);
 
@@ -199,7 +191,7 @@ void insert_dfs(uint localId, modelinfo minfo, int adjPrio, int distance, int pr
     }
 }
 
-void sort_and_insert(uint localId, modelinfo minfo, int thisPriority, int thisDistance, ivec4 thisrvA, ivec4 thisrvB, ivec4 thisrvC) {
+void sort_and_insert(uint localId, modelinfo minfo, int thisPriority, int thisDistance, VertexInfo thisrvA, VertexInfo thisrvB, VertexInfo thisrvC) {
     /* compute face distance */
     int offset = minfo.offset;
     int size = minfo.size;
@@ -235,10 +227,17 @@ void sort_and_insert(uint localId, modelinfo minfo, int thisPriority, int thisDi
             }
         }
 
+        thisrvA.position += pos;
+        thisrvB.position += pos;
+        thisrvC.position += pos;
+        thisrvA.normal.xyz = rotate2(normalize(thisrvA.normal.xyz), orientation);
+        thisrvB.normal.xyz = rotate2(normalize(thisrvB.normal.xyz), orientation);
+        thisrvC.normal.xyz = rotate2(normalize(thisrvC.normal.xyz), orientation);
+
         // position vertices in scene and write to out buffer
-        vout[outOffset + myOffset * 3]     = pos + thisrvA;
-        vout[outOffset + myOffset * 3 + 1] = pos + thisrvB;
-        vout[outOffset + myOffset * 3 + 2] = pos + thisrvC;
+        vout[outOffset + myOffset * 3]     = thisrvA;
+        vout[outOffset + myOffset * 3 + 1] = thisrvB;
+        vout[outOffset + myOffset * 3 + 2] = thisrvC;
 
         if (uvOffset < 0) {
             uvout[outOffset + myOffset * 3]     = vec4(0, 0, 0, 0);
@@ -253,34 +252,5 @@ void sort_and_insert(uint localId, modelinfo minfo, int thisPriority, int thisDi
             uvout[outOffset + myOffset * 3 + 1] = uv[uvOffset + localId * 3 + 1];
             uvout[outOffset + myOffset * 3 + 2] = uv[uvOffset + localId * 3 + 2];
         }
-
-        vec4 normA, normB, normC;
-
-        // Grab vertex normals from the correct buffer
-        if (flags < 0) {
-            normA = normal[offset + ssboOffset * 3    ];
-            normB = normal[offset + ssboOffset * 3 + 1];
-            normC = normal[offset + ssboOffset * 3 + 2];
-        } else {
-            normA = tempnormal[offset + ssboOffset * 3    ];
-            normB = tempnormal[offset + ssboOffset * 3 + 1];
-            normC = tempnormal[offset + ssboOffset * 3 + 2];
-        }
-
-        normA = vec4(normalize(normA.xyz), normA.w);
-        normB = vec4(normalize(normB.xyz), normB.w);
-        normC = vec4(normalize(normC.xyz), normC.w);
-
-        vec4 normrvA;
-        vec4 normrvB;
-        vec4 normrvC;
-
-        normrvA = rotate2(normA, orientation);
-        normrvB = rotate2(normB, orientation);
-        normrvC = rotate2(normC, orientation);
-
-        normalout[outOffset + myOffset * 3]     = normrvA;
-        normalout[outOffset + myOffset * 3 + 1] = normrvB;
-        normalout[outOffset + myOffset * 3 + 2] = normrvC;
     }
 }

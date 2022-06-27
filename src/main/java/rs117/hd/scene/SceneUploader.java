@@ -54,8 +54,7 @@ import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.ModelPusher;
 import rs117.hd.model.objects.ObjectType;
 import rs117.hd.utils.HDUtils;
-import rs117.hd.utils.buffer.GpuFloatBuffer;
-import rs117.hd.utils.buffer.GpuIntBuffer;
+import rs117.hd.utils.buffer.GpuBuffer;
 
 @Singleton
 @Slf4j
@@ -78,7 +77,7 @@ class SceneUploader
 	private int offset;
 	private int uvoffset;
 
-	public void upload(Scene scene, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
+	public void upload(Scene scene, GpuBuffer vertexBuffer, GpuBuffer uvBuffer)
 	{
 		Stopwatch stopwatch = Stopwatch.createStarted();
 
@@ -87,7 +86,6 @@ class SceneUploader
 		uvoffset = 0;
 		vertexBuffer.clear();
 		uvBuffer.clear();
-		normalBuffer.clear();
 
 		for (int z = 0; z < Constants.MAX_Z; ++z)
 		{
@@ -98,7 +96,7 @@ class SceneUploader
 					Tile tile = scene.getTiles()[z][x][y];
 					if (tile != null)
 					{
-						upload(tile, vertexBuffer, uvBuffer, normalBuffer);
+						upload(tile, vertexBuffer, uvBuffer);
 					}
 				}
 			}
@@ -108,7 +106,7 @@ class SceneUploader
 		log.debug("Scene upload time: {}", stopwatch);
 	}
 
-	private void uploadModel(Model model, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
+	private void uploadModel(Model model, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int tileZ, int tileX, int tileY, ObjectProperties objectProperties, ObjectType objectType)
 	{
 		if (model.getSceneId() == sceneId)
 		{
@@ -136,18 +134,18 @@ class SceneUploader
 		}
 		model.setSceneId(sceneId);
 
-		final int[] lengths = modelPusher.pushModel(null, model, vertexBuffer, uvBuffer, normalBuffer, tileX, tileY, tileZ, objectProperties, objectType, true, 0);
+		final int[] lengths = modelPusher.pushModel(null, model, vertexBuffer, uvBuffer, tileX, tileY, tileZ, objectProperties, objectType, true, 0);
 
 		offset += lengths[0];
 		uvoffset += lengths[1];
 	}
 
-	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
+	private void upload(Tile tile, GpuBuffer vertexBuffer, GpuBuffer uvBuffer)
 	{
 		Tile bridge = tile.getBridge();
 		if (bridge != null)
 		{
-			upload(bridge, vertexBuffer, uvBuffer, normalBuffer);
+			upload(bridge, vertexBuffer, uvBuffer);
 		}
 
 		final Point tilePoint = tile.getSceneLocation();
@@ -161,7 +159,7 @@ class SceneUploader
 			int[] uploadedTilePaintData = upload(
 				tile, sceneTilePaint,
 				tileZ, tileX, tileY,
-				vertexBuffer, uvBuffer, normalBuffer,
+				vertexBuffer, uvBuffer,
 				0, 0);
 
 			final int bufferLength = uploadedTilePaintData[0];
@@ -184,7 +182,7 @@ class SceneUploader
 			int[] uploadedTileModelData = upload(
 				tile, sceneTileModel,
 				tileZ, tileX, tileY,
-				vertexBuffer, uvBuffer, normalBuffer,
+				vertexBuffer, uvBuffer,
 				0, 0);
 
 			final int bufferLength = uploadedTileModelData[0];
@@ -211,14 +209,14 @@ class SceneUploader
 			if (renderable1 instanceof Model)
 			{
 				Model model = (Model) renderable1;
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.WALL_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.WALL_OBJECT);
 			}
 
 			Renderable renderable2 = wallObject.getRenderable2();
 			if (renderable2 instanceof Model)
 			{
 				Model model = (Model) renderable2;
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.WALL_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.WALL_OBJECT);
 			}
 		}
 
@@ -231,7 +229,7 @@ class SceneUploader
 			if (renderable instanceof Model)
 			{
 				Model model = (Model) renderable;
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.GROUND_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.GROUND_OBJECT);
 			}
 		}
 
@@ -244,14 +242,14 @@ class SceneUploader
 			if (renderable instanceof Model)
 			{
 				Model model = (Model) renderable;
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.DECORATIVE_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.DECORATIVE_OBJECT);
 			}
 
 			Renderable renderable2 = decorativeObject.getRenderable2();
 			if (renderable2 instanceof Model)
 			{
 				Model model = (Model) renderable2;
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.DECORATIVE_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.DECORATIVE_OBJECT);
 			}
 		}
 
@@ -269,12 +267,12 @@ class SceneUploader
 			if (renderable instanceof Model)
 			{
 				Model model = (Model) gameObject.getRenderable();
-				uploadModel(model, vertexBuffer, uvBuffer, normalBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.GAME_OBJECT);
+				uploadModel(model, vertexBuffer, uvBuffer, tileZ, tileX, tileY, objectProperties, ObjectType.GAME_OBJECT);
 			}
 		}
 	}
 
-	int[] upload(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] upload(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
@@ -282,12 +280,12 @@ class SceneUploader
 
 		int[] bufferLengths;
 
-		bufferLengths = uploadHDTilePaintSurface(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
+		bufferLengths = uploadHDTilePaintSurface(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, 0, 0);
 		bufferLength += bufferLengths[0];
 		uvBufferLength += bufferLengths[1];
 		underwaterTerrain += bufferLengths[2];
 
-		bufferLengths = uploadHDTilePaintUnderwater(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, 0, 0);
+		bufferLengths = uploadHDTilePaintUnderwater(tile, sceneTilePaint, tileZ, tileX, tileY, vertexBuffer, uvBuffer, 0, 0);
 		bufferLength += bufferLengths[0];
 		uvBufferLength += bufferLengths[1];
 		underwaterTerrain += bufferLengths[2];
@@ -295,7 +293,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] uploadHDTilePaintSurface(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] uploadHDTilePaintSurface(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 		boolean ignoreTile = false;
 
@@ -493,23 +491,15 @@ class SceneUploader
 			int nwTerrainData = packTerrainData(0, WaterType.NONE, tileZ);
 			int neTerrainData = packTerrainData(0, WaterType.NONE, tileZ);
 
-			normalBuffer.ensureCapacity(24);
-			normalBuffer.put(neNormals[0], neNormals[2], neNormals[1], neTerrainData);
-			normalBuffer.put(nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
-			normalBuffer.put(seNormals[0], seNormals[2], seNormals[1], seTerrainData);
+			vertexBuffer
+				.ensureCapacity(8 * 6)
+				.putVertex(localNeVertexX, neHeight, localNeVertexY, neColor, neNormals[0], neNormals[2], neNormals[1], neTerrainData)
+				.putVertex(localNwVertexX, nwHeight, localNwVertexY, nwColor, nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData)
+				.putVertex(localSeVertexX, seHeight, localSeVertexY, seColor, seNormals[0], seNormals[2], seNormals[1], seTerrainData)
 
-			normalBuffer.put(swNormals[0], swNormals[2], swNormals[1], swTerrainData);
-			normalBuffer.put(seNormals[0], seNormals[2], seNormals[1], seTerrainData);
-			normalBuffer.put(nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
-
-			vertexBuffer.ensureCapacity(24);
-			vertexBuffer.put(localNeVertexX, neHeight, localNeVertexY, neColor);
-			vertexBuffer.put(localNwVertexX, nwHeight, localNwVertexY, nwColor);
-			vertexBuffer.put(localSeVertexX, seHeight, localSeVertexY, seColor);
-
-			vertexBuffer.put(localSwVertexX, swHeight, localSwVertexY, swColor);
-			vertexBuffer.put(localSeVertexX, seHeight, localSeVertexY, seColor);
-			vertexBuffer.put(localNwVertexX, nwHeight, localNwVertexY, nwColor);
+				.putVertex(localSwVertexX, swHeight, localSwVertexY, swColor, swNormals[0], swNormals[2], swNormals[1], swTerrainData)
+				.putVertex(localSeVertexX, seHeight, localSeVertexY, seColor, seNormals[0], seNormals[2], seNormals[1], seTerrainData)
+				.putVertex(localNwVertexX, nwHeight, localNwVertexY, nwColor, nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
 
 			bufferLength += 6;
 
@@ -533,7 +523,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] uploadHDTilePaintUnderwater(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] uploadHDTilePaintUnderwater(Tile tile, SceneTilePaint sceneTilePaint, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 
 		int baseX = client.getBaseX();
@@ -613,23 +603,15 @@ class SceneUploader
 			int nwTerrainData = packTerrainData(nwDepth, waterType, tileZ);
 			int neTerrainData = packTerrainData(neDepth, waterType, tileZ);
 
-			normalBuffer.ensureCapacity(24);
-			normalBuffer.put(neNormals[0], neNormals[2], neNormals[1], neTerrainData);
-			normalBuffer.put(nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
-			normalBuffer.put(seNormals[0], seNormals[2], seNormals[1], seTerrainData);
+			vertexBuffer
+				.ensureCapacity(8 * 6)
+				.putVertex(localNeVertexX, neHeight + neDepth, localNeVertexY, neColor, neNormals[0], neNormals[2], neNormals[1], neTerrainData)
+				.putVertex(localNwVertexX, nwHeight + nwDepth, localNwVertexY, nwColor, nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData)
+				.putVertex(localSeVertexX, seHeight + seDepth, localSeVertexY, seColor, seNormals[0], seNormals[2], seNormals[1], seTerrainData)
 
-			normalBuffer.put(swNormals[0], swNormals[2], swNormals[1], swTerrainData);
-			normalBuffer.put(seNormals[0], seNormals[2], seNormals[1], seTerrainData);
-			normalBuffer.put(nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
-
-			vertexBuffer.ensureCapacity(24);
-			vertexBuffer.put(localNeVertexX, neHeight + neDepth, localNeVertexY, neColor);
-			vertexBuffer.put(localNwVertexX, nwHeight + nwDepth, localNwVertexY, nwColor);
-			vertexBuffer.put(localSeVertexX, seHeight + seDepth, localSeVertexY, seColor);
-
-			vertexBuffer.put(localSwVertexX, swHeight + swDepth, localSwVertexY, swColor);
-			vertexBuffer.put(localSeVertexX, seHeight + seDepth, localSeVertexY, seColor);
-			vertexBuffer.put(localNwVertexX, nwHeight + nwDepth, localNwVertexY, nwColor);
+				.putVertex(localSwVertexX, swHeight + swDepth, localSwVertexY, swColor, swNormals[0], swNormals[2], swNormals[1], swTerrainData)
+				.putVertex(localSeVertexX, seHeight + seDepth, localSeVertexY, seColor, seNormals[0], seNormals[2], seNormals[1], seTerrainData)
+				.putVertex(localNwVertexX, nwHeight + nwDepth, localNwVertexY, nwColor, nwNormals[0], nwNormals[2], nwNormals[1], nwTerrainData);
 
 			bufferLength += 6;
 
@@ -653,7 +635,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] upload(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] upload(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
@@ -661,12 +643,12 @@ class SceneUploader
 
 		int[] bufferLengths;
 
-		bufferLengths = uploadHDTileModelSurface(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
+		bufferLengths = uploadHDTileModelSurface(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, offsetX, offsetY);
 		bufferLength += bufferLengths[0];
 		uvBufferLength += bufferLengths[1];
 		underwaterTerrain += bufferLengths[2];
 
-		bufferLengths = uploadHDTileModelUnderwater(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, normalBuffer, offsetX, offsetY);
+		bufferLengths = uploadHDTileModelUnderwater(tile, sceneTileModel, tileZ, tileX, tileY, vertexBuffer, uvBuffer, offsetX, offsetY);
 		bufferLength += bufferLengths[0];
 		uvBufferLength += bufferLengths[1];
 		underwaterTerrain += bufferLengths[2];
@@ -674,7 +656,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] uploadHDTileModelSurface(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] uploadHDTileModelSurface(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
@@ -855,15 +837,11 @@ class SceneUploader
 			int bTerrainData = packTerrainData(0, WaterType.NONE, tileZ);
 			int cTerrainData = packTerrainData(0, WaterType.NONE, tileZ);
 
-			normalBuffer.ensureCapacity(12);
-			normalBuffer.put(normalsA[0], normalsA[2], normalsA[1], aTerrainData);
-			normalBuffer.put(normalsB[0], normalsB[2], normalsB[1], bTerrainData);
-			normalBuffer.put(normalsC[0], normalsC[2], normalsC[1], cTerrainData);
-
-			vertexBuffer.ensureCapacity(12);
-			vertexBuffer.put(localVertices[0][0] + offsetX, localVertices[0][2], localVertices[0][1] + offsetY, colorA);
-			vertexBuffer.put(localVertices[1][0] + offsetX, localVertices[1][2], localVertices[1][1] + offsetY, colorB);
-			vertexBuffer.put(localVertices[2][0] + offsetX, localVertices[2][2], localVertices[2][1] + offsetY, colorC);
+			vertexBuffer
+				.ensureCapacity(8 * 3)
+				.putVertex(localVertices[0][0] + offsetX, localVertices[0][2], localVertices[0][1] + offsetY, colorA, normalsA[0], normalsA[2], normalsA[1], aTerrainData)
+				.putVertex(localVertices[1][0] + offsetX, localVertices[1][2], localVertices[1][1] + offsetY, colorB, normalsB[0], normalsB[2], normalsB[1], bTerrainData)
+				.putVertex(localVertices[2][0] + offsetX, localVertices[2][2], localVertices[2][1] + offsetY, colorC, normalsC[0], normalsC[2], normalsC[1], cTerrainData);
 
 			bufferLength += 3;
 
@@ -882,7 +860,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	int[] uploadHDTileModelUnderwater(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer, int offsetX, int offsetY)
+	int[] uploadHDTileModelUnderwater(Tile tile, SceneTileModel sceneTileModel, int tileZ, int tileX, int tileY, GpuBuffer vertexBuffer, GpuBuffer uvBuffer, int offsetX, int offsetY)
 	{
 		int bufferLength = 0;
 		int uvBufferLength = 0;
@@ -979,15 +957,11 @@ class SceneUploader
 				int bTerrainData = packTerrainData(depthB, waterType, tileZ);
 				int cTerrainData = packTerrainData(depthC, waterType, tileZ);
 
-				normalBuffer.ensureCapacity(12);
-				normalBuffer.put(normalsA[0], normalsA[2], normalsA[1], aTerrainData);
-				normalBuffer.put(normalsB[0], normalsB[2], normalsB[1], bTerrainData);
-				normalBuffer.put(normalsC[0], normalsC[2], normalsC[1], cTerrainData);
-
-				vertexBuffer.ensureCapacity(12);
-				vertexBuffer.put(localVertices[0][0] + offsetX, localVertices[0][2] + depthA, localVertices[0][1] + offsetY, colorA);
-				vertexBuffer.put(localVertices[1][0] + offsetX, localVertices[1][2] + depthB, localVertices[1][1] + offsetY, colorB);
-				vertexBuffer.put(localVertices[2][0] + offsetX, localVertices[2][2] + depthC, localVertices[2][1] + offsetY, colorC);
+				vertexBuffer
+					.ensureCapacity(8 * 3)
+					.putVertex(localVertices[0][0] + offsetX, localVertices[0][2] + depthA, localVertices[0][1] + offsetY, colorA, normalsA[0], normalsA[2], normalsA[1], aTerrainData)
+					.putVertex(localVertices[1][0] + offsetX, localVertices[1][2] + depthB, localVertices[1][1] + offsetY, colorB, normalsB[0], normalsB[2], normalsB[1], bTerrainData)
+					.putVertex(localVertices[2][0] + offsetX, localVertices[2][2] + depthC, localVertices[2][1] + offsetY, colorC, normalsC[0], normalsC[2], normalsC[1], cTerrainData);
 
 				bufferLength += 3;
 

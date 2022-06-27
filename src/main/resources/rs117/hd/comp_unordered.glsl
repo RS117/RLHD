@@ -47,7 +47,7 @@ void main() {
     }
 
     uint ssboOffset = localId;
-    ivec4 thisA, thisB, thisC;
+    VertexInfo thisA, thisB, thisC;
 
     // Grab triangle vertices from the correct buffer
     if (flags < 0) {
@@ -62,10 +62,14 @@ void main() {
 
     uint myOffset = localId;
 
+    thisA.position += pos;
+    thisB.position += pos;
+    thisC.position += pos;
+
     // position vertices in scene and write to out buffer
-    vout[outOffset + myOffset * 3]     = pos + thisA;
-    vout[outOffset + myOffset * 3 + 1] = pos + thisB;
-    vout[outOffset + myOffset * 3 + 2] = pos + thisC;
+    vout[outOffset + myOffset * 3]     = thisA;
+    vout[outOffset + myOffset * 3 + 1] = thisB;
+    vout[outOffset + myOffset * 3 + 2] = thisC;
 
     if (uvOffset < 0) {
         uvout[outOffset + myOffset * 3]     = vec4(0, 0, 0, 0);
@@ -80,21 +84,4 @@ void main() {
         uvout[outOffset + myOffset * 3 + 1] = uv[uvOffset + localId * 3 + 1];
         uvout[outOffset + myOffset * 3 + 2] = uv[uvOffset + localId * 3 + 2];
     }
-
-    vec4 normA, normB, normC;
-
-    // Grab triangle normals from the correct buffer
-    if (flags < 0) {
-        normA = normal[offset + ssboOffset * 3    ];
-        normB = normal[offset + ssboOffset * 3 + 1];
-        normC = normal[offset + ssboOffset * 3 + 2];
-    } else {
-        normA = tempnormal[offset + ssboOffset * 3    ];
-        normB = tempnormal[offset + ssboOffset * 3 + 1];
-        normC = tempnormal[offset + ssboOffset * 3 + 2];
-    }
-
-    normalout[outOffset + myOffset * 3]     = normA;
-    normalout[outOffset + myOffset * 3 + 1] = normB;
-    normalout[outOffset + myOffset * 3 + 2] = normC;
 }

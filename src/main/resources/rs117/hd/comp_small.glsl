@@ -58,7 +58,7 @@ void main() {
     }
 
     int prio1, dis1;
-    ivec4 vA1, vA2, vA3;
+    VertexInfo vA1, vA2, vA3;
 
     get_face(localId, minfo, cameraYaw, cameraPitch, prio1, dis1, vA1, vA2, vA3);
 
