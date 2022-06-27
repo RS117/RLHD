@@ -909,6 +909,11 @@ public enum Environment
 		.setLightDirection(-113, -120f)
 		.setWaterColor(102, 234, 255)
 	),
+	ELID_CAVE(Area.ELID_CAVE, new Properties()
+			.setWaterColor(102, 234, 255)
+			.setAmbientStrength(1.75f)
+			.setDirectionalStrength(1.0f)
+	),
 
 
 
