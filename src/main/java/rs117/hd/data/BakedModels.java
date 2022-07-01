@@ -956,7 +956,12 @@ public class BakedModels
             NpcID.YOUNGLLEF,
             NpcID.CORRUPTED_YOUNGLLEF,
             NpcID.YOUNGLLEF_8737,
-            NpcID.CORRUPTED_YOUNGLLEF_8738
+            NpcID.CORRUPTED_YOUNGLLEF_8738,
+            NpcID.HILL_GIANT_11467,
+            NpcID.KOVAC,
+            NpcID.KOVAC_11469,
+            NpcID.KOVAC_11470,
+            NpcID.KOVAC_11472
     ));
 
     public static final HashSet<Integer> OBJECTS = new HashSet<>(Arrays.asList(
