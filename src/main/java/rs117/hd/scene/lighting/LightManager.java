@@ -225,6 +225,13 @@ public class LightManager
 
 			if (light.npc != null)
 			{
+
+				// prevent npcs at plane -1 and under from having lights
+				if (light.npc.getWorldLocation().getPlane() <= -1) {
+					lightIterator.remove();
+					continue;
+				}
+
 				if (light.npc != client.getCachedNPCs()[light.npc.getIndex()])
 				{
 					lightIterator.remove();
@@ -639,6 +646,11 @@ public class LightManager
 	{
 		for (Light l : OBJECT_LIGHTS.get(tileObject.getId()))
 		{
+			// prevent objects at plane -1 and under from having lights
+			if (tileObject.getPlane() <= -1) {
+				continue;
+			}
+
 			// prevent duplicate lights being spawned for the same object
 			if (sceneLights.stream().anyMatch(light -> light.object != null && tileObjectHash(light.object) == tileObjectHash(tileObject)))
 			{
