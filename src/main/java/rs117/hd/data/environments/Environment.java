@@ -947,7 +947,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(1.0f)
 		.setLightDirection(260f, 10f)
-		.setWaterColor(185, 214, 255)
+		.setWaterColor(102, 234, 255)
 	),
 
 	;
