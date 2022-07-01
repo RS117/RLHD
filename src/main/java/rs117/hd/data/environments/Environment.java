@@ -936,6 +936,14 @@ public enum Environment
 		.setDirectionalStrength(1.5f)
 	),
 
+	MAGE_ARENA_BANK(Area.MAGE_ARENA_BANK, new Properties()
+			.setFogDepth(40)
+			.setFogColor("#000000")
+			.setAmbientStrength(1.5f)
+			.setDirectionalStrength(1.0f)
+			.setLightDirection(260f, 10f)
+	),
+
 	// overrides 'ALL' to provide default daylight conditions for the overworld area
 	OVERWORLD(Area.OVERWORLD, new Properties()),
 	// used for underground, instances, etc.
