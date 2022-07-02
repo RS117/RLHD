@@ -247,6 +247,8 @@ public enum Overlay
 	TEMPLE_OF_THE_EYE_ENTRANCE(0, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
 	TEMPLE_OF_THE_EYE_ENTRANCE_2(-53, Area.TEMPLE_OF_THE_EYE_ENTRANCE_FIX, GroundMaterial.DIRT, new Properties().setShiftLightness(-10).setBlended(false)),
 
+	// Elid Cave fix
+	ELID_CAVE_WATER_FIX(-126, Area.ELID_CAVE, WaterType.WATER),
 
 
 	// default overlays

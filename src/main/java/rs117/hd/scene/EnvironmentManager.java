@@ -385,8 +385,11 @@ public class EnvironmentManager
 
 	public void updateSkyColor()
 	{
-		Environment env = currentEnvironment;
-		if (!env.getLighting().isCustomAmbientColor() || env.isAllowSkyOverride() && config.overrideSky())
+
+		Environment env = hdPlugin.configWinterTheme ? hdPlugin.getAreaManager().WINTER : currentEnvironment;
+
+		if (env.getLighting().isCustomAmbientColor() && config.overrideSky())
+
 		{
 			DefaultSkyColor sky = config.defaultSkyColor();
 			targetFogColor = sky.getRgb(client);
@@ -399,6 +402,13 @@ public class EnvironmentManager
 		else
 		{
 			targetFogColor = targetWaterColor = ColorUtil.rgb(env.getFog().getFogColor());
+		}
+
+
+		//override with decoupled water/sky color if present
+		if(currentEnvironment.isCustomWaterColor())
+		{
+			targetWaterColor = ColorUtil.rgb(currentEnvironment.getWaterColor());
 		}
 	}
 

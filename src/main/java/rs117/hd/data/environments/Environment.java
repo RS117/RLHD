@@ -901,6 +901,21 @@ public enum Environment
 	CANOE_CUTSCENE(Area.CANOE_CUTSCENE, new Properties()),
 	FISHER_KINGS_REALM(Area.FISHER_KINGS_REALM, new Properties()),
 	ENCHANTED_VALLEY(Area.ENCHANTED_VALLEY, new Properties()),
+	GIANTS_FOUNDRY(Area.GIANTS_FOUNDRY, new Properties()
+		.setFogColor(0, 0, 0)
+		.setFogDepth(12)
+		.setAmbientStrength(1.1f)
+		.setAmbientColor(255, 255, 255)
+		.setDirectionalStrength(1.0f)
+		.setDirectionalColor(255, 193, 153)
+		.setLightDirection(-113, -120f)
+		.setWaterColor(102, 234, 255)
+	),
+	ELID_CAVE(Area.ELID_CAVE, new Properties()
+			.setWaterColor(102, 234, 255)
+			.setAmbientStrength(1.75f)
+			.setDirectionalStrength(1.0f)
+	),
 
 
 
@@ -923,6 +938,14 @@ public enum Environment
 		.setDirectionalStrength(1.5f)
 	),
 
+	MAGE_ARENA_BANK(Area.MAGE_ARENA_BANK, new Properties()
+			.setFogDepth(40)
+			.setFogColor("#000000")
+			.setAmbientStrength(1.5f)
+			.setDirectionalStrength(1.0f)
+			.setLightDirection(260f, 10f)
+	),
+
 	// overrides 'ALL' to provide default daylight conditions for the overworld area
 	OVERWORLD(Area.OVERWORLD, new Properties()),
 	// used for underground, instances, etc.
@@ -934,6 +957,7 @@ public enum Environment
 		.setDirectionalColor("#FFFFFF")
 		.setDirectionalStrength(1.0f)
 		.setLightDirection(260f, 10f)
+		.setWaterColor(102, 234, 255)
 	),
 
 	;
@@ -965,9 +989,13 @@ public enum Environment
 	private final boolean underwater;
 	private final float[] underwaterCausticsColor;
 	private final float underwaterCausticsStrength;
+
 	private String ambientColor1 = "#97BAFF";
 	private String directionalColor1 = "#FFFFFF";
 	private String underglowColor1 = "#000000";
+
+	private final float[] waterColor;
+	private final boolean customWaterColor;
 
 	private static class Properties
 	{
@@ -1003,6 +1031,8 @@ public enum Environment
 		private float[] underwaterCausticsColor = null;
 		private String underwaterCausticsColor1 = "";
 		private float underwaterCausticsStrength = 0;
+		private float[] waterColor = rgb(185, 214, 255);
+		private boolean customWaterColor = false;
 
 		public Properties setFogDepth(int depth)
 		{
@@ -1040,6 +1070,13 @@ public enum Environment
 			this.ambientColor = rgb(r, g, b);
 			this.ambientColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			this.customAmbientColor = true;
+			return this;
+		}
+
+		public Properties setWaterColor(int r, int g, int b)
+		{
+			this.waterColor = rgb(r, g, b);
+			this.customWaterColor = true;
 			return this;
 		}
 
@@ -1192,6 +1229,8 @@ public enum Environment
 			properties.directionalColor : properties.underwaterCausticsColor;
 		this.underwaterCausticsStrength = properties.underwaterCausticsStrength == 0 ?
 			properties.directionalStrength : properties.underwaterCausticsStrength;
+		this.waterColor = properties.waterColor;
+		this.customWaterColor = properties.customWaterColor;
 	}
 
 	public static float[] rgb(int r, int g, int b)
