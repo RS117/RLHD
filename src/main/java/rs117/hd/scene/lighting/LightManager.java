@@ -226,12 +226,6 @@ public class LightManager
 			if (light.npc != null)
 			{
 
-				// prevent npcs at plane -1 and under from having lights
-				if (light.npc.getWorldLocation().getPlane() <= -1) {
-					lightIterator.remove();
-					continue;
-				}
-
 				if (light.npc != client.getCachedNPCs()[light.npc.getIndex()])
 				{
 					lightIterator.remove();
