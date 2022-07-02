@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
 }
 
 repositories {
@@ -10,7 +11,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.24.2'
+def runeLiteVersion = '1.8.25-SNAPSHOT'
 def joglVersion = '2.4.0-rc-20220318'
 
 dependencies {
@@ -27,6 +28,7 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+	compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 group = 'rs117.hd'
@@ -36,3 +38,4 @@ sourceCompatibility = '1.8'
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
+

@@ -36,6 +36,7 @@ import rs117.hd.data.environments.Area;
 import rs117.hd.data.WaterType;
 
 @Getter
+@Deprecated
 public enum Overlay
 {
 	// Tutorial Island
@@ -490,40 +491,4 @@ public enum Overlay
 		this.shiftLightness = 0;
 	}
 
-	private static final ListMultimap<Integer, Overlay> GROUND_MATERIAL_MAP;
-
-	static
-	{
-		GROUND_MATERIAL_MAP = ArrayListMultimap.create();
-		for (Overlay overlay : values())
-		{
-			GROUND_MATERIAL_MAP.put(overlay.id, overlay);
-		}
-	}
-
-	public static Overlay getOverlay(int overlayId, Tile tile, Client client)
-	{
-		WorldPoint worldPoint = tile.getWorldLocation();
-
-		if (client.isInInstancedRegion())
-		{
-			LocalPoint localPoint = tile.getLocalLocation();
-			worldPoint = WorldPoint.fromLocalInstance(client, localPoint);
-		}
-
-		int worldX = worldPoint.getX();
-		int worldY = worldPoint.getY();
-		int worldZ = worldPoint.getPlane();
-
-		List<Overlay> overlays = GROUND_MATERIAL_MAP.get(overlayId);
-		for (Overlay overlay : overlays)
-		{
-			if (overlay.area.containsPoint(worldX, worldY, worldZ))
-			{
-				return overlay;
-			}
-		}
-
-		return Overlay.DEFAULT;
-	}
 }

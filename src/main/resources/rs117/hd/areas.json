@@ -1,0 +1,8568 @@
+[
+  {
+    "rects": [
+      [
+        2495,
+        4805,
+        2559,
+        4747
+      ]
+    ],
+    "description": "EVIL_BOB_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 70,
+        "fogColor": "#B8D6FF"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#C0AE94",
+        "directionalStrength": 1.0,
+        "directionalColor": "#F5BC67"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3136,
+        3097,
+        3144,
+        3076
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_WIZARD_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3114,
+        3111,
+        3129,
+        3102
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_CHURCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3113,
+        3131,
+        3130,
+        3117
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3067,
+        9534,
+        3120,
+        9491
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_UNDERGROUND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3079,
+        3126,
+        3090,
+        3118
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_QUEST_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 13,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 26,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3072,
+        3092,
+        3079,
+        3080
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_KITCHEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 9,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 11,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3086,
+        3113,
+        3098,
+        3099
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_START_BUILDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3084,
+        3048,
+        3124,
+        3006
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_THE_NODE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3052,
+        3137,
+        3155,
+        3057
+      ],
+      [
+        3084,
+        3048,
+        3124,
+        3006
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1600,
+        6207,
+        1792,
+        6015
+      ]
+    ],
+    "description": "TUTORIAL_ISLAND_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2566,
+        4642,
+        2589,
+        4618
+      ]
+    ],
+    "description": "RFD_QUIZ",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 0,
+        "fogColor": "#000000"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3240,
+        3226,
+        3250,
+        3225
+      ]
+    ],
+    "description": "LUM_BRIDGE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3206,
+        9628,
+        3220,
+        9614
+      ]
+    ],
+    "description": "LUMBRIDGE_CASTLE_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": 56,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3213,
+        3225,
+        3216,
+        3212
+      ]
+    ],
+    "description": "LUMBRIDGE_CASTLE_ENTRYWAY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3205,
+        3226,
+        3212,
+        3218
+      ]
+    ],
+    "description": "LUMBRIDGE_CASTLE_DINING_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3137,
+        9661,
+        3192,
+        9602
+      ]
+    ],
+    "description": "HAM_HIDEOUT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3204,
+        3230,
+        3216,
+        3207
+      ]
+    ],
+    "description": "LUMBRIDGE_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "shiftLightness": 10
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3136,
+        3327,
+        3254,
+        3137
+      ],
+      [
+        3254,
+        3200,
+        3263,
+        3189
+      ],
+      [
+        3247,
+        3327,
+        3266,
+        3200
+      ],
+      [
+        3264,
+        3330,
+        3271,
+        3322
+      ]
+    ],
+    "description": "LUMBRIDGE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 1,
+        "shiftLightness": 12
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3400,
+        4847,
+        3448,
+        4807
+      ]
+    ],
+    "description": "CLAN_WARS_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        1992,
+        4914,
+        2044,
+        4867
+      ],
+      [
+        1922,
+        4861,
+        1981,
+        4801
+      ],
+      [
+        1990,
+        4861,
+        2038,
+        4804
+      ],
+      [
+        1862,
+        4856,
+        1909,
+        4802
+      ],
+      [
+        1793,
+        4792,
+        1853,
+        4738
+      ]
+    ],
+    "description": "FISHING_TRAWLER_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        1988,
+        5052,
+        2010,
+        5027
+      ],
+      [
+        1999,
+        5022,
+        2021,
+        5002
+      ],
+      [
+        2014,
+        5052,
+        2042,
+        5027
+      ],
+      [
+        2047,
+        5049,
+        2055,
+        5040
+      ],
+      [
+        2056,
+        5044,
+        2068,
+        5026
+      ],
+      [
+        2078,
+        5049,
+        2105,
+        5031
+      ],
+      [
+        2078,
+        5025,
+        2101,
+        5001
+      ],
+      [
+        2052,
+        5017,
+        2065,
+        4999
+      ],
+      [
+        2123,
+        5034,
+        2163,
+        4995
+      ],
+      [
+        2181,
+        5053,
+        2202,
+        5027
+      ],
+      [
+        2207,
+        5051,
+        2233,
+        5027
+      ],
+      [
+        2192,
+        5022,
+        2213,
+        5002
+      ],
+      [
+        2256,
+        5022,
+        2276,
+        5002
+      ],
+      [
+        2243,
+        5053,
+        2265,
+        5027
+      ],
+      [
+        2270,
+        5053,
+        2297,
+        5027
+      ],
+      [
+        2307,
+        5053,
+        2330,
+        5026
+      ],
+      [
+        2334,
+        5053,
+        2362,
+        5026
+      ],
+      [
+        2320,
+        5023,
+        2342,
+        5001
+      ],
+      [
+        2373,
+        5053,
+        2396,
+        5025
+      ],
+      [
+        2385,
+        5023,
+        2407,
+        5000
+      ],
+      [
+        2401,
+        5053,
+        2428,
+        5025
+      ],
+      [
+        2441,
+        5046,
+        2471,
+        5017
+      ]
+    ],
+    "description": "TEMPLE_TREAKING",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2687,
+        5376,
+        2752,
+        5247
+      ],
+      [
+        2751,
+        5440,
+        2816,
+        5311
+      ],
+      [
+        2815,
+        5504,
+        2880,
+        5375
+      ]
+    ],
+    "description": "DORGESHKAAN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 1.5,
+        "directionalColor": "#A29B71",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1729,
+        4990,
+        1790,
+        4929
+      ],
+      [
+        1601,
+        4990,
+        1663,
+        4929
+      ]
+    ],
+    "description": "VARROCK_MUSEUM_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#131B26"
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#B59B79",
+        "directionalStrength": 0.5,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": 56,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3253,
+        3455,
+        3267,
+        3442
+      ]
+    ],
+    "description": "VARROCK_MUSEUM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 56,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3200,
+        3500,
+        3226,
+        3458
+      ]
+    ],
+    "description": "VARROCK_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -83,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -84,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3161,
+        3450,
+        3171,
+        3444
+      ]
+    ],
+    "description": "VARROCK_JULIETS_HOUSE_FLOWER_BED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 81,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3149,
+        3441,
+        3164,
+        3427
+      ]
+    ],
+    "description": "VARROCK_JULIETS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -85,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -93,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -96,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 8,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3272,
+        3510,
+        3288,
+        3486
+      ]
+    ],
+    "description": "VARROCK_JOLLY_BOAR_INN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -84,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3249,
+        3488,
+        3259,
+        3471
+      ]
+    ],
+    "description": "VARROCK_CHURCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -83,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3185,
+        3427,
+        3190,
+        3420
+      ]
+    ],
+    "description": "VARROCK_ANVILS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 81,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3185,
+        3427,
+        3194,
+        3416
+      ],
+      [
+        3193,
+        3416,
+        3197,
+        3410
+      ],
+      [
+        3254,
+        3411,
+        3263,
+        3406
+      ]
+    ],
+    "description": "VARROCK_BUILDING_RUINS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 81,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3250,
+        3423,
+        3257,
+        3416
+      ]
+    ],
+    "description": "VARROCK_EAST_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -83,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3136,
+        3518,
+        3290,
+        3397
+      ],
+      [
+        3177,
+        3410,
+        3291,
+        3371
+      ]
+    ],
+    "description": "VARROCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 81,
+        "groundMaterial": "TILE_SMALL",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 89,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3008,
+        5247,
+        3039,
+        5216
+      ],
+      [
+        2963,
+        5228,
+        2995,
+        5198
+      ],
+      [
+        3264,
+        9855,
+        3298,
+        9823
+      ]
+    ],
+    "description": "TOLNA_DUNGEON_ANGER",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#290000"
+      },
+      "lighting": {
+        "ambientStrength": 1.3,
+        "ambientColor": "#AE7D46",
+        "directionalStrength": 1.8,
+        "directionalColor": "#CB4848",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3040,
+        5247,
+        3071,
+        5216
+      ],
+      [
+        3072,
+        5215,
+        3103,
+        5184
+      ],
+      [
+        3008,
+        5215,
+        3039,
+        5184
+      ],
+      [
+        3264,
+        9822,
+        3296,
+        9792
+      ],
+      [
+        3299,
+        9855,
+        3327,
+        9823
+      ]
+    ],
+    "description": "TOLNA_DUNGEON_FEAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#000B0F"
+      },
+      "lighting": {
+        "ambientStrength": 1.3,
+        "ambientColor": "#77A0FF",
+        "directionalStrength": 1.5,
+        "directionalColor": "#4C78B6",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3040,
+        5215,
+        3071,
+        5184
+      ],
+      [
+        3297,
+        9822,
+        3327,
+        9792
+      ]
+    ],
+    "description": "TOLNA_DUNGEON_CONFUSION",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#2E0C23"
+      },
+      "lighting": {
+        "ambientStrength": 1.3,
+        "ambientColor": "#77A0FF",
+        "directionalStrength": 1.5,
+        "directionalColor": "#4E9DD0",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3348,
+        3460,
+        3404,
+        3444
+      ]
+    ],
+    "description": "DIGSITE_DOCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 93,
+        "groundMaterial": "TILES_2x2_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3091,
+        3363,
+        3096,
+        3353
+      ],
+      [
+        3097,
+        3374,
+        3119,
+        3353
+      ],
+      [
+        3120,
+        3360,
+        3126,
+        3353
+      ]
+    ],
+    "description": "DRAYNOR_MANOR_INTERIOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 10,
+        "groundMaterial": "MARBLE_2",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 11,
+        "groundMaterial": "TILE_SMALL",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 119,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 127,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3083,
+        3386,
+        3129,
+        3329
+      ]
+    ],
+    "description": "DRAYNOR_MANOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "lightningEnabled": true,
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#0F0E0D"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#615C57",
+        "directionalStrength": 2.0,
+        "directionalColor": "#FFBCB7"
+      }
+    },
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 127,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3073,
+        9780,
+        3082,
+        9766
+      ]
+    ],
+    "description": "DRAYNOR_MANOR_BASEMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientColor": "#7891B5",
+        "directionalStrength": 0.0,
+        "directionalColor": "#4C78B6",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3071,
+        3292,
+        3133,
+        3226
+      ]
+    ],
+    "description": "DRAYNOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 86,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2112,
+        4930,
+        2166,
+        4893
+      ]
+    ],
+    "description": "DRAYNOR_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        1600,
+        4863,
+        1727,
+        4779
+      ]
+    ],
+    "description": "MISTHALIN_MYSTERY_MANOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "lightningEnabled": true,
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#0F0E0D"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#615C57",
+        "directionalStrength": 2.0,
+        "directionalColor": "#FFBCB7"
+      }
+    },
+    "overlays": [
+      {
+        "id": 11,
+        "groundMaterial": "MARBLE_2",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 10,
+        "groundMaterial": "MARBLE_2",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 127,
+        "groundMaterial": "MARBLE_1",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 119,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2941,
+        3389,
+        2946,
+        3376
+      ],
+      [
+        2946,
+        3382,
+        2949,
+        3376
+      ]
+    ],
+    "description": "FALADOR_HAIRDRESSER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 77,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 123,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3034,
+        3387,
+        3057,
+        3369
+      ]
+    ],
+    "description": "FALADOR_PARTY_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 33,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 123,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2932,
+        3401,
+        3068,
+        3306
+      ]
+    ],
+    "description": "FALADOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -119,
+        "groundMaterial": "FALADOR_PATHS",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 1,
+        "shiftLightness": 7
+      },
+      {
+        "id": 123,
+        "groundMaterial": "TILES_2x2_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 33,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 77,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 13,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3456,
+        4783,
+        3528,
+        4734
+      ]
+    ],
+    "description": "FALADOR_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3713,
+        5696,
+        3776,
+        5633
+      ],
+      [
+        3827,
+        5692,
+        3868,
+        5652
+      ]
+    ],
+    "description": "MOTHERLODE_MINE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#241809"
+      },
+      "lighting": {
+        "ambientStrength": 4.0,
+        "ambientColor": "#AAAFB6",
+        "directionalStrength": 1.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3087,
+        3502,
+        3099,
+        3501
+      ],
+      [
+        3079,
+        3503,
+        3085,
+        3502
+      ],
+      [
+        3105,
+        3508,
+        3113,
+        3507
+      ],
+      [
+        3112,
+        3515,
+        3119,
+        3514
+      ],
+      [
+        3120,
+        3517,
+        3129,
+        3516
+      ],
+      [
+        3119,
+        3516,
+        3120,
+        3515
+      ],
+      [
+        3107,
+        3508,
+        3108,
+        3502
+      ],
+      [
+        3079,
+        3502,
+        3080,
+        3501
+      ],
+      [
+        3079,
+        3506,
+        3080,
+        3504
+      ],
+      [
+        3099,
+        3501,
+        3100,
+        3496
+      ],
+      [
+        3103,
+        3499,
+        3104,
+        3498
+      ],
+      [
+        3102,
+        3500,
+        3103,
+        3499
+      ],
+      [
+        3101,
+        3501,
+        3102,
+        3500
+      ],
+      [
+        3084,
+        3502,
+        3088,
+        3501
+      ],
+      [
+        3113,
+        3514,
+        3114,
+        3509
+      ],
+      [
+        3112,
+        3509,
+        3114,
+        3508
+      ],
+      [
+        3101,
+        3510,
+        3103,
+        3509
+      ],
+      [
+        3103,
+        3509,
+        3104,
+        3508
+      ],
+      [
+        3104,
+        3507,
+        3105,
+        3506
+      ],
+      [
+        3103,
+        3506,
+        3104,
+        3505
+      ],
+      [
+        3102,
+        3505,
+        3103,
+        3504
+      ],
+      [
+        3101,
+        3504,
+        3102,
+        3503
+      ],
+      [
+        3100,
+        3503,
+        3101,
+        3502
+      ]
+    ],
+    "description": "EDGEVILLE_PATH_OVERLAY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 48,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      },
+      {
+        "id": 50,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      },
+      {
+        "id": 64,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blendedAsUnderlay": true,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 8
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3090,
+        3499,
+        3098,
+        3488
+      ]
+    ],
+    "description": "EDGEVILLE_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3087,
+        3502,
+        3098,
+        3483
+      ]
+    ],
+    "description": "EDGEVILLE_BANK_SURROUNDING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3077,
+        3496,
+        3081,
+        3489
+      ]
+    ],
+    "description": "EDGEVILLE_DORIS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 119,
+        "groundMaterial": "TILE_SMALL",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3041,
+        3509,
+        3062,
+        3471
+      ]
+    ],
+    "description": "EDGEVILLE_MONASTERY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2719,
+        3497,
+        2730,
+        3487
+      ]
+    ],
+    "description": "SEERS_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 8,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2789,
+        3530,
+        2879,
+        3488
+      ],
+      [
+        2832,
+        3502,
+        2879,
+        3439
+      ]
+    ],
+    "description": "WHITE_WOLF_MOUNTAIN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2431,
+        5439,
+        2496,
+        5374
+      ]
+    ],
+    "description": "WHITE_WOLF_MOUNTAIN_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2747,
+        3415,
+        2782,
+        3389
+      ]
+    ],
+    "description": "KEEP_LE_FAYE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1670,
+        4280,
+        1721,
+        4230
+      ]
+    ],
+    "description": "KEEP_LE_FAYE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2843,
+        3423,
+        2845,
+        3421
+      ]
+    ],
+    "description": "CATHERBY_BEACH_OBELISK_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 6,
+        "groundMaterial": "WATER_FLAT",
+        "waterType": "WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2842,
+        3424,
+        2842,
+        3424
+      ]
+    ],
+    "description": "CATHERBY_BEACH_LADDER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 11,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2869,
+        3416,
+        2870,
+        3414
+      ],
+      [
+        2864,
+        3423,
+        2865,
+        3420
+      ],
+      [
+        2851,
+        3426,
+        2863,
+        3423
+      ],
+      [
+        2848,
+        3428,
+        2848,
+        3427
+      ],
+      [
+        2847,
+        3429,
+        2847,
+        3429
+      ],
+      [
+        2843,
+        3430,
+        2845,
+        3430
+      ]
+    ],
+    "description": "CATHERBY_BEACH_SHORELINE_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2806,
+        3445,
+        2812,
+        3438
+      ]
+    ],
+    "description": "CATHERBY_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2788,
+        3435,
+        2864,
+        3407
+      ],
+      [
+        2788,
+        3447,
+        2855,
+        3435
+      ],
+      [
+        2788,
+        3474,
+        2839,
+        3447
+      ]
+    ],
+    "description": "CATHERBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 62,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2905,
+        3265,
+        2995,
+        3195
+      ],
+      [
+        2945,
+        3195,
+        2989,
+        3186
+      ]
+    ],
+    "description": "RIMMINGTON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3005,
+        3265,
+        3064,
+        3174
+      ]
+    ],
+    "description": "PORT_SARIM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2977,
+        3132,
+        3008,
+        3102
+      ]
+    ],
+    "description": "MUDSKIPPER_POINT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3011,
+        3322,
+        3069,
+        3279
+      ]
+    ],
+    "description": "SOUTH_FALADOR_FARM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2910,
+        3296,
+        2945,
+        3265
+      ]
+    ],
+    "description": "CRAFTING_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2900,
+        3308,
+        3069,
+        3195
+      ],
+      [
+        2971,
+        3195,
+        3060,
+        3100
+      ],
+      [
+        2924,
+        3202,
+        2980,
+        3185
+      ]
+    ],
+    "description": "SOUTH_FALADOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2892,
+        3514,
+        2898,
+        3507
+      ],
+      [
+        2894,
+        3517,
+        2896,
+        3504
+      ],
+      [
+        2899,
+        3512,
+        2901,
+        3509
+      ]
+    ],
+    "description": "HEROES_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2837,
+        3557,
+        2877,
+        3533
+      ]
+    ],
+    "description": "WARRIORS_GUILD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 87,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 11,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 86,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 55,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2837,
+        3557,
+        2877,
+        3533,
+        1
+      ]
+    ],
+    "description": "WARRIORS_GUILD_FLOOR_2",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 11,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2830,
+        3576,
+        2938,
+        3533
+      ],
+      [
+        2880,
+        3581,
+        2938,
+        3576
+      ],
+      [
+        2838,
+        3553,
+        2928,
+        3538
+      ],
+      [
+        2873,
+        3533,
+        2935,
+        3521
+      ]
+    ],
+    "description": "BURTHORPE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2194,
+        4973,
+        2221,
+        4946
+      ]
+    ],
+    "description": "GAMES_ROOM_INNER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 64,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2179,
+        4990,
+        2239,
+        4929
+      ]
+    ],
+    "description": "GAMES_ROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#B59B79",
+        "directionalStrength": 1.0,
+        "directionalColor": "#A29794",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": 22,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 64,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2460,
+        3335,
+        2558,
+        3279
+      ],
+      [
+        2510,
+        3279,
+        2558,
+        3264
+      ],
+      [
+        2429,
+        3323,
+        2466,
+        3305
+      ]
+    ],
+    "description": "WEST_ARDOUGNE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2558,
+        3342,
+        2686,
+        3257
+      ]
+    ],
+    "description": "EAST_ARDOUGNE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "shiftLightness": 6
+      },
+      {
+        "id": 38,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 40,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3328,
+        5951,
+        3392,
+        5887
+      ]
+    ],
+    "description": "EAST_ARDOUGNE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2565,
+        3313,
+        2592,
+        3279
+      ]
+    ],
+    "description": "EAST_ARDOUGNE_CASTLE_DIRT_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 14,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false,
+        "shiftLightness": 7
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2585,
+        3314,
+        2593,
+        3298
+      ]
+    ],
+    "description": "EAST_ARDOUGNE_CASTLE_PATH_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 10,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE",
+        "blended": false,
+        "shiftLightness": 16
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2609,
+        3097,
+        2616,
+        3088
+      ]
+    ],
+    "description": "YANILLE_BANK",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2531,
+        3127,
+        2622,
+        3070
+      ]
+    ],
+    "description": "YANILLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 16,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2880,
+        4735,
+        2944,
+        4671
+      ]
+    ],
+    "description": "YANILLE_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2560,
+        9475,
+        2626,
+        9408
+      ]
+    ],
+    "description": "GUTANOTH_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": 29,
+        "groundMaterial": "SWAMP_WATER_FLAT",
+        "waterType": "SWAMP_WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2241,
+        4722,
+        2303,
+        4676
+      ]
+    ],
+    "description": "NIGHTMARE_ZONE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "ambientColor": "#F2B979",
+        "directionalStrength": 1.0,
+        "directionalColor": "#97DDFF",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2434,
+        3104,
+        2448,
+        3080
+      ]
+    ],
+    "description": "CASTLE_WARS_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 14,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false,
+        "saturation": 0,
+        "shiftLightness": 4
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2373,
+        3086,
+        2435,
+        3068
+      ],
+      [
+        2435,
+        3091,
+        3282,
+        3086
+      ],
+      [
+        2388,
+        3093,
+        2435,
+        3091
+      ],
+      [
+        2404,
+        3095,
+        2435,
+        3093
+      ],
+      [
+        2407,
+        3098,
+        2435,
+        3095
+      ],
+      [
+        2409,
+        3117,
+        2435,
+        3098
+      ],
+      [
+        2414,
+        3123,
+        2435,
+        3117
+      ],
+      [
+        2420,
+        3127,
+        2430,
+        3123
+      ],
+      [
+        2400,
+        3104,
+        2411,
+        3092
+      ],
+      [
+        2400,
+        3113,
+        2411,
+        3103
+      ]
+    ],
+    "description": "CASTLE_WARS_ARENA_SARADOMIN_SIDE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 15,
+        "groundMaterial": "FALADOR_PATHS",
+        "waterType": "NONE",
+        "blended": false,
+        "hue": 9,
+        "saturation": 1,
+        "shiftLightness": 18
+      }
+    ],
+    "underlays": [
+      {
+        "id": 98,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 4
+      },
+      {
+        "id": 56,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 7,
+        "saturation": 4,
+        "shiftLightness": 3
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2364,
+        3139,
+        2423,
+        3125
+      ],
+      [
+        2364,
+        3125,
+        2417,
+        3120
+      ],
+      [
+        2364,
+        3120,
+        2412,
+        3114
+      ],
+      [
+        2364,
+        3114,
+        2400,
+        3104
+      ],
+      [
+        2364,
+        3105,
+        2399,
+        3093
+      ],
+      [
+        2354,
+        3093,
+        2384,
+        3087
+      ],
+      [
+        2364,
+        3087,
+        2374,
+        3082
+      ]
+    ],
+    "description": "CASTLE_WARS_ARENA_ZAMORAK_SIDE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2364,
+        3139,
+        2435,
+        3068
+      ]
+    ],
+    "description": "CASTLE_WARS_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2361,
+        9544,
+        2444,
+        9473
+      ]
+    ],
+    "description": "CASTLE_WARS_UNDERGROUND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#AAAFB6",
+        "directionalStrength": 1.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2364,
+        3139,
+        2435,
+        3068
+      ],
+      [
+        2434,
+        3104,
+        2448,
+        3080
+      ]
+    ],
+    "description": "CASTLE_WARS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 26,
+        "groundMaterial": "FALADOR_PATHS",
+        "waterType": "NONE",
+        "blended": false,
+        "saturation": 1,
+        "shiftLightness": 5
+      },
+      {
+        "id": 15,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false,
+        "saturation": 1,
+        "shiftLightness": 5
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3455,
+        6205,
+        3647,
+        6015
+      ],
+      [
+        3520,
+        6015,
+        3648,
+        5886
+      ]
+    ],
+    "description": "LMS_ARENA_WILD_VARROCK",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#695B6B",
+        "groundFogStart": 0,
+        "groundFogEnd": -250,
+        "groundFogOpacity": 0.3
+      },
+      "lighting": {
+        "ambientStrength": 0.6,
+        "ambientColor": "#D7D2D2",
+        "directionalStrength": 2.5,
+        "directionalColor": "#C5B8B6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3391,
+        5951,
+        3520,
+        5759
+      ]
+    ],
+    "description": "LMS_ARENA_DESERTED_ISLAND",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3198,
+        9409,
+        3329,
+        9341
+      ]
+    ],
+    "description": "SMOKE_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 80,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientColor": "#ABABAB",
+        "directionalStrength": 1.0,
+        "directionalColor": "#565656",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3326,
+        3290,
+        3407,
+        3199
+      ]
+    ],
+    "description": "DUEL_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3294,
+        3135,
+        3311,
+        3114
+      ]
+    ],
+    "description": "SHANTAY_PASS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3347,
+        3327,
+        3374,
+        3288
+      ]
+    ],
+    "description": "MAGE_TRAINING_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -122,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 56,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3265,
+        3173,
+        3272,
+        3161
+      ],
+      [
+        3270,
+        3194,
+        3279,
+        3179
+      ],
+      [
+        3285,
+        3192,
+        3290,
+        3187
+      ],
+      [
+        3289,
+        3206,
+        3296,
+        3202
+      ],
+      [
+        3297,
+        3194,
+        3306,
+        3185
+      ],
+      [
+        3319,
+        3197,
+        3323,
+        3191
+      ],
+      [
+        3312,
+        3186,
+        3318,
+        3173
+      ],
+      [
+        3313,
+        3165,
+        3318,
+        3160
+      ],
+      [
+        3282,
+        3177,
+        3303,
+        3159
+      ]
+    ],
+    "description": "AL_KHARID_BUILDINGS",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 26,
+        "groundMaterial": "TILES_2x2_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false,
+        "shiftSaturation": -1,
+        "shiftLightness": 7
+      },
+      {
+        "id": 1,
+        "groundMaterial": "TILES_2x2_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3276,
+        3265,
+        3337,
+        3195
+      ],
+      [
+        3259,
+        3201,
+        3345,
+        3135
+      ],
+      [
+        3253,
+        3182,
+        3265,
+        3155
+      ]
+    ],
+    "description": "AL_KHARID",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3344,
+        3200,
+        3384,
+        3129
+      ],
+      [
+        3384,
+        3203,
+        3391,
+        3141
+      ],
+      [
+        3391,
+        3203,
+        3412,
+        3164
+      ],
+      [
+        3412,
+        3197,
+        3426,
+        3170
+      ]
+    ],
+    "description": "EAST_AL_KHARID",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3270,
+        3322,
+        3337,
+        3258
+      ]
+    ],
+    "description": "AL_KHARID_MINE",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3272,
+        3042,
+        3306,
+        3011
+      ]
+    ],
+    "description": "DESERT_MINING_CAMP",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3198,
+        2989,
+        3322,
+        2817
+      ],
+      [
+        3315,
+        2928,
+        3469,
+        2812
+      ]
+    ],
+    "description": "KHARIDIAN_DESERT_DEEP",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 70,
+        "fogColor": "#CDAF7A"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#C0AE94",
+        "directionalStrength": 1.0,
+        "directionalColor": "#F5BC67"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3135,
+        3051,
+        3524,
+        2885
+      ]
+    ],
+    "description": "KHARIDIAN_DESERT_MID",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#C8B085"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#C0AE94",
+        "directionalStrength": 1.0,
+        "directionalColor": "#F5BC67"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3196,
+        3134,
+        3526,
+        2997
+      ],
+      [
+        3134,
+        3069,
+        3565,
+        2600
+      ],
+      [
+        3114,
+        2974,
+        3216,
+        2786
+      ]
+    ],
+    "description": "KHARIDIAN_DESERT",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 25,
+        "fogColor": "#C7B79B"
+      },
+      "lighting": {
+        "ambientStrength": 2.5,
+        "ambientColor": "#A6AFC2",
+        "directionalStrength": 2.5,
+        "directionalColor": "#EDCFA3"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3008,
+        4734,
+        3072,
+        4671
+      ]
+    ],
+    "description": "KHARIDIAN_DESERT_INSTANCE",
+    "theme": "HOT",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3268,
+        3326,
+        3345,
+        3178
+      ],
+      [
+        3255,
+        3188,
+        3433,
+        3119
+      ],
+      [
+        3319,
+        3288,
+        3411,
+        3196
+      ],
+      [
+        3338,
+        3202,
+        3432,
+        3122
+      ],
+      [
+        3376,
+        3321,
+        3401,
+        3200
+      ],
+      [
+        3382,
+        3263,
+        3421,
+        3191
+      ],
+      [
+        3200,
+        3134,
+        3533,
+        3044
+      ],
+      [
+        3399,
+        3164,
+        3484,
+        3129
+      ],
+      [
+        3399,
+        3179,
+        3450,
+        3129
+      ],
+      [
+        3169,
+        3072,
+        3527,
+        3023
+      ],
+      [
+        3142,
+        3063,
+        3527,
+        2842
+      ],
+      [
+        3127,
+        3021,
+        3538,
+        2590
+      ]
+    ],
+    "description": "KHARID_DESERT_REGION",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 26,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 2,
+        "shiftLightness": 5
+      },
+      {
+        "id": 76,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3,
+        "shiftLightness": -10
+      },
+      {
+        "id": 25,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      }
+    ],
+    "underlays": [
+      {
+        "id": 61,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 62,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 67,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 68,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": -127,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 126,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 49,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 58,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 63,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 64,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      },
+      {
+        "id": 50,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3198,
+        9339,
+        3267,
+        9275
+      ],
+      [
+        2755,
+        4982,
+        2812,
+        4934
+      ],
+      [
+        2825,
+        4976,
+        2873,
+        4938
+      ],
+      [
+        2894,
+        4972,
+        2933,
+        4941
+      ]
+    ],
+    "description": "DESERT_TREASURE_PYRAMID",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#271704"
+      },
+      "lighting": {
+        "ambientColor": "#C09F6E",
+        "directionalStrength": 0.25,
+        "directionalColor": "#8A9EB6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1922,
+        4470,
+        1945,
+        4447
+      ],
+      [
+        1955,
+        4441,
+        1980,
+        4417
+      ],
+      [
+        1955,
+        4471,
+        1980,
+        4445
+      ],
+      [
+        1922,
+        4440,
+        1946,
+        4416
+      ],
+      [
+        1919,
+        4481,
+        1988,
+        4414
+      ]
+    ],
+    "description": "PYRAMID_PLUNDER",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientColor": "#B59B79",
+        "directionalStrength": 0.75,
+        "directionalColor": "#8A9EB6",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2380,
+        6000,
+        2420,
+        5958
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#0D1012"
+      },
+      "lighting": {
+        "ambientStrength": 0.7,
+        "ambientColor": "#C4D5EA",
+        "directionalStrength": 1.0,
+        "directionalColor": "#A0BBE2",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2220,
+        6032,
+        2325,
+        5938
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_1",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#111C1A"
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "ambientColor": "#9BBBB1",
+        "directionalStrength": 1.8,
+        "directionalColor": "#75E7FF",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2475,
+        6032,
+        2580,
+        5938
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_2",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#111C1B"
+      },
+      "lighting": {
+        "ambientStrength": 0.875,
+        "ambientColor": "#A0BFBF",
+        "directionalStrength": 1.5,
+        "directionalColor": "#74D6F7",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2350,
+        5906,
+        2455,
+        5800
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_3",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#121C1D"
+      },
+      "lighting": {
+        "ambientStrength": 0.85,
+        "ambientColor": "#A5C3CD",
+        "directionalStrength": 1.5,
+        "directionalColor": "#73C4F0",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2475,
+        5906,
+        2580,
+        5800
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_4",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#121B1F"
+      },
+      "lighting": {
+        "ambientStrength": 0.825,
+        "ambientColor": "#AAC7DC",
+        "directionalStrength": 1.5,
+        "directionalColor": "#72B2E9",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2220,
+        5906,
+        2325,
+        5800
+      ]
+    ],
+    "description": "HALLOWED_SEPULCHRE_FLOOR_5",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#131B21"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#AFCAEA",
+        "directionalStrength": 1.5,
+        "directionalColor": "#71A0E2",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3682,
+        3257,
+        3682,
+        3257
+      ],
+      [
+        3681,
+        3256,
+        3681,
+        3256
+      ],
+      [
+        3678,
+        3263,
+        3684,
+        3259
+      ],
+      [
+        3683,
+        3258,
+        3683,
+        3258
+      ]
+    ],
+    "description": "VER_SINHAZA_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 54,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3641,
+        3236,
+        3684,
+        3202
+      ]
+    ],
+    "description": "VER_SINHAZA",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#1E314B",
+        "groundFogStart": -150,
+        "groundFogEnd": -350,
+        "groundFogOpacity": 0.5
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#5A8CC0",
+        "directionalStrength": 5.0,
+        "directionalColor": "#67A8F8"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3583,
+        3331,
+        3648,
+        3169
+      ]
+    ],
+    "description": "MEIYERDITCH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3520,
+        3388,
+        3594,
+        3328
+      ]
+    ],
+    "description": "CASTLE_DRAKAN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3590,
+        3399,
+        3636,
+        3330
+      ],
+      [
+        3636,
+        3392,
+        3662,
+        3330
+      ],
+      [
+        3662,
+        3384,
+        3669,
+        3335
+      ]
+    ],
+    "description": "DARKMEYER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#1E314B",
+        "groundFogStart": -150,
+        "groundFogEnd": -350,
+        "groundFogOpacity": 0.5
+      },
+      "lighting": {
+        "ambientColor": "#8AABD5",
+        "directionalColor": "#62A3FF"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3649,
+        3508,
+        3688,
+        3456
+      ],
+      [
+        3688,
+        3484,
+        3710,
+        3456
+      ],
+      [
+        3670,
+        3514,
+        3684,
+        3503
+      ]
+    ],
+    "description": "PORT_PHASMATYS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3527,
+        3576,
+        3564,
+        3533
+      ]
+    ],
+    "description": "FENKENSTRAINS_CASTLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3405,
+        3579,
+        3452,
+        3531
+      ]
+    ],
+    "description": "MORYTANIA_SLAYER_TOWER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 102,
+        "groundMaterial": "VARROCK_PATHS_LIGHT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3456,
+        3520,
+        3520,
+        3456
+      ]
+    ],
+    "description": "CANIFIS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3456,
+        3328,
+        3520,
+        3264
+      ]
+    ],
+    "description": "MORTTON",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3524,
+        9726,
+        3586,
+        9669,
+        3
+      ]
+    ],
+    "description": "BARROWS_CRYPTS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 3.5,
+        "ambientColor": "#B58F7C",
+        "directionalStrength": 0.0,
+        "directionalColor": "#FFC875",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3522,
+        9728,
+        3581,
+        9666
+      ]
+    ],
+    "description": "BARROWS_TUNNELS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#B58F7C",
+        "directionalStrength": 0.5,
+        "directionalColor": "#FFC875",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3520,
+        3328,
+        3584,
+        3264
+      ]
+    ],
+    "description": "BARROWS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "lightningEnabled": true,
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#242D3A",
+        "groundFogStart": -300,
+        "groundFogOpacity": 0.5
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#5B83B3",
+        "directionalStrength": 8.0,
+        "directionalColor": "#526E8B"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3468,
+        3258,
+        3583,
+        3164
+      ]
+    ],
+    "description": "BURGH_DE_ROTT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3423,
+        3261,
+        3461,
+        3201
+      ]
+    ],
+    "description": "ABANDONED_MINE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3422,
+        3467,
+        3782,
+        3202
+      ],
+      [
+        3426,
+        3603,
+        3775,
+        3467
+      ],
+      [
+        3399,
+        3603,
+        3426,
+        3511
+      ],
+      [
+        3410,
+        3524,
+        3457,
+        3500
+      ],
+      [
+        3416,
+        3500,
+        3457,
+        3495
+      ],
+      [
+        3420,
+        3495,
+        3451,
+        3481
+      ],
+      [
+        3424,
+        3481,
+        3451,
+        3435
+      ],
+      [
+        3403,
+        3462,
+        3424,
+        3435
+      ],
+      [
+        3399,
+        3442,
+        3422,
+        3321
+      ],
+      [
+        3414,
+        3327,
+        3435,
+        3255
+      ],
+      [
+        3469,
+        3209,
+        3726,
+        3161
+      ],
+      [
+        1670,
+        4600,
+        1724,
+        4546
+      ]
+    ],
+    "description": "MORYTANIA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#1E314B",
+        "groundFogStart": -150,
+        "groundFogEnd": -350,
+        "groundFogOpacity": 0.5
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#5A8CC0",
+        "directionalStrength": 2.0,
+        "directionalColor": "#F8BF68"
+      }
+    },
+    "overlays": [
+      {
+        "id": 11,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2064,
+        4903,
+        2087,
+        4880
+      ]
+    ],
+    "description": "SINHAZA_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2257,
+        5363,
+        2292,
+        5319
+      ],
+      [
+        2466,
+        5053,
+        2523,
+        4994
+      ]
+    ],
+    "description": "THE_INFERNO",
+    "theme": "HOT",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#170B07"
+      },
+      "lighting": {
+        "ambientStrength": 1.7,
+        "ambientColor": "#F0B8B8",
+        "directionalStrength": 0.7,
+        "directionalColor": "#FFF6CA",
+        "underglowStrength": 2.0,
+        "underglowColor": "#FF0000",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "underlays": [
+      {
+        "id": -118,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -115,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 1,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 61,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 118,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 122,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2367,
+        5184,
+        2559,
+        4993
+      ]
+    ],
+    "description": "TZHAAR",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 15,
+        "fogColor": "#1A0808"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#FFEACC",
+        "directionalStrength": 1.8,
+        "directionalColor": "#FFA400",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "underlays": [
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT_SHINY",
+        "waterType": "NONE",
+        "shiftLightness": 2
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2368,
+        3525,
+        2496,
+        3387
+      ],
+      [
+        2404,
+        3547,
+        2431,
+        3511
+      ],
+      [
+        2484,
+        3406,
+        2507,
+        3387
+      ]
+    ],
+    "description": "TREE_GNOME_STRONGHOLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1920,
+        5631,
+        2048,
+        5502
+      ]
+    ],
+    "description": "TREE_GNOME_STRONGHOLD_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3139,
+        10238,
+        3271,
+        10052
+      ]
+    ],
+    "description": "REVENANT_CAVES",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#081F1C"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#AECFC9",
+        "directionalStrength": 1.0,
+        "directionalColor": "#AECFC9",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3970,
+        2988,
+        3904
+      ],
+      [
+        2988,
+        3940,
+        3002,
+        3907
+      ],
+      [
+        2939,
+        3909,
+        2980,
+        3865
+      ],
+      [
+        2939,
+        3865,
+        2958,
+        3834
+      ]
+    ],
+    "description": "FROZEN_WASTE_PLATEAU",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 80,
+        "fogColor": "#252C37"
+      },
+      "lighting": {
+        "ambientStrength": 0.4,
+        "ambientColor": "#3B87E4",
+        "directionalStrength": 2.5,
+        "directionalColor": "#8A9EB6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3974,
+        3391,
+        3903
+      ]
+    ],
+    "description": "WILDERNESS_HIGH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "lightningEnabled": true,
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#464449",
+        "groundFogStart": 0,
+        "groundFogEnd": -250,
+        "groundFogOpacity": 0.3
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#D7D2D2",
+        "directionalStrength": 2.0,
+        "directionalColor": "#C5B8B6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3903,
+        3391,
+        3806
+      ]
+    ],
+    "description": "WILDERNESS_MID_HIGH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3806,
+        3391,
+        3730
+      ]
+    ],
+    "description": "WILDERNESS_MID",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3730,
+        3391,
+        3558
+      ]
+    ],
+    "description": "WILDERNESS_MID_LOW",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3558,
+        3391,
+        3522
+      ]
+    ],
+    "description": "WILDERNESS_LOW",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#A9A2B0"
+      },
+      "lighting": {
+        "ambientStrength": 0.6,
+        "ambientColor": "#D7D2D2",
+        "directionalStrength": 2.5,
+        "directionalColor": "#8A9EB6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2939,
+        3974,
+        3391,
+        3522
+      ]
+    ],
+    "description": "WILDERNESS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#695B6B",
+        "groundFogStart": 0,
+        "groundFogEnd": -250,
+        "groundFogOpacity": 0.3
+      },
+      "lighting": {
+        "ambientStrength": 0.6,
+        "ambientColor": "#D7D2D2",
+        "directionalStrength": 2.5,
+        "directionalColor": "#C5B8B6"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2748,
+        3980,
+        2942,
+        3711
+      ],
+      [
+        2696,
+        3839,
+        2741,
+        3799
+      ],
+      [
+        2714,
+        3803,
+        2757,
+        3767
+      ],
+      [
+        2723,
+        3743,
+        2758,
+        3710
+      ]
+    ],
+    "description": "GIELINOR_SNOWY_NORTHERN_REGION",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 70,
+        "fogColor": "#AEBDE0"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#6FB0FF",
+        "directionalStrength": 2.5,
+        "directionalColor": "#F4E5C9"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2754,
+        3707,
+        2789,
+        3675
+      ],
+      [
+        2789,
+        3708,
+        2802,
+        3682
+      ]
+    ],
+    "description": "MOUNTAIN_CAMP_LAKE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2766,
+        3673,
+        2780,
+        3655
+      ]
+    ],
+    "description": "MOUNTAIN_CAMP_ENTRY_PATH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#B2BBC5",
+        "groundFogStart": -600,
+        "groundFogEnd": -900,
+        "groundFogOpacity": 0.4
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "directionalStrength": 1.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2750,
+        3711,
+        2815,
+        3671
+      ],
+      [
+        2779,
+        3671,
+        2815,
+        3652
+      ]
+    ],
+    "description": "MOUNTAIN_CAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#B2BBC5",
+        "groundFogStart": -1200,
+        "groundFogEnd": -1600,
+        "groundFogOpacity": 0.5
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "directionalStrength": 1.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2594,
+        3747,
+        2692,
+        3646
+      ]
+    ],
+    "description": "RELLEKKA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2574,
+        3750,
+        2800,
+        3585
+      ],
+      [
+        2800,
+        3717,
+        2822,
+        3642
+      ],
+      [
+        2686,
+        3811,
+        2751,
+        3724
+      ]
+    ],
+    "description": "FREMENNIK_PROVINCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#969CA2",
+        "groundFogEnd": -400,
+        "groundFogOpacity": 0.3
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "ambientColor": "#96A3CB",
+        "directionalStrength": 2.0,
+        "directionalColor": "#ABC2D3"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2187,
+        3424,
+        2229,
+        3397
+      ]
+    ],
+    "description": "GWENITH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3136,
+        6207,
+        3391,
+        5952
+      ]
+    ],
+    "description": "PRIFDDINAS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 15,
+        "fogColor": "#99D8C8"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2119,
+        3453,
+        22112,
+        3384
+      ]
+    ],
+    "description": "MYNYDD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2313,
+        3194,
+        2363,
+        3147
+      ]
+    ],
+    "description": "LLETYA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2166,
+        3119,
+        2315,
+        3025
+      ],
+      [
+        2181,
+        3131,
+        2280,
+        3117
+      ]
+    ],
+    "description": "POISON_WASTE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#32372F"
+      },
+      "lighting": {
+        "ambientColor": "#C0DBAD",
+        "directionalStrength": 2.0,
+        "directionalColor": "#ADB08B"
+      }
+    },
+    "overlays": [
+      {
+        "id": 85,
+        "groundMaterial": "POISON_WASTE",
+        "waterType": "POISON_WASTE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2309,
+        3337,
+        2394,
+        3234
+      ]
+    ],
+    "description": "ARANDAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2752,
+        6207,
+        2879,
+        6080
+      ]
+    ],
+    "description": "SOTE_GRAND_LIBRARY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogColor": "#124053"
+      },
+      "lighting": {
+        "ambientStrength": 0.3,
+        "directionalStrength": 1.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2881,
+        6206,
+        2937,
+        6152
+      ]
+    ],
+    "description": "SOTE_LLETYA_ON_FIRE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#5B8B78"
+      },
+      "lighting": {
+        "ambientStrength": 0.9,
+        "directionalStrength": 0.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2730,
+        6160,
+        2820,
+        6080
+      ]
+    ],
+    "description": "SOTE_LLETYA_SMALL_FIRES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#5B8B78"
+      },
+      "lighting": {
+        "directionalStrength": 0.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3219,
+        5933,
+        3237,
+        5913
+      ]
+    ],
+    "description": "SOTE_TEMPLE_OF_LIGHT_SEREN_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3264,
+        5951,
+        3328,
+        5887
+      ]
+    ],
+    "description": "SOTE_FRAGMENT_OF_SEREN_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogColor": "#000000"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2116,
+        3455,
+        2320,
+        3021
+      ],
+      [
+        2295,
+        3202,
+        2365,
+        3140
+      ]
+    ],
+    "description": "TIRANNWN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 15,
+        "fogColor": "#99D8C8"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2688,
+        6207,
+        2944,
+        6015
+      ]
+    ],
+    "description": "TIRANNWN_INSTANCE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2315,
+        4485,
+        2500,
+        4345
+      ]
+    ],
+    "description": "ZANARIS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#163F47"
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#73B5C3",
+        "directionalStrength": 1.3,
+        "directionalColor": "#F5D67A",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2816,
+        5375,
+        2971,
+        5216
+      ],
+      [
+        2848,
+        5199,
+        2948,
+        5153
+      ],
+      [
+        2848,
+        5246,
+        2948,
+        5185
+      ],
+      [
+        3008,
+        10178,
+        3072,
+        10112
+      ]
+    ],
+    "description": "GOD_WARS_DUNGEON",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#0E3B59"
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#68ACFF",
+        "directionalStrength": 1.8,
+        "directionalColor": "#92D1FA",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": 104,
+        "groundMaterial": "ICE_FLAT",
+        "waterType": "ICE_FLAT",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 58,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 59,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2079,
+        3014,
+        2348,
+        2763
+      ]
+    ],
+    "description": "ISLE_OF_SOULS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2113,
+        2946,
+        2302,
+        2878
+      ]
+    ],
+    "description": "SOUL_WARS_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2272,
+        2946,
+        2302,
+        2910
+      ],
+      [
+        2268,
+        2910,
+        2297,
+        2884
+      ],
+      [
+        2240,
+        2938,
+        2273,
+        2891
+      ],
+      [
+        2240,
+        2938,
+        2260,
+        2882
+      ]
+    ],
+    "description": "SOUL_WARS_RED_BASE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogColor": "#1C150D"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2116,
+        2941,
+        2145,
+        2881
+      ],
+      [
+        2145,
+        2941,
+        2177,
+        2889
+      ]
+    ],
+    "description": "SOUL_WARS_BLUE_BASE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1855,
+        6078,
+        2175,
+        5823
+      ]
+    ],
+    "description": "ISLE_OF_SOULS_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        1921,
+        6018,
+        2110,
+        5950
+      ]
+    ],
+    "description": "SOUL_WARS_ARENA_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2080,
+        6018,
+        2110,
+        5982
+      ],
+      [
+        2076,
+        5982,
+        2105,
+        5956
+      ],
+      [
+        2048,
+        6010,
+        2081,
+        5963
+      ],
+      [
+        2048,
+        6010,
+        2068,
+        5954
+      ]
+    ],
+    "description": "SOUL_WARS_RED_BASE_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogColor": "#1C150D"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1924,
+        6013,
+        1953,
+        5953
+      ],
+      [
+        1953,
+        6013,
+        1985,
+        5961
+      ]
+    ],
+    "description": "SOUL_WARS_BLUE_BASE_TUTORIAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1178,
+        10273,
+        1195,
+        10260
+      ],
+      [
+        1296,
+        10277,
+        1333,
+        10255
+      ],
+      [
+        1371,
+        10233,
+        1392,
+        10214
+      ],
+      [
+        1112,
+        10295,
+        1384,
+        10124
+      ],
+      [
+        1247,
+        10172,
+        1278,
+        10146
+      ]
+    ],
+    "description": "KARUULM_SLAYER_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#051E22"
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#A4D2E5",
+        "directionalStrength": 0.75,
+        "directionalColor": "#9AEAFF",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1245,
+        3860,
+        1358,
+        3765
+      ]
+    ],
+    "description": "MOUNT_KARUULM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "lighting": {
+        "directionalStrength": 3.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1280,
+        10109,
+        1341,
+        10047
+      ]
+    ],
+    "description": "LIZARDMAN_TEMPLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": -100,
+        "groundMaterial": "SWAMP_WATER_FLAT",
+        "waterType": "SWAMP_WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1580,
+        3534,
+        1596,
+        3526
+      ]
+    ],
+    "description": "XERICS_LOOKOUT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 50,
+        "groundMaterial": "TILES_2x2_2",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 2,
+        "groundMaterial": "TILES_2x2_2",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1539,
+        3627,
+        1548,
+        3618
+      ]
+    ],
+    "description": "SHAYZIEN_COMBAT_RING",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 30,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 37,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 72,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 73,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1467,
+        3678,
+        1540,
+        3607
+      ],
+      [
+        1540,
+        3650,
+        1559,
+        3613
+      ]
+    ],
+    "description": "SHAYZIEN_ENCAMPMENT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1577,
+        3604,
+        1594,
+        3587
+      ]
+    ],
+    "description": "SHAYZIEN_SHAYZIA_RUIN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1472,
+        3583,
+        1515,
+        3541
+      ]
+    ],
+    "description": "SHAYZIEN_GRAVEYARD_OF_HEROES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1467,
+        3678,
+        1540,
+        3607
+      ],
+      [
+        1540,
+        3650,
+        1559,
+        3613
+      ],
+      [
+        1477,
+        3616,
+        1525,
+        3584
+      ],
+      [
+        1460,
+        3599,
+        1574,
+        3537
+      ],
+      [
+        1535,
+        3537,
+        1574,
+        3523
+      ],
+      [
+        1567,
+        3606,
+        1595,
+        3584
+      ]
+    ],
+    "description": "SHAYZIEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -117,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1720,
+        3641,
+        1802,
+        3560
+      ]
+    ],
+    "description": "HOSIDIUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 123,
+        "groundMaterial": "FALADOR_PATHS",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1600,
+        10111,
+        1732,
+        9977
+      ]
+    ],
+    "description": "KOUREND_CATACOMBS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#0E0022"
+      },
+      "lighting": {
+        "ambientStrength": 3.5,
+        "ambientColor": "#8B7DDB",
+        "directionalStrength": 1.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1703,
+        3844,
+        1739,
+        3815
+      ],
+      [
+        1739,
+        3839,
+        1751,
+        3817
+      ],
+      [
+        1751,
+        3833,
+        1791,
+        3815
+      ]
+    ],
+    "description": "BLOOD_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#4F1325"
+      },
+      "lighting": {
+        "ambientColor": "#BE48AE",
+        "directionalStrength": 2.5,
+        "directionalColor": "#4EEEFF"
+      }
+    },
+    "overlays": [
+      {
+        "id": 72,
+        "groundMaterial": "BLOOD_FLAT",
+        "waterType": "BLOOD",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1660,
+        3904,
+        1747,
+        3864
+      ]
+    ],
+    "description": "DARK_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1572,
+        3838,
+        1597,
+        3799
+      ],
+      [
+        1566,
+        3832,
+        1586,
+        3805
+      ],
+      [
+        1562,
+        3823,
+        1570,
+        3811
+      ],
+      [
+        1588,
+        3838,
+        1608,
+        3778
+      ],
+      [
+        1598,
+        3854,
+        1730,
+        3731
+      ],
+      [
+        1623,
+        3731,
+        1730,
+        3710
+      ],
+      [
+        1616,
+        3874,
+        1658,
+        3842
+      ],
+      [
+        1625,
+        3898,
+        1856,
+        3817
+      ]
+    ],
+    "description": "ARCEUUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#13184F"
+      },
+      "lighting": {
+        "ambientColor": "#6369FF",
+        "directionalStrength": 3.5,
+        "directionalColor": "#4EEEFF"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1493,
+        4061,
+        1870,
+        3905
+      ],
+      [
+        1518,
+        3908,
+        1608,
+        3875
+      ],
+      [
+        1532,
+        3875,
+        1595,
+        3859
+      ],
+      [
+        1532,
+        3859,
+        1582,
+        3847
+      ],
+      [
+        1591,
+        3910,
+        1633,
+        3895
+      ]
+    ],
+    "description": "ZEAH_SNOWY_NORTHERN_REGION",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 70,
+        "fogColor": "#AEBDE0"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#6FB0FF",
+        "directionalStrength": 2.5,
+        "directionalColor": "#F4E5C9"
+      }
+    },
+    "overlays": [
+      {
+        "id": 68,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1416,
+        3899,
+        1521,
+        3835
+      ],
+      [
+        1420,
+        3840,
+        1560,
+        3787
+      ],
+      [
+        1434,
+        3787,
+        1586,
+        3755
+      ],
+      [
+        1448,
+        3767,
+        1595,
+        3737
+      ],
+      [
+        1460,
+        3737,
+        1598,
+        3719
+      ]
+    ],
+    "description": "LOVAKENGJ",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#150A05"
+      },
+      "lighting": {
+        "ambientColor": "#FFD785",
+        "directionalColor": "#7D8DB3"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1194,
+        3594,
+        1292,
+        3520
+      ],
+      [
+        1287,
+        3596,
+        1300,
+        3556
+      ],
+      [
+        1300,
+        3596,
+        1308,
+        3580
+      ],
+      [
+        1230,
+        3611,
+        1269,
+        3588
+      ]
+    ],
+    "description": "MOUNT_QUIDAMORTEM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -93,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1167,
+        3664,
+        1345,
+        3582
+      ],
+      [
+        1292,
+        3588,
+        1355,
+        3526
+      ],
+      [
+        1275,
+        3692,
+        1329,
+        3631
+      ]
+    ],
+    "description": "KEBOS_LOWLANDS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#292C10"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#FFD785",
+        "directionalStrength": 1.0,
+        "directionalColor": "#CFE5B5"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1643,
+        3631,
+        1649,
+        3622
+      ]
+    ],
+    "description": "MESS_HALL_KITCHEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 30,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 99,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1152,
+        4078,
+        1938,
+        3270
+      ]
+    ],
+    "description": "ZEAH",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3632,
+        3800,
+        3712,
+        3694
+      ],
+      [
+        3631,
+        3809,
+        3697,
+        3782
+      ]
+    ],
+    "description": "TAR_SWAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#2A3124"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#F8E0AC",
+        "directionalStrength": 1.25,
+        "directionalColor": "#A8AB90"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3626,
+        3908,
+        3851,
+        3693
+      ]
+    ],
+    "description": "FOSSIL_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 95,
+        "groundMaterial": "SWAMP_WATER_FLAT",
+        "waterType": "SWAMP_WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2821,
+        9663,
+        2875,
+        9541
+      ]
+    ],
+    "description": "KARAMJA_VOLCANO_DUNGEON",
+    "theme": "HOT",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#190D02"
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#7891B5",
+        "directionalStrength": 1.0,
+        "directionalColor": "#4C78B6",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2686,
+        3257,
+        2809,
+        3124
+      ],
+      [
+        2809,
+        3209,
+        2917,
+        3124
+      ],
+      [
+        2917,
+        3184,
+        2964,
+        3132
+      ],
+      [
+        2746,
+        3151,
+        2973,
+        2873
+      ],
+      [
+        2973,
+        3081,
+        3012,
+        2873
+      ]
+    ],
+    "description": "KARAMJA",
+    "theme": "HOT",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2496,
+        4606,
+        2642,
+        4542
+      ]
+    ],
+    "description": "KARAMJA_INSTANCE",
+    "theme": "HOT",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2048,
+        4863,
+        2111,
+        4800
+      ]
+    ],
+    "description": "COSMIC_ENTITYS_PLANE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#DB6FFF",
+        "directionalStrength": 3.0,
+        "directionalColor": "#57FF00",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": 37,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false,
+        "lightness": 0
+      }
+    ],
+    "underlays": [
+      {
+        "id": 72,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false,
+        "lightness": 0
+      },
+      {
+        "id": 2,
+        "groundMaterial": "NONE",
+        "waterType": "NONE",
+        "blended": false,
+        "lightness": 0
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2624,
+        2688,
+        2688,
+        2624
+      ]
+    ],
+    "description": "VOID_KNIGHTS_OUTPOST",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2624,
+        2624,
+        2688,
+        2560
+      ]
+    ],
+    "description": "PEST_CONTROL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2880,
+        2752,
+        2944,
+        2688
+      ]
+    ],
+    "description": "CRASH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2798,
+        3396,
+        2873,
+        3326
+      ],
+      [
+        2873,
+        3344,
+        2882,
+        3326
+      ]
+    ],
+    "description": "ENTRANA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2810,
+        3314,
+        2869,
+        3221
+      ]
+    ],
+    "description": "CRANDOR",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 11,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": -110,
+        "groundMaterial": "SAND",
+        "waterType": "NONE",
+        "hue": 6,
+        "saturation": 3
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2756,
+        3295,
+        2799,
+        3268
+      ]
+    ],
+    "description": "FISHING_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3643,
+        3075,
+        3858,
+        2923
+      ]
+    ],
+    "description": "MOS_LE_HARMLESS",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2112,
+        5182,
+        2176,
+        5041
+      ],
+      [
+        2176,
+        5182,
+        2240,
+        5118
+      ]
+    ],
+    "description": "BRAINDEATH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3776,
+        2880,
+        3840,
+        2816
+      ]
+    ],
+    "description": "HARMONY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        3776,
+        3584,
+        3840,
+        3520
+      ]
+    ],
+    "description": "DRAGONTOOTH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2622,
+        4091,
+        2686,
+        3974
+      ]
+    ],
+    "description": "ICEBERG",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2432,
+        4032,
+        2496,
+        3968
+      ]
+    ],
+    "description": "ISLAND_OF_STONE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2485,
+        3923,
+        2629,
+        3080
+      ]
+    ],
+    "description": "MISCELLANIA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2496,
+        3776,
+        2560,
+        3712
+      ]
+    ],
+    "description": "WATERBIRTH_ISLAND",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2304,
+        3840,
+        2368,
+        3776
+      ]
+    ],
+    "description": "NEITIZNOT",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2368,
+        3840,
+        2432,
+        3776
+      ]
+    ],
+    "description": "JATIZSO",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2299,
+        3907,
+        2436,
+        3769
+      ]
+    ],
+    "description": "FREMENNIK_ISLES",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2240,
+        4096,
+        2304,
+        4032
+      ]
+    ],
+    "description": "UNGAEL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#E2E6ED"
+      },
+      "lighting": {
+        "ambientStrength": 0.6,
+        "ambientColor": "#EAE2CD",
+        "directionalStrength": 1.5,
+        "directionalColor": "#82ACE0"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2176,
+        3840,
+        2240,
+        3776
+      ]
+    ],
+    "description": "PIRATES_COVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1728,
+        5120,
+        1792,
+        5055
+      ],
+      [
+        1800,
+        5109,
+        1850,
+        5066
+      ]
+    ],
+    "description": "LUNAR_DIPLOMACY_DREAM_WORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#77A0FF",
+        "directionalStrength": 0.7,
+        "directionalColor": "#CAB6CD",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2050,
+        3965,
+        2174,
+        3841
+      ]
+    ],
+    "description": "LUNAR_ISLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2056,
+        5442,
+        2109,
+        5375
+      ]
+    ],
+    "description": "MM2_AIRSHIP_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2685,
+        2819,
+        2819,
+        2684
+      ]
+    ],
+    "description": "APE_ATOLL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2669,
+        3183,
+        2673,
+        3166
+      ]
+    ],
+    "description": "FISHING_TRAWLER_BOAT_PORT_KHAZARD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 42,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2012,
+        4826,
+        2021,
+        4824
+      ]
+    ],
+    "description": "FISHING_TRAWLER_BOAT_FLOODED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 6,
+        "groundMaterial": "WATER_FLAT",
+        "waterType": "WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1792,
+        4863,
+        1855,
+        4734
+      ],
+      [
+        1855,
+        4893,
+        1920,
+        4798
+      ],
+      [
+        1920,
+        4863,
+        1990,
+        4798
+      ],
+      [
+        1990,
+        4917,
+        2047,
+        4798
+      ]
+    ],
+    "description": "FISHING_TRAWLER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1832,
+        4878,
+        1934,
+        4776
+      ]
+    ],
+    "description": "MOGRE_CAMP_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "caustics": {
+        "underwater": true
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2944,
+        9535,
+        3007,
+        9472
+      ]
+    ],
+    "description": "MOGRE_CAMP",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 60,
+        "fogColor": "#133156",
+        "groundFogStart": 0,
+        "groundFogOpacity": 0.5
+      },
+      "caustics": {
+        "underwater": true
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#255590",
+        "directionalStrength": 5.0,
+        "directionalColor": "#71A3D0"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3779,
+        9278,
+        3839,
+        9216,
+        1
+      ]
+    ],
+    "description": "HARMONY_ISLAND_UNDERWATER_TUNNEL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 80,
+        "fogColor": "#133156",
+        "groundFogStart": -800,
+        "groundFogEnd": -1100,
+        "groundFogOpacity": 0.5
+      },
+      "caustics": {
+        "underwater": true
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#255590",
+        "directionalStrength": 2.5,
+        "directionalColor": "#71A3D0",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3721,
+        10304,
+        3838,
+        10243
+      ]
+    ],
+    "description": "FOSSIL_ISLAND_UNDERWATER_AREA",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 60,
+        "fogColor": "#133156",
+        "groundFogStart": -400,
+        "groundFogEnd": -750,
+        "groundFogOpacity": 0.5
+      },
+      "caustics": {
+        "underwater": true
+      },
+      "lighting": {
+        "ambientStrength": 0.5,
+        "ambientColor": "#255590",
+        "directionalStrength": 5.0,
+        "directionalColor": "#71A3D0",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2112,
+        4863,
+        2176,
+        4799
+      ]
+    ],
+    "description": "COSMIC_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 0.2,
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 3.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2176,
+        4863,
+        2240,
+        4799
+      ]
+    ],
+    "description": "DEATH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2240,
+        4863,
+        2304,
+        4799
+      ]
+    ],
+    "description": "CHAOS_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2304,
+        4863,
+        2368,
+        4799
+      ]
+    ],
+    "description": "WRATH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2368,
+        4863,
+        2427,
+        4799
+      ]
+    ],
+    "description": "NATURE_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2427,
+        4863,
+        2495,
+        4799
+      ]
+    ],
+    "description": "LAW_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2495,
+        4863,
+        2553,
+        4799
+      ]
+    ],
+    "description": "BODY_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2553,
+        4863,
+        2624,
+        4799
+      ]
+    ],
+    "description": "FIRE_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2624,
+        4863,
+        2688,
+        4799
+      ]
+    ],
+    "description": "EARTH_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2688,
+        4863,
+        2752,
+        4799
+      ]
+    ],
+    "description": "WATER_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2752,
+        4863,
+        2816,
+        4799
+      ]
+    ],
+    "description": "MIND_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": 3,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 4,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 10,
+        "groundMaterial": "MARBLE_2_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ],
+    "underlays": [
+      {
+        "id": 55,
+        "groundMaterial": "MARBLE_1_SEMIGLOSS",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2816,
+        4863,
+        2880,
+        4799
+      ]
+    ],
+    "description": "AIR_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3200,
+        4862,
+        3262,
+        4800
+      ]
+    ],
+    "description": "TRUE_BLOOD_ALTAR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 25,
+        "fogColor": "#000000"
+      }
+    },
+    "overlays": [
+      {
+        "id": 72,
+        "groundMaterial": "BLOOD_FLAT",
+        "waterType": "BLOOD",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1528,
+        5125,
+        1606,
+        5052
+      ],
+      [
+        3535,
+        10490,
+        3570,
+        10440
+      ]
+    ],
+    "description": "LITHKREN_DUNGEON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3519,
+        4032,
+        3602,
+        3967
+      ]
+    ],
+    "description": "LITHKREN",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1800,
+        5277,
+        1814,
+        5250
+      ]
+    ],
+    "description": "DS2_FLASHBACK_PLATFORM",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 1.2,
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 0.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1648,
+        5582,
+        1750,
+        5480
+      ],
+      [
+        8166,
+        16400,
+        8206,
+        16360
+      ]
+    ],
+    "description": "DS2_FLEET_ATTACKED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#FFD3C7"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#68ACFF",
+        "directionalColor": "#FF8700"
+      }
+    },
+    "overlays": [
+      {
+        "id": 6,
+        "groundMaterial": "WATER_FLAT",
+        "waterType": "WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1600,
+        5758,
+        1727,
+        5503
+      ]
+    ],
+    "description": "DS2_SHIPS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#FFD3C7"
+      },
+      "lighting": {
+        "ambientStrength": 0.8,
+        "ambientColor": "#68ACFF",
+        "directionalColor": "#FF8700"
+      }
+    },
+    "overlays": [
+      {
+        "id": 6,
+        "groundMaterial": "WATER_FLAT",
+        "waterType": "WATER_FLAT",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1856,
+        5695,
+        1919,
+        5632
+      ]
+    ],
+    "description": "THE_GAUNTLET",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#090606"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#D2C0B7",
+        "directionalStrength": 3.0,
+        "directionalColor": "#78FFE3",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1920,
+        5695,
+        1983,
+        5632
+      ]
+    ],
+    "description": "THE_GAUNTLET_CORRUPTED",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#090606"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#95B6F7",
+        "directionalStrength": 3.0,
+        "directionalColor": "#FF7878",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3025,
+        6131,
+        3040,
+        6116
+      ]
+    ],
+    "description": "THE_GAUNTLET_LOBBY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#090606"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#D2C0B7",
+        "directionalStrength": 3.0,
+        "directionalColor": "#78FFE3",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1984,
+        5767,
+        2047,
+        5696
+      ]
+    ],
+    "description": "PLAYER_OWNED_HOUSE_SNOWY",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 50,
+        "fogColor": "#AEBDE0"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#6FB0FF",
+        "directionalStrength": 2.5,
+        "directionalColor": "#F4E5C9"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1856,
+        5767,
+        2047,
+        5696
+      ]
+    ],
+    "description": "PLAYER_OWNED_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 26,
+        "groundMaterial": "TILES_2x2_2",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 99,
+        "groundMaterial": "TILES_2x2_2",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1616,
+        4735,
+        1623,
+        4728
+      ]
+    ],
+    "description": "BLACKHOLE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 1.2,
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 0.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2897,
+        5848,
+        3036,
+        5760
+      ]
+    ],
+    "description": "CAMDOZAAL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#080012"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#C9B9F7",
+        "directionalStrength": 0.0,
+        "directionalColor": "#6DC5FF",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": -75,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3005,
+        3011,
+        3066,
+        2941
+      ]
+    ],
+    "description": "TEMPOROSS_COVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "lightningEnabled": true,
+      "fog": {
+        "fogDepth": 60,
+        "fogColor": "#45474B"
+      },
+      "lighting": {
+        "ambientStrength": 2.0,
+        "ambientColor": "#A5ACBD",
+        "directionalStrength": 1.0,
+        "directionalColor": "#707070"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3550,
+        9525,
+        3660,
+        9450
+      ]
+    ],
+    "description": "TEMPLE_OF_THE_EYE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 15,
+        "fogColor": "#002033"
+      },
+      "caustics": {
+        "underwater": true,
+        "underwaterCausticsStrength": 40.0
+      },
+      "lighting": {
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 0.3,
+        "directionalColor": "#E6F4FF",
+        "lightPitch": -130.0
+      }
+    },
+    "overlays": [
+      {
+        "id": -100,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3613,
+        9481,
+        3617,
+        9471
+      ]
+    ],
+    "description": "TEMPLE_OF_THE_EYE_ENTRANCE_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": 0,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false,
+        "shiftLightness": -10
+      },
+      {
+        "id": -53,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false,
+        "shiftLightness": -10
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3166,
+        5734,
+        3185,
+        4288
+      ]
+    ],
+    "description": "DEATHS_OFFICE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 20,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 4.0,
+        "ambientColor": "#AAAFB6",
+        "directionalStrength": 0.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "underlays": [
+      {
+        "id": -110,
+        "groundMaterial": "TILES_2x2_1_SEMIGLOSS",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3152,
+        4468,
+        3231,
+        4416
+      ]
+    ],
+    "description": "TOB_ROOM_MAIDEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3260,
+        4474,
+        3327,
+        4427
+      ]
+    ],
+    "description": "TOB_ROOM_BLOAT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3274,
+        4290,
+        3318,
+        4226
+      ]
+    ],
+    "description": "TOB_ROOM_NYCOLAS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3264,
+        4336,
+        3295,
+        4288
+      ]
+    ],
+    "description": "TOB_ROOM_SOTETSEG",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3151,
+        4406,
+        3191,
+        4368
+      ]
+    ],
+    "description": "TOB_ROOM_XARPUS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3152,
+        4332,
+        3186,
+        4296
+      ]
+    ],
+    "description": "TOB_ROOM_VERZIK",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3224,
+        4334,
+        3250,
+        4305
+      ]
+    ],
+    "description": "TOB_ROOM_VAULT",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#0E081A"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#7575EA",
+        "directionalStrength": 1.0,
+        "directionalColor": "#DDA6A6",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3151,
+        4474,
+        3327,
+        4226
+      ]
+    ],
+    "description": "THEATRE_OF_BLOOD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#0E0C2C"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#8282B0",
+        "directionalStrength": 5.0,
+        "directionalColor": "#DFC0C0"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3262,
+        5373,
+        3360,
+        5341
+      ]
+    ],
+    "description": "COX_SNOW",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "underlays": [
+      {
+        "id": 16,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 59,
+        "groundMaterial": "SNOW_2",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3120,
+        5760,
+        3360,
+        5694
+      ],
+      [
+        3262,
+        5694,
+        3360,
+        5118
+      ]
+    ],
+    "description": "CHAMBERS_OF_XERIC",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 35,
+        "fogColor": "#122717"
+      },
+      "lighting": {
+        "ambientStrength": 3.0,
+        "ambientColor": "#7897C3",
+        "directionalStrength": 1.0,
+        "directionalColor": "#ACFF68",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3840,
+        9983,
+        3903,
+        9920
+      ]
+    ],
+    "description": "NIGHTMARE_OF_ASHIHAMA_ARENA",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "allowSkyOverride": false,
+      "fog": {
+        "fogDepth": 30,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 3.5,
+        "ambientColor": "#9A5DFD",
+        "directionalStrength": 2.0,
+        "directionalColor": "#00FF60",
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2660,
+        2644,
+        2663,
+        2638
+      ],
+      [
+        2638,
+        2648,
+        2641,
+        2642
+      ],
+      [
+        2632,
+        2655,
+        2635,
+        2649
+      ],
+      [
+        2656,
+        2615,
+        2659,
+        2609
+      ]
+    ],
+    "description": "PEST_CONTROL_LANDER_WATER_FIX",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "overlays": [
+      {
+        "id": -95,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": 42,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2571,
+        5305,
+        2616,
+        5252
+      ]
+    ],
+    "description": "BARBARIAN_ASSAULT_WAITING_ROOMS",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": 89,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        3136,
+        4608,
+        3391,
+        4544
+      ],
+      [
+        3168,
+        4639,
+        3196,
+        4604
+      ]
+    ],
+    "description": "TARNS_LAIR",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#241809"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#AAAFB6",
+        "directionalStrength": 1.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        1878,
+        5036,
+        1894,
+        5014
+      ]
+    ],
+    "description": "RANDOM_EVENT_CLASSROOM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2588,
+        4786,
+        2615,
+        4762
+      ]
+    ],
+    "description": "RANDOM_EVENT_FREAKY_FORESTER",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        1920,
+        5007,
+        1935,
+        4992
+      ]
+    ],
+    "description": "RANDOM_EVENT_GRAVEDIGGER",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3136,
+        4863,
+        3200,
+        4799
+      ]
+    ],
+    "description": "RANDOM_EVENT_DRILL_DEMON",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "environment": {
+      "fog": {
+        "fogColor": "#696559"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2450,
+        4794,
+        2480,
+        4764
+      ]
+    ],
+    "description": "RANDOM_EVENT_FROG_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2059,
+        4479,
+        2111,
+        4447
+      ]
+    ],
+    "description": "RANDOM_EVENT_PRISON_PETE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "overlays": [
+      {
+        "id": 2,
+        "groundMaterial": "MARBLE_1",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": -125,
+        "groundMaterial": "MARBLE_2",
+        "waterType": "NONE",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        1730,
+        5501,
+        1789,
+        5442
+      ]
+    ],
+    "description": "CLAN_HALL",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2493,
+        3648,
+        2594,
+        3606
+      ],
+      [
+        2564,
+        3613,
+        2600,
+        3582
+      ]
+    ],
+    "description": "LIGHTHOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        2879,
+        5503,
+        2943,
+        5438
+      ]
+    ],
+    "description": "SORCERESSS_GARDEN",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2558,
+        4352,
+        2625,
+        4286
+      ]
+    ],
+    "description": "PURO_PURO",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        2821,
+        5114,
+        2875,
+        5059
+      ]
+    ],
+    "description": "RATCATCHERS_HOUSE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        1791,
+        4543,
+        1856,
+        4479
+      ]
+    ],
+    "description": "CANOE_CUTSCENE",
+    "theme": "NORMAL",
+    "hideOtherRegions": true,
+    "underlays": [
+      {
+        "id": 48,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "GRASS_SCROLLING",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        2620,
+        4743,
+        2691,
+        4667
+      ],
+      [
+        2729,
+        4762,
+        2815,
+        4637
+      ],
+      [
+        2575,
+        4799,
+        2624,
+        4745
+      ]
+    ],
+    "description": "FISHER_KINGS_REALM",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3010,
+        4540,
+        3073,
+        4478
+      ]
+    ],
+    "description": "ENCHANTED_VALLEY",
+    "theme": "NORMAL",
+    "hideOtherRegions": true
+  },
+  {
+    "rects": [
+      [
+        3331,
+        11520,
+        3393,
+        11456
+      ]
+    ],
+    "description": "GIANTS_FOUNDRY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "waterColor": "#22D3FF",
+      "fog": {
+        "fogDepth": 12,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 1.1,
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 1.0,
+        "directionalColor": "#FFC199",
+        "lightPitch": -113.0,
+        "lightYaw": -120.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3325,
+        9605,
+        3395,
+        9520
+      ]
+    ],
+    "description": "ELID_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "waterColor": "#22D3FF",
+      "lighting": {
+        "ambientStrength": 1.75,
+        "directionalStrength": 1.0
+      }
+    },
+    "overlays": [
+      {
+        "id": -126,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
+    "rects": [],
+    "description": "UNKNOWN_OVERWORLD_SNOWY",
+    "theme": "SNOW",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 70,
+        "fogColor": "#AEBDE0"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#6FB0FF",
+        "directionalStrength": 2.5,
+        "directionalColor": "#F4E5C9"
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        2303,
+        4607,
+        2368,
+        4542
+      ],
+      [
+        3392,
+        5055,
+        3456,
+        4927
+      ],
+      [
+        1920,
+        5055,
+        1984,
+        4990
+      ],
+      [
+        2111,
+        5567,
+        2176,
+        5502
+      ],
+      [
+        1729,
+        5501,
+        1790,
+        5440
+      ],
+      [
+        3647,
+        6142,
+        3775,
+        6014
+      ],
+      [
+        2111,
+        4990,
+        2166,
+        4931
+      ],
+      [
+        1599,
+        4863,
+        1728,
+        4778
+      ]
+    ],
+    "description": "UNKNOWN_OVERWORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false
+  },
+  {
+    "rects": [
+      [
+        700,
+        4095,
+        4200,
+        2300
+      ]
+    ],
+    "description": "OVERWORLD",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 65,
+        "fogColor": "#B9D6FF"
+      },
+      "lighting": {
+        "ambientStrength": 1.0,
+        "ambientColor": "#97BAFF",
+        "directionalStrength": 4.0,
+        "lightPitch": -128,
+        "lightYaw": 55.0
+      }
+    },
+    "underlays": [
+      {
+        "id": 10,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 25,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 33,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 34,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 40,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 48,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 49,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 51,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 52,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 53,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 54,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 55,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 57,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 67,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 70,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 75,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 93,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 96,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 97,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 103,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 114,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 115,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 126,
+        "groundMaterial": "OVERWORLD_GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 64,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 65,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 66,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 80,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 92,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 94,
+        "groundMaterial": "OVERWORLD_DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  },
+  {
+    "rects": [
+      [
+        0,
+        2147483647,
+        2147483647,
+        0
+      ]
+    ],
+    "description": "ALL",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "fog": {
+        "fogDepth": 40,
+        "fogColor": "#241809"
+      },
+      "lighting": {
+        "ambientStrength": 1.5,
+        "ambientColor": "#AAAFB6",
+        "directionalStrength": 1.0,
+        "lightPitch": 260.0,
+        "lightYaw": 10.0
+      }
+    },
+    "overlays": [
+      {
+        "id": -128,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": -124,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -122,
+        "groundMaterial": "TILES_2x2_2_GLOSS",
+        "waterType": "NONE"
+      },
+      {
+        "id": -119,
+        "groundMaterial": "FALADOR_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": -105,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": -100,
+        "groundMaterial": "SWAMP_WATER",
+        "waterType": "SWAMP_WATER",
+        "blended": false
+      },
+      {
+        "id": -98,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": -93,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE"
+      },
+      {
+        "id": -85,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": -77,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": -76,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": -84,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -83,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -82,
+        "groundMaterial": "TILE_DARK",
+        "waterType": "NONE"
+      },
+      {
+        "id": -49,
+        "groundMaterial": "SAND_BRICK",
+        "waterType": "NONE"
+      },
+      {
+        "id": 2,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 3,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 4,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 5,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 6,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": 7,
+        "groundMaterial": "SWAMP_WATER",
+        "waterType": "SWAMP_WATER",
+        "blended": false
+      },
+      {
+        "id": 8,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 10,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 11,
+        "groundMaterial": "VARROCK_PATHS",
+        "waterType": "NONE"
+      },
+      {
+        "id": 12,
+        "groundMaterial": "STONE_PATTERN",
+        "waterType": "NONE"
+      },
+      {
+        "id": 13,
+        "groundMaterial": "CARPET",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 14,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 15,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 19,
+        "groundMaterial": "HD_LAVA",
+        "waterType": "NONE",
+        "blended": false,
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 127
+      },
+      {
+        "id": 20,
+        "groundMaterial": "MARBLE_DARK",
+        "waterType": "NONE"
+      },
+      {
+        "id": 21,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 22,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 23,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 25,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 26,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 27,
+        "groundMaterial": "BRICK_BROWN",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 28,
+        "groundMaterial": "BRICK",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 29,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 30,
+        "groundMaterial": "SNOW_2",
+        "waterType": "NONE"
+      },
+      {
+        "id": 32,
+        "groundMaterial": "CONCRETE",
+        "waterType": "NONE"
+      },
+      {
+        "id": 33,
+        "groundMaterial": "SNOW_2",
+        "waterType": "NONE"
+      },
+      {
+        "id": 35,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 41,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": 46,
+        "groundMaterial": "BRICK_BROWN",
+        "waterType": "NONE",
+        "blended": false
+      },
+      {
+        "id": 49,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 52,
+        "groundMaterial": "WOOD_PLANKS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 60,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 77,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 81,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 82,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 83,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 84,
+        "groundMaterial": "SAND_BRICK",
+        "waterType": "NONE"
+      },
+      {
+        "id": 88,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 89,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 101,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 102,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 104,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      },
+      {
+        "id": 107,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 108,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 110,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 115,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 119,
+        "groundMaterial": "GRAVEL",
+        "waterType": "NONE"
+      },
+      {
+        "id": 123,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -999,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE",
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 40
+      },
+      {
+        "id": -1,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ],
+    "underlays": [
+      {
+        "id": -127,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": -118,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": -111,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -110,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 10,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 25,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 33,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 34,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 40,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 48,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 49,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 50,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 51,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 52,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 53,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 54,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 55,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 56,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 57,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 58,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 61,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 62,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 63,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 64,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 66,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 67,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 68,
+        "groundMaterial": "SAND",
+        "waterType": "NONE"
+      },
+      {
+        "id": 70,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 72,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 75,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 80,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 92,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 93,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 94,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": 96,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 97,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 103,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 114,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 115,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 126,
+        "groundMaterial": "GRASS_1",
+        "waterType": "NONE"
+      },
+      {
+        "id": 98,
+        "groundMaterial": "VARIED_DIRT",
+        "waterType": "NONE"
+      },
+      {
+        "id": -999,
+        "groundMaterial": "SNOW_1",
+        "waterType": "NONE",
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 40
+      },
+      {
+        "id": -999,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE",
+        "hue": 0,
+        "saturation": 0,
+        "shiftLightness": 40
+      },
+      {
+        "id": -1,
+        "groundMaterial": "DIRT",
+        "waterType": "NONE"
+      }
+    ]
+  }
+]

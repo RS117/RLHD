@@ -496,6 +496,17 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "hideAreas",
+			name = "Hide Areas",
+			description = "Hide Areas That you are not supposed to see.",
+			section = miscellaneousSettings
+	)
+	default boolean hideAreas()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "hdInfernalTexture",
 		name = "HD Infernal Texture",
 		description = "Replaces the OSRS infernal cape texture with a high detail one.",
