@@ -4,12 +4,14 @@ import lombok.Data;
 import rs117.hd.utils.Rect;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 @Data
 public class Environment {
+
+    private String waterColor = "#7EADFF";
     private boolean lightningEnabled = false;
+    private boolean customWaterColor = false;
     private boolean allowSkyOverride = true;
     private Fog fog = new Fog();
     private Caustics caustics = new Caustics();

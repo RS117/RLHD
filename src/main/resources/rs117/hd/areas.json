@@ -7634,6 +7634,62 @@
     "hideOtherRegions": true
   },
   {
+    "rects": [
+      [
+        3331,
+        11520,
+        3393,
+        11456
+      ]
+    ],
+    "description": "GIANTS_FOUNDRY",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "waterColor": "#22D3FF",
+      "fog": {
+        "fogDepth": 12,
+        "fogColor": "#000000"
+      },
+      "lighting": {
+        "ambientStrength": 1.1,
+        "ambientColor": "#FFFFFF",
+        "directionalStrength": 1.0,
+        "directionalColor": "#FFC199",
+        "lightPitch": -113.0,
+        "lightYaw": -120.0
+      }
+    }
+  },
+  {
+    "rects": [
+      [
+        3325,
+        9605,
+        3395,
+        9520
+      ]
+    ],
+    "description": "ELID_CAVE",
+    "theme": "NORMAL",
+    "hideOtherRegions": false,
+    "environment": {
+      "waterColor": "#22D3FF",
+      "lighting": {
+        "ambientStrength": 1.75,
+        "directionalStrength": 1.0
+      }
+    },
+    "overlays": [
+      {
+        "id": -126,
+        "groundMaterial": "WATER",
+        "waterType": "WATER",
+        "blended": false
+      }
+    ]
+  },
+  {
     "rects": [],
     "description": "UNKNOWN_OVERWORLD_SNOWY",
     "theme": "SNOW",

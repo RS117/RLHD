@@ -71,7 +71,8 @@ public class Area {
             environment.getFog().setCustomFogDepth(true);
         }
 
-        environment.getFog().setCustomFogColor(environment.getFog().getFogColor().equals("B9D6FF"));
+        environment.setCustomWaterColor(!environment.getWaterColor().equals("#7EADFF"));
+        environment.getFog().setCustomFogColor(!environment.getFog().getFogColor().equals("#B9D6FF"));
         environment.getLighting().setCustomDirectionalStrength(environment.getLighting().getDirectionalStrength() != 4.0f);
         environment.getLighting().setCustomDirectionalColor(!environment.getLighting().getDirectionalColor().equals("#FFFFFF"));
         environment.getLighting().setCustomAmbientStrength(environment.getLighting().getAmbientStrength() != 1.0f);
