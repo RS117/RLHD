@@ -26,7 +26,6 @@ package rs117.hd.scene;
 
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
-import com.jogamp.opengl.math.VectorUtil;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +49,7 @@ import rs117.hd.model.objects.TzHaarRecolorType;
 import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.objects.ObjectType;
 import rs117.hd.utils.HDUtils;
+import static rs117.hd.utils.HDUtils.dotNormal3Lights;
 
 @Slf4j
 @Singleton
@@ -269,8 +269,6 @@ public class ProceduralGenerator
 
 			int[] colorHSL = HDUtils.colorIntToHSL(vertexColors[vertex]);
 
-			float[] inverseLightDirection = VectorUtil.normalizeVec3(new float[]{1.0f, 1.0f, 0.0f});
-
 			float lightenMultiplier = 1.5f;
 			int lightenBase = 15;
 			int lightenAdd = 3;
@@ -280,7 +278,7 @@ public class ProceduralGenerator
 
 			float[] vNormals = vertexTerrainNormals.getOrDefault(vertexHashes[vertex], new float[]{0.0f, 0.0f, 0.0f});
 
-			float dot = VectorUtil.dotVec3(VectorUtil.normalizeVec3(vNormals), inverseLightDirection);
+			float dot = dotNormal3Lights(vNormals, false);
 			int lighten = (int) (Math.max((colorHSL[2] - lightenAdd), 0) * lightenMultiplier) + lightenBase;
 			colorHSL[2] = (int) HDUtils.lerp(colorHSL[2], lighten, Math.max(dot, 0));
 			int darken = (int) (Math.max((colorHSL[2] - darkenAdd), 0) * darkenMultiplier) + darkenBase;

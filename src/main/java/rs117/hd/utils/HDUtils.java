@@ -24,8 +24,8 @@
  */
 package rs117.hd.utils;
 
-import static com.jogamp.opengl.math.VectorUtil.crossVec3;
-import static com.jogamp.opengl.math.VectorUtil.subVec3;
+import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +33,17 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 public class HDUtils
 {
+
+	// directional vectors approximately opposite of the directional light used by the client
+	private static final float[] inverseLightDirectionZ0 = new float[]{
+		0.70710678f, 0.70710678f, 0f
+	};
+	private static final float[] inverseLightDirectionZ1 = new float[]{
+		0.57735026f, 0.57735026f, 0.57735026f
+	};
+
+	// The epsilon for floating point values used by jogl
+	private static final float EPSILON = 1.1920929E-7f;
 
 	public static float[] vectorAdd(float[] vec1, float[] vec2)
 	{
@@ -134,20 +145,23 @@ public class HDUtils
 
 	public static float[] calculateSurfaceNormals(int[] vertexX, int[] vertexY, int[] vertexZ)
 	{
-		float[][] vPosition = new float[3][3];
-
-		for (int i = 0; i < 3; i++)
-		{
-			vPosition[i][0] = vertexX[i];
-			vPosition[i][1] = vertexY[i];
-			vPosition[i][2] = vertexZ[i];
-		}
-
 		// calculate normals
-		float[] a = subVec3(new float[3], vPosition[0], vPosition[1]);
-		float[] b = subVec3(new float[3], vPosition[0], vPosition[2]);
+		float[] a = new float[3];
+		a[0] = vertexX[0] - vertexX[1];
+		a[1] = vertexY[0] - vertexY[1];
+		a[2] = vertexZ[0] - vertexZ[1];
+
+		float[] b = new float[3];
+		b[0] = vertexX[0] - vertexX[2];
+		b[1] = vertexY[0] - vertexY[2];
+		b[2] = vertexZ[0] - vertexZ[2];
+
 		// cross
-		return crossVec3(new float[3], a,b);
+		float[] n = new float[3];
+		n[0] = a[1] * b[2] - a[2] * b[1];
+		n[1] = a[2] * b[0] - a[0] * b[2];
+		n[2] = a[0] * b[1] - a[1] * b[0];
+		return n;
 	}
 
 	public static int[] colorIntToHSL(int colorInt)
@@ -241,5 +255,27 @@ public class HDUtils
 	{
 		float gamma = 2.2f;
 		return (float)Math.pow(c, gamma);
+	}
+
+	public static float dotNormal3Lights(float[] normals)
+	{
+		return dotNormal3Lights(normals, true);
+	}
+
+	public static float dotNormal3Lights(float[] normals, final boolean includeZ)
+	{
+		final float lengthSq = normals[0] * normals[0] + normals[1] * normals[1] + normals[2] * normals[2];
+		if (abs(lengthSq) < EPSILON)
+		{
+			return 0f;
+		}
+		else if (includeZ)
+		{
+			return (normals[0] * inverseLightDirectionZ1[0] + normals[1] * inverseLightDirectionZ1[1] + normals[2] * inverseLightDirectionZ1[2]) / (float) sqrt(lengthSq);
+		}
+		else
+		{
+			return (normals[0] * inverseLightDirectionZ0[0] + normals[1] * inverseLightDirectionZ0[1]) / (float) sqrt(lengthSq);
+		}
 	}
 }

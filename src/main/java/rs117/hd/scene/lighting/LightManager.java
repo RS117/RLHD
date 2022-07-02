@@ -28,9 +28,8 @@ package rs117.hd.scene.lighting;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.primitives.Ints;
-import com.jogamp.opengl.math.FloatUtil;
-import static com.jogamp.opengl.math.FloatUtil.cos;
-import static com.jogamp.opengl.math.FloatUtil.pow;
+import static java.lang.Math.cos;
+import static java.lang.Math.pow;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -113,6 +112,9 @@ public class LightManager
 	public int visibleLightsCount = 0;
 
 	private EntityHiderConfig entityHiderConfig;
+
+	static final float PI = 3.14159265358979323846f;
+	static final float TWO_PI = 2f * PI;
 
 	public void startUp()
 	{
@@ -290,9 +292,9 @@ public class LightManager
 			{
 				long repeatMs = 60000;
 				int offset = light.randomOffset;
-				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * FloatUtil.TWO_PI;
+				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * TWO_PI;
 
-				float flicker = (
+				float flicker = (float) (
 					pow(cos(11 * t), 2) +
 						pow(cos(17 * t), 4) +
 						pow(cos(23 * t), 6) +
@@ -364,7 +366,7 @@ public class LightManager
 			light.belowFloor = false;
 			light.aboveFloor = false;
 
-			if (tileX < Perspective.SCENE_SIZE && tileY < Perspective.SCENE_SIZE && tileX >= 0 && tileY >= 0)
+			if (tileX < Perspective.SCENE_SIZE && tileY < Perspective.SCENE_SIZE && tileX >= 0 && tileY >= 0 && tileZ >= 0)
 			{
 				Tile aboveTile = tileZ < 3 ? client.getScene().getTiles()[tileZ + 1][tileX][tileY] : null;
 
