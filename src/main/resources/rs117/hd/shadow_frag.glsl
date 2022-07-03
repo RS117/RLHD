@@ -60,8 +60,10 @@ void main()
         discard;
     }
 
+    Material mat = material[materialId];
+
     // skip water surfaces
-    switch (material[materialId].diffuseMapId)
+    switch (mat.diffuseMapId)
     {
         case 7001:
         case 7025:
@@ -71,9 +73,11 @@ void main()
             discard;
     }
 
-    vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
-    uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
-    vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
+    vec2 uv = fUv;
+    if (mat.diffuseMapId < 128)
+        uv += textureOffsets[mat.diffuseMapId];
+    uv = vec2((uv.x - 0.5) / mat.textureScale.x + 0.5, (uv.y - 0.5) / mat.textureScale.y + 0.5);
+    vec4 texture = texture(texturesHD, vec3(uv, mat.diffuseMapId));
 
     if (min(texture.a, alpha) < 0.81)
     {
