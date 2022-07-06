@@ -249,6 +249,9 @@ public enum Overlay
 	// Elid Cave fix
 	ELID_CAVE_WATER_FIX(-126, Area.ELID_CAVE, WaterType.WATER),
 
+	// Entrana glass/furnace building fix
+	ENTRANA_GLASS_BUILDING_FIX(10, Area.ENTRANA_GLASS_BUILDING_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(8).setBlended(false)),
+
 
 	// default overlays
 	OVERLAY_N128(-128, WaterType.WATER),
