@@ -29799,5 +29799,60 @@
     "duration": 0,
     "range": 0,
     "fadeInDuration": 0
+  },
+  {
+    "description": "LOVAKITE_FURNACE",
+    "height": 250,
+    "alignment": "CENTER",
+    "radius": 2000,
+    "strength": 20,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 10,
+    "objectIds": [
+      28562
+    ]
+  },
+  {
+    "description": "EVIL_CHICKEN_SHRINE",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 10,
+    "color": [
+      255,
+      127,
+      127
+    ],
+    "type": "FLICKER",
+    "duration": 200,
+    "range": 15,
+    "fadeInDuration": 0,
+    "objectIds": [
+      29088
+    ]
+  },
+  {
+    "description": "COOKING_RANGE",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 400,
+    "strength": 6,
+    "color": [
+      252,
+      148,
+      3
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 5,
+    "objectIds": [
+      40297
+    ]
   }
 ]
