@@ -68,7 +68,9 @@ public enum Overlay
 	VARROCK_BUILDING_FLOOR_1(81, Area.VARROCK, GroundMaterial.TILE_SMALL, new Properties().setBlended(false)),
 	VARROCK_BUILDING_FLOOR_2(4, Area.VARROCK, GroundMaterial.NONE, new Properties().setBlended(false)),
 	VARROCK_PLANT_PATCHES(89, Area.VARROCK, GroundMaterial.DIRT, new Properties().setBlended(false)),
-	VARROCK_EAST_BANK(-83, Area.VARROCK_EAST_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK_CENTER(-83, Area.VARROCK_EAST_BANK_CENTER, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK_OUTSIDE_1(-85, Area.VARROCK_EAST_BANK_OUTSIDE_1, GroundMaterial.VARROCK_PATHS),
+	VARROCK_EAST_BANK(-85, Area.VARROCK_EAST_BANK, GroundMaterial.TILES_2x2_1, new Properties().setBlended(false)),
 	VARROCK_ROOF_GRAVEL(2, Area.VARROCK_CASTLE, GroundMaterial.GRAVEL, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_1(-83, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_2(-84, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
@@ -87,6 +89,8 @@ public enum Overlay
 	KHARID_PATHS_3(25, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT, new Properties().setSaturation(3).setHue(6)),
 
 	// Falador
+	FALADOR_EAST_BANK_PATH_FIX_2(-119, Area.FALADOR_EAST_BANK_PATH_FIX_2, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(13).setBlended(false)),
+	FALADOR_EAST_BANK_PATH_FIX_1(-119, Area.FALADOR_EAST_BANK_PATH_FIX_1, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(9).setBlended(false)),
 	FALADOR_PATHS(-119, Area.FALADOR, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(7)),
 	FALADOR_HAIRDRESSER_TILE_1(77, Area.FALADOR_HAIRDRESSER, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	FALADOR_HAIRDRESSER_TILE_2(123, Area.FALADOR_HAIRDRESSER, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
@@ -179,6 +183,9 @@ public enum Overlay
 
 	// Fossil Island
 	ANCIENT_MUSHROOM_POOL(95, Area.FOSSIL_ISLAND, WaterType.SWAMP_WATER_FLAT),
+	FOSSIL_ISLAND_CENTRAL_BANK_FIX(11, Area.FOSSIL_ISLAND_CENTRAL_BANK_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(-2).setBlended(false)),
+	FOSSIL_ISLAND_HILL_HOUSE_FIX(11, Area.FOSSIL_ISLAND_HILL_HOUSE_FIX, GroundMaterial.VARROCK_PATHS),
+	FOSSIL_ISLAND_HILL_TEXTURE_FIX(11, Area.FOSSIL_ISLAND, GroundMaterial.VARIED_DIRT),
 
 	// Zeah
 	XERICS_LOOKOUT_TILE_1(50, Area.XERICS_LOOKOUT, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
