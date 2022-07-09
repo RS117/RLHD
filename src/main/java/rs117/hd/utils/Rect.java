@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Adam <Adam@sigterm.info>
+ * Copyright (c) 2021, 117 <https://twitter.com/117scape>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,63 +22,39 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#version 330
+package rs117.hd.utils;
 
-#include MAX_MATERIALS
+import lombok.Getter;
 
-struct Material
+@Getter
+public class Rect
 {
-    int diffuseMapId;
-    float specularStrength;
-    float specularGloss;
-    float emissiveStrength;
-    int displacementMapId;
-    float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
-    vec2 textureScale;
-};
+	private final int minX;
+	private final int minY;
+	private final int maxX;
+	private final int maxY;
+	private final int plane;
 
-layout(std140) uniform materials {
-    Material material[MAX_MATERIALS];
-};
+	public Rect(int pointAX, int pointAY, int pointBX, int pointBY)
+	{
+		this.minX = Math.min(pointAX, pointBX);
+		this.minY = Math.min(pointAY, pointBY);
+		this.maxX = Math.max(pointAX, pointBX);
+		this.maxY = Math.max(pointAY, pointBY);
+		this.plane = -1;
+	}
 
-uniform sampler2DArray texturesHD;
-uniform vec2 textureOffsets[128];
+	public Rect(int pointAX, int pointAY, int pointBX, int pointBY, int plane)
+	{
+		this.minX = Math.min(pointAX, pointBX);
+		this.minY = Math.min(pointAY, pointBY);
+		this.maxX = Math.max(pointAX, pointBX);
+		this.maxY = Math.max(pointAY, pointBY);
+		this.plane = plane;
+	}
 
-in float alpha;
-in vec2 fUv;
-flat in int materialId;
-flat in int terrainPlane;
-
-out vec4 FragColor;
-
-void main()
-{
-    if (terrainPlane == 0)
-    {
-        discard;
-    }
-
-    // skip water surfaces
-    switch (material[materialId].diffuseMapId)
-    {
-        case 7001:
-        case 7025:
-        case 7997:
-        case 7998:
-        case 7999:
-            discard;
-    }
-
-    vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
-    uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
-    vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
-
-    if (min(texture.a, alpha) < 0.81)
-    {
-        discard;
-    }
-
-    FragColor = vec4(1.0);
+	public boolean containsPoint(int pointX, int pointY, int pointZ)
+	{
+		return pointX <= maxX && pointX >= minX && pointY <= maxY && pointY >= minY && (plane == -1 || plane == pointZ);
+	}
 }

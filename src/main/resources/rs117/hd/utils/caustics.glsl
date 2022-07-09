@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Adam <Adam@sigterm.info>
+ * Copyright (c) 2022, Hooder <ahooder@protonmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,63 +22,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#version 330
 
-#include MAX_MATERIALS
+#define CAUSTICS_MAP_ID 240
 
-struct Material
-{
-    int diffuseMapId;
-    float specularStrength;
-    float specularGloss;
-    float emissiveStrength;
-    int displacementMapId;
-    float displacementStrength;
-    ivec2 displacementDuration;
-    ivec2 scrollDuration;
-    vec2 textureScale;
-};
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2) {
+    return min(
+        texture(texturesHD, vec3(flow1, CAUSTICS_MAP_ID)).r,
+        texture(texturesHD, vec3(flow2, CAUSTICS_MAP_ID)).r
+    );
+}
 
-layout(std140) uniform materials {
-    Material material[MAX_MATERIALS];
-};
+float sampleCausticsChannel(const vec2 flow1, const vec2 flow2, const vec2 aberration) {
+    return sampleCausticsChannel(flow1 + aberration, flow2 + aberration);
+}
 
-uniform sampler2DArray texturesHD;
-uniform vec2 textureOffsets[128];
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2, const float aberration) {
+    float r = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1,  1));
+    float g = sampleCausticsChannel(flow1, flow2, aberration * vec2( 1, -1));
+    float b = sampleCausticsChannel(flow1, flow2, aberration * vec2(-1, -1));
+    return vec3(r, g, b);
+}
 
-in float alpha;
-in vec2 fUv;
-flat in int materialId;
-flat in int terrainPlane;
-
-out vec4 FragColor;
-
-void main()
-{
-    if (terrainPlane == 0)
-    {
-        discard;
-    }
-
-    // skip water surfaces
-    switch (material[materialId].diffuseMapId)
-    {
-        case 7001:
-        case 7025:
-        case 7997:
-        case 7998:
-        case 7999:
-            discard;
-    }
-
-    vec2 uv = fUv + textureOffsets[material[materialId].diffuseMapId];
-    uv = vec2((uv.x - 0.5) / material[materialId].textureScale.x + 0.5, (uv.y - 0.5) / material[materialId].textureScale.y + 0.5);
-    vec4 texture = texture(texturesHD, vec3(uv, material[materialId].diffuseMapId));
-
-    if (min(texture.a, alpha) < 0.81)
-    {
-        discard;
-    }
-
-    FragColor = vec4(1.0);
+vec3 sampleCaustics(const vec2 flow1, const vec2 flow2) {
+    return vec3(sampleCausticsChannel(flow1, flow2));
 }

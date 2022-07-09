@@ -42,33 +42,11 @@ import rs117.hd.config.FogDepthMode;
 import rs117.hd.config.ShadowDistance;
 import rs117.hd.config.ShadowResolution;
 import rs117.hd.config.UIScalingMode;
-import rs117.hd.config.WaterEffects;
 
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config
 {
-	/*====== Limited-time settings ======*/
-
-	@ConfigSection(
-		name = "Limited-time",
-		description = "Fun and/or experimental settings that are available for a limited time",
-		position = -10,
-		closedByDefault = false
-	)
-	String limitedTimeSettings = "limitedTimeSettings";
-
-	@ConfigItem(
-		keyName = "winterTheme",
-		name = "Winter theme",
-		description = "Covers the Gielinor overworld with a layer of snow!",
-		position = -9,
-		section = limitedTimeSettings
-	)
-	default boolean winterTheme()
-	{
-		return true;
-	}
-
+	String KEY_WINTER_THEME = "winterTheme0";
 
 	/*====== General settings ======*/
 
@@ -299,7 +277,7 @@ public interface HdPluginConfig extends Config
 	)
 	default boolean atmosphericLighting()
 	{
-		return false;
+		return true;
 	}
 
 	@ConfigItem(
@@ -360,6 +338,7 @@ public interface HdPluginConfig extends Config
 	default boolean hideBakedEffects() {
 		return true;
 	}
+
 
 	/*====== Environment settings ======*/
 
@@ -422,11 +401,11 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "overrideSky",
-			name = "Override Sky Color",
-			description = "Forces the selected sky color in all environments",
-			position = 205,
-			section = environmentSettings
+		keyName = "overrideSky",
+		name = "Override Sky Color",
+		description = "Forces the selected sky color in all environments",
+		position = 205,
+		section = environmentSettings
 	)
 	default boolean overrideSky() {
 		return false;
@@ -469,15 +448,15 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "waterEffects",
-		name = "Water Effects",
-		description = "Changes the appearance of the water.",
+		keyName = "underwaterCaustics",
+		name = "Underwater Caustics",
+		description = "Apply underwater lighting effects to imitate sunlight moving through waves on the surface.",
 		position = 209,
 		section = environmentSettings
 	)
-	default WaterEffects waterEffects()
+	default boolean underwaterCaustics()
 	{
-		return WaterEffects.ALL;
+		return true;
 	}
 
 	@ConfigItem(
@@ -491,7 +470,6 @@ public interface HdPluginConfig extends Config
 	{
 		return true;
 	}
-
 
 
 	/*====== Miscellaneous settings ======*/
@@ -530,11 +508,40 @@ public interface HdPluginConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "modelCaching",
-		name = "Disable model caching",
-		description = "Model caching improves performance with increased memory usage.",
+		keyName = KEY_WINTER_THEME,
+		name = "Winter theme",
+		description = "Covers the Gielinor overworld with a layer of snow!",
 		position = 303,
 		section = miscellaneousSettings
 	)
+	default boolean winterTheme()
+	{
+		return false;
+	}
+
+	@ConfigSection(
+			name = "Experimental",
+			description = "Experimental features - you likely won't need to modify these settings",
+			position = 400,
+			closedByDefault = true
+	)
+	String experimentalSettings = "experimentalSettings";
+
+	@ConfigItem(
+			keyName = "modelCaching",
+			name = "Disable model caching",
+			description = "Model caching improves performance with increased memory usage.",
+			position = 401,
+			section = experimentalSettings
+	)
 	default boolean disableModelCaching() { return false; }
+
+	@ConfigItem(
+			keyName = "modelBatching",
+			name = "Disable model batching",
+			description = "Model batching generally improves performance but could cause some graphical artifacts",
+			position = 402,
+			section = experimentalSettings
+	)
+	default boolean disableModelBatching() { return false; }
 }
