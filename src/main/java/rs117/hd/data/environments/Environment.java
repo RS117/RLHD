@@ -623,6 +623,7 @@ public enum Environment
 		.setAmbientStrength(1.0f)
 		.setDirectionalColor(125, 141, 179)
 		.setDirectionalStrength(4.0f)
+		.setWaterColor(185, 214, 255)
 	),
 
 	// Zanaris
