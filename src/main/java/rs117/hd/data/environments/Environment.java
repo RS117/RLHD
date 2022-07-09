@@ -465,11 +465,12 @@ public enum Environment
 	GOD_WARS_DUNGEON(Area.GOD_WARS_DUNGEON, new Properties()
 		.setFogColor(14, 59, 89)
 		.setFogDepth(30)
-		.setAmbientColor("#68ACFF")
-		.setAmbientStrength(0.5f)
+		.setAmbientColor(181,215,255)
+		.setAmbientStrength(1.0f)
 		.setDirectionalColor(146, 209, 250)
 		.setDirectionalStrength(1.8f)
 		.setLightDirection(260f, 10f)
+		.setWaterColor(56, 188, 255)
 	),
 
 	TAR_SWAMP(Area.TAR_SWAMP, new Properties()
