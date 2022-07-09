@@ -126,6 +126,7 @@ public enum Area
 	DRAYNOR_MANOR_BASEMENT(
 		new Rect(3073, 9780, 3082, 9766)
 	),
+	LUMBRIDGE_DRAYNOR_PATH_BLENDING_FIX_1(3138,3304,3186,3202),
 	DRAYNOR(
 		new Rect(3071, 3226, 3133, 3292),
 		new Rect(2112, 4893, 2166, 4930) // bank robbery cutscene
