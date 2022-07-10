@@ -50,7 +50,6 @@ public enum Overlay
 	LUM_BRIDGE(10, Area.LUM_BRIDGE, GroundMaterial.GRAVEL),
 	LUMBRIDGE_CASTLE_TILE(3, Area.LUMBRIDGE_CASTLE_BASEMENT, GroundMaterial.MARBLE_1_SEMIGLOSS),
 	LUMBRIDGE_CASTLE_FLOORS(10, Area.LUMBRIDGE_CASTLE, GroundMaterial.VARROCK_PATHS_LIGHT, new Properties().setShiftLightness(10)),
-	LUMBRIDGE_DRAYNOR_PATH_BLENDING_FIX_1(10, Area.LUMBRIDGE_DRAYNOR_PATH_BLENDING_FIX_1, GroundMaterial.GRAVEL, new Properties().setShiftLightness(18).setHue(7).setSaturation(1).setBlended(false)),
 	LUMBRIDGE_PATHS(10, Area.LUMBRIDGE, GroundMaterial.GRAVEL, new Properties().setShiftLightness(12).setHue(7).setSaturation(1)),
 	LUMBRIDGE_CASTLE_ENTRYWAY_1(2, Area.LUMBRIDGE_CASTLE_ENTRYWAY, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	LUMBRIDGE_CASTLE_ENTRYWAY_2(3, Area.LUMBRIDGE_CASTLE_ENTRYWAY, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
