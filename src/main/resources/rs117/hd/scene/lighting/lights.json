@@ -29892,5 +29892,23 @@
     "objectIds": [
       31970
     ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_GLOWING_CARVING",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 6,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 0,
+    "objectIds": [
+      32524
+    ]
   }
 ]
