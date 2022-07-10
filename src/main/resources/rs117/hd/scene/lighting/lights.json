@@ -29854,5 +29854,43 @@
     "objectIds": [
       40297
     ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_RED_PURPLE_CRYSTAL",
+    "height": 128,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 8,
+    "color": [
+      255,
+      100,
+      190
+    ],
+    "type": "PULSE",
+    "duration": 2000,
+    "range": 10,
+    "fadeInDuration": 0,
+    "objectIds": [
+      31969
+    ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_RED_PURPLE_CRYSTAL_BIG",
+    "height": 256,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 8,
+    "color": [
+      255,
+      100,
+      190
+    ],
+    "type": "PULSE",
+    "duration": 2000,
+    "range": 10,
+    "fadeInDuration": 0,
+    "objectIds": [
+      31970
+    ]
   }
 ]
