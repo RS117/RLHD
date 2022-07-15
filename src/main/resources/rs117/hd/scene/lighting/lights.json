@@ -29947,5 +29947,23 @@
     "objectIds": [
       44022
     ]
+  },
+  {
+    "description": "APE_ATOLL_SACRIFICIAL_PYRE",
+    "height": 80,
+    "alignment": "CENTER",
+    "radius": 1000,
+    "strength": 10,
+    "color": [
+      255,
+      118,
+      9
+    ],
+    "type": "FLICKER",
+    "duration": 800,
+    "range": 7,
+    "objectIds": [
+      4767
+    ]
   }
 ]
