@@ -29910,5 +29910,42 @@
     "objectIds": [
       32524
     ]
+  },
+  {
+    "description": "BENEATH_CURSED_SANDS_RED_FIRE_SMALL",
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 3,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 500,
+    "range": 10,
+    "objectIds": [
+      44024,
+      44023
+    ]
+  },
+  {
+    "description": "BENEATH_CURSED_SANDS_RED_FIRE_LARGE",
+    "height": 225,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 3,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 1000,
+    "range": 10,
+    "objectIds": [
+      44022
+    ]
   }
 ]
