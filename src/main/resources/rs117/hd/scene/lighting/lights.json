@@ -29965,5 +29965,23 @@
     "objectIds": [
       4767
     ]
+  },
+  {
+    "description": "MM2_CRASH_SITE_CAVE_SKYLIGHT",
+    "height": 1000,
+    "alignment": "CENTER",
+    "radius": 2000,
+    "strength": 6,
+    "color": [
+      255,
+      255,
+      255
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 0,
+    "objectIds": [
+      28687
+    ]
   }
 ]
