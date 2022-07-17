@@ -259,6 +259,8 @@ public enum Overlay
 	// Entrana glass/furnace building fix
 	ENTRANA_GLASS_BUILDING_FIX(10, Area.ENTRANA_GLASS_BUILDING_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(8).setBlended(false)),
 
+	// Ancient Cavern upper level water change
+	ANCIENT_CAVERN_UPPER_WATER(41, Area.ANCIENT_CAVERN_UPPER, WaterType.WATER_FLAT),
 
 	// default overlays
 	OVERLAY_N128(-128, WaterType.WATER),

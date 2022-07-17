@@ -916,6 +916,10 @@ public enum Environment
 			.setAmbientStrength(1.75f)
 			.setDirectionalStrength(1.0f)
 	),
+	ANCIENT_CAVERN_UPPER(Area.ANCIENT_CAVERN_UPPER, new Properties()
+			.setWaterColor(79, 178, 255)
+	),
+
 
 
 
