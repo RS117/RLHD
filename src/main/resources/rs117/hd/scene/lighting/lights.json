@@ -29983,5 +29983,43 @@
     "objectIds": [
       28687
     ]
+  },
+  {
+    "description": "LITHKREN_LAVA_1",
+    "worldX": 3531,
+    "worldY": 4013,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 6,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "LITHKREN_LAVA_2",
+    "worldX": 3527,
+    "worldY": 4025,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 6,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
   }
 ]
