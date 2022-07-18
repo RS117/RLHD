@@ -10,12 +10,10 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.24.2'
-def joglVersion = '2.4.0-rc-20220318'
+def runeLiteVersion = '1.8.27.1'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
-	compileOnly group: 'net.runelite.jogl', name:'jogl-gldesktop-dbg', version: joglVersion
 
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
@@ -23,7 +21,6 @@ dependencies {
 	testImplementation 'junit:junit:4.12'
 	testImplementation group: 'net.runelite', name:'client', version: runeLiteVersion
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
-	testImplementation group: 'net.runelite.jogl', name:'jogl-gldesktop-dbg', version: joglVersion
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'

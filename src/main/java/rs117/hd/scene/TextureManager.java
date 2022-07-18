@@ -24,7 +24,6 @@
  */
 package rs117.hd.scene;
 
-import com.jogamp.opengl.GL4;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
@@ -36,8 +35,10 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
+import static org.lwjgl.opengl.GL43C.*;
 import rs117.hd.HdPlugin;
-import rs117.hd.utils.GLUtil;
+import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
+import org.lwjgl.opengl.GL;
 
 @Singleton
 @Slf4j
@@ -48,7 +49,7 @@ public class TextureManager
 
 	private static final int TEXTURE_SIZE = 128;
 
-	public int initTextureArray(TextureProvider textureProvider, GL4 gl)
+	public int initTextureArray(TextureProvider textureProvider)
 	{
 		if (!allTexturesLoaded(textureProvider))
 		{
@@ -57,32 +58,44 @@ public class TextureManager
 
 		Texture[] textures = textureProvider.getTextures();
 
-		int textureArrayId = GLUtil.glGenTexture(gl);
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_SRGB8_ALPHA8, TEXTURE_SIZE, TEXTURE_SIZE, textures.length);
+		int textureArrayId = glGenTextures();
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
+		if (GL.getCapabilities().glTexStorage3D != 0)
+		{
+			glTexStorage3D(GL_TEXTURE_2D_ARRAY, 8, GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, textures.length);
+		}
+		else
+		{
+			int size = TEXTURE_SIZE;
+			for (int i = 0; i < 8; i++)
+			{
+				glTexImage3D(GL_TEXTURE_2D_ARRAY, i, GL_RGBA8, size, size, textures.length, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+				size /= 2;
+			}
+		}
 
-		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST);
-		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 
 		// Set brightness to 1.0d to upload unmodified textures to GPU
 		double save = textureProvider.getBrightness();
 		textureProvider.setBrightness(1.0d);
 
-		updateTextures(textureProvider, gl, textureArrayId);
+		updateTextures(textureProvider, textureArrayId);
 
 		textureProvider.setBrightness(save);
 
-		gl.glActiveTexture(gl.GL_TEXTURE1);
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glGenerateMipmap(gl.GL_TEXTURE_2D_ARRAY);
-		gl.glActiveTexture(gl.GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
+		glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+		glActiveTexture(GL_TEXTURE0);
 
 		return textureArrayId;
 	}
 
-	public int initTextureHDArray(TextureProvider textureProvider, GL4 gl)
+	public int initTextureHDArray(TextureProvider textureProvider)
 	{
 		if (!allTexturesLoaded(textureProvider))
 		{
@@ -93,12 +106,24 @@ public class TextureManager
 
 		int textureCount = 300; // Based on image ids from filenames
 
-		int textureArrayId = GLUtil.glGenTexture(gl);
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glTexStorage3D(gl.GL_TEXTURE_2D_ARRAY, 8, gl.GL_SRGB8_ALPHA8, TEXTURE_SIZE, TEXTURE_SIZE, textureCount);
+		int textureArrayId = glGenTextures();
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
+		if (GL.getCapabilities().glTexStorage3D != 0)
+		{
+			glTexStorage3D(GL_TEXTURE_2D_ARRAY, 8, GL_SRGB8_ALPHA8, TEXTURE_SIZE, TEXTURE_SIZE, textureCount);
+		}
+		else
+		{
+			int size = TEXTURE_SIZE;
+			for (int i = 0; i < 8; i++)
+			{
+				glTexImage3D(GL_TEXTURE_2D_ARRAY, i, GL_SRGB8_ALPHA8, size, size, textureCount, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+				size /= 2;
+			}
+		}
 
-		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_WRAP_S, gl.GL_REPEAT);
-		gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_WRAP_T, gl.GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 
 		double save = textureProvider.getBrightness();
@@ -107,7 +132,7 @@ public class TextureManager
 		int cnt = 0;
 		for (int textureId = 0; textureId < textureCount; textureId++)
 		{
-			if (loadHDTexture(textureId, textureProvider, gl, textures))
+			if (loadHDTexture(textureId, textureProvider, textures))
 			{
 				cnt++;
 			}
@@ -117,15 +142,15 @@ public class TextureManager
 
 		log.debug("Uploaded HD textures {}", cnt);
 
-		gl.glActiveTexture(gl.GL_TEXTURE2);
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
-		gl.glGenerateMipmap(gl.GL_TEXTURE_2D_ARRAY);
-		gl.glActiveTexture(gl.GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
+		glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+		glActiveTexture(GL_TEXTURE0);
 
 		return textureArrayId;
 	}
 
-	boolean loadHDTexture(int textureId, TextureProvider textureProvider, GL4 gl, Texture[] textures)
+	boolean loadHDTexture(int textureId, TextureProvider textureProvider, Texture[] textures)
 	{
 
 		int width = 0;
@@ -177,9 +202,9 @@ public class TextureManager
 				}
 
 				pixelData.flip();
-				int rgbMode = hasAlphaChannel ? gl.GL_RGBA : gl.GL_RGB;
-				gl.glTexSubImage3D(gl.GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, width, height,
-					1, rgbMode, gl.GL_UNSIGNED_BYTE, pixelData);
+				int rgbMode = hasAlphaChannel ? GL_RGBA : GL_RGB;
+				glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, width, height,
+					1, rgbMode, GL_UNSIGNED_BYTE, pixelData);
 
 				return true;
 			}
@@ -211,9 +236,11 @@ public class TextureManager
 				}
 
 				byte[] pixels = convertPixels(srcPixels, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
-				ByteBuffer pixelBuffer = ByteBuffer.wrap(pixels);
-				gl.glTexSubImage3D(gl.GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, TEXTURE_SIZE, TEXTURE_SIZE,
-					1, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE, pixelBuffer);
+				ByteBuffer pixelBuffer = ByteBuffer.allocateDirect(pixels.length);
+				pixelBuffer.put(pixels);
+				pixelBuffer.flip();
+				glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, TEXTURE_SIZE, TEXTURE_SIZE,
+					1, GL_RGBA, GL_UNSIGNED_BYTE, pixelBuffer);
 
 				return true;
 			}
@@ -222,14 +249,14 @@ public class TextureManager
 		return false;
 	}
 
-	public void setAnisotropicFilteringLevel(int textureArrayId, int level, GL4 gl, boolean trilinearFiltering)
+	public void setAnisotropicFilteringLevel(int textureArrayId, int level, boolean trilinearFiltering)
 	{
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
 
 		//level = 0 means no mipmaps and no anisotropic filtering
 		if (level == 0)
 		{
-			gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		}
 		//level = 1 means with mipmaps but without anisotropic filtering GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT defaults to 1.0 which is off
 		//level > 1 enables anisotropic filtering. It's up to the vendor what the values mean
@@ -240,28 +267,28 @@ public class TextureManager
 			{
 				// Trilinear filtering is used for HD textures as linear filtering produces noisy textures
 				// that are very noticeable on terrain
-				gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR_MIPMAP_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 			}
 			else
 			{
 				// Set on GL_NEAREST_MIPMAP_LINEAR (bilinear filtering with mipmaps) since the pixel nature of the game means that nearest filtering
 				// looks best for objects up close but allows linear filtering to resolve possible aliasing and noise with mipmaps from far away objects.
-				gl.glTexParameteri(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST_MIPMAP_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 			}
 		}
 
-		if (gl.isExtensionAvailable("GL_EXT_texture_filter_anisotropic"))
+		if (GL.getCapabilities().GL_EXT_texture_filter_anisotropic)
 		{
-			final float maxSamples = GLUtil.glGetFloat(gl, gl.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+			final float maxSamples = glGetFloat(EXTTextureFilterAnisotropic.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
 			//Clamp from 1 to max GL says it supports.
 			final float anisoLevel = Math.max(1, Math.min(maxSamples, level));
-			gl.glTexParameterf(gl.GL_TEXTURE_2D_ARRAY, gl.GL_TEXTURE_MAX_ANISOTROPY_EXT, anisoLevel);
+			glTexParameterf(GL_TEXTURE_2D_ARRAY, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, anisoLevel);
 		}
 	}
 
-	public void freeTextureArray(GL4 gl, int textureArrayId)
+	public void freeTextureArray(int textureArrayId)
 	{
-		GLUtil.glDeleteTexture(gl, textureArrayId);
+		glDeleteTextures(textureArrayId);
 	}
 
 	/**
@@ -294,11 +321,11 @@ public class TextureManager
 		return true;
 	}
 
-	private void updateTextures(TextureProvider textureProvider, GL4 gl, int textureArrayId)
+	private void updateTextures(TextureProvider textureProvider, int textureArrayId)
 	{
 		Texture[] textures = textureProvider.getTextures();
 
-		gl.glBindTexture(gl.GL_TEXTURE_2D_ARRAY, textureArrayId);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureArrayId);
 
 		int cnt = 0;
 		for (int textureId = 0; textureId < textures.length; textureId++)
@@ -324,9 +351,11 @@ public class TextureManager
 				}
 
 				byte[] pixels = convertPixels(srcPixels, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
-				ByteBuffer pixelBuffer = ByteBuffer.wrap(pixels);
-				gl.glTexSubImage3D(gl.GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, TEXTURE_SIZE, TEXTURE_SIZE,
-					1, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE, pixelBuffer);
+				ByteBuffer pixelBuffer = ByteBuffer.allocateDirect(pixels.length);
+				pixelBuffer.put(pixels);
+				pixelBuffer.flip();
+				glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, textureId, TEXTURE_SIZE, TEXTURE_SIZE,
+					1, GL_RGBA, GL_UNSIGNED_BYTE, pixelBuffer);
 			}
 		}
 
