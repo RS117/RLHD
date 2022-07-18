@@ -113,8 +113,7 @@ public class LightManager
 
 	private EntityHiderConfig entityHiderConfig;
 
-	static final float PI = 3.14159265358979323846f;
-	static final float TWO_PI = 2f * PI;
+	static final float TWO_PI = (float) (2 * Math.PI);
 
 	public void startUp()
 	{
@@ -292,7 +291,7 @@ public class LightManager
 			{
 				long repeatMs = 60000;
 				int offset = light.randomOffset;
-				float t = ((System.currentTimeMillis() + offset) % repeatMs) / (float) repeatMs * TWO_PI;
+				float t = TWO_PI * ((System.currentTimeMillis() + offset) % repeatMs) / repeatMs;
 
 				float flicker = (float) (
 					pow(cos(11 * t), 2) +
