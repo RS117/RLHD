@@ -68,9 +68,7 @@ public enum Overlay
 	VARROCK_BUILDING_FLOOR_1(81, Area.VARROCK, GroundMaterial.TILE_SMALL, new Properties().setBlended(false)),
 	VARROCK_BUILDING_FLOOR_2(4, Area.VARROCK, GroundMaterial.NONE, new Properties().setBlended(false)),
 	VARROCK_PLANT_PATCHES(89, Area.VARROCK, GroundMaterial.DIRT, new Properties().setBlended(false)),
-	VARROCK_EAST_BANK_CENTER(-83, Area.VARROCK_EAST_BANK_CENTER, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
-	VARROCK_EAST_BANK_OUTSIDE_1(-85, Area.VARROCK_EAST_BANK_OUTSIDE_1, GroundMaterial.VARROCK_PATHS),
-	VARROCK_EAST_BANK(-85, Area.VARROCK_EAST_BANK, GroundMaterial.TILES_2x2_1, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK(-83, Area.VARROCK_EAST_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	VARROCK_ROOF_GRAVEL(2, Area.VARROCK_CASTLE, GroundMaterial.GRAVEL, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_1(-83, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_2(-84, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
@@ -183,9 +181,6 @@ public enum Overlay
 
 	// Fossil Island
 	ANCIENT_MUSHROOM_POOL(95, Area.FOSSIL_ISLAND, WaterType.SWAMP_WATER_FLAT),
-	FOSSIL_ISLAND_CENTRAL_BANK_FIX(11, Area.FOSSIL_ISLAND_CENTRAL_BANK_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(-2).setBlended(false)),
-	FOSSIL_ISLAND_HILL_HOUSE_FIX(11, Area.FOSSIL_ISLAND_HILL_HOUSE_FIX, GroundMaterial.VARROCK_PATHS),
-	FOSSIL_ISLAND_HILL_TEXTURE_FIX(11, Area.FOSSIL_ISLAND, GroundMaterial.VARIED_DIRT),
 
 	// Zeah
 	XERICS_LOOKOUT_TILE_1(50, Area.XERICS_LOOKOUT, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
