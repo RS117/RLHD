@@ -29799,5 +29799,227 @@
     "duration": 0,
     "range": 0,
     "fadeInDuration": 0
+  },
+  {
+    "description": "LOVAKITE_FURNACE",
+    "height": 250,
+    "alignment": "CENTER",
+    "radius": 2000,
+    "strength": 20,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 10,
+    "objectIds": [
+      28562
+    ]
+  },
+  {
+    "description": "EVIL_CHICKEN_SHRINE",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 10,
+    "color": [
+      255,
+      127,
+      127
+    ],
+    "type": "FLICKER",
+    "duration": 200,
+    "range": 15,
+    "fadeInDuration": 0,
+    "objectIds": [
+      29088
+    ]
+  },
+  {
+    "description": "COOKING_RANGE",
+    "height": 100,
+    "alignment": "CENTER",
+    "radius": 400,
+    "strength": 6,
+    "color": [
+      252,
+      148,
+      3
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 5,
+    "objectIds": [
+      40297
+    ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_RED_PURPLE_CRYSTAL",
+    "height": 128,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 8,
+    "color": [
+      255,
+      100,
+      190
+    ],
+    "type": "PULSE",
+    "duration": 2000,
+    "range": 10,
+    "fadeInDuration": 0,
+    "objectIds": [
+      31969
+    ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_RED_PURPLE_CRYSTAL_BIG",
+    "height": 256,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 8,
+    "color": [
+      255,
+      100,
+      190
+    ],
+    "type": "PULSE",
+    "duration": 2000,
+    "range": 10,
+    "fadeInDuration": 0,
+    "objectIds": [
+      31970
+    ]
+  },
+  {
+    "description": "MOUNT_QUIDAMORTEM_GLOWING_CARVING",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 6,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 0,
+    "objectIds": [
+      32524
+    ]
+  },
+  {
+    "description": "BENEATH_CURSED_SANDS_RED_FIRE_SMALL",
+    "height": 150,
+    "alignment": "CENTER",
+    "radius": 600,
+    "strength": 3,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 500,
+    "range": 10,
+    "objectIds": [
+      44024,
+      44023
+    ]
+  },
+  {
+    "description": "BENEATH_CURSED_SANDS_RED_FIRE_LARGE",
+    "height": 225,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 3,
+    "color": [
+      255,
+      0,
+      0
+    ],
+    "type": "FLICKER",
+    "duration": 1000,
+    "range": 10,
+    "objectIds": [
+      44022
+    ]
+  },
+  {
+    "description": "APE_ATOLL_SACRIFICIAL_PYRE",
+    "height": 80,
+    "alignment": "CENTER",
+    "radius": 1000,
+    "strength": 10,
+    "color": [
+      255,
+      118,
+      9
+    ],
+    "type": "FLICKER",
+    "duration": 800,
+    "range": 7,
+    "objectIds": [
+      4767
+    ]
+  },
+  {
+    "description": "MM2_CRASH_SITE_CAVE_SKYLIGHT",
+    "height": 1000,
+    "alignment": "CENTER",
+    "radius": 2000,
+    "strength": 6,
+    "color": [
+      255,
+      255,
+      255
+    ],
+    "type": "FLICKER",
+    "duration": 0,
+    "range": 0,
+    "objectIds": [
+      28687
+    ]
+  },
+  {
+    "description": "LITHKREN_LAVA_1",
+    "worldX": 3531,
+    "worldY": 4013,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 2400,
+    "strength": 6,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
+  },
+  {
+    "description": "LITHKREN_LAVA_2",
+    "worldX": 3527,
+    "worldY": 4025,
+    "plane": 0,
+    "height": 500,
+    "alignment": "CENTER",
+    "radius": 1200,
+    "strength": 6,
+    "color": [
+      225,
+      225,
+      215
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 10,
+    "fadeInDuration": 0
   }
 ]
