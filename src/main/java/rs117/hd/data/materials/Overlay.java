@@ -87,6 +87,8 @@ public enum Overlay
 	KHARID_PATHS_3(25, Area.KHARID_DESERT_REGION, GroundMaterial.DIRT, new Properties().setSaturation(3).setHue(6)),
 
 	// Falador
+	FALADOR_EAST_BANK_PATH_FIX_2(-119, Area.FALADOR_EAST_BANK_PATH_FIX_2, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(13).setBlended(false)),
+	FALADOR_EAST_BANK_PATH_FIX_1(-119, Area.FALADOR_EAST_BANK_PATH_FIX_1, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(9).setBlended(false)),
 	FALADOR_PATHS(-119, Area.FALADOR, GroundMaterial.FALADOR_PATHS, new Properties().setHue(7).setSaturation(1).setShiftLightness(7)),
 	FALADOR_HAIRDRESSER_TILE_1(77, Area.FALADOR_HAIRDRESSER, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	FALADOR_HAIRDRESSER_TILE_2(123, Area.FALADOR_HAIRDRESSER, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
@@ -249,6 +251,11 @@ public enum Overlay
 	// Elid Cave fix
 	ELID_CAVE_WATER_FIX(-126, Area.ELID_CAVE, WaterType.WATER),
 
+	// Entrana glass/furnace building fix
+	ENTRANA_GLASS_BUILDING_FIX(10, Area.ENTRANA_GLASS_BUILDING_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(8).setBlended(false)),
+
+	// Ancient Cavern upper level water change
+	ANCIENT_CAVERN_UPPER_WATER(41, Area.ANCIENT_CAVERN_UPPER, WaterType.WATER_FLAT),
 
 	// default overlays
 	OVERLAY_N128(-128, WaterType.WATER),
