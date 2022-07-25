@@ -86,6 +86,9 @@ public class DeveloperTools implements KeyListener
 	}
 
 	public String shaderResolver(String path) {
+		if (shaderPath == null)
+			return null;
+
 		Path fullPath = shaderPath.resolve(path);
 		try
 		{
