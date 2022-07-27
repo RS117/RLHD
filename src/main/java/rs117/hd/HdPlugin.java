@@ -1937,6 +1937,8 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 
 		awtContext.swapBuffers();
 
+		drawManager.processDrawComplete(this::screenshot);
+
 		glBindFramebuffer(GL_FRAMEBUFFER, awtContext.getFramebuffer(false));
 
 		checkGLErrors();
