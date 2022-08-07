@@ -1,13 +1,8 @@
 package rs117.hd.overlays;
 
 import com.google.inject.Inject;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,17 +11,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Function;
 import javax.annotation.Nonnull;
-import net.runelite.api.Client;
-import static net.runelite.api.Constants.MAX_Z;
-import static net.runelite.api.Constants.SCENE_SIZE;
-import net.runelite.api.Perspective;
+
+import net.runelite.api.*;
+
+import static net.runelite.api.Perspective.*;
 import static net.runelite.api.Perspective.LOCAL_TILE_SIZE;
+import static net.runelite.api.Perspective.SCENE_SIZE;
+
 import net.runelite.api.Point;
-import net.runelite.api.Scene;
-import net.runelite.api.SceneTileModel;
-import net.runelite.api.SceneTilePaint;
-import net.runelite.api.Tile;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.client.ui.FontManager;
+import net.runelite.client.ui.overlay.OverlayLayer;
+import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import org.apache.commons.lang3.tuple.Pair;
 import rs117.hd.data.materials.Material;
@@ -43,6 +39,8 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 	public TileInfoOverlay(Client client)
 	{
 		this.client = client;
+		setPosition(OverlayPosition.DYNAMIC);
+		setLayer(OverlayLayer.ABOVE_SCENE);
 	}
 
 	@Override
@@ -54,6 +52,7 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 			return null;
 		}
 
+		g.setFont(FontManager.getRunescapeFont());
 		g.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
 
 		Scene scene = client.getScene();
@@ -315,28 +314,28 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 	 */
 	public static Polygon getCanvasTilePoly(@Nonnull Client client, Tile tile)
 	{
-		LocalPoint localLocation = tile.getLocalLocation();
+		LocalPoint lp = tile.getLocalLocation();
 		int plane = tile.getRenderLevel();
-		if (!localLocation.isInScene())
+		if (!lp.isInScene())
 		{
 			return null;
 		}
 
-		final int swX = localLocation.getX() - LOCAL_TILE_SIZE / 2;
-		final int swY = localLocation.getY() - LOCAL_TILE_SIZE / 2;
+		final int swX = lp.getX() - LOCAL_TILE_SIZE / 2;
+		final int swY = lp.getY() - LOCAL_TILE_SIZE / 2;
 
-		final int neX = localLocation.getX() + LOCAL_TILE_SIZE / 2;
-		final int neY = localLocation.getY() + LOCAL_TILE_SIZE / 2;
+		final int neX = lp.getX() + LOCAL_TILE_SIZE / 2;
+		final int neY = lp.getY() + LOCAL_TILE_SIZE / 2;
 
 		final int swHeight = getHeight(client, swX, swY, plane);
 		final int nwHeight = getHeight(client, neX, swY, plane);
 		final int neHeight = getHeight(client, neX, neY, plane);
 		final int seHeight = getHeight(client, swX, neY, plane);
 
-		Point p1 = Perspective.localToCanvas(client, swX, swY, swHeight);
-		Point p2 = Perspective.localToCanvas(client, neX, swY, nwHeight);
-		Point p3 = Perspective.localToCanvas(client, neX, neY, neHeight);
-		Point p4 = Perspective.localToCanvas(client, swX, neY, seHeight);
+		Point p1 = localToCanvas(client, swX, swY, swHeight);
+		Point p2 = localToCanvas(client, neX, swY, nwHeight);
+		Point p3 = localToCanvas(client, neX, neY, neHeight);
+		Point p4 = localToCanvas(client, swX, neY, seHeight);
 
 		if (p1 == null || p2 == null || p3 == null || p4 == null)
 		{
@@ -353,17 +352,16 @@ public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 	}
 
 	private static int getHeight(@Nonnull Client client, int localX, int localY, int plane) {
-		int sceneX = localX >> 7;
-		int sceneY = localY >> 7;
-		if (sceneX >= 0 && sceneY >= 0 && sceneX < 104 && sceneY < 104) {
+		int sceneX = localX >> LOCAL_COORD_BITS;
+		int sceneY = localY >> LOCAL_COORD_BITS;
+		if (sceneX >= 0 && sceneY >= 0 && sceneX < SCENE_SIZE && sceneY < SCENE_SIZE) {
 			int[][][] tileHeights = client.getTileHeights();
-			int x = localX & 127;
-			int y = localY & 127;
-			int var8 = x * tileHeights[plane][sceneX + 1][sceneY] + (128 - x) * tileHeights[plane][sceneX][sceneY] >> 7;
-			int var9 = tileHeights[plane][sceneX][sceneY + 1] * (128 - x) + x * tileHeights[plane][sceneX + 1][sceneY + 1] >> 7;
-			return (128 - y) * var8 + y * var9 >> 7;
-		} else {
-			return 0;
+			int x = localX & (LOCAL_TILE_SIZE - 1);
+			int y = localY & (LOCAL_TILE_SIZE - 1);
+			int var8 = x * tileHeights[plane][sceneX + 1][sceneY] + (LOCAL_TILE_SIZE - x) * tileHeights[plane][sceneX][sceneY] >> LOCAL_COORD_BITS;
+			int var9 = tileHeights[plane][sceneX][sceneY + 1] * (LOCAL_TILE_SIZE - x) + x * tileHeights[plane][sceneX + 1][sceneY + 1] >> LOCAL_COORD_BITS;
+			return (LOCAL_TILE_SIZE - y) * var8 + y * var9 >> 7;
 		}
+		return 0;
 	}
 }
