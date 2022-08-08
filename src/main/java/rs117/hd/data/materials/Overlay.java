@@ -50,6 +50,7 @@ public enum Overlay
 	LUM_BRIDGE(10, Area.LUM_BRIDGE, GroundMaterial.GRAVEL),
 	LUMBRIDGE_CASTLE_TILE(3, Area.LUMBRIDGE_CASTLE_BASEMENT, GroundMaterial.MARBLE_1_SEMIGLOSS),
 	LUMBRIDGE_CASTLE_FLOORS(10, Area.LUMBRIDGE_CASTLE, GroundMaterial.VARROCK_PATHS_LIGHT, new Properties().setShiftLightness(10)),
+	LUMBRIDGE_TOWER_FLOOR_TEXTURE(10, Area.LUMBRIDGE_TOWER_FLOOR, GroundMaterial.VARROCK_PATHS_LIGHT, new Properties().setShiftLightness(10)),
 	LUMBRIDGE_PATHS(10, Area.LUMBRIDGE, GroundMaterial.GRAVEL, new Properties().setShiftLightness(12).setHue(7).setSaturation(1)),
 	LUMBRIDGE_CASTLE_ENTRYWAY_1(2, Area.LUMBRIDGE_CASTLE_ENTRYWAY, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	LUMBRIDGE_CASTLE_ENTRYWAY_2(3, Area.LUMBRIDGE_CASTLE_ENTRYWAY, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
@@ -61,14 +62,18 @@ public enum Overlay
 	VARROCK_JULIETS_HOUSE_HARD_FLOORS(-85, Area.VARROCK_JULIETS_HOUSE, GroundMaterial.MARBLE_1_SEMIGLOSS, new Properties().setBlended(false)),
 	VARROCK_JULIETS_HOUSE_CARPET_RED(-93, Area.VARROCK_JULIETS_HOUSE, GroundMaterial.CARPET, new Properties().setBlended(false)),
 	VARROCK_JULIETS_HOUSE_CARPET_PINK(-96, Area.VARROCK_JULIETS_HOUSE, GroundMaterial.CARPET, new Properties().setBlended(false)),
-	VARROCK_JOLLY_BOAR_INN_KITCHEN(-84, Area.VARROCK_JOLLY_BOAR_INN, GroundMaterial.NONE, new Properties().setBlended(false)),
-	VARROCK_CHURCH(-83, Area.VARROCK_CHURCH, GroundMaterial.NONE, new Properties().setBlended(false)),
+	VARROCK_JOLLY_BOAR_INN_KITCHEN_1(-84, Area.VARROCK_JOLLY_BOAR_INN, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setBlended(false)),
+	VARROCK_JOLLY_BOAR_INN_KITCHEN_2(-85, Area.VARROCK_JOLLY_BOAR_INN, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setBlended(false)),
+	VARROCK_CHURCH_CARPET(-83, Area.VARROCK_SARADOMIN_CHURCH, GroundMaterial.NONE, new Properties().setBlended(false)),
+	VARROCK_CHURCH_FLOOR(-85, Area.VARROCK_SARADOMIN_CHURCH, GroundMaterial.VARROCK_PATHS, new Properties().setBlended(false)),
 	VARROCK_ANVILS(81, Area.VARROCK_ANVILS, GroundMaterial.DIRT),
 	VARROCK_BUILDING_RUINS(81, Area.VARROCK_BUILDING_RUINS, GroundMaterial.DIRT),
 	VARROCK_BUILDING_FLOOR_1(81, Area.VARROCK, GroundMaterial.TILE_SMALL, new Properties().setBlended(false)),
 	VARROCK_BUILDING_FLOOR_2(4, Area.VARROCK, GroundMaterial.NONE, new Properties().setBlended(false)),
 	VARROCK_PLANT_PATCHES(89, Area.VARROCK, GroundMaterial.DIRT, new Properties().setBlended(false)),
-	VARROCK_EAST_BANK(-83, Area.VARROCK_EAST_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK_CENTER(-83, Area.VARROCK_EAST_BANK_CENTER, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK_OUTSIDE_1(-85, Area.VARROCK_EAST_BANK_OUTSIDE_1, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setBlended(false)),
+	VARROCK_EAST_BANK(-85, Area.VARROCK_EAST_BANK, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setBlended(false)),
 	VARROCK_ROOF_GRAVEL(2, Area.VARROCK_CASTLE, GroundMaterial.GRAVEL, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_1(-83, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
 	VARROCK_ROOF_ARCHERY_FLOOR_2(-84, Area.VARROCK_CASTLE, GroundMaterial.DIRT, new Properties().setBlended(false)),
@@ -94,10 +99,17 @@ public enum Overlay
 	FALADOR_HAIRDRESSER_TILE_2(123, Area.FALADOR_HAIRDRESSER, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	FALADOR_PARTY_ROOM_TILE_1(33, Area.FALADOR_PARTY_ROOM, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	FALADOR_PARTY_ROOM_TILE_2(123, Area.FALADOR_PARTY_ROOM, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
+	FALADOR_PARTROOM_STAIRS_FIX(37, Area.FALADOOR_PARTY_ROOM_STAIRS_FIX, GroundMaterial.NONE, new Properties().setBlended(false).setLightness(0)),
 	FALADOR_BUILDING_FLOOR_1(123, Area.FALADOR, GroundMaterial.TILES_2x2_1_GLOSS, new Properties().setBlended(false)),
 	FALADOR_BUILDING_FLOOR_2(33, Area.FALADOR, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	FALADOR_BUILDING_FLOOR_3(77, Area.FALADOR, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	FALADOR_BUILDING_FLOOR_4(13, Area.FALADOR, GroundMaterial.NONE, new Properties().setBlended(false)),
+
+	// Port Sarim
+	PORT_SARIM_BETTYS_HOUSE_1(11, Area.PORT_SARIM_BETTYS_HOUSE, GroundMaterial.MARBLE_DARK, new Properties().setBlended(false).setLightness(20)),
+	PORT_SARIM_BETTYS_HOUSE_2(2, Area.PORT_SARIM_BETTYS_HOUSE, GroundMaterial.MARBLE_DARK, new Properties().setBlended(false).setLightness(30)),
+	PORT_SARIM_BETTYS_HOUSE_3(3, Area.PORT_SARIM_BETTYS_HOUSE, GroundMaterial.MARBLE_DARK, new Properties().setBlended(false).setLightness(40)),
+
 
 	// Rimmington
 	CRAFTING_GUILD_TILE_1(2, Area.CRAFTING_GUILD, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
@@ -105,11 +117,20 @@ public enum Overlay
 	CRAFTING_GUILD_TILE_3(4, Area.CRAFTING_GUILD, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 
 	// Edgeville
-	EDGEVILLE_BANK_TILE_1(3, Area.EDGEVILLE_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
-	EDGEVILLE_BANK_TILE_2(4, Area.EDGEVILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
-	EDGEVILLE_BANK_SURROUNDING_STONE(10, Area.EDGEVILLE_BANK_SURROUNDING, GroundMaterial.VARROCK_PATHS),
+	EDGEVILLE_BANK_TILE_1(3, Area.EDGEVILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false).setBlendedAsUnderlay(true).setLightness(22)),
+	EDGEVILLE_BANK_TILE_2(4, Area.EDGEVILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false).setBlendedAsUnderlay(true).setLightness(30)),
+	EDGEVILLE_BANK_TILING_FIX_1(10, Area.EDGEVILLE_BANK_TILING, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false).setBlendedAsUnderlay(true).setLightness(22)),
+	EDGEVILLE_BANK_PERIMETER_FIX(10, Area.EDGEVILLE_BANK_PERIMETER_FIX, GroundMaterial.MARBLE_2_GLOSS, new Properties().setLightness(30)),
+	EDGEVILLE_BANK_PERIMETER(10, Area.EDGEVILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false).setBlendedAsUnderlay(true).setLightness(30)),
+	EDGEVILLE_BANK_SURROUNDING_PATH(10, Area.EDGEVILLE_BANK_SURROUNDING_PATH, GroundMaterial.VARROCK_PATHS),
 	EDGEVILLE_DORIS_HOUSE_FLOOR(119, Area.EDGEVILLE_DORIS_HOUSE, GroundMaterial.TILE_SMALL),
+	EDGEVILLE_FURNACE_FLOOR(10, Area.EDGEVILLE_FURNACE_FLOOR, GroundMaterial.TILES_2x2_1, new Properties().setLightness(26).setBlended(false)),
+	EDGEVILLE_MANS_HOUSE_FLOOR(10, Area.EDGEVILLE_MANS_HOUSE_FLOOR, GroundMaterial.TILE_SMALL, new Properties().setHue(5).setSaturation(4).setShiftLightness(-4).setBlended(false)),
+	EDGEVILLE_GENERAL_STORE_BLEND_FIX(10, Area.EDGEVILLE_GENERAL_STORE_FLOOR_FIX, GroundMaterial.TILE_SMALL, new Properties().setHue(5).setSaturation(4).setShiftLightness(-4).setBlended(false)),
+	EDGEVILLE_GENERAL_STORE_FLOOR(10, Area.EDGEVILLE_GENERAL_STORE_FLOOR, GroundMaterial.TILE_SMALL, new Properties().setHue(5).setSaturation(4).setShiftLightness(-4)),
+	EDGEVILLE_GUARD_TOWER_FLOOR(10, Area.EDGEVILLE_GUARD_TOWER_FLOOR, GroundMaterial.CONCRETE),
 	EDGEVILLE_MONASTERY_FLOOR(10, Area.EDGEVILLE_MONASTERY, GroundMaterial.GRAVEL, new Properties().setBlended(false)),
+
 
 	// Burthorpe
 	HEROES_GUILD_TILE_1(3, Area.HEROES_GUILD, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
@@ -124,6 +145,9 @@ public enum Overlay
 	SEERS_BANK_TILE_1(3, Area.SEERS_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	SEERS_BANK_TILE_2(4, Area.SEERS_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
 	SEERS_BANK_TILE_3(8, Area.SEERS_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
+	SEERS_HOUSE_FLOORS(22, Area.SEERS_HOUSES, GroundMaterial.WOOD_PLANKS_1, new Properties().setBlended(false).setLightness(45).setSaturation(2).setHue(15)),
+	SEERS_CHURCH_1(-85, Area.SEERS_CHURCH, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
+	SEERS_CHURCH_2(8, Area.SEERS_CHURCH, GroundMaterial.MARBLE_2, new Properties().setBlended(false)),
 
 	// Catherby
 	CATHERBY_BEACH_OBELISK_WATER_FIX(6, Area.CATHERBY_BEACH_OBELISK_WATER_FIX, WaterType.WATER_FLAT),
@@ -141,11 +165,20 @@ public enum Overlay
 	// Yanille
 	YANILLE_BANK_TILE_1(3, Area.YANILLE_BANK, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
 	YANILLE_BANK_TILE_2(4, Area.YANILLE_BANK, GroundMaterial.MARBLE_2_GLOSS, new Properties().setBlended(false)),
-	YANILLE_HUNTER_SHOP_FLOOR(16, Area.YANILLE, GroundMaterial.CARPET, new Properties().setBlended(false)),
+	YANILLE_BANK_REAR_GROUND(2, Area.YANILLE_BANK, GroundMaterial.TILES_2x2_2_GLOSS, new Properties().setBlended(false).setLightness(25)),
+	YANILLE_HUNTER_SHOP_FLOOR(16, Area.YANILLE, GroundMaterial.WOOD_PLANKS_1, new Properties().setBlended(false).setLightness(32)),
+	YANILLE_MAGIC_GUILD_FLOOR_FIX(10, Area.YANILLE_MAGIC_GUILD_FLOORS, GroundMaterial.TILES_2x2_1_SEMIGLOSS, new Properties().setLightness(30)),
 	GUTANOTH_CAVE(29, Area.GUTANOTH_CAVE, WaterType.SWAMP_WATER_FLAT),
 
+	// Watchtower
+	YANILLE_WATCHTOWER_TOP_FLOOR_FIX_2(2, Area.YANILLE_WATCHTOWER_TOP, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
+	YANILLE_WATCHTOWER_TOP_FLOOR_FIX_3(3, Area.YANILLE_WATCHTOWER_TOP, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),
+
 	// Draynor
+	DRAYNOR_AGGIES_HOUSE(-93, Area.DRAYNOR_AGGIES_HOUSE, GroundMaterial.CARPET, new Properties().setBlended(false)),
 	WISE_OLD_MANS_HOUSE_CARPET(86, Area.DRAYNOR, GroundMaterial.CARPET, new Properties().setBlended(false)),
+	DRAYNOR_BANK_FLOOR(10, Area.DRAYNOR_BANK, GroundMaterial.GRAVEL, new Properties().setBlended(false).setLightness(28)),
+
 	// Draynor manor
 	DRAYNOR_MANOR_TILE_DARK(2, Area.DRAYNOR_MANOR_INTERIOR, GroundMaterial.MARBLE_1, new Properties().setBlended(false)),
 	DRAYNOR_MANOR_TILE_LIGHT(10, Area.DRAYNOR_MANOR_INTERIOR, GroundMaterial.MARBLE_2, new Properties().setBlended(false)),
@@ -181,6 +214,9 @@ public enum Overlay
 
 	// Fossil Island
 	ANCIENT_MUSHROOM_POOL(95, Area.FOSSIL_ISLAND, WaterType.SWAMP_WATER_FLAT),
+	FOSSIL_ISLAND_CENTRAL_BANK_FIX(11, Area.FOSSIL_ISLAND_CENTRAL_BANK_FIX, GroundMaterial.GRAVEL, new Properties().setShiftLightness(-2).setBlended(false)),
+	FOSSIL_ISLAND_HILL_HOUSE_FIX(11, Area.FOSSIL_ISLAND_HILL_HOUSE_FIX, GroundMaterial.VARROCK_PATHS),
+	FOSSIL_ISLAND_HILL_TEXTURE_FIX(11, Area.FOSSIL_ISLAND_HILL_TEXTURE_FIX, GroundMaterial.VARIED_DIRT),
 
 	// Zeah
 	XERICS_LOOKOUT_TILE_1(50, Area.XERICS_LOOKOUT, GroundMaterial.TILES_2x2_2, new Properties().setBlended(false)),
