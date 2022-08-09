@@ -241,6 +241,7 @@ public enum Material
 	HD_BRICK_BROWN(252),
 	HD_LAVA_3(253, new Properties().setEmissive(1).setDisplacement(235, 0.05f, 36f, 22f).setScroll(0f, 3f)),
 	HD_ROOF_SHINGLES_2(254),
+	WORN_TILE_1(299),
 
 	// Seasonal
 	WINTER_WILLOW_LEAVES(255, new Properties().setTextureScale(1.025f, 1.0f)),

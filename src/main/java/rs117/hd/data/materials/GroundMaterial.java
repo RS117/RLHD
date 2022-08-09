@@ -77,6 +77,7 @@ public enum GroundMaterial
 	CONCRETE(Material.CONCRETE),
 	SAND_BRICK(Material.SAND_BRICK),
 	TILE_DARK(Material.TILE_DARK),
+	WORN_TILE_1(Material.WORN_TILE_1),
 
 	// water/fluid variants
 	WATER(Material.WATER),
