@@ -1211,9 +1211,9 @@ public enum Environment
 	public static float[] rgb(int r, int g, int b)
 	{
 		return new float[]{
-			HDUtils.gammaToLinear(r / 255f),
-			HDUtils.gammaToLinear(g / 255f),
-			HDUtils.gammaToLinear(b / 255f)
+			HDUtils.srgbToLinear(r / 255f),
+			HDUtils.srgbToLinear(g / 255f),
+			HDUtils.srgbToLinear(b / 255f)
 		};
 	}
 }

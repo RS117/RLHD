@@ -1746,7 +1746,7 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] fogColor = hasLoggedIn ? environmentManager.getFogColor() : EnvironmentManager.BLACK_COLOR;
 			for (int i = 0; i < fogColor.length; i++)
 			{
-				fogColor[i] = HDUtils.linearToGamma(fogColor[i]);
+				fogColor[i] = HDUtils.linearToSrgb(fogColor[i]);
 			}
 			glClearColor(fogColor[0], fogColor[1], fogColor[2], 1f);
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -1781,15 +1781,15 @@ public class HdPlugin extends Plugin implements DrawCallbacks
 			float[] waterColorDark = new Color(Color.HSBtoRGB(waterColorHSB[0], waterColorHSB[1], waterColorHSB[2] * darkBrightnessMultiplier)).getRGBColorComponents(null);
 			for (int i = 0; i < waterColorLight.length; i++)
 			{
-				waterColorLight[i] = HDUtils.linearToGamma(waterColorLight[i]);
+				waterColorLight[i] = HDUtils.linearToSrgb(waterColorLight[i]);
 			}
 			for (int i = 0; i < waterColorMid.length; i++)
 			{
-				waterColorMid[i] = HDUtils.linearToGamma(waterColorMid[i]);
+				waterColorMid[i] = HDUtils.linearToSrgb(waterColorMid[i]);
 			}
 			for (int i = 0; i < waterColorDark.length; i++)
 			{
-				waterColorDark[i] = HDUtils.linearToGamma(waterColorDark[i]);
+				waterColorDark[i] = HDUtils.linearToSrgb(waterColorDark[i]);
 			}
 			glUniform3f(uniWaterColorLight, waterColorLight[0], waterColorLight[1], waterColorLight[2]);
 			glUniform3f(uniWaterColorMid, waterColorMid[0], waterColorMid[1], waterColorMid[2]);

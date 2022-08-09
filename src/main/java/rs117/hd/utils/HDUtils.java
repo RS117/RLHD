@@ -245,16 +245,22 @@ public class HDUtils
 		return p;
 	}
 
-	public static float linearToGamma(float c)
+	// Conversion functions to and from sRGB and linear color space.
+	// The implementation is based on the sRGB EOTF given in the Khronos Data Format Specification.
+	// Source: https://web.archive.org/web/20220808015852/https://registry.khronos.org/DataFormat/specs/1.3/dataformat.1.3.pdf
+	// Page number 130 (146 in the PDF)
+	public static float linearToSrgb(float c)
 	{
-		float gamma = 2.2f;
-		return (float)Math.pow(c, 1.0f / gamma);
+		return c <= 0.0031308 ?
+			c * 12.92f :
+			(float) (1.055 * Math.pow(c, 1 / 2.4) - 0.055);
 	}
 
-	public static float gammaToLinear(float c)
+	public static float srgbToLinear(float c)
 	{
-		float gamma = 2.2f;
-		return (float)Math.pow(c, gamma);
+		return c <= 0.04045f ?
+			c / 12.92f :
+			(float) Math.pow((c + 0.055) / 1.055, 2.4);
 	}
 
 	public static float dotNormal3Lights(float[] normals)

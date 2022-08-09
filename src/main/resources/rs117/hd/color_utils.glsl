@@ -112,14 +112,20 @@ vec3 hsvToRgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
-vec3 linearToGamma(vec3 c)
-{
-    float gamma = 2.2;
-    return pow(c, vec3(1.0 / gamma));
+// Conversion functions to and from sRGB and linear color space.
+// The implementation is based on the sRGB EOTF given in the Khronos Data Format Specification.
+// Source: https://web.archive.org/web/20220808015852/https://registry.khronos.org/DataFormat/specs/1.3/dataformat.1.3.pdf
+// Page number 130 (146 in the PDF)
+vec3 srgbToLinear(vec3 srgb) {
+  return mix(
+    srgb / 12.92,
+    pow((srgb + vec3(0.055)) / vec3(1.055), vec3(2.4)),
+    step(vec3(0.04045), srgb));
 }
 
-vec3 gammaToLinear(vec3 c)
-{
-    float gamma = 2.2;
-    return pow(c, vec3(gamma));
+vec3 linearToSrgb(vec3 rgb) {
+  return mix(
+    rgb * 12.92,
+    1.055 * pow(rgb, vec3(1 / 2.4)) - 0.055,
+    step(vec3(0.0031308), rgb));
 }

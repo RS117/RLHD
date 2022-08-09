@@ -844,7 +844,7 @@ void main() {
     {
         vec3 litColor = compositeColor * compositeLight;
         compositeColor = mix(litColor, compositeColor, emissive);
-        compositeColor = linearToGamma(compositeColor);
+        compositeColor = linearToSrgb(compositeColor);
     }
 
 

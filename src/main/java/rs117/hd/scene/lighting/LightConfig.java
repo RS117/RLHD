@@ -73,7 +73,7 @@ public class LightConfig
 				float[] linearRGBA = { 0, 0, 0, 1 };
 				for (int i = 0; i < Math.min(l.color.length, linearRGBA.length); i++)
 				{
-					linearRGBA[i] = HDUtils.gammaToLinear(l.color[i] /= 255f);
+					linearRGBA[i] = HDUtils.srgbToLinear(l.color[i] /= 255f);
 				}
 				l.color = linearRGBA;
 

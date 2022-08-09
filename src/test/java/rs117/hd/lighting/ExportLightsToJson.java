@@ -83,7 +83,7 @@ public class ExportLightsToJson
 			{
 				for (int i = 0; i < l.color.length; i++)
 				{
-					l.color[i] = HDUtils.linearToGamma(l.color[i]) * 255f;
+					l.color[i] = HDUtils.linearToSrgb(l.color[i]) * 255f;
 					int nearestInt = Math.round(l.color[i]);
 					if (Math.abs(nearestInt - l.color[i]) <= eps)
 					{
