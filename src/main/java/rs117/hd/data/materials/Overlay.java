@@ -110,6 +110,8 @@ public enum Overlay
 	PORT_SARIM_BETTYS_HOUSE_2(2, Area.PORT_SARIM_BETTYS_HOUSE, GroundMaterial.MARBLE_DARK, new Properties().setBlended(false).setLightness(30)),
 	PORT_SARIM_BETTYS_HOUSE_3(3, Area.PORT_SARIM_BETTYS_HOUSE, GroundMaterial.MARBLE_DARK, new Properties().setBlended(false).setLightness(40)),
 
+	// Brimhaven
+	BRIMHAVEN_DOCKS_TEXTURE_REMOVAL(5, Area.BRIMHAVEN_DOCKS_TEXTURED, GroundMaterial.TRANSPARENT),
 
 	// Rimmington
 	CRAFTING_GUILD_TILE_1(2, Area.CRAFTING_GUILD, GroundMaterial.MARBLE_1_GLOSS, new Properties().setBlended(false)),

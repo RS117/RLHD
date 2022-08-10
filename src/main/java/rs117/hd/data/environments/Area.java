@@ -337,6 +337,9 @@ public enum Area
 		new Rect(2980, 3185, 2924, 3202)
 	),
 
+	// Karamja
+	BRIMHAVEN_DOCKS_TEXTURED(2773, 3235, 2771, 3223),
+
 	// Burthorpe
 	HEROES_GUILD(
 		new Rect(2892, 3507, 2898, 3514),
