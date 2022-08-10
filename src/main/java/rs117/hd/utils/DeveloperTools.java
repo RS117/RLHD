@@ -56,16 +56,12 @@ public class DeveloperTools implements KeyListener
 		{
 			try
 			{
-				shaderSourceWatcher = new FileWatcher()
-					.watchPath(shaderPath)
-					.addChangeHandler(path ->
-					{
-						if (path.getFileName().toString().endsWith(".glsl"))
-						{
-							log.info("Reloading shaders...");
-							plugin.recompilePrograms();
-						}
-					});
+				shaderSourceWatcher = new FileWatcher(shaderPath, path -> {
+					if (path.getFileName().toString().endsWith(".glsl")) {
+						log.info("Reloading shaders...");
+						plugin.recompilePrograms();
+					}
+				});
 			}
 			catch (IOException ex)
 			{

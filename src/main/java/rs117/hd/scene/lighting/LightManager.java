@@ -130,9 +130,7 @@ public class LightManager
 
 			try
 			{
-				fileWatcher = new FileWatcher()
-					.watchFile(lightsConfigPath)
-					.addChangeHandler(path -> hotswapScheduled = true);
+				fileWatcher = new FileWatcher(lightsConfigPath, path -> hotswapScheduled = true);
 			}
 			catch (IOException ex)
 			{
