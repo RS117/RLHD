@@ -30021,5 +30021,167 @@
     "duration": 7000,
     "range": 10,
     "fadeInDuration": 0
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_BLUE_VAT",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 20,
+    "color": [
+      5,
+      177,
+      252
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34562
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_GREEN_VAT",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 20,
+    "color": [
+      59,
+      255,
+      10
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34563
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_RED_VAT",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 20,
+    "color": [
+      175,
+      18,
+      9
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34564
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_BLUE_TUBE",
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 25,
+    "color": [
+      5,
+      177,
+      252
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34571
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_GREEN_TUBE",
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 25,
+    "color": [
+      59,
+      255,
+      10
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34572
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_RED_TUBE",
+    "height": 50,
+    "alignment": "CENTER",
+    "radius": 800,
+    "strength": 25,
+    "color": [
+      175,
+      18,
+      9
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34573
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_BLUE_TUBE_FALL",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 15,
+    "color": [
+      5,
+      177,
+      252
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34565
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_GREEN_TUBE_FALL",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 15,
+    "color": [
+      59,
+      255,
+      10
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34566
+    ]
+  },
+  {
+    "description": "ALCHEMICAL_HYDRA_RED_TUBE_FALL",
+    "height": 200,
+    "alignment": "CENTER",
+    "radius": 350,
+    "strength": 15,
+    "color": [
+      175,
+      18,
+      9
+    ],
+    "type": "PULSE",
+    "duration": 7000,
+    "range": 50,
+    "objectIds": [
+      34567
+    ]
   }
 ]
