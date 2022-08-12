@@ -24,19 +24,14 @@
  */
 package rs117.hd.utils;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
-import com.sun.nio.file.ExtendedWatchEventModifier;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
@@ -47,7 +42,6 @@ public class FileWatcher implements AutoCloseable
 
 	Thread watcherThread;
 	WatchService watchService;
-	boolean manuallyRecursive = false;
 	HashMap<WatchKey, Path> watchKeys = new HashMap<>();
 	Consumer<Path> changeHandler;
 
@@ -69,14 +63,7 @@ public class FileWatcher implements AutoCloseable
 				};
 				watchFile(pathToWatch);
 			} else {
-				try {
-					WatchKey key = pathToWatch.register(watchService, eventKinds, ExtendedWatchEventModifier.FILE_TREE);
-					watchKeys.put(key, pathToWatch);
-				} catch (UnsupportedOperationException ex) {
-					// Fall back to manually watching directories recursively
-					manuallyRecursive = true;
-					watchRecursively(pathToWatch);
-				}
+				watchRecursively(pathToWatch);
 			}
 
 			watcherThread = new Thread(() -> {
@@ -99,7 +86,7 @@ public class FileWatcher implements AutoCloseable
 							log.trace("WatchEvent of kind {} for path {}", event.kind(), path);
 
 							// Manually register new subfolders if not watching a file tree
-							if (manuallyRecursive && event.kind() == ENTRY_CREATE && path.toFile().isDirectory())
+							if (event.kind() == ENTRY_CREATE && path.toFile().isDirectory())
 								watchRecursively(path);
 
 							changeHandler.accept(path);
