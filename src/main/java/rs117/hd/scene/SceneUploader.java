@@ -46,11 +46,11 @@ import net.runelite.api.Tile;
 import net.runelite.api.WallObject;
 import rs117.hd.HdPlugin;
 import rs117.hd.data.WaterType;
+import rs117.hd.data.area.effects.LargeTile;
+import rs117.hd.data.area.effects.TileData;
 import rs117.hd.data.materials.GroundMaterial;
 import rs117.hd.model.objects.ObjectProperties;
-import rs117.hd.data.materials.Overlay;
 import rs117.hd.data.materials.Material;
-import rs117.hd.data.materials.Underlay;
 import rs117.hd.model.ModelPusher;
 import rs117.hd.model.objects.ObjectType;
 import rs117.hd.utils.HDUtils;
@@ -72,7 +72,7 @@ class SceneUploader
 	public ProceduralGenerator proceduralGenerator;
 
 	@Inject
-	private ModelPusher modelPusher;
+	public ModelPusher modelPusher;
 
 	public int sceneId = new Random().nextInt();
 	private int offset;
@@ -88,6 +88,15 @@ class SceneUploader
 		vertexBuffer.clear();
 		uvBuffer.clear();
 		normalBuffer.clear();
+
+		LargeTile largeTile = hdPlugin.getAreaManager().getCurrentArea().getLargeTile();
+
+		if(largeTile != null) {
+			hdPlugin.getTileManager().renderFakeTile(vertexBuffer, uvBuffer, normalBuffer);
+			int size = largeTile.getMaterialBelow() == null ? 6 : 12;
+			offset += size;
+			uvoffset += size;
+		}
 
 		for (int z = 0; z < Constants.MAX_Z; ++z)
 		{
@@ -144,6 +153,10 @@ class SceneUploader
 
 	private void upload(Tile tile, GpuIntBuffer vertexBuffer, GpuFloatBuffer uvBuffer, GpuFloatBuffer normalBuffer)
 	{
+		if(hdPlugin.getAreaManager().shouldHide(tile.getWorldLocation())) {
+			return;
+		}
+
 		Tile bridge = tile.getBridge();
 		if (bridge != null)
 		{
@@ -406,7 +419,7 @@ class SceneUploader
 
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData overlay = hdPlugin.getTileManager().getTile(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client,false);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
@@ -417,7 +430,7 @@ class SceneUploader
 				}
 				else
 				{
-					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData underlay = hdPlugin.getTileManager().getTile(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client,true);
 					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
@@ -436,7 +449,7 @@ class SceneUploader
 			{
 				if (client.getScene().getOverlayIds()[tileZ][tileX][tileY] != 0)
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData overlay = hdPlugin.getTileManager().getTile(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client,false);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(swColor)));
@@ -446,7 +459,7 @@ class SceneUploader
 				}
 				else
 				{
-					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData underlay = hdPlugin.getTileManager().getTile(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client,true);
 					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 
 					swColor = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(swColor)));
@@ -781,7 +794,7 @@ class SceneUploader
 
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData overlay = hdPlugin.getTileManager().getTile(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client,false);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 					groundMaterial = overlay.getGroundMaterial();
 
@@ -791,7 +804,7 @@ class SceneUploader
 				}
 				else
 				{
-					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData underlay = hdPlugin.getTileManager().getTile(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client,true);
 					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 					groundMaterial = underlay.getGroundMaterial();
 
@@ -808,7 +821,7 @@ class SceneUploader
 			{
 				if (proceduralGenerator.isOverlayFace(tile, face))
 				{
-					Overlay overlay = Overlay.getOverlay(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData overlay = hdPlugin.getTileManager().getTile(client.getScene().getOverlayIds()[tileZ][tileX][tileY], tile, client,false);
 					overlay = proceduralGenerator.getSeasonalOverlay(overlay);
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorOverlay(overlay, HDUtils.colorIntToHSL(colorA)));
@@ -817,7 +830,7 @@ class SceneUploader
 				}
 				else
 				{
-					Underlay underlay = Underlay.getUnderlay(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client);
+					TileData underlay = hdPlugin.getTileManager().getTile(client.getScene().getUnderlayIds()[tileZ][tileX][tileY], tile, client,true);
 					underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
 
 					colorA = HDUtils.colorHSLToInt(proceduralGenerator.recolorUnderlay(underlay, HDUtils.colorIntToHSL(colorA)));
@@ -1007,7 +1020,7 @@ class SceneUploader
 		return new int[]{bufferLength, uvBufferLength, underwaterTerrain};
 	}
 
-	private int packTerrainData(int waterDepth, WaterType underwaterType, int plane)
+	public int packTerrainData(int waterDepth, WaterType underwaterType, int plane)
 	{
 		byte isTerrain = 0b1;
 		return ((waterDepth << 4 | underwaterType.getValue()) << 2 | plane) << 1 | isTerrain;

@@ -26,9 +26,11 @@ package rs117.hd.data.environments;
 
 import java.awt.Color;
 import lombok.Getter;
+import rs117.hd.utils.ColorUtil;
 import rs117.hd.utils.HDUtils;
 
 @Getter
+@Deprecated
 public enum Environment
 {
 
@@ -962,8 +964,10 @@ public enum Environment
 
 	private final Area area;
 	private final int fogDepth;
+	private final int fogDepthBefore;
 	private final boolean customFogDepth;
 	private final float[] fogColor;
+	private final String fogColor1;
 	private final boolean customFogColor;
 	private final float ambientStrength;
 	private final boolean customAmbientStrength;
@@ -985,25 +989,37 @@ public enum Environment
 	private final boolean underwater;
 	private final float[] underwaterCausticsColor;
 	private final float underwaterCausticsStrength;
+
+	private String ambientColor1 = "#97BAFF";
+	private String directionalColor1 = "#FFFFFF";
+	private String underglowColor1 = "#000000";
+
 	private final float[] waterColor;
 	private final boolean customWaterColor;
 
 	private static class Properties
 	{
 		private int fogDepth = 65;
+		private int fogDepthBefore = 65;
 		private boolean customFogDepth = false;
 		private float[] fogColor = rgb(185, 214, 255);
+		private String fogColor1 = "";
 		private boolean customFogColor = false;
 		private float ambientStrength = 1.0f;
 		private boolean customAmbientStrength = false;
 		private float[] ambientColor = rgb(151, 186, 255);
+		private String ambientColor1 = "#97baff";
 		private boolean customAmbientColor = false;
 		private float directionalStrength = 4.0f;
 		private boolean customDirectionalStrength = false;
 		private float[] directionalColor = rgb(255, 255, 255);
+		private String directionalColor1 = "#FFFFFF";
+
+
 		private boolean customDirectionalColor = false;
 		private float underglowStrength = 0.0f;
 		private float[] underglowColor = rgb(0, 0, 0);
+		private String underglowColor1 = "#000000";
 		private boolean lightningEnabled = false;
 		private int groundFogStart = -200;
 		private int groundFogEnd = -500;
@@ -1013,6 +1029,7 @@ public enum Environment
 		private boolean allowSkyOverride = true;
 		private boolean underwater = false;
 		private float[] underwaterCausticsColor = null;
+		private String underwaterCausticsColor1 = "";
 		private float underwaterCausticsStrength = 0;
 		private float[] waterColor = rgb(185, 214, 255);
 		private boolean customWaterColor = false;
@@ -1020,6 +1037,7 @@ public enum Environment
 		public Properties setFogDepth(int depth)
 		{
 			this.fogDepth = depth * 10;
+			this.fogDepthBefore = depth;
 			this.customFogDepth = true;
 			return this;
 		}
@@ -1027,13 +1045,14 @@ public enum Environment
 		public Properties setFogColor(int r, int g, int b)
 		{
 			this.fogColor = rgb(r, g, b);
+			this.fogColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			this.customFogColor = true;
 			return this;
 		}
-
 		public Properties setFogColor(String hex)
 		{
 			Color color = Color.decode(hex);
+			this.fogColor1 = hex;
 			this.fogColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			this.customFogColor = true;
 			return this;
@@ -1049,6 +1068,7 @@ public enum Environment
 		public Properties setAmbientColor(int r, int g, int b)
 		{
 			this.ambientColor = rgb(r, g, b);
+			this.ambientColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			this.customAmbientColor = true;
 			return this;
 		}
@@ -1064,6 +1084,7 @@ public enum Environment
 		{
 			Color color = Color.decode(hex);
 			this.ambientColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
+			this.ambientColor1 = hex;
 			this.customAmbientColor = true;
 			return this;
 		}
@@ -1078,6 +1099,7 @@ public enum Environment
 		public Properties setDirectionalColor(int r, int g, int b)
 		{
 			this.directionalColor = rgb(r, g, b);
+			this.directionalColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			this.customDirectionalColor = true;
 			return this;
 		}
@@ -1085,6 +1107,7 @@ public enum Environment
 		public Properties setDirectionalColor(String hex)
 		{
 			Color color = Color.decode(hex);
+			this.directionalColor1 = hex.toUpperCase();
 			this.directionalColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			this.customDirectionalColor = true;
 			return this;
@@ -1099,12 +1122,14 @@ public enum Environment
 		public Properties setUnderglowColor(int r, int g, int b)
 		{
 			this.underglowColor = rgb(r, g, b);
+			this.underglowColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			return this;
 		}
 
 		public Properties setUnderglowColor(String hex)
 		{
 			Color color = Color.decode(hex);
+			this.underglowColor1 = hex.toUpperCase();
 			this.underglowColor = rgb(color.getRed(), color.getGreen(), color.getBlue());
 			return this;
 		}
@@ -1151,6 +1176,7 @@ public enum Environment
 		 */
 		public Properties setUnderwaterCausticsColor(int r, int g, int b)
 		{
+			this.underwaterCausticsColor1 = ColorUtil.rgbToHex(new Color(r,g,b));
 			this.underwaterCausticsColor = rgb(r, g, b);
 			return this;
 		}
@@ -1171,6 +1197,7 @@ public enum Environment
 	{
 		this.area = area;
 		this.fogDepth = properties.fogDepth;
+		this.fogDepthBefore = properties.fogDepthBefore;
 		this.customFogDepth = properties.customFogDepth;
 		this.fogColor = properties.fogColor;
 		this.customFogColor = properties.customFogColor;
@@ -1183,6 +1210,7 @@ public enum Environment
 		this.directionalColor = properties.directionalColor;
 		this.customDirectionalColor = properties.customDirectionalColor;
 		this.underglowColor = properties.underglowColor;
+		this.fogColor1 = properties.fogColor1;
 		this.underglowStrength = properties.underglowStrength;
 		this.lightningEnabled = properties.lightningEnabled;
 		this.groundFogStart = properties.groundFogStart;
@@ -1190,6 +1218,11 @@ public enum Environment
 		this.groundFogOpacity = properties.groundFogOpacity;
 		this.lightPitch = properties.lightPitch;
 		this.lightYaw = properties.lightYaw;
+
+		this.ambientColor1 = properties.ambientColor1;
+		this.directionalColor1 = properties.directionalColor1;
+		this.underglowColor1 = properties.underglowColor1;
+
 		this.allowSkyOverride = properties.allowSkyOverride;
 		this.underwater = properties.underwater;
 		this.underwaterCausticsColor = properties.underwaterCausticsColor == null ?

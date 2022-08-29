@@ -36,6 +36,7 @@ import rs117.hd.data.environments.Area;
 import rs117.hd.data.WaterType;
 
 @Getter
+@Deprecated
 public enum Underlay
 {
 	// Lumbridge
@@ -380,40 +381,4 @@ public enum Underlay
 		this.shiftLightness = 0;
 	}
 
-	private static final ListMultimap<Integer, Underlay> GROUND_MATERIAL_MAP;
-
-	static
-	{
-		GROUND_MATERIAL_MAP = ArrayListMultimap.create();
-		for (Underlay underlay : values())
-		{
-			GROUND_MATERIAL_MAP.put(underlay.id, underlay);
-		}
-	}
-
-	public static Underlay getUnderlay(int underlayId, Tile tile, Client client)
-	{
-		WorldPoint worldPoint = tile.getWorldLocation();
-
-		if (client.isInInstancedRegion())
-		{
-			LocalPoint localPoint = tile.getLocalLocation();
-			worldPoint = WorldPoint.fromLocalInstance(client, localPoint);
-		}
-
-		int worldX = worldPoint.getX();
-		int worldY = worldPoint.getY();
-		int worldZ = worldPoint.getPlane();
-
-		List<Underlay> underlays = GROUND_MATERIAL_MAP.get(underlayId);
-		for (Underlay underlay : underlays)
-		{
-			if (underlay.area.containsPoint(worldX, worldY, worldZ))
-			{
-				return underlay;
-			}
-		}
-
-		return Underlay.NONE;
-	}
 }

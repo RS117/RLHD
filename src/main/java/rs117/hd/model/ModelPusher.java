@@ -7,9 +7,8 @@ import net.runelite.api.*;
 import net.runelite.api.kit.KitType;
 import rs117.hd.HdPlugin;
 import rs117.hd.HdPluginConfig;
+import rs117.hd.data.area.effects.TileData;
 import rs117.hd.data.materials.Material;
-import rs117.hd.data.materials.Overlay;
-import rs117.hd.data.materials.Underlay;
 import rs117.hd.data.materials.UvType;
 import rs117.hd.model.objects.ObjectProperties;
 import rs117.hd.model.objects.ObjectType;
@@ -420,11 +419,11 @@ public class ModelPusher
                     int overlayId = client.getScene().getOverlayIds()[tileZ][tileX][tileY];
                     int underlayId = client.getScene().getUnderlayIds()[tileZ][tileX][tileY];
                     if (overlayId != 0) {
-                        Overlay overlay = Overlay.getOverlay(overlayId, tile, client);
+                        TileData overlay = hdPlugin.getTileManager().getTile(overlayId, tile, client,false);
                         overlay = proceduralGenerator.getSeasonalOverlay(overlay);
                         tileColorHSL = proceduralGenerator.recolorOverlay(overlay, tileColorHSL);
                     } else {
-                        Underlay underlay = Underlay.getUnderlay(underlayId, tile, client);
+                        TileData underlay = hdPlugin.getTileManager().getTile(underlayId, tile, client,true);
                         underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
                         tileColorHSL = proceduralGenerator.recolorUnderlay(underlay, tileColorHSL);
                     }
@@ -447,7 +446,7 @@ public class ModelPusher
                         tileColorHSL = HDUtils.colorIntToHSL(tile.getSceneTileModel().getTriangleColorA()[faceColorIndex]);
 
                         int underlayId = client.getScene().getUnderlayIds()[tileZ][tileX][tileY];
-                        Underlay underlay = Underlay.getUnderlay(underlayId, tile, client);
+                        TileData underlay = hdPlugin.getTileManager().getTile(underlayId, tile, client,true);
                         underlay = proceduralGenerator.getSeasonalUnderlay(underlay);
                         tileColorHSL = proceduralGenerator.recolorUnderlay(underlay, tileColorHSL);
 

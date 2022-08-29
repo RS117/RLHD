@@ -29,6 +29,7 @@ import net.runelite.api.Constants;
 import rs117.hd.utils.Rect;
 
 @Getter
+@Deprecated
 public enum Area
 {
 	// items higher on the list take precedent over those below
@@ -44,14 +45,15 @@ public enum Area
 	TUTORIAL_ISLAND_THE_NODE(3084, 3048, 3124, 3006),
 	TUTORIAL_ISLAND(
 		new Rect(3052, 3137, 3155, 3057),
-		new Rect(3084, 3048, 3124, 3006), // the node
-		new Rect(1600, 6015, 1792, 6207) // some kind of instance
+		new Rect(3084, 3048, 3124, 3006)
 	),
-
+	TUTORIAL_ISLAND_INSTANCE(
+			new Rect(1600, 6015, 1792, 6207) // some kind of instance
+	),
 	// Lumbridge
 	RFD_QUIZ(2589, 4618, 2566, 4642),
 	LUM_BRIDGE(3240, 3226, 3250, 3225),
-	LUMBRIDGE_CASTLE_BASEMENT(3205, 9613, 3220, 9626),
+	LUMBRIDGE_CASTLE_BASEMENT(3206, 9614, 3220, 9628),
 	LUMBRIDGE_CASTLE_ENTRYWAY(3213, 3212, 3216, 3225),
 	LUMBRIDGE_CASTLE_DINING_ROOM(3205, 3218, 3212, 3226),
 	HAM_HIDEOUT(3137, 9661, 3192, 9602),
@@ -60,8 +62,43 @@ public enum Area
 		new Rect(3136, 3137, 3254, 3327),
 		new Rect(3254, 3189, 3263, 3200),
 		new Rect(3266, 3200, 3247, 3327),
-		new Rect(3271, 3330, 3264, 3322),
+		new Rect(3271, 3330, 3264, 3322)
+	),
+	CLAN_WARS_INSTANCE(
 		new Rect(3400, 4807, 3448, 4847) // clan wars arena
+	),
+
+	FISHING_TRAWLER_INSTANCE(
+		new Rect(1992,4867,2044,4914),
+		new Rect(1922,4801,1981,4861),
+		new Rect(1990,4804,2038,4861),
+		new Rect(1862,4802,1909,4856),
+		new Rect(1793,4738,1853,4792)
+	),
+
+	TEMPLE_TREAKING(
+       new Rect(1988, 5027, 2010, 5052),
+       new Rect(1999, 5002, 2021, 5022),
+       new Rect(2014, 5027, 2042, 5052),
+       new Rect(2047, 5040, 2055, 5049),
+       new Rect(2056, 5026, 2068, 5044),
+       new Rect(2078, 5031, 2105, 5049),
+       new Rect(2078, 5001, 2101, 5025),
+       new Rect(2052, 4999, 2065, 5017),
+       new Rect(2123, 4995, 2163, 5034),
+       new Rect(2181, 5027, 2202, 5053),
+       new Rect(2207, 5027, 2233, 5051),
+       new Rect(2192, 5002, 2213, 5022),
+       new Rect(2256, 5002, 2276, 5022),
+       new Rect(2243, 5027, 2265, 5053),
+       new Rect(2270, 5027, 2297, 5053),
+       new Rect(2307, 5026, 2330, 5053),
+       new Rect(2334, 5026, 2362, 5053),
+       new Rect(2320, 5001, 2342, 5023),
+       new Rect(2373, 5025, 2396, 5053),
+       new Rect(2385, 5000, 2407, 5023),
+       new Rect(2401, 5025, 2428, 5053),
+       new Rect(2441, 5017, 2471, 5046)
 	),
 
 	// Dorgesh-Kaan
@@ -125,10 +162,11 @@ public enum Area
 		new Rect(3073, 9780, 3082, 9766)
 	),
 	DRAYNOR(
-		new Rect(3071, 3226, 3133, 3292),
+		new Rect(3071, 3226, 3133, 3292)
+	),
+	DRAYNOR_INSTANCE(
 		new Rect(2112, 4893, 2166, 4930) // bank robbery cutscene
 	),
-
 	// Misthalin Mystery
 	MISTHALIN_MYSTERY_MANOR(1600, 4863, 1727, 4779),
 
@@ -139,10 +177,11 @@ public enum Area
 	),
 	FALADOR_PARTY_ROOM(3034, 3387, 3057, 3369),
 	FALADOR(
-		new Rect(2932, 3306, 3068, 3401),
+		new Rect(2932, 3306, 3068, 3401)
+	),
+	FALADOR_INSTANCE(
 		new Rect(3456, 4734, 3528, 4783)
 	),
-
 	MOTHERLODE_MINE(
 		new Rect(3713, 5696, 3776, 5633),
 		new Rect(3827, 5692, 3868, 5652)
@@ -185,16 +224,18 @@ public enum Area
 	// White Wolf Mountain
 	WHITE_WOLF_MOUNTAIN(
 		new Rect(2789, 3530, 2879, 3488),
-		new Rect(2832, 3439, 2879, 3502),
-		new Rect(2431, 5374, 2496, 5439) // instance
+		new Rect(2832, 3439, 2879, 3502)
 	),
-
+	WHITE_WOLF_MOUNTAIN_INSTANCE(
+		new Rect(2431, 5374, 2496, 5439) 
+	),
 	// Keep Le Faye
 	KEEP_LE_FAYE(
-		new Rect(2747, 3415, 2782, 3389),
-		new Rect(1670, 4228, 1722, 4279) // instance
+		new Rect(2747, 3415, 2782, 3389)
 	),
-
+	KEEP_LE_FAYE_INSTANCE(
+		new Rect(1670, 4230, 1721, 4280) 
+	),
 	// Catherby
 	CATHERBY_BEACH_OBELISK_WATER_FIX(2843, 3423, 2845, 3421),
 	CATHERBY_BEACH_LADDER_FIX(2842, 3424, 2842, 3424),
@@ -253,8 +294,10 @@ public enum Area
 		new Rect(2429, 3323, 2466, 3305)
 	),
 	EAST_ARDOUGNE(
-		new Rect(2558, 3342, 2686, 3257),
-		new Rect(3328, 5887, 3392, 5951) // SOTE cutscene
+		new Rect(2558, 3342, 2686, 3257)
+	),
+	EAST_ARDOUGNE_INSTANCE(
+		new Rect(3328, 5887, 3392, 5951)
 	),
 	EAST_ARDOUGNE_CASTLE_DIRT_FIX(
 		new Rect(2565, 3279, 2592, 3313)
@@ -266,9 +309,13 @@ public enum Area
 	// Yanille
 	YANILLE_BANK(2609, 3088, 2616, 3097),
 	YANILLE(
-		new Rect(2531, 3127, 2622, 3070),
-		new Rect(2880, 4671, 2944, 4735) // instance
+		new Rect(2531, 3127, 2622, 3070)
 	),
+
+	YANILLE_INSTANCE(
+		new Rect(2880, 4671, 2944, 4735) 
+	),
+
 	GUTANOTH_CAVE(2560, 9408, 2626, 9475),
 	// Nightmare Zone
 	NIGHTMARE_ZONE(2241, 4676, 2303, 4722),
@@ -349,8 +396,10 @@ public enum Area
 	KHARIDIAN_DESERT(
 		new Rect(3196, 3134, 3526, 2997),
 		new Rect(3134, 3069, 3565, 2600),
-		new Rect(3114, 2974, 3216, 2786),
-		new Rect(3008, 4671, 3072, 4734) // agility pyramid instance
+		new Rect(3114, 2974, 3216, 2786)
+	),
+	KHARIDIAN_DESERT_INSTANCE(
+		new Rect(3008, 4671, 3072, 4734)
 	),
 	KHARID_DESERT_REGION(
 		new Rect(3268, 3326, 3345, 3178),
@@ -395,8 +444,7 @@ public enum Area
 		new Rect(3683, 3258, 3683, 3258)
 	),
 	VER_SINHAZA(
-		new Rect(3641, 3236, 3684, 3202),
-		new Rect(2087, 4903, 2064, 4880) // cutscene
+		new Rect(3641, 3236, 3684, 3202)
 	),
 	MEIYERDITCH(3583, 3331, 3648, 3169),
 	CASTLE_DRAKAN(3520, 3388, 3594, 3328),
@@ -415,7 +463,7 @@ public enum Area
 	CANIFIS(13878),
 	MORTTON(13875),
 	BARROWS_CRYPTS(3586, 9726, 3524, 9669, 3),
-	BARROWS_TUNNELS(3586, 9726, 3524, 9669, 0),
+	BARROWS_TUNNELS(3522, 9666, 3581, 9728, 0),
 	BARROWS(14131),
 	BURGH_DE_ROTT(3468, 3258, 3583, 3164),
 	ABANDONED_MINE(3423, 3261, 3461, 3201),
@@ -431,12 +479,15 @@ public enum Area
 		new Rect(3422, 3442, 3399, 3321),
 		new Rect(3414, 3327, 3435, 3255),
 		new Rect(3469, 3209, 3726, 3161),
-		new Rect(2087, 4903, 2064, 4880), // ver sinhaza cutscene
-		new Rect(1987, 4996, 2105, 5054), // temple trekking
-		new Rect(2118, 4994, 2171, 5036), // temple trekking
-		new Rect(2178, 4996, 2478, 5054), // temple trekking
+
+
 		new Rect(1670, 4546, 1724, 4600) // slayer tower roof (grotesque guardians)
 	),
+
+	SINHAZA_CUTSCENE(
+		new Rect(2087, 4903, 2064, 4880)
+	),
+
 
 	// TzHaar
 	THE_INFERNO(
@@ -448,12 +499,15 @@ public enum Area
 	TREE_GNOME_STRONGHOLD(
 		new Rect(2368, 3525, 2496, 3387),
 		new Rect(2404, 3547, 2431, 3511),
-		new Rect(2484, 3406, 2507, 3387),
-		new Rect(1920, 5502, 2048, 5631) // instance
+		new Rect(2484, 3406, 2507, 3387)
+	),
+
+	TREE_GNOME_STRONGHOLD_INSTANCE(
+		new Rect(1920, 5502, 2048, 5631) 
 	),
 
 	// Wilderness
-	REVENANT_CAVES(3265, 10243, 3134, 10050),
+	REVENANT_CAVES(3139, 10052, 3271, 10238),
 	FROZEN_WASTE_PLATEAU(
 		new Rect(2939, 3970, 2988, 3904),
 		new Rect(2988, 3907, 3002, 3940),
@@ -508,10 +562,11 @@ public enum Area
 	SOTE_FRAGMENT_OF_SEREN_ARENA(3264, 5887, 3328, 5951),
 	TIRANNWN(
 		new Rect(2116, 3455, 2320, 3021),
-		new Rect(2295, 3202, 2365, 3140),
-		new Rect(2688, 6015, 2944, 6207) // SOTE cutscene
+		new Rect(2295, 3202, 2365, 3140)
 	),
-
+	TIRANNWN_INSTANCE(
+		new Rect(2688, 6015, 2944, 6207)
+	),
 	ZANARIS(2315, 4345, 2500, 4485),
 
 	GOD_WARS_DUNGEON(
@@ -549,7 +604,13 @@ public enum Area
 	),
 
 	// Zeah
-	KARUULM_SLAYER_DUNGEON(1112, 10295, 1384, 10124),
+	KARUULM_SLAYER_DUNGEON(
+		new Rect(1178, 10260, 1195, 10273),
+		new Rect(1296, 10255, 1333, 10277),
+		new Rect(1371, 10214, 1392, 10233),
+		new Rect(1112, 10295, 1384, 10124),
+		new Rect(1247, 10146, 1278, 10172)
+	),
 	MOUNT_KARUULM(1245,3765,1358,3860),
 	LIZARDMAN_TEMPLE(1280, 10047, 1341, 10109),
 	XERICS_LOOKOUT(1580, 3526, 1596, 3534),
@@ -628,11 +689,12 @@ public enum Area
 		new Rect(2809, 3124, 2917, 3209),
 		new Rect(2917, 3184, 2964, 3132),
 		new Rect(2746, 3151, 2973, 2873),
-		new Rect(2973, 2873, 3012, 3081),
-		new Rect(2496, 4542, 2642, 4606) // instance
+		new Rect(2973, 2873, 3012, 3081)
+	),
+	KARAMJA_INSTANCE(
+		new Rect(2496, 4542, 2642, 4606) 
 	),
 
-	// Zanaris
 	COSMIC_ENTITYS_PLANE(2048, 4863, 2111, 4800),
 
 	// islands
@@ -688,7 +750,7 @@ public enum Area
 	MOGRE_CAMP_CUTSCENE(1832, 4776, 1934,4878),
 	MOGRE_CAMP(2944, 9535, 3007, 9472),
 	HARMONY_ISLAND_UNDERWATER_TUNNEL(3779, 9278, 3839, 9216, 1),
-	FOSSIL_ISLAND_UNDERWATER_AREA(3712, 10303, 3839, 10240),
+	FOSSIL_ISLAND_UNDERWATER_AREA(3721, 10243, 3838, 10304),
 
 	// Runecrafting altars
 	COSMIC_ALTAR(2112, 4799, 2176, 4863),
@@ -708,7 +770,7 @@ public enum Area
 	// Dragon Slayer II
 	LITHKREN_DUNGEON(
 		new Rect(1528, 5125, 1606, 5052),
-		new Rect(3571, 10498, 3527, 10400)
+		new Rect(3535, 10440, 3570, 10490)
 	),
 	LITHKREN(3519, 4032, 3602, 3967),
 	DS2_FLASHBACK_PLATFORM(1800, 5277, 1814, 5250),
@@ -796,10 +858,14 @@ public enum Area
 		new Rect(2564, 3582, 2600, 3613)
 	),
 	SORCERESSS_GARDEN(2879, 5438, 2943, 5503),
-	PURO_PURO(2561, 4350, 2622, 4289),
+	PURO_PURO(2558, 4286, 2625, 4352),
 	RATCATCHERS_HOUSE(2821, 5059, 2875, 5114),
 	CANOE_CUTSCENE(1791, 4479, 1856, 4543),
-	FISHER_KINGS_REALM(2575, 4623, 2816, 4798),
+	FISHER_KINGS_REALM(
+		new Rect(2620, 4667,2691,4743),
+		new Rect(2729, 4637,2815,4762),
+		new Rect(2575, 4745,2624,4799)
+	),
 	ENCHANTED_VALLEY(3010, 4478, 3073, 4540),
 	GIANTS_FOUNDRY(3331,11456,3393,11520),
 	ELID_CAVE(3325,9520,3395,9605),
